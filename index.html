@@ -27,7 +27,7 @@
   --font-display:"Unbounded","Geist",system-ui,-apple-system,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
   --font-body:"Geist",system-ui,-apple-system,"Segoe UI","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
   --font-mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,"PingFang TC","Noto Sans TC",monospace;
-  --label-w:252px;
+  --label-w:268px;
   --lane-h:54px;
   --axis-h:48px;
   color-scheme:dark;
@@ -297,7 +297,8 @@ tr.is-archived td{color:var(--muted)}
 .count{font:500 12px var(--font-mono);color:var(--muted)}
 tr.editing td{background:var(--tint-hover)}
 
-.label-acts{display:flex;flex-direction:column;gap:4px}
+.label-acts{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.label-acts .btn:first-child{grid-column:1 / -1}
 .label-acts .btn{justify-content:center;min-width:44px}
 .icon-btn{padding:3px 8px}
 .icon-btn .flag{width:14px;height:14px}
@@ -332,6 +333,52 @@ span.flag-mark{cursor:default}
 .reminder .xico{color:var(--stop)}
 .reminder-acts{display:flex;flex-wrap:wrap;gap:2px}
 
+.icon-btn .clip{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.icon-btn.has-n{color:var(--accent)}
+.icon-btn .n{font:600 10.5px var(--font-mono);margin-left:1px}
+
+/* files & links */
+.ltile{display:inline-grid;place-items:center;width:30px;height:30px;flex:none;border-radius:8px;color:var(--accent);background:rgba(138,180,255,.10)}
+.ltile svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ltile.s-doc{color:#8ab4ff;background:rgba(138,180,255,.13)}
+.ltile.s-sheet{color:#6fd6a0;background:rgba(111,214,160,.13)}
+.ltile.s-slides{color:#ffb86b;background:rgba(255,184,107,.13)}
+.ltile.s-form{color:#b79cff;background:rgba(183,156,255,.13)}
+.ltile.s-video{color:#ff8a80;background:rgba(255,107,94,.13)}
+.ltile.s-paper{color:#5fd4c4;background:rgba(95,212,196,.13)}
+.ltile.s-folder,.ltile.s-file,.ltile.s-code{color:var(--ink);background:rgba(255,255,255,.07)}
+.modal .lk-add{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) auto;gap:8px;margin:4px 0 0}
+a.btn{text-decoration:none}
+.lk-group{font:500 11px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:16px 0 6px}
+.lk-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.lk-row{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 10px;border:1px solid var(--rule);border-radius:10px;background:var(--panel-2)}
+.lk-main{flex:1;min-width:0;display:flex;align-items:center;gap:10px;background:none;border:0;padding:0;color:var(--ink);text-align:left;cursor:pointer}
+.lk-main:hover .lk-title{text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+.lk-text{display:flex;flex-direction:column;gap:1px;min-width:0}
+.lk-title{font-weight:600;overflow-wrap:anywhere}
+.lk-sub{font:400 11.5px var(--font-mono);color:var(--muted);overflow-wrap:anywhere}
+.lk-note{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
+.lk-open{flex:none;display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;border:1px solid var(--rule);color:var(--accent)}
+.lk-open:hover{border-color:var(--accent)}
+.ext{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.btn .ext{width:14px;height:14px}
+.lk-badge{display:inline-flex;align-items:center;gap:4px;font:500 10.5px var(--font-mono);color:var(--warn);border:1px solid rgba(255,184,107,.45);border-radius:999px;padding:0 7px;margin-left:8px;vertical-align:1px;white-space:nowrap}
+.lk-badge .star{width:10px;height:10px;fill:currentColor}
+.lk-empty{color:var(--muted);font-size:13.5px;margin:12px 0 4px}
+.lk-head{align-items:center}
+.lk-head .ltile{width:38px;height:38px;border-radius:10px}
+.lk-head .ltile svg{width:19px;height:19px}
+.kind-seg{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--rule);border-radius:999px;background:var(--panel);align-self:flex-start}
+.kind-seg label{position:relative;cursor:pointer}
+.kind-seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.kind-seg span{display:block;padding:5px 13px;border-radius:999px;font-size:13px;color:var(--muted)}
+.kind-seg input:checked+span{background:var(--panel-2);color:var(--ink);box-shadow:inset 0 0 0 1px var(--rule)}
+.kind-seg input[value="published"]:checked+span{color:var(--warn)}
+.kind-seg input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+td.c-type,td.c-added{white-space:nowrap}
+td.c-type{font-size:13px;color:var(--muted)}
+td.c-open{width:44px}
+
 .is-readonly .edit-only{display:none !important}
 
 /* icons */
@@ -342,50 +389,7 @@ span.flag-mark{cursor:default}
 .orbit ellipse{fill:none;stroke:currentColor;stroke-width:1.5}
 
   background:radial-gradient(120% 160% at 0% 0%,rgba(138,180,255,.11),transparent 55%),rgba(17,22,36,.84)}
-.week-stats{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto}
-.stat{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);padding:5px 11px;border:1px solid var(--rule);border-radius:999px;background:var(--panel)}
-.stat b{font:600 14px var(--font-mono);color:var(--ink)}
-.stat .star{width:13px;height:13px;color:var(--accent)}
-.stat em{font-style:normal;color:var(--warn)}
-.stat.is-warn{border-color:rgba(255,184,107,.45)}
-.stat.is-warn .star{color:var(--warn)}
 
-/* week view */
-.view-week{display:flex;flex-direction:column;gap:12px}
-.week{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;align-items:start}
-.day{display:flex;flex-direction:column;gap:8px;min-height:230px;padding:12px;border:1px solid var(--rule);border-radius:12px;background:rgba(17,22,36,.72)}
-.day.is-today{border-color:rgba(138,180,255,.55);background:linear-gradient(180deg,rgba(138,180,255,.11),rgba(17,22,36,.84) 150px);box-shadow:0 0 0 1px rgba(138,180,255,.14),0 10px 30px rgba(0,0,0,.25)}
-.day.is-past{background:rgba(17,22,36,.5)}
-.day.is-future{background:rgba(17,22,36,.42);border-style:dashed}
-.day-head{display:flex;align-items:baseline;gap:8px}
-.day-rel{font-family:var(--font-display);font-weight:600;font-size:15px;line-height:1.15;letter-spacing:-.005em}
-.day.is-today .day-rel{color:var(--accent)}
-.day-date{font:500 12px var(--font-mono);color:var(--muted);white-space:nowrap}
-.day-count{margin-left:auto;font:600 11px var(--font-mono);color:var(--space);background:var(--accent);border-radius:999px;padding:1px 7px}
-.day ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-.due-item,.log-item{width:100%;display:flex;align-items:flex-start;gap:8px;text-align:left;padding:7px 9px;border-radius:8px;border:1px solid var(--rule);background:var(--panel);color:var(--ink);cursor:pointer;font-size:13px;line-height:1.35}
-.due-item:hover,.log-item:hover{border-color:#38415a;background:var(--panel-2)}
-.due-item svg{width:13px;height:13px;flex:none;margin-top:2px;color:var(--pc,var(--accent))}
-.due-item.kind-ended svg{color:var(--stop)}
-.due-item.is-soon{border-color:rgba(255,184,107,.55);background:rgba(255,184,107,.07)}
-.due-item.is-soon svg{color:var(--warn)}
-.due-item.is-done{opacity:.55}
-.due-item.is-done .due-title{text-decoration:line-through}
-.due-text{display:flex;flex-direction:column;min-width:0}
-.due-title{font-weight:600;overflow-wrap:anywhere}
-.due-kind{font:400 11px var(--font-mono);color:var(--muted)}
-.log-item{flex-direction:column;gap:3px;border-left:3px solid var(--pc)}
-.log-proj{display:inline-flex;align-items:center;gap:6px;font:500 11px var(--font-mono);color:var(--muted)}
-.log-proj .pdot{width:7px;height:7px}
-.log-text{white-space:pre-wrap;overflow-wrap:anywhere}
-.day-empty{margin:0;font-size:12.5px;color:#5f6780}
-.day-add{margin-top:auto;align-self:flex-start;background:none;border:1px dashed var(--rule);border-radius:8px;color:var(--muted);font-size:12.5px;padding:5px 10px;cursor:pointer}
-.day-add:hover{color:var(--ink);border-color:var(--muted)}
-.week-divider{display:flex;align-items:center;gap:10px;font:500 12px var(--font-mono);color:var(--muted)}
-.week-divider::after{content:"";flex:1;border-top:1px dashed var(--rule)}
-@media (min-width: 641px) and (max-width: 1000px){
-  .week{grid-template-columns:repeat(5,minmax(170px,1fr));overflow-x:auto;padding-bottom:4px}
-}
 
 /* areas */
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -501,21 +505,16 @@ td.c-break{display:none}
   .label-meta br{display:none}
   .label-meta .due{margin-left:6px}
   .row.ended .label-box{background:rgba(17,22,36,.45)}
-  .label-acts{flex-direction:row;align-items:center}
+  .label-acts{display:flex;flex-direction:row;align-items:center}
   .label .icon-btn{display:inline-flex}
   .axis-row{grid-template-columns:1fr}
   .axis-spacer{display:none}
   .tick.is-today .tick-wd{font-size:8.5px}
   .divider{padding-top:16px}
   .empty{padding:24px 0}
-  .stat{font-size:12px;padding:4px 9px}
-  .week-stats{margin-left:0;width:100%}
-  .week{display:flex;flex-direction:column;gap:10px}
-  .week{align-items:stretch}
   .view-tab{padding:6px 13px}
   .save-status.is-ok,.save-status.is-saving{font-size:0;gap:0}
   .save-status.is-warn,.save-status.is-err{grid-column:1 / -1;grid-row:3;justify-self:end}
-  .day{min-height:0}
   .chips{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none}
   .chip{flex:none}
   .label-meta .drift{margin-left:6px}
@@ -549,6 +548,14 @@ td.c-break{display:none}
   #projects-body .c-meta{order:5;font-size:12.5px}
   #projects-body .c-meta::before{content:attr(data-label) " ";color:var(--muted);font-family:var(--font-body)}
   #projects-body .c-acts{order:6;flex-basis:100%;margin-left:-6px}
+  .modal .lk-add{grid-template-columns:1fr auto}
+  .lk-add #lk-url{grid-column:1 / -1}
+  #files-body tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}
+  #files-body .c-name{grid-column:1;grid-row:1}
+  #files-body .c-open{grid-column:2;grid-row:1;width:auto}
+  #files-body .c-proj{grid-column:1 / -1;grid-row:2;font-size:12.5px;color:var(--muted)}
+  #files-body .c-notes{grid-column:1 / -1;grid-row:3;font-size:13px;color:var(--muted)}
+  #files-body .c-type,#files-body .c-added{display:none}
   #updates-body tr{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 10px;align-items:center}
   #updates-body .c-date{grid-column:1;grid-row:1}
   #updates-body .c-proj{grid-column:2;grid-row:1;min-width:0;font-size:13px;color:var(--muted)}
@@ -574,7 +581,6 @@ td.c-break{display:none}
       <span class="today-stamp" id="today-stamp"></span>
     </div>
     <nav class="views" aria-label="Views">
-      <a class="view-tab" href="#week" data-view="week">Week</a>
       <a class="view-tab" href="#timeline" data-view="timeline">Timeline</a>
       <a class="view-tab" href="#table" data-view="table">Table</a>
     </nav>
@@ -613,19 +619,6 @@ td.c-break{display:none}
   </form>
 
   <main>
-    <section id="view-week" class="view-week" aria-label="Week" hidden>
-      <div class="tl-toolbar">
-        <div class="tl-nav">
-          <button type="button" class="btn btn-sm" id="week-prev" aria-label="Earlier days">&larr;<span class="btn-word"> Earlier</span></button>
-          <button type="button" class="btn btn-sm" id="week-today">Today</button>
-          <button type="button" class="btn btn-sm" id="week-next" aria-label="Later days"><span class="btn-word">Later </span>&rarr;</button>
-        </div>
-        <span class="range-label" id="week-label"></span>
-        <div class="week-stats" id="week-stats"></div>
-      </div>
-      <div class="week" id="week-grid"></div>
-    </section>
-
     <section id="view-timeline" class="view-timeline" aria-label="Timeline" hidden>
       <div class="tl-toolbar">
         <div class="seg" id="range-seg" role="group" aria-label="Days shown">
@@ -653,8 +646,18 @@ td.c-break{display:none}
       </div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th style="width:44px"><span class="sr-only">Color</span></th><th>Project</th><th>Area</th><th>Started</th><th>Deadline</th><th>Updates</th><th>Last update</th><th>Status</th><th><span class="sr-only">Actions</span></th></tr></thead>
+          <thead><tr><th style="width:44px"><span class="sr-only">Color</span></th><th>Project</th><th>Area</th><th>Started</th><th>Deadline</th><th>Updates</th><th>Files</th><th>Last update</th><th>Status</th><th><span class="sr-only">Actions</span></th></tr></thead>
           <tbody id="projects-body"></tbody>
+        </table>
+      </div>
+
+      <div class="table-head">
+        <h2>Files &amp; links <span class="count" id="files-count"></span></h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Project</th><th>Type</th><th>Notes</th><th>Added</th><th><span class="sr-only">Open</span></th></tr></thead>
+          <tbody id="files-body"></tbody>
         </table>
       </div>
 
@@ -703,6 +706,95 @@ td.c-break{display:none}
   var FLAG = '<svg class="flag" viewBox="0 0 16 16" aria-hidden="true"><path class="fill" d="M3.5 2.5h8.5l-2.2 3 2.2 3H3.5z"/><path d="M3.5 14.5V2"/><path d="M3.5 2.5h8.5l-2.2 3 2.2 3H3.5"/></svg>';
   var XICO = '<svg class="xico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
   var DIAMOND = '<svg class="dia" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 .8 11.2 6 6 11.2.8 6z"/></svg>';
+  /* ---------- files & links ---------- */
+  var LK_SVG = {
+    doc: '<path d="M4 1.8h5.2L12.5 5v9.2H4z"/><path d="M9 1.8V5h3.5M6 8h4.5M6 10.5h4.5M6 13h3"/>',
+    sheet: '<rect x="2.5" y="2.5" width="11" height="11" rx="1.5"/><path d="M2.5 6.2h11M2.5 9.8h11M6.5 2.5v11"/>',
+    slides: '<rect x="2" y="3" width="12" height="8.5" rx="1.5"/><path d="M8 11.5V14M5.5 14h5"/>',
+    form: '<rect x="3" y="2" width="10" height="12" rx="1.5"/><path d="M5.5 5.5h.01M7.5 5.5h3M5.5 8h.01M7.5 8h3M5.5 10.5h.01M7.5 10.5h3"/>',
+    folder: '<path d="M1.8 4.2a1 1 0 0 1 1-1h3.4l1.5 1.6h5.5a1 1 0 0 1 1 1v6.9a1 1 0 0 1-1 1H2.8a1 1 0 0 1-1-1z"/>',
+    file: '<path d="M4 1.8h5.2L12.5 5v9.2H4z"/><path d="M9 1.8V5h3.5"/>',
+    video: '<rect x="1.8" y="3.5" width="12.4" height="9" rx="2"/><path d="M6.8 6.2v3.6l3-1.8z"/>',
+    code: '<path d="M5.5 4.5 2 8l3.5 3.5M10.5 4.5 14 8l-3.5 3.5"/>',
+    paper: '<path d="M2.5 3.2c2-.8 3.8-.8 5.5.4v9.6c-1.7-1.2-3.5-1.2-5.5-.4zM13.5 3.2c-2-.8-3.8-.8-5.5.4v9.6c1.7-1.2 3.5-1.2 5.5-.4z"/>',
+    link: '<path d="M6.6 9.4a2.6 2.6 0 0 0 3.7 0l2.3-2.3a2.6 2.6 0 0 0-3.7-3.7l-1 1"/><path d="M9.4 6.6a2.6 2.6 0 0 0-3.7 0L3.4 8.9a2.6 2.6 0 0 0 3.7 3.7l1-1"/>'
+  };
+  var CLIP = '<svg class="clip" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7.5 8.2 12.3a3 3 0 0 1-4.3-4.3l5-5a2 2 0 0 1 2.9 2.9l-5 5a1 1 0 0 1-1.4-1.4L10 4.9"/></svg>';
+  var EXT = '<svg class="ext" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5H3.5v9h9V10M9 2.5h4.5V7M13.5 2.5 7.5 8.5"/></svg>';
+  function linkTile(svc) { return '<span class="ltile s-' + svc + '"><svg viewBox="0 0 16 16" aria-hidden="true">' + (LK_SVG[svc] || LK_SVG.link) + '</svg></span>'; }
+  // Accepts a pasted address, adds https:// if it's missing, and only allows web links.
+  function cleanUrl(raw) {
+    var v = String(raw || '').trim();
+    if (!v) return null;
+    if (!/^[a-z][a-z0-9+.-]*:/i.test(v)) v = 'https://' + v;
+    var u; try { u = new URL(v); } catch (e) { return null; }
+    if ((u.protocol !== 'https:' && u.protocol !== 'http:') || u.hostname.indexOf('.') < 0) return null;
+    return u.href;
+  }
+  // What kind of thing a link points to, from its address alone.
+  function linkInfo(url) {
+    var u; try { u = new URL(url); } catch (e) { return { svc: 'link', label: 'Link', generic: true }; }
+    var h = u.hostname.replace(/^www\./, '').toLowerCase(), p = u.pathname;
+    function r(svc, label) { return { svc: svc, label: label, generic: false }; }
+    if (h === 'docs.google.com') {
+      if (/^\/document\//.test(p)) return r('doc', 'Google Doc');
+      if (/^\/spreadsheets\//.test(p)) return r('sheet', 'Google Sheet');
+      if (/^\/presentation\//.test(p)) return r('slides', 'Google Slides');
+      if (/^\/forms\//.test(p)) return r('form', 'Google Form');
+      return r('file', 'Google Drive file');
+    }
+    if (h === 'drive.google.com') return /\/folders\//.test(p) ? r('folder', 'Drive folder') : r('file', 'Drive file');
+    if (h === 'forms.gle') return r('form', 'Google Form');
+    if (/\.pdf$/i.test(p)) return r('file', 'PDF');
+    if (/\.docx?$/i.test(p)) return r('doc', 'Word document');
+    if (/\.(xlsx?|csv)$/i.test(p)) return r('sheet', 'Spreadsheet');
+    if (/\.pptx?$/i.test(p)) return r('slides', 'Presentation');
+    if (/(^|\.)sharepoint\.com$|^onedrive\.live\.com$|^1drv\.ms$/.test(h)) return r('file', 'OneDrive file');
+    if (/(^|\.)dropbox\.com$/.test(h)) return r('file', 'Dropbox file');
+    if (h === 'overleaf.com') return r('doc', 'Overleaf');
+    if (h === 'github.com') return r('code', 'GitHub');
+    if (/(^|\.)youtube\.com$|^youtu\.be$|(^|\.)vimeo\.com$/.test(h)) return r('video', 'Video');
+    if (/(^|\.)(doi\.org|arxiv\.org|researchgate\.net|sciencedirect\.com|springer\.com|ieee\.org|acm\.org|nature\.com|plos\.org|ssrn\.com|semanticscholar\.org|pubmed\.ncbi\.nlm\.nih\.gov)$/.test(h) || h === 'scholar.google.com') return r('paper', h);
+    return { svc: 'link', label: h, generic: true };
+  }
+  function guessKind(url) {
+    var svc = linkInfo(url).svc;
+    return (svc === 'link' || svc === 'paper' || svc === 'video' || svc === 'code') ? 'link' : 'file';
+  }
+  function linkTitle(l) {
+    if (l.title) return l.title;
+    var i = linkInfo(l.url);
+    if (!i.generic && i.svc !== 'paper') return i.label;
+    try {
+      var u = new URL(l.url), tail = u.pathname.replace(/\/+$/, '').split('/').pop() || '';
+      try { tail = decodeURIComponent(tail); } catch (e) {}
+      return i.label + (tail ? ' / ' + truncate(tail, 48) : '');
+    } catch (e) { return l.url; }
+  }
+  function normLinks(arr) {
+    var out = [], seen = {};
+    (Array.isArray(arr) ? arr : []).forEach(function (l) {
+      if (!l) return;
+      var url = cleanUrl(l.url); if (!url) return;
+      var id = String(l.id || uid()); if (seen[id]) return; seen[id] = true;
+      out.push({
+        id: id, url: url.slice(0, 2000), title: typeof l.title === 'string' ? l.title.slice(0, 120) : '',
+        kind: l.kind === 'published' ? 'published' : l.kind === 'file' ? 'file' : 'link',
+        notes: typeof l.notes === 'string' ? l.notes.slice(0, 5000) : '', added: isISO(l.added) ? l.added : todayISO()
+      });
+    });
+    return out;
+  }
+  function linksOf(p) { return p.links || (p.links = []); }
+  function linkRowHTML(p, l) {
+    var info = linkInfo(l.url), t = linkTitle(l);
+    return '<li class="lk-row"><button type="button" class="lk-main" data-act="link" data-pid="' + esc(p.id) + '" data-lid="' + esc(l.id) + '">' + linkTile(info.svc) +
+      '<span class="lk-text"><span class="lk-title">' + esc(t) + (l.kind === 'published' ? '<span class="lk-badge">' + STAR + 'Published</span>' : '') + '</span>' +
+      '<span class="lk-sub">' + esc(info.label) + ' · added ' + fmtShort(l.added) + '</span>' +
+      (l.notes ? '<span class="lk-note">' + esc(truncate(l.notes.replace(/\s+/g, ' '), 110)) + '</span>' : '') + '</span></button>' +
+      '<a class="lk-open" href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer" title="Open" aria-label="Open ' + esc(t) + '">' + EXT + '</a></li>';
+  }
+
   var STAR = '<svg class="star" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 9.7 6.3 15 8 9.7 9.7 8 15 6.3 9.7 1 8 6.3 6.3z"/></svg>';
   var CHECK = '<svg class="check" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.4 5 8.8 9.6 3.4"/></svg>';
   var ORBIT = '<svg class="orbit" viewBox="0 0 36 36" aria-hidden="true"><circle class="p" cx="18" cy="18" r="7"/><ellipse cx="18" cy="18" rx="15.5" ry="5.5" transform="rotate(-20 18 18)"/></svg>';
@@ -735,7 +827,7 @@ td.c-break{display:none}
 
   /* ================= state ================= */
   var state = null;
-  var ui = { range: 14, offset: 0, showArchived: false, filterProject: 'all', search: '', editingUpdate: null, editingProject: null, weekOffset: 0, area: 'all', allReminders: false };
+  var ui = { range: 14, offset: 0, showArchived: false, filterProject: 'all', search: '', editingUpdate: null, editingProject: null, area: 'all', allReminders: false };
   var mode = 'pending';        // pending | artifact | local | readonly
   var localOnlyInViewer = false;
   var artifactApi = null;
@@ -802,6 +894,7 @@ td.c-break{display:none}
         start: p.start, ended: isISO(p.ended) ? p.ended : null,
         deadline: isISO(p.deadline) ? p.deadline : null, endedBy: p.endedBy === 'deadline' ? 'deadline' : null,
         area: areaIds[p.area] ? String(p.area) : null, goal: goalIds[p.goal] ? String(p.goal) : null, milestones: ms,
+        links: normLinks(p.links),
         created: Number(p.created) || 0, sample: !!p.sample
       });
     });
@@ -1230,7 +1323,7 @@ td.c-break{display:none}
   }
 
   /* ================= rendering ================= */
-  function currentView() { return location.hash === '#table' ? 'table' : location.hash === '#timeline' ? 'timeline' : 'week'; }
+  function currentView() { return location.hash === '#table' ? 'table' : 'timeline'; }
 
   function render() {
     var T = todayISO();
@@ -1241,10 +1334,9 @@ td.c-break{display:none}
     renderQuickAdd(T);
     var view = currentView();
     $$('.view-tab').forEach(function (a) { if (a.dataset.view === view) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-    $('#view-week').hidden = view !== 'week';
     $('#view-timeline').hidden = view !== 'timeline';
     $('#view-table').hidden = view !== 'table';
-    if (view === 'week') renderWeek(T); else if (view === 'timeline') renderBoard(T); else renderTables(T);
+    if (view === 'timeline') renderBoard(T); else renderTables(T);
   }
 
   function renderHeader(T) {
@@ -1352,60 +1444,6 @@ td.c-break{display:none}
     document.title = (soonCount ? '(' + soonCount + ') ' : '') + BASE_TITLE;
   }
 
-  function renderWeek(T) {
-    var center = addDays(T, ui.weekOffset), phone = isPhone();
-    var days = []; for (var i = -2; i <= 2; i++) days.push(addDays(center, i));
-    $('#week-label').textContent = fmtShort(days[0]) + ' – ' + fmtYear(days[4]);
-    $('#week-today').disabled = ui.weekOffset === 0;
-    var st = streakInfo(T), wkFrom = addDays(T, -6);
-    var wk = state.updates.filter(function (u) { return u.date >= wkFrom && u.date <= T; }).length;
-    $('#week-stats').innerHTML =
-      '<span class="stat' + (st.today ? '' : ' is-warn') + '" title="Days in a row with at least one update">' + STAR + '<b>' + st.n + '</b> day' + (st.n === 1 ? '' : 's') + ' in a row' +
-        (st.today ? '' : '<em>· ' + (st.n ? 'log today to keep it' : 'log today to start') + '</em>') + '</span>' +
-      '<span class="stat"><b>' + wk + '</b> update' + (wk === 1 ? '' : 's') + ' this week</span>';
-    var byDay = {}, dueBy = {};
-    state.updates.forEach(function (u) { if (u.date >= days[0] && u.date <= days[4]) (byDay[u.date] || (byDay[u.date] = [])).push(u); });
-    dueItems().forEach(function (it) { if (it.date >= days[0] && it.date <= days[4]) (dueBy[it.date] || (dueBy[it.date] = [])).push(it); });
-    state.projects.forEach(function (p) {
-      if (p.ended && p.ended >= days[0] && p.ended <= days[4]) (dueBy[p.ended] || (dueBy[p.ended] = [])).push({ kind: 'ended', date: p.ended, p: p, title: p.name });
-    });
-    function dueHTML(it) {
-      var n = diffDays(T, it.date);
-      var cls = 'due-item kind-' + it.kind + (it.done ? ' is-done' : '') +
-        (!it.done && it.kind !== 'ended' && n >= 0 && n <= DUE_SOON ? ' is-soon' : '');
-      var icon = it.kind === 'deadline' ? FLAG : it.kind === 'milestone' ? DIAMOND : XICO;
-      var title = it.kind === 'deadline' || it.kind === 'ended' ? it.p.name : it.title;
-      var kind = it.kind === 'deadline' ? 'Final deadline' : it.kind === 'milestone' ? it.p.name : (it.p.endedBy === 'deadline' ? 'Hit its deadline' : 'Ended');
-      var act = it.kind === 'deadline' ? 'data-act="deadline" data-pid="' + esc(it.p.id) + '"'
-        : it.kind === 'milestone' ? 'data-act="milestone" data-pid="' + esc(it.p.id) + '" data-mid="' + esc(it.m.id) + '"'
-        : 'data-act="project" data-pid="' + esc(it.p.id) + '"';
-      return '<li><button type="button" class="' + cls + '" ' + act + (it.p ? ' style="--pc:var(--c' + it.p.color + ')"' : '') + '>' + icon +
-        '<span class="due-text"><span class="due-title">' + esc(title) + '</span><span class="due-kind">' + esc(kind) + (it.done ? ' · done' : '') + '</span></span></button></li>';
-    }
-    function dayHTML(d) {
-      var ups = (byDay[d] || []).slice().sort(function (a, b) { return a.created - b.created; });
-      var due = dueBy[d] || [];
-      var rel = d === T ? 'Today' : d === addDays(T, 1) ? 'Tomorrow' : d === addDays(T, -1) ? 'Yesterday' : WD[dow(d)];
-      var h = '<section class="day' + (d === T ? ' is-today' : d < T ? ' is-past' : ' is-future') + '" aria-label="' + fmtLong(d) + '">' +
-        '<header class="day-head"><span class="day-rel">' + rel + '</span><span class="day-date">' + (rel === WD[dow(d)] ? fmtShort(d) : WD[dow(d)] + ', ' + fmtShort(d)) + '</span>' +
-        (ups.length ? '<span class="day-count" title="' + plural(ups.length, 'update') + '">' + ups.length + '</span>' : '') + '</header>';
-      if (due.length) h += '<ul class="day-due">' + due.map(dueHTML).join('') + '</ul>';
-      if (ups.length) {
-        h += '<ul class="day-log">' + ups.map(function (u) {
-          var p = getProject(u.projectId); if (!p) return '';
-          return '<li><button type="button" class="log-item" data-act="open-day" data-pid="' + esc(p.id) + '" data-date="' + d + '" style="--pc:var(--c' + p.color + ')">' +
-            '<span class="log-proj"><i class="pdot"></i>' + esc(p.name) + '</span><span class="log-text">' + esc(u.text) + '</span></button></li>';
-        }).join('') + '</ul>';
-      }
-      if (!ups.length && !due.length) h += '<p class="day-empty">' + (d > T ? 'Nothing due' : d === T ? 'Nothing logged yet' : 'Quiet day') + '</p>';
-      if (d <= T) h += '<button type="button" class="day-add edit-only" data-act="log-day" data-date="' + d + '">+ Log' + (d === T ? '' : ' for ' + WD[dow(d)]) + '</button>';
-      return h + '</section>';
-    }
-    $('#week-grid').innerHTML = (phone && ui.weekOffset === 0)
-      ? dayHTML(days[2]) + dayHTML(days[3]) + dayHTML(days[4]) + '<div class="week-divider"><span>Earlier</span></div>' + dayHTML(days[1]) + dayHTML(days[0])
-      : days.map(dayHTML).join('');
-  }
-
   function renderBoard(T) {
     var past = ui.range, fut = FUTURE[past] || 0, N = past + fut, phone = isPhone();
     var last = addDays(T, fut - ui.offset);
@@ -1494,10 +1532,12 @@ td.c-break{display:none}
         meta = (p.endedBy === 'deadline' ? 'Hit deadline ' : 'Ended ') + fmtShort(p.ended) + ' · ' + (left2 <= 1 ? 'leaves tomorrow' : 'leaves in ' + left2 + ' days');
       }
       var dlTitle = p.deadline ? 'Change deadline' : 'Set a deadline';
+      var nL = linksOf(p).length;
+      var clipBtn = '<button type="button" class="btn btn-sm icon-btn' + (nL ? ' has-n' : '') + '" data-act="files" data-pid="' + esc(p.id) + '" title="Files &amp; links" aria-label="Files and links (' + nL + ')">' + CLIP + (nL ? '<span class="n">' + nL + '</span>' : '') + '</button>';
       var btns = st === 'active'
         ? '<button type="button" class="btn btn-sm edit-only" data-act="end" data-pid="' + esc(p.id) + '" title="End this project">End</button>' +
-          '<button type="button" class="btn btn-sm icon-btn edit-only" data-act="deadline" data-pid="' + esc(p.id) + '" title="' + dlTitle + '" aria-label="' + dlTitle + '">' + FLAG + '</button>'
-        : '<button type="button" class="btn btn-sm btn-quiet edit-only" data-act="reopen" data-pid="' + esc(p.id) + '" title="Undo the end">Reopen</button>';
+          '<button type="button" class="btn btn-sm icon-btn edit-only" data-act="deadline" data-pid="' + esc(p.id) + '" title="' + dlTitle + '" aria-label="' + dlTitle + '">' + FLAG + '</button>' + clipBtn
+        : '<button type="button" class="btn btn-sm btn-quiet edit-only" data-act="reopen" data-pid="' + esc(p.id) + '" title="Undo the end">Reopen</button>' + clipBtn;
       return '<div class="row ' + st + (isDrifting(p, T) ? ' drifting' : '') + '" style="--pc:var(--c' + p.color + ')">' +
         '<div class="label"><button type="button" class="label-box" data-act="project" data-pid="' + esc(p.id) + '" title="Edit project"><span class="label-name">' + esc(p.name) +
         (areaOf(p) ? '<span class="area-tag">' + esc(areaOf(p).name) + '</span>' : '') + '</span><span class="label-meta">' + meta +
@@ -1549,7 +1589,7 @@ td.c-break{display:none}
 
     var pb = $('#projects-body');
     if (!projs.length) {
-      pb.innerHTML = '<tr><td colspan="9" class="table-empty">No projects yet. Use <b>+ New project</b> to start one.</td></tr>';
+      pb.innerHTML = '<tr><td colspan="10" class="table-empty">No projects yet. Use <b>+ New project</b> to start one.</td></tr>';
     } else {
       pb.innerHTML = projs.map(function (x) {
         var p = x.p, st = x.st, lu = lastUpdate(p);
@@ -1575,12 +1615,29 @@ td.c-break{display:none}
           '<td class="date c-meta" data-label="Started">' + fmtShort(firstDate(p)) + '</td>' +
           '<td class="date c-meta" data-label="Deadline">' + dlCell + '</td>' +
           '<td class="num c-meta" data-label="Updates">' + countFor(p.id) + '</td>' +
+          '<td class="num c-meta" data-label="Files"><button type="button" class="link-btn" data-act="files" data-pid="' + esc(p.id) + '" style="padding:0">' + linksOf(p).length + '</button></td>' +
           '<td class="date c-meta" data-label="Last">' + (lu ? fmtShort(lu) : '—') + '</td>' +
           '<td class="c-status">' + pill + '</td>' +
           '<td class="c-break" aria-hidden="true"></td>' +
           '<td class="actions c-acts">' + acts + '</td></tr>';
       }).join('');
     }
+
+    var fb = $('#files-body'), all = [];
+    projs.forEach(function (x) { linksOf(x.p).forEach(function (l) { all.push({ p: x.p, l: l }); }); });
+    all.sort(function (a, b) { return a.l.added < b.l.added ? 1 : a.l.added > b.l.added ? -1 : 0; });
+    $('#files-count').textContent = all.length ? plural(all.length, 'item') : '';
+    fb.innerHTML = all.length ? all.map(function (x) {
+      var info = linkInfo(x.l.url), t = linkTitle(x.l);
+      return '<tr style="--pc:var(--c' + x.p.color + ')">' +
+        '<td class="c-name"><button type="button" class="lk-main" data-act="link" data-pid="' + esc(x.p.id) + '" data-lid="' + esc(x.l.id) + '">' + linkTile(info.svc) +
+          '<span class="lk-text"><span class="lk-title">' + esc(t) + (x.l.kind === 'published' ? '<span class="lk-badge">' + STAR + 'Published</span>' : '') + '</span></span></button></td>' +
+        '<td class="c-proj"><span class="proj-cell"><i class="pdot"></i>' + esc(x.p.name) + '</span></td>' +
+        '<td class="c-type">' + esc(info.label) + '</td>' +
+        '<td class="text c-notes">' + (x.l.notes ? esc(truncate(x.l.notes.replace(/\s+/g, ' '), 140)) : '<span class="muted">—</span>') + '</td>' +
+        '<td class="date c-added">' + fmtShort(x.l.added) + '</td>' +
+        '<td class="c-open"><a class="lk-open" href="' + esc(x.l.url) + '" target="_blank" rel="noopener noreferrer" title="Open" aria-label="Open ' + esc(t) + '">' + EXT + '</a></td></tr>';
+    }).join('') : '<tr><td colspan="6" class="table-empty">Nothing saved yet. Tap the paperclip next to a project on the Timeline to add its files and links.</td></tr>';
 
     var fsel = $('#f-project');
     var visibleIds = {};
@@ -1652,6 +1709,7 @@ td.c-break{display:none}
   }
   function closeModal() {
     if ($('#modal').hidden) return;
+    var cx = modalCtx; if (cx && cx.onClose) { try { cx.onClose(); } catch (er) {} }
     $('#modal').hidden = true; $('#modal-body').innerHTML = ''; modalCtx = null;
     if (lastFocus && document.contains(lastFocus)) { try { lastFocus.focus(); } catch (e) {} }
     if (dirty) scheduleSave(600);
@@ -1911,28 +1969,103 @@ td.c-break{display:none}
     openModal(ctx);
   }
 
-  // Log an update for any day up to today, picking the project
-  function openLog(date) {
-    if (mode === 'readonly') return;
-    var T = todayISO();
-    var list = state.projects.filter(function (p) { return canAddOn(p, date, T) && statusOf(p, T) !== 'archived'; });
-    if (!list.length) { openNewProject(); return; }
-    var cur = $('#qa-project').value;
-    openModal({
+  // A project's files and links: paste to add, tap one to name it and write notes.
+  function openFiles(pid, focusAdd) {
+    var p = getProject(pid); if (!p) return;
+    var ro = mode === 'readonly';
+    var ctx = {
       draw: function () {
-        $('#modal-body').innerHTML = '<h2 id="modal-title">Log ' + (date === T ? 'today' : fmtLong(date)) + '</h2>' +
-          '<form id="log-form" novalidate><div class="field"><label for="log-project">Project</label><select id="log-project">' +
-          list.map(function (p) { return '<option value="' + esc(p.id) + '"' + (p.id === cur ? ' selected' : '') + '>' + esc(p.name) + '</option>'; }).join('') + '</select></div>' +
-          '<div class="field"><label for="log-text">What did you do?</label><textarea id="log-text" rows="3" autofocus></textarea></div>' +
-          '<div class="modal-actions"><button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Log update</button></div></form>';
+        p = getProject(pid); if (!p) { closeModal(); return; }
+        var L = linksOf(p);
+        function group(kind, label) {
+          var items = L.filter(function (l) { return l.kind === kind; })
+            .sort(function (a, b) { return a.added < b.added ? 1 : a.added > b.added ? -1 : 0; });
+          return items.length ? '<h3 class="lk-group">' + label + '</h3><ul class="lk-list">' + items.map(function (l) { return linkRowHTML(p, l); }).join('') + '</ul>' : '';
+        }
+        $('#modal-body').innerHTML =
+          '<div class="modal-head" style="--pc:var(--c' + p.color + ')"><i class="dot"></i><div><h2 id="modal-title">' + esc(p.name) + '</h2>' +
+          '<p class="modal-sub">Files &amp; links · ' + L.length + '</p></div></div>' +
+          (ro ? '' : '<form id="lk-form" class="lk-add" novalidate>' +
+            '<label for="lk-url" class="sr-only">Link</label><input id="lk-url" type="text" inputmode="url" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="Paste a link: Google Doc, Sheet, Drive, website…"' + (focusAdd ? ' autofocus' : '') + '>' +
+            '<label for="lk-name" class="sr-only">Name</label><input id="lk-name" type="text" maxlength="120" placeholder="Name (optional)">' +
+            '<button type="submit" class="btn primary">Add</button></form><p class="form-error" id="lk-error" hidden></p>') +
+          (L.length ? group('published', 'Published') + group('file', 'Files') + group('link', 'Links')
+            : '<p class="lk-empty">Nothing saved yet. Paste the link to a Google Doc, Sheet, Slides deck, Drive folder or any web page. Tap it afterwards to add notes, or to mark where the work is published.</p>') +
+          '<div class="modal-actions"><button type="button" class="btn" data-close>Done</button></div>';
       },
-      onSubmit: function () {
-        var pid = $('#log-project').value, v = $('#log-text').value.trim();
-        if (!v) { $('#log-text').focus(); return; }
-        addUpdate(pid, date, v);
-        closeModal();
+      onSubmit: function (e) {
+        if (e.target.id !== 'lk-form') return;
+        var raw = $('#lk-url').value, url = cleanUrl(raw), err = $('#lk-error');
+        if (!url) {
+          err.textContent = raw.trim() ? 'That doesn’t look like a web link. Copy the whole address from the browser bar or the Share button.' : 'Paste a link first.';
+          err.hidden = false; $('#lk-url').focus(); return;
+        }
+        var name = $('#lk-name').value.trim().slice(0, 120);
+        commit(function () { linksOf(p).push({ id: uid(), url: url, title: name, kind: guessKind(url), notes: '', added: todayISO() }); });
+        ctx.draw();
+        var f = $('#lk-url'); if (f) f.focus();
+      },
+      onClick: function (e) {
+        var b = e.target.closest('[data-act="link"]'); if (b) openLink(pid, b.dataset.lid);
       }
-    });
+    };
+    openModal(ctx);
+  }
+
+  // One saved file or link: its name, address, type and notes. Saves when you leave it.
+  function openLink(pid, lid) {
+    var p = getProject(pid); if (!p) return;
+    var l = null; linksOf(p).forEach(function (x) { if (x.id === lid) l = x; });
+    if (!l) return;
+    var ro = mode === 'readonly';
+    function save() {
+      if (ro || !$('#li-title')) return true;
+      var url = cleanUrl($('#li-url').value), err = $('#li-error');
+      var kindEl = $('input[name="lk-kind"]:checked');
+      var next = { title: $('#li-title').value.trim().slice(0, 120), url: url || l.url, kind: kindEl ? kindEl.value : l.kind, notes: $('#li-notes').value.slice(0, 5000) };
+      var changed = next.title !== l.title || next.url !== l.url || next.kind !== l.kind || next.notes !== l.notes;
+      if (changed) commit(function () { l.title = next.title; l.url = next.url; l.kind = next.kind; l.notes = next.notes; });
+      if (!url) { err.textContent = 'That link doesn’t look right, so the old one was kept.'; err.hidden = false; return false; }
+      return true;
+    }
+    var ctx = {
+      draw: function () {
+        var info = linkInfo(l.url);
+        function k(v, label) { return '<label><input type="radio" name="lk-kind" value="' + v + '"' + (l.kind === v ? ' checked' : '') + (ro ? ' disabled' : '') + '><span>' + label + '</span></label>'; }
+        $('#modal-body').innerHTML =
+          '<div class="modal-head lk-head">' + linkTile(info.svc) + '<div><h2 id="modal-title">' + esc(linkTitle(l)) + '</h2>' +
+          '<p class="modal-sub">' + esc(info.label) + ' · ' + esc(p.name) + ' · added ' + fmtShort(l.added) + '</p></div></div>' +
+          '<p style="margin:2px 0 12px"><a class="btn" href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer">' + EXT + 'Open</a></p>' +
+          '<form id="li-form" novalidate>' +
+          '<div class="field"><label for="li-title">Name</label><input id="li-title" type="text" maxlength="120" value="' + esc(l.title) + '" placeholder="' + esc(linkTitle({ url: l.url, title: '' })) + '"' + (ro ? ' readonly' : '') + '></div>' +
+          '<div class="field"><label for="li-url">Link</label><input id="li-url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" value="' + esc(l.url) + '"' + (ro ? ' readonly' : '') + '></div>' +
+          '<div class="field"><span class="field-label">Type</span><div class="kind-seg" role="radiogroup" aria-label="Type">' + k('file', 'File') + k('link', 'Link') + k('published', 'Published') + '</div></div>' +
+          '<div class="field"><label for="li-notes">Notes</label><textarea id="li-notes" rows="6" maxlength="5000" placeholder="What it is, what changed, where it was published, what to do next…"' + (ro ? ' readonly' : '') + '>' + esc(l.notes) + '</textarea></div>' +
+          '<p class="form-error" id="li-error" hidden></p>' +
+          (ro ? '<div class="modal-actions"><button type="button" class="btn" data-act="li-back">Back</button></div>'
+            : '<div class="modal-actions" id="li-acts"><button type="button" class="btn btn-quiet" data-act="li-del" style="margin-right:auto">Remove</button>' +
+              '<button type="submit" class="btn primary">Done</button></div>' +
+              '<div class="modal-actions" id="li-confirm" hidden><span class="muted" style="margin-right:auto;align-self:center;font-size:13px">Remove this from the project?</span>' +
+              '<button type="button" class="btn" data-act="li-keep">Keep</button><button type="button" class="btn danger" data-act="li-del-yes">Remove</button></div>') +
+          '</form>';
+      },
+      onClick: function (e) {
+        var b = e.target.closest('[data-act]'); if (!b) return;
+        var a = b.dataset.act;
+        if (a === 'li-back') openFiles(pid);
+        else if (a === 'li-del') { $('#li-acts').hidden = true; $('#li-confirm').hidden = false; }
+        else if (a === 'li-keep') { $('#li-acts').hidden = false; $('#li-confirm').hidden = true; }
+        else if (a === 'li-del-yes') {
+          ctx.onClose = null;
+          commit(function () { p.links = linksOf(p).filter(function (x) { return x.id !== lid; }); });
+          openFiles(pid);
+        }
+      },
+      onSubmit: function () { if (save()) { ctx.onClose = null; openFiles(pid); } },
+      onClose: function () { save(); }
+    };
+    openModal(ctx);
+    if (!ro && !l.title) { var t = $('#li-title'); if (t) t.focus(); }
   }
 
   function openEnd(pid) {
@@ -2159,18 +2292,6 @@ td.c-break{display:none}
       }
     });
 
-    $('#week-prev').addEventListener('click', function () { ui.weekOffset -= 5; render(); });
-    $('#week-next').addEventListener('click', function () { ui.weekOffset += 5; render(); });
-    $('#week-today').addEventListener('click', function () { ui.weekOffset = 0; render(); });
-    $('#week-grid').addEventListener('click', function (e) {
-      var b = e.target.closest('[data-act]'); if (!b) return;
-      var a = b.dataset.act;
-      if (a === 'open-day') openDay(b.dataset.pid, b.dataset.date);
-      else if (a === 'log-day') openLog(b.dataset.date);
-      else if (a === 'milestone') openMilestone(b.dataset.pid, b.dataset.mid);
-      else if (a === 'deadline') openDeadline(b.dataset.pid);
-      else if (a === 'project') openProject(b.dataset.pid);
-    });
     $('#area-chips').addEventListener('click', function (e) {
       var b = e.target.closest('[data-area]'); if (!b) return;
       ui.area = b.dataset.area; render();
@@ -2225,6 +2346,7 @@ td.c-break{display:none}
         else if (act.dataset.act === 'reopen') openReopen(pid);
         else if (act.dataset.act === 'deadline') openDeadline(pid);
         else if (act.dataset.act === 'project') openProject(pid);
+        else if (act.dataset.act === 'files') openFiles(pid);
         else if (act.dataset.act === 'milestone') openMilestone(pid, act.dataset.mid);
         else if (act.dataset.act === 'new-project') openNewProject();
         else if (act.dataset.act === 'sync') openSync();
@@ -2266,6 +2388,8 @@ td.c-break{display:none}
         case 'deadline': openDeadline(pid); break;
         case 'project': openProject(pid); break;
         case 'areas': openAreas(); break;
+        case 'files': openFiles(pid); break;
+        case 'link': openLink(pid, b.dataset.lid); break;
         case 'delete-project':
           var n = countFor(pid);
           confirmDialog({

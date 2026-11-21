@@ -1,14 +1,14 @@
 # Polaris
 
-A one-file project tracker for projects, research and classes. Every day you write one line about what moved, and Polaris turns those lines into a timeline, a week view and gentle reminders.
+A one-file project tracker for projects, research and classes. Every day you write one line about what moved, and Polaris turns those lines into a timeline and gentle reminders.
 
 ## What's in it
 
-- **Week** (the home screen): five days that roll with you, from 2 days back to 2 days ahead. Each day shows what you logged and what's due. Tap **+ Log** on a day to add something for it. The toolbar shows how many days in a row you've logged something and how many updates you made this week.
-- **Timeline**: every project as a line, with a dot for each update, a ◆ for each milestone, a flag for the final deadline and an ✕ when it ends. Ended projects sink to the bottom and leave the board a week later.
+- **Timeline** (the home screen): every project as a line, with a dot for each update, a ◆ for each milestone, a flag for the final deadline and an ✕ when it ends. Ended projects sink to the bottom and leave the board a week later.
 - **Table**: all projects and updates, searchable and editable.
 - **Areas**: Research, Class, Project and Personal by default. Rename them or add your own in **Table → Edit areas**, and filter the Timeline by area.
 - **Milestones**: several dated checkpoints per project (assignments, exams, submissions). Each one gets a reminder 3 days before. The **final deadline** is separate: once that day is over, the project ends itself.
+- **Files & links**: tap the paperclip next to a project and paste a link: a Google Doc, Sheet, Slides deck, Drive folder, PDF or any website. Polaris shows what kind of file it is. Tap an item to name it, write notes, or mark it **Published** when the work is published somewhere. The **Table** tab lists everything you've saved. Polaris stores only the address, not the file itself, so who can open a Google Doc still depends on that doc's own sharing settings.
 - **Reminders** (the yellow bars): milestones and deadlines coming up, projects that have gone quiet for 5+ days, and a recap of last week from Monday to Wednesday. Each one can be dismissed.
 
 The whole app is `index.html`: HTML, CSS and JavaScript in one file. There's no build step, nothing to install, and no server of your own. The only outside things it loads are fonts from Google Fonts (Unbounded, Geist and Geist Mono). Without internet it falls back to system fonts.
@@ -99,9 +99,8 @@ and open `polaris/index.html`.
 
 The layout switches automatically on screens narrower than 640px:
 
-- The **Week** tab lists today first, then the next two days, then the two days before.
 - On the **Timeline**, each project's name sits above its line, so the line uses the full width, and it starts on the one-week range.
-- The update box is a bar at the bottom of the screen, like a chat app. It always logs for today. To add an update for an earlier day, tap **+ Log** on that day in the Week tab, or tap that day on the project's line.
+- The update box is a bar at the bottom of the screen, like a chat app. It always logs for today. To add an update for an earlier day, tap that day on the project's line.
 - Tap an update to read, edit or add more. Pop-ups slide up from the bottom.
 - The **Table** tab shows projects and updates as cards.
 - **GitHub sync** and **Backup** are in the **⋯** menu at the top right.
@@ -122,7 +121,9 @@ The layout switches automatically on screens narrower than 640px:
     { "id": "mwq3y07bbxii4o", "name": "ESL Grant", "color": 0,
       "start": "2026-11-16", "ended": null, "deadline": "2026-11-30", "endedBy": null,
       "area": "research",
-      "milestones": [ { "id": "m1", "title": "Budget section", "date": "2026-11-22", "done": false } ] }
+      "milestones": [ { "id": "m1", "title": "Budget section", "date": "2026-11-22", "done": false } ],
+      "links": [ { "id": "l1", "url": "https://docs.google.com/document/d/…/edit", "title": "Budget draft",
+                   "kind": "file", "notes": "", "added": "2026-11-21" } ] }
   ],
   "updates": [
     { "id": "mwq3y8k24hf5h9", "projectId": "mwq3y07bbxii4o", "date": "2026-11-17", "text": "Something" }
