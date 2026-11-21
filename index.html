@@ -379,6 +379,75 @@ td.c-type,td.c-added{white-space:nowrap}
 td.c-type{font-size:13px;color:var(--muted)}
 td.c-open{width:44px}
 
+/* ---------- project window: one place for to-dos, files, activity and notes ---------- */
+body.hub-open{overflow:hidden}
+.hub{position:fixed;inset:0;z-index:40;background:rgba(4,6,12,.72);display:grid;place-items:center;padding:16px}
+.hub-panel{position:relative;width:min(1100px,100%);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain;
+  background:var(--panel);border:1px solid var(--rule);border-top:3px solid var(--pc);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.6);padding:18px 22px 22px}
+.hub-head{display:flex;align-items:flex-start;gap:12px}
+.hub-head .dot{flex:none;width:12px;height:12px;border-radius:50%;background:var(--pc);box-shadow:0 0 10px var(--pc);margin-top:10px}
+.hub-titles{flex:1;min-width:0}
+.hub-titles h2{font-family:var(--font-display);font-weight:600;font-size:21px;line-height:1.25;margin:0;overflow-wrap:anywhere}
+.hub-sub{margin:3px 0 0;font:500 12.5px var(--font-mono);color:var(--muted)}
+.hub-acts{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.hub-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0 16px}
+.hstat{display:flex;flex-direction:column;gap:2px;min-width:0;padding:10px 12px;border:1px solid var(--rule);border-radius:12px;background:var(--panel-2)}
+.hstat-k{font:500 10.5px var(--font-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.hstat-v{font-weight:600;font-size:14.5px;line-height:1.3;overflow-wrap:anywhere}
+.hstat-v b{font:600 19px var(--font-mono)}
+.hstat-s{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
+.hstat.is-soon{border-color:rgba(255,184,107,.5)}
+.hstat.is-soon .hstat-v{color:var(--warn)}
+.hstat.is-late .hstat-v{color:var(--stop)}
+.pbar{display:block;height:6px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:6px}
+.pbar i{display:block;height:100%;min-width:0;background:var(--pc);box-shadow:0 0 8px var(--pc);border-radius:inherit}
+.hub-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;align-items:start}
+.hub-col{display:flex;flex-direction:column;gap:16px;min-width:0}
+.hsec{border:1px solid var(--rule);border-radius:12px;padding:12px 14px 14px;background:rgba(10,13,22,.35);min-width:0}
+.hsec-h{display:flex;align-items:baseline;gap:8px;margin:0 0 10px}
+.hsec-h h3{margin:0;font:600 11.5px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.hsec-h .count{margin-left:auto}
+.hub form{display:grid;gap:8px;margin:0 0 10px}
+.hub .task-add{grid-template-columns:minmax(0,1fr) 150px auto}
+.hub .lk-add{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) auto}
+.hub .log-add{grid-template-columns:minmax(0,1fr) auto;align-items:end}
+.hub .log-add textarea{min-height:46px}
+.task-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px}
+.task{display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:10px;border:1px solid transparent}
+.task:hover{background:var(--panel-2);border-color:var(--rule)}
+.task.is-next{background:rgba(138,180,255,.06);border-color:rgba(138,180,255,.25)}
+.tbox{flex:none;display:grid;place-items:center;width:22px;height:22px;padding:0;border-radius:7px;border:1.5px solid #4a5470;background:none;color:transparent;cursor:pointer}
+.tbox:hover{border-color:var(--ok);color:rgba(111,214,160,.5)}
+.tbox:disabled{cursor:default}
+.ck{display:block;width:12px;height:12px}
+.ck path{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.task.is-done .tbox{background:var(--ok);border-color:var(--ok);color:#0a0d16}
+.task-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;background:none;border:0;padding:0;text-align:left;cursor:pointer;color:var(--ink)}
+.task-title{font-weight:500;line-height:1.35;overflow-wrap:anywhere}
+.task-meta{font:400 11.5px var(--font-mono);color:var(--muted)}
+.task.is-soon .task-meta{color:var(--warn)}
+.task.is-late .task-meta{color:var(--stop)}
+.task.is-done .task-title{text-decoration:line-through;text-decoration-color:rgba(138,146,168,.6);color:var(--muted)}
+.next-tag{font:600 10px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-right:7px}
+.task-link{flex:none;display:inline-grid;border-radius:8px}
+.task-link .ltile{width:28px;height:28px}
+.task-link:hover .ltile{box-shadow:0 0 0 1px currentColor}
+.hub-more{margin-top:6px}
+.hub-empty{color:var(--muted);font-size:13.5px;margin:2px 0}
+.hub-hint{font-size:12px;color:var(--muted);margin:6px 0 0}
+#hub-notes{min-height:150px}
+.feed{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column}
+.feed-day{font:500 11px var(--font-mono);letter-spacing:.04em;color:var(--muted);margin:10px 0 3px}
+.feed-day:first-child{margin-top:2px}
+.feed-item{width:100%;display:flex;align-items:flex-start;gap:7px;text-align:left;background:none;border:0;border-left:2px solid var(--rule);padding:3px 0 3px 10px;color:var(--ink);cursor:pointer;font-size:14px;line-height:1.45}
+.feed-item:hover{border-left-color:var(--pc)}
+.feed-item.auto{color:var(--muted)}
+.feed-item .ck{flex:none;margin-top:4px;color:var(--ok)}
+.feed-text{white-space:pre-wrap;overflow-wrap:anywhere}
+.label-meta .prog{color:#c3c9d8}
+.node .ck{width:8px;height:8px;color:var(--space)}
+.node .ck path{stroke-width:3}
+
 .is-readonly .edit-only{display:none !important}
 
 /* icons */
@@ -551,6 +620,24 @@ td.c-break{display:none}
   #projects-body .c-acts{order:6;flex-basis:100%;margin-left:-6px}
   .modal .lk-add{grid-template-columns:1fr auto}
   .lk-add #lk-url{grid-column:1 / -1}
+
+  /* project window fills the screen */
+  .hub{place-items:stretch;padding:0}
+  .hub-panel{width:100%;max-height:none;height:100%;border-radius:0;border-width:3px 0 0;padding:14px max(14px, env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left))}
+  .hub-head{flex-wrap:wrap}
+  .hub-titles h2{font-size:18px}
+  .hub-acts{width:100%;justify-content:flex-start;order:3}
+  .hub-acts .hub-close{position:absolute;top:12px;right:max(12px, env(safe-area-inset-right))}
+  .hub-titles{padding-right:40px}
+  .hub-stats{grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+  .hub-grid{display:flex;flex-direction:column;gap:12px}
+  .hub-col{display:contents}
+  .hsec-tasks{order:1}.hsec-files{order:2}.hsec-log{order:3}.hsec-notes{order:4}
+  .hub .task-add{grid-template-columns:minmax(0,1fr) auto}
+  .hub .task-add #ta-title{grid-column:1 / -1}
+  .hub .lk-add{grid-template-columns:minmax(0,1fr) auto}
+  .hub .lk-add #hl-url{grid-column:1 / -1}
+  .tbox{width:26px;height:26px}
   #files-body tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center}
   #files-body .c-name{grid-column:1;grid-row:1}
   #files-body .c-open{grid-column:2;grid-row:1;width:auto}
@@ -641,7 +728,7 @@ td.c-break{display:none}
       </div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th style="width:44px"><span class="sr-only">Color</span></th><th>Project</th><th>Area</th><th>Started</th><th>Deadline</th><th>Updates</th><th>Files</th><th>Last update</th><th>Status</th><th><span class="sr-only">Actions</span></th></tr></thead>
+          <thead><tr><th style="width:44px"><span class="sr-only">Color</span></th><th>Project</th><th>Area</th><th>Started</th><th>Deadline</th><th>To-dos</th><th>Updates</th><th>Files</th><th>Last update</th><th>Status</th><th><span class="sr-only">Actions</span></th></tr></thead>
           <tbody id="projects-body"></tbody>
         </table>
       </div>
@@ -675,6 +762,7 @@ td.c-break{display:none}
   </main>
 </div>
 
+<div class="hub" id="hub" hidden></div>
 <div class="modal-backdrop" id="modal" hidden>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" id="modal-body"></div>
 </div>
@@ -794,6 +882,7 @@ td.c-break{display:none}
 
   var STAR = '<svg class="star" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 9.7 6.3 15 8 9.7 9.7 8 15 6.3 9.7 1 8 6.3 6.3z"/></svg>';
   var CHECK = '<svg class="check" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.4 5 8.8 9.6 3.4"/></svg>';
+  var CK = '<svg class="ck" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.4 5 8.8 9.6 3.4"/></svg>';
   var ORBIT = '<svg class="orbit" viewBox="0 0 36 36" aria-hidden="true"><circle class="p" cx="18" cy="18" r="7"/><ellipse cx="18" cy="18" rx="15.5" ry="5.5" transform="rotate(-20 18 18)"/></svg>';
   var DRIFT_DAYS = 5;    // a project with no update for this many days is "drifting"
   var GOAL_SOON = 14;    // mission goals get a reminder this many days ahead
@@ -821,10 +910,21 @@ td.c-break{display:none}
   function fmtYear(iso) { return fmtShort(iso) + ', ' + iso.slice(0, 4); }
   function fmtTime(ms) { if (!ms) return ''; var d = new Date(ms); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
   function isWeekend(iso) { var w = dow(iso); return w === 0 || w === 6; }
+  // Dated to-dos first (soonest first), then undated ones in the order they were added.
+  function cmpTask(a, b) {
+    if (a.date && b.date) return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
+    if (a.date) return -1;
+    if (b.date) return 1;
+    return 0;
+  }
+  function relDay(iso, T) {
+    var n = diffDays(iso, T);
+    return n === 0 ? 'Today' : n === 1 ? 'Yesterday' : n === -1 ? 'Tomorrow' : fmtLong(iso) + (iso.slice(0, 4) !== T.slice(0, 4) ? ', ' + iso.slice(0, 4) : '');
+  }
 
   /* ================= state ================= */
   var state = null;
-  var ui = { range: 7, offset: 0, showArchived: false, filterProject: 'all', search: '', editingUpdate: null, editingProject: null, area: 'all', allReminders: false };
+  var ui = { range: 7, offset: 0, showArchived: false, filterProject: 'all', search: '', editingUpdate: null, editingProject: null, area: 'all', allReminders: false, hub: null, hubShowDone: false, hubAllLog: false, hubAllTasks: false };
   var mode = 'pending';        // pending | artifact | local | readonly
   var localOnlyInViewer = false;
   var artifactApi = null;
@@ -878,26 +978,30 @@ td.c-break{display:none}
       ids[id] = true;
       var c = parseInt(p.color, 10); if (!isFinite(c)) c = 0;
       var ms = [], msIds = {};
+      // "milestones" are the project's to-dos. A date is optional; a to-do can carry one link.
       (Array.isArray(p.milestones) ? p.milestones : []).forEach(function (x) {
-        if (!x || typeof x.title !== 'string' || !x.title.trim() || !isISO(x.date)) return;
+        if (!x || typeof x.title !== 'string' || !x.title.trim()) return;
         var mid = String(x.id || uid());
         if (msIds[mid]) return;
         msIds[mid] = true;
-        ms.push({ id: mid, title: x.title.trim().slice(0, 100), date: x.date, done: !!x.done });
+        ms.push({ id: mid, title: x.title.trim().slice(0, 140), date: isISO(x.date) ? x.date : null, done: !!x.done,
+          doneOn: x.done && isISO(x.doneOn) ? x.doneOn : null, url: (typeof x.url === 'string' && cleanUrl(x.url)) || '', created: Number(x.created) || 0 });
       });
-      ms.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+      ms.sort(cmpTask);
       out.projects.push({
         id: id, name: p.name.slice(0, 80), color: ((c % INKS) + INKS) % INKS,
         start: p.start, ended: isISO(p.ended) ? p.ended : null,
         deadline: isISO(p.deadline) ? p.deadline : null, endedBy: p.endedBy === 'deadline' ? 'deadline' : null,
         area: areaIds[p.area] ? String(p.area) : null, goal: goalIds[p.goal] ? String(p.goal) : null, milestones: ms,
-        links: normLinks(p.links),
+        links: normLinks(p.links), notes: typeof p.notes === 'string' ? p.notes.slice(0, 10000) : '',
         created: Number(p.created) || 0, sample: !!p.sample
       });
     });
     (Array.isArray(s.updates) ? s.updates : []).forEach(function (u) {
       if (!u || !ids[String(u.projectId)] || !isISO(u.date) || typeof u.text !== 'string') return;
-      out.updates.push({ id: String(u.id || uid()), projectId: String(u.projectId), date: u.date, text: u.text.slice(0, 2000), created: Number(u.created) || 0 });
+      var o = { id: String(u.id || uid()), projectId: String(u.projectId), date: u.date, text: u.text.slice(0, 2000), created: Number(u.created) || 0 };
+      if (typeof u.task === 'string' && u.task) o.task = u.task;   // set when the update was made by ticking a to-do
+      out.updates.push(o);
     });
     return out;
   }
@@ -999,6 +1103,34 @@ td.c-break{display:none}
   function lastActivity(p) { return lastUpdate(p) || p.start; }
   function driftDays(p, T) { return p.ended ? 0 : Math.max(0, diffDays(lastActivity(p), T)); }
   function isDrifting(p, T) { return !p.ended && driftDays(p, T) >= DRIFT_DAYS; }
+  function taskById(p, mid) { var m = null; p.milestones.forEach(function (x) { if (x.id === mid) m = x; }); return m; }
+  function taskCounts(p) { var d = 0; p.milestones.forEach(function (m) { if (m.done) d++; }); return { done: d, total: p.milestones.length }; }
+  // Tick or untick a to-do. Ticking also logs it on today's dot, so the timeline shows progress by itself.
+  function setTaskDone(s, p, m, done, T) {
+    if (!!m.done === !!done) return;
+    m.done = !!done;
+    if (m.done) {
+      m.doneOn = T;
+      if (canAddOn(p, T, T)) {
+        s.updates.push({ id: uid(), projectId: p.id, date: T, text: '✓ ' + m.title, created: Date.now(), task: m.id });
+        justAdded = p.id + '|' + T;
+      }
+    } else {
+      m.doneOn = null;
+      s.updates = s.updates.filter(function (u) { return !(u.task === m.id && u.date === T); });
+    }
+  }
+  // "Essay draft https://docs.google.com/…" becomes the to-do "Essay draft" with that link attached.
+  function splitTaskInput(raw) {
+    var v = String(raw || '').trim(), url = '';
+    var hit = v.match(/(?:https?:\/\/|www\.)\S+/i);
+    if (hit) {
+      url = cleanUrl(hit[0].replace(/[),.;]+$/, '')) || '';
+      if (url) v = (v.slice(0, hit.index) + ' ' + v.slice(hit.index + hit[0].length)).replace(/\s+/g, ' ').replace(/[\s:–—-]+$/, '').trim();
+    }
+    if (!v && url) v = linkTitle({ url: url, title: '' });
+    return { title: v.slice(0, 140), url: url };
+  }
   // Google Calendar "new event" link for an all-day event
   // Everything with a date: final deadlines and milestones
   function dueItems() {
@@ -1006,7 +1138,7 @@ td.c-break{display:none}
     state.projects.forEach(function (p) {
       if (p.ended) return;
       if (p.deadline) items.push({ kind: 'deadline', date: p.deadline, p: p, title: p.name, done: false });
-      p.milestones.forEach(function (m) { items.push({ kind: 'milestone', date: m.date, p: p, m: m, title: m.title, done: m.done }); });
+      p.milestones.forEach(function (m) { if (m.date) items.push({ kind: 'milestone', date: m.date, p: p, m: m, title: m.title, done: m.done }); });
     });
     return items.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
   }
@@ -1039,7 +1171,8 @@ td.c-break{display:none}
 
   function isBusy() {
     var qa = $('#qa-text');
-    return !$('#modal').hidden || (qa && qa.value.trim()) || ui.editingUpdate || ui.editingProject ||
+    var hubTyping = !!ui.hub && $$('#hub [data-keep]').some(function (el) { return el.id === 'hub-notes' ? el === document.activeElement : !!el.value.trim(); });
+    return !$('#modal').hidden || hubTyping || (qa && qa.value.trim()) || ui.editingUpdate || ui.editingProject ||
       (document.activeElement && document.activeElement.id === 'board-title');
   }
 
@@ -1334,6 +1467,7 @@ td.c-break{display:none}
     $('#view-timeline').hidden = view !== 'timeline';
     $('#view-table').hidden = view !== 'table';
     if (view === 'timeline') renderBoard(T); else renderTables(T);
+    if (ui.hub) renderHub();
   }
 
   function renderHeader(T) {
@@ -1488,10 +1622,10 @@ td.c-break{display:none}
       Object.keys(ups).forEach(function (d) {
         var k = idx(d);
         if (k < 0 || k > N - 1) return;
-        var n = ups[d].length;
+        var n = ups[d].length, ticked = ups[d].some(function (u) { return u.task; });
         out += '<button type="button" class="node' + (n > 1 ? ' multi' : '') + (justAdded === p.id + '|' + d ? ' just-added' : '') +
           '" data-pid="' + esc(p.id) + '" data-date="' + d + '" style="left:' + cx(k).toFixed(3) + '%" aria-label="' +
-          esc(p.name) + ': ' + plural(n, 'update') + ' on ' + fmtLong(d) + '">' + (n > 1 ? n : '') + '</button>';
+          esc(p.name) + ': ' + plural(n, 'update') + ' on ' + fmtLong(d) + '">' + (n > 1 ? n : ticked ? CK : '') + '</button>';
       });
       if (p.ended) {
         var ei = idx(p.ended);
@@ -1508,6 +1642,7 @@ td.c-break{display:none}
         }
       }
       p.milestones.forEach(function (m) {
+        if (!m.date) return;
         var mi = idx(m.date);
         if (mi < 0 || mi > N - 1) return;
         var ml = diffDays(T, m.date), soonM = !m.done && ml >= 0 && ml <= DUE_SOON;
@@ -1515,12 +1650,13 @@ td.c-break{display:none}
         out += '<button type="button" class="ms-mark' + (m.done ? ' is-done' : '') + (soonM ? ' is-soon' : '') + '" data-act="milestone" data-pid="' + esc(p.id) + '" data-mid="' + esc(m.id) +
           '" style="left:' + cx(mi).toFixed(3) + '%" title="' + esc(tipM) + '" aria-label="Milestone: ' + esc(tipM) + '">' + DIAMOND + '</button>';
       });
-      var parts = [];
+      var parts = [], tc = taskCounts(p);
       if (st === 'active') {
         if (p.deadline) {
           var d2 = diffDays(T, p.deadline);
           parts.push('<span class="due' + (d2 <= DUE_SOON ? ' is-soon' : '') + '">' + FLAG + (d2 <= 0 ? 'Due today' : 'Due ' + fmtShort(p.deadline) + ' · ' + plural(d2, 'day') + ' left') + '</span>');
         }
+        if (tc.total) parts.push('<span class="prog">' + tc.done + '/' + tc.total + ' to-dos done</span>');
         if (isDrifting(p, T)) parts.push('<span class="drift">quiet for ' + driftDays(p, T) + ' days</span>');
       } else {
         var left2 = KEEP_DAYS - diffDays(p.ended, T);
@@ -1528,15 +1664,12 @@ td.c-break{display:none}
       }
       var meta = parts.join('<br>');
       var dlTitle = p.deadline ? 'Change deadline' : 'Set a deadline';
-      var nL = linksOf(p).length;
-      var clipBtn = '<button type="button" class="act' + (nL ? ' has-n' : '') + '" data-act="files" data-pid="' + esc(p.id) + '" title="Files &amp; links' + (nL ? ' (' + nL + ')' : '') + '" aria-label="Files and links (' + nL + ')">' + CLIP + (nL ? '<span class="n">' + nL + '</span>' : '') + '</button>';
       var btns = st === 'active'
-        ? clipBtn +
-          '<button type="button" class="act edit-only" data-act="deadline" data-pid="' + esc(p.id) + '" title="' + dlTitle + '" aria-label="' + dlTitle + '">' + FLAG + '</button>' +
+        ? '<button type="button" class="act edit-only" data-act="deadline" data-pid="' + esc(p.id) + '" title="' + dlTitle + '" aria-label="' + dlTitle + '">' + FLAG + '</button>' +
           '<button type="button" class="act end edit-only" data-act="end" data-pid="' + esc(p.id) + '" title="End project" aria-label="End project">' + END_ICO + '</button>'
-        : clipBtn + '<button type="button" class="act edit-only" data-act="reopen" data-pid="' + esc(p.id) + '" title="Reopen project" aria-label="Reopen project">' + REOPEN_ICO + '</button>';
+        : '<button type="button" class="act edit-only" data-act="reopen" data-pid="' + esc(p.id) + '" title="Reopen project" aria-label="Reopen project">' + REOPEN_ICO + '</button>';
       return '<div class="row ' + st + (isDrifting(p, T) ? ' drifting' : '') + '" style="--pc:var(--c' + p.color + ')">' +
-        '<div class="label"><button type="button" class="label-box" data-act="project" data-pid="' + esc(p.id) + '" title="Edit project"><span class="label-name">' + esc(p.name) +
+        '<div class="label"><button type="button" class="label-box" data-act="project" data-pid="' + esc(p.id) + '" title="Open project"><span class="label-name">' + esc(p.name) +
         (areaOf(p) ? '<span class="area-tag">' + esc(areaOf(p).name) + '</span>' : '') + '</span><span class="label-meta">' + meta + '</span></button>' +
         '<div class="label-acts">' + btns + '</div></div>' +
         '<div class="lane" data-pid="' + esc(p.id) + '">' + out + '<span class="ghost" aria-hidden="true">+</span></div></div>';
@@ -1585,7 +1718,7 @@ td.c-break{display:none}
 
     var pb = $('#projects-body');
     if (!projs.length) {
-      pb.innerHTML = '<tr><td colspan="10" class="table-empty">No projects yet. Use <b>+ New project</b> to start one.</td></tr>';
+      pb.innerHTML = '<tr><td colspan="11" class="table-empty">No projects yet. Use <b>+ New project</b> to start one.</td></tr>';
     } else {
       pb.innerHTML = projs.map(function (x) {
         var p = x.p, st = x.st, lu = lastUpdate(p);
@@ -1599,7 +1732,8 @@ td.c-break{display:none}
         else dlCell = p.deadline ? fmtShort(p.deadline) : '—';
         var name = ui.editingProject === p.id
           ? '<input class="cell-input" id="pn-input" type="text" maxlength="80" value="' + esc(p.name) + '" aria-label="Project name">'
-          : '<button type="button" class="name-btn" data-act="project" data-pid="' + esc(p.id) + '" title="Edit project">' + esc(p.name) + '</button>';
+          : '<button type="button" class="name-btn" data-act="project" data-pid="' + esc(p.id) + '" title="Open project">' + esc(p.name) + '</button>';
+        var tc = taskCounts(p);
         var acts = (st === 'active'
           ? '<button type="button" class="link-btn edit-only" data-act="end" data-pid="' + esc(p.id) + '">End</button>'
           : '<button type="button" class="link-btn edit-only" data-act="reopen" data-pid="' + esc(p.id) + '">Reopen</button>') +
@@ -1610,6 +1744,7 @@ td.c-break{display:none}
           '<td class="c-meta" data-label="Area">' + (areaOf(p) ? esc(areaOf(p).name) : '—') + '</td>' +
           '<td class="date c-meta" data-label="Started">' + fmtShort(firstDate(p)) + '</td>' +
           '<td class="date c-meta" data-label="Deadline">' + dlCell + '</td>' +
+          '<td class="num c-meta" data-label="To-dos">' + (tc.total ? tc.done + '/' + tc.total : '—') + '</td>' +
           '<td class="num c-meta" data-label="Updates">' + countFor(p.id) + '</td>' +
           '<td class="num c-meta" data-label="Files"><button type="button" class="link-btn" data-act="files" data-pid="' + esc(p.id) + '" style="padding:0">' + linksOf(p).length + '</button></td>' +
           '<td class="date c-meta" data-label="Last">' + (lu ? fmtShort(lu) : '—') + '</td>' +
@@ -1633,7 +1768,7 @@ td.c-break{display:none}
         '<td class="text c-notes">' + (x.l.notes ? esc(truncate(x.l.notes.replace(/\s+/g, ' '), 140)) : '<span class="muted">—</span>') + '</td>' +
         '<td class="date c-added">' + fmtShort(x.l.added) + '</td>' +
         '<td class="c-open"><a class="lk-open" href="' + esc(x.l.url) + '" target="_blank" rel="noopener noreferrer" title="Open" aria-label="Open ' + esc(t) + '">' + EXT + '</a></td></tr>';
-    }).join('') : '<tr><td colspan="6" class="table-empty">Nothing saved yet. Tap the paperclip next to a project on the Timeline to add its files and links.</td></tr>';
+    }).join('') : '<tr><td colspan="6" class="table-empty">Nothing saved yet. Open a project (tap its name) and paste a link under Files &amp; links.</td></tr>';
 
     var fsel = $('#f-project');
     var visibleIds = {};
@@ -1708,6 +1843,7 @@ td.c-break{display:none}
     var cx = modalCtx; if (cx && cx.onClose) { try { cx.onClose(); } catch (er) {} }
     $('#modal').hidden = true; $('#modal-body').innerHTML = ''; modalCtx = null;
     if (lastFocus && document.contains(lastFocus)) { try { lastFocus.focus(); } catch (e) {} }
+    else if (ui.hub) { var hc = $('#hub .hub-close'); if (hc) { try { hc.focus({ preventScroll: true }); } catch (e) {} } }
     if (dirty) scheduleSave(600);
   }
   function confirmDialog(o) {
@@ -1791,30 +1927,22 @@ td.c-break{display:none}
     openModal(ctx);
   }
 
-  // One editor for everything about a project: name, area, dates, milestones, color.
+  // The basics of a project: name, area, dates and color. To-dos, files and notes live in the project window.
   function openProject(pid) {
     if (mode === 'readonly') return;
     var T = todayISO(), p0 = pid ? getProject(pid) : null;
     if (pid && !p0) return;
     var isNew = !p0;
     var d = isNew
-      ? { name: '', area: ui.area !== 'all' ? ui.area : null, goal: null, color: leastUsedColor(), start: T, deadline: null, milestones: [], note: '' }
-      : { name: p0.name, area: p0.area, goal: p0.goal, color: p0.color, start: p0.start, deadline: p0.deadline, note: '',
-          milestones: p0.milestones.map(function (m) { return { id: m.id, title: m.title, date: m.date, done: m.done }; }) };
+      ? { name: '', area: ui.area !== 'all' ? ui.area : null, goal: null, color: leastUsedColor(), start: T, deadline: null, note: '' }
+      : { name: p0.name, area: p0.area, goal: p0.goal, color: p0.color, start: p0.start, deadline: p0.deadline, note: '' };
     function opt(v, label, cur) { return '<option value="' + esc(v) + '"' + (v === (cur || '') ? ' selected' : '') + '>' + esc(label) + '</option>'; }
-    function msRow(m, i) {
-      return '<li class="ms-row"><input type="checkbox" id="ms-d-' + i + '"' + (m.done ? ' checked' : '') + ' title="Done" aria-label="Done">' +
-        '<input type="text" id="ms-t-' + i + '" maxlength="100" value="' + esc(m.title) + '" placeholder="e.g. Essay 2, Midterm, Abstract due" aria-label="Milestone name">' +
-        '<input type="date" id="ms-a-' + i + '" value="' + esc(m.date || '') + '" aria-label="Milestone date">' +
-        '<button type="button" class="icon-x" data-act="del-ms" data-i="' + i + '" aria-label="Remove milestone">×</button></li>';
-    }
     function readForm() {
       d.name = $('#pj-name').value;
       d.area = $('#pj-area').value || null;
       d.start = $('#pj-start').value;
       d.deadline = $('#pj-deadline').value || null;
       var c = $('input[name="pj-color"]:checked'); if (c) d.color = +c.value;
-      d.milestones.forEach(function (m, i) { m.done = $('#ms-d-' + i).checked; m.title = $('#ms-t-' + i).value; m.date = $('#ms-a-' + i).value; });
       var n = $('#pj-note'); if (n) d.note = n.value;
     }
     var ctx = {
@@ -1828,25 +1956,16 @@ td.c-break{display:none}
             state.areas.map(function (a) { return opt(a.id, a.name, d.area); }).join('') + '</select></div>' +
           '<div class="field-row"><div class="field"><label for="pj-start">Start date</label><input id="pj-start" type="date" value="' + esc(d.start) + '" max="' + T + '"></div>' +
           '<div class="field"><label for="pj-deadline">Final deadline <span class="muted">(ends the project)</span></label><input id="pj-deadline" type="date" value="' + esc(d.deadline || '') + '"' + (p0 && p0.ended ? '' : ' min="' + T + '"') + '></div></div>' +
-          '<div class="field"><span class="field-label">Milestones <span class="muted">(assignments, exams, submissions; you get a reminder ' + DUE_SOON + ' days before)</span></span>' +
-            (d.milestones.length ? '<ul class="ms-list">' + d.milestones.map(msRow).join('') + '</ul>' : '') +
-            '<button type="button" class="btn btn-sm" data-act="add-ms" style="align-self:flex-start">+ Add milestone</button></div>' +
           '<div class="field"><fieldset class="swatches"><legend>Line color</legend>' + sw + '</fieldset></div>' +
-          (isNew ? '<div class="field"><label for="pj-note">First update <span class="muted">(optional, logged on the start date)</span></label><textarea id="pj-note" rows="2" placeholder="Kickoff, goal, first step…">' + esc(d.note) + '</textarea></div>' : '') +
+          (isNew ? '<div class="field"><label for="pj-note">First update <span class="muted">(optional, logged on the start date)</span></label><textarea id="pj-note" rows="2" placeholder="Kickoff, goal, first step…">' + esc(d.note) + '</textarea></div>' +
+            '<p class="muted" style="font-size:13px;margin:4px 0 0">Next, the project window opens, where you add its to-dos, files and notes.</p>' : '') +
           '<p class="form-error" id="pj-error" hidden></p>' +
           '<div class="modal-actions">' + (isNew ? '' : '<button type="button" class="btn btn-quiet" data-act="del-project" style="margin-right:auto">Delete project</button>') +
           '<button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">' + (isNew ? 'Create project' : 'Save') + '</button></div></form>';
       },
       onClick: function (e) {
         var b = e.target.closest('[data-act]'); if (!b) return;
-        if (b.dataset.act === 'add-ms') {
-          readForm();
-          d.milestones.push({ id: uid(), title: '', date: addDays(T, 7), done: false });
-          ctx.draw();
-          var t = $('#ms-t-' + (d.milestones.length - 1)); if (t) t.focus();
-        } else if (b.dataset.act === 'del-ms') {
-          readForm(); d.milestones.splice(+b.dataset.i, 1); ctx.draw();
-        } else if (b.dataset.act === 'del-project') {
+        if (b.dataset.act === 'del-project') {
           var n = countFor(p0.id);
           confirmDialog({
             title: 'Delete “' + p0.name + '”?', yes: 'Delete project', danger: true,
@@ -1864,30 +1983,22 @@ td.c-break{display:none}
         var active = isNew || !p0.ended;
         if (d.deadline && !isISO(d.deadline)) return fail('That final deadline isn’t a valid date.');
         if (d.deadline && active && d.deadline < T && (isNew || d.deadline !== p0.deadline)) return fail('The final deadline has to be today or later.');
-        var ms = [];
-        for (var i = 0; i < d.milestones.length; i++) {
-          var m = d.milestones[i], t = m.title.trim();
-          if (!t && !m.date) continue;
-          if (!t) return fail('Give milestone ' + (i + 1) + ' a name.');
-          if (!isISO(m.date)) return fail('Give “' + t + '” a date.');
-          ms.push({ id: m.id, title: t.slice(0, 100), date: m.date, done: !!m.done });
-        }
-        ms.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
         var note = (d.note || '').trim();
         if (isNew) {
           var id = uid();
           commit(function (s) {
             s.projects.push({ id: id, name: name.slice(0, 80), color: d.color, start: d.start, ended: null, deadline: d.deadline, endedBy: null,
-              area: d.area, goal: d.goal, milestones: ms, created: Date.now(), sample: false });
+              area: d.area, goal: d.goal, milestones: [], links: [], notes: '', created: Date.now(), sample: false });
             if (note) s.updates.push({ id: uid(), projectId: id, date: d.start, text: note, created: Date.now() });
           });
           if (note) justAdded = id + '|' + d.start;
           $('#qa-project').value = id;
           closeModal(); render();
+          openHub(id, 'tasks');
         } else {
           commit(function () {
             p0.name = name.slice(0, 80); p0.color = d.color; p0.start = d.start; p0.deadline = d.deadline;
-            p0.area = d.area; p0.goal = d.goal; p0.milestones = ms;
+            p0.area = d.area; p0.goal = d.goal;
           });
           closeModal();
         }
@@ -1897,20 +2008,23 @@ td.c-break{display:none}
   }
   function openNewProject() { openProject(null); }
 
+  // One to-do: its name, optional due date, optional link, and whether it's done.
   function openMilestone(pid, mid) {
     var p = getProject(pid); if (!p || mode === 'readonly') return;
-    var m = null; p.milestones.forEach(function (x) { if (x.id === mid) m = x; });
+    var m = taskById(p, mid);
     if (!m) return;
     var T = todayISO();
     openModal({
       draw: function () {
-        var dl = diffDays(T, m.date);
+        var dl = m.date ? diffDays(T, m.date) : null;
         $('#modal-body').innerHTML = '<div class="modal-head" style="--pc:var(--c' + p.color + ')"><i class="dot"></i><div><h2 id="modal-title">' + esc(m.title) + '</h2>' +
-          '<p class="modal-sub">' + esc(p.name) + ' · ' + fmtLong(m.date) + (m.done ? ' · done' : dl >= 0 ? ' · ' + dueLabel(dl) : ' · ' + plural(-dl, 'day') + ' ago') + '</p></div></div>' +
+          '<p class="modal-sub">' + esc(p.name) + (m.date ? ' · ' + fmtLong(m.date) : '') + (m.done ? ' · done' : dl === null ? '' : dl >= 0 ? ' · ' + dueLabel(dl) : ' · ' + plural(-dl, 'day') + ' overdue') + '</p></div></div>' +
           '<form id="ms-form" novalidate>' +
-          '<div class="field"><label for="ms-title">Milestone</label><input id="ms-title" type="text" maxlength="100" value="' + esc(m.title) + '"></div>' +
-          '<div class="field-row"><div class="field"><label for="ms-date">Date</label><input id="ms-date" type="date" value="' + m.date + '"></div>' +
+          '<div class="field"><label for="ms-title">To-do</label><input id="ms-title" type="text" maxlength="140" value="' + esc(m.title) + '"></div>' +
+          '<div class="field-row"><div class="field"><label for="ms-date">Due date <span class="muted">(optional)</span></label><input id="ms-date" type="date" value="' + (m.date || '') + '"></div>' +
           '<div class="field" style="justify-content:flex-end"><label class="check"><input type="checkbox" id="ms-done"' + (m.done ? ' checked' : '') + '> Done</label></div></div>' +
+          '<div class="field"><label for="ms-url">Link <span class="muted">(optional: the doc or file you work on for this)</span></label><input id="ms-url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="Paste a link" value="' + esc(m.url || '') + '"></div>' +
+          (m.url ? '<p style="margin:6px 0 0"><a class="btn btn-sm" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer">' + EXT + 'Open link</a></p>' : '') +
           '<p class="form-error" id="ms-error" hidden></p>' +
           '<div class="modal-actions"><button type="button" class="btn btn-quiet" data-act="del-ms" style="margin-right:auto">Delete</button>' +
           '<button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
@@ -1922,13 +2036,17 @@ td.c-break{display:none}
         }
       },
       onSubmit: function () {
-        var t = $('#ms-title').value.trim(), dt = $('#ms-date').value, err = $('#ms-error');
-        if (!t) { err.textContent = 'Give the milestone a name.'; err.hidden = false; return; }
-        if (!isISO(dt)) { err.textContent = 'Pick a date.'; err.hidden = false; return; }
+        var t = $('#ms-title').value.trim(), dt = $('#ms-date').value, rawU = $('#ms-url').value.trim(), err = $('#ms-error');
+        var fail = function (x) { err.textContent = x; err.hidden = false; };
+        if (!t) return fail('Give the to-do a name.');
+        if (dt && !isISO(dt)) return fail('That date isn’t valid.');
+        var url = rawU ? cleanUrl(rawU) : '';
+        if (rawU && !url) return fail('That link doesn’t look right. Copy the whole address from the browser bar or the Share button.');
         var dn = $('#ms-done').checked;
-        commit(function () {
-          m.title = t.slice(0, 100); m.date = dt; m.done = dn;
-          p.milestones.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+        commit(function (s) {
+          m.title = t.slice(0, 140); m.date = dt || null; m.url = url;
+          setTaskDone(s, p, m, dn, T);
+          p.milestones.sort(cmpTask);
         });
         closeModal();
       }
@@ -2014,6 +2132,8 @@ td.c-break{display:none}
     var l = null; linksOf(p).forEach(function (x) { if (x.id === lid) l = x; });
     if (!l) return;
     var ro = mode === 'readonly';
+    // Opened from the project window: go back to it. Otherwise back to the files list.
+    function back() { if (ui.hub === pid) closeModal(); else openFiles(pid); }
     function save() {
       if (ro || !$('#li-title')) return true;
       var url = cleanUrl($('#li-url').value), err = $('#li-error');
@@ -2048,20 +2168,198 @@ td.c-break{display:none}
       onClick: function (e) {
         var b = e.target.closest('[data-act]'); if (!b) return;
         var a = b.dataset.act;
-        if (a === 'li-back') openFiles(pid);
+        if (a === 'li-back') back();
         else if (a === 'li-del') { $('#li-acts').hidden = true; $('#li-confirm').hidden = false; }
         else if (a === 'li-keep') { $('#li-acts').hidden = false; $('#li-confirm').hidden = true; }
         else if (a === 'li-del-yes') {
           ctx.onClose = null;
           commit(function () { p.links = linksOf(p).filter(function (x) { return x.id !== lid; }); });
-          openFiles(pid);
+          back();
         }
       },
-      onSubmit: function () { if (save()) { ctx.onClose = null; openFiles(pid); } },
+      onSubmit: function () { if (save()) { ctx.onClose = null; back(); } },
       onClose: function () { save(); }
     };
     openModal(ctx);
     if (!ro && !l.title) { var t = $('#li-title'); if (t) t.focus(); }
+  }
+
+  /* ================= project window ================= */
+  // Everything about one project on one screen: where it stands, what to do next, its files, what happened, and notes.
+  var hubFocusBack = null, hubNotesBase = '', hubDownOnBackdrop = false;
+
+  function hubStat(k, v, s, cls) {
+    return '<div class="hstat ' + (cls || '') + '"><span class="hstat-k">' + k + '</span><span class="hstat-v">' + v + '</span>' + (s ? '<span class="hstat-s">' + s + '</span>' : '') + '</div>';
+  }
+
+  function hubHTML(p, T) {
+    var ro = mode === 'readonly';
+    var open = p.milestones.filter(function (m) { return !m.done; }).sort(cmpTask);
+    var done = p.milestones.filter(function (m) { return m.done; }).sort(function (a, b) { var x = a.doneOn || '', y = b.doneOn || ''; return x < y ? 1 : x > y ? -1 : 0; });
+    var c = taskCounts(p), pct = c.total ? Math.round(c.done / c.total * 100) : 0, next = open[0] || null;
+    var ups = state.updates.filter(function (u) { return u.projectId === p.id; })
+      .sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : b.created - a.created; });
+    var area = areaOf(p);
+
+    function dueBits(m) {
+      if (m.done) return { cls: '', txt: m.doneOn ? 'done ' + (m.doneOn === T ? 'today' : fmtShort(m.doneOn)) : 'done' };
+      if (!m.date) return { cls: '', txt: 'no date' };
+      var n = diffDays(T, m.date);
+      if (n < 0) return { cls: ' is-late', txt: fmtShort(m.date) + ' · ' + plural(-n, 'day') + ' overdue' };
+      return { cls: n <= DUE_SOON ? ' is-soon' : '', txt: fmtLong(m.date) + ' · ' + dueLabel(n) };
+    }
+    function taskRow(m, isNext) {
+      var b = dueBits(m), info = m.url ? linkInfo(m.url) : null;
+      return '<li class="task' + (m.done ? ' is-done' : '') + b.cls + (isNext ? ' is-next' : '') + '">' +
+        '<button type="button" class="tbox" id="tk-' + esc(m.id) + '" data-act="task-toggle" data-mid="' + esc(m.id) + '" aria-pressed="' + !!m.done + '" aria-label="' +
+          (m.done ? 'Mark not done: ' : 'Mark done: ') + esc(m.title) + '"' + (ro ? ' disabled' : '') + '>' + CK + '</button>' +
+        '<button type="button" class="task-main" data-act="task" data-mid="' + esc(m.id) + '" title="' + (ro ? '' : 'Edit') + '"><span class="task-title">' + esc(m.title) + '</span>' +
+          '<span class="task-meta">' + (isNext ? '<span class="next-tag">Next</span>' : '') + esc(b.txt) + '</span></button>' +
+        (m.url ? '<a class="task-link" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer" title="Open ' + esc(info.label) + '" aria-label="Open the link for ' + esc(m.title) + '">' + linkTile(info.svc) + '</a>' : '') +
+        '</li>';
+    }
+
+    // header
+    var sub = [area ? area.name : '', 'started ' + fmtShort(firstDate(p)),
+      p.ended ? (p.endedBy === 'deadline' ? 'hit its deadline ' : 'ended ') + fmtShort(p.ended)
+        : p.deadline ? 'due ' + fmtLong(p.deadline) + ', ' + p.deadline.slice(0, 4) : 'no deadline'].filter(Boolean).join(' · ');
+    var acts = (ro ? '' : '<button type="button" class="btn btn-sm" data-act="hub-edit">Edit</button>' +
+        (p.ended ? '<button type="button" class="btn btn-sm" data-act="reopen">Reopen</button>' : '<button type="button" class="btn btn-sm btn-quiet" data-act="end">End</button>')) +
+      '<button type="button" class="icon-x hub-close" data-act="hub-close" aria-label="Close project" title="Close (Esc)">×</button>';
+
+    // the four numbers that tell you where things stand
+    var stats = hubStat('Progress', c.total ? '<b>' + c.done + '</b> of ' + c.total + ' done' : 'No to-dos yet',
+      c.total ? '<span class="pbar" aria-hidden="true"><i style="width:' + pct + '%"></i></span>' : '');
+    if (p.ended) stats += hubStat('Status', 'Ended', fmtLong(p.ended));
+    else if (p.deadline) {
+      var dl = diffDays(T, p.deadline);
+      stats += hubStat('Deadline', dl <= 0 ? '<b>Today</b>' : '<b>' + dl + '</b> ' + (dl === 1 ? 'day' : 'days') + ' left', fmtLong(p.deadline), dl <= DUE_SOON ? 'is-soon' : '');
+    } else stats += hubStat('Deadline', 'None set', ro ? '' : '<button type="button" class="link-btn" data-act="deadline" style="padding:0">Set one</button>');
+    if (next) {
+      var nb = dueBits(next);
+      stats += hubStat('Next up', esc(truncate(next.title, 70)), esc(nb.txt), nb.cls === ' is-late' ? 'is-late' : nb.cls === ' is-soon' ? 'is-soon' : '');
+    } else stats += hubStat('Next up', c.total ? 'All done' : 'Nothing yet', c.total ? '' : 'Add the first to-do below');
+    var lu = ups.length ? ups[0].date : null;
+    stats += hubStat('Last activity', lu ? esc(relDay(lu, T)) : 'Nothing logged', plural(ups.length, 'update'), isDrifting(p, T) ? 'is-soon' : '');
+
+    // to-dos
+    var tasksSec = '<section class="hsec hsec-tasks" aria-labelledby="hs-tasks"><div class="hsec-h"><h3 id="hs-tasks">To-do</h3><span class="count">' + (c.total ? pct + '%' : '') + '</span></div>' +
+      (ro ? '' : '<form id="task-add" class="task-add" novalidate autocomplete="off">' +
+        '<label for="ta-title" class="sr-only">New to-do</label><input id="ta-title" data-keep data-focus="tasks" type="text" maxlength="2100" placeholder="Add a to-do (paste a link to attach it)">' +
+        '<label for="ta-date" class="sr-only">Due date (optional)</label><input id="ta-date" data-keep type="date" title="Due date (optional)">' +
+        '<button type="submit" class="btn btn-sm primary">Add</button></form>') +
+      (open.length ? '<ul class="task-list">' + (ui.hubAllTasks ? open : open.slice(0, 7)).map(function (m, i) { return taskRow(m, i === 0); }).join('') + '</ul>' +
+          (open.length > 7 ? '<button type="button" class="link-btn hub-more" id="hub-all" data-act="hub-all">' + (ui.hubAllTasks ? 'Show only the next 7' : 'Show all ' + open.length + ' open to-dos') + '</button><br>' : '')
+        : '<p class="hub-empty">' + (c.total ? 'Everything is done.' : 'No to-dos yet. Add each step this project needs, with a date if it has one.') + '</p>') +
+      (done.length ? '<button type="button" class="link-btn hub-more" id="hub-done" data-act="hub-done">' + (ui.hubShowDone ? 'Hide' : 'Show') + ' ' + done.length + ' done</button>' +
+        (ui.hubShowDone ? '<ul class="task-list">' + done.map(function (m) { return taskRow(m, false); }).join('') + '</ul>' : '') : '') +
+      '</section>';
+
+    // notes
+    var notesSec = '<section class="hsec hsec-notes" aria-labelledby="hs-notes"><div class="hsec-h"><h3 id="hs-notes">Notes</h3></div>' +
+      '<label for="hub-notes" class="sr-only">Project notes</label><textarea id="hub-notes" data-keep data-focus="notes" rows="7" maxlength="10000" placeholder="Goal, requirements, key facts, decisions…"' + (ro ? ' readonly' : '') + '>' + esc(p.notes || '') + '</textarea>' +
+      (ro ? '' : '<p class="hub-hint">Saves when you click away.</p>') + '</section>';
+
+    // files and links: the project's own, plus any attached to a to-do
+    var order = { published: 0, file: 1, link: 2 };
+    var L = linksOf(p).slice().sort(function (a, b) { return order[a.kind] - order[b.kind] || (a.added < b.added ? 1 : a.added > b.added ? -1 : 0); });
+    var TL = p.milestones.filter(function (m) { return m.url; });
+    var filesSec = '<section class="hsec hsec-files" aria-labelledby="hs-files"><div class="hsec-h"><h3 id="hs-files">Files &amp; links</h3><span class="count">' + ((L.length + TL.length) || '') + '</span></div>' +
+      (ro ? '' : '<form id="hub-lk" class="lk-add" novalidate autocomplete="off">' +
+        '<label for="hl-url" class="sr-only">Link</label><input id="hl-url" data-keep data-focus="files" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="Paste a link: Doc, Sheet, Drive, paper, website…">' +
+        '<label for="hl-name" class="sr-only">Name</label><input id="hl-name" data-keep type="text" maxlength="120" placeholder="Name (optional)">' +
+        '<button type="submit" class="btn btn-sm primary">Add</button></form><p class="form-error" id="hl-error" hidden></p>') +
+      (L.length ? '<ul class="lk-list">' + L.map(function (l) { return linkRowHTML(p, l); }).join('') + '</ul>' : '') +
+      (TL.length ? '<h4 class="lk-group">On to-dos</h4><ul class="lk-list">' + TL.map(function (m) {
+        var info = linkInfo(m.url);
+        return '<li class="lk-row"><button type="button" class="lk-main" data-act="task" data-mid="' + esc(m.id) + '">' + linkTile(info.svc) +
+          '<span class="lk-text"><span class="lk-title">' + esc(m.title) + '</span><span class="lk-sub">' + esc(info.label) + (m.done ? ' · done' : '') + '</span></span></button>' +
+          '<a class="lk-open" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer" title="Open" aria-label="Open ' + esc(m.title) + '">' + EXT + '</a></li>';
+      }).join('') + '</ul>' : '') +
+      (!L.length && !TL.length ? '<p class="hub-empty">No files yet. Paste the link to a Google Doc, Drive folder, paper or web page. Tap one to add notes.</p>' : '') +
+      '</section>';
+
+    // activity: every dot on this project's line, newest first
+    var shown = ui.hubAllLog ? ups : ups.slice(0, 8), lastD = null;
+    var feed = shown.map(function (u) {
+      var h = '';
+      if (u.date !== lastD) { h += '<li class="feed-day">' + esc(relDay(u.date, T)) + '</li>'; lastD = u.date; }
+      return h + '<li><button type="button" class="feed-item' + (u.task ? ' auto' : '') + '" data-act="open-day" data-date="' + u.date + '">' +
+        (u.task ? CK : '') + '<span class="feed-text">' + esc(u.task ? u.text.replace(/^✓\s*/, 'Done: ') : u.text) + '</span></button></li>';
+    }).join('');
+    var logSec = '<section class="hsec hsec-log" aria-labelledby="hs-log"><div class="hsec-h"><h3 id="hs-log">Activity</h3><span class="count">' + (ups.length || '') + '</span></div>' +
+      (!ro && canAddOn(p, T, T) ? '<form id="log-add" class="log-add" novalidate>' +
+        '<label for="lg-text" class="sr-only">What did you do on this today?</label><textarea id="lg-text" data-keep data-focus="log" rows="2" maxlength="2000" placeholder="What did you do on this today?"></textarea>' +
+        '<button type="submit" class="btn btn-sm primary">Log</button></form>' : '') +
+      (ups.length ? '<ol class="feed">' + feed + '</ol>' +
+        (ups.length > 8 ? '<button type="button" class="link-btn hub-more" id="hub-log" data-act="hub-log">' + (ui.hubAllLog ? 'Show less' : 'Show all ' + ups.length) + '</button>' : '')
+        : '<p class="hub-empty">Nothing logged yet. Each update is a dot on the timeline, and ticking a to-do adds one too.</p>') +
+      '</section>';
+
+    return '<div class="hub-panel" role="dialog" aria-modal="true" aria-labelledby="hub-title" style="--pc:var(--c' + p.color + ')">' +
+      '<header class="hub-head"><i class="dot" aria-hidden="true"></i><div class="hub-titles"><h2 id="hub-title">' + esc(p.name) + '</h2><p class="hub-sub">' + esc(sub) + '</p></div>' +
+      '<div class="hub-acts">' + acts + '</div></header>' +
+      '<div class="hub-stats">' + stats + '</div>' +
+      '<div class="hub-grid"><div class="hub-col">' + tasksSec + notesSec + '</div><div class="hub-col">' + filesSec + logSec + '</div></div></div>';
+  }
+
+  // Redraw the open project window, keeping whatever you were typing and where you were.
+  function renderHub() {
+    var box = $('#hub'); if (!box) return;
+    if (!ui.hub) { box.hidden = true; return; }
+    var p = getProject(ui.hub);
+    if (!p) { closeHub(); return; }
+    var same = box.dataset.pid === p.id, keep = {}, focusId = null, selS = null, selE = null, sc = 0;
+    if (same) {
+      $$('#hub [data-keep]').forEach(function (el) { keep[el.id] = el.value; });
+      var ae = document.activeElement;
+      if (ae && box.contains(ae) && ae.id) { focusId = ae.id; try { selS = ae.selectionStart; selE = ae.selectionEnd; } catch (e) {} }
+      var pn = $('#hub .hub-panel'); if (pn) sc = pn.scrollTop;
+    }
+    box.dataset.pid = p.id;
+    box.innerHTML = hubHTML(p, todayISO());
+    Object.keys(keep).forEach(function (id) {
+      if (id === 'hub-notes' && keep[id] === hubNotesBase) return;   // not edited here, so show the saved notes
+      var el = document.getElementById(id); if (el) el.value = keep[id];
+    });
+    hubNotesBase = p.notes || '';
+    if (focusId) {
+      var f = document.getElementById(focusId);
+      if (f) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } try { if (selS != null) f.setSelectionRange(selS, selE); } catch (e) {} }
+    }
+    var pn2 = $('#hub .hub-panel'); if (pn2) pn2.scrollTop = sc;
+  }
+
+  function openHub(pid, focus) {
+    if (!getProject(pid)) return;
+    if (!$('#modal').hidden) closeModal();
+    hideTip();
+    if (ui.hub !== pid) { ui.hubShowDone = false; ui.hubAllLog = false; ui.hubAllTasks = false; $('#hub').dataset.pid = ''; }
+    if (!ui.hub) hubFocusBack = document.activeElement;
+    ui.hub = pid;
+    $('#hub').hidden = false;
+    document.body.classList.add('hub-open');
+    renderHub();
+    var f = (focus && $('#hub [data-focus="' + focus + '"]')) || $('#hub .hub-close');
+    if (f) {
+      try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); }
+      if (focus) { try { f.scrollIntoView({ block: 'center' }); } catch (e) {} }
+    }
+  }
+  function saveHubNotes() {
+    var p = ui.hub && getProject(ui.hub), el = $('#hub-notes');
+    if (!p || !el || mode === 'readonly') return;
+    var v = el.value.slice(0, 10000);
+    if (v !== (p.notes || '')) commit(function () { p.notes = v; });
+  }
+  function closeHub() {
+    if (!ui.hub) return;
+    saveHubNotes();
+    ui.hub = null;
+    var box = $('#hub'); box.hidden = true; box.innerHTML = ''; box.dataset.pid = '';
+    document.body.classList.remove('hub-open');
+    if (hubFocusBack && document.contains(hubFocusBack)) { try { hubFocusBack.focus(); } catch (e) {} }
+    if (dirty) scheduleSave(600);
   }
 
   function openEnd(pid) {
@@ -2104,7 +2402,7 @@ td.c-break{display:none}
         var v = p.deadline || addDays(T, 7);
         $('#modal-body').innerHTML = '<div class="modal-head" style="--pc:var(--c' + p.color + ')"><i class="dot"></i><div><h2 id="modal-title">Final deadline for “' + esc(p.name) + '”</h2>' +
           '<p class="modal-sub">' + (p.deadline ? 'Due ' + fmtLong(p.deadline) + ' (' + dueLabel(diffDays(T, p.deadline)) + ')' : 'No deadline yet') + '</p></div></div>' +
-          '<p>You’ll see a reminder ' + DUE_SOON + ' days before. Once the deadline day is over, the project ends itself with an ✕ on that day. For assignments and exams inside a project, add milestones instead (tap the project’s name).</p>' +
+          '<p>You’ll see a reminder ' + DUE_SOON + ' days before. Once the deadline day is over, the project ends itself with an ✕ on that day. For steps inside a project, add to-dos with dates in the project window (tap the project’s name).</p>' +
           '<form id="dl-form" novalidate><div class="field"><label for="dl-date">Final deadline</label><input id="dl-date" type="date" value="' + v + '" min="' + T + '" autofocus></div>' +
           '<p class="form-error" id="dl-error" hidden></p>' +
           '<div class="modal-actions">' + (p.deadline ? '<button type="button" class="btn btn-quiet" data-act="remove" style="margin-right:auto">Remove deadline</button>' : '') +
@@ -2218,6 +2516,7 @@ td.c-break{display:none}
     app.innerHTML = '';
     app.appendChild(tpl.content.cloneNode(true));
     // move overlays to body level
+    document.body.appendChild($('#hub'));
     document.body.appendChild($('#modal'));
     document.body.appendChild($('#tooltip'));
 
@@ -2273,7 +2572,8 @@ td.c-break{display:none}
       else if (a === 'milestone') openMilestone(b.dataset.pid, b.dataset.mid);
       else if (a === 'ms-done') {
         var pp = getProject(b.dataset.pid);
-        if (pp) commit(function () { pp.milestones.forEach(function (m) { if (m.id === b.dataset.mid) m.done = true; }); });
+        var mm = pp && taskById(pp, b.dataset.mid);
+        if (mm) commit(function (s) { setTaskDone(s, pp, mm, true, todayISO()); });
       }
       else if (a === 'log-project') {
         $('#qa-project').value = b.dataset.pid;
@@ -2337,8 +2637,8 @@ td.c-break{display:none}
         if (act.dataset.act === 'end') openEnd(pid);
         else if (act.dataset.act === 'reopen') openReopen(pid);
         else if (act.dataset.act === 'deadline') openDeadline(pid);
-        else if (act.dataset.act === 'project') openProject(pid);
-        else if (act.dataset.act === 'files') openFiles(pid);
+        else if (act.dataset.act === 'project') openHub(pid);
+        else if (act.dataset.act === 'files') openHub(pid, 'files');
         else if (act.dataset.act === 'milestone') openMilestone(pid, act.dataset.mid);
         else if (act.dataset.act === 'new-project') openNewProject();
         else if (act.dataset.act === 'sync') openSync();
@@ -2378,9 +2678,9 @@ td.c-break{display:none}
         case 'end': openEnd(pid); break;
         case 'reopen': openReopen(pid); break;
         case 'deadline': openDeadline(pid); break;
-        case 'project': openProject(pid); break;
+        case 'project': openHub(pid); break;
         case 'areas': openAreas(); break;
-        case 'files': openFiles(pid); break;
+        case 'files': openHub(pid, 'files'); break;
         case 'link': openLink(pid, b.dataset.lid); break;
         case 'delete-project':
           var n = countFor(pid);
@@ -2438,6 +2738,69 @@ td.c-break{display:none}
       });
     }
 
+    // project window
+    var hub = $('#hub');
+    hub.addEventListener('mousedown', function (e) { hubDownOnBackdrop = e.target === hub; });
+    hub.addEventListener('click', function (e) {
+      if (e.target === hub) { if (hubDownOnBackdrop) closeHub(); return; }
+      var b = e.target.closest('[data-act]'); if (!b) return;
+      var pid = ui.hub, p = getProject(pid); if (!p) return;
+      var a = b.dataset.act;
+      if (a === 'hub-close') closeHub();
+      else if (a === 'hub-edit') openProject(pid);
+      else if (a === 'end') openEnd(pid);
+      else if (a === 'reopen') openReopen(pid);
+      else if (a === 'deadline') openDeadline(pid);
+      else if (a === 'task-toggle') {
+        var m = taskById(p, b.dataset.mid);
+        if (m && mode !== 'readonly') commit(function (s) { setTaskDone(s, p, m, !m.done, todayISO()); });
+      }
+      else if (a === 'task') openMilestone(pid, b.dataset.mid);
+      else if (a === 'link') openLink(pid, b.dataset.lid);
+      else if (a === 'open-day') openDay(pid, b.dataset.date);
+      else if (a === 'hub-done') { ui.hubShowDone = !ui.hubShowDone; renderHub(); }
+      else if (a === 'hub-all') { ui.hubAllTasks = !ui.hubAllTasks; renderHub(); }
+      else if (a === 'hub-log') { ui.hubAllLog = !ui.hubAllLog; renderHub(); }
+    });
+    hub.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var p = getProject(ui.hub); if (!p || mode === 'readonly') return;
+      var T = todayISO(), id = e.target.id;
+      if (id === 'task-add') {
+        var ti = $('#ta-title'), x = splitTaskInput(ti.value), dt = $('#ta-date').value;
+        if (!x.title) { ti.focus(); return; }
+        ti.value = ''; $('#ta-date').value = '';
+        commit(function () {
+          p.milestones.push({ id: uid(), title: x.title, date: isISO(dt) ? dt : null, done: false, doneOn: null, url: x.url, created: Date.now() });
+          p.milestones.sort(cmpTask);
+        });
+        var t2 = $('#ta-title'); if (t2) t2.focus();
+      } else if (id === 'hub-lk') {
+        var raw = $('#hl-url').value, url = cleanUrl(raw), err = $('#hl-error');
+        if (!url) {
+          err.textContent = raw.trim() ? 'That doesn’t look like a web link. Copy the whole address from the browser bar or the Share button.' : 'Paste a link first.';
+          err.hidden = false; $('#hl-url').focus(); return;
+        }
+        var name = $('#hl-name').value.trim().slice(0, 120);
+        $('#hl-url').value = ''; $('#hl-name').value = '';
+        commit(function () { linksOf(p).push({ id: uid(), url: url, title: name, kind: guessKind(url), notes: '', added: T }); });
+        var u2 = $('#hl-url'); if (u2) u2.focus();
+      } else if (id === 'log-add') {
+        var ta = $('#lg-text'), v = ta.value.trim();
+        if (!v) { ta.focus(); return; }
+        ta.value = '';
+        addUpdate(p.id, T, v);
+        var l2 = $('#lg-text'); if (l2) l2.focus();
+      }
+    });
+    hub.addEventListener('change', function (e) { if (e.target.id === 'hub-notes') saveHubNotes(); });
+    hub.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && e.target.id === 'lg-text') {
+        e.preventDefault();
+        var f = $('#log-add'); if (f.requestSubmit) f.requestSubmit(); else f.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+      }
+    });
+
     // modal
     var modal = $('#modal');
     modal.addEventListener('click', function (e) {
@@ -2457,8 +2820,9 @@ td.c-break{display:none}
     // global keys
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && !$('#modal').hidden) { closeModal(); return; }
+      if (e.key === 'Escape' && ui.hub) { closeHub(); return; }
       var tag = (document.activeElement && document.activeElement.tagName) || '';
-      if (e.key === '/' && $('#modal').hidden && !/^(INPUT|TEXTAREA|SELECT)$/.test(tag) && mode !== 'readonly') {
+      if (e.key === '/' && $('#modal').hidden && !ui.hub && !/^(INPUT|TEXTAREA|SELECT)$/.test(tag) && mode !== 'readonly') {
         e.preventDefault(); $('#qa-text').focus();
       }
     });
