@@ -146,9 +146,3 @@ Near the top of the `<script>` in `index.html`:
 | `KEEP_DAYS` | `7` | Days an ended project stays on the board |
 | `DUE_SOON` | `3` | Days before a deadline or milestone when the reminder appears |
 | `DRIFT_DAYS` | `5` | Days without an update before a project counts as quiet |
-
-## Security notes
-
-- The token is stored in your browser (localStorage) on each device where you connect. Use a fine-grained token limited to `polaris-data` only, as above.
-- You can revoke the token any time at <https://github.com/settings/personal-access-tokens>. Polaris then falls back to saving in the browser until you connect a new one.
-- On a shared or public computer, click **GitHub sync → Disconnect** when you're done.
