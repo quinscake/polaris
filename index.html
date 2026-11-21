@@ -157,8 +157,8 @@ label{font-size:13px;font-weight:500;color:var(--muted)}
 
 .row{position:relative;display:grid;grid-template-columns:var(--label-w) 1fr;min-height:var(--lane-h)}
 .label{
-  position:sticky;left:0;z-index:3;display:flex;align-items:center;gap:8px;
-  padding:5px 14px 5px 0;background:linear-gradient(90deg,var(--space) 92%,transparent);
+  position:sticky;left:0;z-index:3;display:flex;align-items:center;gap:6px;
+  padding:5px 12px 5px 0;background:linear-gradient(90deg,var(--space) 92%,transparent);
 }
 .label-box{
   flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;
@@ -297,11 +297,14 @@ tr.is-archived td{color:var(--muted)}
 .count{font:500 12px var(--font-mono);color:var(--muted)}
 tr.editing td{background:var(--tint-hover)}
 
-.label-acts{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.label-acts .btn:first-child{grid-column:1 / -1}
-.label-acts .btn{justify-content:center;min-width:44px}
-.icon-btn{padding:3px 8px}
-.icon-btn .flag{width:14px;height:14px}
+.label-acts{display:flex;flex-direction:column;gap:2px}
+.label-acts .act{position:relative;display:inline-grid;place-items:center;width:24px;height:22px;padding:0;border:1px solid transparent;border-radius:6px;background:none;color:var(--muted);cursor:pointer}
+.label-acts .act:hover{color:var(--ink);background:var(--panel-2);border-color:var(--rule)}
+.label-acts .act.end:hover{color:var(--stop)}
+.label-acts .act.has-n{color:var(--accent)}
+.label-acts .act svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.label-acts .act .n{position:absolute;top:-3px;right:-5px;font:600 9px/1 var(--font-mono);color:var(--space);background:var(--accent);border-radius:999px;padding:2px 4px}
+.label-meta:empty{display:none}
 
 /* deadlines */
 .flag{display:block}
@@ -319,7 +322,7 @@ tr.editing td{background:var(--tint-hover)}
 span.flag-mark{cursor:default}
 .due-off{position:absolute;right:4px;top:50%;transform:translateY(-50%);z-index:2;font:500 11px var(--font-mono);color:var(--muted);background:var(--space);padding:1px 7px;border-radius:999px;border:1px solid var(--rule);white-space:nowrap;pointer-events:none}
 .due-off.is-soon{color:var(--warn);border-color:rgba(255,184,107,.45)}
-.label-meta .due{display:inline-flex;align-items:center;gap:4px}
+.label-meta .due{display:inline-flex;align-items:center;gap:5px;color:#c3c9d8}
 .label-meta .due .flag{width:11px;height:11px}
 .label-meta .due.is-soon{color:var(--warn)}
 .pill.due{color:var(--warn)}
@@ -333,9 +336,6 @@ span.flag-mark{cursor:default}
 .reminder .xico{color:var(--stop)}
 .reminder-acts{display:flex;flex-wrap:wrap;gap:2px}
 
-.icon-btn .clip{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.icon-btn.has-n{color:var(--accent)}
-.icon-btn .n{font:600 10.5px var(--font-mono);margin-left:1px}
 
 /* files & links */
 .ltile{display:inline-grid;place-items:center;width:30px;height:30px;flex:none;border-radius:8px;color:var(--accent);background:rgba(138,180,255,.10)}
@@ -438,7 +438,6 @@ button.label-box:hover{border-color:#38415a;border-left-color:var(--pc)}
 }
 @media (max-width: 420px){
   :root{--label-w:128px}
-  .label .icon-btn{display:none}
   .label{gap:4px;padding-right:8px}
   .label .btn-sm{padding:3px 6px;font-size:11px}
 }
@@ -506,7 +505,8 @@ td.c-break{display:none}
   .label-meta .due{margin-left:6px}
   .row.ended .label-box{background:rgba(17,22,36,.45)}
   .label-acts{display:flex;flex-direction:row;align-items:center}
-  .label .icon-btn{display:inline-flex}
+  .label-acts .act{width:30px;height:30px}
+  .label-acts .act svg{width:15px;height:15px}
   .axis-row{grid-template-columns:1fr}
   .axis-spacer{display:none}
   .tick.is-today .tick-wd{font-size:8.5px}
@@ -521,7 +521,8 @@ td.c-break{display:none}
   .ms-row{grid-template-columns:auto minmax(0,1fr) auto}
   .ms-row input[type="date"]{grid-column:2;grid-row:2}
   .reminder{font-size:13.5px;padding:8px 12px;gap:2px 10px}
-  .reminder .msg{min-width:0}
+  .reminder .msg{min-width:0;flex:1 1 calc(100% - 34px)}
+  .reminder-acts{width:100%;padding-left:26px;margin-top:2px}
 
   /* pop-ups slide up from the bottom */
   .modal-backdrop{place-items:end center;padding:0}
@@ -578,7 +579,6 @@ td.c-break{display:none}
       <svg class="logo" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 2.5 20.4 15.6 33.5 18 20.4 20.4 18 33.5 15.6 20.4 2.5 18 15.6 15.6Z"/><path class="core" d="M18 10.5 19 17 25.5 18 19 19 18 25.5 17 19 10.5 18 17 17Z"/></svg>
       <label for="board-title" class="sr-only">Board name</label>
       <input id="board-title" class="board-title" type="text" maxlength="40" spellcheck="false" autocomplete="off">
-      <span class="today-stamp" id="today-stamp"></span>
     </div>
     <nav class="views" aria-label="Views">
       <a class="view-tab" href="#timeline" data-view="timeline">Timeline</a>
@@ -621,11 +621,6 @@ td.c-break{display:none}
   <main>
     <section id="view-timeline" class="view-timeline" aria-label="Timeline" hidden>
       <div class="tl-toolbar">
-        <div class="seg" id="range-seg" role="group" aria-label="Days shown">
-          <button type="button" data-range="7">Week</button>
-          <button type="button" data-range="14">2 weeks</button>
-          <button type="button" data-range="30">Month</button>
-        </div>
         <div class="tl-nav">
           <button type="button" class="btn btn-sm" id="btn-prev" aria-label="Earlier days">&larr;<span class="btn-word"> Earlier</span></button>
           <button type="button" class="btn btn-sm" id="btn-today">Today</button>
@@ -719,6 +714,8 @@ td.c-break{display:none}
     paper: '<path d="M2.5 3.2c2-.8 3.8-.8 5.5.4v9.6c-1.7-1.2-3.5-1.2-5.5-.4zM13.5 3.2c-2-.8-3.8-.8-5.5.4v9.6c1.7-1.2 3.5-1.2 5.5-.4z"/>',
     link: '<path d="M6.6 9.4a2.6 2.6 0 0 0 3.7 0l2.3-2.3a2.6 2.6 0 0 0-3.7-3.7l-1 1"/><path d="M9.4 6.6a2.6 2.6 0 0 0-3.7 0L3.4 8.9a2.6 2.6 0 0 0 3.7 3.7l1-1"/>'
   };
+  var END_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7"/></svg>';
+  var REOPEN_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 8a4.8 4.8 0 1 0 1.4-3.4M3.2 2.6v2.9h2.9"/></svg>';
   var CLIP = '<svg class="clip" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7.5 8.2 12.3a3 3 0 0 1-4.3-4.3l5-5a2 2 0 0 1 2.9 2.9l-5 5a1 1 0 0 1-1.4-1.4L10 4.9"/></svg>';
   var EXT = '<svg class="ext" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5H3.5v9h9V10M9 2.5h4.5V7M13.5 2.5 7.5 8.5"/></svg>';
   function linkTile(svc) { return '<span class="ltile s-' + svc + '"><svg viewBox="0 0 16 16" aria-hidden="true">' + (LK_SVG[svc] || LK_SVG.link) + '</svg></span>'; }
@@ -827,7 +824,7 @@ td.c-break{display:none}
 
   /* ================= state ================= */
   var state = null;
-  var ui = { range: 14, offset: 0, showArchived: false, filterProject: 'all', search: '', editingUpdate: null, editingProject: null, area: 'all', allReminders: false };
+  var ui = { range: 7, offset: 0, showArchived: false, filterProject: 'all', search: '', editingUpdate: null, editingProject: null, area: 'all', allReminders: false };
   var mode = 'pending';        // pending | artifact | local | readonly
   var localOnlyInViewer = false;
   var artifactApi = null;
@@ -1344,7 +1341,6 @@ td.c-break{display:none}
     if (document.activeElement !== t) t.value = state.title;
     t.readOnly = mode === 'readonly';
     t.size = Math.max(3, (t.value || '').length + 1);
-    $('#today-stamp').textContent = fmtLong(T) + ', ' + T.slice(0, 4);
     $('#sample-banner').hidden = !hasSamples();
     $('#btn-sync').hidden = inViewer;
     $('#mm-sync').hidden = inViewer;
@@ -1445,15 +1441,14 @@ td.c-break{display:none}
   }
 
   function renderBoard(T) {
-    var past = ui.range, fut = FUTURE[past] || 0, N = past + fut, phone = isPhone();
-    var last = addDays(T, fut - ui.offset);
-    var first = addDays(last, -(N - 1));
+    // Always one week: 3 days before the middle day, the middle day, 3 days after. The middle day is today unless you step away.
+    var past = 7, N = 7, phone = isPhone();
+    var middle = addDays(T, -ui.offset);
+    var first = addDays(middle, -3), last = addDays(middle, 3);
     var dates = []; for (var i = 0; i < N; i++) dates.push(addDays(first, i));
 
     $('#range-label').textContent = fmtShort(first) + ' – ' + fmtYear(last);
-    $$('#range-seg button').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.range === past)); });
-    $('#btn-next').disabled = ui.offset <= 0;
-    $('#btn-today').disabled = ui.offset <= 0;
+    $('#btn-today').disabled = ui.offset === 0;
     if (ui.area !== 'all' && !state.areas.some(function (a) { return a.id === ui.area; })) ui.area = 'all';
     var areaCount = {};
     state.projects.forEach(function (p) { if (statusOf(p, T) !== 'archived' && p.area) areaCount[p.area] = (areaCount[p.area] || 0) + 1; });
@@ -1520,28 +1515,29 @@ td.c-break{display:none}
         out += '<button type="button" class="ms-mark' + (m.done ? ' is-done' : '') + (soonM ? ' is-soon' : '') + '" data-act="milestone" data-pid="' + esc(p.id) + '" data-mid="' + esc(m.id) +
           '" style="left:' + cx(mi).toFixed(3) + '%" title="' + esc(tipM) + '" aria-label="Milestone: ' + esc(tipM) + '">' + DIAMOND + '</button>';
       });
-      var n = countFor(p.id), meta;
+      var parts = [];
       if (st === 'active') {
-        meta = plural(n, 'update') + ' · since ' + fmtShort(f);
         if (p.deadline) {
           var d2 = diffDays(T, p.deadline);
-          meta += '<br><span class="due' + (d2 <= DUE_SOON ? ' is-soon' : '') + '">' + FLAG + 'due ' + (d2 <= DUE_SOON ? dueLabel(d2) : fmtShort(p.deadline) + ' · ' + d2 + ' days') + '</span>';
+          parts.push('<span class="due' + (d2 <= DUE_SOON ? ' is-soon' : '') + '">' + FLAG + (d2 <= 0 ? 'Due today' : 'Due ' + fmtShort(p.deadline) + ' · ' + plural(d2, 'day') + ' left') + '</span>');
         }
+        if (isDrifting(p, T)) parts.push('<span class="drift">quiet for ' + driftDays(p, T) + ' days</span>');
       } else {
         var left2 = KEEP_DAYS - diffDays(p.ended, T);
-        meta = (p.endedBy === 'deadline' ? 'Hit deadline ' : 'Ended ') + fmtShort(p.ended) + ' · ' + (left2 <= 1 ? 'leaves tomorrow' : 'leaves in ' + left2 + ' days');
+        parts.push((p.endedBy === 'deadline' ? 'Hit deadline ' : 'Ended ') + fmtShort(p.ended) + ' · ' + (left2 <= 1 ? 'leaves tomorrow' : 'leaves in ' + left2 + ' days'));
       }
+      var meta = parts.join('<br>');
       var dlTitle = p.deadline ? 'Change deadline' : 'Set a deadline';
       var nL = linksOf(p).length;
-      var clipBtn = '<button type="button" class="btn btn-sm icon-btn' + (nL ? ' has-n' : '') + '" data-act="files" data-pid="' + esc(p.id) + '" title="Files &amp; links" aria-label="Files and links (' + nL + ')">' + CLIP + (nL ? '<span class="n">' + nL + '</span>' : '') + '</button>';
+      var clipBtn = '<button type="button" class="act' + (nL ? ' has-n' : '') + '" data-act="files" data-pid="' + esc(p.id) + '" title="Files &amp; links' + (nL ? ' (' + nL + ')' : '') + '" aria-label="Files and links (' + nL + ')">' + CLIP + (nL ? '<span class="n">' + nL + '</span>' : '') + '</button>';
       var btns = st === 'active'
-        ? '<button type="button" class="btn btn-sm edit-only" data-act="end" data-pid="' + esc(p.id) + '" title="End this project">End</button>' +
-          '<button type="button" class="btn btn-sm icon-btn edit-only" data-act="deadline" data-pid="' + esc(p.id) + '" title="' + dlTitle + '" aria-label="' + dlTitle + '">' + FLAG + '</button>' + clipBtn
-        : '<button type="button" class="btn btn-sm btn-quiet edit-only" data-act="reopen" data-pid="' + esc(p.id) + '" title="Undo the end">Reopen</button>' + clipBtn;
+        ? clipBtn +
+          '<button type="button" class="act edit-only" data-act="deadline" data-pid="' + esc(p.id) + '" title="' + dlTitle + '" aria-label="' + dlTitle + '">' + FLAG + '</button>' +
+          '<button type="button" class="act end edit-only" data-act="end" data-pid="' + esc(p.id) + '" title="End project" aria-label="End project">' + END_ICO + '</button>'
+        : clipBtn + '<button type="button" class="act edit-only" data-act="reopen" data-pid="' + esc(p.id) + '" title="Reopen project" aria-label="Reopen project">' + REOPEN_ICO + '</button>';
       return '<div class="row ' + st + (isDrifting(p, T) ? ' drifting' : '') + '" style="--pc:var(--c' + p.color + ')">' +
         '<div class="label"><button type="button" class="label-box" data-act="project" data-pid="' + esc(p.id) + '" title="Edit project"><span class="label-name">' + esc(p.name) +
-        (areaOf(p) ? '<span class="area-tag">' + esc(areaOf(p).name) + '</span>' : '') + '</span><span class="label-meta">' + meta +
-        (isDrifting(p, T) ? '<br><span class="drift">quiet for ' + driftDays(p, T) + ' days</span>' : '') + '</span></button>' +
+        (areaOf(p) ? '<span class="area-tag">' + esc(areaOf(p).name) + '</span>' : '') + '</span><span class="label-meta">' + meta + '</span></button>' +
         '<div class="label-acts">' + btns + '</div></div>' +
         '<div class="lane" data-pid="' + esc(p.id) + '">' + out + '<span class="ghost" aria-hidden="true">+</span></div></div>';
     }
@@ -2312,12 +2308,8 @@ td.c-break{display:none}
     });
 
     // timeline toolbar
-    $('#range-seg').addEventListener('click', function (e) {
-      var b = e.target.closest('button[data-range]'); if (!b) return;
-      ui.range = +b.dataset.range; render();
-    });
-    $('#btn-prev').addEventListener('click', function () { ui.offset += Math.max(1, Math.floor(ui.range / 2)); render(); });
-    $('#btn-next').addEventListener('click', function () { ui.offset = Math.max(0, ui.offset - Math.max(1, Math.floor(ui.range / 2))); render(); });
+    $('#btn-prev').addEventListener('click', function () { ui.offset += 7; render(); });
+    $('#btn-next').addEventListener('click', function () { ui.offset -= 7; render(); });
     $('#btn-today').addEventListener('click', function () { ui.offset = 0; render(); });
 
     // board

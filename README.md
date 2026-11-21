@@ -4,7 +4,7 @@ A one-file project tracker for projects, research and classes. Every day you wri
 
 ## What's in it
 
-- **Timeline** (the home screen): every project as a line, with a dot for each update, a ◆ for each milestone, a flag for the final deadline and an ✕ when it ends. Ended projects sink to the bottom and leave the board a week later.
+- **Timeline** (the home screen): one week with today in the middle, and every project as a line, with a dot for each update, a ◆ for each milestone, a flag for the final deadline and an ✕ when it ends. Ended projects sink to the bottom and leave the board a week later.
 - **Table**: all projects and updates, searchable and editable.
 - **Areas**: Research, Class, Project and Personal by default. Rename them or add your own in **Table → Edit areas**, and filter the Timeline by area.
 - **Milestones**: several dated checkpoints per project (assignments, exams, submissions). Each one gets a reminder 3 days before. The **final deadline** is separate: once that day is over, the project ends itself.
@@ -99,7 +99,7 @@ and open `polaris/index.html`.
 
 The layout switches automatically on screens narrower than 640px:
 
-- On the **Timeline**, each project's name sits above its line, so the line uses the full width, and it starts on the one-week range.
+- On the **Timeline**, each project's name sits above its line, so the line uses the full width.
 - The update box is a bar at the bottom of the screen, like a chat app. It always logs for today. To add an update for an earlier day, tap that day on the project's line.
 - Tap an update to read, edit or add more. Pop-ups slide up from the bottom.
 - The **Table** tab shows projects and updates as cards.
@@ -146,7 +146,6 @@ Near the top of the `<script>` in `index.html`:
 | `KEEP_DAYS` | `7` | Days an ended project stays on the board |
 | `DUE_SOON` | `3` | Days before a deadline or milestone when the reminder appears |
 | `DRIFT_DAYS` | `5` | Days without an update before a project counts as quiet |
-| `FUTURE` | `{7:3, 14:4, 30:7}` | Days shown after today on the Timeline, for each zoom level |
 
 ## Security notes
 
