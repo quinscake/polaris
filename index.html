@@ -91,6 +91,13 @@ button,input,select,textarea{font:inherit;color:inherit}
 .save-status.is-warn{color:var(--warn)}
 .save-status.is-err{color:var(--stop)}
 .save-status button{background:none;border:0;padding:0;color:inherit;font:inherit;text-decoration:underline;cursor:pointer}
+.sync-badges{display:inline-flex;align-items:center;gap:5px}
+.sync-badges[hidden]{display:none}
+.sb{width:23px;height:23px;display:grid;place-items:center;padding:0;border-radius:7px;border:1px solid var(--rule);background:transparent;
+  color:#5d6680;font:600 11.5px/1 var(--font-mono);cursor:pointer;transition:color .25s,border-color .25s,background .25s,box-shadow .25s}
+.sb:hover{border-color:#3a4562;color:var(--muted)}
+.sb.is-on{color:var(--ok);border-color:rgba(111,214,160,.5);background:rgba(111,214,160,.09);box-shadow:0 0 9px rgba(111,214,160,.28)}
+.sb.is-on:hover{color:var(--ok);border-color:rgba(111,214,160,.75)}
 
 /* ---------- buttons & fields ---------- */
 .btn{
@@ -437,6 +444,24 @@ body.hub-open{overflow:hidden}
 .node .ck{width:8px;height:8px;color:var(--space)}
 .node .ck path{stroke-width:3}
 
+/* ---------- drag to reorder ---------- */
+[data-sort-list] > [data-sort-id]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.task[data-sort-id]{position:relative}
+.label-box{position:relative}
+@media (hover: hover) and (pointer: fine){
+  .task[data-sort-id]:hover::before,.row[data-sort-id] .label-box:hover::before{content:"";position:absolute;top:50%;width:6px;height:14px;margin-top:-7px;
+    background-image:radial-gradient(circle,#66708c 1.1px,transparent 1.4px);background-size:4px 4px;pointer-events:none}
+  .task[data-sort-id]:hover::before{left:-11px}
+  .row[data-sort-id] .label-box:hover::before{left:2px}
+}
+.is-sorting > [data-sort-id]{transition:transform .16s ease}
+.is-sorting > [data-sort-id].is-dragging{transition:none;z-index:30;cursor:grabbing}
+.task.is-dragging{background:var(--panel-2);border-color:#3a4562;box-shadow:0 10px 28px rgba(0,0,0,.5)}
+.row.is-dragging{z-index:30;background:rgba(10,13,22,.9);border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.5);outline:1px solid #3a4562}
+.row.is-dragging .label-box{border-color:#3a4562;border-left-color:var(--pc)}
+body.is-dragging-something,body.is-dragging-something *{cursor:grabbing !important;-webkit-user-select:none;user-select:none}
+body.is-dragging-something .tip{display:none !important}
+
 /* ---------- faded stars: done in the last 48 hours ---------- */
 .task-stars{margin-top:8px;padding-top:6px;border-top:1px dashed var(--rule)}
 .task.is-star .tbox,.tbox.tstar{border-color:transparent;background:none;color:#59647f}
@@ -538,9 +563,7 @@ button.label-box:hover{border-color:#38415a;border-left-color:var(--pc)}
 }
 /* ---------- shared bits for small screens and touch ---------- */
 .btn-more{display:inline-flex;font-size:18px;line-height:1;padding:7px 12px;position:relative}
-#btn-sync,#btn-backup{display:none !important}
-@media (min-width: 641px){#mm-library{display:none}}
-.btn-more.has-alert::after{content:"";position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--warn)}
+#btn-sync,#btn-backup,#btn-library{display:none !important}
 .mm-sub{display:block;font:400 11.5px var(--font-mono);color:var(--muted);margin-top:2px}
 .mm-sub:empty{display:none}
 .mm-sub.is-ok{color:var(--ok)}
@@ -581,6 +604,7 @@ td.c-break{display:none}
   .views{grid-column:1;grid-row:2;justify-self:start}
   .view-tab{padding:6px 16px}
   .save-status{grid-column:2 / -1;grid-row:2;justify-self:end}
+  .sync-badges{grid-column:2 / -1;grid-row:2;justify-self:end}
   .more-menu{top:46px}
 
   /* log bar sits at the bottom like a chat box */
@@ -716,6 +740,7 @@ td.c-break{display:none}
     </nav>
     <div class="top-actions">
       <span class="save-status" id="save-status" role="status"></span>
+      <span class="sync-badges" id="sync-badges"><button type="button" class="sb" id="sb-g" title="GitHub: not set up" aria-label="GitHub: not set up">G</button><button type="button" class="sb" id="sb-c" title="Google Calendar: not set up" aria-label="Google Calendar: not set up">C</button></span>
       <button type="button" class="btn" id="btn-library" aria-pressed="false">Library</button>
       <button type="button" class="btn" id="btn-sync" hidden>GitHub sync</button>
       <button type="button" class="btn" id="btn-backup">Backup</button>
@@ -723,7 +748,7 @@ td.c-break{display:none}
       <button type="button" class="btn btn-more" id="btn-more" aria-haspopup="true" aria-expanded="false" aria-controls="more-menu" aria-label="More">&#x22EF;</button>
       <div class="more-menu" id="more-menu" hidden>
         <button type="button" id="mm-library">Library</button>
-        <button type="button" id="mm-gcal">Google Calendar<span class="mm-sub" id="mm-gcal-sub"></span></button>
+        <button type="button" id="mm-gcal">Google Calendar</button>
         <button type="button" id="mm-sync">GitHub sync</button>
         <button type="button" id="mm-backup">Backup</button>
       </div>
@@ -774,7 +799,7 @@ td.c-break{display:none}
         <div class="chips" id="area-chips" role="group" aria-label="Show area"></div>
       </div>
       <div class="tl-scroll" id="tl-scroll">
-        <div class="board" id="board"></div>
+        <div class="board" id="board" data-sort-list="projects" data-sort-grab=".label-box"></div>
       </div>
     </section>
 
@@ -1049,7 +1074,6 @@ td.c-break{display:none}
           today: !x.done && isISO(x.today) ? x.today : null, time: isISO(x.date) && isTime(x.time) ? x.time : null,
           doneAt: x.done ? (Number(x.doneAt) || noonOf(x.doneOn)) : 0 });
       });
-      ms.sort(cmpTask);
       out.projects.push({
         id: id, name: p.name.slice(0, 80), color: ((c % INKS) + INKS) % INKS,
         start: p.start, ended: isISO(p.ended) ? p.ended : null,
@@ -1080,6 +1104,8 @@ td.c-break{display:none}
     });
     // Google Calendar: which OAuth client and which calendar. Shared by all your devices; the sign-in itself stays on each device.
     var gc = s.gcal && typeof s.gcal === 'object' ? s.gcal : {};
+    var dor = s.dayOrder;
+    out.dayOrder = dor && dor.day === todayISO() && Array.isArray(dor.ids) ? { day: dor.day, ids: dor.ids.filter(function (k) { return typeof k === 'string'; }).slice(0, 300) } : null;
     out.gcal = { clientId: typeof gc.clientId === 'string' ? gc.clientId.trim().slice(0, 200) : '', calendarId: typeof gc.calendarId === 'string' ? gc.calendarId.slice(0, 300) : '' };
     return out;
   }
@@ -1298,37 +1324,37 @@ td.c-break{display:none}
       SO + ' id="app-script">' + js + SC + '\n</body>\n</html>\n';
   }
 
-  var statusKind = '';
+  var statusKind = '', ghWasOk = false, ghLastError = '';
+  function badge(id, on, label) { var el = $(id); if (!el) return; el.classList.toggle('is-on', !!on); el.title = label; el.setAttribute('aria-label', label); }
+  function ghSub(kind) {
+    var ok = !!gh && (kind === 'gh' || kind === 'ghNewer' || ((kind === 'saving' || kind === 'ghLoading') && ghWasOk));
+    ghWasOk = ok;
+    badge('#sb-g', ok, !gh ? 'GitHub: not set up' : ok ? 'GitHub: synced' : kind === 'ghError' ? 'GitHub: not synced (tap to see why)' : 'GitHub: not synced');
+  }
   function setStatus(kind, detail) {
     statusKind = kind;
     var el = $('#save-status'); if (!el) return;
     var map = {
       '': ['', ''],
-      saving: ['Saving…', 'is-saving'],
-      saved: ['Saved', 'is-ok'],
-      local: ['Saved in this browser', 'is-ok'],
+      saving: ['', ''],
+      saved: ['', ''],
+      local: ['', ''],
       localOnly: ['Saved in this browser only', 'is-warn'],
       errorLocal: ['Couldn’t save. Use Backup to keep a copy', 'is-err'],
       error: ['Couldn’t save', 'is-err'],
       readonly: ['View only', 'is-saving'],
       conflict: ['Changed in another tab, reloading', 'is-warn'],
-      gh: ['Saved to GitHub', 'is-ok'],
-      ghLoading: ['Loading from GitHub…', 'is-saving'],
-      ghNewer: ['Loaded newer changes from GitHub', 'is-ok'],
-      ghError: ['Couldn’t sync with GitHub', 'is-err']
+      gh: ['', ''],
+      ghLoading: ['', ''],
+      ghNewer: ['', ''],
+      ghError: ['', '']
     };
     var m = map[kind] || map[''];
+    ghSub(kind);
     el.className = 'save-status ' + m[1];
     el.textContent = m[0];
     el.title = detail || '';
-    if (kind === 'ghError') {
-      var rb = document.createElement('button'); rb.type = 'button'; rb.textContent = 'Retry';
-      rb.addEventListener('click', function () { if (dirty) scheduleSave(0); else ghPull(); });
-      var db = document.createElement('button'); db.type = 'button'; db.textContent = 'Why?';
-      db.addEventListener('click', function () { openSync(detail); });
-      el.appendChild(document.createTextNode(' · ')); el.appendChild(rb);
-      el.appendChild(document.createTextNode(' · ')); el.appendChild(db);
-    }
+    ghLastError = kind === 'ghError' ? (detail || 'Couldn’t sync with GitHub.') : kind === 'gh' || kind === 'ghNewer' ? '' : ghLastError;
     if (kind === 'error') {
       var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Retry';
       b.addEventListener('click', function () { scheduleSave(0); });
@@ -1574,6 +1600,7 @@ td.c-break{display:none}
     $('#btn-sync').hidden = inViewer;
     $('#mm-sync').hidden = inViewer;
     $('#mm-gcal').hidden = inViewer;
+    $('#sync-badges').hidden = inViewer;
   }
 
   function renderQuickAdd(T) {
@@ -1768,7 +1795,7 @@ td.c-break{display:none}
         ? '<button type="button" class="act edit-only" data-act="deadline" data-pid="' + esc(p.id) + '" title="' + dlTitle + '" aria-label="' + dlTitle + '">' + FLAG + '</button>' +
           '<button type="button" class="act end edit-only" data-act="end" data-pid="' + esc(p.id) + '" title="End project" aria-label="End project">' + END_ICO + '</button>'
         : '<button type="button" class="act edit-only" data-act="reopen" data-pid="' + esc(p.id) + '" title="Reopen project" aria-label="Reopen project">' + REOPEN_ICO + '</button>';
-      return '<div class="row ' + st + (isDrifting(p, T) ? ' drifting' : '') + '" style="--pc:var(--c' + p.color + ')">' +
+      return '<div class="row ' + st + (isDrifting(p, T) ? ' drifting' : '') + '"' + (st === 'active' ? sortAttr(p.id) : '') + ' style="--pc:var(--c' + p.color + ')">' +
         '<div class="label"><button type="button" class="label-box" data-act="project" data-pid="' + esc(p.id) + '" title="Open project"><span class="label-name">' + esc(p.name) +
         (areaOf(p) ? '<span class="area-tag">' + esc(areaOf(p).name) + '</span>' : '') + '</span><span class="label-meta">' + meta + '</span></button>' +
         '<div class="label-acts">' + btns + '</div></div>' +
@@ -1925,6 +1952,8 @@ td.c-break{display:none}
   function starPop(id) { justStarred = id; setTimeout(function () { justStarred = null; }, 1000); }
   function isoOf(ms) { var d = new Date(ms || Date.now()); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
 
+  function todayKey(x) { return x.kind === 'quick' ? 'q:' + x.t.id : x.kind === 'ms' ? 'm:' + x.m.id : 'd:' + x.p.id; }
+  function sortAttr(id) { return mode === 'readonly' ? '' : ' data-sort-id="' + esc(id) + '"'; }
   function todoLists(T) {
     var today = [], week = [], next = [], done = [], wkEnd = addDays(T, 7);
     state.tasks.forEach(function (t) {
@@ -1943,13 +1972,16 @@ td.c-break{display:none}
       else if (p.deadline && p.deadline > T && p.deadline <= wkEnd) week.push({ kind: 'deadline', p: p, date: p.deadline });
     });
     today.sort(function (a, b) { return a.rank - b.rank || (a.key < b.key ? -1 : a.key > b.key ? 1 : 0); });
+    var DO = state.dayOrder && state.dayOrder.day === T ? state.dayOrder.ids : null;
+    if (DO) today = today.map(function (x, i) { var o = DO.indexOf(todayKey(x)); return { x: x, o: o < 0 ? 1e6 + i : o }; })
+      .sort(function (a, b) { return a.o - b.o; }).map(function (y) { return y.x; });
     week.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : (a.kind === 'deadline') - (b.kind === 'deadline'); });
     // Next steps: projects with nothing on today's list or this week, and the first open to-do of each
     state.projects.forEach(function (p) {
       if (p.ended) return;
       var busy = today.concat(week).some(function (x) { return x.p === p && x.kind === 'ms'; });
       if (busy) return;
-      var open = p.milestones.filter(function (m) { return !m.done; }).sort(cmpTask);
+      var open = p.milestones.filter(function (m) { return !m.done; });
       next.push({ p: p, m: open[0] || null });
     });
     done.sort(function (a, b) { return b.at - a.at; });
@@ -2041,7 +2073,7 @@ td.c-break{display:none}
     }
     var openN = L.today.filter(function (x) { return x.kind !== 'deadline'; }).length;
     var todaySec = '<section class="hsec" aria-labelledby="td-h-today"><div class="hsec-h"><h3 id="td-h-today">Today</h3><span class="hsec-date">' + fmtLong(T) + '</span><span class="count">' + (openN || '') + '</span></div>' +
-      (L.today.length ? '<ul class="task-list">' + L.today.map(todayRow).join('') + '</ul>'
+      (L.today.length ? '<ul class="task-list" data-sort-list="today">' + L.today.map(function (x) { return todayRow(x).replace('<li ', '<li' + sortAttr(todayKey(x)) + ' '); }).join('') + '</ul>'
         : '<p class="todo-empty">' + (L.done.length ? 'All done for today.' : 'Nothing on today’s list yet. Add something that came up, or pull in a next step with ☀.') + '</p>') +
       (openN > 7 ? '<p class="todo-full">That’s a full day. Move what can wait with → and it comes back tomorrow.</p>' : '') +
       (L.done.length ? '<ul class="task-list task-stars" aria-label="Done in the last 48 hours">' + L.done.map(doneRow).join('') + '</ul>' : '') +
@@ -2049,8 +2081,8 @@ td.c-break{display:none}
     var weekSec = '<section class="hsec" aria-labelledby="td-h-week"><div class="hsec-h"><h3 id="td-h-week">This week</h3><span class="count">' + (L.week.length || '') + '</span></div>' +
       (L.week.length ? '<ul class="task-list">' + L.week.map(weekRow).join('') + '</ul>' : '<p class="todo-empty">Nothing due in the next 7 days.</p>') + '</section>';
     var nextSec = L.next.length ? '<section class="hsec" aria-labelledby="td-h-next"><div class="hsec-h"><h3 id="td-h-next">Next steps</h3></div>' +
-      '<p class="hub-hint" style="margin:-4px 0 8px">Projects with nothing due this week. Tap ☀ to pull a step into today.</p>' +
-      '<ul class="task-list">' + L.next.map(nextRow).join('') + '</ul></section>' : '';
+      '<p class="hub-hint" style="margin:-4px 0 8px">Projects with nothing due this week. Tap ☀ to pull a step into today. ' + (isPhone() ? 'Hold and drag' : 'Drag') + ' to put the ones you’re on first.</p>' +
+      '<ul class="task-list" data-sort-list="next">' + L.next.map(function (x) { return nextRow(x).replace('<li ', '<li' + sortAttr(x.p.id) + ' '); }).join('') + '</ul></section>' : '';
     $('#todo-body').innerHTML = '<div class="todo-grid"><div class="todo-main">' + todaySec + '</div><div class="todo-side">' + weekSec + nextSec + '</div></div>';
   }
 
@@ -2089,12 +2121,129 @@ td.c-break{display:none}
           if (p) {
             s.tasks = s.tasks.filter(function (x) { return x.id !== tid; });
             p.milestones.push({ id: uid(), title: title.slice(0, 140), date: isTime(tm) ? t.day : null, time: isTime(tm) ? tm : null, done: !!t.done, doneOn: t.done ? t.doneOn : null, doneAt: t.done ? t.doneAt : 0, url: url, created: Date.now(), today: t.done ? null : T });
-            p.milestones.sort(cmpTask);
           } else { t.title = title.slice(0, 140); t.url = url; t.time = isTime(tm) ? tm : null; if (t.time && !t.done && t.day < T) t.day = T; }
         });
         closeModal();
       }
     });
+  }
+
+  /* ================= drag to reorder ================= */
+  // Laptop: press and drag. Phone: hold for a moment, then drag (a quick swipe still scrolls).
+  // Lists say what they hold with data-sort-list; each movable thing has data-sort-id.
+  var drag = null, dragEndedAt = 0;
+  var NO_GRAB = 'button:not(.task-main):not(.label-box), a, input, textarea, select, label';
+  function scrollerOf(el) {
+    for (var n = el.parentElement; n && n !== document.body && n !== document.documentElement; n = n.parentElement) {
+      var oy = getComputedStyle(n).overflowY;
+      if ((oy === 'auto' || oy === 'scroll') && n.scrollHeight > n.clientHeight + 1) return n;
+    }
+    return null;
+  }
+  function scrollTopOf(sc) { return sc ? sc.scrollTop : (window.scrollY || document.documentElement.scrollTop || 0); }
+  function dragDown(e) {
+    if (drag || mode === 'readonly') return;
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    var item = e.target.closest && e.target.closest('[data-sort-id]'); if (!item) return;
+    var list = item.parentElement; if (!list || !list.hasAttribute('data-sort-list')) return;
+    var grab = list.getAttribute('data-sort-grab');
+    if (grab && !e.target.closest(grab)) return;
+    var nb = e.target.closest(NO_GRAB); if (nb && item.contains(nb)) return;
+    if (list.querySelectorAll(':scope > [data-sort-id]').length < 2) return;
+    drag = { item: item, list: list, id: e.pointerId, x0: e.clientX, y0: e.clientY, y: e.clientY, touch: e.pointerType !== 'mouse', on: false, timer: 0 };
+    if (drag.touch) drag.timer = setTimeout(function () { if (drag && !drag.on) dragStart(); }, 330);
+  }
+  function dragStart() {
+    var d = drag;
+    d.items = Array.prototype.slice.call(d.list.querySelectorAll(':scope > [data-sort-id]'));
+    d.from = d.items.indexOf(d.item); d.to = d.from;
+    d.sc = scrollerOf(d.list); d.st0 = scrollTopOf(d.sc);
+    d.rects = d.items.map(function (el) { var r = el.getBoundingClientRect(); return { top: r.top, bottom: r.bottom, mid: (r.top + r.bottom) / 2 }; });
+    var r = d.rects[d.from], nx = d.rects[d.from + 1], pv = d.rects[d.from - 1];
+    d.stride = (r.bottom - r.top) + (nx ? nx.top - r.bottom : pv ? r.top - pv.bottom : 0);
+    d.yStart = d.y; d.on = true;
+    d.list.classList.add('is-sorting'); d.item.classList.add('is-dragging'); document.body.classList.add('is-dragging-something');
+    try { hideTip(); } catch (er) {}
+    if (d.touch && navigator.vibrate) { try { navigator.vibrate(12); } catch (er) {} }
+    d.raf = requestAnimationFrame(dragTick);
+  }
+  function dragLayout() {
+    var d = drag, dy = (d.y + scrollTopOf(d.sc)) - (d.yStart + d.st0), R = d.rects, f = d.from;
+    dy = Math.max(R[0].top - R[f].top - 10, Math.min(R[R.length - 1].bottom - R[f].bottom + 10, dy));
+    d.item.style.transform = 'translateY(' + dy + 'px)';
+    var center = R[f].mid + dy, to = 0;
+    for (var i = 0; i < R.length; i++) if (i !== f && R[i].mid < center) to++;
+    d.to = to;
+    for (var j = 0; j < d.items.length; j++) {
+      if (j === f) continue;
+      var sh = j < f && j >= to ? d.stride : j > f && j <= to ? -d.stride : 0;
+      d.items[j].style.transform = sh ? 'translateY(' + sh + 'px)' : '';
+    }
+  }
+  function dragTick() {
+    var d = drag; if (!d || !d.on) return;
+    var top = 0, bottom = window.innerHeight, v = 0, edge = 56;
+    if (d.sc) { var r = d.sc.getBoundingClientRect(); top = Math.max(0, r.top); bottom = Math.min(bottom, r.bottom); }
+    if (d.y < top + edge) v = -Math.ceil((top + edge - d.y) / 5);
+    else if (d.y > bottom - edge) v = Math.ceil((d.y - (bottom - edge)) / 5);
+    if (v) { if (d.sc) d.sc.scrollTop += v; else window.scrollBy(0, v); }
+    dragLayout();
+    d.raf = requestAnimationFrame(dragTick);
+  }
+  function dragMove(e) {
+    var d = drag; if (!d || e.pointerId !== d.id) return;
+    d.y = e.clientY;
+    if (!d.on) {
+      var dx = e.clientX - d.x0, dy = e.clientY - d.y0;
+      if (d.touch) { if (Math.abs(dx) > 9 || Math.abs(dy) > 9) dragStop(false); return; }   // moved before the hold: that's a scroll
+      if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+      d.y = d.y0; dragStart(); d.y = e.clientY;
+    }
+    if (e.cancelable) e.preventDefault();
+  }
+  function dragStop(drop) {
+    var d = drag; drag = null; if (!d) return;
+    clearTimeout(d.timer); if (d.raf) cancelAnimationFrame(d.raf);
+    if (!d.on) return;
+    dragEndedAt = Date.now();
+    d.items.forEach(function (el) { el.style.transform = ''; });
+    d.list.classList.remove('is-sorting'); d.item.classList.remove('is-dragging'); document.body.classList.remove('is-dragging-something');
+    if (!drop || d.to === d.from) return;
+    var ids = d.items.map(function (el) { return el.getAttribute('data-sort-id'); });
+    ids.splice(d.to, 0, ids.splice(d.from, 1)[0]);
+    applySort(d.list.getAttribute('data-sort-list'), ids);
+  }
+  // Put the dragged ones back into the same slots they came from, in the new order (hidden ones don't move).
+  function reorderSubset(arr, ids, keyOf) {
+    var slots = [], pick = {};
+    arr.forEach(function (x, i) { var k = keyOf(x); if (ids.indexOf(k) >= 0) { slots.push(i); pick[k] = x; } });
+    var ordered = ids.map(function (k) { return pick[k]; }).filter(Boolean);
+    if (ordered.length !== slots.length) return null;
+    var out = arr.slice(); slots.forEach(function (at, i) { out[at] = ordered[i]; });
+    return out;
+  }
+  function applySort(list, ids) {
+    if (list === 'projects' || list === 'next') {
+      commit(function (s) { var r = reorderSubset(s.projects, ids, function (p) { return p.id; }); if (r) s.projects = r; });
+    } else if (list.indexOf('hub:') === 0) {
+      var pid = list.slice(4);
+      commit(function (s) {
+        var p = null; s.projects.forEach(function (x) { if (x.id === pid) p = x; }); if (!p) return;
+        var r = reorderSubset(p.milestones, ids, function (m) { return m.id; }); if (r) p.milestones = r;
+      });
+    } else if (list === 'today') {
+      commit(function (s) { s.dayOrder = { day: todayISO(), ids: ids }; });
+    }
+  }
+  function initDrag() {
+    document.addEventListener('pointerdown', dragDown);
+    window.addEventListener('pointermove', dragMove, { passive: false });
+    window.addEventListener('pointerup', function (e) { if (drag && e.pointerId === drag.id) dragStop(true); });
+    window.addEventListener('pointercancel', function (e) { if (drag && e.pointerId === drag.id) dragStop(false); });
+    document.addEventListener('touchmove', function (e) { if (drag && drag.on && e.cancelable) e.preventDefault(); }, { passive: false });
+    document.addEventListener('contextmenu', function (e) { if (drag) e.preventDefault(); });
+    document.addEventListener('keydown', function (e) { if (drag && e.key === 'Escape') dragStop(false); }, true);
+    document.addEventListener('click', function (e) { if (Date.now() - dragEndedAt < 120) { e.preventDefault(); e.stopPropagation(); } }, true);
   }
 
   /* ================= Google Calendar (one way: Polaris → a "Polaris" calendar) ================= */
@@ -2105,7 +2254,7 @@ td.c-break{display:none}
   function gcalPending() { var r = null; try { r = localStorage.getItem(GREV_KEY); } catch (e) {} return String(state.rev) !== r; }
   function gcalAutoOK() { try { return matchMedia('(hover: hover) and (pointer: fine)').matches; } catch (e) { return false; } }
   var GCAL_COLORS = ['9', '2', '3', '6', '10', '4'];   // Google's colors closest to the six project colors
-  var gcalTok = null, gcalClient = null, gcalState = 'off', gcalMsg = '', gcalTimer = null, gcalBusy = false, gcalAgain = false, gcalLast = 0, gcalLastPrompt = 0, gisPromise = null;
+  var gcalWasOk = false, gcalTok = null, gcalClient = null, gcalState = 'off', gcalMsg = '', gcalTimer = null, gcalBusy = false, gcalAgain = false, gcalLast = 0, gcalLastPrompt = 0, gisPromise = null;
 
   function gcalCfg() { return state && state.gcal && state.gcal.clientId ? state.gcal : null; }
   function hasGis() { return !!(window.google && google.accounts && google.accounts.oauth2); }
@@ -2157,12 +2306,9 @@ td.c-break{display:none}
   }
   function gcalSet(st, msg) {
     gcalState = st; gcalMsg = msg || '';
-    var sub = $('#mm-gcal-sub'), more = $('#btn-more');
-    if (sub) {
-      sub.textContent = { off: 'Not set up', signin: 'Tap to sign in', syncing: 'Updating…', ok: 'Up to date', error: 'Problem, tap for details' }[st] || '';
-      sub.className = 'mm-sub' + (st === 'ok' ? ' is-ok' : st === 'error' ? ' is-err' : st === 'signin' ? ' is-warn' : '');
-    }
-    if (more) more.classList.toggle('has-alert', st === 'error' || st === 'signin');
+    var calOk = st === 'ok' || (st === 'syncing' && gcalWasOk);
+    gcalWasOk = calOk;
+    badge('#sb-c', calOk, st === 'off' ? 'Google Calendar: not set up' : calOk ? 'Google Calendar: synced' : st === 'signin' ? 'Google Calendar: not synced (tap to sign in)' : 'Google Calendar: not synced');
     if (modalCtx && modalCtx.isGcal && gcalCfg()) modalCtx.draw();
     try { if (state) renderReminders(todayISO()); } catch (e) {}
   }
@@ -2576,7 +2722,6 @@ td.c-break{display:none}
         commit(function (s) {
           m.title = t.slice(0, 140); m.date = dt || null; m.time = dt && isTime(tm) ? tm : null; m.url = url;
           setTaskDone(s, p, m, dn, T);
-          p.milestones.sort(cmpTask);
         });
         closeModal();
       }
@@ -2720,7 +2865,7 @@ td.c-break{display:none}
 
   function hubHTML(p, T) {
     var ro = mode === 'readonly';
-    var open = p.milestones.filter(function (m) { return !m.done; }).sort(cmpTask);
+    var open = p.milestones.filter(function (m) { return !m.done; });
     var done = p.milestones.filter(function (m) { return m.done; }).sort(function (a, b) { return (b.doneAt || 0) - (a.doneAt || 0); });
     var fresh = done.filter(function (m) { return recentDone(m.doneAt); }), older = done.filter(function (m) { return !recentDone(m.doneAt); });
     var c = taskCounts(p);
@@ -2767,7 +2912,7 @@ td.c-break{display:none}
         '<label for="ta-title" class="sr-only">New to-do</label><input id="ta-title" data-keep data-focus="tasks" type="text" maxlength="2100" placeholder="Add a to-do (paste a link to attach it)">' +
         '<label for="ta-date" class="sr-only">Due date (optional)</label><input id="ta-date" data-keep type="date" title="Due date (optional)">' +
         '<button type="submit" class="btn btn-sm primary">Add</button></form>') +
-      (open.length ? '<ul class="task-list">' + (ui.hubAllTasks ? open : open.slice(0, 7)).map(function (m, i) { return taskRow(m, i === 0); }).join('') + '</ul>' +
+      (open.length ? '<ul class="task-list" data-sort-list="hub:' + esc(p.id) + '">' + (ui.hubAllTasks ? open : open.slice(0, 7)).map(function (m, i) { return taskRow(m, i === 0).replace('<li ', '<li' + sortAttr(m.id) + ' '); }).join('') + '</ul>' +
           (open.length > 7 ? '<button type="button" class="link-btn hub-more" id="hub-all" data-act="hub-all">' + (ui.hubAllTasks ? 'Show only the next 7' : 'Show all ' + open.length + ' open to-dos') + '</button><br>' : '')
         : '<p class="hub-empty">' + (c.total ? 'Everything is done.' : 'No to-dos yet. Add each step this project needs, with a date if it has one.') + '</p>') +
       (fresh.length ? '<ul class="task-list task-stars" aria-label="Done in the last 48 hours">' + fresh.map(function (m) { return taskRow(m, false); }).join('') + '</ul>' : '') +
@@ -3053,6 +3198,8 @@ td.c-break{display:none}
     $('#btn-new-project').addEventListener('click', openNewProject);
     $('#btn-backup').addEventListener('click', openBackup);
     $('#btn-sync').addEventListener('click', function () { openSync(); });
+    $('#sb-g').addEventListener('click', function () { openSync(ghLastError || undefined); });
+    $('#sb-c').addEventListener('click', function () { openGcal(); });
     $('#btn-library').addEventListener('click', function () { location.hash = currentView() === 'table' ? '#timeline' : '#library'; });
     var moreBtn = $('#btn-more'), moreMenu = $('#more-menu');
     function closeMenu() { moreMenu.hidden = true; moreBtn.setAttribute('aria-expanded', 'false'); }
@@ -3138,7 +3285,7 @@ td.c-break{display:none}
       if (!x.title) { inp.focus(); return; }
       inp.value = '';
       commit(function (s) {
-        if (p) { p.milestones.push({ id: uid(), title: x.title, date: null, done: false, doneOn: null, url: x.url, created: Date.now(), today: T }); p.milestones.sort(cmpTask); }
+        if (p) { p.milestones.push({ id: uid(), title: x.title, date: null, done: false, doneOn: null, url: x.url, created: Date.now(), today: T }); }
         else s.tasks.push({ id: uid(), title: x.title, url: x.url, day: T, created: Date.now(), done: false, doneOn: null });
       });
       inp.focus();
@@ -3155,7 +3302,7 @@ td.c-break{display:none}
       else if (a === 'td-later' && !ro) {
         var tm = addDays(T, 1);
         if (t) commit(function () { t.day = tm; });
-        else if (m) commit(function () { if (m.date && m.date <= T) { m.date = tm; m.today = null; } else m.today = tm; p.milestones.sort(cmpTask); });
+        else if (m) commit(function () { if (m.date && m.date <= T) { m.date = tm; m.today = null; } else m.today = tm; });
       }
       else if (a === 'td-pull' && m && !ro) commit(function () { m.today = T; });
       else if (a === 'td-ms' && m) openMilestone(p.id, m.id);
@@ -3333,7 +3480,6 @@ td.c-break{display:none}
         ti.value = ''; $('#ta-date').value = '';
         commit(function () {
           p.milestones.push({ id: uid(), title: x.title, date: isISO(dt) ? dt : null, done: false, doneOn: null, url: x.url, created: Date.now() });
-          p.milestones.sort(cmpTask);
         });
         var t2 = $('#ta-title'); if (t2) t2.focus();
       } else if (id === 'hub-lk') {
@@ -3441,6 +3587,7 @@ td.c-break{display:none}
     }
     initStorage();
     gcalBoot();
+    initDrag();
   }
 
   if (hot && typeof hot.ready === 'function') hot.ready(start);
