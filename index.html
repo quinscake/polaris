@@ -437,6 +437,43 @@ body.hub-open{overflow:hidden}
 .node .ck{width:8px;height:8px;color:var(--space)}
 .node .ck path{stroke-width:3}
 
+/* ---------- faded stars: done in the last 48 hours ---------- */
+.task-stars{margin-top:8px;padding-top:6px;border-top:1px dashed var(--rule)}
+.task.is-star .tbox,.tbox.tstar{border-color:transparent;background:none;color:#59647f}
+.tbox.tstar svg{width:16px;height:16px;display:block}
+.tbox.tstar:hover{color:var(--warn);border-color:transparent;background:none}
+.task.is-star .task-title{color:var(--muted);text-decoration:none;opacity:.8}
+.task.is-star .task-meta{color:#5f6780}
+.task.just-starred .tstar{animation:starpop 1s ease}
+@keyframes starpop{0%{transform:scale(.3) rotate(-30deg);color:var(--warn);filter:drop-shadow(0 0 8px var(--warn))}45%{transform:scale(1.4);color:var(--warn);filter:drop-shadow(0 0 10px var(--warn))}100%{transform:scale(1);color:#59647f;filter:none}}
+input[type="time"]{width:100%;padding:8px 11px;border:1px solid var(--rule);border-radius:8px;background:var(--panel-2);color:var(--ink)}
+.gc-more{margin-top:12px}
+.gc-more summary{cursor:pointer;color:var(--muted);font-size:13px}
+.modal code{font:12px var(--font-mono);color:var(--ink)}
+
+/* ---------- to-do ---------- */
+.tab-n{display:inline-block;margin-left:7px;font:600 10.5px/1 var(--font-mono);color:var(--space);background:var(--accent);border-radius:999px;padding:3px 6px;vertical-align:1px}
+#btn-library[aria-pressed="true"]{border-color:var(--accent);color:var(--accent)}
+.lib-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.lib-title{font-family:var(--font-display);font-weight:600;font-size:22px;margin:0}
+body[data-view="todo"] #quick-add,body[data-view="table"] #quick-add{display:none !important}
+.view-todo{display:flex;flex-direction:column;gap:14px}
+.todo-add{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,240px) auto;gap:8px;align-items:center;padding:10px;background:rgba(17,22,36,.85);border:1px solid var(--rule);border-radius:12px}
+.todo-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px;align-items:start}
+.todo-main,.todo-side{display:flex;flex-direction:column;gap:14px;min-width:0}
+.hsec-date{font:500 12px var(--font-mono);color:var(--muted)}
+.task-meta .pdot{display:inline-block;width:7px;height:7px;margin-right:6px;vertical-align:1px}
+.tact{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;padding:0;border:1px solid transparent;border-radius:8px;background:none;color:var(--muted);cursor:pointer}
+.tact:hover{color:var(--ink);background:var(--panel-2);border-color:var(--rule)}
+.tact.on{color:var(--warn)}
+.tact svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.tflag{flex:none;display:grid;place-items:center;width:22px;height:22px;color:var(--warn)}
+.tflag .flag{width:14px;height:14px}
+.task.is-carried .task-meta{color:var(--warn)}
+.nstep > .pdot{width:9px;height:9px;margin:0 7px}
+.todo-empty{color:var(--muted);font-size:13.5px;margin:4px 2px}
+.todo-full{font-size:12.5px;color:var(--warn);margin:8px 2px 0}
+
 .is-readonly .edit-only{display:none !important}
 
 /* icons */
@@ -500,7 +537,15 @@ button.label-box:hover{border-color:#38415a;border-left-color:var(--pc)}
   .label .btn-sm{padding:3px 6px;font-size:11px}
 }
 /* ---------- shared bits for small screens and touch ---------- */
-.btn-more{display:none;font-size:18px;line-height:1;padding:7px 12px}
+.btn-more{display:inline-flex;font-size:18px;line-height:1;padding:7px 12px;position:relative}
+#btn-sync,#btn-backup{display:none !important}
+@media (min-width: 641px){#mm-library{display:none}}
+.btn-more.has-alert::after{content:"";position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--warn)}
+.mm-sub{display:block;font:400 11.5px var(--font-mono);color:var(--muted);margin-top:2px}
+.mm-sub:empty{display:none}
+.mm-sub.is-ok{color:var(--ok)}
+.mm-sub.is-warn{color:var(--warn)}
+.mm-sub.is-err{color:var(--stop)}
 .more-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:45;min-width:190px;display:flex;flex-direction:column;padding:6px;background:var(--panel-2);border:1px solid var(--rule);border-radius:12px;box-shadow:0 16px 40px rgba(0,0,0,.5)}
 .more-menu[hidden]{display:none !important}
 .more-menu button{background:none;border:0;text-align:left;padding:11px 12px;border-radius:8px;font-size:15px;color:var(--ink);cursor:pointer}
@@ -532,7 +577,7 @@ td.c-break{display:none}
   .today-stamp{display:none}
   #btn-new-project{grid-column:2;grid-row:1}
   .btn-more{display:inline-flex;grid-column:3;grid-row:1}
-  #btn-sync,#btn-backup{display:none !important}
+  #btn-sync,#btn-backup,#btn-library{display:none !important}
   .views{grid-column:1;grid-row:2;justify-self:start}
   .view-tab{padding:6px 16px}
   .save-status{grid-column:2 / -1;grid-row:2;justify-self:end}
@@ -550,7 +595,7 @@ td.c-break{display:none}
   .quick-add #qa-date{display:none}
   .quick-add #qa-text,.quick-add button[type="submit"]{grid-column:auto}
   .quick-add .qa-error{order:-1}
-  input[type="text"],input[type="date"],input[type="search"],input:not([type]),select,textarea{font-size:16px}
+  input[type="text"],input[type="date"],input[type="time"],input[type="search"],input:not([type]),select,textarea{font-size:16px}
 
   /* timeline: each project's name sits above its line, so the line gets the full width */
   .tl-toolbar{gap:8px}
@@ -610,6 +655,18 @@ td.c-break{display:none}
   .modal .lk-add{grid-template-columns:1fr auto}
   .lk-add #lk-url{grid-column:1 / -1}
 
+  /* to-do: the add bar sits at the bottom like the update bar */
+  .todo-add{
+    position:fixed;left:0;right:0;bottom:0;z-index:30;
+    grid-template-columns:minmax(0,1fr) minmax(0,32%) auto;gap:6px;
+    padding:10px max(10px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+    border-radius:16px 16px 0 0;border-width:1px 0 0;
+    background:rgba(13,17,28,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    box-shadow:0 -10px 30px rgba(0,0,0,.35);
+  }
+  .todo-grid{grid-template-columns:1fr}
+  .lib-title{font-size:18px}
+
   /* project window fills the screen */
   .hub{place-items:stretch;padding:0}
   .hub-panel{width:100%;max-height:none;height:100%;border-radius:0;border-width:3px 0 0;padding:14px max(14px, env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left))}
@@ -654,16 +711,19 @@ td.c-break{display:none}
       <input id="board-title" class="board-title" type="text" maxlength="40" spellcheck="false" autocomplete="off">
     </div>
     <nav class="views" aria-label="Views">
+      <a class="view-tab" href="#todo" data-view="todo">To-do<span class="tab-n" id="todo-n" hidden></span></a>
       <a class="view-tab" href="#timeline" data-view="timeline">Timeline</a>
-      <a class="view-tab" href="#table" data-view="table">Table</a>
     </nav>
     <div class="top-actions">
       <span class="save-status" id="save-status" role="status"></span>
+      <button type="button" class="btn" id="btn-library" aria-pressed="false">Library</button>
       <button type="button" class="btn" id="btn-sync" hidden>GitHub sync</button>
       <button type="button" class="btn" id="btn-backup">Backup</button>
       <button type="button" class="btn primary edit-only" id="btn-new-project">+ New<span class="btn-word"> project</span></button>
       <button type="button" class="btn btn-more" id="btn-more" aria-haspopup="true" aria-expanded="false" aria-controls="more-menu" aria-label="More">&#x22EF;</button>
       <div class="more-menu" id="more-menu" hidden>
+        <button type="button" id="mm-library">Library</button>
+        <button type="button" id="mm-gcal">Google Calendar<span class="mm-sub" id="mm-gcal-sub"></span></button>
         <button type="button" id="mm-sync">GitHub sync</button>
         <button type="button" id="mm-backup">Backup</button>
       </div>
@@ -692,6 +752,17 @@ td.c-break{display:none}
   </form>
 
   <main>
+    <section id="view-todo" class="view-todo" aria-label="To-do" hidden>
+      <form class="todo-add edit-only" id="todo-add" autocomplete="off">
+        <label for="td-text" class="sr-only">New task</label>
+        <input type="text" id="td-text" maxlength="2100" placeholder="Add a task for today (paste a link to attach it)">
+        <label for="td-project" class="sr-only">Project</label>
+        <select id="td-project"></select>
+        <button type="submit" class="btn primary">Add</button>
+      </form>
+      <div id="todo-body"></div>
+    </section>
+
     <section id="view-timeline" class="view-timeline" aria-label="Timeline" hidden>
       <div class="tl-toolbar">
         <div class="tl-nav">
@@ -707,7 +778,8 @@ td.c-break{display:none}
       </div>
     </section>
 
-    <section id="view-table" class="view-table" aria-label="Table" hidden>
+    <section id="view-table" class="view-table" aria-label="Library" hidden>
+      <div class="lib-head"><h2 class="lib-title">Library</h2><a class="btn btn-sm" href="#timeline">&larr; Back to the timeline</a></div>
       <div class="table-head">
         <h2>Projects</h2>
         <div class="filters"><button type="button" class="btn btn-sm edit-only" data-act="areas">Edit areas</button><label class="check"><input type="checkbox" id="f-archived"> Show archived</label></div>
@@ -886,6 +958,8 @@ td.c-break{display:none}
 
   function todayISO() { var d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
   function isISO(s) { return typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s); }
+  function isTime(s) { return typeof s === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(s); }
+  function noonOf(iso) { return isISO(iso) ? new Date(iso + 'T12:00:00').getTime() : 0; }
   function toUTC(iso) { var a = iso.split('-'); return Date.UTC(+a[0], +a[1] - 1, +a[2]); }
   function fromUTC(ms) { var d = new Date(ms); return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate()); }
   function addDays(iso, n) { return fromUTC(toUTC(iso) + n * 86400000); }
@@ -936,7 +1010,7 @@ td.c-break{display:none}
       v: 2,
       rev: typeof s.rev === 'number' && isFinite(s.rev) ? s.rev : 0,
       title: typeof s.title === 'string' && s.title.trim() && s.title !== 'Work' && s.title !== 'KEPLER' ? s.title.slice(0, 40) : 'Polaris',
-      areas: [], mission: null, projects: [], updates: []
+      areas: [], mission: null, projects: [], updates: [], tasks: []
     };
     var areaIds = {};
     (Array.isArray(s.areas) ? s.areas : DEFAULT_AREAS).forEach(function (a) {
@@ -971,7 +1045,9 @@ td.c-break{display:none}
         if (msIds[mid]) return;
         msIds[mid] = true;
         ms.push({ id: mid, title: x.title.trim().slice(0, 140), date: isISO(x.date) ? x.date : null, done: !!x.done,
-          doneOn: x.done && isISO(x.doneOn) ? x.doneOn : null, url: (typeof x.url === 'string' && cleanUrl(x.url)) || '', created: Number(x.created) || 0 });
+          doneOn: x.done && isISO(x.doneOn) ? x.doneOn : null, url: (typeof x.url === 'string' && cleanUrl(x.url)) || '', created: Number(x.created) || 0,
+          today: !x.done && isISO(x.today) ? x.today : null, time: isISO(x.date) && isTime(x.time) ? x.time : null,
+          doneAt: x.done ? (Number(x.doneAt) || noonOf(x.doneOn)) : 0 });
       });
       ms.sort(cmpTask);
       out.projects.push({
@@ -989,6 +1065,22 @@ td.c-break{display:none}
       if (typeof u.task === 'string' && u.task) o.task = u.task;   // set when the update was made by ticking a to-do
       out.updates.push(o);
     });
+    // Quick tasks: things that came up, with no project. Finished ones are kept for a month.
+    var cutoff = addDays(todayISO(), -30), tids = {};
+    (Array.isArray(s.tasks) ? s.tasks : []).forEach(function (t) {
+      if (!t || typeof t.title !== 'string' || !t.title.trim()) return;
+      var tid = String(t.id || uid());
+      if (tids[tid]) return;
+      tids[tid] = true;
+      var done = !!t.done, doneOn = done && isISO(t.doneOn) ? t.doneOn : null;
+      if (done && doneOn && doneOn < cutoff) return;
+      out.tasks.push({ id: tid, title: t.title.trim().slice(0, 140), url: (typeof t.url === 'string' && cleanUrl(t.url)) || '',
+        day: isISO(t.day) ? t.day : todayISO(), created: Number(t.created) || 0, done: done, doneOn: doneOn,
+        time: isTime(t.time) ? t.time : null, doneAt: done ? (Number(t.doneAt) || noonOf(doneOn)) : 0 });
+    });
+    // Google Calendar: which OAuth client and which calendar. Shared by all your devices; the sign-in itself stays on each device.
+    var gc = s.gcal && typeof s.gcal === 'object' ? s.gcal : {};
+    out.gcal = { clientId: typeof gc.clientId === 'string' ? gc.clientId.trim().slice(0, 200) : '', calendarId: typeof gc.calendarId === 'string' ? gc.calendarId.slice(0, 300) : '' };
     return out;
   }
 
@@ -1096,14 +1188,15 @@ td.c-break{display:none}
     if (!!m.done === !!done) return;
     m.done = !!done;
     if (m.done) {
-      m.doneOn = T;
+      m.doneOn = T; m.doneAt = Date.now(); m.today = null;
       if (canAddOn(p, T, T)) {
         s.updates.push({ id: uid(), projectId: p.id, date: T, text: '✓ ' + m.title, created: Date.now(), task: m.id });
         justAdded = p.id + '|' + T;
       }
     } else {
-      m.doneOn = null;
-      s.updates = s.updates.filter(function (u) { return !(u.task === m.id && u.date === T); });
+      var was = m.doneOn;
+      m.doneOn = null; m.doneAt = 0;
+      s.updates = s.updates.filter(function (u) { return !(u.task === m.id && (u.date === T || u.date === was)); });
     }
   }
   // "Essay draft https://docs.google.com/…" becomes the to-do "Essay draft" with that link attached.
@@ -1144,6 +1237,7 @@ td.c-break{display:none}
     state.rev = (state.rev || 0) + 1;
     render();
     scheduleSave();
+    gcalKick();
     return true;
   }
 
@@ -1158,7 +1252,7 @@ td.c-break{display:none}
   function isBusy() {
     var qa = $('#qa-text');
     var hubTyping = !!ui.hub && $$('#hub [data-keep]').some(function (el) { return el.id === 'hub-notes' ? el === document.activeElement : !!el.value.trim(); });
-    return !$('#modal').hidden || hubTyping || (qa && qa.value.trim()) || ui.editingUpdate || ui.editingProject ||
+    return !$('#modal').hidden || hubTyping || (qa && qa.value.trim()) || ($('#td-text') && $('#td-text').value.trim()) || ui.editingUpdate || ui.editingProject ||
       (document.activeElement && document.activeElement.id === 'board-title');
   }
 
@@ -1439,7 +1533,16 @@ td.c-break{display:none}
   }
 
   /* ================= rendering ================= */
-  function currentView() { return location.hash === '#table' ? 'table' : 'timeline'; }
+  var VIEW_KEY = LS_KEY + ':view';
+  // Timeline and To-do are tabs; the Library (all tables) opens from its button. Polaris reopens on the tab you used last.
+  function currentView() {
+    var h = location.hash;
+    if (h === '#library' || h === '#table') return 'table';
+    if (h === '#todo') return 'todo';
+    if (h === '#timeline') return 'timeline';
+    var saved = null; try { saved = localStorage.getItem(VIEW_KEY); } catch (e) {}
+    return saved === 'timeline' ? 'timeline' : 'todo';
+  }
 
   function render() {
     var T = todayISO();
@@ -1449,11 +1552,17 @@ td.c-break{display:none}
     renderReminders(T);
     renderQuickAdd(T);
     var view = currentView();
+    document.body.setAttribute('data-view', view);
+    try { if (view !== 'table') localStorage.setItem(VIEW_KEY, view); } catch (e) {}
     $$('.view-tab').forEach(function (a) { if (a.dataset.view === view) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     $('#view-timeline').hidden = view !== 'timeline';
+    $('#view-todo').hidden = view !== 'todo';
     $('#view-table').hidden = view !== 'table';
-    if (view === 'timeline') renderBoard(T); else renderTables(T);
+    var lb = $('#btn-library'); if (lb) lb.setAttribute('aria-pressed', String(view === 'table'));
+    renderTodoCount(T);
+    if (view === 'timeline') renderBoard(T); else if (view === 'todo') renderTodo(T); else renderTables(T);
     if (ui.hub) renderHub();
+    if (!inViewer && gcalState === 'off' && gcalCfg()) gcalBoot();
   }
 
   function renderHeader(T) {
@@ -1464,6 +1573,7 @@ td.c-break{display:none}
     $('#sample-banner').hidden = !hasSamples();
     $('#btn-sync').hidden = inViewer;
     $('#mm-sync').hidden = inViewer;
+    $('#mm-gcal').hidden = inViewer;
   }
 
   function renderQuickAdd(T) {
@@ -1533,6 +1643,10 @@ td.c-break{display:none}
       }
       cards.push({ n: n, html: h });
     });
+    if (!inViewer && gcalCfg() && gcalState === 'signin' && gcalPending() && !dismissed['gcal|' + T]) {
+      cards.push({ n: -99, html: '<div class="reminder">' + STAR + '<span class="msg">Your <b>Polaris calendar</b> is waiting: Google wants you to sign in again before it can add your latest changes.</span><span class="reminder-acts">' +
+        '<button type="button" class="link-btn" data-act="gc-signin">Sign in</button>' + dismissBtn('gcal|' + T) + '</span></div>' });
+    }
     cards.sort(function (a, b) { return a.n - b.n; });
     recentlyForced(T).forEach(function (p) {
       var key = 'forced|' + p.id + '|' + p.ended + '|' + T;
@@ -1798,6 +1912,435 @@ td.c-break{display:none}
     }).join('');
   }
 
+  /* ================= to-do ================= */
+  // One daily list fed by two sources: quick tasks you type in, and your projects' to-dos
+  // that are due, overdue, or pulled in with the sun button. Unfinished items stay until done.
+  var SUN = '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.8"/><path d="M8 1.6v1.5M8 12.9v1.5M1.6 8h1.5M12.9 8h1.5M3.5 3.5l1.1 1.1M11.4 11.4l1.1 1.1M3.5 12.5l1.1-1.1M11.4 4.6l1.1-1.1"/></svg>';
+  var LATER = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.6 4.6 12 8l-3.4 3.4"/></svg>';
+  var todoShowDone = false, justStarred = null;
+  var STAR_HOURS = 48;   // a finished task stays as a faded star this long, then leaves the list
+  function recentDone(at) { return !!at && Date.now() - at < STAR_HOURS * 3600000; }
+  function agoText(at) { var mn = Math.round((Date.now() - at) / 60000); return mn < 1 ? 'just now' : mn < 60 ? mn + ' min ago' : mn < 1440 ? Math.round(mn / 60) + ' h ago' : 'yesterday'; }
+  function fadeNote(at) { var h = Math.max(1, Math.ceil((STAR_HOURS * 3600000 - (Date.now() - at)) / 3600000)); return 'done ' + agoText(at) + ' · fades in ' + h + ' h'; }
+  function starPop(id) { justStarred = id; setTimeout(function () { justStarred = null; }, 1000); }
+  function isoOf(ms) { var d = new Date(ms || Date.now()); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+
+  function todoLists(T) {
+    var today = [], week = [], next = [], done = [], wkEnd = addDays(T, 7);
+    state.tasks.forEach(function (t) {
+      if (t.done) { if (recentDone(t.doneAt)) done.push({ kind: 'quick', t: t, at: t.doneAt }); return; }
+      if (t.day <= T) today.push({ kind: 'quick', t: t, rank: 3, key: String(t.created) });
+    });
+    state.projects.forEach(function (p) {
+      if (p.ended) return;
+      p.milestones.forEach(function (m) {
+        if (m.done) { if (recentDone(m.doneAt)) done.push({ kind: 'ms', p: p, m: m, at: m.doneAt }); return; }
+        var due = m.date && m.date <= T, pulled = m.today && m.today <= T;
+        if (due || pulled) today.push({ kind: 'ms', p: p, m: m, rank: m.date && m.date < T ? 0 : due ? 1 : 2, key: (m.date || '') + (m.time || '') });
+        else if (m.date && m.date <= wkEnd) week.push({ kind: 'ms', p: p, m: m, date: m.date });
+      });
+      if (p.deadline === T) today.push({ kind: 'deadline', p: p, rank: 1, key: '' });
+      else if (p.deadline && p.deadline > T && p.deadline <= wkEnd) week.push({ kind: 'deadline', p: p, date: p.deadline });
+    });
+    today.sort(function (a, b) { return a.rank - b.rank || (a.key < b.key ? -1 : a.key > b.key ? 1 : 0); });
+    week.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : (a.kind === 'deadline') - (b.kind === 'deadline'); });
+    // Next steps: projects with nothing on today's list or this week, and the first open to-do of each
+    state.projects.forEach(function (p) {
+      if (p.ended) return;
+      var busy = today.concat(week).some(function (x) { return x.p === p && x.kind === 'ms'; });
+      if (busy) return;
+      var open = p.milestones.filter(function (m) { return !m.done; }).sort(cmpTask);
+      next.push({ p: p, m: open[0] || null });
+    });
+    done.sort(function (a, b) { return b.at - a.at; });
+    return { today: today, week: week, next: next, done: done };
+  }
+  function renderTodoCount(T) {
+    var el = $('#todo-n'); if (!el) return;
+    var n = todoLists(T).today.filter(function (x) { return x.kind !== 'deadline'; }).length;
+    el.textContent = n; el.hidden = !n;
+  }
+  function renderTodoProjects() {
+    var sel = $('#td-project'); if (!sel) return;
+    var cur = sel.value, act = state.projects.filter(function (p) { return !p.ended; });
+    sel.innerHTML = '<option value="">No project</option>' + act.map(function (p) { return '<option value="' + esc(p.id) + '">' + esc(p.name) + '</option>'; }).join('');
+    if (act.some(function (p) { return p.id === cur; })) sel.value = cur;
+  }
+
+  function renderTodo(T) {
+    renderTodoProjects();
+    var L = todoLists(T), ro = mode === 'readonly';
+    function linkBtn(url, title) {
+      if (!url) return '';
+      var info = linkInfo(url);
+      return '<a class="task-link" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer" title="Open ' + esc(info.label) + '" aria-label="Open the link for ' + esc(title) + '">' + linkTile(info.svc) + '</a>';
+    }
+    function box(attrs, isDone, title) {
+      return '<button type="button" class="tbox" data-act="td-toggle" ' + attrs + ' aria-pressed="' + !!isDone + '" aria-label="' + (isDone ? 'Mark not done: ' : 'Mark done: ') + esc(title) + '"' + (ro ? ' disabled' : '') + '>' + CK + '</button>';
+    }
+    function later(attrs, title) {
+      return ro ? '' : '<button type="button" class="tact" data-act="td-later" ' + attrs + ' title="Move to tomorrow" aria-label="Move to tomorrow: ' + esc(title) + '">' + LATER + '</button>';
+    }
+    function pull(attrs, title) {
+      return ro ? '' : '<button type="button" class="tact" data-act="td-pull" ' + attrs + ' title="Do today" aria-label="Do today: ' + esc(title) + '">' + SUN + '</button>';
+    }
+    function todayRow(x) {
+      if (x.kind === 'deadline') {
+        return '<li class="task is-soon" style="--pc:var(--c' + x.p.color + ')"><span class="tflag">' + FLAG + '</span>' +
+          '<button type="button" class="task-main" data-act="td-hub" data-pid="' + esc(x.p.id) + '"><span class="task-title">Final deadline: ' + esc(x.p.name) + '</span>' +
+          '<span class="task-meta">The project ends itself when today is over</span></button></li>';
+      }
+      if (x.kind === 'quick') {
+        var t = x.t, since = Math.max(0, diffDays(isoOf(t.created), T)), a = 'data-tid="' + esc(t.id) + '"';
+        return '<li class="task' + (since >= 2 ? ' is-carried' : '') + '">' + box(a, false, t.title) +
+          '<button type="button" class="task-main" data-act="td-quick" ' + a + '><span class="task-title">' + esc(t.title) + '</span>' +
+          ((since >= 1 || t.time) ? '<span class="task-meta">' + [t.time ? 'at ' + t.time : '', since >= 1 ? (since === 1 ? 'from yesterday' : 'carried over ' + since + ' days') : ''].filter(Boolean).join(' · ') + '</span>' : '') + '</button>' +
+          linkBtn(t.url, t.title) + later(a, t.title) + '</li>';
+      }
+      var m = x.m, p = x.p, n = m.date ? diffDays(T, m.date) : null, a2 = 'data-pid="' + esc(p.id) + '" data-mid="' + esc(m.id) + '"';
+      var meta = '<i class="pdot"></i>' + esc(p.name) + (n === null ? '' : n < 0 ? ' · ' + plural(-n, 'day') + ' overdue' : n === 0 ? ' · due today' : ' · due ' + fmtLong(m.date) + ' (' + dueLabel(n) + ')') + (m.time ? ' · ' + m.time : '');
+      return '<li class="task' + (n !== null && n < 0 ? ' is-late' : n === 0 ? ' is-soon' : '') + '" style="--pc:var(--c' + p.color + ')">' + box(a2, false, m.title) +
+        '<button type="button" class="task-main" data-act="td-ms" ' + a2 + '><span class="task-title">' + esc(m.title) + '</span><span class="task-meta">' + meta + '</span></button>' +
+        linkBtn(m.url, m.title) + later(a2, m.title) + '</li>';
+    }
+    function weekRow(x) {
+      var n = diffDays(T, x.date), when = fmtLong(x.date) + (x.m && x.m.time ? ' ' + x.m.time : '') + ' · ' + dueLabel(n);
+      if (x.kind === 'deadline') {
+        return '<li class="task" style="--pc:var(--c' + x.p.color + ')"><span class="tflag" style="color:var(--pc)">' + FLAG + '</span>' +
+          '<button type="button" class="task-main" data-act="td-hub" data-pid="' + esc(x.p.id) + '"><span class="task-title">Final deadline: ' + esc(x.p.name) + '</span><span class="task-meta">' + when + '</span></button></li>';
+      }
+      var m = x.m, p = x.p, a = 'data-pid="' + esc(p.id) + '" data-mid="' + esc(m.id) + '"';
+      return '<li class="task' + (n <= DUE_SOON ? ' is-soon' : '') + '" style="--pc:var(--c' + p.color + ')">' + box(a, false, m.title) +
+        '<button type="button" class="task-main" data-act="td-ms" ' + a + '><span class="task-title">' + esc(m.title) + '</span><span class="task-meta"><i class="pdot"></i>' + esc(p.name) + ' · ' + when + '</span></button>' +
+        linkBtn(m.url, m.title) + pull(a, m.title) + '</li>';
+    }
+    function nextRow(x) {
+      var p = x.p, m = x.m;
+      if (!m) {
+        return '<li class="task nstep" style="--pc:var(--c' + p.color + ')"><i class="pdot"></i>' +
+          '<button type="button" class="task-main" data-act="td-hub" data-pid="' + esc(p.id) + '" data-focus="tasks"><span class="task-title muted">No next step yet</span><span class="task-meta">' + esc(p.name) + '</span></button>' +
+          (ro ? '' : '<button type="button" class="btn btn-sm" data-act="td-hub" data-pid="' + esc(p.id) + '" data-focus="tasks">+ Step</button>') + '</li>';
+      }
+      var a = 'data-pid="' + esc(p.id) + '" data-mid="' + esc(m.id) + '"';
+      return '<li class="task nstep" style="--pc:var(--c' + p.color + ')"><i class="pdot"></i>' +
+        '<button type="button" class="task-main" data-act="td-ms" ' + a + '><span class="task-title">' + esc(m.title) + '</span><span class="task-meta">' + esc(p.name) + (m.date ? ' · ' + fmtShort(m.date) : '') + '</span></button>' +
+        linkBtn(m.url, m.title) + pull(a, m.title) + '</li>';
+    }
+    function star(attrs, title) {
+      return '<button type="button" class="tbox tstar" data-act="td-toggle" ' + attrs + ' aria-pressed="true" title="Bring it back" aria-label="Bring back: ' + esc(title) + '"' + (ro ? ' disabled' : '') + '>' + STAR + '</button>';
+    }
+    function doneRow(x) {
+      if (x.kind === 'quick') {
+        var a = 'data-tid="' + esc(x.t.id) + '"';
+        return '<li class="task is-star' + (justStarred === x.t.id ? ' just-starred' : '') + '">' + star(a, x.t.title) +
+          '<button type="button" class="task-main" data-act="td-quick" ' + a + '><span class="task-title">' + esc(x.t.title) + '</span><span class="task-meta">' + fadeNote(x.at) + '</span></button></li>';
+      }
+      var a2 = 'data-pid="' + esc(x.p.id) + '" data-mid="' + esc(x.m.id) + '"';
+      return '<li class="task is-star' + (justStarred === x.m.id ? ' just-starred' : '') + '" style="--pc:var(--c' + x.p.color + ')">' + star(a2, x.m.title) +
+        '<button type="button" class="task-main" data-act="td-ms" ' + a2 + '><span class="task-title">' + esc(x.m.title) + '</span><span class="task-meta"><i class="pdot"></i>' + esc(x.p.name) + ' · ' + fadeNote(x.at) + '</span></button></li>';
+    }
+    var openN = L.today.filter(function (x) { return x.kind !== 'deadline'; }).length;
+    var todaySec = '<section class="hsec" aria-labelledby="td-h-today"><div class="hsec-h"><h3 id="td-h-today">Today</h3><span class="hsec-date">' + fmtLong(T) + '</span><span class="count">' + (openN || '') + '</span></div>' +
+      (L.today.length ? '<ul class="task-list">' + L.today.map(todayRow).join('') + '</ul>'
+        : '<p class="todo-empty">' + (L.done.length ? 'All done for today.' : 'Nothing on today’s list yet. Add something that came up, or pull in a next step with ☀.') + '</p>') +
+      (openN > 7 ? '<p class="todo-full">That’s a full day. Move what can wait with → and it comes back tomorrow.</p>' : '') +
+      (L.done.length ? '<ul class="task-list task-stars" aria-label="Done in the last 48 hours">' + L.done.map(doneRow).join('') + '</ul>' : '') +
+      '</section>';
+    var weekSec = '<section class="hsec" aria-labelledby="td-h-week"><div class="hsec-h"><h3 id="td-h-week">This week</h3><span class="count">' + (L.week.length || '') + '</span></div>' +
+      (L.week.length ? '<ul class="task-list">' + L.week.map(weekRow).join('') + '</ul>' : '<p class="todo-empty">Nothing due in the next 7 days.</p>') + '</section>';
+    var nextSec = L.next.length ? '<section class="hsec" aria-labelledby="td-h-next"><div class="hsec-h"><h3 id="td-h-next">Next steps</h3></div>' +
+      '<p class="hub-hint" style="margin:-4px 0 8px">Projects with nothing due this week. Tap ☀ to pull a step into today.</p>' +
+      '<ul class="task-list">' + L.next.map(nextRow).join('') + '</ul></section>' : '';
+    $('#todo-body').innerHTML = '<div class="todo-grid"><div class="todo-main">' + todaySec + '</div><div class="todo-side">' + weekSec + nextSec + '</div></div>';
+  }
+
+  // A quick task: rename it, attach a link, or move it into one of your projects.
+  function openQuickTask(tid) {
+    if (mode === 'readonly') return;
+    var t = null; state.tasks.forEach(function (x) { if (x.id === tid) t = x; });
+    if (!t) return;
+    var T = todayISO(), added = isoOf(t.created);
+    openModal({
+      draw: function () {
+        var act = state.projects.filter(function (p) { return !p.ended; });
+        $('#modal-body').innerHTML = '<h2 id="modal-title">' + esc(t.title) + '</h2>' +
+          '<p class="modal-sub">Quick task · added ' + (added === T ? 'today' : fmtShort(added)) + (t.done ? ' · done' : '') + '</p>' +
+          '<form id="qt-form" novalidate>' +
+          '<div class="field"><label for="qt-title">Task</label><input id="qt-title" type="text" maxlength="140" value="' + esc(t.title) + '"></div>' +
+          '<div class="field"><label for="qt-url">Link <span class="muted">(optional)</span></label><input id="qt-url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="Paste a link" value="' + esc(t.url || '') + '"></div>' +
+          '<div class="field"><label for="qt-time">Time <span class="muted">(optional, puts it on your Google Calendar)</span></label><input id="qt-time" type="time" value="' + esc(t.time || '') + '"></div>' +
+          '<div class="field"><label for="qt-project">Belongs to a project?</label><select id="qt-project"><option value="">No, keep it as a quick task</option>' +
+            act.map(function (p) { return '<option value="' + esc(p.id) + '">Move to ' + esc(p.name) + '</option>'; }).join('') + '</select></div>' +
+          '<p class="hub-hint">Moving it makes it one of that project’s to-dos and keeps it on today’s list. Ticking it then shows on the project’s line.</p>' +
+          '<p class="form-error" id="qt-error" hidden></p>' +
+          '<div class="modal-actions"><button type="button" class="btn btn-quiet" data-act="qt-del" style="margin-right:auto">Delete</button>' +
+          '<button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
+      },
+      onClick: function (e) {
+        if (e.target.closest('[data-act="qt-del"]')) { commit(function (s) { s.tasks = s.tasks.filter(function (x) { return x.id !== tid; }); }); closeModal(); }
+      },
+      onSubmit: function () {
+        var title = $('#qt-title').value.trim(), rawU = $('#qt-url').value.trim(), pid = $('#qt-project').value, tm = $('#qt-time').value, err = $('#qt-error');
+        if (!title) { err.textContent = 'Give the task a name.'; err.hidden = false; return; }
+        var url = rawU ? cleanUrl(rawU) : '';
+        if (rawU && !url) { err.textContent = 'That link doesn’t look right. Copy the whole address from the browser bar or the Share button.'; err.hidden = false; return; }
+        var p = pid ? getProject(pid) : null;
+        commit(function (s) {
+          if (p) {
+            s.tasks = s.tasks.filter(function (x) { return x.id !== tid; });
+            p.milestones.push({ id: uid(), title: title.slice(0, 140), date: isTime(tm) ? t.day : null, time: isTime(tm) ? tm : null, done: !!t.done, doneOn: t.done ? t.doneOn : null, doneAt: t.done ? t.doneAt : 0, url: url, created: Date.now(), today: t.done ? null : T });
+            p.milestones.sort(cmpTask);
+          } else { t.title = title.slice(0, 140); t.url = url; t.time = isTime(tm) ? tm : null; if (t.time && !t.done && t.day < T) t.day = T; }
+        });
+        closeModal();
+      }
+    });
+  }
+
+  /* ================= Google Calendar (one way: Polaris → a "Polaris" calendar) ================= */
+  // Uses Google's narrowest calendar permission: it can only create its own calendar and manage events on it.
+  // It can't read or change your other calendars, and nothing in Google Calendar ever flows back into Polaris.
+  var GCAL_SCOPE = 'https://www.googleapis.com/auth/calendar.app.created';
+  var GTOK_KEY = 'polaris:gcal-token', GREV_KEY = 'polaris:gcal-rev';
+  function gcalPending() { var r = null; try { r = localStorage.getItem(GREV_KEY); } catch (e) {} return String(state.rev) !== r; }
+  function gcalAutoOK() { try { return matchMedia('(hover: hover) and (pointer: fine)').matches; } catch (e) { return false; } }
+  var GCAL_COLORS = ['9', '2', '3', '6', '10', '4'];   // Google's colors closest to the six project colors
+  var gcalTok = null, gcalClient = null, gcalState = 'off', gcalMsg = '', gcalTimer = null, gcalBusy = false, gcalAgain = false, gcalLast = 0, gcalLastPrompt = 0, gisPromise = null;
+
+  function gcalCfg() { return state && state.gcal && state.gcal.clientId ? state.gcal : null; }
+  function hasGis() { return !!(window.google && google.accounts && google.accounts.oauth2); }
+  function gis() {
+    if (hasGis()) return Promise.resolve(true);
+    if (!gisPromise) gisPromise = new Promise(function (res) {
+      var sc = document.createElement('script');
+      sc.src = 'https://accounts.google.com/gsi/client'; sc.async = true;
+      sc.onload = function () { res(hasGis()); };
+      sc.onerror = function () { gisPromise = null; res(false); };
+      document.head.appendChild(sc);
+    });
+    return gisPromise;
+  }
+  function loadTok() {
+    try { var t = JSON.parse(localStorage.getItem(GTOK_KEY) || 'null'); if (t && t.t && t.exp > Date.now() + 60000) return t; } catch (e) {}
+    return null;
+  }
+  function gcalTokenClient(cfg) {
+    if (gcalClient && gcalClient.__id === cfg.clientId) return gcalClient;
+    gcalClient = google.accounts.oauth2.initTokenClient({
+      client_id: cfg.clientId, scope: GCAL_SCOPE,
+      callback: function (r) {
+        if (r && r.access_token) {
+          gcalTok = { t: r.access_token, exp: Date.now() + (Number(r.expires_in) || 3600) * 1000 };
+          try { localStorage.setItem(GTOK_KEY, JSON.stringify(gcalTok)); } catch (e) {}
+          gcalSync();
+        } else gcalSet('signin', (r && (r.error_description || r.error)) || 'Google didn’t give permission.');
+      },
+      error_callback: function (err) {
+        gcalSet('signin', err && err.type === 'popup_closed' ? 'The Google window closed before you finished. Tap Sign in again.' : 'The browser blocked Google’s sign-in window. Tap Sign in again.');
+      }
+    });
+    gcalClient.__id = cfg.clientId;
+    return gcalClient;
+  }
+  // Must run inside a tap, so the browser lets Google's window open.
+  function gcalSignIn(prompt) {
+    var cfg = gcalCfg(); if (!cfg || inViewer) return;
+    if (!hasGis()) { gcalSet('signin', 'Google sign-in is still loading. Tap again in a moment.'); gis(); return; }
+    gcalLastPrompt = Date.now();
+    try { gcalTokenClient(cfg).requestAccessToken({ prompt: prompt || '' }); } catch (e) { gcalSet('error', 'Google sign-in couldn’t start.'); }
+  }
+  function gcalStatusText() {
+    return gcalState === 'ok' ? 'Up to date' + (gcalLast ? ' · updated ' + agoText(gcalLast) : '') :
+      gcalState === 'syncing' ? 'Updating your Polaris calendar…' :
+      gcalState === 'signin' ? (gcalMsg || 'Sign in with Google on this device to keep your calendar updated.') :
+      gcalState === 'error' ? gcalMsg : '';
+  }
+  function gcalSet(st, msg) {
+    gcalState = st; gcalMsg = msg || '';
+    var sub = $('#mm-gcal-sub'), more = $('#btn-more');
+    if (sub) {
+      sub.textContent = { off: 'Not set up', signin: 'Tap to sign in', syncing: 'Updating…', ok: 'Up to date', error: 'Problem, tap for details' }[st] || '';
+      sub.className = 'mm-sub' + (st === 'ok' ? ' is-ok' : st === 'error' ? ' is-err' : st === 'signin' ? ' is-warn' : '');
+    }
+    if (more) more.classList.toggle('has-alert', st === 'error' || st === 'signin');
+    if (modalCtx && modalCtx.isGcal && gcalCfg()) modalCtx.draw();
+    try { if (state) renderReminders(todayISO()); } catch (e) {}
+  }
+  function gcalBoot() {
+    if (inViewer) return;
+    if (!gcalCfg()) { gcalSet('off'); return; }
+    gis();
+    gcalTok = loadTok();
+    if (gcalTok) gcalKick(); else gcalSet('signin', '');
+  }
+  // Called after every change. With a valid sign-in it updates the calendar a moment later.
+  function gcalKick() {
+    var cfg = gcalCfg(); if (!cfg || inViewer) return;
+    if (!gcalTok || gcalTok.exp < Date.now() + 30000) gcalTok = loadTok();
+    if (!gcalTok) {
+      // We're inside a tap: quietly ask Google for a fresh pass (at most every 10 minutes).
+      if (hasGis() && gcalAutoOK() && Date.now() - gcalLastPrompt > 600000) gcalSignIn('');
+      else if (gcalState !== 'signin') gcalSet('signin', '');
+      return;
+    }
+    clearTimeout(gcalTimer); gcalTimer = setTimeout(gcalSync, 2500);
+  }
+  function gapi(method, path, body) {
+    var h = { Authorization: 'Bearer ' + gcalTok.t };
+    if (body) h['Content-Type'] = 'application/json';
+    return fetch('https://www.googleapis.com/calendar/v3' + path, { method: method, headers: h, body: body ? JSON.stringify(body) : undefined })
+      .catch(function () { var e = new Error('Couldn’t reach Google Calendar. Check your connection.'); e.status = 0; throw e; })
+      .then(function (r) {
+        if (r.status === 204) return null;
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (r.ok) return j;
+          var e = new Error((j && j.error && j.error.message) || ('Google Calendar answered with error ' + r.status)); e.status = r.status; throw e;
+        });
+      });
+  }
+  // Event IDs come from the to-do's own ID, so the same to-do always maps to the same event.
+  function gcalId(key) { var b = new TextEncoder().encode(key), h = 'pl'; for (var i = 0; i < b.length; i++) h += (b[i] < 16 ? '0' : '') + b[i].toString(16); return h; }
+  function plusHour(date, time) {
+    var d = new Date(new Date(date + 'T' + time + ':00').getTime() + 3600000);
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + 'T' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':00';
+  }
+  // What the Polaris calendar should contain right now.
+  function gcalWanted() {
+    var T = todayISO(), tz = (Intl.DateTimeFormat().resolvedOptions().timeZone) || 'UTC', out = {};
+    function ev(key, title, date, time, desc, color) {
+      var e = { id: gcalId(key), summary: title, description: desc + '\n\nWritten by Polaris. Change it in Polaris; edits made here get replaced.',
+        colorId: color, extendedProperties: { private: { polaris: '1' } } };
+      if (time) { e.start = { dateTime: date + 'T' + time + ':00', timeZone: tz }; e.end = { dateTime: plusHour(date, time), timeZone: tz }; }
+      else { e.start = { date: date }; e.end = { date: addDays(date, 1) }; }
+      out[e.id] = e;
+    }
+    state.projects.forEach(function (p) {
+      if (statusOf(p, T) === 'archived') return;
+      var color = GCAL_COLORS[p.color] || '9';
+      if (p.deadline) ev('d:' + p.id, '⚑ ' + p.name + ': final deadline', p.deadline, null, 'Final deadline for ' + p.name + '.', color);
+      p.milestones.forEach(function (m) { if (m.date) ev('m:' + m.id, (m.done ? '✓ ' : '') + m.title, m.date, m.time, p.name + (m.url ? '\n' + m.url : ''), color); });
+    });
+    state.tasks.forEach(function (t) { if (t.time) ev('t:' + t.id, (t.done ? '✓ ' : '') + t.title, t.day, t.time, 'Quick task' + (t.url ? '\n' + t.url : ''), '8'); });
+    return out;
+  }
+  function gcalSame(a, b) {
+    function k(x) {
+      var st = x.start || {}, en = x.end || {};
+      return JSON.stringify([x.summary || '', x.description || '', x.colorId || '', st.date || (st.dateTime || '').slice(0, 16), en.date || (en.dateTime || '').slice(0, 16)]);
+    }
+    return k(a) === k(b);
+  }
+  function gcalEnsureCalendar() {
+    var cfg = gcalCfg();
+    if (cfg.calendarId) return Promise.resolve(cfg.calendarId);
+    var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone) || 'UTC';
+    return gapi('POST', '/calendars', { summary: 'Polaris', description: 'Deadlines and dated to-dos from Polaris. Only Polaris writes here.', timeZone: tz })
+      .then(function (c) { commit(function (s) { s.gcal.calendarId = c.id; }); return c.id; });
+  }
+  function gcalList(calId) {
+    var have = {};
+    function page(tok) {
+      var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone) || 'UTC';
+      return gapi('GET', '/calendars/' + encodeURIComponent(calId) + '/events?maxResults=2500&timeZone=' + encodeURIComponent(tz) + '&privateExtendedProperty=' + encodeURIComponent('polaris=1') + (tok ? '&pageToken=' + encodeURIComponent(tok) : ''))
+        .then(function (j) { (j.items || []).forEach(function (e) { if (e.status !== 'cancelled') have[e.id] = e; }); return j.nextPageToken ? page(j.nextPageToken) : have; });
+    }
+    return page(null);
+  }
+  function gcalSync() {
+    var cfg = gcalCfg(); if (!cfg || inViewer) return;
+    if (!gcalTok || gcalTok.exp < Date.now() + 30000) { gcalTok = loadTok(); if (!gcalTok) { gcalSet('signin', ''); return; } }
+    if (gcalBusy) { gcalAgain = true; return; }
+    gcalBusy = true; gcalSet('syncing');
+    var calId, base;
+    gcalEnsureCalendar().then(function (id) {
+      calId = id; base = '/calendars/' + encodeURIComponent(id) + '/events';
+      return gcalList(id).catch(function (e) {
+        if (e.status !== 404) throw e;
+        // The Polaris calendar was deleted in Google: make a new one.
+        commit(function (s) { s.gcal.calendarId = ''; });
+        return gcalEnsureCalendar().then(function (id2) { calId = id2; base = '/calendars/' + encodeURIComponent(id2) + '/events'; return {}; });
+      });
+    }).then(function (have) {
+      var want = gcalWanted(), jobs = [];
+      Object.keys(want).forEach(function (id) {
+        if (!have[id]) jobs.push(function () {
+          return gapi('POST', base, want[id]).catch(function (e) {
+            if (e.status === 409) return gapi('PUT', base + '/' + id, Object.assign({ status: 'confirmed' }, want[id]));   // came back after being removed
+            throw e;
+          });
+        });
+        else if (!gcalSame(have[id], want[id])) jobs.push(function () { return gapi('PUT', base + '/' + id, want[id]); });
+      });
+      Object.keys(have).forEach(function (id) {
+        if (!want[id]) jobs.push(function () { return gapi('DELETE', base + '/' + id).catch(function (e) { if (e.status === 404 || e.status === 410) return null; throw e; }); });
+      });
+      return jobs.reduce(function (pr, job) { return pr.then(job); }, Promise.resolve());
+    }).then(function () {
+      gcalBusy = false; gcalLast = Date.now();
+      try { localStorage.setItem(GREV_KEY, String(state.rev)); } catch (e) {}
+      gcalSet('ok');
+      if (gcalAgain) { gcalAgain = false; gcalSync(); }
+    }, function (e) {
+      gcalBusy = false; gcalAgain = false;
+      if (e.status === 401) { gcalTok = null; try { localStorage.removeItem(GTOK_KEY); } catch (er) {} gcalSet('signin', 'Google asked you to sign in again.'); }
+      else gcalSet('error', e.message || 'Something went wrong updating Google Calendar.');
+    });
+  }
+
+  function openGcal() {
+    if (inViewer) return;
+    gis();
+    var ctx = {
+      isGcal: true,
+      draw: function () {
+        var cfg = gcalCfg(), fileMode = location.protocol === 'file:';
+        var origin = location.origin && location.origin !== 'null' && !fileMode ? location.origin : 'https://YOUR-USERNAME.github.io';
+        var needSign = !gcalTok || gcalState === 'signin' || (gcalState === 'error' && !gcalTok);
+        $('#modal-body').innerHTML = '<h2 id="modal-title">Google Calendar</h2>' +
+          '<p>Polaris writes your final deadlines and dated to-dos into its own <b>Polaris</b> calendar in your Google account. A to-do with a time becomes an event at that time; one with only a date becomes an all-day event. It only goes one way: nothing you do in Google Calendar changes Polaris, and Polaris can’t see or touch your other calendars.</p>' +
+          (fileMode ? '<p class="form-error">This works on your GitHub Pages site, not on the file opened from your computer.</p>' : '') +
+          (cfg
+            ? '<p class="muted" style="font-size:13px" id="gc-status">' + esc(gcalStatusText()) + '</p>' +
+              '<div class="modal-actions" style="justify-content:flex-start">' +
+                (needSign ? '<button type="button" class="btn primary" data-act="gc-signin">Sign in with Google</button>' : '<button type="button" class="btn" data-act="gc-sync">Update now</button>') +
+                '<button type="button" class="btn" data-close style="margin-left:auto">Close</button></div>' +
+              '<details class="gc-more"><summary>Settings</summary>' +
+                '<p class="muted" style="font-size:13px">Client ID: <code>' + esc(cfg.clientId.slice(0, 24)) + '…</code></p>' +
+                '<button type="button" class="btn btn-quiet" data-act="gc-off">Turn off</button>' +
+                '<p class="hub-hint">Turning it off stops the updates on all your devices. The Polaris calendar stays in Google Calendar; delete it there if you don’t want it.</p></details>'
+            : '<form id="gc-form" novalidate>' +
+                '<div class="field"><label for="gc-client">OAuth client ID</label><input id="gc-client" type="text" spellcheck="false" autocomplete="off" placeholder="1234-abcd.apps.googleusercontent.com"></div>' +
+                '<p class="hub-hint">One-time setup in Google Cloud (free): turn on the Google Calendar API and make an OAuth client ID of type <b>Web application</b>, with <b>' + esc(origin) + '</b> as an authorized JavaScript origin.</p>' +
+                '<p class="form-error" id="gc-error" hidden></p>' +
+                '<div class="modal-actions"><button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Connect</button></div></form>');
+      },
+      onClick: function (e) {
+        var b = e.target.closest('[data-act]'); if (!b) return;
+        if (b.dataset.act === 'gc-signin') gcalSignIn('');
+        else if (b.dataset.act === 'gc-sync') gcalSync();
+        else if (b.dataset.act === 'gc-off') {
+          commit(function (s) { s.gcal = { clientId: '', calendarId: '' }; });
+          gcalTok = null; gcalClient = null;
+          try { localStorage.removeItem(GTOK_KEY); } catch (er) {}
+          gcalSet('off'); ctx.draw();
+        }
+      },
+      onSubmit: function () {
+        var id = $('#gc-client').value.trim(), err = $('#gc-error');
+        var fail = function (m) { err.textContent = m; err.hidden = false; };
+        if (!/^[\w.-]+\.apps\.googleusercontent\.com$/.test(id)) return fail('That doesn’t look like a client ID. It ends in .apps.googleusercontent.com.');
+        if (!hasGis()) { gis(); return fail('Google sign-in is still loading. Wait a second and tap Connect again.'); }
+        gcalLastPrompt = Date.now();
+        commit(function (s) { s.gcal = { clientId: id, calendarId: s.gcal && s.gcal.clientId === id ? s.gcal.calendarId : '' }; });
+        gcalClient = null;
+        gcalState = 'signin';
+        ctx.draw();
+        try { gcalTokenClient(gcalCfg()).requestAccessToken({ prompt: 'consent' }); } catch (er) { gcalSet('error', 'Google sign-in couldn’t start.'); }
+      }
+    };
+    openModal(ctx);
+  }
+
   /* ================= tooltip ================= */
   function showTip(node) {
     var p = getProject(node.dataset.pid); if (!p) return;
@@ -2008,7 +2551,8 @@ td.c-break{display:none}
           '<form id="ms-form" novalidate>' +
           '<div class="field"><label for="ms-title">To-do</label><input id="ms-title" type="text" maxlength="140" value="' + esc(m.title) + '"></div>' +
           '<div class="field-row"><div class="field"><label for="ms-date">Due date <span class="muted">(optional)</span></label><input id="ms-date" type="date" value="' + (m.date || '') + '"></div>' +
-          '<div class="field" style="justify-content:flex-end"><label class="check"><input type="checkbox" id="ms-done"' + (m.done ? ' checked' : '') + '> Done</label></div></div>' +
+          '<div class="field"><label for="ms-time">Time <span class="muted">(optional)</span></label><input id="ms-time" type="time" value="' + (m.time || '') + '"></div></div>' +
+          '<div class="field"><label class="check"><input type="checkbox" id="ms-done"' + (m.done ? ' checked' : '') + '> Done</label></div>' +
           '<div class="field"><label for="ms-url">Link <span class="muted">(optional: the doc or file you work on for this)</span></label><input id="ms-url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="Paste a link" value="' + esc(m.url || '') + '"></div>' +
           (m.url ? '<p style="margin:6px 0 0"><a class="btn btn-sm" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer">' + EXT + 'Open link</a></p>' : '') +
           '<p class="form-error" id="ms-error" hidden></p>' +
@@ -2022,7 +2566,7 @@ td.c-break{display:none}
         }
       },
       onSubmit: function () {
-        var t = $('#ms-title').value.trim(), dt = $('#ms-date').value, rawU = $('#ms-url').value.trim(), err = $('#ms-error');
+        var t = $('#ms-title').value.trim(), dt = $('#ms-date').value, tm = $('#ms-time').value, rawU = $('#ms-url').value.trim(), err = $('#ms-error');
         var fail = function (x) { err.textContent = x; err.hidden = false; };
         if (!t) return fail('Give the to-do a name.');
         if (dt && !isISO(dt)) return fail('That date isn’t valid.');
@@ -2030,7 +2574,7 @@ td.c-break{display:none}
         if (rawU && !url) return fail('That link doesn’t look right. Copy the whole address from the browser bar or the Share button.');
         var dn = $('#ms-done').checked;
         commit(function (s) {
-          m.title = t.slice(0, 140); m.date = dt || null; m.url = url;
+          m.title = t.slice(0, 140); m.date = dt || null; m.time = dt && isTime(tm) ? tm : null; m.url = url;
           setTaskDone(s, p, m, dn, T);
           p.milestones.sort(cmpTask);
         });
@@ -2177,27 +2721,30 @@ td.c-break{display:none}
   function hubHTML(p, T) {
     var ro = mode === 'readonly';
     var open = p.milestones.filter(function (m) { return !m.done; }).sort(cmpTask);
-    var done = p.milestones.filter(function (m) { return m.done; }).sort(function (a, b) { var x = a.doneOn || '', y = b.doneOn || ''; return x < y ? 1 : x > y ? -1 : 0; });
+    var done = p.milestones.filter(function (m) { return m.done; }).sort(function (a, b) { return (b.doneAt || 0) - (a.doneAt || 0); });
+    var fresh = done.filter(function (m) { return recentDone(m.doneAt); }), older = done.filter(function (m) { return !recentDone(m.doneAt); });
     var c = taskCounts(p);
     var ups = state.updates.filter(function (u) { return u.projectId === p.id; })
       .sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : b.created - a.created; });
     var area = areaOf(p);
 
     function dueBits(m) {
-      if (m.done) return { cls: '', txt: m.doneOn ? 'done ' + (m.doneOn === T ? 'today' : fmtShort(m.doneOn)) : 'done' };
+      if (m.done) return { cls: '', txt: recentDone(m.doneAt) ? fadeNote(m.doneAt) : m.doneOn ? 'done ' + (m.doneOn === T ? 'today' : fmtShort(m.doneOn)) : 'done' };
       if (!m.date) return { cls: '', txt: 'no date' };
       var n = diffDays(T, m.date);
       if (n < 0) return { cls: ' is-late', txt: fmtShort(m.date) + ' · ' + plural(-n, 'day') + ' overdue' };
-      return { cls: n <= DUE_SOON ? ' is-soon' : '', txt: fmtShort(m.date) + ' · ' + dueLabel(n) };
+      return { cls: n <= DUE_SOON ? ' is-soon' : '', txt: fmtShort(m.date) + (m.time ? ' ' + m.time : '') + ' · ' + dueLabel(n) };
     }
     function taskRow(m, isNext) {
       var b = dueBits(m), info = m.url ? linkInfo(m.url) : null;
-      return '<li class="task' + (m.done ? ' is-done' : '') + b.cls + (isNext ? ' is-next' : '') + '">' +
-        '<button type="button" class="tbox" id="tk-' + esc(m.id) + '" data-act="task-toggle" data-mid="' + esc(m.id) + '" aria-pressed="' + !!m.done + '" aria-label="' +
-          (m.done ? 'Mark not done: ' : 'Mark done: ') + esc(m.title) + '"' + (ro ? ' disabled' : '') + '>' + CK + '</button>' +
+      return '<li class="task' + (m.done ? ' is-done is-star' : '') + b.cls + (isNext ? ' is-next' : '') + (justStarred === m.id ? ' just-starred' : '') + '">' +
+        '<button type="button" class="tbox' + (m.done ? ' tstar' : '') + '" id="tk-' + esc(m.id) + '" data-act="task-toggle" data-mid="' + esc(m.id) + '" aria-pressed="' + !!m.done + '" title="' + (m.done ? 'Bring it back' : 'Mark done') + '" aria-label="' +
+          (m.done ? 'Bring back: ' : 'Mark done: ') + esc(m.title) + '"' + (ro ? ' disabled' : '') + '>' + (m.done ? STAR : CK) + '</button>' +
         '<button type="button" class="task-main" data-act="task" data-mid="' + esc(m.id) + '" title="' + (ro ? '' : 'Edit') + '"><span class="task-title">' + esc(m.title) + '</span>' +
           '<span class="task-meta">' + (isNext ? '<span class="next-tag">Next</span>' : '') + esc(b.txt) + '</span></button>' +
         (m.url ? '<a class="task-link" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer" title="Open ' + esc(info.label) + '" aria-label="Open the link for ' + esc(m.title) + '">' + linkTile(info.svc) + '</a>' : '') +
+        (!m.done && !ro ? '<button type="button" class="tact' + (m.today && m.today <= T ? ' on' : '') + '" data-act="task-today" data-mid="' + esc(m.id) + '" aria-pressed="' + !!(m.today && m.today <= T) +
+          '" title="' + (m.today && m.today <= T ? 'On today’s list. Tap to take it off' : 'Do today') + '" aria-label="' + (m.today && m.today <= T ? 'Take off today’s list: ' : 'Do today: ') + esc(m.title) + '">' + SUN + '</button>' : '') +
         '</li>';
     }
 
@@ -2223,8 +2770,9 @@ td.c-break{display:none}
       (open.length ? '<ul class="task-list">' + (ui.hubAllTasks ? open : open.slice(0, 7)).map(function (m, i) { return taskRow(m, i === 0); }).join('') + '</ul>' +
           (open.length > 7 ? '<button type="button" class="link-btn hub-more" id="hub-all" data-act="hub-all">' + (ui.hubAllTasks ? 'Show only the next 7' : 'Show all ' + open.length + ' open to-dos') + '</button><br>' : '')
         : '<p class="hub-empty">' + (c.total ? 'Everything is done.' : 'No to-dos yet. Add each step this project needs, with a date if it has one.') + '</p>') +
-      (done.length ? '<button type="button" class="link-btn hub-more" id="hub-done" data-act="hub-done">' + (ui.hubShowDone ? 'Hide' : 'Show') + ' ' + done.length + ' done</button>' +
-        (ui.hubShowDone ? '<ul class="task-list">' + done.map(function (m) { return taskRow(m, false); }).join('') + '</ul>' : '') : '') +
+      (fresh.length ? '<ul class="task-list task-stars" aria-label="Done in the last 48 hours">' + fresh.map(function (m) { return taskRow(m, false); }).join('') + '</ul>' : '') +
+      (older.length ? '<button type="button" class="link-btn hub-more" id="hub-done" data-act="hub-done">' + (ui.hubShowDone ? 'Hide' : 'Show') + ' ' + older.length + ' done earlier</button>' +
+        (ui.hubShowDone ? '<ul class="task-list">' + older.map(function (m) { return taskRow(m, false); }).join('') + '</ul>' : '') : '') +
       '</section>';
 
     // notes
@@ -2342,7 +2890,7 @@ td.c-break{display:none}
     openModal({
       draw: function () {
         $('#modal-body').innerHTML = '<h2 id="modal-title">End “' + esc(p.name) + '”?</h2>' +
-          '<p>Its line stops with an <b style="color:var(--stop)">✕</b> and it sinks to the bottom of the board. A week after the end date it leaves the board, but stays in <b>Table</b> under <i>Show archived</i>.</p>' +
+          '<p>Its line stops with an <b style="color:var(--stop)">✕</b> and it sinks to the bottom of the board. A week after the end date it leaves the board, but stays in the <b>Library</b> under <i>Show archived</i>.</p>' +
           '<form id="end-form" novalidate>' +
           '<div class="field"><label for="end-date">End date</label><input id="end-date" type="date" value="' + T + '" min="' + min + '" max="' + T + '"></div>' +
           '<div class="field"><label for="end-note">Final note <span class="muted">(optional)</span></label><textarea id="end-note" rows="2" placeholder="How it wrapped up, a link, the result…" autofocus></textarea></div>' +
@@ -2505,6 +3053,7 @@ td.c-break{display:none}
     $('#btn-new-project').addEventListener('click', openNewProject);
     $('#btn-backup').addEventListener('click', openBackup);
     $('#btn-sync').addEventListener('click', function () { openSync(); });
+    $('#btn-library').addEventListener('click', function () { location.hash = currentView() === 'table' ? '#timeline' : '#library'; });
     var moreBtn = $('#btn-more'), moreMenu = $('#more-menu');
     function closeMenu() { moreMenu.hidden = true; moreBtn.setAttribute('aria-expanded', 'false'); }
     moreBtn.addEventListener('click', function (e) {
@@ -2516,6 +3065,8 @@ td.c-break{display:none}
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !moreMenu.hidden) closeMenu(); });
     $('#mm-sync').addEventListener('click', function () { closeMenu(); openSync(); });
     $('#mm-backup').addEventListener('click', function () { closeMenu(); openBackup(); });
+    $('#mm-library').addEventListener('click', function () { closeMenu(); location.hash = '#library'; });
+    $('#mm-gcal').addEventListener('click', function () { closeMenu(); openGcal(); });
 
     // re-draw when the window crosses between phone and laptop layouts
     if (window.matchMedia) {
@@ -2552,6 +3103,7 @@ td.c-break{display:none}
         try { qt.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (er) {}
       }
       else if (a === 'more-reminders') { ui.allReminders = !ui.allReminders; render(); }
+      else if (a === 'gc-signin') gcalSignIn('');
       else if (a === 'dismiss') {
         dismissed[b.dataset.key] = true;
         try { localStorage.setItem(LS_KEY + ':dismissed', JSON.stringify(dismissed)); } catch (er) {}
@@ -2576,6 +3128,40 @@ td.c-break{display:none}
       $('#qa-text').value = '';
       $('#qa-date').value = T;
       addUpdate(pid, d, txt);
+    });
+
+    // to-do view
+    $('#todo-add').addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (mode === 'readonly') return;
+      var T = todayISO(), inp = $('#td-text'), x = splitTaskInput(inp.value), pid = $('#td-project').value, p = pid ? getProject(pid) : null;
+      if (!x.title) { inp.focus(); return; }
+      inp.value = '';
+      commit(function (s) {
+        if (p) { p.milestones.push({ id: uid(), title: x.title, date: null, done: false, doneOn: null, url: x.url, created: Date.now(), today: T }); p.milestones.sort(cmpTask); }
+        else s.tasks.push({ id: uid(), title: x.title, url: x.url, day: T, created: Date.now(), done: false, doneOn: null });
+      });
+      inp.focus();
+    });
+    $('#view-todo').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-act]'); if (!b) return;
+      var a = b.dataset.act, T = todayISO(), ro = mode === 'readonly';
+      var p = b.dataset.pid ? getProject(b.dataset.pid) : null, m = p && b.dataset.mid ? taskById(p, b.dataset.mid) : null, t = null;
+      if (b.dataset.tid) state.tasks.forEach(function (x) { if (x.id === b.dataset.tid) t = x; });
+      if (a === 'td-toggle' && !ro) {
+        if (t) { if (!t.done) starPop(t.id); commit(function () { t.done = !t.done; t.doneOn = t.done ? T : null; t.doneAt = t.done ? Date.now() : 0; if (!t.done) t.day = T; }); }
+        else if (m) { if (!m.done) starPop(m.id); commit(function (s) { setTaskDone(s, p, m, !m.done, T); m.today = m.done ? null : T; }); }
+      }
+      else if (a === 'td-later' && !ro) {
+        var tm = addDays(T, 1);
+        if (t) commit(function () { t.day = tm; });
+        else if (m) commit(function () { if (m.date && m.date <= T) { m.date = tm; m.today = null; } else m.today = tm; p.milestones.sort(cmpTask); });
+      }
+      else if (a === 'td-pull' && m && !ro) commit(function () { m.today = T; });
+      else if (a === 'td-ms' && m) openMilestone(p.id, m.id);
+      else if (a === 'td-quick' && t) openQuickTask(t.id);
+      else if (a === 'td-hub' && p) openHub(p.id, b.dataset.focus || null);
+      else if (a === 'td-done-toggle') { todoShowDone = !todoShowDone; render(); }
     });
 
     // timeline toolbar
@@ -2724,9 +3310,13 @@ td.c-break{display:none}
       else if (a === 'deadline') openDeadline(pid);
       else if (a === 'task-toggle') {
         var m = taskById(p, b.dataset.mid);
-        if (m && mode !== 'readonly') commit(function (s) { setTaskDone(s, p, m, !m.done, todayISO()); });
+        if (m && mode !== 'readonly') { if (!m.done) starPop(m.id); commit(function (s) { setTaskDone(s, p, m, !m.done, todayISO()); }); }
       }
       else if (a === 'task') openMilestone(pid, b.dataset.mid);
+      else if (a === 'task-today') {
+        var mt = taskById(p, b.dataset.mid), td0 = todayISO();
+        if (mt && mode !== 'readonly') commit(function () { mt.today = mt.today && mt.today <= td0 ? null : td0; });
+      }
       else if (a === 'link') openLink(pid, b.dataset.lid);
       else if (a === 'open-day') openDay(pid, b.dataset.date);
       else if (a === 'hub-done') { ui.hubShowDone = !ui.hubShowDone; renderHub(); }
@@ -2794,7 +3384,7 @@ td.c-break{display:none}
       if (e.key === 'Escape' && ui.hub) { closeHub(); return; }
       var tag = (document.activeElement && document.activeElement.tagName) || '';
       if (e.key === '/' && $('#modal').hidden && !ui.hub && !/^(INPUT|TEXTAREA|SELECT)$/.test(tag) && mode !== 'readonly') {
-        e.preventDefault(); $('#qa-text').focus();
+        e.preventDefault(); (currentView() === 'todo' ? $('#td-text') : $('#qa-text')).focus();
       }
     });
     $('#qa-text').addEventListener('blur', function () { if (dirty) scheduleSave(); });
@@ -2850,6 +3440,7 @@ td.c-break{display:none}
       } catch (e) {}
     }
     initStorage();
+    gcalBoot();
   }
 
   if (hot && typeof hot.ready === 'function') hot.ready(start);
