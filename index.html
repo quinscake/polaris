@@ -748,8 +748,6 @@ td.c-break{display:none}
       <button type="button" class="btn btn-more" id="btn-more" aria-haspopup="true" aria-expanded="false" aria-controls="more-menu" aria-label="More">&#x22EF;</button>
       <div class="more-menu" id="more-menu" hidden>
         <button type="button" id="mm-library">Library</button>
-        <button type="button" id="mm-gcal">Google Calendar</button>
-        <button type="button" id="mm-sync">GitHub sync</button>
         <button type="button" id="mm-backup">Backup</button>
       </div>
     </div>
@@ -1598,8 +1596,6 @@ td.c-break{display:none}
     t.size = Math.max(3, (t.value || '').length + 1);
     $('#sample-banner').hidden = !hasSamples();
     $('#btn-sync').hidden = inViewer;
-    $('#mm-sync').hidden = inViewer;
-    $('#mm-gcal').hidden = inViewer;
     $('#sync-badges').hidden = inViewer;
   }
 
@@ -2027,13 +2023,13 @@ td.c-break{display:none}
         return '<li class="task' + (since >= 2 ? ' is-carried' : '') + '">' + box(a, false, t.title) +
           '<button type="button" class="task-main" data-act="td-quick" ' + a + '><span class="task-title">' + esc(t.title) + '</span>' +
           ((since >= 1 || t.time) ? '<span class="task-meta">' + [t.time ? 'at ' + t.time : '', since >= 1 ? (since === 1 ? 'from yesterday' : 'carried over ' + since + ' days') : ''].filter(Boolean).join(' · ') + '</span>' : '') + '</button>' +
-          linkBtn(t.url, t.title) + later(a, t.title) + '</li>';
+          linkBtn(t.url, t.title) + '</li>';
       }
       var m = x.m, p = x.p, n = m.date ? diffDays(T, m.date) : null, a2 = 'data-pid="' + esc(p.id) + '" data-mid="' + esc(m.id) + '"';
       var meta = '<i class="pdot"></i>' + esc(p.name) + (n === null ? '' : n < 0 ? ' · ' + plural(-n, 'day') + ' overdue' : n === 0 ? ' · due today' : ' · due ' + fmtLong(m.date) + ' (' + dueLabel(n) + ')') + (m.time ? ' · ' + m.time : '');
       return '<li class="task' + (n !== null && n < 0 ? ' is-late' : n === 0 ? ' is-soon' : '') + '" style="--pc:var(--c' + p.color + ')">' + box(a2, false, m.title) +
         '<button type="button" class="task-main" data-act="td-ms" ' + a2 + '><span class="task-title">' + esc(m.title) + '</span><span class="task-meta">' + meta + '</span></button>' +
-        linkBtn(m.url, m.title) + later(a2, m.title) + '</li>';
+        linkBtn(m.url, m.title) + '</li>';
     }
     function weekRow(x) {
       var n = diffDays(T, x.date), when = fmtLong(x.date) + (x.m && x.m.time ? ' ' + x.m.time : '') + ' · ' + dueLabel(n);
@@ -2075,7 +2071,6 @@ td.c-break{display:none}
     var todaySec = '<section class="hsec" aria-labelledby="td-h-today"><div class="hsec-h"><h3 id="td-h-today">Today</h3><span class="hsec-date">' + fmtLong(T) + '</span><span class="count">' + (openN || '') + '</span></div>' +
       (L.today.length ? '<ul class="task-list" data-sort-list="today">' + L.today.map(function (x) { return todayRow(x).replace('<li ', '<li' + sortAttr(todayKey(x)) + ' '); }).join('') + '</ul>'
         : '<p class="todo-empty">' + (L.done.length ? 'All done for today.' : 'Nothing on today’s list yet. Add something that came up, or pull in a next step with ☀.') + '</p>') +
-      (openN > 7 ? '<p class="todo-full">That’s a full day. Move what can wait with → and it comes back tomorrow.</p>' : '') +
       (L.done.length ? '<ul class="task-list task-stars" aria-label="Done in the last 48 hours">' + L.done.map(doneRow).join('') + '</ul>' : '') +
       '</section>';
     var weekSec = '<section class="hsec" aria-labelledby="td-h-week"><div class="hsec-h"><h3 id="td-h-week">This week</h3><span class="count">' + (L.week.length || '') + '</span></div>' +
@@ -3210,10 +3205,8 @@ td.c-break{display:none}
     });
     document.addEventListener('click', function (e) { if (!moreMenu.hidden && !e.target.closest('#more-menu')) closeMenu(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !moreMenu.hidden) closeMenu(); });
-    $('#mm-sync').addEventListener('click', function () { closeMenu(); openSync(); });
     $('#mm-backup').addEventListener('click', function () { closeMenu(); openBackup(); });
     $('#mm-library').addEventListener('click', function () { closeMenu(); location.hash = '#library'; });
-    $('#mm-gcal').addEventListener('click', function () { closeMenu(); openGcal(); });
 
     // re-draw when the window crosses between phone and laptop layouts
     if (window.matchMedia) {
