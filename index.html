@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0a0d16"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Polaris"><link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAkFBMVEX9/v/o8f/G2fyasNxyiLhIW4wzQ3AqN14iLVAdJkcZIkQZITwWHjwXHjUUGzcUGzISGDEQFiwPFSsQFigOFCgOEyUNEiIMESIMECALEB4LDx0KDhwKDRoKDRkKDBgJDBgJCxYIDBcICxYICxUIChQHChMHChIHCREGCREGCBEGCA8FCA4FBw0FBwsEBgwDBAlOX+9SAAAD60lEQVR42o1W53qjMBCUKaYbMNWUYJtmAYH3f7ubFbgkTu5OP1K+b4adWUmzYgvWJ9Y0jQPv+65tmrqur1j41TRt13M+jNNEGMIy+jHf8fwG9PVSbesCUtP2/caYN8I8Az4NA+9up7IBriyLHKsoS+KgChgDIJ/zTIRZ6MHnu3rWLV4QOEvjOEkzIlVCWscHoWpe2Ex6SE7X1pf2AnB2SqLA94MoOWUZUarF0JYOskCY2QPf1FUF+ClNk8h3HcfxoyRNT1l+iTR+7oQRMNimp22uVUnwJI6At3TNcvwwgrBTngVwQkZIFXviC0gHPAyBN1XFNFw/FJSsKqoHg73g8fkohHrPMQxF1nXbg5MwSpJT/mSwaeS8Az4nr1EIuHeAIEXWdPPggRJG8JIRo+N8nBgMoz8VuonPHwXeNrS9LO01wxaMI4pQjbpFc0dGgupL0RpaERwJfrBRQJUkFSXsA1FWRnmpSRQTBso8j/xow9uGvgdBoRJguCsjy0thg8HAuSioP8C7gNsmFCmCgBI2nHu0iWSDdpz17ZkvZDhc8aZp6IIg7/e6YZoHXQfjKYp19WSpbUyGPYE3SZG828kqNIGgaUeXRG2dYu15tNRrTAXI71qACBIIosQBzXqUqFlTl+2cxKHopxBEBGnHBIEYluhuGKNEySeGPctS4YDwxopXJMYkZWUYcL6WyLLWdVh9KXNYPnou9BAceEHYKSoYoohlu96RTnvrgIBDlALvEBzoPfCwAIKMP/CvRk4sB4w0z/lIhCwOXGtD0+cVWSKCJCvKk2O5QQwTZ4ZjmgauszZHVWRZkqQd8GDs8KcsC2Uo4rhBisYyfsmTwEXr71gBvi9BEqy97gZJDkKQFSBoqizw0lf8K0PbCHunBcEyV0U/SRKaVkm5kATT/sO0+rtpPz7h/JHpXMTEtgk/tRVwx0WI0C26bxxttGX8vHEGHQ5/O0w4Gh959uvR0NTXo5F/XBscPuxc+rfDZz8PH64QazdNvx5viy728wYxihiU+PUCrYJeLlD/UuKnKwq8++WK8m51QYn9HgLWin8NgS1mMhFjbzFzeATTI2YoyD42Ud+DzLIM7y3IxqG/LSKK36PyoKuh9z0qp3EqdV6tNt7CWCTrM4z7Aek9TWeH1y9xf/S/xX36iPtlmTBQxml5GShhqmvht4Gy4fvFcRYxsm6vIwu3I/gystCfbZzMZbk8hmJ7IyNiKKZfh2JR0QaI8YOhfh+7KKfPZYWRjrGbfh2717p9DNFPtj00hvGc3fBsqMr3wS4eHM/BTk8NejpME2Z1Qw+Nvz0dUAHOn4+Z9j8eJ3t1Ge4M/o/nz+ei/QH28sn+yVJOXgAAAABJRU5ErkJggg=="><link rel="apple-touch-icon" href="data:image/png;base64,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">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0a0d16"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Polaris"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAkFBMVEX9/v/o8f/G2fyasNxyiLhIW4wzQ3AqN14iLVAdJkcZIkQZITwWHjwXHjUUGzcUGzISGDEQFiwPFSsQFigOFCgOEyUNEiIMESIMECALEB4LDx0KDhwKDRoKDRkKDBgJDBgJCxYIDBcICxYICxUIChQHChMHChIHCREGCREGCBEGCA8FCA4FBw0FBwsEBgwDBAlOX+9SAAAD60lEQVR42o1W53qjMBCUKaYbMNWUYJtmAYH3f7ubFbgkTu5OP1K+b4adWUmzYgvWJ9Y0jQPv+65tmrqur1j41TRt13M+jNNEGMIy+jHf8fwG9PVSbesCUtP2/caYN8I8Az4NA+9up7IBriyLHKsoS+KgChgDIJ/zTIRZ6MHnu3rWLV4QOEvjOEkzIlVCWscHoWpe2Ex6SE7X1pf2AnB2SqLA94MoOWUZUarF0JYOskCY2QPf1FUF+ClNk8h3HcfxoyRNT1l+iTR+7oQRMNimp22uVUnwJI6At3TNcvwwgrBTngVwQkZIFXviC0gHPAyBN1XFNFw/FJSsKqoHg73g8fkohHrPMQxF1nXbg5MwSpJT/mSwaeS8Az4nr1EIuHeAIEXWdPPggRJG8JIRo+N8nBgMoz8VuonPHwXeNrS9LO01wxaMI4pQjbpFc0dGgupL0RpaERwJfrBRQJUkFSXsA1FWRnmpSRQTBso8j/xow9uGvgdBoRJguCsjy0thg8HAuSioP8C7gNsmFCmCgBI2nHu0iWSDdpz17ZkvZDhc8aZp6IIg7/e6YZoHXQfjKYp19WSpbUyGPYE3SZG828kqNIGgaUeXRG2dYu15tNRrTAXI71qACBIIosQBzXqUqFlTl+2cxKHopxBEBGnHBIEYluhuGKNEySeGPctS4YDwxopXJMYkZWUYcL6WyLLWdVh9KXNYPnou9BAceEHYKSoYoohlu96RTnvrgIBDlALvEBzoPfCwAIKMP/CvRk4sB4w0z/lIhCwOXGtD0+cVWSKCJCvKk2O5QQwTZ4ZjmgauszZHVWRZkqQd8GDs8KcsC2Uo4rhBisYyfsmTwEXr71gBvi9BEqy97gZJDkKQFSBoqizw0lf8K0PbCHunBcEyV0U/SRKaVkm5kATT/sO0+rtpPz7h/JHpXMTEtgk/tRVwx0WI0C26bxxttGX8vHEGHQ5/O0w4Gh959uvR0NTXo5F/XBscPuxc+rfDZz8PH64QazdNvx5viy728wYxihiU+PUCrYJeLlD/UuKnKwq8++WK8m51QYn9HgLWin8NgS1mMhFjbzFzeATTI2YoyD42Ud+DzLIM7y3IxqG/LSKK36PyoKuh9z0qp3EqdV6tNt7CWCTrM4z7Aek9TWeH1y9xf/S/xX36iPtlmTBQxml5GShhqmvht4Gy4fvFcRYxsm6vIwu3I/gystCfbZzMZbk8hmJ7IyNiKKZfh2JR0QaI8YOhfh+7KKfPZYWRjrGbfh2717p9DNFPtj00hvGc3fBsqMr3wS4eHM/BTk8NejpME2Z1Qw+Nvz0dUAHOn4+Z9j8eJ3t1Ge4M/o/nz+ei/QH28sn+yVJOXgAAAABJRU5ErkJggg=="><link rel="apple-touch-icon" href="data:image/png;base64,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">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -528,6 +528,92 @@ body.hub-open{overflow:hidden}
 .sc-sum{font:500 12px var(--font-mono);color:var(--muted);margin:8px 0 0}
 .sc-sum:empty{display:none}
 
+/* ---------- typed dates, doing limit, weekly review ---------- */
+.when-chip{grid-column:1 / -1;justify-self:start;display:inline-flex;align-items:center;gap:6px;font:500 12px var(--font-mono);color:var(--accent);
+  background:rgba(138,180,255,.1);border:1px solid rgba(138,180,255,.35);border-radius:999px;padding:3px 4px 3px 9px}
+.when-chip[hidden]{display:none}
+.when-chip svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.4}
+.wc-ico{display:inline-flex}
+.wc-x{border:0;background:none;color:var(--muted);cursor:pointer;font-size:14px;line-height:1;padding:0 5px}
+.wc-x:hover{color:var(--ink)}
+.doing-warn{margin:0;font-size:12.5px;color:var(--warn)}
+.rv-sec{margin:14px 0 4px}
+.rv-sec h3{font:600 11.5px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;display:flex;align-items:center;gap:10px}
+.rv-n{font-weight:500;letter-spacing:0;text-transform:none;color:var(--ok)}
+.rv-n.is-over{color:var(--warn)}
+.rv-line{margin:0 0 6px;font-size:14px}
+.rv-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.rv-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:1px}
+.rv-proj{margin:8px 0 4px}
+.rv-ph{font-size:13px;font-weight:500;margin-bottom:3px}
+.rv-pick{font-size:14px;padding:2px 0 2px 16px}
+
+/* ---------- chat dock ---------- */
+.chat-dock{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:44;width:min(680px,calc(100vw - 32px));display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.chat-dock[hidden]{display:none}
+.chat-dock > *{pointer-events:auto}
+.chat-fab{display:none}
+.chat-panel{display:none;flex-direction:column;max-height:min(62vh,640px);background:rgba(15,19,31,.97);border:1px solid #2c3552;border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.55);overflow:hidden}
+.chat-dock.is-open .chat-panel{display:flex}
+.chat-head{display:flex;align-items:center;gap:12px;padding:10px 12px 10px 16px;border-bottom:1px solid var(--rule)}
+.chat-title{font:600 13px var(--font-display);letter-spacing:.02em}
+.chat-ctx{flex:1;min-width:0;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-ctx b{color:var(--ink);font-weight:500}
+.chat-head .link-btn{font-size:12.5px}
+.chat-log{flex:1;overflow:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-height:120px}
+.cm{max-width:88%;padding:9px 12px;border-radius:12px;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.cm-user{align-self:flex-end;background:#2a3557;color:var(--ink);border-bottom-right-radius:4px}
+.cm-ai{align-self:flex-start;background:rgba(255,255,255,.045);border:1px solid var(--rule);border-bottom-left-radius:4px}
+.cm-ai.is-err{border-color:rgba(255,107,94,.45);color:#ffb3aa}
+.cm-file{display:block;margin-top:4px;font:500 11.5px var(--font-mono);color:#b8c4ea}
+.cm-meta{margin:6px 0 0;font:500 11px var(--font-mono);color:#6d7690}
+.cm-ops{margin-top:10px;padding-top:8px;border-top:1px dashed var(--rule);display:flex;flex-direction:column;gap:7px}
+.cm-ops .check{align-items:flex-start;font-size:13.5px;line-height:1.45}
+.cm-ops .check input{margin-top:3px}
+.cm-ops .is-danger span{color:#ff9a8a}
+.cm-acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}
+.cm-ok{margin:0;font-size:13px;color:var(--ok)}
+.cm-note p{margin:0}
+.cm-paste{width:100%;margin-top:8px;font-size:13px}
+.cm-wait{color:var(--muted);font-size:13px}
+.dots{display:inline-flex;gap:3px;vertical-align:middle;margin-right:4px}
+.dots i{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:blink 1.2s infinite ease-in-out}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.chat-hello{color:var(--muted);font-size:13.5px}
+.chat-hello p{margin:0 0 10px}
+.chat-sugg{display:flex;flex-wrap:wrap;gap:6px}
+.chat-bar{background:rgba(15,19,31,.96);border:1px solid #2c3552;border-radius:16px;box-shadow:0 12px 36px rgba(0,0,0,.5);padding:8px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.chat-bar:focus-within{border-color:#4a5a8c}
+.chat-row{display:flex;align-items:flex-end;gap:6px}
+.chat-att{font:500 12px var(--font-mono);color:#b8c4ea;padding:2px 6px 6px;display:flex;align-items:center;gap:6px}
+.chat-att[hidden]{display:none}
+#chat-input{flex:1;min-width:0;resize:none;border:0;background:transparent;color:var(--ink);font:400 14.5px/1.45 var(--font-body);padding:7px 6px;min-height:34px;height:34px;max-height:160px;outline:none;box-shadow:none}
+.chat-row{align-items:center}
+.chat-ico,.chat-send{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:10px;border:0;cursor:pointer;padding:0}
+.chat-ico{background:transparent;color:var(--muted)}
+.chat-ico:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+.chat-ico svg,.chat-send svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.chat-send{background:var(--accent);color:#0b1020}
+.chat-send:disabled{opacity:.45;cursor:default}
+.chat-model{flex:none;max-width:150px;font:500 12px var(--font-mono);padding:7px 8px;border-radius:10px;border:1px solid var(--rule);background:rgba(255,255,255,.04);color:var(--muted)}
+body.dock-on main{padding-bottom:96px}
+body.dock-on .hub{padding-bottom:88px}
+@media (max-width: 640px){
+  .chat-dock{left:auto;right:14px;transform:none;bottom:calc(78px + env(safe-area-inset-bottom));width:auto}
+  .chat-fab{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:1px solid #3a4770;background:#1b2340;color:var(--accent);box-shadow:0 10px 28px rgba(0,0,0,.5);cursor:pointer;align-self:flex-end}
+  .chat-fab .spark{width:22px;height:22px;margin:0}
+  .chat-bar{display:none}
+  .chat-dock.is-open{left:0;right:0;bottom:0;top:12vh;width:auto;gap:0;background:#0b0e18;border-top:1px solid #2c3552;border-radius:18px 18px 0 0;box-shadow:0 -20px 60px rgba(0,0,0,.6)}
+  .chat-dock.is-open .chat-fab{display:none}
+  .chat-dock.is-open .chat-panel{flex:1;min-height:0;max-height:none;border:0;border-radius:18px 18px 0 0;background:#0b0e18;box-shadow:none}
+  .chat-dock.is-open .chat-bar{display:block;border-radius:0;border-width:1px 0 0;box-shadow:none;padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
+  .chat-model{max-width:118px}
+  .cm{max-width:92%}
+  body.dock-on main{padding-bottom:0}
+  body.dock-on .hub{padding-bottom:16px}
+}
+
 /* ---------- Ask AI ---------- */
 .spark{width:14px;height:14px;fill:currentColor;vertical-align:-2px;margin-right:6px}
 #modal-title .spark{width:17px;height:17px;color:var(--accent)}
@@ -851,7 +937,8 @@ td.c-break{display:none}
       <button type="button" class="btn btn-more" id="btn-more" aria-haspopup="true" aria-expanded="false" aria-controls="more-menu" aria-label="More">&#x22EF;</button>
       <div class="more-menu" id="more-menu" hidden>
         <button type="button" id="mm-library">Library</button>
-        <button type="button" id="mm-ai">Ask AI</button>
+        <button type="button" id="mm-review">Weekly review</button>
+        <button type="button" id="mm-ai">AI settings</button>
         <button type="button" id="mm-backup">Backup</button>
       </div>
     </div>
@@ -882,7 +969,8 @@ td.c-break{display:none}
     <section id="view-todo" class="view-todo" aria-label="To-do" hidden>
       <form class="todo-add edit-only" id="todo-add" autocomplete="off">
         <label for="td-text" class="sr-only">New task</label>
-        <input type="text" id="td-text" maxlength="2100" placeholder="Add a task for today (paste a link to attach it)">
+        <div class="when-chip" id="td-when" hidden></div>
+        <input type="text" id="td-text" maxlength="2100" placeholder="Add a task, like “call the office fri 3pm”">
         <label for="td-project" class="sr-only">Project</label>
         <select id="td-project"></select>
         <button type="submit" class="btn primary">Add</button>
@@ -947,6 +1035,26 @@ td.c-break{display:none}
   </main>
 </div>
 
+<div class="chat-dock" id="chat-dock" hidden>
+  <button type="button" class="chat-fab" id="chat-fab" data-act="chat-fab" aria-label="Chat with AI"></button>
+  <div class="chat-panel" id="chat-panel">
+    <div class="chat-head"><span class="chat-title">Chat</span><span class="chat-ctx" id="chat-ctx"></span>
+      <button type="button" class="link-btn" data-act="chat-clear">Clear</button><button type="button" class="link-btn" data-act="chat-settings">Settings</button>
+      <button type="button" class="icon-x" data-act="chat-min" aria-label="Minimize the chat" title="Minimize (Esc)">–</button></div>
+    <div class="chat-log" id="chat-log" aria-live="polite"></div>
+  </div>
+  <form class="chat-bar" id="chat-form" novalidate autocomplete="off">
+    <div class="chat-att" id="chat-att" hidden></div>
+    <div class="chat-row">
+      <button type="button" class="chat-ico" id="chat-attach-btn" data-act="chat-attach" aria-label="Attach a PDF or text file" title="Attach a PDF or text file"></button>
+      <input type="file" id="chat-file" accept=".pdf,.txt,.md,application/pdf,text/plain" hidden>
+      <label for="chat-input" class="sr-only">Message</label>
+      <textarea id="chat-input" rows="1" placeholder="Ask about your projects, or tell me what to change"></textarea>
+      <label for="chat-model" class="sr-only">Model</label><select id="chat-model" class="chat-model"></select>
+      <button type="submit" class="chat-send" id="chat-send" aria-label="Send"></button>
+    </div>
+  </form>
+</div>
 <div class="hub" id="hub" hidden></div>
 <div class="modal-backdrop" id="modal" hidden>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" id="modal-body"></div>
@@ -960,7 +1068,7 @@ td.c-break{display:none}
   'use strict';
 
   /* ================= constants ================= */
-  var HEAD = '<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0a0d16"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Polaris"><link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAkFBMVEX9/v/o8f/G2fyasNxyiLhIW4wzQ3AqN14iLVAdJkcZIkQZITwWHjwXHjUUGzcUGzISGDEQFiwPFSsQFigOFCgOEyUNEiIMESIMECALEB4LDx0KDhwKDRoKDRkKDBgJDBgJCxYIDBcICxYICxUIChQHChMHChIHCREGCREGCBEGCA8FCA4FBw0FBwsEBgwDBAlOX+9SAAAD60lEQVR42o1W53qjMBCUKaYbMNWUYJtmAYH3f7ubFbgkTu5OP1K+b4adWUmzYgvWJ9Y0jQPv+65tmrqur1j41TRt13M+jNNEGMIy+jHf8fwG9PVSbesCUtP2/caYN8I8Az4NA+9up7IBriyLHKsoS+KgChgDIJ/zTIRZ6MHnu3rWLV4QOEvjOEkzIlVCWscHoWpe2Ex6SE7X1pf2AnB2SqLA94MoOWUZUarF0JYOskCY2QPf1FUF+ClNk8h3HcfxoyRNT1l+iTR+7oQRMNimp22uVUnwJI6At3TNcvwwgrBTngVwQkZIFXviC0gHPAyBN1XFNFw/FJSsKqoHg73g8fkohHrPMQxF1nXbg5MwSpJT/mSwaeS8Az4nr1EIuHeAIEXWdPPggRJG8JIRo+N8nBgMoz8VuonPHwXeNrS9LO01wxaMI4pQjbpFc0dGgupL0RpaERwJfrBRQJUkFSXsA1FWRnmpSRQTBso8j/xow9uGvgdBoRJguCsjy0thg8HAuSioP8C7gNsmFCmCgBI2nHu0iWSDdpz17ZkvZDhc8aZp6IIg7/e6YZoHXQfjKYp19WSpbUyGPYE3SZG828kqNIGgaUeXRG2dYu15tNRrTAXI71qACBIIosQBzXqUqFlTl+2cxKHopxBEBGnHBIEYluhuGKNEySeGPctS4YDwxopXJMYkZWUYcL6WyLLWdVh9KXNYPnou9BAceEHYKSoYoohlu96RTnvrgIBDlALvEBzoPfCwAIKMP/CvRk4sB4w0z/lIhCwOXGtD0+cVWSKCJCvKk2O5QQwTZ4ZjmgauszZHVWRZkqQd8GDs8KcsC2Uo4rhBisYyfsmTwEXr71gBvi9BEqy97gZJDkKQFSBoqizw0lf8K0PbCHunBcEyV0U/SRKaVkm5kATT/sO0+rtpPz7h/JHpXMTEtgk/tRVwx0WI0C26bxxttGX8vHEGHQ5/O0w4Gh959uvR0NTXo5F/XBscPuxc+rfDZz8PH64QazdNvx5viy728wYxihiU+PUCrYJeLlD/UuKnKwq8++WK8m51QYn9HgLWin8NgS1mMhFjbzFzeATTI2YoyD42Ud+DzLIM7y3IxqG/LSKK36PyoKuh9z0qp3EqdV6tNt7CWCTrM4z7Aek9TWeH1y9xf/S/xX36iPtlmTBQxml5GShhqmvht4Gy4fvFcRYxsm6vIwu3I/gystCfbZzMZbk8hmJ7IyNiKKZfh2JR0QaI8YOhfh+7KKfPZYWRjrGbfh2717p9DNFPtj00hvGc3fBsqMr3wS4eHM/BTk8NejpME2Z1Qw+Nvz0dUAHOn4+Z9j8eJ3t1Ge4M/o/nz+ei/QH28sn+yVJOXgAAAABJRU5ErkJggg=="><link rel="apple-touch-icon" href="data:image/png;base64,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">\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">';
+  var HEAD = '<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0a0d16"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Polaris"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAkFBMVEX9/v/o8f/G2fyasNxyiLhIW4wzQ3AqN14iLVAdJkcZIkQZITwWHjwXHjUUGzcUGzISGDEQFiwPFSsQFigOFCgOEyUNEiIMESIMECALEB4LDx0KDhwKDRoKDRkKDBgJDBgJCxYIDBcICxYICxUIChQHChMHChIHCREGCREGCBEGCA8FCA4FBw0FBwsEBgwDBAlOX+9SAAAD60lEQVR42o1W53qjMBCUKaYbMNWUYJtmAYH3f7ubFbgkTu5OP1K+b4adWUmzYgvWJ9Y0jQPv+65tmrqur1j41TRt13M+jNNEGMIy+jHf8fwG9PVSbesCUtP2/caYN8I8Az4NA+9up7IBriyLHKsoS+KgChgDIJ/zTIRZ6MHnu3rWLV4QOEvjOEkzIlVCWscHoWpe2Ex6SE7X1pf2AnB2SqLA94MoOWUZUarF0JYOskCY2QPf1FUF+ClNk8h3HcfxoyRNT1l+iTR+7oQRMNimp22uVUnwJI6At3TNcvwwgrBTngVwQkZIFXviC0gHPAyBN1XFNFw/FJSsKqoHg73g8fkohHrPMQxF1nXbg5MwSpJT/mSwaeS8Az4nr1EIuHeAIEXWdPPggRJG8JIRo+N8nBgMoz8VuonPHwXeNrS9LO01wxaMI4pQjbpFc0dGgupL0RpaERwJfrBRQJUkFSXsA1FWRnmpSRQTBso8j/xow9uGvgdBoRJguCsjy0thg8HAuSioP8C7gNsmFCmCgBI2nHu0iWSDdpz17ZkvZDhc8aZp6IIg7/e6YZoHXQfjKYp19WSpbUyGPYE3SZG828kqNIGgaUeXRG2dYu15tNRrTAXI71qACBIIosQBzXqUqFlTl+2cxKHopxBEBGnHBIEYluhuGKNEySeGPctS4YDwxopXJMYkZWUYcL6WyLLWdVh9KXNYPnou9BAceEHYKSoYoohlu96RTnvrgIBDlALvEBzoPfCwAIKMP/CvRk4sB4w0z/lIhCwOXGtD0+cVWSKCJCvKk2O5QQwTZ4ZjmgauszZHVWRZkqQd8GDs8KcsC2Uo4rhBisYyfsmTwEXr71gBvi9BEqy97gZJDkKQFSBoqizw0lf8K0PbCHunBcEyV0U/SRKaVkm5kATT/sO0+rtpPz7h/JHpXMTEtgk/tRVwx0WI0C26bxxttGX8vHEGHQ5/O0w4Gh959uvR0NTXo5F/XBscPuxc+rfDZz8PH64QazdNvx5viy728wYxihiU+PUCrYJeLlD/UuKnKwq8++WK8m51QYn9HgLWin8NgS1mMhFjbzFzeATTI2YoyD42Ud+DzLIM7y3IxqG/LSKK36PyoKuh9z0qp3EqdV6tNt7CWCTrM4z7Aek9TWeH1y9xf/S/xX36iPtlmTBQxml5GShhqmvht4Gy4fvFcRYxsm6vIwu3I/gystCfbZzMZbk8hmJ7IyNiKKZfh2JR0QaI8YOhfh+7KKfPZYWRjrGbfh2717p9DNFPtj00hvGc3fBsqMr3wS4eHM/BTk8NejpME2Z1Qw+Nvz0dUAHOn4+Z9j8eJ3t1Ge4M/o/nz+ei/QH28sn+yVJOXgAAAABJRU5ErkJggg=="><link rel="apple-touch-icon" href="data:image/png;base64,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">\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">';
   var LS_KEY = 'kepler:v1';
   var KEEP_DAYS = 7;
   var INKS = 6;
@@ -1162,7 +1270,8 @@ td.c-break{display:none}
   };
   var ST_ORDER = ['todo', 'doing', 'waiting', 'done'];
   var ST_LABEL = { todo: 'To do', doing: 'Doing', waiting: 'Waiting', done: 'Done' };
-  var WAIT_NUDGE = 7;   // days before a "Waiting" piece gets a follow-up reminder
+  var WAIT_NUDGE = 7;
+  var DOING_MAX = 3;   // stages in Doing across all projects before Polaris suggests finishing one first   // days before a "Waiting" piece gets a follow-up reminder
   function listLabel() { return 'Stages'; }
   function numOrNull(v) { var n = Number(v); return v === null || v === '' || v === undefined || !isFinite(n) || n <= 0 ? null : Math.min(100000, Math.round(n * 100) / 100); }
   // Your North Star starts empty: you name it and add your own goals.
@@ -1176,7 +1285,7 @@ td.c-break{display:none}
       v: 2,
       rev: typeof s.rev === 'number' && isFinite(s.rev) ? s.rev : 0,
       title: typeof s.title === 'string' && s.title.trim() && s.title !== 'Work' && s.title !== 'KEPLER' ? s.title.slice(0, 40) : 'Polaris',
-      areas: [], mission: null, projects: [], updates: [], tasks: [], kindsV: 3
+      areas: [], mission: null, projects: [], updates: [], tasks: [], kindsV: 3, reviewWeek: isISO(s.reviewWeek) ? s.reviewWeek : null
     };
     var areaIds = {};
     (Array.isArray(s.areas) ? s.areas : DEFAULT_AREAS).forEach(function (a) {
@@ -1395,6 +1504,11 @@ td.c-break{display:none}
   function driftDays(p, T) { return p.ended ? 0 : Math.max(0, diffDays(lastActivity(p), T)); }
   function isDrifting(p, T) { return !p.ended && driftDays(p, T) >= DRIFT_DAYS; }
   function taskById(p, mid) { var m = null; p.milestones.forEach(function (x) { if (x.id === mid) m = x; }); return m; }
+  function doingAll() {
+    var out = [];
+    state.projects.forEach(function (p) { if (p.ended) return; piecesOf(p).forEach(function (m) { if (!m.done && m.status === 'doing') out.push({ p: p, m: m }); }); });
+    return out;
+  }
   function piecesOf(p) { return p.milestones.filter(function (m) { return !m.parent; }); }
   function stepsOf(p, m) { return p.milestones.filter(function (x) { return x.parent === m.id; }); }
   function taskCounts(p) { var P = piecesOf(p), d = 0; P.forEach(function (m) { if (m.done) d++; }); return { done: d, total: P.length }; }
@@ -1452,6 +1566,68 @@ td.c-break{display:none}
     }
   }
   // "Essay draft https://docs.google.com/…" becomes the to-do "Essay draft" with that link attached.
+  // Reads a date and/or time from the end of what you typed. Returns null when there isn't one.
+  var WHEN_MONTHS = { jan: 1, january: 1, feb: 2, february: 2, mar: 3, march: 3, apr: 4, april: 4, may: 5, jun: 6, june: 6, jul: 7, july: 7,
+    aug: 8, august: 8, sep: 9, sept: 9, september: 9, oct: 10, october: 10, nov: 11, november: 11, dec: 12, december: 12 };
+  var WHEN_DAYS = { sun: 0, sunday: 0, mon: 1, monday: 1, tue: 2, tues: 2, tuesday: 2, wed: 3, weds: 3, wednesday: 3, thu: 4, thur: 4, thurs: 4, thursday: 4, fri: 5, friday: 5, sat: 6, saturday: 6 };
+  function parseWhen(raw, T) {
+    var s0 = String(raw || '').replace(/\s+$/, ''), cut = s0.length, date = null, time = null, guard = 0, found = true;
+    var MON = 'january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sept|sep|oct|nov|dec';
+    var DAY = 'monday|tuesday|wednesday|thursday|friday|saturday|sunday|thurs|thur|tues|weds|mon|tue|wed|thu|fri|sat|sun';
+    function ymd(y, mo, d) { var dt = new Date(y, mo - 1, d); return dt.getMonth() === mo - 1 ? localISOOf(dt.getTime()) : null; }
+    function withYear(mo, d, y) {
+      if (y) return ymd(+y, mo, d);
+      var ty = +T.slice(0, 4), v = ymd(ty, mo, d);
+      return v && v < T ? ymd(ty + 1, mo, d) : v;
+    }
+    while (found && guard++ < 8) {
+      found = false;
+      var rest = s0.slice(0, cut), m, v = null;
+      if (!time && (m = rest.match(/(^|\s)(?:at\s+|@\s*)?(\d{1,2})(?::([0-5]\d))?\s*(am|pm|a\.m\.|p\.m\.)$/i))) {
+        var h = +m[2]; if (h >= 1 && h <= 12) { var pm = /^p/i.test(m[4]); h = h % 12 + (pm ? 12 : 0); time = pad(h) + ':' + (m[3] || '00'); }
+      } else if (!time && (m = rest.match(/(^|\s)(?:at\s+|@\s*)?([01]?\d|2[0-3]):([0-5]\d)$/))) time = pad(+m[2]) + ':' + m[3];
+      else if (!time && (m = rest.match(/(^|\s)(?:at\s+)?noon$/i))) time = '12:00';
+      else if (!date && (m = rest.match(/(^|\s)(today|tonight)$/i))) date = T;
+      else if (!date && (m = rest.match(/(^|\s)(tomorrow|tmrw|tmr)$/i))) date = addDays(T, 1);
+      else if (!date && (m = rest.match(/(^|\s)next\s+week$/i))) date = addDays(T, 7 - (dow(T) + 6) % 7);
+      else if (!date && (m = rest.match(/(^|\s)in\s+(\d{1,3})\s+(days?|weeks?)$/i))) date = addDays(T, +m[2] * (/^w/i.test(m[3]) ? 7 : 1));
+      else if (!date && (m = rest.match(new RegExp('(^|\\s)(next\\s+|this\\s+)?(' + DAY + ')\\.?$', 'i')))) {
+        var want = WHEN_DAYS[m[3].toLowerCase()], ahead = (want - dow(T) + 7) % 7;
+        v = addDays(T, ahead);
+        if (m[2] && /next/i.test(m[2]) && ahead < 7 - (dow(T) + 6) % 7) v = addDays(v, 7);   // "next fri" = Friday of next week
+        date = v;
+      }
+      else if (!date && (m = rest.match(new RegExp('(^|\\s)(' + MON + ')\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?(?:,?\\s+(\\d{4}))?$', 'i')))) { date = withYear(WHEN_MONTHS[m[2].toLowerCase()], +m[3], m[4]); if (!date) m = null; }
+      else if (!date && (m = rest.match(new RegExp('(^|\\s)(\\d{1,2})(?:st|nd|rd|th)?\\s+(' + MON + ')\\.?(?:,?\\s+(\\d{4}))?$', 'i')))) { date = withYear(WHEN_MONTHS[m[3].toLowerCase()], +m[2], m[4]); if (!date) m = null; }
+      else if (!date && (m = rest.match(/(^|\s)(\d{4})-(\d{2})-(\d{2})$/))) { date = ymd(+m[2], +m[3], +m[4]); if (!date) m = null; }
+      else if ((date || time) && (m = rest.match(/(^|\s)(on|by|due|at|before|until|this)$|\s*[,–—-]$/i))) { /* joining words */ }
+      else m = null;
+      if (m) { cut -= m[0].length; found = true; }
+    }
+    if (!date && !time) return null;
+    var title = s0.slice(0, cut).replace(/[\s,–—:-]+$/, '').trim();
+    if (!title) return null;
+    return { title: title, date: date || T, time: time, phrase: s0.slice(cut).trim() };
+  }
+  function whenLabel(w) { return fmtLong(w.date) + (w.time ? ', ' + w.time : ''); }
+  // the small chip under an add box: shows what was understood, × keeps the text as it is
+  function whenWatch(inputSel, chipSel) {
+    var inp = $(inputSel), chip = $(chipSel); if (!inp || !chip) return;
+    var upd = function () {
+      if (inp.dataset.nowhen && inp.dataset.nowhen !== inp.value) delete inp.dataset.nowhen;
+      var x = splitTaskInput(inp.value), w = !inp.dataset.nowhen && x.title ? parseWhen(x.title, todayISO()) : null;
+      chip.hidden = !w;
+      if (w) chip.innerHTML = '<span class="wc-ico">' + CAL_ICO + '</span>' + esc(whenLabel(w)) + '<button type="button" class="wc-x" data-act="when-off" aria-label="Don’t read a date from this" title="Keep the text as it is">×</button>';
+    };
+    if (!inp.dataset.whenWired) {
+      inp.dataset.whenWired = '1';
+      inp.addEventListener('input', upd);
+      chip.addEventListener('click', function (e) { if (e.target.closest('[data-act="when-off"]')) { inp.dataset.nowhen = inp.value; upd(); inp.focus(); } });
+    }
+    upd();
+  }
+  function readWhen(inp, title) { return inp && inp.dataset.nowhen === inp.value ? null : parseWhen(title, todayISO()); }
+  var CAL_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="10" rx="2"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></svg>';
   function splitTaskInput(raw) {
     var v = String(raw || '').trim(), url = '';
     var hit = v.match(/(?:https?:\/\/|www\.)\S+/i);
@@ -1815,6 +1991,8 @@ td.c-break{display:none}
     if (view === 'timeline') renderBoard(T); else if (view === 'todo') renderTodo(T); else renderTables(T);
     if (ui.hub) renderHub();
     if (!inViewer && gcalState === 'off' && gcalCfg()) gcalBoot();
+    chatShown(); if (chat.open) renderChat();
+    whenWatch('#td-text', '#td-when'); if (ui.hub) whenWatch('#ta-title', '#ta-when');
   }
 
   function renderHeader(T) {
@@ -1852,7 +2030,7 @@ td.c-break{display:none}
     var off = (dow(T) + 6) % 7;            // 0 = Monday
     if (off > 2) return '';                // shown Monday to Wednesday
     var mon = addDays(T, -off), from = addDays(mon, -7), to = addDays(mon, -1), key = 'recap|' + mon;
-    if (dismissed[key]) return '';
+    if (dismissed[key] || state.reviewWeek === mon) return '';
     var ups = state.updates.filter(function (u) { return u.date >= from && u.date <= to; });
     var wasActive = state.projects.filter(function (p) { return p.start < mon && (!p.ended || p.ended >= from); });
     if (!ups.length && !wasActive.length) return '';
@@ -1867,7 +2045,8 @@ td.c-break{display:none}
     parts.push(due.length ? 'Due this week: ' + due.slice(0, 4).map(function (it) {
       return esc(it.kind === 'deadline' ? it.p.name + ' deadline' : it.title) + ' (' + WD[dow(it.date)] + ')';
     }).join(', ') + '.' : 'Nothing due this week.');
-    return '<div class="reminder is-recap">' + ORBIT + '<span class="msg">' + parts.join(' ') + '</span><span class="reminder-acts">' + dismissBtn(key, 'Got it') + '</span></div>';
+    return '<div class="reminder is-recap">' + ORBIT + '<span class="msg">' + parts.join(' ') + '</span><span class="reminder-acts">' +
+      '<button type="button" class="link-btn edit-only" data-act="review">Review the week (2 min)</button>' + dismissBtn(key, 'Got it') + '</span></div>';
   }
 
   function renderReminders(T) {
@@ -1894,6 +2073,13 @@ td.c-break{display:none}
       }
       cards.push({ n: n, html: h });
     });
+    var DA = doingAll();
+    if (DA.length > DOING_MAX && !dismissed['doing|' + T]) {
+      cards.push({ n: 40, html: '<div class="reminder">' + ORBIT + '<span class="msg"><b>' + DA.length + ' stages in Doing</b>: ' +
+        DA.slice(0, 5).map(function (x) { return esc(truncate(x.m.title, 28)) + ' (' + esc(truncate(x.p.name, 18)) + ')'; }).join(', ') +
+        '. Finishing one before starting the next gets more done. Aim for ' + DOING_MAX + '.</span><span class="reminder-acts">' +
+        '<button type="button" class="link-btn edit-only" data-act="review">Pick my 3</button>' + dismissBtn('doing|' + T) + '</span></div>' });
+    }
     state.projects.forEach(function (p) {
       if (p.ended) return;
       p.milestones.forEach(function (m) {
@@ -2200,6 +2386,7 @@ td.c-break{display:none}
     state.tasks.forEach(function (t) {
       if (t.done) { if (recentDone(t.doneAt)) done.push({ kind: 'quick', t: t, at: t.doneAt }); return; }
       if (t.day <= T) today.push({ kind: 'quick', t: t, rank: 3, key: String(t.created) });
+      else if (t.day <= wkEnd) week.push({ kind: 'quick', t: t, date: t.day });
     });
     state.projects.forEach(function (p) {
       if (p.ended) return;
@@ -2217,10 +2404,11 @@ td.c-break{display:none}
     if (DO) today = today.map(function (x, i) { var o = DO.indexOf(todayKey(x)); return { x: x, o: o < 0 ? 1e6 + i : o }; })
       .sort(function (a, b) { return a.o - b.o; }).map(function (y) { return y.x; });
     week.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : (a.kind === 'deadline') - (b.kind === 'deadline'); });
+    week = week.filter(function (x) { return x.kind !== 'quick' || !x.t.done; });
     // Next steps: projects with nothing on today's list or this week, and the first open to-do of each
     state.projects.forEach(function (p) {
       if (p.ended) return;
-      var busy = today.concat(week).some(function (x) { return x.p === p && x.kind === 'ms'; });
+      var busy = today.concat(week).some(function (x) { return x.p && x.p === p && x.kind === 'ms'; });
       if (busy) return;
       next.push({ p: p, m: nextAction(p) });
     });
@@ -2276,7 +2464,12 @@ td.c-break{display:none}
         linkBtn(m.url, m.title) + '</li>';
     }
     function weekRow(x) {
-      var n = diffDays(T, x.date), when = fmtLong(x.date) + (x.m && x.m.time ? ' ' + x.m.time : '') + ' · ' + dueLabel(n);
+      var n = diffDays(T, x.date), when = fmtLong(x.date) + (x.m && x.m.time ? ' ' + x.m.time : x.t && x.t.time ? ' ' + x.t.time : '') + ' · ' + dueLabel(n);
+      if (x.kind === 'quick') {
+        var qa = 'data-tid="' + esc(x.t.id) + '"';
+        return '<li class="task">' + box(qa, false, x.t.title) + '<button type="button" class="task-main" data-act="td-quick" ' + qa + '><span class="task-title">' + esc(x.t.title) + '</span>' +
+          '<span class="task-meta">' + when + '</span></button>' + linkBtn(x.t.url, x.t.title) + '</li>';
+      }
       if (x.kind === 'deadline') {
         return '<li class="task" style="--pc:var(--c' + x.p.color + ')"><span class="tflag" style="color:var(--pc)">' + FLAG + '</span>' +
           '<button type="button" class="task-main" data-act="td-hub" data-pid="' + esc(x.p.id) + '"><span class="task-title">Final deadline: ' + esc(x.p.name) + '</span><span class="task-meta">' + when + '</span></button></li>';
@@ -2370,15 +2563,25 @@ td.c-break{display:none}
   /* ================= Ask AI: Claude or ChatGPT suggest changes, you approve them ================= */
   // Your key stays in this browser. Nothing changes until you tap Apply.
   var AI_KEY = 'polaris:ai';
-  var AI_MODELS = { claude: 'claude-sonnet-5-5', openai: 'chat-latest' };
+  // Only the top model from each: Claude Opus 5.5 and GPT-6.2 Astra.
+  var AI_MODELS = { claude: 'claude-opus-5-5', openai: 'gpt-6.2-astra' };
+  var AI_LABELS = { claude: 'Claude Opus 5.5', openai: 'GPT-6.2 Astra' };
   var AI_NAMES = { claude: 'Claude', openai: 'ChatGPT' };
   var PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
   function aiCfg() {
-    try { var c = JSON.parse(localStorage.getItem(AI_KEY) || 'null'); if (c && (c.provider === 'claude' || c.provider === 'openai') && c.key) return c; } catch (e) {}
-    return null;
+    var c = null;
+    try { c = JSON.parse(localStorage.getItem(AI_KEY) || 'null'); } catch (e) {}
+    if (!c || typeof c !== 'object') c = {};
+    var keys = { claude: '', openai: '' };
+    if (c.keys && typeof c.keys === 'object') { keys.claude = String(c.keys.claude || ''); keys.openai = String(c.keys.openai || ''); }
+    if ((c.provider === 'claude' || c.provider === 'openai') && c.key && !keys[c.provider]) keys[c.provider] = String(c.key);   // older settings
+    var ids = c.ids && typeof c.ids === 'object' ? c.ids : {};
+    var model = c.use === 'claude' || c.use === 'openai' ? c.use : c.provider === 'openai' ? 'openai' : keys.claude || !keys.openai ? 'claude' : 'openai';
+    return { keys: keys, use: model, ids: { claude: String(ids.claude || '').trim() || AI_MODELS.claude, openai: String(ids.openai || '').trim() || AI_MODELS.openai } };
   }
-  var AI_RULES = [
-    'You edit a personal project tracker called Polaris. Reply with one JSON object only: {"summary": "one short sentence", "ops": [...]}.',
+  function aiSave(c) { try { localStorage.setItem(AI_KEY, JSON.stringify({ keys: c.keys, use: c.use, ids: { claude: c.ids.claude === AI_MODELS.claude ? '' : c.ids.claude, openai: c.ids.openai === AI_MODELS.openai ? '' : c.ids.openai } })); return true; } catch (e) { return false; } }
+  function aiLabel(c, prov) { return c.ids[prov] === AI_MODELS[prov] ? AI_LABELS[prov] : c.ids[prov]; }
+  var AI_BODY = [
     'Rules:',
     '- Pieces are called stages in the app. Change only what the request asks for. Do not add pieces, steps, notes or links that nobody asked for. No generic advice and no made-up tasks like "email someone", "check something" or "review".',
     '- When a source (a call, handbook or brief) is given, add only requirements the source actually states. Never invent requirements. Put the exact rule in short form in "rule": limits, format, who signs, where it is submitted.',
@@ -2398,8 +2601,18 @@ td.c-break{display:none}
     '{"op":"order","ids":["piece ids, top to bottom"]}',
     'When the whole board is shared, project operations need "project":"<project id>", and you can also use',
     '{"op":"add_project","name":"","kind":"","deadline":"YYYY-MM-DD","time":"HH:MM","tz":"","pointsTotal":0,"note":"key facts for the activity log (optional)","pieces":[{"title":"","rule":"","due":"","time":"","tz":"","points":0,"steps":[]}]}',
+    '{"op":"add_task","title":"","time":"HH:MM"}  (a quick task on today\'s list, not tied to a project)',
+    '{"op":"today","id":"<stage or step id>"}  (put an existing stage or step on today\'s list)',
     'Statuses: todo, doing, waiting (waiting on someone else), done. Kinds are the ids listed under "kinds". "points" is only for scored items, like a grant\'s scoring table.'
   ].join('\n');
+  var AI_RULES = 'You edit a personal project tracker called Polaris. Reply with one JSON object only: {"summary": "one short sentence", "ops": [...]}.\n' + AI_BODY;
+  var CHAT_RULES = [
+    'You are the assistant inside Polaris, the user\'s personal project tracker for research, applications and classes. Each message from the user comes with their current data.',
+    'Always reply with one JSON object only: {"reply": "your message", "ops": [...]}.',
+    '"reply" is what the user reads: short, direct, plain text; line breaks and "- " bullets are fine. Answer from the data, be concrete (names, dates, what is next), and say when something isn\'t in the data.',
+    'Put changes in "ops" only when the user asks for them or clearly agrees. The user sees every change and approves it before anything happens, so never claim a change is done.',
+    'When "lookingAt" is set, the user has that project open: operations without "project" apply to it. Otherwise every project operation needs "project".'
+  ].join('\n') + '\n' + AI_BODY;
   function whenOut(date, at, tz) {
     if (!date) return null;
     if (at && tz && validTz(tz)) { var w = wallIn(at, tz); return { date: w.date, time: w.time, tz: tz === LOCAL_TZ ? undefined : tz }; }
@@ -2425,31 +2638,34 @@ td.c-break{display:none}
     return 'My request: ' + ask + '\n\nCurrent data:\n```json\n' + JSON.stringify(aiData(pid), null, 1) + '\n```' +
       (src && src.text ? '\n\nSource' + (src.name ? ' (' + src.name + ')' : '') + ':\n<source>\n' + src.text + '\n</source>' : '');
   }
-  function aiCall(cfg, pid, ask, src) {
-    var ctl = window.AbortController ? new AbortController() : null, timer = ctl ? setTimeout(function () { ctl.abort(); }, 120000) : 0;
-    var user = aiUserText(pid, ask, src), model = cfg.model || AI_MODELS[cfg.provider], req;
-    if (cfg.provider === 'claude') {
+  function aiSend(prov, key, model, system, msgs) {
+    var ctl = window.AbortController ? new AbortController() : null, timer = ctl ? setTimeout(function () { ctl.abort(); }, 240000) : 0, req;
+    if (prov === 'claude') {
       req = fetch('https://api.anthropic.com/v1/messages', { method: 'POST', signal: ctl && ctl.signal,
-        headers: { 'x-api-key': cfg.key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true', 'content-type': 'application/json' },
-        body: JSON.stringify({ model: model, max_tokens: 8000, system: AI_RULES, messages: [{ role: 'user', content: user }] }) });
+        headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true', 'content-type': 'application/json' },
+        body: JSON.stringify({ model: model, max_tokens: 8000, system: system, messages: msgs }) });
     } else {
-      req = fetch('https://api.openai.com/v1/chat/completions', { method: 'POST', signal: ctl && ctl.signal,
-        headers: { Authorization: 'Bearer ' + cfg.key, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ model: model, messages: [{ role: 'system', content: AI_RULES }, { role: 'user', content: user }] }) });
+      req = fetch('https://api.openai.com/v1/responses', { method: 'POST', signal: ctl && ctl.signal,
+        headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: model, instructions: system, input: msgs }) });
     }
     return req.catch(function (e) {
-      throw new Error(e && e.name === 'AbortError' ? 'The AI took too long. Try a shorter request.' : 'Couldn’t reach ' + AI_NAMES[cfg.provider] + '. Check your connection.');
+      throw new Error(e && e.name === 'AbortError' ? 'The AI took too long. Try a shorter request.' : 'Couldn’t reach ' + AI_NAMES[prov] + '. Check your connection.');
     }).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (j) {
         clearTimeout(timer);
         if (!r.ok) {
           var msg = (j && j.error && (j.error.message || j.error.type)) || ('error ' + r.status);
           if (r.status === 401) msg = 'The API key wasn’t accepted. Check it in AI settings.';
+          else if (r.status === 429) msg = 'Too many requests or no credit left on this key. ' + msg;
           else if (r.status === 404 && /model/i.test(msg)) msg = 'That model name wasn’t found: ' + model + '. Change it in AI settings.';
-          throw new Error(AI_NAMES[cfg.provider] + ': ' + msg);
+          throw new Error(AI_NAMES[prov] + ': ' + msg);
         }
-        if (cfg.provider === 'claude') return (j.content || []).filter(function (c) { return c.type === 'text'; }).map(function (c) { return c.text; }).join('');
-        return (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || '';
+        if (prov === 'claude') return (j.content || []).filter(function (c) { return c.type === 'text'; }).map(function (c) { return c.text; }).join('');
+        if (typeof j.output_text === 'string' && j.output_text) return j.output_text;
+        return (j.output || []).filter(function (o) { return o.type === 'message'; }).map(function (o) {
+          return (o.content || []).filter(function (c) { return c.type === 'output_text' || c.type === 'text'; }).map(function (c) { return c.text; }).join('');
+        }).join('');
       });
     });
   }
@@ -2460,8 +2676,9 @@ td.c-break{display:none}
     if (a < 0 || b <= a) throw new Error('That reply has no changes in it. Paste the whole reply, including the part in braces { }.');
     var j;
     try { j = JSON.parse(t.slice(a, b + 1)); } catch (e) { throw new Error('That reply isn’t complete. Copy the whole reply and paste it again.'); }
-    if (!j || !Array.isArray(j.ops)) throw new Error('That reply has no list of changes ("ops").');
-    return { summary: typeof j.summary === 'string' ? j.summary.slice(0, 600) : '', ops: j.ops.filter(function (o) { return o && typeof o.op === 'string'; }).slice(0, 150) };
+    if (!j || (!Array.isArray(j.ops) && typeof j.reply !== 'string' && typeof j.summary !== 'string')) throw new Error('That reply has no list of changes ("ops").');
+    var said = typeof j.reply === 'string' ? j.reply : typeof j.summary === 'string' ? j.summary : '';
+    return { summary: said.slice(0, 6000), ops: (Array.isArray(j.ops) ? j.ops : []).filter(function (o) { return o && typeof o.op === 'string'; }).slice(0, 150) };
   }
   // PDFs are read right here in your browser; only the text goes to the AI.
   function loadPdfJs() {
@@ -2499,6 +2716,11 @@ td.c-break{display:none}
   function aiDescribe(o, pid) {
     var p = aiFind(state, o.project || pid), m, bits = [];
     function q(t) { return '“' + truncate(String(t || ''), 60) + '”'; }
+    if (o.op === 'add_task') return o.title ? { text: 'Add to today: ' + q(o.title) + (isTime(o.time) ? ' at ' + o.time : '') } : null;
+    if (o.op === 'today') {
+      var hit = null; state.projects.forEach(function (x) { var y = taskById(x, o.id); if (y && !hit) hit = { p: x, m: y }; });
+      return hit && !hit.m.done ? { text: 'Put ' + q(hit.m.title) + ' (' + hit.p.name + ') on today’s list' } : null;
+    }
     switch (o.op) {
       case 'add_project':
         if (!o.name) return null;
@@ -2507,7 +2729,7 @@ td.c-break{display:none}
           (Array.isArray(o.pieces) && o.pieces.length ? ', with ' + o.pieces.length + ': ' + o.pieces.map(function (x) { return x && x.title; }).filter(Boolean).join(', ') : '') };
     }
     if (!p) return null;
-    var pre = pid ? '' : p.name + ': ';
+    var pre = pid && p.id === pid ? '' : p.name + ': ';
     switch (o.op) {
       case 'add_piece':
         if (!o.title) return null;
@@ -2570,6 +2792,17 @@ td.c-break{display:none}
     ops.forEach(function (o) {
       var p = o.op === 'add_project' ? null : aiFind(s, o.project || pid), m, x;
       try {
+        if (o.op === 'add_task') {
+          if (!o.title) return;
+          s.tasks.push({ id: uid(), title: String(o.title).trim().slice(0, 140), url: '', day: T, created: Date.now(), done: false, doneOn: null, doneAt: 0, time: isTime(o.time) ? o.time : null });
+          n++; return;
+        }
+        if (o.op === 'today') {
+          var done = false;
+          s.projects.forEach(function (x2) { var y = taskById(x2, o.id); if (y && !y.done && !done) { y.today = T; done = true; } });
+          if (done) n++;
+          return;
+        }
         if (o.op === 'add_project') {
           var np = { id: uid(), name: String(o.name).slice(0, 80), color: leastUsedColor(), start: T, ended: null, deadline: null, deadlineAt: 0, deadlineTz: '', endedBy: null,
             area: s.areas.some(function (a) { return a.id === o.kind; }) ? o.kind : null, goal: null, milestones: [], links: [], notes: '',
@@ -2631,137 +2864,208 @@ td.c-break{display:none}
     return n;
   }
 
-  function openAskAI(pid) {
-    if (mode === 'readonly' || inViewer) return;
-    if (pid && !getProject(pid)) return;
-    var view = 'ask', ask = '', src = null, srcBusy = false, reply = '', parsed = null, items = [], err = '', busy = false, copied = '', undoSnap = null, appliedN = 0;
-    var cfg = aiCfg();
-    function scopeName() { return pid ? getProject(pid).name : 'Your whole board'; }
-    function grab() {
-      var a = $('#ai-ask'); if (a) ask = a.value;
-      var r = $('#ai-reply'); if (r) reply = r.value;
-      var t = $('#ai-src-text'); if (t && t.value.trim() && (!src || src.pasted)) src = { text: t.value.slice(0, 90000), name: '', pasted: true };
-    }
-    function toPreview(text) {
-      try { parsed = aiParse(text); } catch (e) { err = e.message; ctx.draw(); return; }
-      items = parsed.ops.map(function (o) { var d = aiDescribe(o, pid); return d ? { op: o, text: d.text, danger: !!d.danger, on: true } : null; }).filter(Boolean);
-      parsed.skipped = parsed.ops.length - items.length;
-      err = ''; view = 'preview'; ctx.draw();
-    }
-    var ctx = {
-      draw: function () {
-        var who = cfg ? AI_NAMES[cfg.provider] : null, h = '';
-        h += '<div class="modal-head"' + (pid ? ' style="--pc:var(--c' + getProject(pid).color + ')"' : '') + '><i class="dot"></i><div><h2 id="modal-title">' + SPARK + 'Ask AI</h2><p class="modal-sub">' + esc(scopeName()) + '</p></div></div>';
-        if (view === 'ask') {
-          h += '<form id="ai-form" novalidate>' +
-            '<div class="field"><label for="ai-ask">What should change?</label><textarea id="ai-ask" rows="3" maxlength="4000" placeholder="' +
-              (pid ? 'e.g. Add the requirements from this handbook, with the exact rules, points and deadline' : 'e.g. Make a project for this call, with its requirements and deadline') + '">' + esc(ask) + '</textarea></div>' +
-            '<div class="field"><span class="field-label">Source <span class="muted">(optional: a PDF or text file, like a call or handbook)</span></span>' +
-              '<div class="ai-src"><label class="btn btn-sm ai-file"><input type="file" id="ai-file" accept=".pdf,.txt,.md,application/pdf,text/plain" hidden>Choose a file</label>' +
-              '<span class="ai-src-info" id="ai-src-info">' + (srcBusy ? 'Reading…' : src && !src.pasted ? esc(src.name) + ' · ' + (src.pages ? plural(src.pages, 'page') + ' · ' : '') + src.text.length.toLocaleString() + ' characters' : '') + '</span>' +
-              (src && !src.pasted ? '<button type="button" class="link-btn" data-act="ai-src-clear">Remove</button>' : '') + '</div>' +
-              '<details class="ai-paste"' + (src && src.pasted ? ' open' : '') + '><summary>Or paste text</summary><textarea id="ai-src-text" rows="4" placeholder="Paste the requirements, call text or notes">' + esc(src && src.pasted ? src.text : '') + '</textarea></details></div>' +
-            (err ? '<p class="form-error">' + esc(err) + '</p>' : '') +
-            '<div class="modal-actions ai-acts"><button type="button" class="link-btn" data-act="ai-settings" style="margin-right:auto">AI settings</button>' +
-              '<button type="button" class="btn" data-act="ai-copy">Copy for ChatGPT or Claude</button>' +
-              (cfg ? '<button type="submit" class="btn primary"' + (busy ? ' disabled' : '') + '>' + (busy ? 'Asking ' + who + '…' : 'Ask ' + who) + '</button>' : '') + '</div>' +
-            (copied ? '<p class="ai-copied">' + esc(copied) + '</p>' : '') +
-            '<details class="ai-paste"' + (copied || reply ? ' open' : '') + '><summary>Paste the AI’s reply</summary><textarea id="ai-reply" rows="4" placeholder="Paste the whole reply here">' + esc(reply) + '</textarea>' +
-              '<div class="modal-actions"><button type="button" class="btn" data-act="ai-preview">Show the changes</button></div></details>' +
-            (cfg ? '' : '<p class="hub-hint">No AI key on this device, so use Copy: paste it into ChatGPT or Claude, then paste the reply back here. Or add a key in AI settings to ask directly.</p>') +
-            '</form>';
-        } else if (view === 'preview') {
-          h += (parsed.summary ? '<p class="ai-summary">' + esc(parsed.summary) + '</p>' : '') +
-            (items.length ? '<p class="hub-hint" style="margin-top:0">Untick anything you don’t want.</p><ul class="ai-ops">' + items.map(function (it, i) {
-              return '<li><label class="check' + (it.danger ? ' is-danger' : '') + '"><input type="checkbox" data-act="ai-op" data-i="' + i + '"' + (it.on ? ' checked' : '') + '> <span>' + esc(it.text) + '</span></label></li>';
-            }).join('') + '</ul>' : '<p class="hub-empty">No changes to make.</p>') +
-            (parsed.skipped ? '<p class="hub-hint">' + plural(parsed.skipped, 'suggestion') + ' didn’t match anything here, so ' + (parsed.skipped === 1 ? 'it was' : 'they were') + ' left out.</p>' : '') +
-            '<div class="modal-actions"><button type="button" class="btn" data-act="ai-back" style="margin-right:auto">Back</button><button type="button" class="btn" data-close>Cancel</button>' +
-              (items.length ? '<button type="button" class="btn primary" data-act="ai-apply">Apply ' + plural(items.filter(function (x) { return x.on; }).length, 'change') + '</button>' : '') + '</div>';
-        } else {
-          h += '<p>' + plural(appliedN, 'change') + ' applied.</p>' +
-            '<div class="modal-actions"><button type="button" class="btn" data-act="ai-undo" style="margin-right:auto">Undo</button><button type="button" class="btn primary" data-close>Done</button></div>';
-        }
-        $('#modal-body').innerHTML = h;
-        var f = $('#ai-file');
-        if (f) f.addEventListener('change', function () {
-          var file = f.files && f.files[0]; if (!file) return;
-          grab(); srcBusy = true; err = ''; ctx.draw();
-          fileText(file).then(function (r) { src = { text: r.text, name: file.name, pages: r.pages }; srcBusy = false; if (!r.text.trim()) err = 'That file has no text Polaris can read (it may be a scan). Paste the text instead.'; ctx.draw(); },
-            function (e) { srcBusy = false; err = e.message || 'Couldn’t read that file.'; ctx.draw(); });
-        });
-      },
-      onClick: function (e) {
-        var b = e.target.closest('[data-act]'); if (!b) return;
-        var a = b.dataset.act;
-        if (a === 'ai-settings') { grab(); openAiSettings(function () { cfg = aiCfg(); openModal(ctx); }); }
-        else if (a === 'ai-src-clear') { grab(); src = null; ctx.draw(); }
-        else if (a === 'ai-copy') {
-          grab();
-          if (!ask.trim()) { err = 'Write what should change first.'; ctx.draw(); return; }
-          var text = AI_RULES + '\n\n' + aiUserText(pid, ask.trim(), src) + '\n\nReply with the JSON object only.';
-          var done = function (ok) { copied = ok ? 'Copied. Paste it into ChatGPT or Claude, then paste its whole reply below.' : 'Your browser blocked copying. Select the text below and copy it.'; err = ''; ctx.draw();
-            if (!ok) { var r = $('#ai-reply'); if (r) { r.value = text; r.select(); } } };
-          try { navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); }); } catch (er) { done(false); }
-        }
-        else if (a === 'ai-preview') { grab(); if (!reply.trim()) { err = 'Paste the AI’s reply first.'; ctx.draw(); return; } toPreview(reply); }
-        else if (a === 'ai-op') { var it = items[+b.dataset.i]; if (it) it.on = b.checked; var ap = $('[data-act="ai-apply"]'); if (ap) ap.textContent = 'Apply ' + plural(items.filter(function (x) { return x.on; }).length, 'change'); }
-        else if (a === 'ai-back') { view = 'ask'; ctx.draw(); }
-        else if (a === 'ai-apply') {
-          var ops = items.filter(function (x) { return x.on; }).map(function (x) { return x.op; });
-          if (!ops.length) return;
-          undoSnap = JSON.stringify({ projects: state.projects, updates: state.updates });
-          commit(function (s) { appliedN = aiApply(s, pid, ops); });
-          view = 'done'; ctx.draw();
-        }
-        else if (a === 'ai-undo' && undoSnap) {
-          var snap = JSON.parse(undoSnap); undoSnap = null;
-          commit(function (s) { s.projects = snap.projects; s.updates = snap.updates; });
-          closeModal();
-        }
-      },
-      onSubmit: function () {
-        grab();
-        if (!cfg || busy) return;
-        if (!ask.trim()) { err = 'Write what should change first.'; ctx.draw(); return; }
-        busy = true; err = ''; ctx.draw();
-        aiCall(cfg, pid, ask.trim(), src).then(function (text) { busy = false; reply = text; toPreview(text); },
-          function (e) { busy = false; err = e.message || 'Something went wrong.'; ctx.draw(); });
+  /* ---- the chat: always at the bottom of To-do and Timeline ---- */
+  var CHAT_KEY = 'polaris:chat';
+  var chat = { open: false, msgs: [], focus: null, busy: false, attach: null, reading: false };
+  try { var cs0 = JSON.parse(sessionStorage.getItem(CHAT_KEY) || 'null'); if (cs0 && Array.isArray(cs0.msgs)) chat.msgs = cs0.msgs.slice(-60); } catch (e) {}
+  function chatKeep() { try { sessionStorage.setItem(CHAT_KEY, JSON.stringify({ msgs: chat.msgs.slice(-60).map(function (m) { var c = Object.assign({}, m); delete c.undo; return c; }) })); } catch (e) {} }
+  var CLIP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 6.5l-7.3 7.3a2 2 0 0 0 2.8 2.8l7.6-7.6a4 4 0 0 0-5.7-5.7l-7.7 7.7a6 6 0 0 0 8.5 8.5l6.6-6.6"/></svg>';
+  var SEND = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>';
+  function chatFocusId() { return ui.hub && getProject(ui.hub) ? ui.hub : chat.focus && getProject(chat.focus) ? chat.focus : null; }
+  function chatData() {
+    var T = todayISO(), L = todoLists(T), f = chatFocusId();
+    return { today: T, now: localTimeOf(Date.now()), timezone: LOCAL_TZ, kinds: state.areas.map(function (a) { return a.id; }), lookingAt: f || undefined,
+      todayList: L.today.map(function (x) {
+        return x.kind === 'quick' ? { task: x.t.id, title: x.t.title, time: x.t.time || undefined } : x.kind === 'ms' ? { stage: x.m.id, project: x.p.id, title: x.m.title, status: x.m.status } : { deadline: x.p.id, title: x.p.name };
+      }),
+      projects: state.projects.filter(function (p) { return !p.ended || p.id === f; }).map(aiProject) };
+  }
+  // earlier turns as plain text; the newest one carries the current data
+  function chatMessages() {
+    var turns = chat.msgs.filter(function (m) { return m.role === 'user' || (m.role === 'ai' && !m.error); }).slice(-14), out = [];
+    turns.forEach(function (m, i) {
+      var c;
+      if (m.role === 'ai') c = { role: 'assistant', content: m.raw || JSON.stringify({ reply: m.text, ops: [] }) };
+      else {
+        var t = m.text || '(see the attached file)';
+        if (m.src && m.src.text) t += '\n\nAttached file (' + m.src.name + '):\n<source>\n' + m.src.text + '\n</source>';
+        if (i === turns.length - 1) t += '\n\nCurrent data:\n```json\n' + JSON.stringify(chatData()) + '\n```';
+        c = { role: 'user', content: t };
       }
-    };
-    openModal(ctx);
+      var last = out[out.length - 1];
+      if (last && last.role === c.role) last.content += '\n\n' + c.content; else out.push(c);
+    });
+    while (out.length && out[0].role !== 'user') out.shift();
+    return out;
+  }
+  function chatAi(raw, label) {
+    var parsed;
+    try { parsed = aiParse(raw); } catch (e) { parsed = { summary: String(raw || '').trim(), ops: [] }; }
+    var f = chatFocusId();
+    var items = parsed.ops.map(function (o) { var d = aiDescribe(o, f); return d ? { op: o, text: d.text, danger: !!d.danger, on: true } : null; }).filter(Boolean);
+    chat.msgs.push({ role: 'ai', text: parsed.summary || (items.length ? 'Here’s what I’d change:' : 'Done.'), raw: raw, items: items, skipped: parsed.ops.length - items.length, model: label, focus: f });
+  }
+  function chatSend() {
+    var inp = $('#chat-input'), text = inp ? inp.value.trim() : '';
+    if (chat.busy || chat.reading || (!text && !chat.attach)) return;
+    chat.msgs.push({ role: 'user', text: text, src: chat.attach ? { name: chat.attach.name, text: chat.attach.text } : null });
+    chat.attach = null; if (inp) { inp.value = ''; chatGrow(); }
+    chat.open = true;
+    var c = aiCfg(), prov = c.use, key = c.keys[prov];
+    if (!key) { chat.msgs.push({ role: 'nokey', prov: prov }); chatKeep(); renderChat(); return; }
+    chat.busy = true; chatKeep(); renderChat();
+    var label = aiLabel(c, prov);
+    aiSend(prov, key, c.ids[prov], CHAT_RULES, chatMessages()).then(function (raw) {
+      chat.busy = false; chatAi(raw, label); chatKeep(); renderChat();
+    }, function (e) {
+      chat.busy = false; chat.msgs.push({ role: 'ai', error: true, text: e.message || 'Something went wrong.' }); chatKeep(); renderChat();
+    });
+  }
+  function chatCopyText() {
+    return CHAT_RULES + '\n\n' + chatMessages().map(function (m) { return (m.role === 'user' ? 'Me: ' : 'You: ') + m.content; }).join('\n\n') + '\n\nReply with the JSON object only.';
+  }
+  function chatText(t) {
+    return esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+  }
+  function renderChat() {
+    var dock = $('#chat-dock'); if (!dock) return;
+    var c = aiCfg(), f = chatFocusId();
+    dock.classList.toggle('is-open', chat.open);
+    var sel = $('#chat-model');
+    if (sel) sel.innerHTML = ['claude', 'openai'].map(function (k) { return '<option value="' + k + '"' + (c.use === k ? ' selected' : '') + '>' + esc(aiLabel(c, k)) + (c.keys[k] ? '' : ' (no key)') + '</option>'; }).join('');
+    var ctx = $('#chat-ctx');
+    if (ctx) ctx.innerHTML = f ? 'About <b>' + esc(truncate(getProject(f).name, 34)) + '</b>' + (ui.hub ? '' : ' <button type="button" class="link-btn" data-act="chat-unfocus">All projects</button>') : 'All your projects';
+    var att = $('#chat-att');
+    if (att) { att.hidden = !(chat.attach || chat.reading); att.innerHTML = chat.reading ? 'Reading the file…' : chat.attach ? esc(chat.attach.name) + ' · ' + chat.attach.text.length.toLocaleString() + ' characters <button type="button" class="icon-x" data-act="chat-att-x" aria-label="Remove the file">×</button>' : ''; }
+    var log = $('#chat-log'); if (!log) return;
+    var h = '';
+    if (!chat.msgs.length) h += '<div class="chat-hello"><p>Ask anything about your projects, or tell me what to change.</p><div class="chat-sugg">' +
+      ['What should I focus on today?', 'What’s at risk this week?', f ? 'Add the requirements from a PDF to this project' : 'Plan my week'].map(function (t) { return '<button type="button" class="chip" data-act="chat-sugg">' + esc(t) + '</button>'; }).join('') + '</div></div>';
+    chat.msgs.forEach(function (m, mi) {
+      if (m.role === 'user') { h += '<div class="cm cm-user">' + chatText(m.text) + (m.src ? '<span class="cm-file">' + esc(m.src.name) + '</span>' : '') + '</div>'; return; }
+      if (m.role === 'nokey') {
+        var nm = AI_NAMES[m.prov];
+        h += '<div class="cm cm-ai cm-note"><p>There’s no ' + nm + ' key on this device yet. Add one to chat here, or copy this for ' + nm + ' and paste its answer back.</p>' +
+          '<div class="cm-acts"><button type="button" class="btn btn-sm primary" data-act="chat-settings">Add a key</button><button type="button" class="btn btn-sm" data-act="chat-copy">Copy for ' + nm + '</button></div>' +
+          '<textarea class="cm-paste" id="cm-paste-' + mi + '" rows="3" placeholder="Paste ' + nm + '’s whole answer here"></textarea>' +
+          '<div class="cm-acts"><button type="button" class="btn btn-sm" data-act="chat-paste" data-mi="' + mi + '">Use this answer</button>' + (m.copied ? '<span class="cm-ok">Copied</span>' : '') + '</div></div>';
+        return;
+      }
+      h += '<div class="cm cm-ai' + (m.error ? ' is-err' : '') + '">' + chatText(m.text) +
+        (m.items && m.items.length ? '<div class="cm-ops">' + (m.applied == null ? m.items.map(function (it, i) {
+            return '<label class="check' + (it.danger ? ' is-danger' : '') + '"><input type="checkbox" data-act="chat-op" data-mi="' + mi + '" data-i="' + i + '"' + (it.on ? ' checked' : '') + '> <span>' + esc(it.text) + '</span></label>';
+          }).join('') + '<div class="cm-acts"><button type="button" class="btn btn-sm primary" data-act="chat-apply" data-mi="' + mi + '">Apply ' + plural(m.items.filter(function (x) { return x.on; }).length, 'change') + '</button></div>'
+          : '<p class="cm-ok">' + (m.applied === 'undone' ? 'Undone.' : plural(m.applied, 'change') + ' applied.') + (m.undo ? ' <button type="button" class="link-btn" data-act="chat-undo" data-mi="' + mi + '">Undo</button>' : '') + '</p>') + '</div>' : '') +
+        (m.skipped ? '<p class="cm-meta">' + plural(m.skipped, 'suggestion') + ' didn’t match anything here and ' + (m.skipped === 1 ? 'was' : 'were') + ' left out.</p>' : '') +
+        (m.model ? '<p class="cm-meta">' + esc(m.model) + '</p>' : '') + '</div>';
+    });
+    if (chat.busy) h += '<div class="cm cm-ai cm-wait"><span class="dots"><i></i><i></i><i></i></span> ' + esc(aiLabel(c, c.use)) + ' is thinking</div>';
+    log.innerHTML = h;
+    log.scrollTop = log.scrollHeight;
+    var send = $('#chat-send'); if (send) send.disabled = chat.busy || chat.reading;
+  }
+  function chatGrow() { var t = $('#chat-input'); if (!t) return; t.style.height = '34px'; if (t.value) t.style.height = Math.min(160, Math.max(34, t.scrollHeight)) + 'px'; }
+  function openChat(pid) {
+    if (inViewer || mode === 'readonly') return;
+    if (pid) chat.focus = pid;
+    chat.open = true; renderChat();
+    var t = $('#chat-input'); if (t) t.focus();
+  }
+  function openAskAI(pid) { openChat(pid); }
+  function chatShown() {
+    var dock = $('#chat-dock'); if (!dock) return;
+    var v = document.body.getAttribute('data-view');
+    var on = !inViewer && mode !== 'readonly' && (v === 'todo' || v === 'timeline' || !!ui.hub);
+    dock.hidden = !on; document.body.classList.toggle('dock-on', on);
+  }
+  function initChat() {
+    var dock = $('#chat-dock'); if (!dock) return;
+    $('#chat-attach-btn').innerHTML = CLIP; $('#chat-send').innerHTML = SEND;
+    $('#chat-fab').innerHTML = SPARK;
+    $('#chat-form').addEventListener('submit', function (e) { e.preventDefault(); chatSend(); });
+    var inp = $('#chat-input');
+    if (isPhone()) inp.placeholder = 'Ask, or say what to change';
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); chatSend(); } else if (e.key === 'Escape') { chat.open = false; renderChat(); inp.blur(); } });
+    inp.addEventListener('input', chatGrow);
+    inp.addEventListener('focus', function () { if (!chat.open && !isPhone()) { chat.open = true; renderChat(); } });
+    $('#chat-model').addEventListener('change', function (e) { var c = aiCfg(); c.use = e.target.value; aiSave(c); renderChat(); });
+    $('#chat-file').addEventListener('change', function (e) {
+      var file = e.target.files && e.target.files[0]; e.target.value = ''; if (!file) return;
+      chat.reading = true; renderChat();
+      fileText(file).then(function (r) {
+        chat.reading = false;
+        if (!r.text.trim()) { chat.msgs.push({ role: 'ai', error: true, text: 'That file has no text I can read (it may be a scan). Paste the text into the chat instead.' }); chat.open = true; }
+        else chat.attach = { name: file.name, text: r.text };
+        renderChat(); inp.focus();
+      }, function (er) { chat.reading = false; chat.msgs.push({ role: 'ai', error: true, text: er.message || 'Couldn’t read that file.' }); chat.open = true; renderChat(); });
+    });
+    dock.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-act]'); if (!b) return;
+      var a = b.dataset.act, m = chat.msgs[+b.dataset.mi];
+      if (a === 'chat-fab') { chat.open = true; renderChat(); inp.focus(); }
+      else if (a === 'chat-min') { chat.open = false; renderChat(); }
+      else if (a === 'chat-attach') $('#chat-file').click();
+      else if (a === 'chat-att-x') { chat.attach = null; renderChat(); }
+      else if (a === 'chat-clear') { chat.msgs = []; chatKeep(); renderChat(); }
+      else if (a === 'chat-settings') openAiSettings(function () { closeModal(); renderChat(); });
+      else if (a === 'chat-unfocus') { chat.focus = null; renderChat(); }
+      else if (a === 'chat-sugg') { inp.value = b.textContent; chatGrow(); if (/PDF/.test(b.textContent)) $('#chat-file').click(); else chatSend(); }
+      else if (a === 'chat-op' && m && m.items) { var it = m.items[+b.dataset.i]; if (it) { it.on = b.checked; var ap = dock.querySelector('[data-act="chat-apply"][data-mi="' + b.dataset.mi + '"]'); if (ap) ap.textContent = 'Apply ' + plural(m.items.filter(function (x) { return x.on; }).length, 'change'); } }
+      else if (a === 'chat-apply' && m && m.items) {
+        var ops = m.items.filter(function (x) { return x.on; }).map(function (x) { return x.op; });
+        if (!ops.length) return;
+        var snap = JSON.stringify({ projects: state.projects, updates: state.updates, tasks: state.tasks }), n = 0;
+        commit(function (st) { n = aiApply(st, m.focus || chatFocusId(), ops); });
+        m.applied = n; m.undo = snap; chatKeep(); renderChat();
+      }
+      else if (a === 'chat-undo' && m && m.undo) {
+        var o = JSON.parse(m.undo); m.undo = null; m.applied = 'undone';
+        commit(function (st) { st.projects = o.projects; st.updates = o.updates; st.tasks = o.tasks; });
+        chatKeep(); renderChat();
+      }
+      else if (a === 'chat-copy') {
+        var mm = chat.msgs[chat.msgs.length - 1];
+        var mark = function () { if (mm && mm.role === 'nokey') mm.copied = true; renderChat(); };
+        try { navigator.clipboard.writeText(chatCopyText()).then(mark, function () { prompt('Copy this:', chatCopyText()); }); } catch (er) { prompt('Copy this:', chatCopyText()); }
+      }
+      else if (a === 'chat-paste' && m) {
+        var ta = $('#cm-paste-' + b.dataset.mi), v = ta ? ta.value.trim() : '';
+        if (!v) { if (ta) ta.focus(); return; }
+        chat.msgs.splice(+b.dataset.mi, 1);
+        chatAi(v, AI_NAMES[m.prov] + ' (pasted)'); chatKeep(); renderChat();
+      }
+    });
+    renderChat(); chatShown(); chatGrow();
   }
 
   function openAiSettings(back) {
-    var c = aiCfg() || { provider: 'claude', key: '', model: '' };
+    var c = aiCfg();
     var ctx = {
       draw: function () {
         $('#modal-body').innerHTML = '<h2 id="modal-title">AI settings</h2>' +
-          '<p>Polaris can ask Claude or ChatGPT to make changes for you. You always see the changes first, and nothing is saved until you tap Apply.</p>' +
+          '<p>Chat with Claude Opus 5.5 or GPT-6.2 Astra from the bar at the bottom. Add the key for each one you use; pick the model in the chat.</p>' +
           '<form id="ais-form" novalidate>' +
-          '<fieldset class="field ai-prov"><legend>Use</legend>' +
-            '<label class="check"><input type="radio" name="ais-prov" value="claude"' + (c.provider === 'claude' ? ' checked' : '') + '> Claude (Anthropic)</label>' +
-            '<label class="check"><input type="radio" name="ais-prov" value="openai"' + (c.provider === 'openai' ? ' checked' : '') + '> ChatGPT (OpenAI)</label></fieldset>' +
-          '<div class="field"><label for="ais-key">API key</label><input id="ais-key" type="password" autocomplete="off" spellcheck="false" placeholder="' + (c.provider === 'openai' ? 'sk-…' : 'sk-ant-…') + '" value="' + esc(c.key || '') + '"></div>' +
-          '<div class="field"><label for="ais-model">Model <span class="muted">(leave empty for the default: ' + esc(AI_MODELS[c.provider]) + ')</span></label><input id="ais-model" type="text" autocomplete="off" spellcheck="false" value="' + esc(c.model || '') + '"></div>' +
-          '<p class="muted" style="font-size:12.5px">The key stays in this browser on this device, like your GitHub token. Polaris sends your request, this project’s data and any source you add to ' +
-            'Anthropic or OpenAI only when you press Ask. API use is billed by them per request, separately from a Claude or ChatGPT subscription. Make the key in the Claude Console or on the OpenAI platform.</p>' +
+          '<div class="field"><label for="ais-claude">Claude API key <span class="muted">(for Claude Opus 5.5)</span></label><input id="ais-claude" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-…" value="' + esc(c.keys.claude) + '"></div>' +
+          '<div class="field"><label for="ais-openai">OpenAI API key <span class="muted">(for GPT-6.2 Astra)</span></label><input id="ais-openai" type="password" autocomplete="off" spellcheck="false" placeholder="sk-…" value="' + esc(c.keys.openai) + '"></div>' +
+          '<details class="gc-more"><summary>Model names (only if one stops working)</summary>' +
+            '<div class="field"><label for="ais-mc">Claude model</label><input id="ais-mc" type="text" spellcheck="false" placeholder="' + AI_MODELS.claude + '" value="' + esc(c.ids.claude === AI_MODELS.claude ? '' : c.ids.claude) + '"></div>' +
+            '<div class="field"><label for="ais-mo">OpenAI model</label><input id="ais-mo" type="text" spellcheck="false" placeholder="' + AI_MODELS.openai + '" value="' + esc(c.ids.openai === AI_MODELS.openai ? '' : c.ids.openai) + '"></div></details>' +
+          '<p class="muted" style="font-size:12.5px">Keys stay in this browser on this device, like your GitHub token. Polaris sends your message and your projects to Anthropic or OpenAI only when you send something. ' +
+            'API use is billed by them per message, separately from a Claude or ChatGPT subscription, so set a monthly limit in their console. Clear a box to remove that key.</p>' +
           '<p class="form-error" id="ais-error" hidden></p>' +
-          '<div class="modal-actions">' + (aiCfg() ? '<button type="button" class="btn btn-quiet" data-act="ais-remove" style="margin-right:auto">Remove key</button>' : '') +
-          '<button type="button" class="btn" data-act="ais-cancel">Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
-        $$('input[name="ais-prov"]').forEach(function (r) { r.addEventListener('change', function () { c.provider = r.value; c.key = $('#ais-key').value; c.model = $('#ais-model').value; ctx.draw(); }); });
+          '<div class="modal-actions"><button type="button" class="btn" data-act="ais-cancel">Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
       },
       onClick: function (e) {
         var b = e.target.closest('[data-act]'); if (!b) return;
-        if (b.dataset.act === 'ais-remove') { try { localStorage.removeItem(AI_KEY); } catch (er) {} if (back) back(); else closeModal(); }
-        else if (b.dataset.act === 'ais-cancel') { if (back) back(); else closeModal(); }
+        if (b.dataset.act === 'ais-cancel') { if (back) back(); else closeModal(); }
       },
       onSubmit: function () {
-        var key = $('#ais-key').value.trim(), model = $('#ais-model').value.trim(), err = $('#ais-error');
-        if (!key) { err.textContent = 'Paste your API key, or tap Cancel.'; err.hidden = false; return; }
-        try { localStorage.setItem(AI_KEY, JSON.stringify({ provider: c.provider, key: key, model: model })); }
-        catch (er) { err.textContent = 'This browser won’t let Polaris save the key.'; err.hidden = false; return; }
+        c.keys.claude = $('#ais-claude').value.trim(); c.keys.openai = $('#ais-openai').value.trim();
+        c.ids.claude = $('#ais-mc').value.trim() || AI_MODELS.claude; c.ids.openai = $('#ais-mo').value.trim() || AI_MODELS.openai;
+        if (!c.keys[c.use] && c.keys[c.use === 'claude' ? 'openai' : 'claude']) c.use = c.use === 'claude' ? 'openai' : 'claude';
+        if (!aiSave(c)) { var err = $('#ais-error'); err.textContent = 'This browser won’t let Polaris save the keys.'; err.hidden = false; return; }
         if (back) back(); else closeModal();
+        renderChat();
       }
     };
     openModal(ctx);
@@ -3343,6 +3647,81 @@ td.c-break{display:none}
     openModal(ctx);
   }
   function openNewProject() { openProject(null); }
+
+  // A 2-minute look back and ahead. The stages you pick become your Doing for the week.
+  function openReview() {
+    if (mode === 'readonly') return;
+    var T = todayISO(), mon = addDays(T, -((dow(T) + 6) % 7)), from = addDays(mon, -7), to = addDays(mon, -1);
+    var act = state.projects.filter(function (p) { return !p.ended; });
+    var finished = [], stuck = [];
+    act.concat(state.projects.filter(function (p) { return p.ended; })).forEach(function (p) {
+      piecesOf(p).forEach(function (m) { if (m.done && m.doneOn && m.doneOn >= from && m.doneOn <= T) finished.push({ p: p, m: m }); });
+    });
+    act.forEach(function (p) {
+      piecesOf(p).forEach(function (m) {
+        if (m.done) return;
+        if (m.status === 'waiting' && m.waitSince && diffDays(m.waitSince, T) >= WAIT_NUDGE) stuck.push({ p: p, txt: esc(m.title) + ': waiting for ' + plural(diffDays(m.waitSince, T), 'day') });
+        else if (m.date && m.date < T) stuck.push({ p: p, txt: esc(m.title) + ': ' + plural(diffDays(m.date, T), 'day') + ' overdue' });
+      });
+      var pc = paceOf(p); if (pc && pc.key === 'behind') stuck.push({ p: p, txt: 'Behind pace for the deadline (' + fmtShort(p.deadline) + ')' });
+      if (isDrifting(p, T)) stuck.push({ p: p, txt: 'No updates for ' + driftDays(p, T) + ' days' });
+    });
+    var ups = state.updates.filter(function (u) { return u.date >= from && u.date <= to; }).length;
+    var picks = {};
+    doingAll().forEach(function (x) { picks[x.m.id] = true; });
+    var c = aiCfg(), hasAI = !!(c.keys.claude || c.keys.openai);
+    function dot(p) { return '<i class="rv-dot" style="background:var(--c' + p.color + ')"></i>'; }
+    function count() { return Object.keys(picks).filter(function (k) { return picks[k]; }).length; }
+    var ctx = {
+      draw: function () {
+        var n = count();
+        $('#modal-body').innerHTML = '<h2 id="modal-title">Weekly review</h2><p class="modal-sub">Week of ' + fmtLong(mon) + '</p>' +
+          '<section class="rv-sec"><h3>What moved</h3><p class="rv-line">' + plural(ups, 'update') + ' last week' + (finished.length ? ', and you finished:' : '.') + '</p>' +
+            (finished.length ? '<ul class="rv-list">' + finished.slice(0, 8).map(function (x) { return '<li>' + dot(x.p) + esc(x.m.title) + ' <span class="muted">· ' + esc(x.p.name) + '</span></li>'; }).join('') + '</ul>' : '') + '</section>' +
+          '<section class="rv-sec"><h3>What’s stuck</h3>' + (stuck.length ? '<ul class="rv-list">' + stuck.map(function (x) { return '<li>' + dot(x.p) + x.txt + ' <span class="muted">· ' + esc(x.p.name) + '</span></li>'; }).join('') + '</ul>'
+            : '<p class="rv-line">Nothing stuck. Nice.</p>') + '</section>' +
+          '<section class="rv-sec"><h3>This week’s ' + DOING_MAX + ' <span class="rv-n' + (n > DOING_MAX ? ' is-over' : '') + '">' + n + ' picked</span></h3>' +
+            '<p class="rv-line muted">Pick what you’ll really work on. They become Doing; anything else in Doing goes back to To do.</p>' +
+            act.map(function (p) {
+              var open = piecesOf(p).filter(function (m) { return !m.done; });
+              if (!open.length) return '';
+              return '<div class="rv-proj"><div class="rv-ph">' + dot(p) + esc(p.name) + '</div>' + open.map(function (m) {
+                return '<label class="check rv-pick"><input type="checkbox" data-act="rv-pick" data-mid="' + esc(m.id) + '"' + (picks[m.id] ? ' checked' : '') + '> <span>' + esc(m.title) +
+                  (m.date ? ' <span class="muted">· ' + fmtShort(m.date) + '</span>' : '') + (m.status === 'waiting' ? ' <span class="muted">· waiting</span>' : '') + '</span></label>';
+              }).join('') + '</div>';
+            }).join('') + '</section>' +
+          '<div class="modal-actions">' + (hasAI ? '<button type="button" class="link-btn" data-act="rv-ai" style="margin-right:auto">Ask AI to suggest my 3</button>' : '') +
+            '<button type="button" class="btn" data-close>Later</button><button type="button" class="btn primary" data-act="rv-save">Done</button></div>';
+      },
+      onClick: function (e) {
+        var b = e.target.closest('[data-act]'); if (!b) return;
+        if (b.dataset.act === 'rv-pick') {
+          picks[b.dataset.mid] = b.checked;
+          var el = $('#modal-body .rv-n'), k = count();
+          if (el) { el.textContent = k + ' picked'; el.classList.toggle('is-over', k > DOING_MAX); }
+        } else if (b.dataset.act === 'rv-ai') {
+          closeModal();
+          openChat(null);
+          var inp = $('#chat-input');
+          if (inp) { inp.value = 'Do my weekly review: what moved last week, what is stuck, and suggest my ' + DOING_MAX + ' stages for this week with one line each on why. Offer to set them to Doing.'; chatGrow(); }
+        } else if (b.dataset.act === 'rv-save') {
+          commit(function (s) {
+            s.projects.forEach(function (p) {
+              if (p.ended) return;
+              piecesOf(p).forEach(function (m) {
+                if (m.done) return;
+                if (picks[m.id] && m.status !== 'doing') setStatus2(s, p, m, 'doing', T);
+                else if (!picks[m.id] && m.status === 'doing') setStatus2(s, p, m, 'todo', T);
+              });
+            });
+            s.reviewWeek = mon;
+          });
+          closeModal();
+        }
+      }
+    };
+    openModal(ctx);
+  }
   // An ended project leaves on its own after a week; this removes it right away.
   function deleteNow(pid) {
     var p = getProject(pid); if (!p || mode === 'readonly') return;
@@ -3735,6 +4114,9 @@ td.c-break{display:none}
     // progress, pace and where the points are
     var nDone = P.filter(function (m) { return m.done; }).length, pace = paceOf(p), overview = '';
     if (P.length) {
+      var DA = doingAll();
+      if (DA.length > DOING_MAX && DA.some(function (x) { return x.p === p; }))
+        overview += '<p class="doing-warn">' + DA.length + ' stages are in Doing across your projects. Finishing one before starting another gets more done (aim for ' + DOING_MAX + ').</p>';
       overview += '<div class="hub-prog"><div class="pbar" role="img" aria-label="' + nDone + ' of ' + P.length + ' done"><i style="width:' + Math.round(nDone / P.length * 100) + '%"></i></div>' +
         '<span class="pbar-n">' + nDone + ' of ' + P.length + ' done</span>' + (pace ? '<span class="pace pace-' + pace.key + '">' + pace.label + '</span>' : '') +
         (!ro && !P.some(function (m) { return m.points; }) ? '<button type="button" class="link-btn pts-add" data-act="scoring">Add scoring</button>' : '') + '</div>';
@@ -3750,9 +4132,10 @@ td.c-break{display:none}
     }
 
     // the pieces
-    var LBL = listLabel(p), kindPh = 'Add a stage (paste a link to attach it)';
+    var LBL = listLabel(p), kindPh = 'Add a stage, like “draft the essay dec 10”';
     var tasksSec = '<section class="hsec hsec-tasks" aria-labelledby="hs-tasks"><div class="hsec-h"><h3 id="hs-tasks">' + LBL + '</h3><span class="count">' + (Popen.length || '') + '</span></div>' +
       (ro ? '' : '<form id="task-add" class="task-add" novalidate autocomplete="off">' +
+        '<div class="when-chip" id="ta-when" hidden></div>' +
         '<label for="ta-title" class="sr-only">New item</label><input id="ta-title" data-keep data-focus="tasks" type="text" maxlength="2100" placeholder="' + kindPh + '">' +
         '<label for="ta-date" class="sr-only">Due date (optional)</label><input id="ta-date" data-keep type="date" title="Due date (optional)">' +
         '<button type="submit" class="btn btn-sm primary">Add</button></form>') +
@@ -3835,6 +4218,7 @@ td.c-break{display:none}
       if (f) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } try { if (selS != null) f.setSelectionRange(selS, selE); } catch (e) {} }
     }
     var pn2 = $('#hub .hub-panel'); if (pn2) pn2.scrollTop = sc;
+    whenWatch('#ta-title', '#ta-when');
   }
 
   function openHub(pid, focus) {
@@ -4057,7 +4441,8 @@ td.c-break{display:none}
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !moreMenu.hidden) closeMenu(); });
     $('#mm-backup').addEventListener('click', function () { closeMenu(); openBackup(); });
     $('#mm-library').addEventListener('click', function () { closeMenu(); location.hash = '#library'; });
-    $('#mm-ai').addEventListener('click', function () { closeMenu(); openAskAI(null); });
+    $('#mm-ai').addEventListener('click', function () { closeMenu(); openAiSettings(); });
+    $('#mm-review').addEventListener('click', function () { closeMenu(); openReview(); });
 
     // re-draw when the window crosses between phone and laptop layouts
     if (window.matchMedia) {
@@ -4099,6 +4484,7 @@ td.c-break{display:none}
       }
       else if (a === 'more-reminders') { ui.allReminders = !ui.allReminders; render(); }
       else if (a === 'gc-signin') gcalSignIn('');
+      else if (a === 'review') openReview();
       else if (a === 'dismiss') {
         dismissed[b.dataset.key] = true;
         try { localStorage.setItem(LS_KEY + ':dismissed', JSON.stringify(dismissed)); } catch (er) {}
@@ -4131,11 +4517,17 @@ td.c-break{display:none}
       if (mode === 'readonly') return;
       var T = todayISO(), inp = $('#td-text'), x = splitTaskInput(inp.value), pid = $('#td-project').value, p = pid ? getProject(pid) : null;
       if (!x.title) { inp.focus(); return; }
-      inp.value = '';
+      var w = readWhen(inp, x.title); if (w) x.title = w.title;
+      inp.value = ''; delete inp.dataset.nowhen;
       commit(function (s) {
-        if (p) { p.milestones.push({ id: uid(), title: x.title, date: null, done: false, doneOn: null, url: x.url, created: Date.now(), today: T }); }
-        else s.tasks.push({ id: uid(), title: x.title, url: x.url, day: T, created: Date.now(), done: false, doneOn: null });
+        if (p) {
+          var np = newPiece(x.title); np.url = x.url;
+          if (w) { var v = moment(w.date, w.time, ''); np.date = v.date; np.time = v.time; np.at = v.at; np.tz = v.tz; } else np.today = T;
+          p.milestones.push(np);
+        }
+        else s.tasks.push({ id: uid(), title: x.title, url: x.url, day: w ? w.date : T, created: Date.now(), done: false, doneOn: null, doneAt: 0, time: w && w.time ? w.time : null });
       });
+      whenWatch('#td-text', '#td-when');
       inp.focus();
     });
     $('#view-todo').addEventListener('click', function (e) {
@@ -4329,9 +4721,11 @@ td.c-break{display:none}
       if (id === 'task-add') {
         var ti = $('#ta-title'), x = splitTaskInput(ti.value), dt = $('#ta-date').value;
         if (!x.title) { ti.focus(); return; }
-        ti.value = ''; $('#ta-date').value = '';
+        var w = readWhen(ti, x.title); if (w) x.title = w.title;
+        ti.value = ''; $('#ta-date').value = ''; delete ti.dataset.nowhen;
         commit(function () {
-          var np = newPiece(x.title); np.date = isISO(dt) ? dt : null; np.url = x.url; p.milestones.push(np);
+          var np = newPiece(x.title), v = moment(isISO(dt) ? dt : w ? w.date : null, w ? w.time : null, '');
+          np.date = v.date; np.time = v.time; np.at = v.at; np.tz = v.tz; np.url = x.url; p.milestones.push(np);
         });
         var t2 = $('#ta-title'); if (t2) t2.focus();
       } else if (id === 'hub-lk') {
@@ -4400,7 +4794,12 @@ td.c-break{display:none}
     // save if the tab is being hidden with unsaved work
     document.addEventListener('visibilitychange', function () {
       if (document.visibilityState === 'hidden') { if (dirty) trySave(true); return; }
-      if (mode === 'github' && !dirty && !publishing && $('#modal').hidden && !ui.editingUpdate && !ui.editingProject) ghPull();
+      if (dirty) { trySave(true); return; }   // changes made while offline go up as soon as you're back
+      if (mode === 'github' && !publishing && $('#modal').hidden && !ui.editingUpdate && !ui.editingProject) ghPull();
+    });
+    window.addEventListener('online', function () {
+      if (dirty) trySave(true);
+      else if (mode === 'github' && !publishing && $('#modal').hidden) ghPull();
     });
 
     // day rollover
@@ -4450,6 +4849,10 @@ td.c-break{display:none}
     initStorage();
     gcalBoot();
     initDrag();
+    initChat();
+    // offline copy for the installed app (needs sw.js next to index.html; harmless without it)
+    if ('serviceWorker' in navigator && !inViewer && (location.protocol === 'https:' || location.hostname === 'localhost') && !/claude|anthropic/.test(location.hostname))
+      navigator.serviceWorker.register('sw.js').catch(function () {});
   }
 
   if (hot && typeof hot.ready === 'function') hot.ready(start);
