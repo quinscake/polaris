@@ -548,91 +548,6 @@ body.hub-open{overflow:hidden}
 .rv-ph{font-size:13px;font-weight:500;margin-bottom:3px}
 .rv-pick{font-size:14px;padding:2px 0 2px 16px}
 
-/* ---------- chat dock ---------- */
-.chat-dock{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:44;width:min(680px,calc(100vw - 32px));display:flex;flex-direction:column;gap:8px;pointer-events:none}
-.chat-dock[hidden]{display:none}
-.chat-dock > *{pointer-events:auto}
-.chat-fab{display:none}
-.chat-panel{display:none;flex-direction:column;max-height:min(62vh,640px);background:rgba(15,19,31,.97);border:1px solid #2c3552;border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.55);overflow:hidden}
-.chat-dock.is-open .chat-panel{display:flex}
-.chat-head{display:flex;align-items:center;gap:12px;padding:10px 12px 10px 16px;border-bottom:1px solid var(--rule)}
-.chat-title{font:600 13px var(--font-display);letter-spacing:.02em}
-.chat-ctx{flex:1;min-width:0;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.chat-ctx b{color:var(--ink);font-weight:500}
-.chat-head .link-btn{font-size:12.5px}
-.chat-log{flex:1;overflow:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-height:120px}
-.cm{max-width:88%;padding:9px 12px;border-radius:12px;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
-.cm-user{align-self:flex-end;background:#2a3557;color:var(--ink);border-bottom-right-radius:4px}
-.cm-ai{align-self:flex-start;background:rgba(255,255,255,.045);border:1px solid var(--rule);border-bottom-left-radius:4px}
-.cm-ai.is-err{border-color:rgba(255,107,94,.45);color:#ffb3aa}
-.cm-file{display:block;margin-top:4px;font:500 11.5px var(--font-mono);color:#b8c4ea}
-.cm-meta{margin:6px 0 0;font:500 11px var(--font-mono);color:#6d7690}
-.cm-ops{margin-top:10px;padding-top:8px;border-top:1px dashed var(--rule);display:flex;flex-direction:column;gap:7px}
-.cm-ops .check{align-items:flex-start;font-size:13.5px;line-height:1.45}
-.cm-ops .check input{margin-top:3px}
-.cm-ops .is-danger span{color:#ff9a8a}
-.cm-acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px}
-.cm-ok{margin:0;font-size:13px;color:var(--ok)}
-.cm-note p{margin:0}
-.cm-paste{width:100%;margin-top:8px;font-size:13px}
-.cm-wait{color:var(--muted);font-size:13px}
-.dots{display:inline-flex;gap:3px;vertical-align:middle;margin-right:4px}
-.dots i{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:blink 1.2s infinite ease-in-out}
-.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
-@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
-.chat-hello{color:var(--muted);font-size:13.5px}
-.chat-hello p{margin:0 0 10px}
-.chat-sugg{display:flex;flex-wrap:wrap;gap:6px}
-.chat-bar{background:rgba(15,19,31,.96);border:1px solid #2c3552;border-radius:16px;box-shadow:0 12px 36px rgba(0,0,0,.5);padding:8px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
-.chat-bar:focus-within{border-color:#4a5a8c}
-.chat-row{display:flex;align-items:flex-end;gap:6px}
-.chat-att{font:500 12px var(--font-mono);color:#b8c4ea;padding:2px 6px 6px;display:flex;align-items:center;gap:6px}
-.chat-att[hidden]{display:none}
-#chat-input{flex:1;min-width:0;resize:none;border:0;background:transparent;color:var(--ink);font:400 14.5px/1.45 var(--font-body);padding:7px 6px;min-height:34px;height:34px;max-height:160px;outline:none;box-shadow:none}
-.chat-row{align-items:center}
-.chat-ico,.chat-send{flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:10px;border:0;cursor:pointer;padding:0}
-.chat-ico{background:transparent;color:var(--muted)}
-.chat-ico:hover{color:var(--ink);background:rgba(255,255,255,.06)}
-.chat-ico svg,.chat-send svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.chat-send{background:var(--accent);color:#0b1020}
-.chat-send:disabled{opacity:.45;cursor:default}
-.chat-model{flex:none;max-width:150px;font:500 12px var(--font-mono);padding:7px 8px;border-radius:10px;border:1px solid var(--rule);background:rgba(255,255,255,.04);color:var(--muted)}
-body.dock-on main{padding-bottom:96px}
-body.dock-on .hub{padding-bottom:88px}
-@media (max-width: 640px){
-  .chat-dock{left:auto;right:14px;transform:none;bottom:calc(78px + env(safe-area-inset-bottom));width:auto}
-  .chat-fab{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:1px solid #3a4770;background:#1b2340;color:var(--accent);box-shadow:0 10px 28px rgba(0,0,0,.5);cursor:pointer;align-self:flex-end}
-  .chat-fab .spark{width:22px;height:22px;margin:0}
-  .chat-bar{display:none}
-  .chat-dock.is-open{left:0;right:0;bottom:0;top:12vh;width:auto;gap:0;background:#0b0e18;border-top:1px solid #2c3552;border-radius:18px 18px 0 0;box-shadow:0 -20px 60px rgba(0,0,0,.6)}
-  .chat-dock.is-open .chat-fab{display:none}
-  .chat-dock.is-open .chat-panel{flex:1;min-height:0;max-height:none;border:0;border-radius:18px 18px 0 0;background:#0b0e18;box-shadow:none}
-  .chat-dock.is-open .chat-bar{display:block;border-radius:0;border-width:1px 0 0;box-shadow:none;padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
-  .chat-model{max-width:118px}
-  .cm{max-width:92%}
-  body.dock-on main{padding-bottom:0}
-  body.dock-on .hub{padding-bottom:16px}
-}
-
-/* ---------- Ask AI ---------- */
-.spark{width:14px;height:14px;fill:currentColor;vertical-align:-2px;margin-right:6px}
-#modal-title .spark{width:17px;height:17px;color:var(--accent)}
-.ai-src{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.ai-file{cursor:pointer}
-.ai-src-info{font:500 12px var(--font-mono);color:var(--muted)}
-.ai-paste{margin-top:8px}
-.ai-paste summary{cursor:pointer;color:var(--muted);font-size:13px}
-.ai-paste textarea{margin-top:8px;width:100%}
-.ai-acts{flex-wrap:wrap}
-.ai-copied{font-size:13px;color:var(--ok);margin:6px 0 0}
-.ai-summary{margin:0 0 10px;color:var(--ink)}
-.ai-ops{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:52vh;overflow:auto}
-.ai-ops .check{align-items:flex-start;line-height:1.45;font-size:14px}
-.ai-ops .check input{margin-top:3px}
-.ai-ops .is-danger span{color:#ff9a8a}
-.ai-prov{border:0;padding:0;margin:0 0 6px;display:flex;flex-direction:column;gap:6px}
-.ai-prov legend{font-size:13px;font-weight:500;margin-bottom:4px}
-
 /* ---------- drag to reorder ---------- */
 [data-sort-list] > [data-sort-id]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .task[data-sort-id]{position:relative}
@@ -938,7 +853,6 @@ td.c-break{display:none}
       <div class="more-menu" id="more-menu" hidden>
         <button type="button" id="mm-library">Library</button>
         <button type="button" id="mm-review">Weekly review</button>
-        <button type="button" id="mm-ai">AI settings</button>
         <button type="button" id="mm-backup">Backup</button>
       </div>
     </div>
@@ -1035,26 +949,6 @@ td.c-break{display:none}
   </main>
 </div>
 
-<div class="chat-dock" id="chat-dock" hidden>
-  <button type="button" class="chat-fab" id="chat-fab" data-act="chat-fab" aria-label="Chat with AI"></button>
-  <div class="chat-panel" id="chat-panel">
-    <div class="chat-head"><span class="chat-title">Chat</span><span class="chat-ctx" id="chat-ctx"></span>
-      <button type="button" class="link-btn" data-act="chat-clear">Clear</button><button type="button" class="link-btn" data-act="chat-settings">Settings</button>
-      <button type="button" class="icon-x" data-act="chat-min" aria-label="Minimize the chat" title="Minimize (Esc)">–</button></div>
-    <div class="chat-log" id="chat-log" aria-live="polite"></div>
-  </div>
-  <form class="chat-bar" id="chat-form" novalidate autocomplete="off">
-    <div class="chat-att" id="chat-att" hidden></div>
-    <div class="chat-row">
-      <button type="button" class="chat-ico" id="chat-attach-btn" data-act="chat-attach" aria-label="Attach a PDF or text file" title="Attach a PDF or text file"></button>
-      <input type="file" id="chat-file" accept=".pdf,.txt,.md,application/pdf,text/plain" hidden>
-      <label for="chat-input" class="sr-only">Message</label>
-      <textarea id="chat-input" rows="1" placeholder="Ask about your projects, or tell me what to change"></textarea>
-      <label for="chat-model" class="sr-only">Model</label><select id="chat-model" class="chat-model"></select>
-      <button type="submit" class="chat-send" id="chat-send" aria-label="Send"></button>
-    </div>
-  </form>
-</div>
 <div class="hub" id="hub" hidden></div>
 <div class="modal-backdrop" id="modal" hidden>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" id="modal-body"></div>
@@ -1190,7 +1084,6 @@ td.c-break{display:none}
   function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function plural(n, w) { return n + ' ' + w + (n === 1 ? '' : 's'); }
-  var SPARK = '<svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg>';
   function truncate(s, n) { s = String(s); return s.length > n ? s.slice(0, n - 1) + '…' : s; }
 
   function todayISO() { var d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
@@ -1991,7 +1884,6 @@ td.c-break{display:none}
     if (view === 'timeline') renderBoard(T); else if (view === 'todo') renderTodo(T); else renderTables(T);
     if (ui.hub) renderHub();
     if (!inViewer && gcalState === 'off' && gcalCfg()) gcalBoot();
-    chatShown(); if (chat.open) renderChat();
     whenWatch('#td-text', '#td-when'); if (ui.hub) whenWatch('#ta-title', '#ta-when');
   }
 
@@ -2558,517 +2450,6 @@ td.c-break{display:none}
         closeModal();
       }
     });
-  }
-
-  /* ================= Ask AI: Claude or ChatGPT suggest changes, you approve them ================= */
-  // Your key stays in this browser. Nothing changes until you tap Apply.
-  var AI_KEY = 'polaris:ai';
-  // Only the top model from each: Claude Opus 5.5 and GPT-6.2 Astra.
-  var AI_MODELS = { claude: 'claude-opus-5-5', openai: 'gpt-6.2-astra' };
-  var AI_LABELS = { claude: 'Claude Opus 5.5', openai: 'GPT-6.2 Astra' };
-  var AI_NAMES = { claude: 'Claude', openai: 'ChatGPT' };
-  var PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
-  function aiCfg() {
-    var c = null;
-    try { c = JSON.parse(localStorage.getItem(AI_KEY) || 'null'); } catch (e) {}
-    if (!c || typeof c !== 'object') c = {};
-    var keys = { claude: '', openai: '' };
-    if (c.keys && typeof c.keys === 'object') { keys.claude = String(c.keys.claude || ''); keys.openai = String(c.keys.openai || ''); }
-    if ((c.provider === 'claude' || c.provider === 'openai') && c.key && !keys[c.provider]) keys[c.provider] = String(c.key);   // older settings
-    var ids = c.ids && typeof c.ids === 'object' ? c.ids : {};
-    var model = c.use === 'claude' || c.use === 'openai' ? c.use : c.provider === 'openai' ? 'openai' : keys.claude || !keys.openai ? 'claude' : 'openai';
-    return { keys: keys, use: model, ids: { claude: String(ids.claude || '').trim() || AI_MODELS.claude, openai: String(ids.openai || '').trim() || AI_MODELS.openai } };
-  }
-  function aiSave(c) { try { localStorage.setItem(AI_KEY, JSON.stringify({ keys: c.keys, use: c.use, ids: { claude: c.ids.claude === AI_MODELS.claude ? '' : c.ids.claude, openai: c.ids.openai === AI_MODELS.openai ? '' : c.ids.openai } })); return true; } catch (e) { return false; } }
-  function aiLabel(c, prov) { return c.ids[prov] === AI_MODELS[prov] ? AI_LABELS[prov] : c.ids[prov]; }
-  var AI_BODY = [
-    'Rules:',
-    '- Pieces are called stages in the app. Change only what the request asks for. Do not add pieces, steps, notes or links that nobody asked for. No generic advice and no made-up tasks like "email someone", "check something" or "review".',
-    '- When a source (a call, handbook or brief) is given, add only requirements the source actually states. Never invent requirements. Put the exact rule in short form in "rule": limits, format, who signs, where it is submitted.',
-    '- Keep titles short (1 to 5 words). Details go in "rule".',
-    '- Dates are YYYY-MM-DD, times are HH:MM (24 h). If the source gives a time in a named zone (for example "23:59 Paris time" or "CET"), set "tz" to the IANA zone (Europe/Paris). With no zone, leave "tz" out: that means the user\'s own time.',
-    '- Use the ids from the data to change existing items. Delete only when asked. If nothing should change, return an empty ops list and say why in summary.',
-    'Operations:',
-    '{"op":"add_piece","title":"","rule":"","status":"todo|doing|waiting|done","due":"YYYY-MM-DD","time":"HH:MM","tz":"","points":0,"steps":["small step"]}  (all but title optional)',
-    '{"op":"update_piece","id":"","title":"","rule":"","status":"","due":"","time":"","tz":"","points":0}  (only the fields that change; null clears one)',
-    '{"op":"delete_piece","id":""}',
-    '{"op":"add_step","piece":"<piece id>","title":""}',
-    '{"op":"update_step","id":"","title":"","done":true}',
-    '{"op":"delete_step","id":""}',
-    '{"op":"set_project","name":"","kind":"","deadline":"YYYY-MM-DD","time":"HH:MM","tz":"","pointsTotal":0}  (only the fields that change)',
-    '{"op":"add_note","text":""}  (adds an entry to the project\'s activity log, which is where notes live; only when asked, for example to keep key facts from a source)',
-    '{"op":"add_link","url":"","title":"","notes":""}',
-    '{"op":"order","ids":["piece ids, top to bottom"]}',
-    'When the whole board is shared, project operations need "project":"<project id>", and you can also use',
-    '{"op":"add_project","name":"","kind":"","deadline":"YYYY-MM-DD","time":"HH:MM","tz":"","pointsTotal":0,"note":"key facts for the activity log (optional)","pieces":[{"title":"","rule":"","due":"","time":"","tz":"","points":0,"steps":[]}]}',
-    '{"op":"add_task","title":"","time":"HH:MM"}  (a quick task on today\'s list, not tied to a project)',
-    '{"op":"today","id":"<stage or step id>"}  (put an existing stage or step on today\'s list)',
-    'Statuses: todo, doing, waiting (waiting on someone else), done. Kinds are the ids listed under "kinds". "points" is only for scored items, like a grant\'s scoring table.'
-  ].join('\n');
-  var AI_RULES = 'You edit a personal project tracker called Polaris. Reply with one JSON object only: {"summary": "one short sentence", "ops": [...]}.\n' + AI_BODY;
-  var CHAT_RULES = [
-    'You are the assistant inside Polaris, the user\'s personal project tracker for research, applications and classes. Each message from the user comes with their current data.',
-    'Always reply with one JSON object only: {"reply": "your message", "ops": [...]}.',
-    '"reply" is what the user reads: short, direct, plain text; line breaks and "- " bullets are fine. Answer from the data, be concrete (names, dates, what is next), and say when something isn\'t in the data.',
-    'Put changes in "ops" only when the user asks for them or clearly agrees. The user sees every change and approves it before anything happens, so never claim a change is done.',
-    'When "lookingAt" is set, the user has that project open: operations without "project" apply to it. Otherwise every project operation needs "project".'
-  ].join('\n') + '\n' + AI_BODY;
-  function whenOut(date, at, tz) {
-    if (!date) return null;
-    if (at && tz && validTz(tz)) { var w = wallIn(at, tz); return { date: w.date, time: w.time, tz: tz === LOCAL_TZ ? undefined : tz }; }
-    return { date: date, time: at ? localTimeOf(at) : undefined };
-  }
-  function aiProject(p) {
-    return { id: p.id, name: p.name, kind: p.area || null, start: p.start, ended: p.ended || undefined,
-      deadline: whenOut(p.deadline, p.deadlineAt, p.deadlineTz), pointsTotal: p.pointsTotal || undefined,
-      log: state.updates.filter(function (u) { return u.projectId === p.id; }).slice(-15).map(function (u) { return { date: u.date, text: u.text }; }),
-      pieces: piecesOf(p).map(function (m) {
-        return { id: m.id, title: m.title, status: m.status, rule: m.rule || undefined, due: whenOut(m.date, m.at, m.tz) || undefined, points: m.points || undefined,
-          steps: stepsOf(p, m).map(function (x) { return { id: x.id, title: x.title, done: x.done }; }) };
-      }),
-      links: linksOf(p).map(function (l) { return { title: l.title || linkTitle(l), url: l.url }; }) };
-  }
-  function aiData(pid) {
-    var base = { today: todayISO(), timezone: LOCAL_TZ, kinds: state.areas.map(function (a) { return a.id; }) };
-    if (pid) base.project = aiProject(getProject(pid));
-    else base.projects = state.projects.filter(function (p) { return !p.ended; }).map(aiProject);
-    return base;
-  }
-  function aiUserText(pid, ask, src) {
-    return 'My request: ' + ask + '\n\nCurrent data:\n```json\n' + JSON.stringify(aiData(pid), null, 1) + '\n```' +
-      (src && src.text ? '\n\nSource' + (src.name ? ' (' + src.name + ')' : '') + ':\n<source>\n' + src.text + '\n</source>' : '');
-  }
-  function aiSend(prov, key, model, system, msgs) {
-    var ctl = window.AbortController ? new AbortController() : null, timer = ctl ? setTimeout(function () { ctl.abort(); }, 240000) : 0, req;
-    if (prov === 'claude') {
-      req = fetch('https://api.anthropic.com/v1/messages', { method: 'POST', signal: ctl && ctl.signal,
-        headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true', 'content-type': 'application/json' },
-        body: JSON.stringify({ model: model, max_tokens: 8000, system: system, messages: msgs }) });
-    } else {
-      req = fetch('https://api.openai.com/v1/responses', { method: 'POST', signal: ctl && ctl.signal,
-        headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ model: model, instructions: system, input: msgs }) });
-    }
-    return req.catch(function (e) {
-      throw new Error(e && e.name === 'AbortError' ? 'The AI took too long. Try a shorter request.' : 'Couldn’t reach ' + AI_NAMES[prov] + '. Check your connection.');
-    }).then(function (r) {
-      return r.json().catch(function () { return {}; }).then(function (j) {
-        clearTimeout(timer);
-        if (!r.ok) {
-          var msg = (j && j.error && (j.error.message || j.error.type)) || ('error ' + r.status);
-          if (r.status === 401) msg = 'The API key wasn’t accepted. Check it in AI settings.';
-          else if (r.status === 429) msg = 'Too many requests or no credit left on this key. ' + msg;
-          else if (r.status === 404 && /model/i.test(msg)) msg = 'That model name wasn’t found: ' + model + '. Change it in AI settings.';
-          throw new Error(AI_NAMES[prov] + ': ' + msg);
-        }
-        if (prov === 'claude') return (j.content || []).filter(function (c) { return c.type === 'text'; }).map(function (c) { return c.text; }).join('');
-        if (typeof j.output_text === 'string' && j.output_text) return j.output_text;
-        return (j.output || []).filter(function (o) { return o.type === 'message'; }).map(function (o) {
-          return (o.content || []).filter(function (c) { return c.type === 'output_text' || c.type === 'text'; }).map(function (c) { return c.text; }).join('');
-        }).join('');
-      });
-    });
-  }
-  function aiParse(text) {
-    var t = String(text || '').trim(), fence = t.match(/```(?:json)?\s*([\s\S]*?)```/);
-    if (fence) t = fence[1];
-    var a = t.indexOf('{'), b = t.lastIndexOf('}');
-    if (a < 0 || b <= a) throw new Error('That reply has no changes in it. Paste the whole reply, including the part in braces { }.');
-    var j;
-    try { j = JSON.parse(t.slice(a, b + 1)); } catch (e) { throw new Error('That reply isn’t complete. Copy the whole reply and paste it again.'); }
-    if (!j || (!Array.isArray(j.ops) && typeof j.reply !== 'string' && typeof j.summary !== 'string')) throw new Error('That reply has no list of changes ("ops").');
-    var said = typeof j.reply === 'string' ? j.reply : typeof j.summary === 'string' ? j.summary : '';
-    return { summary: said.slice(0, 6000), ops: (Array.isArray(j.ops) ? j.ops : []).filter(function (o) { return o && typeof o.op === 'string'; }).slice(0, 150) };
-  }
-  // PDFs are read right here in your browser; only the text goes to the AI.
-  function loadPdfJs() {
-    if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
-    return new Promise(function (res, rej) {
-      var sc = document.createElement('script'); sc.src = PDFJS + 'pdf.min.js';
-      sc.onload = function () { if (!window.pdfjsLib) return rej(new Error('no reader')); window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; res(window.pdfjsLib); };
-      sc.onerror = function () { rej(new Error('Couldn’t load the PDF reader. Check your connection, or paste the text instead.')); };
-      document.head.appendChild(sc);
-    });
-  }
-  function fileText(file) {
-    if (/\.pdf$/i.test(file.name) || file.type === 'application/pdf') {
-      return loadPdfJs().then(function (lib) { return file.arrayBuffer().then(function (buf) { return lib.getDocument({ data: buf }).promise; }); })
-        .then(function (doc) {
-          var out = [], chain = Promise.resolve(), n = Math.min(doc.numPages, 80);
-          for (var i = 1; i <= n; i++) (function (k) {
-            chain = chain.then(function () { return doc.getPage(k); }).then(function (pg) { return pg.getTextContent(); })
-              .then(function (tc) { out.push(tc.items.map(function (it) { return it.str + (it.hasEOL ? '\n' : ' '); }).join('')); });
-          })(i);
-          return chain.then(function () { return { text: out.join('\n\n').replace(/[ \t]+/g, ' ').trim().slice(0, 90000), pages: doc.numPages }; });
-        });
-    }
-    return file.text().then(function (t) { return { text: t.slice(0, 90000), pages: 0 }; });
-  }
-
-  // ---- what each suggested change means, in plain words
-  function aiFind(s, pid) { var p = null; s.projects.forEach(function (x) { if (x.id === pid) p = x; }); return p; }
-  function aiWhen(o, dateKey) {
-    var d = o[dateKey || 'due'];
-    if (!isISO(d)) return '';
-    var v = moment(d, o.time, o.tz), note = srcNote(v.at, v.tz);
-    return fmtShort(v.date) + (v.time ? ' ' + v.time : '') + (note ? ' your time (' + note + ')' : '');
-  }
-  function aiDescribe(o, pid) {
-    var p = aiFind(state, o.project || pid), m, bits = [];
-    function q(t) { return '“' + truncate(String(t || ''), 60) + '”'; }
-    if (o.op === 'add_task') return o.title ? { text: 'Add to today: ' + q(o.title) + (isTime(o.time) ? ' at ' + o.time : '') } : null;
-    if (o.op === 'today') {
-      var hit = null; state.projects.forEach(function (x) { var y = taskById(x, o.id); if (y && !hit) hit = { p: x, m: y }; });
-      return hit && !hit.m.done ? { text: 'Put ' + q(hit.m.title) + ' (' + hit.p.name + ') on today’s list' } : null;
-    }
-    switch (o.op) {
-      case 'add_project':
-        if (!o.name) return null;
-        var kd = state.areas.filter(function (a) { return a.id === o.kind; })[0];
-        return { text: 'New project ' + q(o.name) + (kd ? ' (' + kd.name + ')' : '') + (aiWhen(o, 'deadline') ? ', due ' + aiWhen(o, 'deadline') : '') +
-          (Array.isArray(o.pieces) && o.pieces.length ? ', with ' + o.pieces.length + ': ' + o.pieces.map(function (x) { return x && x.title; }).filter(Boolean).join(', ') : '') };
-    }
-    if (!p) return null;
-    var pre = pid && p.id === pid ? '' : p.name + ': ';
-    switch (o.op) {
-      case 'add_piece':
-        if (!o.title) return null;
-        if (o.rule) bits.push(truncate(o.rule, 140));
-        if (aiWhen(o)) bits.push('due ' + aiWhen(o));
-        if (numOrNull(o.points)) bits.push(numOrNull(o.points) + ' pts');
-        if (Array.isArray(o.steps) && o.steps.length) bits.push(o.steps.length + ' steps');
-        return { text: pre + 'Add ' + q(o.title) + (bits.length ? ': ' + bits.join(' · ') : '') };
-      case 'update_piece':
-        m = taskById(p, o.id); if (!m || m.parent) return null;
-        if (o.title && o.title !== m.title) bits.push('name → ' + q(o.title));
-        if ('rule' in o && (o.rule || '') !== (m.rule || '')) bits.push(o.rule ? 'rule → ' + truncate(o.rule, 120) : 'remove the rule');
-        if (o.status && o.status !== m.status && ST_ORDER.indexOf(o.status) >= 0) bits.push('status → ' + ST_LABEL[o.status]);
-        if ('due' in o) bits.push(o.due ? 'due → ' + aiWhen(o) : 'remove the due date');
-        if ('points' in o && numOrNull(o.points) !== m.points) bits.push(numOrNull(o.points) ? 'points → ' + numOrNull(o.points) : 'remove the points');
-        return bits.length ? { text: pre + 'Change ' + q(m.title) + ': ' + bits.join(' · ') } : null;
-      case 'delete_piece':
-        m = taskById(p, o.id); if (!m || m.parent) return null;
-        return { text: pre + 'Delete ' + q(m.title) + (stepsOf(p, m).length ? ' and its steps' : ''), danger: true };
-      case 'add_step':
-        m = taskById(p, o.piece); if (!m || m.parent || !o.title) return null;
-        return { text: pre + 'Add step ' + q(o.title) + ' to ' + q(m.title) };
-      case 'update_step':
-        m = taskById(p, o.id); if (!m || !m.parent) return null;
-        if (o.title && o.title !== m.title) bits.push('name → ' + q(o.title));
-        if (typeof o.done === 'boolean' && o.done !== m.done) bits.push(o.done ? 'mark done' : 'mark not done');
-        return bits.length ? { text: pre + 'Step ' + q(m.title) + ': ' + bits.join(' · ') } : null;
-      case 'delete_step':
-        m = taskById(p, o.id); if (!m || !m.parent) return null;
-        return { text: pre + 'Delete step ' + q(m.title), danger: true };
-      case 'set_project':
-        if (o.name && o.name !== p.name) bits.push('name → ' + q(o.name));
-        if (o.kind && o.kind !== p.area && state.areas.some(function (a) { return a.id === o.kind; })) bits.push('kind → ' + state.areas.filter(function (a) { return a.id === o.kind; })[0].name);
-        if ('deadline' in o) bits.push(o.deadline ? 'final deadline → ' + aiWhen(o, 'deadline') : 'remove the deadline');
-        if ('pointsTotal' in o && numOrNull(o.pointsTotal) !== p.pointsTotal) bits.push('total points → ' + (numOrNull(o.pointsTotal) || 'none'));
-        return bits.length ? { text: pre + 'Project ' + q(p.name) + ': ' + bits.join(' · ') } : null;
-      case 'set_notes':
-      case 'add_note':
-        if (typeof o.text !== 'string' || !o.text.trim()) return null;
-        return { text: pre + 'Add to the activity log: ' + truncate(o.text.replace(/\s+/g, ' '), 160) };
-      case 'add_link':
-        if (!cleanUrl(o.url || '')) return null;
-        return { text: pre + 'Add link ' + q(o.title || o.url) };
-      case 'order':
-        if (!Array.isArray(o.ids) || o.ids.length < 2) return null;
-        return { text: pre + 'Reorder: ' + o.ids.map(function (id) { var x = taskById(p, id); return x ? x.title : null; }).filter(Boolean).map(function (t) { return truncate(t, 24); }).join(' → ') };
-    }
-    return null;
-  }
-  function aiPieceFrom(o) {
-    var m = newPiece(String(o.title).trim());
-    if (o.rule) m.rule = String(o.rule).trim().slice(0, 1500);
-    m.points = numOrNull(o.points);
-    if (isISO(o.due)) { var v = moment(o.due, o.time, o.tz); m.date = v.date; m.time = v.time; m.at = v.at; m.tz = v.tz; }
-    if (o.url && cleanUrl(o.url)) m.url = cleanUrl(o.url);
-    return m;
-  }
-  function aiApply(s, pid, ops) {
-    var T = todayISO(), n = 0;
-    ops.forEach(function (o) {
-      var p = o.op === 'add_project' ? null : aiFind(s, o.project || pid), m, x;
-      try {
-        if (o.op === 'add_task') {
-          if (!o.title) return;
-          s.tasks.push({ id: uid(), title: String(o.title).trim().slice(0, 140), url: '', day: T, created: Date.now(), done: false, doneOn: null, doneAt: 0, time: isTime(o.time) ? o.time : null });
-          n++; return;
-        }
-        if (o.op === 'today') {
-          var done = false;
-          s.projects.forEach(function (x2) { var y = taskById(x2, o.id); if (y && !y.done && !done) { y.today = T; done = true; } });
-          if (done) n++;
-          return;
-        }
-        if (o.op === 'add_project') {
-          var np = { id: uid(), name: String(o.name).slice(0, 80), color: leastUsedColor(), start: T, ended: null, deadline: null, deadlineAt: 0, deadlineTz: '', endedBy: null,
-            area: s.areas.some(function (a) { return a.id === o.kind; }) ? o.kind : null, goal: null, milestones: [], links: [], notes: '',
-            created: Date.now(), sample: false, pointsTotal: numOrNull(o.pointsTotal) };
-          if (isISO(o.deadline)) applyDeadline(np, moment(o.deadline, o.time, o.tz));
-          (Array.isArray(o.pieces) ? o.pieces : []).forEach(function (q) {
-            if (!q || !q.title) return;
-            var pm = aiPieceFrom(q); np.milestones.push(pm);
-            (Array.isArray(q.steps) ? q.steps : []).forEach(function (t) { if (t) { var st = newPiece(String(t)); st.parent = pm.id; np.milestones.push(st); } });
-          });
-          s.projects.push(np);
-          var nt = typeof o.note === 'string' ? o.note : typeof o.notes === 'string' ? o.notes : '';
-          if (nt.trim()) s.updates.push({ id: uid(), projectId: np.id, date: T, text: nt.trim().slice(0, 2000), created: Date.now() });
-          n++; return;
-        }
-        if (!p) return;
-        if (o.op === 'add_piece') {
-          m = aiPieceFrom(o); p.milestones.push(m);
-          if (o.status && o.status !== 'todo') setStatus2(s, p, m, o.status, T);
-          (Array.isArray(o.steps) ? o.steps : []).forEach(function (t) { if (t) { var st = newPiece(String(t)); st.parent = m.id; p.milestones.push(st); } });
-        } else if (o.op === 'update_piece') {
-          m = taskById(p, o.id); if (!m) return;
-          if (o.title) m.title = String(o.title).trim().slice(0, 140);
-          if ('rule' in o) m.rule = o.rule ? String(o.rule).trim().slice(0, 1500) : '';
-          if ('points' in o) m.points = numOrNull(o.points);
-          if ('due' in o) { var v = isISO(o.due) ? moment(o.due, o.time, o.tz) : moment(null); m.date = v.date; m.time = v.time; m.at = v.at; m.tz = v.tz; }
-          if (o.status) setStatus2(s, p, m, o.status, T);
-        } else if (o.op === 'delete_piece') {
-          p.milestones = p.milestones.filter(function (y) { return y.id !== o.id && y.parent !== o.id; });
-        } else if (o.op === 'add_step') {
-          m = taskById(p, o.piece); if (!m) return;
-          x = newPiece(String(o.title)); x.parent = m.id;
-          var S = stepsOf(p, m), after = S.length ? S[S.length - 1] : m;
-          p.milestones.splice(p.milestones.indexOf(after) + 1, 0, x);
-        } else if (o.op === 'update_step') {
-          m = taskById(p, o.id); if (!m) return;
-          if (o.title) m.title = String(o.title).trim().slice(0, 140);
-          if (typeof o.done === 'boolean') setTaskDone(s, p, m, o.done, T);
-        } else if (o.op === 'delete_step') {
-          p.milestones = p.milestones.filter(function (y) { return y.id !== o.id; });
-        } else if (o.op === 'set_project') {
-          if (o.name) p.name = String(o.name).slice(0, 80);
-          if (o.kind && s.areas.some(function (a) { return a.id === o.kind; })) p.area = o.kind;
-          if ('deadline' in o) applyDeadline(p, isISO(o.deadline) ? moment(o.deadline, o.time, o.tz) : moment(null));
-          if ('pointsTotal' in o) p.pointsTotal = numOrNull(o.pointsTotal);
-        } else if (o.op === 'set_notes' || o.op === 'add_note') {
-          var day = p.ended && p.ended < T ? p.ended : T;
-          s.updates.push({ id: uid(), projectId: p.id, date: day < p.start ? p.start : day, text: String(o.text).trim().slice(0, 2000), created: Date.now() });
-        } else if (o.op === 'add_link') {
-          var u = cleanUrl(o.url || ''); if (!u) return;
-          linksOf(p).push({ id: uid(), url: u, title: String(o.title || '').slice(0, 120), kind: guessKind(u), notes: String(o.notes || '').slice(0, 4000), added: T });
-        } else if (o.op === 'order') {
-          var r = reorderSubset(p.milestones, o.ids.filter(function (id) { var y = taskById(p, id); return y && !y.parent; }), function (y) { return y.id; });
-          if (r) p.milestones = r;
-        } else return;
-        n++;
-      } catch (e) {}
-    });
-    return n;
-  }
-
-  /* ---- the chat: always at the bottom of To-do and Timeline ---- */
-  var CHAT_KEY = 'polaris:chat';
-  var chat = { open: false, msgs: [], focus: null, busy: false, attach: null, reading: false };
-  try { var cs0 = JSON.parse(sessionStorage.getItem(CHAT_KEY) || 'null'); if (cs0 && Array.isArray(cs0.msgs)) chat.msgs = cs0.msgs.slice(-60); } catch (e) {}
-  function chatKeep() { try { sessionStorage.setItem(CHAT_KEY, JSON.stringify({ msgs: chat.msgs.slice(-60).map(function (m) { var c = Object.assign({}, m); delete c.undo; return c; }) })); } catch (e) {} }
-  var CLIP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 6.5l-7.3 7.3a2 2 0 0 0 2.8 2.8l7.6-7.6a4 4 0 0 0-5.7-5.7l-7.7 7.7a6 6 0 0 0 8.5 8.5l6.6-6.6"/></svg>';
-  var SEND = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>';
-  function chatFocusId() { return ui.hub && getProject(ui.hub) ? ui.hub : chat.focus && getProject(chat.focus) ? chat.focus : null; }
-  function chatData() {
-    var T = todayISO(), L = todoLists(T), f = chatFocusId();
-    return { today: T, now: localTimeOf(Date.now()), timezone: LOCAL_TZ, kinds: state.areas.map(function (a) { return a.id; }), lookingAt: f || undefined,
-      todayList: L.today.map(function (x) {
-        return x.kind === 'quick' ? { task: x.t.id, title: x.t.title, time: x.t.time || undefined } : x.kind === 'ms' ? { stage: x.m.id, project: x.p.id, title: x.m.title, status: x.m.status } : { deadline: x.p.id, title: x.p.name };
-      }),
-      projects: state.projects.filter(function (p) { return !p.ended || p.id === f; }).map(aiProject) };
-  }
-  // earlier turns as plain text; the newest one carries the current data
-  function chatMessages() {
-    var turns = chat.msgs.filter(function (m) { return m.role === 'user' || (m.role === 'ai' && !m.error); }).slice(-14), out = [];
-    turns.forEach(function (m, i) {
-      var c;
-      if (m.role === 'ai') c = { role: 'assistant', content: m.raw || JSON.stringify({ reply: m.text, ops: [] }) };
-      else {
-        var t = m.text || '(see the attached file)';
-        if (m.src && m.src.text) t += '\n\nAttached file (' + m.src.name + '):\n<source>\n' + m.src.text + '\n</source>';
-        if (i === turns.length - 1) t += '\n\nCurrent data:\n```json\n' + JSON.stringify(chatData()) + '\n```';
-        c = { role: 'user', content: t };
-      }
-      var last = out[out.length - 1];
-      if (last && last.role === c.role) last.content += '\n\n' + c.content; else out.push(c);
-    });
-    while (out.length && out[0].role !== 'user') out.shift();
-    return out;
-  }
-  function chatAi(raw, label) {
-    var parsed;
-    try { parsed = aiParse(raw); } catch (e) { parsed = { summary: String(raw || '').trim(), ops: [] }; }
-    var f = chatFocusId();
-    var items = parsed.ops.map(function (o) { var d = aiDescribe(o, f); return d ? { op: o, text: d.text, danger: !!d.danger, on: true } : null; }).filter(Boolean);
-    chat.msgs.push({ role: 'ai', text: parsed.summary || (items.length ? 'Here’s what I’d change:' : 'Done.'), raw: raw, items: items, skipped: parsed.ops.length - items.length, model: label, focus: f });
-  }
-  function chatSend() {
-    var inp = $('#chat-input'), text = inp ? inp.value.trim() : '';
-    if (chat.busy || chat.reading || (!text && !chat.attach)) return;
-    chat.msgs.push({ role: 'user', text: text, src: chat.attach ? { name: chat.attach.name, text: chat.attach.text } : null });
-    chat.attach = null; if (inp) { inp.value = ''; chatGrow(); }
-    chat.open = true;
-    var c = aiCfg(), prov = c.use, key = c.keys[prov];
-    if (!key) { chat.msgs.push({ role: 'nokey', prov: prov }); chatKeep(); renderChat(); return; }
-    chat.busy = true; chatKeep(); renderChat();
-    var label = aiLabel(c, prov);
-    aiSend(prov, key, c.ids[prov], CHAT_RULES, chatMessages()).then(function (raw) {
-      chat.busy = false; chatAi(raw, label); chatKeep(); renderChat();
-    }, function (e) {
-      chat.busy = false; chat.msgs.push({ role: 'ai', error: true, text: e.message || 'Something went wrong.' }); chatKeep(); renderChat();
-    });
-  }
-  function chatCopyText() {
-    return CHAT_RULES + '\n\n' + chatMessages().map(function (m) { return (m.role === 'user' ? 'Me: ' : 'You: ') + m.content; }).join('\n\n') + '\n\nReply with the JSON object only.';
-  }
-  function chatText(t) {
-    return esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
-  }
-  function renderChat() {
-    var dock = $('#chat-dock'); if (!dock) return;
-    var c = aiCfg(), f = chatFocusId();
-    dock.classList.toggle('is-open', chat.open);
-    var sel = $('#chat-model');
-    if (sel) sel.innerHTML = ['claude', 'openai'].map(function (k) { return '<option value="' + k + '"' + (c.use === k ? ' selected' : '') + '>' + esc(aiLabel(c, k)) + (c.keys[k] ? '' : ' (no key)') + '</option>'; }).join('');
-    var ctx = $('#chat-ctx');
-    if (ctx) ctx.innerHTML = f ? 'About <b>' + esc(truncate(getProject(f).name, 34)) + '</b>' + (ui.hub ? '' : ' <button type="button" class="link-btn" data-act="chat-unfocus">All projects</button>') : 'All your projects';
-    var att = $('#chat-att');
-    if (att) { att.hidden = !(chat.attach || chat.reading); att.innerHTML = chat.reading ? 'Reading the file…' : chat.attach ? esc(chat.attach.name) + ' · ' + chat.attach.text.length.toLocaleString() + ' characters <button type="button" class="icon-x" data-act="chat-att-x" aria-label="Remove the file">×</button>' : ''; }
-    var log = $('#chat-log'); if (!log) return;
-    var h = '';
-    if (!chat.msgs.length) h += '<div class="chat-hello"><p>Ask anything about your projects, or tell me what to change.</p><div class="chat-sugg">' +
-      ['What should I focus on today?', 'What’s at risk this week?', f ? 'Add the requirements from a PDF to this project' : 'Plan my week'].map(function (t) { return '<button type="button" class="chip" data-act="chat-sugg">' + esc(t) + '</button>'; }).join('') + '</div></div>';
-    chat.msgs.forEach(function (m, mi) {
-      if (m.role === 'user') { h += '<div class="cm cm-user">' + chatText(m.text) + (m.src ? '<span class="cm-file">' + esc(m.src.name) + '</span>' : '') + '</div>'; return; }
-      if (m.role === 'nokey') {
-        var nm = AI_NAMES[m.prov];
-        h += '<div class="cm cm-ai cm-note"><p>There’s no ' + nm + ' key on this device yet. Add one to chat here, or copy this for ' + nm + ' and paste its answer back.</p>' +
-          '<div class="cm-acts"><button type="button" class="btn btn-sm primary" data-act="chat-settings">Add a key</button><button type="button" class="btn btn-sm" data-act="chat-copy">Copy for ' + nm + '</button></div>' +
-          '<textarea class="cm-paste" id="cm-paste-' + mi + '" rows="3" placeholder="Paste ' + nm + '’s whole answer here"></textarea>' +
-          '<div class="cm-acts"><button type="button" class="btn btn-sm" data-act="chat-paste" data-mi="' + mi + '">Use this answer</button>' + (m.copied ? '<span class="cm-ok">Copied</span>' : '') + '</div></div>';
-        return;
-      }
-      h += '<div class="cm cm-ai' + (m.error ? ' is-err' : '') + '">' + chatText(m.text) +
-        (m.items && m.items.length ? '<div class="cm-ops">' + (m.applied == null ? m.items.map(function (it, i) {
-            return '<label class="check' + (it.danger ? ' is-danger' : '') + '"><input type="checkbox" data-act="chat-op" data-mi="' + mi + '" data-i="' + i + '"' + (it.on ? ' checked' : '') + '> <span>' + esc(it.text) + '</span></label>';
-          }).join('') + '<div class="cm-acts"><button type="button" class="btn btn-sm primary" data-act="chat-apply" data-mi="' + mi + '">Apply ' + plural(m.items.filter(function (x) { return x.on; }).length, 'change') + '</button></div>'
-          : '<p class="cm-ok">' + (m.applied === 'undone' ? 'Undone.' : plural(m.applied, 'change') + ' applied.') + (m.undo ? ' <button type="button" class="link-btn" data-act="chat-undo" data-mi="' + mi + '">Undo</button>' : '') + '</p>') + '</div>' : '') +
-        (m.skipped ? '<p class="cm-meta">' + plural(m.skipped, 'suggestion') + ' didn’t match anything here and ' + (m.skipped === 1 ? 'was' : 'were') + ' left out.</p>' : '') +
-        (m.model ? '<p class="cm-meta">' + esc(m.model) + '</p>' : '') + '</div>';
-    });
-    if (chat.busy) h += '<div class="cm cm-ai cm-wait"><span class="dots"><i></i><i></i><i></i></span> ' + esc(aiLabel(c, c.use)) + ' is thinking</div>';
-    log.innerHTML = h;
-    log.scrollTop = log.scrollHeight;
-    var send = $('#chat-send'); if (send) send.disabled = chat.busy || chat.reading;
-  }
-  function chatGrow() { var t = $('#chat-input'); if (!t) return; t.style.height = '34px'; if (t.value) t.style.height = Math.min(160, Math.max(34, t.scrollHeight)) + 'px'; }
-  function openChat(pid) {
-    if (inViewer || mode === 'readonly') return;
-    if (pid) chat.focus = pid;
-    chat.open = true; renderChat();
-    var t = $('#chat-input'); if (t) t.focus();
-  }
-  function openAskAI(pid) { openChat(pid); }
-  function chatShown() {
-    var dock = $('#chat-dock'); if (!dock) return;
-    var v = document.body.getAttribute('data-view');
-    var on = !inViewer && mode !== 'readonly' && (v === 'todo' || v === 'timeline' || !!ui.hub);
-    dock.hidden = !on; document.body.classList.toggle('dock-on', on);
-  }
-  function initChat() {
-    var dock = $('#chat-dock'); if (!dock) return;
-    $('#chat-attach-btn').innerHTML = CLIP; $('#chat-send').innerHTML = SEND;
-    $('#chat-fab').innerHTML = SPARK;
-    $('#chat-form').addEventListener('submit', function (e) { e.preventDefault(); chatSend(); });
-    var inp = $('#chat-input');
-    if (isPhone()) inp.placeholder = 'Ask, or say what to change';
-    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); chatSend(); } else if (e.key === 'Escape') { chat.open = false; renderChat(); inp.blur(); } });
-    inp.addEventListener('input', chatGrow);
-    inp.addEventListener('focus', function () { if (!chat.open && !isPhone()) { chat.open = true; renderChat(); } });
-    $('#chat-model').addEventListener('change', function (e) { var c = aiCfg(); c.use = e.target.value; aiSave(c); renderChat(); });
-    $('#chat-file').addEventListener('change', function (e) {
-      var file = e.target.files && e.target.files[0]; e.target.value = ''; if (!file) return;
-      chat.reading = true; renderChat();
-      fileText(file).then(function (r) {
-        chat.reading = false;
-        if (!r.text.trim()) { chat.msgs.push({ role: 'ai', error: true, text: 'That file has no text I can read (it may be a scan). Paste the text into the chat instead.' }); chat.open = true; }
-        else chat.attach = { name: file.name, text: r.text };
-        renderChat(); inp.focus();
-      }, function (er) { chat.reading = false; chat.msgs.push({ role: 'ai', error: true, text: er.message || 'Couldn’t read that file.' }); chat.open = true; renderChat(); });
-    });
-    dock.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-act]'); if (!b) return;
-      var a = b.dataset.act, m = chat.msgs[+b.dataset.mi];
-      if (a === 'chat-fab') { chat.open = true; renderChat(); inp.focus(); }
-      else if (a === 'chat-min') { chat.open = false; renderChat(); }
-      else if (a === 'chat-attach') $('#chat-file').click();
-      else if (a === 'chat-att-x') { chat.attach = null; renderChat(); }
-      else if (a === 'chat-clear') { chat.msgs = []; chatKeep(); renderChat(); }
-      else if (a === 'chat-settings') openAiSettings(function () { closeModal(); renderChat(); });
-      else if (a === 'chat-unfocus') { chat.focus = null; renderChat(); }
-      else if (a === 'chat-sugg') { inp.value = b.textContent; chatGrow(); if (/PDF/.test(b.textContent)) $('#chat-file').click(); else chatSend(); }
-      else if (a === 'chat-op' && m && m.items) { var it = m.items[+b.dataset.i]; if (it) { it.on = b.checked; var ap = dock.querySelector('[data-act="chat-apply"][data-mi="' + b.dataset.mi + '"]'); if (ap) ap.textContent = 'Apply ' + plural(m.items.filter(function (x) { return x.on; }).length, 'change'); } }
-      else if (a === 'chat-apply' && m && m.items) {
-        var ops = m.items.filter(function (x) { return x.on; }).map(function (x) { return x.op; });
-        if (!ops.length) return;
-        var snap = JSON.stringify({ projects: state.projects, updates: state.updates, tasks: state.tasks }), n = 0;
-        commit(function (st) { n = aiApply(st, m.focus || chatFocusId(), ops); });
-        m.applied = n; m.undo = snap; chatKeep(); renderChat();
-      }
-      else if (a === 'chat-undo' && m && m.undo) {
-        var o = JSON.parse(m.undo); m.undo = null; m.applied = 'undone';
-        commit(function (st) { st.projects = o.projects; st.updates = o.updates; st.tasks = o.tasks; });
-        chatKeep(); renderChat();
-      }
-      else if (a === 'chat-copy') {
-        var mm = chat.msgs[chat.msgs.length - 1];
-        var mark = function () { if (mm && mm.role === 'nokey') mm.copied = true; renderChat(); };
-        try { navigator.clipboard.writeText(chatCopyText()).then(mark, function () { prompt('Copy this:', chatCopyText()); }); } catch (er) { prompt('Copy this:', chatCopyText()); }
-      }
-      else if (a === 'chat-paste' && m) {
-        var ta = $('#cm-paste-' + b.dataset.mi), v = ta ? ta.value.trim() : '';
-        if (!v) { if (ta) ta.focus(); return; }
-        chat.msgs.splice(+b.dataset.mi, 1);
-        chatAi(v, AI_NAMES[m.prov] + ' (pasted)'); chatKeep(); renderChat();
-      }
-    });
-    renderChat(); chatShown(); chatGrow();
-  }
-
-  function openAiSettings(back) {
-    var c = aiCfg();
-    var ctx = {
-      draw: function () {
-        $('#modal-body').innerHTML = '<h2 id="modal-title">AI settings</h2>' +
-          '<p>Chat with Claude Opus 5.5 or GPT-6.2 Astra from the bar at the bottom. Add the key for each one you use; pick the model in the chat.</p>' +
-          '<form id="ais-form" novalidate>' +
-          '<div class="field"><label for="ais-claude">Claude API key <span class="muted">(for Claude Opus 5.5)</span></label><input id="ais-claude" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-…" value="' + esc(c.keys.claude) + '"></div>' +
-          '<div class="field"><label for="ais-openai">OpenAI API key <span class="muted">(for GPT-6.2 Astra)</span></label><input id="ais-openai" type="password" autocomplete="off" spellcheck="false" placeholder="sk-…" value="' + esc(c.keys.openai) + '"></div>' +
-          '<details class="gc-more"><summary>Model names (only if one stops working)</summary>' +
-            '<div class="field"><label for="ais-mc">Claude model</label><input id="ais-mc" type="text" spellcheck="false" placeholder="' + AI_MODELS.claude + '" value="' + esc(c.ids.claude === AI_MODELS.claude ? '' : c.ids.claude) + '"></div>' +
-            '<div class="field"><label for="ais-mo">OpenAI model</label><input id="ais-mo" type="text" spellcheck="false" placeholder="' + AI_MODELS.openai + '" value="' + esc(c.ids.openai === AI_MODELS.openai ? '' : c.ids.openai) + '"></div></details>' +
-          '<p class="muted" style="font-size:12.5px">Keys stay in this browser on this device, like your GitHub token. Polaris sends your message and your projects to Anthropic or OpenAI only when you send something. ' +
-            'API use is billed by them per message, separately from a Claude or ChatGPT subscription, so set a monthly limit in their console. Clear a box to remove that key.</p>' +
-          '<p class="form-error" id="ais-error" hidden></p>' +
-          '<div class="modal-actions"><button type="button" class="btn" data-act="ais-cancel">Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
-      },
-      onClick: function (e) {
-        var b = e.target.closest('[data-act]'); if (!b) return;
-        if (b.dataset.act === 'ais-cancel') { if (back) back(); else closeModal(); }
-      },
-      onSubmit: function () {
-        c.keys.claude = $('#ais-claude').value.trim(); c.keys.openai = $('#ais-openai').value.trim();
-        c.ids.claude = $('#ais-mc').value.trim() || AI_MODELS.claude; c.ids.openai = $('#ais-mo').value.trim() || AI_MODELS.openai;
-        if (!c.keys[c.use] && c.keys[c.use === 'claude' ? 'openai' : 'claude']) c.use = c.use === 'claude' ? 'openai' : 'claude';
-        if (!aiSave(c)) { var err = $('#ais-error'); err.textContent = 'This browser won’t let Polaris save the keys.'; err.hidden = false; return; }
-        if (back) back(); else closeModal();
-        renderChat();
-      }
-    };
-    openModal(ctx);
   }
 
   /* ================= drag to reorder ================= */
@@ -3669,7 +3050,6 @@ td.c-break{display:none}
     var ups = state.updates.filter(function (u) { return u.date >= from && u.date <= to; }).length;
     var picks = {};
     doingAll().forEach(function (x) { picks[x.m.id] = true; });
-    var c = aiCfg(), hasAI = !!(c.keys.claude || c.keys.openai);
     function dot(p) { return '<i class="rv-dot" style="background:var(--c' + p.color + ')"></i>'; }
     function count() { return Object.keys(picks).filter(function (k) { return picks[k]; }).length; }
     var ctx = {
@@ -3690,7 +3070,7 @@ td.c-break{display:none}
                   (m.date ? ' <span class="muted">· ' + fmtShort(m.date) + '</span>' : '') + (m.status === 'waiting' ? ' <span class="muted">· waiting</span>' : '') + '</span></label>';
               }).join('') + '</div>';
             }).join('') + '</section>' +
-          '<div class="modal-actions">' + (hasAI ? '<button type="button" class="link-btn" data-act="rv-ai" style="margin-right:auto">Ask AI to suggest my 3</button>' : '') +
+          '<div class="modal-actions">' +
             '<button type="button" class="btn" data-close>Later</button><button type="button" class="btn primary" data-act="rv-save">Done</button></div>';
       },
       onClick: function (e) {
@@ -3699,11 +3079,6 @@ td.c-break{display:none}
           picks[b.dataset.mid] = b.checked;
           var el = $('#modal-body .rv-n'), k = count();
           if (el) { el.textContent = k + ' picked'; el.classList.toggle('is-over', k > DOING_MAX); }
-        } else if (b.dataset.act === 'rv-ai') {
-          closeModal();
-          openChat(null);
-          var inp = $('#chat-input');
-          if (inp) { inp.value = 'Do my weekly review: what moved last week, what is stuck, and suggest my ' + DOING_MAX + ' stages for this week with one line each on why. Offer to set them to Doing.'; chatGrow(); }
         } else if (b.dataset.act === 'rv-save') {
           commit(function (s) {
             s.projects.forEach(function (p) {
@@ -4106,7 +3481,7 @@ td.c-break{display:none}
       sub.push('<span class="hub-left' + (dl <= DUE_SOON ? ' is-soon' : '') + '">' + leftText(p, T) + '</span>');
     } else sub.push('no deadline');
     sub = sub.filter(Boolean).join(' · ');
-    var acts = (ro ? '' : '<button type="button" class="btn btn-sm" data-act="ask-ai">' + SPARK + 'Ask AI</button><button type="button" class="btn btn-sm" data-act="hub-edit">Edit</button>' +
+    var acts = (ro ? '' : '<button type="button" class="btn btn-sm" data-act="hub-edit">Edit</button>' +
         (p.ended ? '<button type="button" class="btn btn-sm" data-act="reopen">Reopen</button><button type="button" class="btn btn-sm btn-quiet btn-del" data-act="delete-now">Delete now</button>'
           : '<button type="button" class="btn btn-sm btn-quiet" data-act="end">End</button>')) +
       '<button type="button" class="icon-x hub-close" data-act="hub-close" aria-label="Close project" title="Close (Esc)">×</button>';
@@ -4441,7 +3816,6 @@ td.c-break{display:none}
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !moreMenu.hidden) closeMenu(); });
     $('#mm-backup').addEventListener('click', function () { closeMenu(); openBackup(); });
     $('#mm-library').addEventListener('click', function () { closeMenu(); location.hash = '#library'; });
-    $('#mm-ai').addEventListener('click', function () { closeMenu(); openAiSettings(); });
     $('#mm-review').addEventListener('click', function () { closeMenu(); openReview(); });
 
     // re-draw when the window crosses between phone and laptop layouts
@@ -4693,7 +4067,6 @@ td.c-break{display:none}
       var a = b.dataset.act;
       if (a === 'hub-close') closeHub();
       else if (a === 'hub-edit') openProject(pid);
-      else if (a === 'ask-ai') openAskAI(pid);
       else if (a === 'scoring') openScoring(pid);
       else if (a === 'end') openEnd(pid);
       else if (a === 'reopen') openReopen(pid);
@@ -4849,7 +4222,7 @@ td.c-break{display:none}
     initStorage();
     gcalBoot();
     initDrag();
-    initChat();
+    try { localStorage.removeItem('polaris:ai'); sessionStorage.removeItem('polaris:chat'); } catch (e) {}   // AI was removed: forget any saved key
     // offline copy for the installed app (needs sw.js next to index.html; harmless without it)
     if ('serviceWorker' in navigator && !inViewer && (location.protocol === 'https:' || location.hostname === 'localhost') && !/claude|anthropic/.test(location.hostname))
       navigator.serviceWorker.register('sw.js').catch(function () {});
