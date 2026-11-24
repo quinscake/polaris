@@ -506,6 +506,24 @@ body.hub-open{overflow:hidden}
   .hub-overview{margin-left:0}
 }
 
+/* ---------- archive and scoring ---------- */
+.hsec-arch{opacity:.55;transition:opacity .2s}
+.hsec-arch:hover,.hsec-arch:focus-within{opacity:.85}
+.task-list.arch .task.piece{padding:4px 8px}
+.task-list.arch .task-title{font-weight:400;color:var(--muted)}
+.pts-h{display:flex;align-items:baseline;gap:10px}
+.pts-edit,.pts-add{font-size:12px}
+.pts-add{margin-left:auto}
+.pts-bar[data-act]{cursor:pointer}
+.sc-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.sc-row{display:grid;grid-template-columns:minmax(0,1fr) 92px;align-items:center;gap:12px;font-size:14px}
+.sc-row.is-done span{color:var(--muted)}
+.sc-row input{text-align:right}
+.sc-total{padding-top:10px;border-top:1px solid var(--rule)}
+.sc-total span{font-size:13px}
+.sc-sum{font:500 12px var(--font-mono);color:var(--muted);margin:8px 0 0}
+.sc-sum:empty{display:none}
+
 /* ---------- Ask AI ---------- */
 .spark{width:14px;height:14px;fill:currentColor;vertical-align:-2px;margin-right:6px}
 #modal-title .spark{width:17px;height:17px;color:var(--accent)}
@@ -1142,7 +1160,7 @@ td.c-break{display:none}
   var ST_ORDER = ['todo', 'doing', 'waiting', 'done'];
   var ST_LABEL = { todo: 'To do', doing: 'Doing', waiting: 'Waiting', done: 'Done' };
   var WAIT_NUDGE = 7;   // days before a "Waiting" piece gets a follow-up reminder
-  function listLabel(p) { return { application: 'Requirements', research: 'Stages', engineering: 'Stages' }[p.area] || 'To-do'; }
+  function listLabel() { return 'Stages'; }
   function numOrNull(v) { var n = Number(v); return v === null || v === '' || v === undefined || !isFinite(n) || n <= 0 ? null : Math.min(100000, Math.round(n * 100) / 100); }
   // Your North Star starts empty: you name it and add your own goals.
   function defaultMission() {
@@ -1231,6 +1249,17 @@ td.c-break{display:none}
       if (typeof u.task === 'string' && u.task) o.task = u.task;   // set when the update was made by ticking a to-do
       if (typeof u.piece === 'string' && u.piece) o.piece = u.piece; // the piece this update is about
       out.updates.push(o);
+    });
+    out.projects.forEach(function (p) {
+      var n = (p.notes || '').trim(); p.notes = '';
+      if (!n) return;
+      var d = p.start <= todayISO() ? p.start : todayISO(), parts = [];
+      for (var i = 0; i < n.length; i += 1990) parts.push(n.slice(i, i + 1990));
+      parts.forEach(function (t, k) {
+        var id = 'nt' + k + p.id;
+        if (out.updates.some(function (u) { return u.id === id; })) return;
+        out.updates.push({ id: id, projectId: p.id, date: d, text: (k ? '' : 'Notes: ') + t, created: Date.now() + k });
+      });
     });
     // Quick tasks: things that came up, with no project. Finished ones are kept for a month.
     var cutoff = addDays(todayISO(), -30), tids = {};
@@ -2335,7 +2364,7 @@ td.c-break{display:none}
   var AI_RULES = [
     'You edit a personal project tracker called Polaris. Reply with one JSON object only: {"summary": "one short sentence", "ops": [...]}.',
     'Rules:',
-    '- Change only what the request asks for. Do not add pieces, steps, notes or links that nobody asked for. No generic advice and no made-up tasks like "email someone", "check something" or "review".',
+    '- Pieces are called stages in the app. Change only what the request asks for. Do not add pieces, steps, notes or links that nobody asked for. No generic advice and no made-up tasks like "email someone", "check something" or "review".',
     '- When a source (a call, handbook or brief) is given, add only requirements the source actually states. Never invent requirements. Put the exact rule in short form in "rule": limits, format, who signs, where it is submitted.',
     '- Keep titles short (1 to 5 words). Details go in "rule".',
     '- Dates are YYYY-MM-DD, times are HH:MM (24 h). If the source gives a time in a named zone (for example "23:59 Paris time" or "CET"), set "tz" to the IANA zone (Europe/Paris). With no zone, leave "tz" out: that means the user\'s own time.',
@@ -2348,11 +2377,11 @@ td.c-break{display:none}
     '{"op":"update_step","id":"","title":"","done":true}',
     '{"op":"delete_step","id":""}',
     '{"op":"set_project","name":"","kind":"","deadline":"YYYY-MM-DD","time":"HH:MM","tz":"","pointsTotal":0}  (only the fields that change)',
-    '{"op":"set_notes","text":""}  (replaces the notes, so keep what the user wrote unless asked)',
+    '{"op":"add_note","text":""}  (adds an entry to the project\'s activity log, which is where notes live; only when asked, for example to keep key facts from a source)',
     '{"op":"add_link","url":"","title":"","notes":""}',
     '{"op":"order","ids":["piece ids, top to bottom"]}',
     'When the whole board is shared, project operations need "project":"<project id>", and you can also use',
-    '{"op":"add_project","name":"","kind":"","deadline":"YYYY-MM-DD","time":"HH:MM","tz":"","pointsTotal":0,"notes":"","pieces":[{"title":"","rule":"","due":"","time":"","tz":"","points":0,"steps":[]}]}',
+    '{"op":"add_project","name":"","kind":"","deadline":"YYYY-MM-DD","time":"HH:MM","tz":"","pointsTotal":0,"note":"key facts for the activity log (optional)","pieces":[{"title":"","rule":"","due":"","time":"","tz":"","points":0,"steps":[]}]}',
     'Statuses: todo, doing, waiting (waiting on someone else), done. Kinds are the ids listed under "kinds". "points" is only for scored items, like a grant\'s scoring table.'
   ].join('\n');
   function whenOut(date, at, tz) {
@@ -2362,7 +2391,8 @@ td.c-break{display:none}
   }
   function aiProject(p) {
     return { id: p.id, name: p.name, kind: p.area || null, start: p.start, ended: p.ended || undefined,
-      deadline: whenOut(p.deadline, p.deadlineAt, p.deadlineTz), pointsTotal: p.pointsTotal || undefined, notes: p.notes || '',
+      deadline: whenOut(p.deadline, p.deadlineAt, p.deadlineTz), pointsTotal: p.pointsTotal || undefined,
+      log: state.updates.filter(function (u) { return u.projectId === p.id; }).slice(-15).map(function (u) { return { date: u.date, text: u.text }; }),
       pieces: piecesOf(p).map(function (m) {
         return { id: m.id, title: m.title, status: m.status, rule: m.rule || undefined, due: whenOut(m.date, m.at, m.tz) || undefined, points: m.points || undefined,
           steps: stepsOf(p, m).map(function (x) { return { id: x.id, title: x.title, done: x.done }; }) };
@@ -2499,8 +2529,9 @@ td.c-break{display:none}
         if ('pointsTotal' in o && numOrNull(o.pointsTotal) !== p.pointsTotal) bits.push('total points → ' + (numOrNull(o.pointsTotal) || 'none'));
         return bits.length ? { text: pre + 'Project ' + q(p.name) + ': ' + bits.join(' · ') } : null;
       case 'set_notes':
-        if (typeof o.text !== 'string' || o.text === p.notes) return null;
-        return { text: pre + 'Replace the notes with: ' + truncate(o.text.replace(/\s+/g, ' '), 160), danger: !!(p.notes && p.notes.trim()) };
+      case 'add_note':
+        if (typeof o.text !== 'string' || !o.text.trim()) return null;
+        return { text: pre + 'Add to the activity log: ' + truncate(o.text.replace(/\s+/g, ' '), 160) };
       case 'add_link':
         if (!cleanUrl(o.url || '')) return null;
         return { text: pre + 'Add link ' + q(o.title || o.url) };
@@ -2525,7 +2556,7 @@ td.c-break{display:none}
       try {
         if (o.op === 'add_project') {
           var np = { id: uid(), name: String(o.name).slice(0, 80), color: leastUsedColor(), start: T, ended: null, deadline: null, deadlineAt: 0, deadlineTz: '', endedBy: null,
-            area: s.areas.some(function (a) { return a.id === o.kind; }) ? o.kind : null, goal: null, milestones: [], links: [], notes: typeof o.notes === 'string' ? o.notes.slice(0, 10000) : '',
+            area: s.areas.some(function (a) { return a.id === o.kind; }) ? o.kind : null, goal: null, milestones: [], links: [], notes: '',
             created: Date.now(), sample: false, pointsTotal: numOrNull(o.pointsTotal) };
           if (isISO(o.deadline)) applyDeadline(np, moment(o.deadline, o.time, o.tz));
           (Array.isArray(o.pieces) ? o.pieces : []).forEach(function (q) {
@@ -2533,7 +2564,10 @@ td.c-break{display:none}
             var pm = aiPieceFrom(q); np.milestones.push(pm);
             (Array.isArray(q.steps) ? q.steps : []).forEach(function (t) { if (t) { var st = newPiece(String(t)); st.parent = pm.id; np.milestones.push(st); } });
           });
-          s.projects.push(np); n++; return;
+          s.projects.push(np);
+          var nt = typeof o.note === 'string' ? o.note : typeof o.notes === 'string' ? o.notes : '';
+          if (nt.trim()) s.updates.push({ id: uid(), projectId: np.id, date: T, text: nt.trim().slice(0, 2000), created: Date.now() });
+          n++; return;
         }
         if (!p) return;
         if (o.op === 'add_piece') {
@@ -2565,8 +2599,9 @@ td.c-break{display:none}
           if (o.kind && s.areas.some(function (a) { return a.id === o.kind; })) p.area = o.kind;
           if ('deadline' in o) applyDeadline(p, isISO(o.deadline) ? moment(o.deadline, o.time, o.tz) : moment(null));
           if ('pointsTotal' in o) p.pointsTotal = numOrNull(o.pointsTotal);
-        } else if (o.op === 'set_notes') {
-          p.notes = String(o.text).slice(0, 10000);
+        } else if (o.op === 'set_notes' || o.op === 'add_note') {
+          var day = p.ended && p.ended < T ? p.ended : T;
+          s.updates.push({ id: uid(), projectId: p.id, date: day < p.start ? p.start : day, text: String(o.text).trim().slice(0, 2000), created: Date.now() });
         } else if (o.op === 'add_link') {
           var u = cleanUrl(o.url || ''); if (!u) return;
           linksOf(p).push({ id: uid(), url: u, title: String(o.title || '').slice(0, 120), kind: guessKind(u), notes: String(o.notes || '').slice(0, 4000), added: T });
@@ -3224,7 +3259,7 @@ td.c-break{display:none}
           '<div class="field"><label for="pj-area">Kind</label><select id="pj-area">' + opt('', 'None', d.area) +
             state.areas.map(function (a) { return opt(a.id, a.name, d.area); }).join('') + '</select></div>' +
           (isNew ? '<label class="check kind-stages" id="pj-stages-row" hidden><input type="checkbox" id="pj-stages"' + (d.stages ? ' checked' : '') + '> <span id="pj-stages-txt"></span></label>' : '') +
-          '<p class="hub-hint kind-hint" id="pj-kind-hint" hidden>Add one requirement per document the call asks for. Tap one to paste its exact rule, points and deadline.</p>' +
+          '<p class="hub-hint kind-hint" id="pj-kind-hint" hidden>Add one stage per document the call asks for. Tap one to paste its exact rule, points and deadline.</p>' +
           '<div class="field"><label for="pj-start">Start date</label><input id="pj-start" type="date" value="' + esc(d.start) + '" max="' + T + '"></div>' +
           whenFields('pj-dl', 'Final deadline <span class="muted">(ends the project)</span>', d.dl, p0 && p0.ended ? '' : T) +
           '<div class="field" id="pj-pts-row" hidden><label for="pj-pts">Total points in the scoring <span class="muted">(optional)</span></label><input id="pj-pts" type="number" min="0" step="1" inputmode="numeric" value="' + esc(String(d.pts || '')) + '" placeholder="e.g. 140"></div>' +
@@ -3420,6 +3455,37 @@ td.c-break{display:none}
     }
     openModal(ctx);
   }
+  // Points per stage, plus the scoring's total if some points come from elsewhere.
+  function openScoring(pid) {
+    var p = getProject(pid); if (!p || mode === 'readonly') return;
+    var P = piecesOf(p);
+    function sumUp() {
+      var sum = 0; $$('#sc-form input[data-mid]').forEach(function (inp) { sum += numOrNull(inp.value) || 0; });
+      var tot = numOrNull($('#sc-total').value), el = $('#sc-sum');
+      el.textContent = sum ? 'Stages add up to ' + Math.round(sum * 100) / 100 + (tot ? ' of ' + tot : '') + ' points.' : '';
+    }
+    openModal({
+      draw: function () {
+        $('#modal-body').innerHTML = '<div class="modal-head" style="--pc:var(--c' + p.color + ')"><i class="dot"></i><div><h2 id="modal-title">Scoring</h2><p class="modal-sub">' + esc(p.name) + '</p></div></div>' +
+          '<p class="hub-hint" style="margin-top:0">How many points each stage is worth. Leave it empty if it isn’t scored.</p>' +
+          '<form id="sc-form" novalidate>' + (P.length ? '<div class="sc-list">' + P.map(function (m) {
+            return '<label class="sc-row' + (m.done ? ' is-done' : '') + '"><span>' + esc(m.title) + '</span><input type="number" min="0" step="1" inputmode="numeric" data-mid="' + esc(m.id) + '" value="' + (m.points || '') + '" aria-label="Points for ' + esc(m.title) + '"></label>';
+          }).join('') + '</div>' : '<p class="hub-empty">Add stages first, then give them points here.</p>') +
+          '<label class="sc-row sc-total"><span>Total in the scoring <span class="muted">(optional, when some points come from things that aren’t stages, like country)</span></span><input id="sc-total" type="number" min="0" step="1" inputmode="numeric" value="' + (p.pointsTotal || '') + '"></label>' +
+          '<p class="sc-sum" id="sc-sum"></p>' +
+          '<div class="modal-actions"><button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
+        $$('#sc-form input').forEach(function (inp) { inp.addEventListener('input', sumUp); });
+        sumUp();
+      },
+      onSubmit: function () {
+        commit(function () {
+          $$('#sc-form input[data-mid]').forEach(function (inp) { var m = taskById(p, inp.dataset.mid); if (m) m.points = numOrNull(inp.value); });
+          p.pointsTotal = numOrNull($('#sc-total').value);
+        });
+        closeModal();
+      }
+    });
+  }
   // Change a piece's status. Done goes through the usual "done" path (timeline dot, faded star).
   function setStatus2(s, p, m, st, T) {
     if (ST_ORDER.indexOf(st) < 0) return;
@@ -3576,7 +3642,7 @@ td.c-break{display:none}
     var area = areaOf(p);
 
     function dueBits(m) {
-      if (m.done) return { cls: '', txt: recentDone(m.doneAt) ? fadeNote(m.doneAt) : m.doneOn ? 'done ' + (m.doneOn === T ? 'today' : fmtShort(m.doneOn)) : 'done' };
+      if (m.done) return { cls: '', txt: m.doneOn ? 'done ' + (m.doneOn === T ? 'today' : fmtShort(m.doneOn)) : 'done' };
       if (!m.date) return { cls: '', txt: '' };
       var n = diffDays(T, m.date), src = srcNote(m.at, m.tz), w = fmtShort(m.date) + (m.time ? ' ' + m.time : '');
       if (n < 0) return { cls: ' is-late', txt: w + ' · ' + plural(-n, 'day') + ' overdue' };
@@ -3600,17 +3666,21 @@ td.c-break{display:none}
         '<button type="button" class="task-main" data-act="task" data-mid="' + esc(m.id) + '"><span class="task-title">' + esc(m.title) + '</span>' +
           (b.txt ? '<span class="task-meta">' + esc(b.txt) + '</span>' : '') + '</button>' + linkA(m) + sunBtn(m) + '</li>';
     }
-    var P = piecesOf(p), nx = nextPiece(p);
+    var P = piecesOf(p), nx = nextPiece(p), Popen = P.filter(function (m) { return !m.done; });
+    function stSelect(m) {
+      return '<select class="st-pill st-' + m.status + '" data-act="piece-status" data-mid="' + esc(m.id) + '" aria-label="Status of ' + esc(m.title) + '"' + (ro ? ' disabled' : '') + '>' +
+        ST_ORDER.map(function (k) { return '<option value="' + k + '"' + (m.status === k ? ' selected' : '') + '>' + ST_LABEL[k] + '</option>'; }).join('') + '</select>';
+    }
     function pieceRow(m) {
       var b = dueBits(m), S = stepsOf(p, m), sd = S.filter(function (x) { return x.done; }).length, meta = [];
+      S = S.filter(function (x) { return !x.done; }).concat(S.filter(function (x) { return x.done; }));   // finished steps sink to the bottom
       if (!m.done && b.txt) meta.push(b.txt);
       if (m.status === 'waiting' && m.waitSince) meta.push('waiting since ' + fmtShort(m.waitSince));
       if (S.length) meta.push(sd + ' of ' + S.length + ' steps');
       if (m.done && b.txt) meta.push(b.txt);
       if (m.points) meta.push(m.points + ' pts');
       return '<li class="task piece st-' + m.status + (m.done ? '' : b.cls) + (m === nx ? ' is-next' : '') + (justStarred === m.id ? ' just-starred' : '') + '"' + sortAttr(m.id) + '>' +
-        '<div class="piece-top"><select class="st-pill st-' + m.status + '" data-act="piece-status" data-mid="' + esc(m.id) + '" aria-label="Status of ' + esc(m.title) + '"' + (ro ? ' disabled' : '') + '>' +
-          ST_ORDER.map(function (k) { return '<option value="' + k + '"' + (m.status === k ? ' selected' : '') + '>' + ST_LABEL[k] + '</option>'; }).join('') + '</select>' +
+        '<div class="piece-top">' + stSelect(m) +
         '<button type="button" class="task-main" data-act="task" data-mid="' + esc(m.id) + '" title="' + (ro ? '' : 'Open') + '"><span class="task-title">' + esc(m.title) + '</span>' +
           (m.rule ? '<span class="piece-rule">' + esc(m.rule) + '</span>' : '') +
           (meta.length || m === nx ? '<span class="task-meta">' + (m === nx ? '<span class="next-tag">Next</span>' : '') + esc(meta.join(' · ')) + '</span>' : '') + '</button>' +
@@ -3635,11 +3705,12 @@ td.c-break{display:none}
     var nDone = P.filter(function (m) { return m.done; }).length, pace = paceOf(p), overview = '';
     if (P.length) {
       overview += '<div class="hub-prog"><div class="pbar" role="img" aria-label="' + nDone + ' of ' + P.length + ' done"><i style="width:' + Math.round(nDone / P.length * 100) + '%"></i></div>' +
-        '<span class="pbar-n">' + nDone + ' of ' + P.length + ' done</span>' + (pace ? '<span class="pace pace-' + pace.key + '">' + pace.label + '</span>' : '') + '</div>';
+        '<span class="pbar-n">' + nDone + ' of ' + P.length + ' done</span>' + (pace ? '<span class="pace pace-' + pace.key + '">' + pace.label + '</span>' : '') +
+        (!ro && !P.some(function (m) { return m.points; }) ? '<button type="button" class="link-btn pts-add" data-act="scoring">Add scoring</button>' : '') + '</div>';
       var WP = P.filter(function (m) { return m.points; });
       if (WP.length) {
         var sum = WP.reduce(function (a, m) { return a + m.points; }, 0), total = Math.max(p.pointsTotal || 0, sum), other = Math.round((total - sum) * 100) / 100;
-        overview += '<div class="pts"><div class="pts-h">Where the ' + total + ' points are</div><div class="pts-bar">' +
+        overview += '<div class="pts"><div class="pts-h">Where the ' + total + ' points are' + (ro ? '' : '<button type="button" class="link-btn pts-edit" data-act="scoring">Edit scoring</button>') + '</div><div class="pts-bar"' + (ro ? '' : ' data-act="scoring" title="Edit scoring"') + '>' +
           WP.map(function (m) { return '<i class="' + (m.done ? 'is-done' : '') + '" style="flex:' + m.points + '" title="' + esc(m.title) + ': ' + m.points + '"></i>'; }).join('') +
           (other > 0 ? '<i class="is-other" style="flex:' + other + '" title="Other criteria: ' + other + '"></i>' : '') + '</div>' +
           '<div class="pts-key">' + WP.map(function (m) { return '<span' + (m.done ? ' class="is-done"' : '') + '>' + esc(truncate(m.title, 26)) + ' ' + m.points + '</span>'; }).join('') +
@@ -3648,40 +3719,38 @@ td.c-break{display:none}
     }
 
     // the pieces
-    var LBL = listLabel(p), kindPh = { Requirements: 'Add a requirement (paste a link to attach it)', Stages: 'Add a stage (paste a link to attach it)' }[LBL] || 'Add a to-do (paste a link to attach it)';
-    var tasksSec = '<section class="hsec hsec-tasks" aria-labelledby="hs-tasks"><div class="hsec-h"><h3 id="hs-tasks">' + LBL + '</h3><span class="count">' + (P.length || '') + '</span></div>' +
+    var LBL = listLabel(p), kindPh = 'Add a stage (paste a link to attach it)';
+    var tasksSec = '<section class="hsec hsec-tasks" aria-labelledby="hs-tasks"><div class="hsec-h"><h3 id="hs-tasks">' + LBL + '</h3><span class="count">' + (Popen.length || '') + '</span></div>' +
       (ro ? '' : '<form id="task-add" class="task-add" novalidate autocomplete="off">' +
         '<label for="ta-title" class="sr-only">New item</label><input id="ta-title" data-keep data-focus="tasks" type="text" maxlength="2100" placeholder="' + kindPh + '">' +
         '<label for="ta-date" class="sr-only">Due date (optional)</label><input id="ta-date" data-keep type="date" title="Due date (optional)">' +
         '<button type="submit" class="btn btn-sm primary">Add</button></form>') +
-      (P.length ? '<ul class="task-list pieces" data-sort-list="hub:' + esc(p.id) + '">' + P.map(pieceRow).join('') + '</ul>' +
+      (Popen.length ? '<ul class="task-list pieces" data-sort-list="hub:' + esc(p.id) + '">' + Popen.map(pieceRow).join('') + '</ul>' +
           (ro ? '' : '<p class="hub-hint">Tap one to add its exact rule, deadline, points or small steps. ' + (isPhone() ? 'Hold and drag' : 'Drag') + ' to reorder.</p>')
-        : '<p class="hub-empty">' + (LBL === 'Requirements' ? 'Add one requirement per document the call asks for. Tap one afterwards to paste its exact rule, points and deadline.' :
-            LBL === 'Stages' ? 'Add the stages this project goes through. Tap one to add small steps inside it.' : 'No to-dos yet. Add each step this project needs, with a date if it has one.') + '</p>') +
+        : '<p class="hub-empty">' + (P.length ? 'All stages are done. They’re in the archive at the bottom.' : 'Add the stages this project goes through. Tap one to add its exact rule, deadline, points or small steps.') + '</p>') +
       '</section>';
 
-    // notes
-    var notesSec = '<section class="hsec hsec-notes" aria-labelledby="hs-notes"><div class="hsec-h"><h3 id="hs-notes">Notes</h3></div>' +
-      '<label for="hub-notes" class="sr-only">Project notes</label><textarea id="hub-notes" data-keep data-focus="notes" rows="7" maxlength="10000" placeholder="Goal, requirements, key facts, decisions…"' + (ro ? ' readonly' : '') + '>' + esc(p.notes || '') + '</textarea>' +
-      (ro ? '' : '<p class="hub-hint">Saves when you click away.</p>') + '</section>';
+    // archive: finished stages, kept for the record, faded at the very bottom
+    var arch = P.filter(function (m) { return m.done; }).sort(function (a, b) { return (b.doneAt || 0) - (a.doneAt || 0) || ((a.doneOn || '') < (b.doneOn || '') ? 1 : -1); });
+    var archSec = arch.length ? '<section class="hsec hsec-arch" aria-labelledby="hs-arch"><div class="hsec-h"><h3 id="hs-arch">Archive</h3><span class="count">' + arch.length + '</span></div>' +
+      '<ul class="task-list arch">' + arch.map(function (m) {
+        var S = stepsOf(p, m), meta = [m.doneOn ? 'done ' + (m.doneOn === T ? 'today' : fmtYear(m.doneOn)) : 'done'];
+        if (S.length) meta.push(plural(S.length, 'step'));
+        if (m.points) meta.push(m.points + ' pts');
+        return '<li class="task piece arch-row"><div class="piece-top">' + stSelect(m) +
+          '<button type="button" class="task-main" data-act="task" data-mid="' + esc(m.id) + '"><span class="task-title">' + esc(m.title) + '</span><span class="task-meta">' + esc(meta.join(' · ')) + '</span></button>' + linkA(m) + '</div></li>';
+      }).join('') + '</ul>' + (ro ? '' : '<p class="hub-hint">To bring one back, change its status.</p>') + '</section>' : '';
 
-    // files and links: the project's own, plus any attached to a to-do
+    // files and links: the project's own (links on a stage stay on the stage)
     var order = { published: 0, file: 1, link: 2 };
     var L = linksOf(p).slice().sort(function (a, b) { return order[a.kind] - order[b.kind] || (a.added < b.added ? 1 : a.added > b.added ? -1 : 0); });
-    var TL = p.milestones.filter(function (m) { return m.url; });
-    var filesSec = '<section class="hsec hsec-files" aria-labelledby="hs-files"><div class="hsec-h"><h3 id="hs-files">Files &amp; links</h3><span class="count">' + ((L.length + TL.length) || '') + '</span></div>' +
+    var filesSec = '<section class="hsec hsec-files" aria-labelledby="hs-files"><div class="hsec-h"><h3 id="hs-files">Files &amp; links</h3><span class="count">' + (L.length || '') + '</span></div>' +
       (ro ? '' : '<form id="hub-lk" class="lk-add" novalidate autocomplete="off">' +
         '<label for="hl-url" class="sr-only">Link</label><input id="hl-url" data-keep data-focus="files" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="Paste a link: Doc, Sheet, Drive, paper, website…">' +
         '<label for="hl-name" class="sr-only">Name</label><input id="hl-name" data-keep type="text" maxlength="120" placeholder="Name (optional)">' +
         '<button type="submit" class="btn btn-sm primary">Add</button></form><p class="form-error" id="hl-error" hidden></p>') +
       (L.length ? '<ul class="lk-list">' + L.map(function (l) { return linkRowHTML(p, l); }).join('') + '</ul>' : '') +
-      (TL.length ? '<h4 class="lk-group">On to-dos</h4><ul class="lk-list">' + TL.map(function (m) {
-        var info = linkInfo(m.url);
-        return '<li class="lk-row"><button type="button" class="lk-main" data-act="task" data-mid="' + esc(m.id) + '">' + linkTile(info.svc) +
-          '<span class="lk-text"><span class="lk-title">' + esc(m.title) + '</span><span class="lk-sub">' + esc(info.label) + (m.done ? ' · done' : '') + '</span></span></button>' +
-          '<a class="lk-open" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer" title="Open" aria-label="Open ' + esc(m.title) + '">' + EXT + '</a></li>';
-      }).join('') + '</ul>' : '') +
-      (!L.length && !TL.length ? '<p class="hub-empty">No files yet. Paste the link to a Google Doc, Drive folder, paper or web page. Tap one to add notes.</p>' : '') +
+      (!L.length ? '<p class="hub-empty">No files yet. Paste the link to a Google Doc, Drive folder, paper or web page. Tap one to add notes.</p>' : '') +
       '</section>';
 
     // activity: every dot on this project's line, newest first
@@ -3707,7 +3776,7 @@ td.c-break{display:none}
     return '<div class="hub-panel" role="dialog" aria-modal="true" aria-labelledby="hub-title" style="--pc:var(--c' + p.color + ')">' +
       '<header class="hub-head"><i class="dot" aria-hidden="true"></i><div class="hub-titles"><h2 id="hub-title">' + esc(p.name) + '</h2><p class="hub-sub">' + sub + '</p></div>' +
       '<div class="hub-acts">' + acts + '</div></header>' + (overview ? '<div class="hub-overview">' + overview + '</div>' : '') +
-      '<div class="hub-body">' + tasksSec + logSec + filesSec + notesSec + '</div></div>';
+      '<div class="hub-body">' + tasksSec + logSec + filesSec + archSec + '</div></div>';
   }
 
   // Redraw the open project window, keeping whatever you were typing and where you were.
@@ -4201,6 +4270,7 @@ td.c-break{display:none}
       if (a === 'hub-close') closeHub();
       else if (a === 'hub-edit') openProject(pid);
       else if (a === 'ask-ai') openAskAI(pid);
+      else if (a === 'scoring') openScoring(pid);
       else if (a === 'end') openEnd(pid);
       else if (a === 'reopen') openReopen(pid);
       else if (a === 'deadline') openDeadline(pid);
