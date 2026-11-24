@@ -444,6 +444,87 @@ body.hub-open{overflow:hidden}
 .node .ck{width:8px;height:8px;color:var(--space)}
 .node .ck path{stroke-width:3}
 
+/* ---------- pieces: status, rule, steps, progress, points ---------- */
+.task.piece{flex-direction:column;align-items:stretch;gap:4px;padding:7px 8px}
+.piece-top{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.piece-top .st-pill{margin-top:1px}
+.piece-top .task-link,.piece-top .tact{margin-top:1px}
+.st-pill{flex:none;width:84px;appearance:none;-webkit-appearance:none;font:600 11px/1 var(--font-mono);letter-spacing:.02em;text-align:center;text-align-last:center;
+  padding:6px 6px;border-radius:999px;border:1px solid var(--rule);background:rgba(255,255,255,.03);color:var(--muted);cursor:pointer}
+.st-pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.st-pill.st-doing{color:#9fb6ff;border-color:rgba(159,182,255,.45);background:rgba(159,182,255,.1)}
+.st-pill.st-waiting{color:var(--warn);border-color:rgba(255,204,102,.45);background:rgba(255,204,102,.08)}
+.st-pill.st-done{color:var(--ok);border-color:rgba(111,214,160,.45);background:rgba(111,214,160,.08)}
+.st-pill option{background:#141a2a;color:var(--ink)}
+.task.piece.st-done .task-title{color:var(--muted)}
+.piece-rule{font-size:12.5px;line-height:1.4;color:#a9b1c6;overflow-wrap:anywhere;margin-top:1px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.task.piece.st-done .piece-rule{display:none}
+.task-list.steps{margin:2px 0 0 94px;gap:1px}
+.task.step{padding:3px 6px}
+.task.step .tbox{width:18px;height:18px;border-radius:6px}
+.task.step .task-title{font-weight:400;font-size:13.5px}
+.hub-overview{margin:12px 0 0 24px;display:flex;flex-direction:column;gap:10px}
+.hub-prog{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pbar{flex:1 1 160px;height:6px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--ok);border-radius:3px}
+.pbar-n{font:500 12px var(--font-mono);color:var(--muted)}
+.pace{font:600 11px var(--font-mono);padding:3px 9px;border-radius:999px;border:1px solid var(--rule)}
+.pace-ok,.pace-done{color:var(--ok);border-color:rgba(111,214,160,.45);background:rgba(111,214,160,.08)}
+.pace-behind{color:var(--warn);border-color:rgba(255,204,102,.45);background:rgba(255,204,102,.08)}
+.pts-h{font:500 11.5px var(--font-mono);color:var(--muted);margin-bottom:5px}
+.pts-bar{display:flex;gap:2px;height:8px;border-radius:4px;overflow:hidden}
+.pts-bar i{background:var(--pc);opacity:.45}
+.pts-bar i.is-done{opacity:1}
+.pts-bar i.is-other{background:rgba(255,255,255,.08);opacity:1}
+.pts-key{display:flex;flex-wrap:wrap;gap:3px 14px;margin-top:6px;font:400 11.5px var(--font-mono);color:#a9b1c6}
+.pts-key span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:2px;background:var(--pc);opacity:.45;margin-right:6px}
+.pts-key span.is-done::before{opacity:1}
+.pts-key span.is-other{color:var(--muted)}
+.pts-key span.is-other::before{background:rgba(255,255,255,.15);opacity:1}
+.hub-src{color:#8a93ab}
+.label-meta .prog{display:inline-flex;align-items:center;gap:7px}
+.mbar{display:inline-block;width:46px;height:4px;border-radius:2px;background:rgba(255,255,255,.1);overflow:hidden}
+.mbar i{display:block;height:100%;background:var(--ok)}
+.pace-t.is-behind{color:var(--warn)}
+.pace-t.is-ok{color:var(--ok)}
+.feed-tag{display:inline-block;font:500 10.5px var(--font-mono);color:var(--muted);border:1px solid var(--rule);border-radius:6px;padding:0 6px;margin-left:4px;vertical-align:1px}
+.hub .log-add .lg-piece{grid-column:1 / -1;font-size:12.5px;padding:5px 8px;max-width:100%}
+.when-local{font:500 12px var(--font-mono);color:var(--accent);margin:-2px 0 4px;min-height:0}
+.when-local:empty{display:none}
+.kind-stages{font-size:13px;color:var(--muted);margin:-2px 0 6px}
+.st-list{list-style:none;margin:4px 0 6px;padding:0;display:flex;flex-direction:column;gap:2px}
+.st-item{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.st-add{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.field-label{font-size:13px;color:var(--ink);font-weight:500}
+@media (max-width: 640px){
+  .piece-top{display:grid;grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"main link sun" "pill link sun";column-gap:8px;row-gap:6px}
+  .piece-top .task-main{grid-area:main}
+  .piece-top .st-pill{grid-area:pill;justify-self:start;width:auto;padding:5px 12px;margin-top:0}
+  .piece-top .task-link{grid-area:link}
+  .piece-top .tact{grid-area:sun}
+  .task-list.steps{margin-left:10px}
+  .hub-overview{margin-left:0}
+}
+
+/* ---------- Ask AI ---------- */
+.spark{width:14px;height:14px;fill:currentColor;vertical-align:-2px;margin-right:6px}
+#modal-title .spark{width:17px;height:17px;color:var(--accent)}
+.ai-src{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ai-file{cursor:pointer}
+.ai-src-info{font:500 12px var(--font-mono);color:var(--muted)}
+.ai-paste{margin-top:8px}
+.ai-paste summary{cursor:pointer;color:var(--muted);font-size:13px}
+.ai-paste textarea{margin-top:8px;width:100%}
+.ai-acts{flex-wrap:wrap}
+.ai-copied{font-size:13px;color:var(--ok);margin:6px 0 0}
+.ai-summary{margin:0 0 10px;color:var(--ink)}
+.ai-ops{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:52vh;overflow:auto}
+.ai-ops .check{align-items:flex-start;line-height:1.45;font-size:14px}
+.ai-ops .check input{margin-top:3px}
+.ai-ops .is-danger span{color:#ff9a8a}
+.ai-prov{border:0;padding:0;margin:0 0 6px;display:flex;flex-direction:column;gap:6px}
+.ai-prov legend{font-size:13px;font-weight:500;margin-bottom:4px}
+
 /* ---------- drag to reorder ---------- */
 [data-sort-list] > [data-sort-id]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .task[data-sort-id]{position:relative}
@@ -748,6 +829,7 @@ td.c-break{display:none}
       <button type="button" class="btn btn-more" id="btn-more" aria-haspopup="true" aria-expanded="false" aria-controls="more-menu" aria-label="More">&#x22EF;</button>
       <div class="more-menu" id="more-menu" hidden>
         <button type="button" id="mm-library">Library</button>
+        <button type="button" id="mm-ai">Ask AI</button>
         <button type="button" id="mm-backup">Backup</button>
       </div>
     </div>
@@ -977,12 +1059,42 @@ td.c-break{display:none}
   function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function plural(n, w) { return n + ' ' + w + (n === 1 ? '' : 's'); }
+  var SPARK = '<svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg>';
   function truncate(s, n) { s = String(s); return s.length > n ? s.slice(0, n - 1) + '…' : s; }
 
   function todayISO() { var d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
   function isISO(s) { return typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s); }
   function isTime(s) { return typeof s === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(s); }
   function noonOf(iso) { return isISO(iso) ? new Date(iso + 'T12:00:00').getTime() : 0; }
+  var LOCAL_TZ = (function () { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { return ''; } })();
+  function validTz(z) { if (!z || typeof z !== 'string') return false; try { new Intl.DateTimeFormat('en-US', { timeZone: z }); return true; } catch (e) { return false; } }
+  function zoneParts(ms, tz) {
+    var o = {};
+    new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' })
+      .formatToParts(new Date(ms)).forEach(function (x) { o[x.type] = x.value; });
+    return { y: +o.year, mo: +o.month, d: +o.day, h: +o.hour % 24, mi: +o.minute, s: +o.second };
+  }
+  function tzOffset(ms, tz) { var p = zoneParts(ms, tz); return Date.UTC(p.y, p.mo - 1, p.d, p.h, p.mi, p.s) - Math.floor(ms / 1000) * 1000; }
+  // "2027-01-31", "23:59", "Europe/Paris" -> the exact moment. No zone means this device's own time.
+  function zonedMs(date, time, tz) {
+    var a = date.split('-'), t = time.split(':');
+    if (!tz || !validTz(tz)) return new Date(+a[0], +a[1] - 1, +a[2], +t[0], +t[1]).getTime();
+    var wall = Date.UTC(+a[0], +a[1] - 1, +a[2], +t[0], +t[1]);
+    var guess = wall - tzOffset(wall, tz);
+    return wall - tzOffset(guess, tz);
+  }
+  function localISOOf(ms) { var d = new Date(ms); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function localTimeOf(ms) { var d = new Date(ms); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+  function wallIn(ms, tz) { var p = zoneParts(ms, tz); return { date: p.y + '-' + pad(p.mo) + '-' + pad(p.d), time: pad(p.h) + ':' + pad(p.mi) }; }
+  function zoneName(tz) { return String(tz || '').split('/').pop().replace(/_/g, ' '); }
+  // "Jan 31 23:59 Paris time", only when that zone's clock reads differently from yours
+  function srcNote(ms, tz) {
+    if (!ms || !tz || tz === LOCAL_TZ || !validTz(tz)) return '';
+    var w = wallIn(ms, tz);
+    if (w.date === localISOOf(ms) && w.time === localTimeOf(ms)) return '';
+    return fmtShort(w.date) + ' ' + w.time + ' ' + zoneName(tz) + ' time';
+  }
+  function hoursLeft(ms) { return Math.max(0, Math.ceil((ms - Date.now()) / 3600000)); }
   function toUTC(iso) { var a = iso.split('-'); return Date.UTC(+a[0], +a[1] - 1, +a[2]); }
   function fromUTC(ms) { var d = new Date(ms); return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate()); }
   function addDays(iso, n) { return fromUTC(toUTC(iso) + n * 86400000); }
@@ -1019,9 +1131,19 @@ td.c-break{display:none}
   var inViewer = !!(window.claude && typeof window.claude.use === 'function');
 
   var DEFAULT_AREAS = [
-    { id: 'research', name: 'Research' }, { id: 'class', name: 'Class' },
-    { id: 'project', name: 'Project' }, { id: 'personal', name: 'Personal' }
+    { id: 'research', name: 'Research' }, { id: 'engineering', name: 'Engineering' }, { id: 'application', name: 'Application' },
+    { id: 'class', name: 'Class' }, { id: 'personal', name: 'Personal' }
   ];
+  // What a new project of each kind starts with. You can rename or delete any of them.
+  var KIND_STAGES = {
+    research: ['Reading and question', 'Simulations or experiments', 'Results', 'Write-up', 'Submit'],
+    engineering: ['Requirements', 'Design', 'Build', 'Test', 'Deliver']
+  };
+  var ST_ORDER = ['todo', 'doing', 'waiting', 'done'];
+  var ST_LABEL = { todo: 'To do', doing: 'Doing', waiting: 'Waiting', done: 'Done' };
+  var WAIT_NUDGE = 7;   // days before a "Waiting" piece gets a follow-up reminder
+  function listLabel(p) { return { application: 'Requirements', research: 'Stages', engineering: 'Stages' }[p.area] || 'To-do'; }
+  function numOrNull(v) { var n = Number(v); return v === null || v === '' || v === undefined || !isFinite(n) || n <= 0 ? null : Math.min(100000, Math.round(n * 100) / 100); }
   // Your North Star starts empty: you name it and add your own goals.
   function defaultMission() {
     return { title: 'North Star', goals: [] };
@@ -1043,6 +1165,14 @@ td.c-break{display:none}
       areaIds[id] = true;
       out.areas.push({ id: id, name: a.name.trim().slice(0, 30) });
     });
+    // One-time: the old catch-all "Project" area becomes Engineering, and Application is added
+    var migrateArea = false;
+    if (areaIds.project && !areaIds.engineering && !areaIds.application && out.areas.some(function (a) { return a.id === 'project' && a.name === 'Project'; })) {
+      var rest = out.areas.filter(function (a) { return a.id !== 'project'; });
+      out.areas = rest.filter(function (a) { return a.id === 'research'; })
+        .concat([{ id: 'engineering', name: 'Engineering' }, { id: 'application', name: 'Application' }], rest.filter(function (a) { return a.id !== 'research'; }));
+      areaIds.engineering = areaIds.application = true; delete areaIds.project; migrateArea = true;
+    }
     var m = s.mission && typeof s.mission === 'object' ? s.mission : defaultMission();
     var goalIds = {};
     out.mission = { title: typeof m.title === 'string' && m.title.trim() ? m.title.trim().slice(0, 50) : 'North Star', goals: [] };
@@ -1067,16 +1197,30 @@ td.c-break{display:none}
         var mid = String(x.id || uid());
         if (msIds[mid]) return;
         msIds[mid] = true;
-        ms.push({ id: mid, title: x.title.trim().slice(0, 140), date: isISO(x.date) ? x.date : null, done: !!x.done,
+        var date = isISO(x.date) ? x.date : null, time = date && isTime(x.time) ? x.time : null, at = Number(x.at) || 0;
+        if (at > 0 && (time || !date)) { date = localISOOf(at); time = localTimeOf(at); }   // a moment: shown on this device's clock
+        else if (date && time) at = zonedMs(date, time, '');
+        else at = 0;
+        var st = x.done ? 'done' : (x.status === 'doing' || x.status === 'waiting') ? x.status : 'todo';
+        ms.push({ id: mid, title: x.title.trim().slice(0, 140), date: date, done: !!x.done,
           doneOn: x.done && isISO(x.doneOn) ? x.doneOn : null, url: (typeof x.url === 'string' && cleanUrl(x.url)) || '', created: Number(x.created) || 0,
-          today: !x.done && isISO(x.today) ? x.today : null, time: isISO(x.date) && isTime(x.time) ? x.time : null,
-          doneAt: x.done ? (Number(x.doneAt) || noonOf(x.doneOn)) : 0 });
+          today: !x.done && isISO(x.today) ? x.today : null, time: time, at: time ? at : 0, tz: time && validTz(x.tz) ? x.tz : '',
+          doneAt: x.done ? (Number(x.doneAt) || noonOf(x.doneOn)) : 0,
+          status: st, rule: typeof x.rule === 'string' ? x.rule.trim().slice(0, 1500) : '', points: numOrNull(x.points),
+          parent: typeof x.parent === 'string' && x.parent ? x.parent : null, waitSince: st === 'waiting' && isISO(x.waitSince) ? x.waitSince : null });
       });
+      // steps hang off a top-level piece; anything else becomes a piece of its own
+      var tops = {}; ms.forEach(function (m) { if (!m.parent) tops[m.id] = true; });
+      ms.forEach(function (m) { if (m.parent && !tops[m.parent]) m.parent = null; });
+      ms.forEach(function (m) { if (m.parent) { m.rule = ''; m.points = null; } });
+      var dAt = Number(p.deadlineAt) || 0, dl = isISO(p.deadline) ? p.deadline : null;
+      if (dAt > 0) dl = localISOOf(dAt); else dAt = 0;
       out.projects.push({
         id: id, name: p.name.slice(0, 80), color: ((c % INKS) + INKS) % INKS,
         start: p.start, ended: isISO(p.ended) ? p.ended : null,
-        deadline: isISO(p.deadline) ? p.deadline : null, endedBy: p.endedBy === 'deadline' ? 'deadline' : null,
-        area: areaIds[p.area] ? String(p.area) : null, goal: goalIds[p.goal] ? String(p.goal) : null, milestones: ms,
+        deadline: dl, deadlineAt: dAt, deadlineTz: dAt && validTz(p.deadlineTz) ? p.deadlineTz : '', pointsTotal: numOrNull(p.pointsTotal),
+        endedBy: p.endedBy === 'deadline' ? 'deadline' : null,
+        area: migrateArea && p.area === 'project' ? 'engineering' : areaIds[p.area] ? String(p.area) : null, goal: goalIds[p.goal] ? String(p.goal) : null, milestones: ms,
         links: normLinks(p.links), notes: typeof p.notes === 'string' ? p.notes.slice(0, 10000) : '',
         created: Number(p.created) || 0, sample: !!p.sample
       });
@@ -1085,6 +1229,7 @@ td.c-break{display:none}
       if (!u || !ids[String(u.projectId)] || !isISO(u.date) || typeof u.text !== 'string') return;
       var o = { id: String(u.id || uid()), projectId: String(u.projectId), date: u.date, text: u.text.slice(0, 2000), created: Number(u.created) || 0 };
       if (typeof u.task === 'string' && u.task) o.task = u.task;   // set when the update was made by ticking a to-do
+      if (typeof u.piece === 'string' && u.piece) o.piece = u.piece; // the piece this update is about
       out.updates.push(o);
     });
     // Quick tasks: things that came up, with no project. Finished ones are kept for a month.
@@ -1206,11 +1351,50 @@ td.c-break{display:none}
   function driftDays(p, T) { return p.ended ? 0 : Math.max(0, diffDays(lastActivity(p), T)); }
   function isDrifting(p, T) { return !p.ended && driftDays(p, T) >= DRIFT_DAYS; }
   function taskById(p, mid) { var m = null; p.milestones.forEach(function (x) { if (x.id === mid) m = x; }); return m; }
-  function taskCounts(p) { var d = 0; p.milestones.forEach(function (m) { if (m.done) d++; }); return { done: d, total: p.milestones.length }; }
+  function piecesOf(p) { return p.milestones.filter(function (m) { return !m.parent; }); }
+  function stepsOf(p, m) { return p.milestones.filter(function (x) { return x.parent === m.id; }); }
+  function taskCounts(p) { var P = piecesOf(p), d = 0; P.forEach(function (m) { if (m.done) d++; }); return { done: d, total: P.length }; }
+  function nextPiece(p) { var P = piecesOf(p); for (var i = 0; i < P.length; i++) if (!P[i].done && P[i].status !== 'waiting') return P[i]; return null; }
+  // what to actually do next: the next piece, or its first open step
+  function nextAction(p) {
+    var n = nextPiece(p); if (!n) return null;
+    var st = stepsOf(p, n).filter(function (x) { return !x.done; });
+    return st[0] || n;
+  }
+  function deadlineMs(p) { return p.deadlineAt || (p.deadline ? new Date(p.deadline + 'T23:59:59').getTime() : 0); }
+  // On pace = the share of pieces finished keeps up with the share of time used. Doing and waiting count half.
+  function paceOf(p) {
+    var P = piecesOf(p), n = P.length; if (!n || p.ended) return null;
+    var done = 0, part = 0;
+    P.forEach(function (m) { if (m.done) done++; else if (m.status === 'doing' || m.status === 'waiting') part++; });
+    if (done === n) return { key: 'done', label: 'All done' };
+    var end = deadlineMs(p), start = new Date(p.start + 'T00:00:00').getTime();
+    if (!end || end <= start) return null;
+    var expect = Math.min(1, Math.max(0, (Date.now() - start) / (end - start))), have = (done + part * 0.5) / n;
+    return have + 0.15 >= expect ? { key: 'ok', label: 'On pace' } : { key: 'behind', label: 'Behind' };
+  }
+  function deadlineText(p, T, longFmt) {
+    if (!p.deadline) return '';
+    return (longFmt ? fmtYear(p.deadline) : fmtShort(p.deadline)) + (p.deadlineAt ? ' ' + localTimeOf(p.deadlineAt) : '');
+  }
+  function leftText(p, T) {
+    var n = diffDays(T, p.deadline);
+    if (p.deadlineAt && p.deadlineAt - Date.now() < 48 * 3600000) { var h = hoursLeft(p.deadlineAt); return h <= 0 ? 'due now' : plural(h, 'hour') + ' left'; }
+    return n <= 0 ? 'due today' : plural(n, 'day') + ' left';
+  }
+  // set a deadline-like thing from what you typed: date, optional time, optional zone
+  function moment(date, time, tz) {
+    if (!isISO(date)) return { date: null, time: null, at: 0, tz: '' };
+    if (!isTime(time)) return { date: date, time: null, at: 0, tz: '' };
+    var z = validTz(tz) ? tz : LOCAL_TZ, at = zonedMs(date, time, z);
+    return { date: localISOOf(at), time: localTimeOf(at), at: at, tz: z };
+  }
+  function applyDeadline(p, v) { p.deadline = v.date; p.deadlineAt = v.at; p.deadlineTz = v.at ? v.tz : ''; }
   // Tick or untick a to-do. Ticking also logs it on today's dot, so the timeline shows progress by itself.
   function setTaskDone(s, p, m, done, T) {
     if (!!m.done === !!done) return;
     m.done = !!done;
+    if (m.done) m.status = 'done', m.waitSince = null; else if (m.status === 'done') m.status = 'todo';
     if (m.done) {
       m.doneOn = T; m.doneAt = Date.now(); m.today = null;
       if (canAddOn(p, T, T)) {
@@ -1241,7 +1425,7 @@ td.c-break{display:none}
     state.projects.forEach(function (p) {
       if (p.ended) return;
       if (p.deadline) items.push({ kind: 'deadline', date: p.deadline, p: p, title: p.name, done: false });
-      p.milestones.forEach(function (m) { if (m.date) items.push({ kind: 'milestone', date: m.date, p: p, m: m, title: m.title, done: m.done }); });
+      p.milestones.forEach(function (m) { if (m.date && !m.parent) items.push({ kind: 'milestone', date: m.date, p: p, m: m, title: m.title, done: m.done }); });
     });
     return items.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
   }
@@ -1653,7 +1837,7 @@ td.c-break{display:none}
       if (dismissed[key]) return;
       var cls = 'reminder' + (n <= 0 ? ' is-today' : ''), h;
       if (it.kind === 'deadline') {
-        h = '<div class="' + cls + '">' + FLAG + '<span class="msg"><b>' + esc(it.p.name) + '</b> is due <b>' + dueLabel(n) + '</b> (' + fmtLong(it.date) + '). ' +
+        h = '<div class="' + cls + '">' + FLAG + '<span class="msg"><b>' + esc(it.p.name) + '</b> is due <b>' + dueLabel(n) + '</b> (' + fmtLong(it.date) + (it.p.deadlineAt ? ', ' + localTimeOf(it.p.deadlineAt) + ' your time' : '') + '). ' +
           (n <= 0 ? 'It ends automatically when today is over.' : 'It ends automatically after that day.') + '</span><span class="reminder-acts">' +
           '<button type="button" class="link-btn edit-only" data-act="deadline" data-pid="' + esc(it.p.id) + '">Move deadline</button>' +
           '<button type="button" class="link-btn edit-only" data-act="end" data-pid="' + esc(it.p.id) + '">End now</button>' +
@@ -1665,6 +1849,17 @@ td.c-break{display:none}
           dismissBtn(key) + '</span></div>';
       }
       cards.push({ n: n, html: h });
+    });
+    state.projects.forEach(function (p) {
+      if (p.ended) return;
+      p.milestones.forEach(function (m) {
+        if (m.done || m.status !== 'waiting' || !m.waitSince) return;
+        var w = diffDays(m.waitSince, T), key = 'wait|' + m.id + '|' + T;
+        if (w < WAIT_NUDGE || dismissed[key]) return;
+        cards.push({ n: 50, html: '<div class="reminder">' + ORBIT + '<span class="msg">Still waiting on <b>' + esc(m.title) + '</b> for ' + esc(p.name) + ' (' + plural(w, 'day') + '). Time to follow up?</span><span class="reminder-acts">' +
+          '<button type="button" class="link-btn edit-only" data-act="wait-done" data-pid="' + esc(p.id) + '" data-mid="' + esc(m.id) + '">It came in</button>' +
+          '<button type="button" class="link-btn edit-only" data-act="wait-later" data-pid="' + esc(p.id) + '" data-mid="' + esc(m.id) + '">Ask me again in a week</button>' + dismissBtn(key) + '</span></div>' });
+      });
     });
     if (!inViewer && gcalCfg() && gcalState === 'signin' && gcalPending() && !dismissed['gcal|' + T]) {
       cards.push({ n: -99, html: '<div class="reminder">' + STAR + '<span class="msg">Your <b>Polaris calendar</b> is waiting: Google wants you to sign in again before it can add your latest changes.</span><span class="reminder-acts">' +
@@ -1755,7 +1950,7 @@ td.c-break{display:none}
         if (ei >= 0 && ei <= N - 1) out += '<span class="xmark" style="left:' + cx(ei).toFixed(3) + '%" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5.5 L19.5 18.5"/><path d="M18.5 4.5 L5.5 19.5"/></svg></span>';
       } else if (p.deadline) {
         var di = idx(p.deadline), dl = diffDays(T, p.deadline), soon = dl <= DUE_SOON;
-        var tip = 'Deadline: ' + fmtLong(p.deadline) + ' (' + dueLabel(dl) + ')';
+        var tip = 'Deadline: ' + fmtLong(p.deadline) + (p.deadlineAt ? ', ' + localTimeOf(p.deadlineAt) : '') + ' (' + leftText(p, T) + ')';
         if (di <= N - 1) {
           out += mode === 'readonly'
             ? '<span class="flag-mark' + (soon ? ' is-soon' : '') + '" style="left:' + cx(di).toFixed(3) + '%" title="' + esc(tip) + '">' + FLAG + '</span>'
@@ -1765,7 +1960,7 @@ td.c-break{display:none}
         }
       }
       p.milestones.forEach(function (m) {
-        if (!m.date) return;
+        if (!m.date || m.parent) return;
         var mi = idx(m.date);
         if (mi < 0 || mi > N - 1) return;
         var ml = diffDays(T, m.date), soonM = !m.done && ml >= 0 && ml <= DUE_SOON;
@@ -1777,9 +1972,13 @@ td.c-break{display:none}
       if (st === 'active') {
         if (p.deadline) {
           var d2 = diffDays(T, p.deadline);
-          parts.push('<span class="due' + (d2 <= DUE_SOON ? ' is-soon' : '') + '">' + FLAG + (d2 <= 0 ? 'Due today' : 'Due ' + fmtShort(p.deadline) + ' · ' + plural(d2, 'day') + ' left') + '</span>');
+          parts.push('<span class="due' + (d2 <= DUE_SOON ? ' is-soon' : '') + '">' + FLAG + (d2 <= 0 && !p.deadlineAt ? 'Due today' : 'Due ' + deadlineText(p, T) + ' · ' + leftText(p, T)) + '</span>');
         }
-        if (tc.total) parts.push('<span class="prog">' + tc.done + '/' + tc.total + ' to-dos done</span>');
+        if (tc.total) {
+          var pc2 = paceOf(p);
+          parts.push('<span class="prog"><i class="mbar"><i style="width:' + Math.round(tc.done / tc.total * 100) + '%"></i></i>' + tc.done + '/' + tc.total +
+            (pc2 && pc2.key !== 'done' ? ' · <span class="pace-t is-' + pc2.key + '">' + pc2.label.toLowerCase() + '</span>' : '') + '</span>');
+        }
         if (isDrifting(p, T)) parts.push('<span class="drift">quiet for ' + driftDays(p, T) + ' days</span>');
       } else {
         var left2 = KEEP_DAYS - diffDays(p.ended, T);
@@ -1948,6 +2147,7 @@ td.c-break{display:none}
   function starPop(id) { justStarred = id; setTimeout(function () { justStarred = null; }, 1000); }
   function isoOf(ms) { var d = new Date(ms || Date.now()); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
 
+  function whereOf(p, m) { var par = m && m.parent ? taskById(p, m.parent) : null; return esc(p.name) + (par ? ' › ' + esc(truncate(par.title, 30)) : ''); }
   function todayKey(x) { return x.kind === 'quick' ? 'q:' + x.t.id : x.kind === 'ms' ? 'm:' + x.m.id : 'd:' + x.p.id; }
   function sortAttr(id) { return mode === 'readonly' ? '' : ' data-sort-id="' + esc(id) + '"'; }
   function todoLists(T) {
@@ -1977,8 +2177,7 @@ td.c-break{display:none}
       if (p.ended) return;
       var busy = today.concat(week).some(function (x) { return x.p === p && x.kind === 'ms'; });
       if (busy) return;
-      var open = p.milestones.filter(function (m) { return !m.done; });
-      next.push({ p: p, m: open[0] || null });
+      next.push({ p: p, m: nextAction(p) });
     });
     done.sort(function (a, b) { return b.at - a.at; });
     return { today: today, week: week, next: next, done: done };
@@ -2026,7 +2225,7 @@ td.c-break{display:none}
           linkBtn(t.url, t.title) + '</li>';
       }
       var m = x.m, p = x.p, n = m.date ? diffDays(T, m.date) : null, a2 = 'data-pid="' + esc(p.id) + '" data-mid="' + esc(m.id) + '"';
-      var meta = '<i class="pdot"></i>' + esc(p.name) + (n === null ? '' : n < 0 ? ' · ' + plural(-n, 'day') + ' overdue' : n === 0 ? ' · due today' : ' · due ' + fmtLong(m.date) + ' (' + dueLabel(n) + ')') + (m.time ? ' · ' + m.time : '');
+      var meta = '<i class="pdot"></i>' + whereOf(p, m) + (n === null ? '' : n < 0 ? ' · ' + plural(-n, 'day') + ' overdue' : n === 0 ? ' · due today' : ' · due ' + fmtLong(m.date) + ' (' + dueLabel(n) + ')') + (m.time ? ' · ' + m.time : '');
       return '<li class="task' + (n !== null && n < 0 ? ' is-late' : n === 0 ? ' is-soon' : '') + '" style="--pc:var(--c' + p.color + ')">' + box(a2, false, m.title) +
         '<button type="button" class="task-main" data-act="td-ms" ' + a2 + '><span class="task-title">' + esc(m.title) + '</span><span class="task-meta">' + meta + '</span></button>' +
         linkBtn(m.url, m.title) + '</li>';
@@ -2039,7 +2238,7 @@ td.c-break{display:none}
       }
       var m = x.m, p = x.p, a = 'data-pid="' + esc(p.id) + '" data-mid="' + esc(m.id) + '"';
       return '<li class="task' + (n <= DUE_SOON ? ' is-soon' : '') + '" style="--pc:var(--c' + p.color + ')">' + box(a, false, m.title) +
-        '<button type="button" class="task-main" data-act="td-ms" ' + a + '><span class="task-title">' + esc(m.title) + '</span><span class="task-meta"><i class="pdot"></i>' + esc(p.name) + ' · ' + when + '</span></button>' +
+        '<button type="button" class="task-main" data-act="td-ms" ' + a + '><span class="task-title">' + esc(m.title) + '</span><span class="task-meta"><i class="pdot"></i>' + whereOf(p, m) + ' · ' + when + '</span></button>' +
         linkBtn(m.url, m.title) + pull(a, m.title) + '</li>';
     }
     function nextRow(x) {
@@ -2051,7 +2250,7 @@ td.c-break{display:none}
       }
       var a = 'data-pid="' + esc(p.id) + '" data-mid="' + esc(m.id) + '"';
       return '<li class="task nstep" style="--pc:var(--c' + p.color + ')"><i class="pdot"></i>' +
-        '<button type="button" class="task-main" data-act="td-ms" ' + a + '><span class="task-title">' + esc(m.title) + '</span><span class="task-meta">' + esc(p.name) + (m.date ? ' · ' + fmtShort(m.date) : '') + '</span></button>' +
+        '<button type="button" class="task-main" data-act="td-ms" ' + a + '><span class="task-title">' + esc(m.title) + '</span><span class="task-meta">' + whereOf(p, m) + (m.status === 'doing' ? ' · doing' : '') + (m.date ? ' · ' + fmtShort(m.date) + (m.time ? ' ' + m.time : '') : '') + '</span></button>' +
         linkBtn(m.url, m.title) + pull(a, m.title) + '</li>';
     }
     function star(attrs, title) {
@@ -2121,6 +2320,400 @@ td.c-break{display:none}
         closeModal();
       }
     });
+  }
+
+  /* ================= Ask AI: Claude or ChatGPT suggest changes, you approve them ================= */
+  // Your key stays in this browser. Nothing changes until you tap Apply.
+  var AI_KEY = 'polaris:ai';
+  var AI_MODELS = { claude: 'claude-sonnet-5-5', openai: 'chat-latest' };
+  var AI_NAMES = { claude: 'Claude', openai: 'ChatGPT' };
+  var PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+  function aiCfg() {
+    try { var c = JSON.parse(localStorage.getItem(AI_KEY) || 'null'); if (c && (c.provider === 'claude' || c.provider === 'openai') && c.key) return c; } catch (e) {}
+    return null;
+  }
+  var AI_RULES = [
+    'You edit a personal project tracker called Polaris. Reply with one JSON object only: {"summary": "one short sentence", "ops": [...]}.',
+    'Rules:',
+    '- Change only what the request asks for. Do not add pieces, steps, notes or links that nobody asked for. No generic advice and no made-up tasks like "email someone", "check something" or "review".',
+    '- When a source (a call, handbook or brief) is given, add only requirements the source actually states. Never invent requirements. Put the exact rule in short form in "rule": limits, format, who signs, where it is submitted.',
+    '- Keep titles short (1 to 5 words). Details go in "rule".',
+    '- Dates are YYYY-MM-DD, times are HH:MM (24 h). If the source gives a time in a named zone (for example "23:59 Paris time" or "CET"), set "tz" to the IANA zone (Europe/Paris). With no zone, leave "tz" out: that means the user\'s own time.',
+    '- Use the ids from the data to change existing items. Delete only when asked. If nothing should change, return an empty ops list and say why in summary.',
+    'Operations:',
+    '{"op":"add_piece","title":"","rule":"","status":"todo|doing|waiting|done","due":"YYYY-MM-DD","time":"HH:MM","tz":"","points":0,"steps":["small step"]}  (all but title optional)',
+    '{"op":"update_piece","id":"","title":"","rule":"","status":"","due":"","time":"","tz":"","points":0}  (only the fields that change; null clears one)',
+    '{"op":"delete_piece","id":""}',
+    '{"op":"add_step","piece":"<piece id>","title":""}',
+    '{"op":"update_step","id":"","title":"","done":true}',
+    '{"op":"delete_step","id":""}',
+    '{"op":"set_project","name":"","kind":"","deadline":"YYYY-MM-DD","time":"HH:MM","tz":"","pointsTotal":0}  (only the fields that change)',
+    '{"op":"set_notes","text":""}  (replaces the notes, so keep what the user wrote unless asked)',
+    '{"op":"add_link","url":"","title":"","notes":""}',
+    '{"op":"order","ids":["piece ids, top to bottom"]}',
+    'When the whole board is shared, project operations need "project":"<project id>", and you can also use',
+    '{"op":"add_project","name":"","kind":"","deadline":"YYYY-MM-DD","time":"HH:MM","tz":"","pointsTotal":0,"notes":"","pieces":[{"title":"","rule":"","due":"","time":"","tz":"","points":0,"steps":[]}]}',
+    'Statuses: todo, doing, waiting (waiting on someone else), done. Kinds are the ids listed under "kinds". "points" is only for scored items, like a grant\'s scoring table.'
+  ].join('\n');
+  function whenOut(date, at, tz) {
+    if (!date) return null;
+    if (at && tz && validTz(tz)) { var w = wallIn(at, tz); return { date: w.date, time: w.time, tz: tz === LOCAL_TZ ? undefined : tz }; }
+    return { date: date, time: at ? localTimeOf(at) : undefined };
+  }
+  function aiProject(p) {
+    return { id: p.id, name: p.name, kind: p.area || null, start: p.start, ended: p.ended || undefined,
+      deadline: whenOut(p.deadline, p.deadlineAt, p.deadlineTz), pointsTotal: p.pointsTotal || undefined, notes: p.notes || '',
+      pieces: piecesOf(p).map(function (m) {
+        return { id: m.id, title: m.title, status: m.status, rule: m.rule || undefined, due: whenOut(m.date, m.at, m.tz) || undefined, points: m.points || undefined,
+          steps: stepsOf(p, m).map(function (x) { return { id: x.id, title: x.title, done: x.done }; }) };
+      }),
+      links: linksOf(p).map(function (l) { return { title: l.title || linkTitle(l), url: l.url }; }) };
+  }
+  function aiData(pid) {
+    var base = { today: todayISO(), timezone: LOCAL_TZ, kinds: state.areas.map(function (a) { return a.id; }) };
+    if (pid) base.project = aiProject(getProject(pid));
+    else base.projects = state.projects.filter(function (p) { return !p.ended; }).map(aiProject);
+    return base;
+  }
+  function aiUserText(pid, ask, src) {
+    return 'My request: ' + ask + '\n\nCurrent data:\n```json\n' + JSON.stringify(aiData(pid), null, 1) + '\n```' +
+      (src && src.text ? '\n\nSource' + (src.name ? ' (' + src.name + ')' : '') + ':\n<source>\n' + src.text + '\n</source>' : '');
+  }
+  function aiCall(cfg, pid, ask, src) {
+    var ctl = window.AbortController ? new AbortController() : null, timer = ctl ? setTimeout(function () { ctl.abort(); }, 120000) : 0;
+    var user = aiUserText(pid, ask, src), model = cfg.model || AI_MODELS[cfg.provider], req;
+    if (cfg.provider === 'claude') {
+      req = fetch('https://api.anthropic.com/v1/messages', { method: 'POST', signal: ctl && ctl.signal,
+        headers: { 'x-api-key': cfg.key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true', 'content-type': 'application/json' },
+        body: JSON.stringify({ model: model, max_tokens: 8000, system: AI_RULES, messages: [{ role: 'user', content: user }] }) });
+    } else {
+      req = fetch('https://api.openai.com/v1/chat/completions', { method: 'POST', signal: ctl && ctl.signal,
+        headers: { Authorization: 'Bearer ' + cfg.key, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: model, messages: [{ role: 'system', content: AI_RULES }, { role: 'user', content: user }] }) });
+    }
+    return req.catch(function (e) {
+      throw new Error(e && e.name === 'AbortError' ? 'The AI took too long. Try a shorter request.' : 'Couldn’t reach ' + AI_NAMES[cfg.provider] + '. Check your connection.');
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        clearTimeout(timer);
+        if (!r.ok) {
+          var msg = (j && j.error && (j.error.message || j.error.type)) || ('error ' + r.status);
+          if (r.status === 401) msg = 'The API key wasn’t accepted. Check it in AI settings.';
+          else if (r.status === 404 && /model/i.test(msg)) msg = 'That model name wasn’t found: ' + model + '. Change it in AI settings.';
+          throw new Error(AI_NAMES[cfg.provider] + ': ' + msg);
+        }
+        if (cfg.provider === 'claude') return (j.content || []).filter(function (c) { return c.type === 'text'; }).map(function (c) { return c.text; }).join('');
+        return (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || '';
+      });
+    });
+  }
+  function aiParse(text) {
+    var t = String(text || '').trim(), fence = t.match(/```(?:json)?\s*([\s\S]*?)```/);
+    if (fence) t = fence[1];
+    var a = t.indexOf('{'), b = t.lastIndexOf('}');
+    if (a < 0 || b <= a) throw new Error('That reply has no changes in it. Paste the whole reply, including the part in braces { }.');
+    var j;
+    try { j = JSON.parse(t.slice(a, b + 1)); } catch (e) { throw new Error('That reply isn’t complete. Copy the whole reply and paste it again.'); }
+    if (!j || !Array.isArray(j.ops)) throw new Error('That reply has no list of changes ("ops").');
+    return { summary: typeof j.summary === 'string' ? j.summary.slice(0, 600) : '', ops: j.ops.filter(function (o) { return o && typeof o.op === 'string'; }).slice(0, 150) };
+  }
+  // PDFs are read right here in your browser; only the text goes to the AI.
+  function loadPdfJs() {
+    if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+    return new Promise(function (res, rej) {
+      var sc = document.createElement('script'); sc.src = PDFJS + 'pdf.min.js';
+      sc.onload = function () { if (!window.pdfjsLib) return rej(new Error('no reader')); window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; res(window.pdfjsLib); };
+      sc.onerror = function () { rej(new Error('Couldn’t load the PDF reader. Check your connection, or paste the text instead.')); };
+      document.head.appendChild(sc);
+    });
+  }
+  function fileText(file) {
+    if (/\.pdf$/i.test(file.name) || file.type === 'application/pdf') {
+      return loadPdfJs().then(function (lib) { return file.arrayBuffer().then(function (buf) { return lib.getDocument({ data: buf }).promise; }); })
+        .then(function (doc) {
+          var out = [], chain = Promise.resolve(), n = Math.min(doc.numPages, 80);
+          for (var i = 1; i <= n; i++) (function (k) {
+            chain = chain.then(function () { return doc.getPage(k); }).then(function (pg) { return pg.getTextContent(); })
+              .then(function (tc) { out.push(tc.items.map(function (it) { return it.str + (it.hasEOL ? '\n' : ' '); }).join('')); });
+          })(i);
+          return chain.then(function () { return { text: out.join('\n\n').replace(/[ \t]+/g, ' ').trim().slice(0, 90000), pages: doc.numPages }; });
+        });
+    }
+    return file.text().then(function (t) { return { text: t.slice(0, 90000), pages: 0 }; });
+  }
+
+  // ---- what each suggested change means, in plain words
+  function aiFind(s, pid) { var p = null; s.projects.forEach(function (x) { if (x.id === pid) p = x; }); return p; }
+  function aiWhen(o, dateKey) {
+    var d = o[dateKey || 'due'];
+    if (!isISO(d)) return '';
+    var v = moment(d, o.time, o.tz), note = srcNote(v.at, v.tz);
+    return fmtShort(v.date) + (v.time ? ' ' + v.time : '') + (note ? ' your time (' + note + ')' : '');
+  }
+  function aiDescribe(o, pid) {
+    var p = aiFind(state, o.project || pid), m, bits = [];
+    function q(t) { return '“' + truncate(String(t || ''), 60) + '”'; }
+    switch (o.op) {
+      case 'add_project':
+        if (!o.name) return null;
+        var kd = state.areas.filter(function (a) { return a.id === o.kind; })[0];
+        return { text: 'New project ' + q(o.name) + (kd ? ' (' + kd.name + ')' : '') + (aiWhen(o, 'deadline') ? ', due ' + aiWhen(o, 'deadline') : '') +
+          (Array.isArray(o.pieces) && o.pieces.length ? ', with ' + o.pieces.length + ': ' + o.pieces.map(function (x) { return x && x.title; }).filter(Boolean).join(', ') : '') };
+    }
+    if (!p) return null;
+    var pre = pid ? '' : p.name + ': ';
+    switch (o.op) {
+      case 'add_piece':
+        if (!o.title) return null;
+        if (o.rule) bits.push(truncate(o.rule, 140));
+        if (aiWhen(o)) bits.push('due ' + aiWhen(o));
+        if (numOrNull(o.points)) bits.push(numOrNull(o.points) + ' pts');
+        if (Array.isArray(o.steps) && o.steps.length) bits.push(o.steps.length + ' steps');
+        return { text: pre + 'Add ' + q(o.title) + (bits.length ? ': ' + bits.join(' · ') : '') };
+      case 'update_piece':
+        m = taskById(p, o.id); if (!m || m.parent) return null;
+        if (o.title && o.title !== m.title) bits.push('name → ' + q(o.title));
+        if ('rule' in o && (o.rule || '') !== (m.rule || '')) bits.push(o.rule ? 'rule → ' + truncate(o.rule, 120) : 'remove the rule');
+        if (o.status && o.status !== m.status && ST_ORDER.indexOf(o.status) >= 0) bits.push('status → ' + ST_LABEL[o.status]);
+        if ('due' in o) bits.push(o.due ? 'due → ' + aiWhen(o) : 'remove the due date');
+        if ('points' in o && numOrNull(o.points) !== m.points) bits.push(numOrNull(o.points) ? 'points → ' + numOrNull(o.points) : 'remove the points');
+        return bits.length ? { text: pre + 'Change ' + q(m.title) + ': ' + bits.join(' · ') } : null;
+      case 'delete_piece':
+        m = taskById(p, o.id); if (!m || m.parent) return null;
+        return { text: pre + 'Delete ' + q(m.title) + (stepsOf(p, m).length ? ' and its steps' : ''), danger: true };
+      case 'add_step':
+        m = taskById(p, o.piece); if (!m || m.parent || !o.title) return null;
+        return { text: pre + 'Add step ' + q(o.title) + ' to ' + q(m.title) };
+      case 'update_step':
+        m = taskById(p, o.id); if (!m || !m.parent) return null;
+        if (o.title && o.title !== m.title) bits.push('name → ' + q(o.title));
+        if (typeof o.done === 'boolean' && o.done !== m.done) bits.push(o.done ? 'mark done' : 'mark not done');
+        return bits.length ? { text: pre + 'Step ' + q(m.title) + ': ' + bits.join(' · ') } : null;
+      case 'delete_step':
+        m = taskById(p, o.id); if (!m || !m.parent) return null;
+        return { text: pre + 'Delete step ' + q(m.title), danger: true };
+      case 'set_project':
+        if (o.name && o.name !== p.name) bits.push('name → ' + q(o.name));
+        if (o.kind && o.kind !== p.area && state.areas.some(function (a) { return a.id === o.kind; })) bits.push('kind → ' + state.areas.filter(function (a) { return a.id === o.kind; })[0].name);
+        if ('deadline' in o) bits.push(o.deadline ? 'final deadline → ' + aiWhen(o, 'deadline') : 'remove the deadline');
+        if ('pointsTotal' in o && numOrNull(o.pointsTotal) !== p.pointsTotal) bits.push('total points → ' + (numOrNull(o.pointsTotal) || 'none'));
+        return bits.length ? { text: pre + 'Project ' + q(p.name) + ': ' + bits.join(' · ') } : null;
+      case 'set_notes':
+        if (typeof o.text !== 'string' || o.text === p.notes) return null;
+        return { text: pre + 'Replace the notes with: ' + truncate(o.text.replace(/\s+/g, ' '), 160), danger: !!(p.notes && p.notes.trim()) };
+      case 'add_link':
+        if (!cleanUrl(o.url || '')) return null;
+        return { text: pre + 'Add link ' + q(o.title || o.url) };
+      case 'order':
+        if (!Array.isArray(o.ids) || o.ids.length < 2) return null;
+        return { text: pre + 'Reorder: ' + o.ids.map(function (id) { var x = taskById(p, id); return x ? x.title : null; }).filter(Boolean).map(function (t) { return truncate(t, 24); }).join(' → ') };
+    }
+    return null;
+  }
+  function aiPieceFrom(o) {
+    var m = newPiece(String(o.title).trim());
+    if (o.rule) m.rule = String(o.rule).trim().slice(0, 1500);
+    m.points = numOrNull(o.points);
+    if (isISO(o.due)) { var v = moment(o.due, o.time, o.tz); m.date = v.date; m.time = v.time; m.at = v.at; m.tz = v.tz; }
+    if (o.url && cleanUrl(o.url)) m.url = cleanUrl(o.url);
+    return m;
+  }
+  function aiApply(s, pid, ops) {
+    var T = todayISO(), n = 0;
+    ops.forEach(function (o) {
+      var p = o.op === 'add_project' ? null : aiFind(s, o.project || pid), m, x;
+      try {
+        if (o.op === 'add_project') {
+          var np = { id: uid(), name: String(o.name).slice(0, 80), color: leastUsedColor(), start: T, ended: null, deadline: null, deadlineAt: 0, deadlineTz: '', endedBy: null,
+            area: s.areas.some(function (a) { return a.id === o.kind; }) ? o.kind : null, goal: null, milestones: [], links: [], notes: typeof o.notes === 'string' ? o.notes.slice(0, 10000) : '',
+            created: Date.now(), sample: false, pointsTotal: numOrNull(o.pointsTotal) };
+          if (isISO(o.deadline)) applyDeadline(np, moment(o.deadline, o.time, o.tz));
+          (Array.isArray(o.pieces) ? o.pieces : []).forEach(function (q) {
+            if (!q || !q.title) return;
+            var pm = aiPieceFrom(q); np.milestones.push(pm);
+            (Array.isArray(q.steps) ? q.steps : []).forEach(function (t) { if (t) { var st = newPiece(String(t)); st.parent = pm.id; np.milestones.push(st); } });
+          });
+          s.projects.push(np); n++; return;
+        }
+        if (!p) return;
+        if (o.op === 'add_piece') {
+          m = aiPieceFrom(o); p.milestones.push(m);
+          if (o.status && o.status !== 'todo') setStatus2(s, p, m, o.status, T);
+          (Array.isArray(o.steps) ? o.steps : []).forEach(function (t) { if (t) { var st = newPiece(String(t)); st.parent = m.id; p.milestones.push(st); } });
+        } else if (o.op === 'update_piece') {
+          m = taskById(p, o.id); if (!m) return;
+          if (o.title) m.title = String(o.title).trim().slice(0, 140);
+          if ('rule' in o) m.rule = o.rule ? String(o.rule).trim().slice(0, 1500) : '';
+          if ('points' in o) m.points = numOrNull(o.points);
+          if ('due' in o) { var v = isISO(o.due) ? moment(o.due, o.time, o.tz) : moment(null); m.date = v.date; m.time = v.time; m.at = v.at; m.tz = v.tz; }
+          if (o.status) setStatus2(s, p, m, o.status, T);
+        } else if (o.op === 'delete_piece') {
+          p.milestones = p.milestones.filter(function (y) { return y.id !== o.id && y.parent !== o.id; });
+        } else if (o.op === 'add_step') {
+          m = taskById(p, o.piece); if (!m) return;
+          x = newPiece(String(o.title)); x.parent = m.id;
+          var S = stepsOf(p, m), after = S.length ? S[S.length - 1] : m;
+          p.milestones.splice(p.milestones.indexOf(after) + 1, 0, x);
+        } else if (o.op === 'update_step') {
+          m = taskById(p, o.id); if (!m) return;
+          if (o.title) m.title = String(o.title).trim().slice(0, 140);
+          if (typeof o.done === 'boolean') setTaskDone(s, p, m, o.done, T);
+        } else if (o.op === 'delete_step') {
+          p.milestones = p.milestones.filter(function (y) { return y.id !== o.id; });
+        } else if (o.op === 'set_project') {
+          if (o.name) p.name = String(o.name).slice(0, 80);
+          if (o.kind && s.areas.some(function (a) { return a.id === o.kind; })) p.area = o.kind;
+          if ('deadline' in o) applyDeadline(p, isISO(o.deadline) ? moment(o.deadline, o.time, o.tz) : moment(null));
+          if ('pointsTotal' in o) p.pointsTotal = numOrNull(o.pointsTotal);
+        } else if (o.op === 'set_notes') {
+          p.notes = String(o.text).slice(0, 10000);
+        } else if (o.op === 'add_link') {
+          var u = cleanUrl(o.url || ''); if (!u) return;
+          linksOf(p).push({ id: uid(), url: u, title: String(o.title || '').slice(0, 120), kind: guessKind(u), notes: String(o.notes || '').slice(0, 4000), added: T });
+        } else if (o.op === 'order') {
+          var r = reorderSubset(p.milestones, o.ids.filter(function (id) { var y = taskById(p, id); return y && !y.parent; }), function (y) { return y.id; });
+          if (r) p.milestones = r;
+        } else return;
+        n++;
+      } catch (e) {}
+    });
+    return n;
+  }
+
+  function openAskAI(pid) {
+    if (mode === 'readonly' || inViewer) return;
+    if (pid && !getProject(pid)) return;
+    var view = 'ask', ask = '', src = null, srcBusy = false, reply = '', parsed = null, items = [], err = '', busy = false, copied = '', undoSnap = null, appliedN = 0;
+    var cfg = aiCfg();
+    function scopeName() { return pid ? getProject(pid).name : 'Your whole board'; }
+    function grab() {
+      var a = $('#ai-ask'); if (a) ask = a.value;
+      var r = $('#ai-reply'); if (r) reply = r.value;
+      var t = $('#ai-src-text'); if (t && t.value.trim() && (!src || src.pasted)) src = { text: t.value.slice(0, 90000), name: '', pasted: true };
+    }
+    function toPreview(text) {
+      try { parsed = aiParse(text); } catch (e) { err = e.message; ctx.draw(); return; }
+      items = parsed.ops.map(function (o) { var d = aiDescribe(o, pid); return d ? { op: o, text: d.text, danger: !!d.danger, on: true } : null; }).filter(Boolean);
+      parsed.skipped = parsed.ops.length - items.length;
+      err = ''; view = 'preview'; ctx.draw();
+    }
+    var ctx = {
+      draw: function () {
+        var who = cfg ? AI_NAMES[cfg.provider] : null, h = '';
+        h += '<div class="modal-head"' + (pid ? ' style="--pc:var(--c' + getProject(pid).color + ')"' : '') + '><i class="dot"></i><div><h2 id="modal-title">' + SPARK + 'Ask AI</h2><p class="modal-sub">' + esc(scopeName()) + '</p></div></div>';
+        if (view === 'ask') {
+          h += '<form id="ai-form" novalidate>' +
+            '<div class="field"><label for="ai-ask">What should change?</label><textarea id="ai-ask" rows="3" maxlength="4000" placeholder="' +
+              (pid ? 'e.g. Add the requirements from this handbook, with the exact rules, points and deadline' : 'e.g. Make a project for this call, with its requirements and deadline') + '">' + esc(ask) + '</textarea></div>' +
+            '<div class="field"><span class="field-label">Source <span class="muted">(optional: a PDF or text file, like a call or handbook)</span></span>' +
+              '<div class="ai-src"><label class="btn btn-sm ai-file"><input type="file" id="ai-file" accept=".pdf,.txt,.md,application/pdf,text/plain" hidden>Choose a file</label>' +
+              '<span class="ai-src-info" id="ai-src-info">' + (srcBusy ? 'Reading…' : src && !src.pasted ? esc(src.name) + ' · ' + (src.pages ? plural(src.pages, 'page') + ' · ' : '') + src.text.length.toLocaleString() + ' characters' : '') + '</span>' +
+              (src && !src.pasted ? '<button type="button" class="link-btn" data-act="ai-src-clear">Remove</button>' : '') + '</div>' +
+              '<details class="ai-paste"' + (src && src.pasted ? ' open' : '') + '><summary>Or paste text</summary><textarea id="ai-src-text" rows="4" placeholder="Paste the requirements, call text or notes">' + esc(src && src.pasted ? src.text : '') + '</textarea></details></div>' +
+            (err ? '<p class="form-error">' + esc(err) + '</p>' : '') +
+            '<div class="modal-actions ai-acts"><button type="button" class="link-btn" data-act="ai-settings" style="margin-right:auto">AI settings</button>' +
+              '<button type="button" class="btn" data-act="ai-copy">Copy for ChatGPT or Claude</button>' +
+              (cfg ? '<button type="submit" class="btn primary"' + (busy ? ' disabled' : '') + '>' + (busy ? 'Asking ' + who + '…' : 'Ask ' + who) + '</button>' : '') + '</div>' +
+            (copied ? '<p class="ai-copied">' + esc(copied) + '</p>' : '') +
+            '<details class="ai-paste"' + (copied || reply ? ' open' : '') + '><summary>Paste the AI’s reply</summary><textarea id="ai-reply" rows="4" placeholder="Paste the whole reply here">' + esc(reply) + '</textarea>' +
+              '<div class="modal-actions"><button type="button" class="btn" data-act="ai-preview">Show the changes</button></div></details>' +
+            (cfg ? '' : '<p class="hub-hint">No AI key on this device, so use Copy: paste it into ChatGPT or Claude, then paste the reply back here. Or add a key in AI settings to ask directly.</p>') +
+            '</form>';
+        } else if (view === 'preview') {
+          h += (parsed.summary ? '<p class="ai-summary">' + esc(parsed.summary) + '</p>' : '') +
+            (items.length ? '<p class="hub-hint" style="margin-top:0">Untick anything you don’t want.</p><ul class="ai-ops">' + items.map(function (it, i) {
+              return '<li><label class="check' + (it.danger ? ' is-danger' : '') + '"><input type="checkbox" data-act="ai-op" data-i="' + i + '"' + (it.on ? ' checked' : '') + '> <span>' + esc(it.text) + '</span></label></li>';
+            }).join('') + '</ul>' : '<p class="hub-empty">No changes to make.</p>') +
+            (parsed.skipped ? '<p class="hub-hint">' + plural(parsed.skipped, 'suggestion') + ' didn’t match anything here, so ' + (parsed.skipped === 1 ? 'it was' : 'they were') + ' left out.</p>' : '') +
+            '<div class="modal-actions"><button type="button" class="btn" data-act="ai-back" style="margin-right:auto">Back</button><button type="button" class="btn" data-close>Cancel</button>' +
+              (items.length ? '<button type="button" class="btn primary" data-act="ai-apply">Apply ' + plural(items.filter(function (x) { return x.on; }).length, 'change') + '</button>' : '') + '</div>';
+        } else {
+          h += '<p>' + plural(appliedN, 'change') + ' applied.</p>' +
+            '<div class="modal-actions"><button type="button" class="btn" data-act="ai-undo" style="margin-right:auto">Undo</button><button type="button" class="btn primary" data-close>Done</button></div>';
+        }
+        $('#modal-body').innerHTML = h;
+        var f = $('#ai-file');
+        if (f) f.addEventListener('change', function () {
+          var file = f.files && f.files[0]; if (!file) return;
+          grab(); srcBusy = true; err = ''; ctx.draw();
+          fileText(file).then(function (r) { src = { text: r.text, name: file.name, pages: r.pages }; srcBusy = false; if (!r.text.trim()) err = 'That file has no text Polaris can read (it may be a scan). Paste the text instead.'; ctx.draw(); },
+            function (e) { srcBusy = false; err = e.message || 'Couldn’t read that file.'; ctx.draw(); });
+        });
+      },
+      onClick: function (e) {
+        var b = e.target.closest('[data-act]'); if (!b) return;
+        var a = b.dataset.act;
+        if (a === 'ai-settings') { grab(); openAiSettings(function () { cfg = aiCfg(); openModal(ctx); }); }
+        else if (a === 'ai-src-clear') { grab(); src = null; ctx.draw(); }
+        else if (a === 'ai-copy') {
+          grab();
+          if (!ask.trim()) { err = 'Write what should change first.'; ctx.draw(); return; }
+          var text = AI_RULES + '\n\n' + aiUserText(pid, ask.trim(), src) + '\n\nReply with the JSON object only.';
+          var done = function (ok) { copied = ok ? 'Copied. Paste it into ChatGPT or Claude, then paste its whole reply below.' : 'Your browser blocked copying. Select the text below and copy it.'; err = ''; ctx.draw();
+            if (!ok) { var r = $('#ai-reply'); if (r) { r.value = text; r.select(); } } };
+          try { navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); }); } catch (er) { done(false); }
+        }
+        else if (a === 'ai-preview') { grab(); if (!reply.trim()) { err = 'Paste the AI’s reply first.'; ctx.draw(); return; } toPreview(reply); }
+        else if (a === 'ai-op') { var it = items[+b.dataset.i]; if (it) it.on = b.checked; var ap = $('[data-act="ai-apply"]'); if (ap) ap.textContent = 'Apply ' + plural(items.filter(function (x) { return x.on; }).length, 'change'); }
+        else if (a === 'ai-back') { view = 'ask'; ctx.draw(); }
+        else if (a === 'ai-apply') {
+          var ops = items.filter(function (x) { return x.on; }).map(function (x) { return x.op; });
+          if (!ops.length) return;
+          undoSnap = JSON.stringify({ projects: state.projects, updates: state.updates });
+          commit(function (s) { appliedN = aiApply(s, pid, ops); });
+          view = 'done'; ctx.draw();
+        }
+        else if (a === 'ai-undo' && undoSnap) {
+          var snap = JSON.parse(undoSnap); undoSnap = null;
+          commit(function (s) { s.projects = snap.projects; s.updates = snap.updates; });
+          closeModal();
+        }
+      },
+      onSubmit: function () {
+        grab();
+        if (!cfg || busy) return;
+        if (!ask.trim()) { err = 'Write what should change first.'; ctx.draw(); return; }
+        busy = true; err = ''; ctx.draw();
+        aiCall(cfg, pid, ask.trim(), src).then(function (text) { busy = false; reply = text; toPreview(text); },
+          function (e) { busy = false; err = e.message || 'Something went wrong.'; ctx.draw(); });
+      }
+    };
+    openModal(ctx);
+  }
+
+  function openAiSettings(back) {
+    var c = aiCfg() || { provider: 'claude', key: '', model: '' };
+    var ctx = {
+      draw: function () {
+        $('#modal-body').innerHTML = '<h2 id="modal-title">AI settings</h2>' +
+          '<p>Polaris can ask Claude or ChatGPT to make changes for you. You always see the changes first, and nothing is saved until you tap Apply.</p>' +
+          '<form id="ais-form" novalidate>' +
+          '<fieldset class="field ai-prov"><legend>Use</legend>' +
+            '<label class="check"><input type="radio" name="ais-prov" value="claude"' + (c.provider === 'claude' ? ' checked' : '') + '> Claude (Anthropic)</label>' +
+            '<label class="check"><input type="radio" name="ais-prov" value="openai"' + (c.provider === 'openai' ? ' checked' : '') + '> ChatGPT (OpenAI)</label></fieldset>' +
+          '<div class="field"><label for="ais-key">API key</label><input id="ais-key" type="password" autocomplete="off" spellcheck="false" placeholder="' + (c.provider === 'openai' ? 'sk-…' : 'sk-ant-…') + '" value="' + esc(c.key || '') + '"></div>' +
+          '<div class="field"><label for="ais-model">Model <span class="muted">(leave empty for the default: ' + esc(AI_MODELS[c.provider]) + ')</span></label><input id="ais-model" type="text" autocomplete="off" spellcheck="false" value="' + esc(c.model || '') + '"></div>' +
+          '<p class="muted" style="font-size:12.5px">The key stays in this browser on this device, like your GitHub token. Polaris sends your request, this project’s data and any source you add to ' +
+            'Anthropic or OpenAI only when you press Ask. API use is billed by them per request, separately from a Claude or ChatGPT subscription. Make the key in the Claude Console or on the OpenAI platform.</p>' +
+          '<p class="form-error" id="ais-error" hidden></p>' +
+          '<div class="modal-actions">' + (aiCfg() ? '<button type="button" class="btn btn-quiet" data-act="ais-remove" style="margin-right:auto">Remove key</button>' : '') +
+          '<button type="button" class="btn" data-act="ais-cancel">Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
+        $$('input[name="ais-prov"]').forEach(function (r) { r.addEventListener('change', function () { c.provider = r.value; c.key = $('#ais-key').value; c.model = $('#ais-model').value; ctx.draw(); }); });
+      },
+      onClick: function (e) {
+        var b = e.target.closest('[data-act]'); if (!b) return;
+        if (b.dataset.act === 'ais-remove') { try { localStorage.removeItem(AI_KEY); } catch (er) {} if (back) back(); else closeModal(); }
+        else if (b.dataset.act === 'ais-cancel') { if (back) back(); else closeModal(); }
+      },
+      onSubmit: function () {
+        var key = $('#ais-key').value.trim(), model = $('#ais-model').value.trim(), err = $('#ais-error');
+        if (!key) { err.textContent = 'Paste your API key, or tap Cancel.'; err.hidden = false; return; }
+        try { localStorage.setItem(AI_KEY, JSON.stringify({ provider: c.provider, key: key, model: model })); }
+        catch (er) { err.textContent = 'This browser won’t let Polaris save the key.'; err.hidden = false; return; }
+        if (back) back(); else closeModal();
+      }
+    };
+    openModal(ctx);
   }
 
   /* ================= drag to reorder ================= */
@@ -2358,7 +2951,8 @@ td.c-break{display:none}
     state.projects.forEach(function (p) {
       if (statusOf(p, T) === 'archived') return;
       var color = GCAL_COLORS[p.color] || '9';
-      if (p.deadline) ev('d:' + p.id, '⚑ ' + p.name + ': final deadline', p.deadline, null, 'Final deadline for ' + p.name + '.', color);
+      if (p.deadline) ev('d:' + p.id, '⚑ ' + p.name + ': final deadline', p.deadline, p.deadlineAt ? localTimeOf(p.deadlineAt) : null,
+        'Final deadline for ' + p.name + '.' + (srcNote(p.deadlineAt, p.deadlineTz) ? ' (' + srcNote(p.deadlineAt, p.deadlineTz) + ')' : ''), color);
       p.milestones.forEach(function (m) { if (m.date) ev('m:' + m.id, (m.done ? '✓ ' : '') + m.title, m.date, m.time, p.name + (m.url ? '\n' + m.url : ''), color); });
     });
     state.tasks.forEach(function (t) { if (t.time) ev('t:' + t.id, (t.done ? '✓ ' : '') + t.title, t.day, t.time, 'Quick task' + (t.url ? '\n' + t.url : ''), '8'); });
@@ -2527,10 +3121,12 @@ td.c-break{display:none}
     });
   }
 
-  function addUpdate(pid, d, text) {
+  function addUpdate(pid, d, text, piece) {
     justAdded = pid + '|' + d;
     commit(function (s) {
-      s.updates.push({ id: uid(), projectId: pid, date: d, text: text, created: Date.now() });
+      var o = { id: uid(), projectId: pid, date: d, text: text, created: Date.now() };
+      if (piece) o.piece = piece;
+      s.updates.push(o);
       var p = null; s.projects.forEach(function (x) { if (x.id === pid) p = x; });
       if (p && d < p.start) p.start = d;
     });
@@ -2604,14 +3200,17 @@ td.c-break{display:none}
     if (pid && !p0) return;
     var isNew = !p0;
     var d = isNew
-      ? { name: '', area: ui.area !== 'all' ? ui.area : null, goal: null, color: leastUsedColor(), start: T, deadline: null, note: '' }
-      : { name: p0.name, area: p0.area, goal: p0.goal, color: p0.color, start: p0.start, deadline: p0.deadline, note: '' };
+      ? { name: '', area: ui.area !== 'all' ? ui.area : null, goal: null, color: leastUsedColor(), start: T, deadline: null, note: '', dl: {}, pts: '', stages: true }
+      : { name: p0.name, area: p0.area, goal: p0.goal, color: p0.color, start: p0.start, deadline: p0.deadline, note: '',
+          dl: { date: p0.deadline, time: p0.deadlineAt ? localTimeOf(p0.deadlineAt) : '', at: p0.deadlineAt, tz: p0.deadlineTz }, pts: p0.pointsTotal || '' };
     function opt(v, label, cur) { return '<option value="' + esc(v) + '"' + (v === (cur || '') ? ' selected' : '') + '>' + esc(label) + '</option>'; }
     function readForm() {
       d.name = $('#pj-name').value;
       d.area = $('#pj-area').value || null;
       d.start = $('#pj-start').value;
-      d.deadline = $('#pj-deadline').value || null;
+      d.when = whenRead('pj-dl');
+      d.pts = $('#pj-pts') ? $('#pj-pts').value : d.pts;
+      d.stages = $('#pj-stages') ? $('#pj-stages').checked : false;
       var c = $('input[name="pj-color"]:checked'); if (c) d.color = +c.value;
       var n = $('#pj-note'); if (n) d.note = n.value;
     }
@@ -2622,16 +3221,27 @@ td.c-break{display:none}
         $('#modal-body').innerHTML = '<h2 id="modal-title">' + (isNew ? 'New project' : 'Edit project') + '</h2>' +
           '<form id="pj-form" novalidate>' +
           '<div class="field"><label for="pj-name">Name</label><input id="pj-name" type="text" maxlength="80" value="' + esc(d.name) + '" placeholder="e.g. Physics 101, Exoplanet research"' + (isNew ? ' autofocus' : '') + '></div>' +
-          '<div class="field"><label for="pj-area">Area</label><select id="pj-area">' + opt('', 'No area', d.area) +
+          '<div class="field"><label for="pj-area">Kind</label><select id="pj-area">' + opt('', 'None', d.area) +
             state.areas.map(function (a) { return opt(a.id, a.name, d.area); }).join('') + '</select></div>' +
-          '<div class="field-row"><div class="field"><label for="pj-start">Start date</label><input id="pj-start" type="date" value="' + esc(d.start) + '" max="' + T + '"></div>' +
-          '<div class="field"><label for="pj-deadline">Final deadline <span class="muted">(ends the project)</span></label><input id="pj-deadline" type="date" value="' + esc(d.deadline || '') + '"' + (p0 && p0.ended ? '' : ' min="' + T + '"') + '></div></div>' +
+          (isNew ? '<label class="check kind-stages" id="pj-stages-row" hidden><input type="checkbox" id="pj-stages"' + (d.stages ? ' checked' : '') + '> <span id="pj-stages-txt"></span></label>' : '') +
+          '<p class="hub-hint kind-hint" id="pj-kind-hint" hidden>Add one requirement per document the call asks for. Tap one to paste its exact rule, points and deadline.</p>' +
+          '<div class="field"><label for="pj-start">Start date</label><input id="pj-start" type="date" value="' + esc(d.start) + '" max="' + T + '"></div>' +
+          whenFields('pj-dl', 'Final deadline <span class="muted">(ends the project)</span>', d.dl, p0 && p0.ended ? '' : T) +
+          '<div class="field" id="pj-pts-row" hidden><label for="pj-pts">Total points in the scoring <span class="muted">(optional)</span></label><input id="pj-pts" type="number" min="0" step="1" inputmode="numeric" value="' + esc(String(d.pts || '')) + '" placeholder="e.g. 140"></div>' +
           '<div class="field"><fieldset class="swatches"><legend>Line color</legend>' + sw + '</fieldset></div>' +
           (isNew ? '<div class="field"><label for="pj-note">First update <span class="muted">(optional, logged on the start date)</span></label><textarea id="pj-note" rows="2" placeholder="Kickoff, goal, first step…">' + esc(d.note) + '</textarea></div>' +
             '<p class="muted" style="font-size:13px;margin:4px 0 0">Next, the project window opens, where you add its to-dos, files and notes.</p>' : '') +
           '<p class="form-error" id="pj-error" hidden></p>' +
           '<div class="modal-actions">' + (isNew ? '' : '<button type="button" class="btn btn-quiet" data-act="del-project" style="margin-right:auto">Delete project</button>') +
           '<button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">' + (isNew ? 'Create project' : 'Save') + '</button></div></form>';
+        whenWire('pj-dl');
+        var kindUpd = function () {
+          var k = $('#pj-area').value, st = KIND_STAGES[k], row = $('#pj-stages-row');
+          if (row) { row.hidden = !st; if (st) $('#pj-stages-txt').textContent = 'Start with these stages: ' + st.join(', '); }
+          $('#pj-kind-hint').hidden = !(isNew && k === 'application');
+          $('#pj-pts-row').hidden = k !== 'application' && !d.pts;
+        };
+        $('#pj-area').addEventListener('change', kindUpd); kindUpd();
       },
       onClick: function (e) {
         var b = e.target.closest('[data-act]'); if (!b) return;
@@ -2651,14 +3261,19 @@ td.c-break{display:none}
         if (!name) { fail('Give the project a name.'); $('#pj-name').focus(); return; }
         if (!isISO(d.start) || d.start > T) return fail('Pick today or an earlier start date.');
         var active = isNew || !p0.ended;
-        if (d.deadline && !isISO(d.deadline)) return fail('That final deadline isn’t a valid date.');
+        if (d.when.error) return fail(d.when.error);
+        d.deadline = d.when.date;
         if (d.deadline && active && d.deadline < T && (isNew || d.deadline !== p0.deadline)) return fail('The final deadline has to be today or later.');
+        var pts = numOrNull(d.pts);
         var note = (d.note || '').trim();
         if (isNew) {
           var id = uid();
           commit(function (s) {
-            s.projects.push({ id: id, name: name.slice(0, 80), color: d.color, start: d.start, ended: null, deadline: d.deadline, endedBy: null,
-              area: d.area, goal: d.goal, milestones: [], links: [], notes: '', created: Date.now(), sample: false });
+            var np = { id: id, name: name.slice(0, 80), color: d.color, start: d.start, ended: null, deadline: null, deadlineAt: 0, deadlineTz: '', endedBy: null,
+              area: d.area, goal: d.goal, milestones: [], links: [], notes: '', created: Date.now(), sample: false, pointsTotal: pts };
+            applyDeadline(np, d.when);
+            if (d.stages && KIND_STAGES[d.area]) KIND_STAGES[d.area].forEach(function (t, i) { np.milestones.push(newPiece(t, i)); });
+            s.projects.push(np);
             if (note) s.updates.push({ id: uid(), projectId: id, date: d.start, text: note, created: Date.now() });
           });
           if (note) justAdded = id + '|' + d.start;
@@ -2667,8 +3282,8 @@ td.c-break{display:none}
           openHub(id, 'tasks');
         } else {
           commit(function () {
-            p0.name = name.slice(0, 80); p0.color = d.color; p0.start = d.start; p0.deadline = d.deadline;
-            p0.area = d.area; p0.goal = d.goal;
+            p0.name = name.slice(0, 80); p0.color = d.color; p0.start = d.start; applyDeadline(p0, d.when);
+            p0.area = d.area; p0.goal = d.goal; p0.pointsTotal = pts;
           });
           closeModal();
         }
@@ -2677,50 +3292,142 @@ td.c-break{display:none}
     openModal(ctx);
   }
   function openNewProject() { openProject(null); }
+  function newPiece(title, i) {
+    return { id: uid(), title: String(title).slice(0, 140), date: null, time: null, at: 0, tz: '', done: false, doneOn: null, doneAt: 0, url: '', created: Date.now() + (i || 0),
+      today: null, status: 'todo', rule: '', points: null, parent: null, waitSince: null };
+  }
 
-  // One to-do: its name, optional due date, optional link, and whether it's done.
+  // Date + optional time + optional time zone, with a live "on your clock" line.
+  function ensureTzList() {
+    if (document.getElementById('tz-list')) return;
+    var zones = [];
+    try { zones = Intl.supportedValuesOf('timeZone'); } catch (e) {}
+    if (!zones.length) zones = ['Europe/Paris', 'Europe/London', 'America/New_York', 'America/Los_Angeles', 'Asia/Manila', 'Asia/Taipei', 'Asia/Tokyo', 'UTC'];
+    var dl = document.createElement('datalist'); dl.id = 'tz-list';
+    dl.innerHTML = zones.map(function (z) { return '<option value="' + esc(z) + '">' + esc(zoneName(z)) + '</option>'; }).join('');
+    document.body.appendChild(dl);
+  }
+  function whenFields(pre, label, v, minDate) {
+    ensureTzList();
+    // show what was typed, in the zone it was typed in
+    var date = v.date || '', time = v.time || '', tz = v.tz && v.tz !== LOCAL_TZ ? v.tz : '';
+    if (v.at && v.tz && validTz(v.tz)) { var w = wallIn(v.at, v.tz); date = w.date; time = w.time; }
+    return '<div class="field-row when-row"><div class="field"><label for="' + pre + '-date">' + label + '</label><input id="' + pre + '-date" type="date" value="' + esc(date) + '"' + (minDate ? ' min="' + minDate + '"' : '') + '></div>' +
+      '<div class="field"><label for="' + pre + '-time">Time <span class="muted">(optional)</span></label><input id="' + pre + '-time" type="time" value="' + esc(time) + '"></div></div>' +
+      '<div class="field when-tz"' + (time ? '' : ' hidden') + '><label for="' + pre + '-tz">Time zone of that time <span class="muted">(leave empty for yours: ' + esc(zoneName(LOCAL_TZ) || 'this device') + ')</span></label>' +
+      '<input id="' + pre + '-tz" type="text" list="tz-list" autocomplete="off" spellcheck="false" placeholder="e.g. Europe/Paris" value="' + esc(tz) + '"></div>' +
+      '<p class="when-local" id="' + pre + '-local"></p>';
+  }
+  function whenRead(pre) {
+    var d = $('#' + pre + '-date').value, t = $('#' + pre + '-time').value, z = ($('#' + pre + '-tz').value || '').trim();
+    if (z && !validTz(z)) return { error: 'Pick a time zone from the list, like Europe/Paris, or leave it empty for your own time.' };
+    if (d && !isISO(d)) return { error: 'That date isn’t valid.' };
+    return moment(d, t, z);
+  }
+  function whenWire(pre) {
+    var upd = function () {
+      var t = $('#' + pre + '-time'), box = $('#' + pre + '-local'), zf = t && t.closest('form') && t.closest('form').querySelector('.when-tz');
+      if (!t || !box) return;
+      if (zf) zf.hidden = !t.value;
+      var v = whenRead(pre);
+      if (v.error || !v.at) { box.textContent = ''; return; }
+      var note = srcNote(v.at, v.tz);
+      box.textContent = note ? 'On your clock: ' + fmtLong(v.date) + ', ' + v.time + ' (' + zoneName(LOCAL_TZ) + ')' : '';
+    };
+    ['date', 'time', 'tz'].forEach(function (k) { var el = $('#' + pre + '-' + k); if (el) { el.addEventListener('input', upd); el.addEventListener('change', upd); } });
+    upd();
+  }
+
+  // One piece (or one small step inside a piece): status, the exact rule, due moment, points, link, steps.
   function openMilestone(pid, mid) {
     var p = getProject(pid); if (!p || mode === 'readonly') return;
     var m = taskById(p, mid);
     if (!m) return;
-    var T = todayISO();
-    openModal({
+    var T = todayISO(), isStep = !!m.parent, parent = isStep ? taskById(p, m.parent) : null;
+    function drawSteps() {
+      var box = $('#ms-steps'); if (!box) return;
+      var S = stepsOf(p, m);
+      box.innerHTML = S.map(function (x) {
+        return '<li class="st-item"><label class="check"><input type="checkbox" data-act="st-done" data-sid="' + esc(x.id) + '"' + (x.done ? ' checked' : '') + '> <span' + (x.done ? ' class="muted"' : '') + '>' + esc(x.title) + '</span></label>' +
+          '<button type="button" class="icon-x" data-act="st-del" data-sid="' + esc(x.id) + '" aria-label="Remove step ' + esc(x.title) + '">×</button></li>';
+      }).join('');
+    }
+    var ctx = {
       draw: function () {
         var dl = m.date ? diffDays(T, m.date) : null;
         $('#modal-body').innerHTML = '<div class="modal-head" style="--pc:var(--c' + p.color + ')"><i class="dot"></i><div><h2 id="modal-title">' + esc(m.title) + '</h2>' +
-          '<p class="modal-sub">' + esc(p.name) + (m.date ? ' · ' + fmtShort(m.date) : '') + (m.done ? ' · done' : dl === null ? '' : dl >= 0 ? ' · ' + dueLabel(dl) : ' · ' + plural(-dl, 'day') + ' overdue') + '</p></div></div>' +
+          '<p class="modal-sub">' + esc(p.name) + (parent ? ' › ' + esc(parent.title) : '') + (m.date ? ' · ' + fmtShort(m.date) + (m.time ? ' ' + m.time : '') : '') +
+            (m.done ? ' · done' : dl === null ? '' : dl >= 0 ? ' · ' + dueLabel(dl) : ' · ' + plural(-dl, 'day') + ' overdue') + '</p></div></div>' +
           '<form id="ms-form" novalidate>' +
-          '<div class="field"><label for="ms-title">To-do</label><input id="ms-title" type="text" maxlength="140" value="' + esc(m.title) + '"></div>' +
-          '<div class="field-row"><div class="field"><label for="ms-date">Due date <span class="muted">(optional)</span></label><input id="ms-date" type="date" value="' + (m.date || '') + '"></div>' +
-          '<div class="field"><label for="ms-time">Time <span class="muted">(optional)</span></label><input id="ms-time" type="time" value="' + (m.time || '') + '"></div></div>' +
-          '<div class="field"><label class="check"><input type="checkbox" id="ms-done"' + (m.done ? ' checked' : '') + '> Done</label></div>' +
+          '<div class="field"><label for="ms-title">' + (isStep ? 'Step' : 'Name') + '</label><input id="ms-title" type="text" maxlength="140" value="' + esc(m.title) + '"></div>' +
+          (isStep ? '<div class="field"><label class="check"><input type="checkbox" id="ms-done"' + (m.done ? ' checked' : '') + '> Done</label></div>'
+            : '<div class="field"><label for="ms-status">Status</label><select id="ms-status">' + ST_ORDER.map(function (k) { return '<option value="' + k + '"' + (m.status === k ? ' selected' : '') + '>' + ST_LABEL[k] + '</option>'; }).join('') + '</select></div>' +
+              '<div class="field"><label for="ms-rule">Exact rule <span class="muted">(optional: limits, format, who signs, where it goes)</span></label><textarea id="ms-rule" rows="3" maxlength="1500" placeholder="e.g. Max 400 words, signed and stamped, uploaded on the platform">' + esc(m.rule || '') + '</textarea></div>') +
+          whenFields('ms', 'Due <span class="muted">(optional)</span>', m, '') +
+          (isStep ? '' : '<div class="field"><label for="ms-pts">Points <span class="muted">(optional, if it’s scored)</span></label><input id="ms-pts" type="number" min="0" step="1" inputmode="numeric" value="' + esc(m.points ? String(m.points) : '') + '"></div>') +
           '<div class="field"><label for="ms-url">Link <span class="muted">(optional: the doc or file you work on for this)</span></label><input id="ms-url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="Paste a link" value="' + esc(m.url || '') + '"></div>' +
           (m.url ? '<p style="margin:6px 0 0"><a class="btn btn-sm" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer">' + EXT + 'Open link</a></p>' : '') +
+          (isStep ? '' : '<div class="field"><span class="field-label">Steps <span class="muted">(optional, small things inside this one)</span></span><ul class="st-list" id="ms-steps"></ul>' +
+            '<div class="st-add"><input id="ms-step" type="text" maxlength="140" placeholder="Add a step"><button type="button" class="btn btn-sm" data-act="st-add">Add</button></div></div>') +
           '<p class="form-error" id="ms-error" hidden></p>' +
           '<div class="modal-actions"><button type="button" class="btn btn-quiet" data-act="del-ms" style="margin-right:auto">Delete</button>' +
           '<button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
+        whenWire('ms'); drawSteps();
+        var si = $('#ms-step');
+        if (si) si.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); addStep(); } });
       },
       onClick: function (e) {
-        if (e.target.closest('[data-act="del-ms"]')) {
-          commit(function () { p.milestones = p.milestones.filter(function (x) { return x.id !== mid; }); });
+        var b = e.target.closest('[data-act]'); if (!b) return;
+        var a = b.dataset.act;
+        if (a === 'del-ms') {
+          commit(function () { p.milestones = p.milestones.filter(function (x) { return x.id !== mid && x.parent !== mid; }); });
           closeModal();
+        } else if (a === 'st-add') addStep();
+        else if (a === 'st-del') { commit(function () { p.milestones = p.milestones.filter(function (x) { return x.id !== b.dataset.sid; }); }); drawSteps(); }
+        else if (a === 'st-done') {
+          var x = taskById(p, b.dataset.sid);
+          if (x) commit(function (s) { setTaskDone(s, p, x, b.checked, todayISO()); });
+          drawSteps();
         }
       },
       onSubmit: function () {
-        var t = $('#ms-title').value.trim(), dt = $('#ms-date').value, tm = $('#ms-time').value, rawU = $('#ms-url').value.trim(), err = $('#ms-error');
+        var t = $('#ms-title').value.trim(), rawU = $('#ms-url').value.trim(), err = $('#ms-error');
         var fail = function (x) { err.textContent = x; err.hidden = false; };
-        if (!t) return fail('Give the to-do a name.');
-        if (dt && !isISO(dt)) return fail('That date isn’t valid.');
+        if (!t) return fail('Give it a name.');
+        var w = whenRead('ms'); if (w.error) return fail(w.error);
         var url = rawU ? cleanUrl(rawU) : '';
         if (rawU && !url) return fail('That link doesn’t look right. Copy the whole address from the browser bar or the Share button.');
-        var dn = $('#ms-done').checked;
+        var stv = isStep ? ($('#ms-done').checked ? 'done' : 'todo') : $('#ms-status').value;
         commit(function (s) {
-          m.title = t.slice(0, 140); m.date = dt || null; m.time = dt && isTime(tm) ? tm : null; m.url = url;
-          setTaskDone(s, p, m, dn, T);
+          m.title = t.slice(0, 140); m.date = w.date; m.time = w.time; m.at = w.at; m.tz = w.tz; m.url = url;
+          if (!isStep) { m.rule = $('#ms-rule').value.trim().slice(0, 1500); m.points = numOrNull($('#ms-pts').value); }
+          setStatus2(s, p, m, stv, T);
         });
         closeModal();
       }
-    });
+    };
+    function addStep() {
+      var el = $('#ms-step'), v = el ? el.value.trim() : '';
+      if (!v) { if (el) el.focus(); return; }
+      el.value = '';
+      commit(function () {
+        var x = newPiece(v); x.parent = m.id;
+        // keep steps right after their piece and its other steps
+        var S = stepsOf(p, m), after = S.length ? S[S.length - 1] : m, i = p.milestones.indexOf(after);
+        p.milestones.splice(i + 1, 0, x);
+      });
+      drawSteps(); el.focus();
+    }
+    openModal(ctx);
+  }
+  // Change a piece's status. Done goes through the usual "done" path (timeline dot, faded star).
+  function setStatus2(s, p, m, st, T) {
+    if (ST_ORDER.indexOf(st) < 0) return;
+    if (st === 'done') { setTaskDone(s, p, m, true, T); return; }
+    if (m.done) setTaskDone(s, p, m, false, T);
+    if (st === 'waiting' && m.status !== 'waiting') m.waitSince = T;
+    if (st !== 'waiting') m.waitSince = null;
+    m.status = st;
   }
 
   function openAreas() {
@@ -2870,49 +3577,87 @@ td.c-break{display:none}
 
     function dueBits(m) {
       if (m.done) return { cls: '', txt: recentDone(m.doneAt) ? fadeNote(m.doneAt) : m.doneOn ? 'done ' + (m.doneOn === T ? 'today' : fmtShort(m.doneOn)) : 'done' };
-      if (!m.date) return { cls: '', txt: 'no date' };
-      var n = diffDays(T, m.date);
-      if (n < 0) return { cls: ' is-late', txt: fmtShort(m.date) + ' · ' + plural(-n, 'day') + ' overdue' };
-      return { cls: n <= DUE_SOON ? ' is-soon' : '', txt: fmtShort(m.date) + (m.time ? ' ' + m.time : '') + ' · ' + dueLabel(n) };
+      if (!m.date) return { cls: '', txt: '' };
+      var n = diffDays(T, m.date), src = srcNote(m.at, m.tz), w = fmtShort(m.date) + (m.time ? ' ' + m.time : '');
+      if (n < 0) return { cls: ' is-late', txt: w + ' · ' + plural(-n, 'day') + ' overdue' };
+      return { cls: n <= DUE_SOON ? ' is-soon' : '', txt: w + ' · ' + dueLabel(n) + (src ? ' (' + src + ')' : '') };
     }
-    function taskRow(m, isNext) {
-      var b = dueBits(m), info = m.url ? linkInfo(m.url) : null;
-      return '<li class="task' + (m.done ? ' is-done is-star' : '') + b.cls + (isNext ? ' is-next' : '') + (justStarred === m.id ? ' just-starred' : '') + '">' +
-        '<button type="button" class="tbox' + (m.done ? ' tstar' : '') + '" id="tk-' + esc(m.id) + '" data-act="task-toggle" data-mid="' + esc(m.id) + '" aria-pressed="' + !!m.done + '" title="' + (m.done ? 'Bring it back' : 'Mark done') + '" aria-label="' +
+    function sunBtn(m) {
+      return !m.done && !ro ? '<button type="button" class="tact' + (m.today && m.today <= T ? ' on' : '') + '" data-act="task-today" data-mid="' + esc(m.id) + '" aria-pressed="' + !!(m.today && m.today <= T) +
+        '" title="' + (m.today && m.today <= T ? 'On today’s list. Tap to take it off' : 'Do today') + '" aria-label="' + (m.today && m.today <= T ? 'Take off today’s list: ' : 'Do today: ') + esc(m.title) + '">' + SUN + '</button>' : '';
+    }
+    function linkA(m) {
+      if (!m.url) return '';
+      var info = linkInfo(m.url);
+      return '<a class="task-link" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer" title="Open ' + esc(info.label) + '" aria-label="Open the link for ' + esc(m.title) + '">' + linkTile(info.svc) + '</a>';
+    }
+    // a small step inside a piece: a checkbox, like any to-do
+    function stepRow(m) {
+      var b = dueBits(m);
+      return '<li class="task step' + (m.done ? ' is-done is-star' : '') + b.cls + (justStarred === m.id ? ' just-starred' : '') + '"' + sortAttr(m.id) + '>' +
+        '<button type="button" class="tbox' + (m.done ? ' tstar' : '') + '" data-act="task-toggle" data-mid="' + esc(m.id) + '" aria-pressed="' + !!m.done + '" title="' + (m.done ? 'Bring it back' : 'Mark done') + '" aria-label="' +
           (m.done ? 'Bring back: ' : 'Mark done: ') + esc(m.title) + '"' + (ro ? ' disabled' : '') + '>' + (m.done ? STAR : CK) + '</button>' +
-        '<button type="button" class="task-main" data-act="task" data-mid="' + esc(m.id) + '" title="' + (ro ? '' : 'Edit') + '"><span class="task-title">' + esc(m.title) + '</span>' +
-          '<span class="task-meta">' + (isNext ? '<span class="next-tag">Next</span>' : '') + esc(b.txt) + '</span></button>' +
-        (m.url ? '<a class="task-link" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer" title="Open ' + esc(info.label) + '" aria-label="Open the link for ' + esc(m.title) + '">' + linkTile(info.svc) + '</a>' : '') +
-        (!m.done && !ro ? '<button type="button" class="tact' + (m.today && m.today <= T ? ' on' : '') + '" data-act="task-today" data-mid="' + esc(m.id) + '" aria-pressed="' + !!(m.today && m.today <= T) +
-          '" title="' + (m.today && m.today <= T ? 'On today’s list. Tap to take it off' : 'Do today') + '" aria-label="' + (m.today && m.today <= T ? 'Take off today’s list: ' : 'Do today: ') + esc(m.title) + '">' + SUN + '</button>' : '') +
-        '</li>';
+        '<button type="button" class="task-main" data-act="task" data-mid="' + esc(m.id) + '"><span class="task-title">' + esc(m.title) + '</span>' +
+          (b.txt ? '<span class="task-meta">' + esc(b.txt) + '</span>' : '') + '</button>' + linkA(m) + sunBtn(m) + '</li>';
+    }
+    var P = piecesOf(p), nx = nextPiece(p);
+    function pieceRow(m) {
+      var b = dueBits(m), S = stepsOf(p, m), sd = S.filter(function (x) { return x.done; }).length, meta = [];
+      if (!m.done && b.txt) meta.push(b.txt);
+      if (m.status === 'waiting' && m.waitSince) meta.push('waiting since ' + fmtShort(m.waitSince));
+      if (S.length) meta.push(sd + ' of ' + S.length + ' steps');
+      if (m.done && b.txt) meta.push(b.txt);
+      if (m.points) meta.push(m.points + ' pts');
+      return '<li class="task piece st-' + m.status + (m.done ? '' : b.cls) + (m === nx ? ' is-next' : '') + (justStarred === m.id ? ' just-starred' : '') + '"' + sortAttr(m.id) + '>' +
+        '<div class="piece-top"><select class="st-pill st-' + m.status + '" data-act="piece-status" data-mid="' + esc(m.id) + '" aria-label="Status of ' + esc(m.title) + '"' + (ro ? ' disabled' : '') + '>' +
+          ST_ORDER.map(function (k) { return '<option value="' + k + '"' + (m.status === k ? ' selected' : '') + '>' + ST_LABEL[k] + '</option>'; }).join('') + '</select>' +
+        '<button type="button" class="task-main" data-act="task" data-mid="' + esc(m.id) + '" title="' + (ro ? '' : 'Open') + '"><span class="task-title">' + esc(m.title) + '</span>' +
+          (m.rule ? '<span class="piece-rule">' + esc(m.rule) + '</span>' : '') +
+          (meta.length || m === nx ? '<span class="task-meta">' + (m === nx ? '<span class="next-tag">Next</span>' : '') + esc(meta.join(' · ')) + '</span>' : '') + '</button>' +
+        linkA(m) + sunBtn(m) + '</div>' +
+        (S.length ? '<ul class="task-list steps" data-sort-list="steps:' + esc(p.id) + '">' + S.map(stepRow).join('') + '</ul>' : '') + '</li>';
     }
 
     // header
     var sub = [area ? esc(area.name) : ''];
     if (p.ended) sub.push((p.endedBy === 'deadline' ? 'hit its deadline ' : 'ended ') + fmtYear(p.ended));
     else if (p.deadline) {
-      var dl = diffDays(T, p.deadline);
-      sub.push('due ' + fmtYear(p.deadline));
-      sub.push('<span class="hub-left' + (dl <= DUE_SOON ? ' is-soon' : '') + '">' + (dl <= 0 ? 'due today' : plural(dl, 'day') + ' left') + '</span>');
+      var dl = diffDays(T, p.deadline), srcD = srcNote(p.deadlineAt, p.deadlineTz);
+      sub.push('due ' + deadlineText(p, T, true) + (srcD ? ' <span class="hub-src">(' + esc(srcD) + ')</span>' : ''));
+      sub.push('<span class="hub-left' + (dl <= DUE_SOON ? ' is-soon' : '') + '">' + leftText(p, T) + '</span>');
     } else sub.push('no deadline');
     sub = sub.filter(Boolean).join(' · ');
-    var acts = (ro ? '' : '<button type="button" class="btn btn-sm" data-act="hub-edit">Edit</button>' +
+    var acts = (ro ? '' : '<button type="button" class="btn btn-sm" data-act="ask-ai">' + SPARK + 'Ask AI</button><button type="button" class="btn btn-sm" data-act="hub-edit">Edit</button>' +
         (p.ended ? '<button type="button" class="btn btn-sm" data-act="reopen">Reopen</button>' : '<button type="button" class="btn btn-sm btn-quiet" data-act="end">End</button>')) +
       '<button type="button" class="icon-x hub-close" data-act="hub-close" aria-label="Close project" title="Close (Esc)">×</button>';
 
-    // to-dos
-    var tasksSec = '<section class="hsec hsec-tasks" aria-labelledby="hs-tasks"><div class="hsec-h"><h3 id="hs-tasks">To-do</h3></div>' +
+    // progress, pace and where the points are
+    var nDone = P.filter(function (m) { return m.done; }).length, pace = paceOf(p), overview = '';
+    if (P.length) {
+      overview += '<div class="hub-prog"><div class="pbar" role="img" aria-label="' + nDone + ' of ' + P.length + ' done"><i style="width:' + Math.round(nDone / P.length * 100) + '%"></i></div>' +
+        '<span class="pbar-n">' + nDone + ' of ' + P.length + ' done</span>' + (pace ? '<span class="pace pace-' + pace.key + '">' + pace.label + '</span>' : '') + '</div>';
+      var WP = P.filter(function (m) { return m.points; });
+      if (WP.length) {
+        var sum = WP.reduce(function (a, m) { return a + m.points; }, 0), total = Math.max(p.pointsTotal || 0, sum), other = Math.round((total - sum) * 100) / 100;
+        overview += '<div class="pts"><div class="pts-h">Where the ' + total + ' points are</div><div class="pts-bar">' +
+          WP.map(function (m) { return '<i class="' + (m.done ? 'is-done' : '') + '" style="flex:' + m.points + '" title="' + esc(m.title) + ': ' + m.points + '"></i>'; }).join('') +
+          (other > 0 ? '<i class="is-other" style="flex:' + other + '" title="Other criteria: ' + other + '"></i>' : '') + '</div>' +
+          '<div class="pts-key">' + WP.map(function (m) { return '<span' + (m.done ? ' class="is-done"' : '') + '>' + esc(truncate(m.title, 26)) + ' ' + m.points + '</span>'; }).join('') +
+          (other > 0 ? '<span class="is-other">Other criteria ' + other + '</span>' : '') + '</div></div>';
+      }
+    }
+
+    // the pieces
+    var LBL = listLabel(p), kindPh = { Requirements: 'Add a requirement (paste a link to attach it)', Stages: 'Add a stage (paste a link to attach it)' }[LBL] || 'Add a to-do (paste a link to attach it)';
+    var tasksSec = '<section class="hsec hsec-tasks" aria-labelledby="hs-tasks"><div class="hsec-h"><h3 id="hs-tasks">' + LBL + '</h3><span class="count">' + (P.length || '') + '</span></div>' +
       (ro ? '' : '<form id="task-add" class="task-add" novalidate autocomplete="off">' +
-        '<label for="ta-title" class="sr-only">New to-do</label><input id="ta-title" data-keep data-focus="tasks" type="text" maxlength="2100" placeholder="Add a to-do (paste a link to attach it)">' +
+        '<label for="ta-title" class="sr-only">New item</label><input id="ta-title" data-keep data-focus="tasks" type="text" maxlength="2100" placeholder="' + kindPh + '">' +
         '<label for="ta-date" class="sr-only">Due date (optional)</label><input id="ta-date" data-keep type="date" title="Due date (optional)">' +
         '<button type="submit" class="btn btn-sm primary">Add</button></form>') +
-      (open.length ? '<ul class="task-list" data-sort-list="hub:' + esc(p.id) + '">' + (ui.hubAllTasks ? open : open.slice(0, 7)).map(function (m, i) { return taskRow(m, i === 0).replace('<li ', '<li' + sortAttr(m.id) + ' '); }).join('') + '</ul>' +
-          (open.length > 7 ? '<button type="button" class="link-btn hub-more" id="hub-all" data-act="hub-all">' + (ui.hubAllTasks ? 'Show only the next 7' : 'Show all ' + open.length + ' open to-dos') + '</button><br>' : '')
-        : '<p class="hub-empty">' + (c.total ? 'Everything is done.' : 'No to-dos yet. Add each step this project needs, with a date if it has one.') + '</p>') +
-      (fresh.length ? '<ul class="task-list task-stars" aria-label="Done in the last 48 hours">' + fresh.map(function (m) { return taskRow(m, false); }).join('') + '</ul>' : '') +
-      (older.length ? '<button type="button" class="link-btn hub-more" id="hub-done" data-act="hub-done">' + (ui.hubShowDone ? 'Hide' : 'Show') + ' ' + older.length + ' done earlier</button>' +
-        (ui.hubShowDone ? '<ul class="task-list">' + older.map(function (m) { return taskRow(m, false); }).join('') + '</ul>' : '') : '') +
+      (P.length ? '<ul class="task-list pieces" data-sort-list="hub:' + esc(p.id) + '">' + P.map(pieceRow).join('') + '</ul>' +
+          (ro ? '' : '<p class="hub-hint">Tap one to add its exact rule, deadline, points or small steps. ' + (isPhone() ? 'Hold and drag' : 'Drag') + ' to reorder.</p>')
+        : '<p class="hub-empty">' + (LBL === 'Requirements' ? 'Add one requirement per document the call asks for. Tap one afterwards to paste its exact rule, points and deadline.' :
+            LBL === 'Stages' ? 'Add the stages this project goes through. Tap one to add small steps inside it.' : 'No to-dos yet. Add each step this project needs, with a date if it has one.') + '</p>') +
       '</section>';
 
     // notes
@@ -2945,12 +3690,15 @@ td.c-break{display:none}
       var h = '';
       if (u.date !== lastD) { h += '<li class="feed-day">' + esc(relDay(u.date, T)) + '</li>'; lastD = u.date; }
       return h + '<li><button type="button" class="feed-item' + (u.task ? ' auto' : '') + '" data-act="open-day" data-date="' + u.date + '">' +
-        (u.task ? CK : '') + '<span class="feed-text">' + esc(u.task ? u.text.replace(/^✓\s*/, 'Done: ') : u.text) + '</span></button></li>';
+        (u.task ? CK : '') + '<span class="feed-text">' + esc(u.task ? u.text.replace(/^✓\s*/, 'Done: ') : u.text) +
+        (u.piece && taskById(p, u.piece) ? ' <span class="feed-tag">' + esc(truncate(taskById(p, u.piece).title, 28)) + '</span>' : '') + '</span></button></li>';
     }).join('');
     var logSec = '<section class="hsec hsec-log" aria-labelledby="hs-log"><div class="hsec-h"><h3 id="hs-log">Activity</h3><span class="count">' + (ups.length || '') + '</span></div>' +
       (!ro && canAddOn(p, T, T) ? '<form id="log-add" class="log-add" novalidate>' +
         '<label for="lg-text" class="sr-only">What did you do on this today?</label><textarea id="lg-text" data-keep data-focus="log" rows="2" maxlength="2000" placeholder="What did you do on this today?"></textarea>' +
-        '<button type="submit" class="btn btn-sm primary">Log</button></form>' : '') +
+        '<button type="submit" class="btn btn-sm primary">Log</button>' +
+        (P.length ? '<label for="lg-piece" class="sr-only">About</label><select id="lg-piece" data-keep class="lg-piece"><option value="">About: the whole project</option>' +
+          P.map(function (m) { return '<option value="' + esc(m.id) + '">About: ' + esc(truncate(m.title, 40)) + '</option>'; }).join('') + '</select>' : '') + '</form>' : '') +
       (ups.length ? '<ol class="feed">' + feed + '</ol>' +
         (ups.length > 8 ? '<button type="button" class="link-btn hub-more" id="hub-log" data-act="hub-log">' + (ui.hubAllLog ? 'Show less' : 'Show all ' + ups.length) + '</button>' : '')
         : '<p class="hub-empty">Nothing logged yet. Each update is a dot on the timeline, and ticking a to-do adds one too.</p>') +
@@ -2958,8 +3706,8 @@ td.c-break{display:none}
 
     return '<div class="hub-panel" role="dialog" aria-modal="true" aria-labelledby="hub-title" style="--pc:var(--c' + p.color + ')">' +
       '<header class="hub-head"><i class="dot" aria-hidden="true"></i><div class="hub-titles"><h2 id="hub-title">' + esc(p.name) + '</h2><p class="hub-sub">' + sub + '</p></div>' +
-      '<div class="hub-acts">' + acts + '</div></header>' +
-      '<div class="hub-body">' + notesSec + tasksSec + logSec + filesSec + '</div></div>';
+      '<div class="hub-acts">' + acts + '</div></header>' + (overview ? '<div class="hub-overview">' + overview + '</div>' : '') +
+      '<div class="hub-body">' + tasksSec + logSec + filesSec + notesSec + '</div></div>';
   }
 
   // Redraw the open project window, keeping whatever you were typing and where you were.
@@ -3058,22 +3806,24 @@ td.c-break{display:none}
     var T = todayISO();
     openModal({
       draw: function () {
-        var v = p.deadline || addDays(T, 7);
+        var v = p.deadline ? { date: p.deadline, time: p.deadlineAt ? localTimeOf(p.deadlineAt) : '', at: p.deadlineAt, tz: p.deadlineTz } : { date: addDays(T, 7) };
         $('#modal-body').innerHTML = '<div class="modal-head" style="--pc:var(--c' + p.color + ')"><i class="dot"></i><div><h2 id="modal-title">Final deadline for “' + esc(p.name) + '”</h2>' +
-          '<p class="modal-sub">' + (p.deadline ? 'Due ' + fmtLong(p.deadline) + ' (' + dueLabel(diffDays(T, p.deadline)) + ')' : 'No deadline yet') + '</p></div></div>' +
+          '<p class="modal-sub">' + (p.deadline ? 'Due ' + fmtLong(p.deadline) + (p.deadlineAt ? ', ' + localTimeOf(p.deadlineAt) : '') + ' (' + leftText(p, T) + ')' : 'No deadline yet') + '</p></div></div>' +
           '<p>You’ll see a reminder ' + DUE_SOON + ' days before. Once the deadline day is over, the project ends itself with an ✕ on that day. For steps inside a project, add to-dos with dates in the project window (tap the project’s name).</p>' +
-          '<form id="dl-form" novalidate><div class="field"><label for="dl-date">Final deadline</label><input id="dl-date" type="date" value="' + v + '" min="' + T + '" autofocus></div>' +
+          '<form id="dl-form" novalidate>' + whenFields('dl', 'Final deadline', v, T) +
           '<p class="form-error" id="dl-error" hidden></p>' +
           '<div class="modal-actions">' + (p.deadline ? '<button type="button" class="btn btn-quiet" data-act="remove" style="margin-right:auto">Remove deadline</button>' : '') +
           '<button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Save deadline</button></div></form>';
+        whenWire('dl');
       },
       onClick: function (e) {
-        if (e.target.closest('[data-act="remove"]')) { commit(function () { p.deadline = null; }); closeModal(); }
+        if (e.target.closest('[data-act="remove"]')) { commit(function () { applyDeadline(p, moment(null)); }); closeModal(); }
       },
       onSubmit: function () {
-        var dt = $('#dl-date').value, err = $('#dl-error');
-        if (!isISO(dt) || dt < T) { err.textContent = 'Pick today or a later day.'; err.hidden = false; return; }
-        commit(function () { p.deadline = dt; });
+        var v = whenRead('dl'), err = $('#dl-error');
+        if (v.error) { err.textContent = v.error; err.hidden = false; return; }
+        if (!v.date || v.date < T) { err.textContent = 'Pick today or a later day.'; err.hidden = false; return; }
+        commit(function () { applyDeadline(p, v); });
         closeModal();
       }
     });
@@ -3093,12 +3843,12 @@ td.c-break{display:none}
           '<button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Reopen</button></div></form>';
       },
       onClick: function (e) {
-        if (e.target.closest('[data-act="nodl"]')) { commit(function () { p.ended = null; p.endedBy = null; p.deadline = null; }); closeModal(); }
+        if (e.target.closest('[data-act="nodl"]')) { commit(function () { p.ended = null; p.endedBy = null; applyDeadline(p, moment(null)); }); closeModal(); }
       },
       onSubmit: function () {
         var d = $('#ro-date').value, err = $('#ro-error');
         if (!isISO(d) || d < T) { err.textContent = 'Pick today or a later day.'; err.hidden = false; return; }
-        commit(function () { p.ended = null; p.endedBy = null; p.deadline = d; });
+        commit(function () { p.ended = null; p.endedBy = null; applyDeadline(p, moment(d)); });
         closeModal();
       }
     });
@@ -3207,6 +3957,7 @@ td.c-break{display:none}
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !moreMenu.hidden) closeMenu(); });
     $('#mm-backup').addEventListener('click', function () { closeMenu(); openBackup(); });
     $('#mm-library').addEventListener('click', function () { closeMenu(); location.hash = '#library'; });
+    $('#mm-ai').addEventListener('click', function () { closeMenu(); openAskAI(null); });
 
     // re-draw when the window crosses between phone and laptop layouts
     if (window.matchMedia) {
@@ -3236,6 +3987,10 @@ td.c-break{display:none}
         var pp = getProject(b.dataset.pid);
         var mm = pp && taskById(pp, b.dataset.mid);
         if (mm) commit(function (s) { setTaskDone(s, pp, mm, true, todayISO()); });
+      }
+      else if (a === 'wait-done' || a === 'wait-later') {
+        var wp = getProject(b.dataset.pid), wm = wp && taskById(wp, b.dataset.mid), td = todayISO();
+        if (wm) commit(function (s) { if (a === 'wait-done') setTaskDone(s, wp, wm, true, td); else wm.waitSince = td; });
       }
       else if (a === 'log-project') {
         $('#qa-project').value = b.dataset.pid;
@@ -3445,6 +4200,7 @@ td.c-break{display:none}
       var a = b.dataset.act;
       if (a === 'hub-close') closeHub();
       else if (a === 'hub-edit') openProject(pid);
+      else if (a === 'ask-ai') openAskAI(pid);
       else if (a === 'end') openEnd(pid);
       else if (a === 'reopen') openReopen(pid);
       else if (a === 'deadline') openDeadline(pid);
@@ -3472,7 +4228,7 @@ td.c-break{display:none}
         if (!x.title) { ti.focus(); return; }
         ti.value = ''; $('#ta-date').value = '';
         commit(function () {
-          p.milestones.push({ id: uid(), title: x.title, date: isISO(dt) ? dt : null, done: false, doneOn: null, url: x.url, created: Date.now() });
+          var np = newPiece(x.title); np.date = isISO(dt) ? dt : null; np.url = x.url; p.milestones.push(np);
         });
         var t2 = $('#ta-title'); if (t2) t2.focus();
       } else if (id === 'hub-lk') {
@@ -3489,11 +4245,21 @@ td.c-break{display:none}
         var ta = $('#lg-text'), v = ta.value.trim();
         if (!v) { ta.focus(); return; }
         ta.value = '';
-        addUpdate(p.id, T, v);
+        var lp = $('#lg-piece'), pc = lp && lp.value && taskById(p, lp.value) ? lp.value : '';
+        if (lp) lp.value = '';
+        addUpdate(p.id, T, v, pc);
         var l2 = $('#lg-text'); if (l2) l2.focus();
       }
     });
-    hub.addEventListener('change', function (e) { if (e.target.id === 'hub-notes') saveHubNotes(); });
+    hub.addEventListener('change', function (e) {
+      if (e.target.id === 'hub-notes') { saveHubNotes(); return; }
+      if (e.target.matches && e.target.matches('select[data-act="piece-status"]')) {
+        var p = getProject(ui.hub), m = p && taskById(p, e.target.dataset.mid), v = e.target.value;
+        if (!m || mode === 'readonly') return;
+        if (v === 'done' && !m.done) starPop(m.id);
+        commit(function (s) { setStatus2(s, p, m, v, todayISO()); });
+      }
+    });
     hub.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && e.target.id === 'lg-text') {
         e.preventDefault();
