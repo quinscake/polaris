@@ -770,6 +770,78 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
 .th-topic-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;border-top:1px dashed var(--rule);padding-top:12px}
 .th-topic-acts{display:flex;gap:6px;flex-wrap:wrap}
 .th-topic-acts .star{width:12px;height:12px;margin-right:4px;vertical-align:-1px}
+.th-head-acts{display:flex;gap:8px;align-items:center;flex:none}
+.btn.th-hot{background:var(--warn);border-color:var(--warn);color:#1b1407;font-weight:600}
+.btn.th-hot:hover{background:#ffc98f;border-color:#ffc98f}
+.btn.th-hot[aria-pressed="true"]{box-shadow:0 0 0 3px rgba(255,184,107,.28)}
+.btn.th-hot .ico{width:14px;height:14px;margin-right:6px;vertical-align:-2px}
+.th-hot-n{margin-left:7px;font:700 10.5px var(--font-mono);background:rgba(27,20,7,.16);border-radius:999px;padding:1px 6px}
+.th-jnew{display:flex;flex-direction:column;gap:8px;margin:0 0 24px;padding:12px;border:1px solid rgba(255,184,107,.32);border-radius:12px;background:rgba(255,184,107,.035)}
+.th-jnew textarea,.th-jentry textarea{min-height:96px;font-size:14.5px;line-height:1.55;resize:vertical}
+.th-jnew-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.th-jnew-foot input[type=date]{width:auto}
+.th-jhint{margin-left:auto;font:500 11.5px var(--font-mono);color:#626a82}
+.th-jday{margin:24px 0 8px;font:600 11px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--warn)}
+.th-jlist>.th-jday:first-child{margin-top:0}
+.th-jentry{position:relative;margin:0 0 10px;padding:14px 16px;border:1px solid var(--rule);border-left:3px solid rgba(255,184,107,.65);border-radius:12px;background:var(--panel);scroll-margin-top:16px;transition:box-shadow .3s}
+.th-jentry.is-flash{box-shadow:0 0 0 2px rgba(255,184,107,.55)}
+.th-jentry.is-editing form{display:flex;flex-direction:column;gap:8px}
+.th-jhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 6px}
+.th-jtitle{margin:0;flex:1;min-width:180px;font:600 17px/1.3 var(--font-display);color:var(--ink)}
+.th-jtime{font:500 11.5px var(--font-mono);color:var(--muted)}
+.th-jacts{display:flex;gap:12px;margin-left:auto}
+.th-jacts .link-btn{font-size:12.5px;padding:0}
+.th-jentry .md{font-size:15px}
+.th-jentry.is-long .md{max-height:13em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 65%,transparent);mask-image:linear-gradient(#000 65%,transparent)}
+.th-umbs{margin:0 0 18px;padding:14px 14px 12px;border:1px solid var(--rule);border-radius:12px;background:rgba(255,255,255,.015)}
+.th-umb-count{font:500 11px var(--font-mono);letter-spacing:0;text-transform:none;color:var(--muted);background:rgba(255,255,255,.05);border-radius:999px;padding:1px 8px}
+.th-umb-count.is-full{color:var(--warn);background:rgba(255,184,107,.1)}
+.th-umb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.th-umb{position:relative;display:flex;flex-direction:column;gap:2px;min-height:58px;box-sizing:border-box;padding:9px 30px 9px 12px;border:1px solid color-mix(in srgb,var(--uc) 40%,transparent);border-left:3px solid var(--uc);border-radius:10px;background:color-mix(in srgb,var(--uc) 8%,transparent)}
+.th-umb-name{background:transparent !important;border:0 !important;padding:0 !important;box-shadow:none !important;font:600 14.5px var(--font-body) !important;color:var(--ink);width:100%;outline:none;min-height:0}
+.th-umb-name:focus{text-decoration:underline;text-decoration-color:var(--uc);text-underline-offset:3px}
+.th-umb-c{font:500 11.5px var(--font-mono);color:var(--muted)}
+.th-umb-x{position:absolute;top:7px;right:6px;width:22px;height:22px;display:grid;place-items:center;border:0;border-radius:6px;background:none;color:var(--muted);cursor:pointer;opacity:.55}
+.th-umb-x:hover{opacity:1;color:var(--stop);background:rgba(255,107,94,.1)}
+.th-umb-x svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.th-umb-add{--uc:#5a6482;border-style:dashed;border-left:1px dashed #3d4766;background:none;justify-content:center;padding-right:12px}
+.th-umb-add input{background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;font-size:14px;color:var(--ink);outline:none;min-height:0}
+.th-topic-umb{flex:0 0 auto;max-width:230px}
+.th-quick:has(input){align-items:center;flex-wrap:wrap}
+.th-quick:has(input) input{flex:1 1 240px}
+.th-topic-body select{max-width:340px}
+.th-group{margin:0 0 6px}
+.th-group-h{display:flex;align-items:center;gap:8px;margin:18px 0 8px;font:600 11.5px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--uc,var(--muted))}
+.th-group-h i{width:9px;height:9px;border-radius:3px;background:var(--uc,#4a5370)}
+.th-none-sm{font-size:12.5px;margin:0 0 8px}
+.th-list{margin:0 0 26px}
+.th-list-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 10px}
+.th-list-h h3{margin:0;font:600 15.5px var(--font-display);color:var(--ink)}
+.th-prog{display:inline-flex;align-items:center;gap:8px;font:500 12px var(--font-mono);color:var(--muted)}
+.th-prog .cp-meter{flex:0 0 70px}
+.th-prog .cp-meter i{background:var(--ok)}
+.th-st{flex:none;font:600 10.5px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--rule);border-radius:999px;padding:2px 8px;color:var(--muted)}
+.th-st.tone-go{color:var(--ok);border-color:rgba(111,214,160,.45)}
+.th-st.tone-mid{color:var(--accent);border-color:rgba(138,180,255,.45)}
+.th-st.tone-warn{color:var(--warn);border-color:rgba(255,184,107,.45)}
+.th-st.tone-bad{color:var(--stop);border-color:rgba(255,107,94,.45)}
+.th-fill{font:500 11.5px var(--font-mono);color:#626a82}
+.th-card.is-done .th-topic-t{color:#b9c0d2}
+.th-seg{display:flex;gap:6px;flex-wrap:wrap}
+.th-seg .chip.tone-go[aria-pressed="true"]{border-color:var(--ok);background:rgba(111,214,160,.12)}
+.th-seg .chip.tone-warn[aria-pressed="true"]{border-color:var(--warn);background:rgba(255,184,107,.12)}
+.th-seg .chip.tone-bad[aria-pressed="true"]{border-color:var(--stop);background:rgba(255,107,94,.12)}
+.th-cf{display:flex;flex-direction:column;gap:4px}
+.th-cf textarea{min-height:38px;resize:none}
+.th-url{display:flex;gap:8px;align-items:center}
+.th-url input{flex:1;min-width:0}
+.th-checklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.th-checklist li{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--rule);border-radius:10px;background:var(--panel)}
+.th-checklist li:has(input:checked) span{color:var(--muted);text-decoration:line-through}
+.th-row-x{margin-left:auto;width:24px;height:24px;display:grid;place-items:center;border:0;border-radius:6px;background:none;color:var(--muted);cursor:pointer;opacity:.4}
+.th-row-x:hover{opacity:1;color:var(--stop)}
+.th-row-x svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.th-add{margin:10px 0 0}
 .th-canvas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .th-cv{display:flex;flex-direction:column;gap:6px;padding:12px 14px;border:1px solid var(--rule);border-radius:12px;background:var(--panel)}
 .th-cv:focus-within{border-color:rgba(255,184,107,.5)}
@@ -801,6 +873,10 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
   .md{font-size:15px}
   .th-ph{margin-bottom:14px}
   .th-pen button{min-width:38px;height:38px}
+  .th-topic-umb{flex:1 1 auto;max-width:none}
+  .th-head-top{flex-wrap:wrap}
+  .th-jhint{display:none}
+  .th-umb-grid{grid-template-columns:1fr 1fr}
 }
 
 .cp-foot{margin:0;font-size:12px;color:#5f6780;text-align:center}
@@ -2826,6 +2902,45 @@ td.c-break{display:none}
   var TARGET_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.6"/></svg>';
   var CANVAS_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M2.5 7h11M7 7v6.5"/></svg>';
 
+  // Each stage gets one working page, shown only while you're on that stage. Stage 1 is Topic candidates.
+  var TH_UMB_MAX = 4, TH_UMB_COLORS = [1, 2, 5, 4];
+  var DOC_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h5.5L12.5 5.5v8H4z"/><path d="M9.5 2.5v3h3M6 8.5h4.5M6 11h3"/></svg>';
+  var CARDS_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="4.5" width="9" height="9" rx="1.8"/><path d="M5 2.5h7a1.5 1.5 0 0 1 1.5 1.5v7"/></svg>';
+  var CHAIN_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3.5" cy="8" r="1.6"/><circle cx="8" cy="8" r="1.6"/><circle cx="12.5" cy="8" r="1.6"/><path d="M5.1 8h1.3M9.6 8h1.3"/></svg>';
+  var CHART_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.5h11M4.5 11V8M8 11V4.5M11.5 11V6.5"/></svg>';
+  var PENCIL_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M10.6 2.9l2.5 2.5-7.4 7.4-3.2.7.7-3.2z"/></svg>';
+  var MIC_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="6" y="2.2" width="4" height="7.3" rx="2"/><path d="M3.8 8a4.2 4.2 0 0 0 8.4 0M8 12.2v1.8"/></svg>';
+  var TH_FEEDBACK = { key: 'feedback', title: 'Feedback to address', st: [['open', 'Open', 'warn'], ['done', 'Addressed', 'go']], done: 'done', doneWord: 'addressed',
+    fields: [['notes', 'What you changed', 'How you answered it']], add: 'A comment from your advisor', empty: 'No open comments. Add each one here when feedback comes in.' };
+  var TH_TOOLS = {
+    topic: { name: 'Topic candidates', ico: TARGET_ICO },
+    proposal: { name: 'Proposal', ico: DOC_ICO, sub: 'Write it section by section, then close every comment your advisor leaves.', lists: [
+      { key: 'sections', title: 'Sections', seed: ['Problem and motivation', 'Objectives', 'Method and validation', 'Timeline', 'Expected contribution'],
+        st: [['todo', 'To write', ''], ['draft', 'Draft', 'mid'], ['done', 'Done', 'go']], done: 'done', doneWord: 'done', fields: [['notes', 'Key points', 'What this section has to say']], add: 'Another section', cap: 10 },
+      TH_FEEDBACK] },
+    lit: { name: 'Paper cards', ico: CARDS_ICO, sub: 'Five short lines per paper. Stop at 20: needing more means the theme is too wide.', lists: [
+      { key: 'papers', title: 'Papers', st: [['toread', 'To read', ''], ['carded', 'Carded', 'go']], done: 'carded', doneWord: 'carded', showCap: true,
+        fields: [['link', 'Link', 'https://…', 'url'], ['problem', 'Problem', 'What they set out to solve'], ['method', 'Method', 'How they did it'], ['result', 'Result', 'What they found'],
+          ['limit', 'What they didn’t do', 'Your gap often hides here'], ['use', 'How it helps you', 'Where it fits in your thesis']],
+        add: 'Paper title', cap: 20, capMsg: '20 cards: the limit. Cut one before adding another, or narrow your theme.', empty: 'No papers yet. Add the ones closest to your topic first.' }] },
+    method: { name: 'Method chain', ico: CHAIN_ICO, sub: 'Each link leads to the next. Make one solid before leaning on it.', lists: [
+      { key: 'chain', title: 'The chain', numbered: true, seed: ['The effect', 'Why it causes trouble', 'Your fix', 'The proof', 'The simulation'],
+        st: [['open', 'Open', ''], ['working', 'Working on it', 'mid'], ['solid', 'Solid', 'go']], done: 'solid', doneWord: 'solid', fields: [['notes', 'Notes', 'Equations, choices, open questions']], add: 'Another link', cap: 8 }] },
+    results: { name: 'Results log', ico: CHART_ICO, sub: 'Log every run. A weak result is fine; an unexplained one isn’t.', lists: [
+      { key: 'runs', title: 'Runs', st: [['solid', 'Solid', 'go'], ['weak', 'Weak', 'warn'], ['failed', 'Failed', 'bad']],
+        fields: [['expected', 'Expected', 'What you thought would happen'], ['saw', 'What you saw', 'Numbers, plots, where they live'], ['why', 'Why', 'Explain it, especially when it’s weak']],
+        add: 'What you ran', empty: 'No runs logged yet.' }] },
+    writing: { name: 'Chapters', ico: PENCIL_ICO, sub: 'Draft in any order. Keep every chapter moving.', lists: [
+      { key: 'chapters', title: 'Chapters', seed: ['Abstract', 'Introduction', 'Background', 'Method', 'Results', 'Discussion', 'Conclusion', 'References'],
+        st: [['todo', 'To write', ''], ['draft', 'Draft', 'mid'], ['revised', 'Revised', 'mid'], ['done', 'Done', 'go']], done: 'done', doneWord: 'done', fields: [['notes', 'Notes', 'What’s left, word count, figures to make']], add: 'Another chapter', cap: 14 },
+      TH_FEEDBACK] },
+    defense: { name: 'Defense prep', ico: MIC_ICO, sub: 'Know the questions before they ask them.', lists: [
+      { key: 'prep', title: 'Ready to present', check: true, seed: ['Slides ready', 'Practiced out loud twice', 'Timed under the limit', 'Backup slides for the hard questions'],
+        st: [['todo', 'To do', ''], ['done', 'Done', 'go']], done: 'done', doneWord: 'done', add: 'Another step', cap: 10 },
+      { key: 'questions', title: 'Questions they’ll ask', st: [['open', 'Not ready', ''], ['ready', 'Ready', 'go']], done: 'ready', doneWord: 'ready',
+        fields: [['answer', 'Your answer', 'Two or three lines you can say without notes']], add: 'A question you expect', empty: 'Add the questions you’d ask if you were on the committee.' }] }
+  };
+  function thListDef(key) { var p = key.split('.'), t = TH_TOOLS[p[0]]; return t && t.lists ? t.lists.filter(function (L) { return L.key === p[1]; })[0] : null; }
   function normThesis(s) {
     var th = s.thesis && typeof s.thesis === 'object' ? s.thesis : {};
     var stIds = {}; TH_STAGES.forEach(function (g) { stIds[g.id] = true; });
@@ -2856,6 +2971,27 @@ td.c-break{display:none}
       if (mk.page && typeof m.q === 'string' && m.q.trim()) { mk.q = m.q.slice(0, 20000); mk.pre = str(m.pre, 40); mk.suf = str(m.suf, 40); }
       out.marks.push(mk);
     });
+    var umbIds = {};
+    out.journal = (Array.isArray(th.journal) ? th.journal : []).filter(function (e) { return e && typeof e.text === 'string' && e.text.trim(); }).slice(0, 3000).map(function (e) {
+      var cr = Number(e.created) || Date.now();
+      return { id: typeof e.id === 'string' && e.id ? e.id.slice(0, 40) : uid(), date: isISO(e.date) ? e.date : isoOf(cr), text: e.text.slice(0, 20000), created: cr, updated: Number(e.updated) || cr };
+    });
+    out.umbrellas = (Array.isArray(th.umbrellas) ? th.umbrellas : []).filter(function (u) { return u && typeof u.name === 'string' && u.name.trim(); }).slice(0, 12).map(function (u) {
+      var id = typeof u.id === 'string' && u.id ? u.id.slice(0, 40) : uid(); umbIds[id] = true;
+      return { id: id, name: u.name.trim().slice(0, 80), created: Number(u.created) || Date.now() };
+    });
+    out.lists = {};
+    var srcL = th.lists && typeof th.lists === 'object' ? th.lists : {};
+    Object.keys(TH_TOOLS).forEach(function (stg) {
+      (TH_TOOLS[stg].lists || []).forEach(function (L) {
+        var key = stg + '.' + L.key, src = srcL[key], ids = L.st.map(function (x) { return x[0]; });
+        if (!Array.isArray(src)) { out.lists[key] = (L.seed || []).map(function (t, i) { return { id: key + '-' + i, title: t, status: ids[0], f: {}, created: 0 }; }); return; }
+        out.lists[key] = src.filter(function (it) { return it && typeof it.title === 'string' && it.title.trim(); }).slice(0, 300).map(function (it) {
+          var f = {}; (L.fields || []).forEach(function (fd) { if (it.f && typeof it.f[fd[0]] === 'string' && it.f[fd[0]]) f[fd[0]] = it.f[fd[0]].slice(0, 4000); });
+          return { id: typeof it.id === 'string' && it.id ? it.id.slice(0, 60) : uid(), title: it.title.trim().slice(0, 300), status: ids.indexOf(it.status) >= 0 ? it.status : ids[0], f: f, created: Number(it.created) || 0 };
+        });
+      });
+    });
     var chosen = false;
     (Array.isArray(th.topics) ? th.topics : []).slice(0, 60).forEach(function (t) {
       if (!t || typeof t.title !== 'string' || !t.title.trim()) return;
@@ -2863,7 +2999,7 @@ td.c-break{display:none}
       if (stt === 'chosen') chosen = true;
       out.topics.push({ id: typeof t.id === 'string' && t.id ? t.id.slice(0, 40) : uid(), title: t.title.trim().slice(0, 300), status: stt,
         checks: (Array.isArray(t.checks) ? t.checks : []).filter(function (c) { return typeof c === 'string'; }).slice(0, 20).map(function (c) { return c.slice(0, 160); }),
-        notes: str(t.notes, 4000), created: Number(t.created) || Date.now() });
+        notes: str(t.notes, 4000), umb: umbIds[t.umb] ? t.umb : null, created: Number(t.created) || Date.now() });
     });
     return out;
   }
@@ -2932,7 +3068,7 @@ td.c-break{display:none}
       if (!ti) return mdOf(n, pre);
       return tag === 'math' && n.getAttribute('display') === 'block' ? '\n\n$$' + ti + '$$\n\n' : '$' + ti + '$';
     }
-    if (n.getAttribute('aria-hidden') === 'true') return '';
+    if (n.getAttribute('aria-hidden') === 'true' && n.textContent.trim().length < 40) return '';
     var who = roleLine(n);
     if (who) return '\n\n' + who + '\n\n' + mdOf(n, pre) + '\n\n';
     switch (tag) {
@@ -3121,9 +3257,10 @@ td.c-break{display:none}
   function thCurrent() {
     var id = ui.thPage;
     if (!id) { try { id = localStorage.getItem(TH_PAGE_KEY); } catch (e) {} }
-    if (id && (id === 'th:important' || id === 'th:topics' || id === 'th:canvas' || getThPage(id))) return id;
+    if (id === 'th:topics') id = 'th:stage';
+    if (id && (id === 'th:important' || id === 'th:stage' || id === 'th:canvas' || id === 'th:journal' || getThPage(id))) return id;
     var P = state.thesis.pages.slice().sort(function (a, b) { return b.updated - a.updated; });
-    return P.length ? P[0].id : 'th:canvas';
+    return P.length ? P[0].id : 'th:stage';
   }
   function thOpen(id, reading) {
     ui.thPage = id; if (reading !== undefined) ui.thReading = reading;
@@ -3151,7 +3288,9 @@ td.c-break{display:none}
       (th.title ? '<h2 class="th-title">' + esc(th.title) + '</h2>' : '<h2 class="th-title is-empty">' + (ro ? 'Thesis' : 'Name your thesis') + '</h2>') +
       (th.question ? '<p class="th-q">' + esc(th.question) + '</p>' : ro ? '' : '<p class="th-q is-empty">Your research question, in one sentence</p>') +
       (meta.length || chosen ? '<p class="th-meta">' + meta.concat(chosen ? ['Topic: <b>' + esc(truncate(chosen.title, 90)) + '</b>'] : []).join(' · ') + '</p>' : '') + '</div>' +
-      (ro ? '' : '<button type="button" class="btn btn-sm" data-act="th-edit">Edit</button>') + '</div>' +
+      '<div class="th-head-acts"><button type="button" class="btn btn-sm th-hot" data-act="th-journal" aria-pressed="' + (thCurrent() === 'th:journal') + '">' + BOOK_ICO + 'Journal' +
+        (th.journal.length ? '<span class="th-hot-n">' + th.journal.length + '</span>' : '') + '</button>' +
+      (ro ? '' : '<button type="button" class="btn btn-sm" data-act="th-edit">Edit</button>') + '</div></div>' +
       '<ol class="th-stages" aria-label="Thesis stages">' + TH_STAGES.map(function (g, i) {
         return '<li class="' + (i < si ? 'is-done' : i === si ? 'is-now' : '') + '"><button type="button" data-act="th-stage" data-stage="' + g.id + '" title="' + esc(g.hint) + '"' + (ro ? ' disabled' : '') + (i === si ? ' aria-current="step"' : '') + '>' +
           '<span class="th-dot">' + (i < si ? CK : i + 1) + '</span><span class="th-sname">' + esc(g.name) + '</span></button></li>';
@@ -3172,7 +3311,7 @@ td.c-break{display:none}
     }
     var filled = TH_CANVAS.filter(function (f) { return th.canvas[f.id].trim(); }).length;
     var h = '<div class="th-pins">' + pin('th:important', STAR, 'Important', th.marks.length || '') +
-      pin('th:topics', TARGET_ICO, 'Topic candidates', th.topics.filter(function (t) { return t.status !== 'dropped'; }).length || '') +
+      pin('th:stage', TH_TOOLS[th.stage].ico, esc(TH_TOOLS[th.stage].name), thToolCount(th.stage)) +
       pin('th:canvas', CANVAS_ICO, 'Thesis canvas', filled + '/' + TH_CANVAS.length) + '</div>';
     var pages = th.pages.slice().sort(function (a, b) { return b.updated - a.updated; }), shown = 0;
     TH_STAGES.forEach(function (g) {
@@ -3187,13 +3326,24 @@ td.c-break{display:none}
           '<span class="th-isub">' + (x.sn ? x.sn : thSourceName(x.pg) + ' · ' + fmtShort(isoOf(x.pg.updated))) + '</span></button>';
       }).join('') + '</div>';
     });
+    if (q) {
+      var jm = th.journal.slice().sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : b.created - a.created; }).filter(function (e) { return e.text.toLowerCase().indexOf(q) >= 0; });
+      if (jm.length) {
+        shown += jm.length;
+        h += '<div class="th-sec"><p class="th-sec-h">Journal</p>' + jm.slice(0, 30).map(function (e) {
+          var sp = thJSplit(e.text), t = thPlain(e.text), k = t.toLowerCase().indexOf(q), a0 = Math.max(0, k - 30);
+          return '<button type="button" class="th-item" data-act="th-jopen" data-id="' + esc(e.id) + '"><span class="th-iname">' + esc(sp.title || fmtLong(e.date)) + '</span>' +
+            '<span class="th-isub">' + (k >= 0 ? (a0 ? '…' : '') + esc(t.slice(a0, k)) + '<mark>' + esc(t.slice(k, k + q.length)) + '</mark>' + esc(t.slice(k + q.length, k + q.length + 50)) + '…' : fmtShort(e.date)) + '</span></button>';
+        }).join('') + '</div>';
+      }
+    }
     if (!shown) h += '<p class="th-none">' + (q ? 'Nothing matches “' + esc(ui.thQuery.trim()) + '”.' : 'No pages yet. Paste a chat from Claude or ChatGPT, or write a note.') + '</p>';
     var size = 0; try { size = JSON.stringify(state).length; } catch (e) {}
     if (size > 3500000) h += '<p class="th-warn">Your notebook is getting big (' + (size / 1048576).toFixed(1) + ' MB). It still syncs, but phones keep less offline. Old chats you no longer need can go.</p>';
     $('#th-list').innerHTML = h;
   }
   function thPageKey(id) {
-    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + (ui.thTopic || '') + '|' + JSON.stringify(state.compassTests || []).length;
+    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify(state.compassTests || []).length;
     var pg = getThPage(id); if (!pg) return id + '|gone';
     return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',') +
       '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',');
@@ -3208,12 +3358,44 @@ td.c-break{display:none}
     var same = el.dataset.id === id, y = el.scrollTop;
     el.dataset.key = key; el.dataset.id = id;
     var back = '<button type="button" class="link-btn th-back" data-act="th-back">← Notebook</button>';
-    el.innerHTML = back + (id === 'th:important' ? thImportantHTML() : id === 'th:topics' ? thTopicsHTML() : id === 'th:canvas' ? thCanvasHTML() : thChatHTML(getThPage(id)));
+    el.innerHTML = back + (id === 'th:journal' ? thJournalHTML() : id === 'th:important' ? thImportantHTML() : id === 'th:stage' ? (state.thesis.stage === 'topic' ? thTopicsHTML() : thToolHTML(state.thesis.stage)) : id === 'th:canvas' ? thCanvasHTML() : thChatHTML(getThPage(id)));
     if (same) el.scrollTop = y;
     if (id.indexOf('th:') !== 0) { thPaint(el, id); thTypeset(el); }
+    else if (id === 'th:journal') thTypeset(el);
+    var jb = $('#th-head [data-act="th-journal"]'); if (jb) jb.setAttribute('aria-pressed', String(id === 'th:journal'));
     $$('#th-page textarea[data-grow]').forEach(thGrow);
   }
   function thGrow(ta) { ta.style.height = 'auto'; ta.style.height = Math.min(600, ta.scrollHeight + 2) + 'px'; }
+  // The journal: what you did, in dated entries. "# Title" on the first line names an entry.
+  var BOOK_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.8h7.5a2 2 0 0 1 2 2v8.4H5a2 2 0 0 1-2-2z"/><path d="M3 11.2a2 2 0 0 1 2-2h7.5M6 5.5h4"/></svg>';
+  function thJSplit(text) {
+    var t = String(text || '').replace(/^\s*\n/, ''), first = t.split('\n')[0], m = first.match(/^\s{0,3}#{1,6}\s+(.+?)\s*#*\s*$/);
+    return m ? { title: m[1], body: t.slice(first.length).replace(/^\n+/, '') } : { title: '', body: t };
+  }
+  function thHHMM(ms) { var d = new Date(ms); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
+  function thJournalHTML() {
+    var J = state.thesis.journal, ro = mode === 'readonly', T = todayISO();
+    var h = thHeader(BOOK_ICO + 'Your log', 'Journal', 'What you did, one entry at a time. Start an entry with <b># Title</b> to name it.');
+    if (!ro) h += '<form class="th-jnew" data-form="th-j-add"><label for="th-j-text" class="sr-only">New journal entry</label>' +
+      '<textarea id="th-j-text" data-grow data-md-paste rows="4" placeholder="# What you did&#10;What you tried, what you found, what’s next."></textarea>' +
+      '<div class="th-jnew-foot"><label for="th-j-date" class="th-lbl">Date</label><input type="date" id="th-j-date" value="' + T + '" max="' + T + '"><span class="th-jhint">Ctrl + Enter saves</span><button type="submit" class="btn btn-sm th-hot">Add entry</button></div></form>';
+    if (!J.length) return h + '<p class="th-none">No entries yet. Log what you did today, even if it was small.</p>';
+    var last = null;
+    return h + '<div class="th-jlist">' + J.slice().sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : b.created - a.created; }).map(function (e) {
+      var day = e.date !== last ? '<p class="th-jday">' + (e.date === T ? 'Today · ' : '') + (e.date.slice(0, 4) === T.slice(0, 4) ? fmtLong(e.date) : fmtYear(e.date)) + '</p>' : ''; last = e.date;
+      var id = esc(e.id);
+      if (ui.thJEdit === e.id && !ro) {
+        return day + '<article class="th-jentry is-editing" id="th-j-' + id + '"><form data-form="th-j-save" data-id="' + id + '"><label for="th-je-' + id + '" class="sr-only">Entry</label>' +
+          '<textarea id="th-je-' + id + '" data-grow data-md-paste rows="5">' + esc(e.text) + '</textarea><div class="th-jnew-foot"><label for="th-jd-' + id + '" class="th-lbl">Date</label><input type="date" id="th-jd-' + id + '" value="' + e.date + '">' +
+          '<span class="th-jhint"></span><button type="button" class="btn btn-sm" data-act="th-j-cancel">Cancel</button><button type="submit" class="btn btn-sm th-hot">Save</button></div></form></article>';
+      }
+      var p = thJSplit(e.text), long = p.body.length > 900;
+      return day + '<article class="th-jentry' + (long ? ' is-long' : '') + '" id="th-j-' + id + '"><header class="th-jhead">' +
+        (p.title ? '<h3 class="th-jtitle">' + mdInline(p.title) + '</h3>' : '') + (isoOf(e.created) === e.date ? '<span class="th-jtime">' + thHHMM(e.created) + '</span>' : '') +
+        (ro ? '' : '<span class="th-jacts"><button type="button" class="link-btn" data-act="th-j-edit" data-id="' + id + '">Edit</button><button type="button" class="link-btn th-unmark" data-act="th-j-del" data-id="' + id + '">Delete</button></span>') + '</header>' +
+        (p.body.trim() ? '<div class="md">' + mdToHtml(p.body) + '</div>' : '') + (long ? '<button type="button" class="link-btn th-showall" data-act="th-showall">Show all</button>' : '') + '</article>';
+    }).join('') + '</div>';
+  }
   function thHeader(kicker, title, sub, acts) {
     return '<header class="th-ph"><div class="th-ph-main"><p class="th-kicker">' + kicker + '</p><h2 class="th-ptitle">' + title + '</h2>' + (sub ? '<p class="th-sub">' + sub + '</p>' : '') + '</div>' + (acts || '') + '</header>';
   }
@@ -3247,32 +3429,116 @@ td.c-break{display:none}
         (ro ? '' : '<button type="button" class="link-btn th-unmark" data-act="th-unmark" data-id="' + esc(m.id) + '">Remove</button>') + '</div></li>';
     }).join('') + '</ul>';
   }
+  function thToolCount(stg) {
+    var th = state.thesis;
+    if (stg === 'topic') return th.topics.filter(function (t) { return t.status !== 'dropped'; }).length || '';
+    var L = TH_TOOLS[stg].lists[0], items = th.lists[stg + '.' + L.key] || [];
+    if (!items.length) return '';
+    return L.done ? items.filter(function (it) { return it.status === L.done; }).length + '/' + items.length : items.length;
+  }
+  function thUmbColor(i) { return 'var(--c' + TH_UMB_COLORS[i % TH_UMB_COLORS.length] + ')'; }
+  function thTopicCard(tp, tests, U) {
+    var ro = mode === 'readonly', N = tests.length, n = tests.filter(function (t) { return tp.checks.indexOf(t) >= 0; }).length, open = ui.thTopic === tp.id;
+    var cls = N && n === N ? 'is-go' : N && n > 0 && n >= N - 2 ? 'is-close' : 'is-no';
+    var tag = tp.status === 'chosen' ? '<span class="th-tag is-chosen">' + STAR + 'Chosen</span>' : tp.status === 'dropped' ? '<span class="th-tag">Dropped</span>' : '';
+    var body = '';
+    if (open) {
+      body = '<div class="th-topic-body">' + (N ? '<ul class="cp-checks">' + tests.map(function (t, i) {
+        return '<li><label class="check"><input type="checkbox" data-act="th-topic-check" data-id="' + esc(tp.id) + '" data-i="' + i + '"' + (tp.checks.indexOf(t) >= 0 ? ' checked' : '') + (ro ? ' disabled' : '') + '> <span>' + esc(t) + '</span></label></li>';
+      }).join('') + '</ul>' : '') +
+        (U.length ? '<div class="th-cf"><label for="th-tu-' + esc(tp.id) + '" class="th-lbl">Umbrella</label><select id="th-tu-' + esc(tp.id) + '" data-topic-umb="' + esc(tp.id) + '"' + (ro ? ' disabled' : '') + '>' +
+          U.map(function (u) { return '<option value="' + esc(u.id) + '"' + (tp.umb === u.id ? ' selected' : '') + '>' + esc(u.name) + '</option>'; }).join('') + '<option value=""' + (!tp.umb ? ' selected' : '') + '>No umbrella</option></select></div>' : '') +
+        '<label for="th-tn-' + esc(tp.id) + '" class="th-lbl">Notes</label><textarea id="th-tn-' + esc(tp.id) + '" data-topic-notes="' + esc(tp.id) + '" data-grow rows="2" placeholder="Why it’s interesting, what worries you, who to ask"' + (ro ? ' readonly' : '') + '>' + esc(tp.notes) + '</textarea>' +
+        (ro ? '' : '<div class="th-topic-acts">' + (tp.status !== 'chosen' ? '<button type="button" class="btn btn-sm primary" data-act="th-topic-status" data-id="' + esc(tp.id) + '" data-status="chosen">' + STAR + 'Choose this one</button>' : '<button type="button" class="btn btn-sm" data-act="th-topic-status" data-id="' + esc(tp.id) + '" data-status="exploring">Unchoose</button>') +
+          (tp.status !== 'dropped' ? '<button type="button" class="btn btn-sm btn-quiet" data-act="th-topic-status" data-id="' + esc(tp.id) + '" data-status="dropped">Drop</button>' : '<button type="button" class="btn btn-sm" data-act="th-topic-status" data-id="' + esc(tp.id) + '" data-status="exploring">Bring back</button>') +
+          '<button type="button" class="btn btn-sm btn-quiet" data-act="th-topic-del" data-id="' + esc(tp.id) + '" style="margin-left:auto">Delete</button></div>') + '</div>';
+    }
+    return '<article class="th-topic is-' + tp.status + (open ? ' is-open' : '') + '"><button type="button" class="th-topic-h" data-act="th-topic-toggle" data-id="' + esc(tp.id) + '" aria-expanded="' + open + '">' +
+      '<span class="th-topic-t">' + esc(tp.title) + '</span>' + tag +
+      (N ? '<span class="th-score cp-verdict ' + cls + '"><i class="cp-meter"><i style="width:' + Math.round(n / N * 100) + '%"></i></i>' + n + '/' + N + '</span>' : '') + '</button>' + body + '</article>';
+  }
   function thTopicsHTML() {
-    var th = state.thesis, ro = mode === 'readonly', tests = state.compassTests || [], N = tests.length;
-    var h = thHeader(TARGET_ICO + 'Topic selection', 'Topic candidates', 'Line up the ideas, run each one through your idea checks, then choose one.');
-    if (!ro) h += '<form class="th-quick" data-form="th-topic-add"><label for="th-topic-new" class="sr-only">A candidate topic</label><input id="th-topic-new" type="text" maxlength="300" placeholder="A candidate topic, in one sentence"><button type="submit" class="btn btn-sm">Add</button></form>';
+    var th = state.thesis, ro = mode === 'readonly', tests = state.compassTests || [], N = tests.length, U = th.umbrellas, full = U.length >= TH_UMB_MAX;
+    var h = thHeader(TARGET_ICO + 'Stage 1 · Topic selection', 'Topic candidates', 'Pick up to ' + TH_UMB_MAX + ' umbrellas, line up topics under them, test each one, then choose.');
+    var live = function (id) { return th.topics.filter(function (t) { return t.umb === id && t.status !== 'dropped'; }).length; };
+    h += '<section class="th-umbs" aria-label="Umbrellas"><p class="th-kicker">Umbrellas <span class="th-umb-count' + (full ? ' is-full' : '') + '">' + U.length + ' of ' + TH_UMB_MAX + '</span></p><div class="th-umb-grid">' +
+      U.map(function (u, i) {
+        return '<div class="th-umb" style="--uc:' + thUmbColor(i) + '"><label class="sr-only" for="th-un-' + esc(u.id) + '">Umbrella name</label>' +
+          '<input id="th-un-' + esc(u.id) + '" class="th-umb-name" data-umb-name="' + esc(u.id) + '" value="' + esc(u.name) + '" maxlength="80"' + (ro ? ' readonly' : '') + '>' +
+          '<span class="th-umb-c">' + plural(live(u.id), 'topic') + '</span>' +
+          (ro ? '' : '<button type="button" class="th-umb-x" data-act="th-umb-del" data-id="' + esc(u.id) + '" title="Delete this umbrella" aria-label="Delete ' + esc(u.name) + '">' + END_ICO + '</button>') + '</div>';
+      }).join('') +
+      (!ro && !full ? '<form class="th-umb th-umb-add" data-form="th-umb-add"><label class="sr-only" for="th-umb-new">New umbrella</label><input id="th-umb-new" maxlength="80" autocomplete="off" placeholder="+ Umbrella, like Solar sails"></form>' : '') +
+      '</div>' + (full && !ro ? '<p class="th-note">' + TH_UMB_MAX + ' umbrellas, the limit. To explore a new area, delete one first.</p>'
+        : !U.length ? '<p class="th-note">Umbrellas are the big areas your topics fall under. Keep it to ' + TH_UMB_MAX + ' at most.</p>' : '') + '</section>';
+    if (!ro) h += '<form class="th-quick" data-form="th-topic-add"><label for="th-topic-new" class="sr-only">A candidate topic</label><input id="th-topic-new" type="text" maxlength="300" autocomplete="off" placeholder="A candidate topic, in one sentence">' +
+      (U.length ? '<label for="th-topic-umb" class="sr-only">Umbrella</label><select id="th-topic-umb" class="th-topic-umb">' + U.map(function (u) { return '<option value="' + esc(u.id) + '"' + (ui.thUmbSel === u.id ? ' selected' : '') + '>' + esc(u.name) + '</option>'; }).join('') + '<option value=""' + (ui.thUmbSel === '' ? ' selected' : '') + '>No umbrella</option></select>' : '') +
+      '<button type="submit" class="btn btn-sm">Add</button></form>';
     if (!N) h += '<p class="th-note">Add your idea checks on the <a href="#compass">Compass</a> tab to score each candidate.</p>';
     var order = { chosen: 0, exploring: 1, dropped: 2 };
     var T = th.topics.slice().sort(function (a, b) { return order[a.status] - order[b.status] || a.created - b.created; });
     if (!T.length) return h + '<p class="th-none">No candidates yet. Add every idea you’re weighing, even the half-formed ones.</p>';
-    return h + '<div class="th-topics">' + T.map(function (tp) {
-      var n = tests.filter(function (t) { return tp.checks.indexOf(t) >= 0; }).length, open = ui.thTopic === tp.id;
-      var cls = N && n === N ? 'is-go' : N && n > 0 && n >= N - 2 ? 'is-close' : 'is-no';
-      var tag = tp.status === 'chosen' ? '<span class="th-tag is-chosen">' + STAR + 'Chosen</span>' : tp.status === 'dropped' ? '<span class="th-tag">Dropped</span>' : '';
-      var body = '';
-      if (open) {
-        body = '<div class="th-topic-body">' + (N ? '<ul class="cp-checks">' + tests.map(function (t, i) {
-          return '<li><label class="check"><input type="checkbox" data-act="th-topic-check" data-id="' + esc(tp.id) + '" data-i="' + i + '"' + (tp.checks.indexOf(t) >= 0 ? ' checked' : '') + (ro ? ' disabled' : '') + '> <span>' + esc(t) + '</span></label></li>';
-        }).join('') + '</ul>' : '') +
-          '<label for="th-tn-' + esc(tp.id) + '" class="th-lbl">Notes</label><textarea id="th-tn-' + esc(tp.id) + '" data-topic-notes="' + esc(tp.id) + '" data-grow rows="2" placeholder="Why it’s interesting, what worries you, who to ask"' + (ro ? ' readonly' : '') + '>' + esc(tp.notes) + '</textarea>' +
-          (ro ? '' : '<div class="th-topic-acts">' + (tp.status !== 'chosen' ? '<button type="button" class="btn btn-sm primary" data-act="th-topic-status" data-id="' + esc(tp.id) + '" data-status="chosen">' + STAR + 'Choose this one</button>' : '<button type="button" class="btn btn-sm" data-act="th-topic-status" data-id="' + esc(tp.id) + '" data-status="exploring">Unchoose</button>') +
-            (tp.status !== 'dropped' ? '<button type="button" class="btn btn-sm btn-quiet" data-act="th-topic-status" data-id="' + esc(tp.id) + '" data-status="dropped">Drop</button>' : '<button type="button" class="btn btn-sm" data-act="th-topic-status" data-id="' + esc(tp.id) + '" data-status="exploring">Bring back</button>') +
-            '<button type="button" class="btn btn-sm btn-quiet" data-act="th-topic-del" data-id="' + esc(tp.id) + '" style="margin-left:auto">Delete</button></div>') + '</div>';
+    U.concat([{ id: null, name: 'No umbrella' }]).forEach(function (g, i) {
+      var list = T.filter(function (t) { return (t.umb || null) === g.id; });
+      if (!list.length && (g.id === null || !U.length)) return;
+      h += '<div class="th-group"' + (g.id ? ' style="--uc:' + thUmbColor(i) + '"' : '') + '>' + (U.length ? '<p class="th-group-h"><i></i>' + esc(g.name) + '</p>' : '') +
+        (list.length ? '<div class="th-topics">' + list.map(function (tp) { return thTopicCard(tp, tests, U); }).join('') + '</div>' : '<p class="th-none th-none-sm">No topics under this one yet.</p>') + '</div>';
+    });
+    return h;
+  }
+  // The working page for stages 2 to 7: lists of cards, each with a status and a few short fields
+  function thSt(L, id) { for (var i = 0; i < L.st.length; i++) if (L.st[i][0] === id) return L.st[i]; return L.st[0]; }
+  function thProgress(L, items) {
+    if (!items.length) return '';
+    var cap = L.showCap ? ' · ' + items.length + ' of ' + L.cap : '';
+    if (L.done) {
+      var d = items.filter(function (it) { return it.status === L.done; }).length;
+      return '<i class="cp-meter"><i style="width:' + Math.round(d / items.length * 100) + '%"></i></i>' + d + ' of ' + items.length + ' ' + esc(L.doneWord) + cap;
+    }
+    return L.st.map(function (x) { return items.filter(function (it) { return it.status === x[0]; }).length + ' ' + x[1].toLowerCase(); }).join(' · ') + cap;
+  }
+  function thCardHTML(L, key, it, i) {
+    var ro = mode === 'readonly', open = ui.thCard === it.id, st = thSt(L, it.status), id = esc(it.id), dk = ' data-k="' + key + '" data-id="' + id + '"';
+    var F = (L.fields || []).filter(function (fd) { return fd[3] !== 'url'; }), filled = F.filter(function (fd) { return it.f[fd[0]]; }).length;
+    var body = '';
+    if (open) {
+      body = '<div class="th-topic-body">' +
+        (ro ? '' : '<div class="th-cf"><label class="th-lbl" for="th-ct-' + id + '">Title</label><input id="th-ct-' + id + '" class="th-ct" data-ct="1"' + dk + ' value="' + esc(it.title) + '" maxlength="300"></div>') +
+        '<div class="th-seg" role="group" aria-label="Status">' + L.st.map(function (x) {
+          return '<button type="button" class="chip tone-' + (x[2] || 'none') + '" data-act="th-card-status"' + dk + ' data-st="' + x[0] + '" aria-pressed="' + (it.status === x[0]) + '"' + (ro ? ' disabled' : '') + '>' + esc(x[1]) + '</button>';
+        }).join('') + '</div>' +
+        (L.fields || []).map(function (fd) {
+          var fid = 'th-cf-' + id + '-' + fd[0], v = it.f[fd[0]] || '';
+          if (fd[3] === 'url') return '<div class="th-cf"><label class="th-lbl" for="' + fid + '">' + esc(fd[1]) + '</label><div class="th-url"><input type="url" id="' + fid + '" data-cf="' + fd[0] + '"' + dk + ' value="' + esc(v) + '" placeholder="' + esc(fd[2]) + '"' + (ro ? ' readonly' : '') + '>' +
+            (/^https?:\/\//i.test(v) ? '<a class="btn btn-sm" href="' + esc(v) + '" target="_blank" rel="noopener noreferrer">Open ↗</a>' : '') + '</div></div>';
+          return '<div class="th-cf"><label class="th-lbl" for="' + fid + '">' + esc(fd[1]) + '</label><textarea id="' + fid + '" data-cf="' + fd[0] + '"' + dk + ' data-grow rows="1" placeholder="' + esc(fd[2]) + '"' + (ro ? ' readonly' : '') + '>' + esc(v) + '</textarea></div>';
+        }).join('') +
+        (ro ? '' : '<div class="th-topic-acts"><button type="button" class="btn btn-sm btn-quiet" data-act="th-card-del"' + dk + ' style="margin-left:auto">Delete</button></div>') + '</div>';
+    }
+    return '<article class="th-topic th-card' + (open ? ' is-open' : '') + (st[2] === 'go' ? ' is-done' : '') + '"><button type="button" class="th-topic-h" data-act="th-card-toggle" data-id="' + id + '" aria-expanded="' + open + '">' +
+      (L.numbered ? '<span class="th-cvn">' + (i + 1) + '</span>' : '') + '<span class="th-topic-t">' + esc(it.title) + '</span>' +
+      (F.length > 1 && !open ? '<span class="th-fill">' + filled + '/' + F.length + '</span>' : '') +
+      '<span class="th-st tone-' + (st[2] || 'none') + '">' + esc(st[1]) + '</span></button>' + body + '</article>';
+  }
+  function thToolHTML(stg) {
+    var tool = TH_TOOLS[stg], ro = mode === 'readonly', si = thStageIndex();
+    var h = thHeader(tool.ico + 'Stage ' + (si + 1) + ' · ' + esc(thStageName(stg)), esc(tool.name), esc(tool.sub));
+    tool.lists.forEach(function (L) {
+      var key = stg + '.' + L.key, items = state.thesis.lists[key] || [], full = L.cap && items.length >= L.cap, prog = thProgress(L, items), kid = 'th-add-' + stg + '-' + L.key;
+      h += '<section class="th-list"><div class="th-list-h"><h3>' + esc(L.title) + '</h3>' + (prog ? '<span class="th-prog">' + prog + '</span>' : '') + '</div>';
+      if (L.check) {
+        h += items.length ? '<ul class="th-checklist">' + items.map(function (it) {
+          return '<li><label class="check"><input type="checkbox" data-act="th-card-check" data-k="' + key + '" data-id="' + esc(it.id) + '"' + (it.status === L.done ? ' checked' : '') + (ro ? ' disabled' : '') + '> <span>' + esc(it.title) + '</span></label>' +
+            (ro ? '' : '<button type="button" class="th-row-x" data-act="th-card-del" data-k="' + key + '" data-id="' + esc(it.id) + '" title="Delete" aria-label="Delete ' + esc(it.title) + '">' + END_ICO + '</button>') + '</li>';
+        }).join('') + '</ul>' : '<p class="th-none">' + esc(L.empty || 'Nothing here yet.') + '</p>';
+      } else {
+        h += items.length ? '<div class="th-topics">' + items.map(function (it, i) { return thCardHTML(L, key, it, i); }).join('') + '</div>' : '<p class="th-none">' + esc(L.empty || 'Nothing here yet.') + '</p>';
       }
-      return '<article class="th-topic is-' + tp.status + (open ? ' is-open' : '') + '"><button type="button" class="th-topic-h" data-act="th-topic-toggle" data-id="' + esc(tp.id) + '" aria-expanded="' + open + '">' +
-        '<span class="th-topic-t">' + esc(tp.title) + '</span>' + tag +
-        (N ? '<span class="th-score cp-verdict ' + cls + '"><i class="cp-meter"><i style="width:' + Math.round(n / N * 100) + '%"></i></i>' + n + '/' + N + '</span>' : '') + '</button>' + body + '</article>';
-    }).join('') + '</div>';
+      if (!ro) h += full ? '<p class="th-note">' + esc(L.capMsg || (L.cap + ', the limit.')) + '</p>'
+        : '<form class="th-quick th-add" data-form="th-card-add" data-k="' + key + '"><label class="sr-only" for="' + kid + '">' + esc(L.add) + '</label><input id="' + kid + '" maxlength="300" autocomplete="off" placeholder="' + esc(L.add) + '"><button type="submit" class="btn btn-sm">Add</button></form>';
+      h += '</section>';
+    });
+    return h;
   }
   function thCanvasHTML() {
     var th = state.thesis, ro = mode === 'readonly';
@@ -3541,6 +3807,9 @@ td.c-break{display:none}
     if (looksMd && !rich) return;
     var md = ''; try { md = htmlToMd(html); } catch (er) { md = ''; }
     if (!md.trim()) return;
+    // if the formatted version lost much of the text, keep the plain text instead
+    var words = function (x) { return (x.match(/[A-Za-z0-9À-￿]/g) || []).length; };
+    if (text && words(md) < words(text) * 0.6) return;
     e.preventDefault();
     var ta = e.target, a = ta.selectionStart, b = ta.selectionEnd;
     ta.value = ta.value.slice(0, a) + md + ta.value.slice(b);
@@ -3567,7 +3836,28 @@ td.c-break{display:none}
       else if (a === 'th-paste') openThEditor('new');
       else if (a === 'th-note') openThEditor('note');
       else if (a === 'th-edit') openThesisEdit();
-      else if (a === 'th-stage') { var sid = b.dataset.stage; if (sid !== state.thesis.stage) commit(function (s) { s.thesis.stage = sid; }); }
+      else if (a === 'th-stage') {
+        var sid = b.dataset.stage; ui.thCard = null;
+        if (sid !== state.thesis.stage) commit(function (s) { s.thesis.stage = sid; });
+        thOpen('th:stage', true);
+      }
+      else if (a === 'th-umb-del') {
+        var u0 = state.thesis.umbrellas.filter(function (u) { return u.id === id; })[0]; if (!u0) return;
+        var nT = state.thesis.topics.filter(function (t) { return t.umb === id; }).length;
+        confirmDialog({ title: 'Delete the “' + truncate(u0.name, 40) + '” umbrella?', body: nT ? 'Its ' + plural(nT, 'topic') + ' stay, under No umbrella.' : 'It has no topics.', yes: 'Delete umbrella', danger: true,
+          onYes: function () { commit(function (s) { s.thesis.umbrellas = s.thesis.umbrellas.filter(function (u) { return u.id !== id; }); s.thesis.topics.forEach(function (t) { if (t.umb === id) t.umb = null; }); }); } });
+      }
+      else if (a === 'th-card-toggle') { ui.thCard = ui.thCard === id ? null : id; renderThPage(); }
+      else if (a === 'th-card-status' || a === 'th-card-check') {
+        var L0 = thListDef(b.dataset.k), nst = a === 'th-card-check' ? (b.checked ? L0.done : L0.st[0][0]) : b.dataset.st; if (!L0) return;
+        commit(function (s) { (s.thesis.lists[b.dataset.k] || []).forEach(function (it) { if (it.id === id) it.status = nst; }); });
+      }
+      else if (a === 'th-card-del') {
+        var k0 = b.dataset.k, it0 = (state.thesis.lists[k0] || []).filter(function (it) { return it.id === id; })[0]; if (!it0) return;
+        var gone = function () { commit(function (s) { s.thesis.lists[k0] = s.thesis.lists[k0].filter(function (it) { return it.id !== id; }); }); };
+        if (Object.keys(it0.f).length) confirmDialog({ title: 'Delete “' + truncate(it0.title, 50) + '”?', body: 'Its notes go with it.', yes: 'Delete', danger: true, onYes: gone });
+        else gone();
+      }
       else if (a === 'th-more') openThEditor('more', thCurrent());
       else if (a === 'th-edit-page') openThEditor('edit', thCurrent());
       else if (a === 'th-del-page') {
@@ -3576,7 +3866,20 @@ td.c-break{display:none}
           onYes: function () { commit(function (s) { s.thesis.pages = s.thesis.pages.filter(function (x) { return x.id !== pid; }); s.thesis.marks.forEach(function (m) { if (m.page === pid) m.page = null; }); }); ui.thPage = null; ui.thReading = false; try { localStorage.removeItem(TH_PAGE_KEY); } catch (er) {} renderThesis(T); } });
       }
       else if (a === 'th-jump') { var q = $('#th-you-' + b.dataset.i); if (q) q.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-      else if (a === 'th-showall') { var sec = b.closest('.th-b'); if (sec) sec.classList.remove('is-long'); b.remove(); }
+      else if (a === 'th-showall') { var sec = b.closest('.th-b, .th-jentry'); if (sec) sec.classList.remove('is-long'); b.remove(); }
+      else if (a === 'th-journal') { ui.thJEdit = null; thOpen('th:journal', true); if (isPhone()) window.scrollTo(0, 0); }
+      else if (a === 'th-jopen') {
+        thOpen('th:journal', true);
+        var je = $('#th-j-' + id); if (je) { je.scrollIntoView({ behavior: 'smooth', block: 'start' }); je.classList.add('is-flash'); setTimeout(function () { je.classList.remove('is-flash'); }, 1600); }
+      }
+      else if (a === 'th-j-edit') { ui.thJEdit = id; renderThPage(); var et = $('#th-je-' + id); if (et) { thGrow(et); et.focus(); } }
+      else if (a === 'th-j-cancel') { ui.thJEdit = null; renderThPage(); }
+      else if (a === 'th-j-del') {
+        var e0 = state.thesis.journal.filter(function (x) { return x.id === id; })[0]; if (!e0) return;
+        var t0 = thJSplit(e0.text).title;
+        confirmDialog({ title: 'Delete this entry?', body: esc(t0 ? truncate(t0, 80) : fmtLong(e0.date)), yes: 'Delete', danger: true,
+          onYes: function () { commit(function (s) { s.thesis.journal = s.thesis.journal.filter(function (x) { return x.id !== id; }); }); } });
+      }
       else if (a === 'th-unmark') commit(function (s) { s.thesis.marks = s.thesis.marks.filter(function (m) { return m.id !== id; }); });
       else if (a === 'th-goto-mark') {
         var mk = state.thesis.marks.filter(function (m) { return m.id === id; })[0]; if (!mk || !mk.page) return;
@@ -3602,19 +3905,42 @@ td.c-break{display:none}
     box.addEventListener('submit', function (e) {
       var f = e.target.closest('[data-form]'); if (!f) return;
       e.preventDefault();
+      if (f.dataset.form === 'th-j-add' || f.dataset.form === 'th-j-save') {
+        var jid = f.dataset.id, jt = f.querySelector('textarea'), jd = f.querySelector('input[type=date]'), jv = jt.value.replace(/\s+$/, '');
+        if (!jv.trim()) { jt.focus(); return; }
+        var jdate = isISO(jd.value) ? jd.value : todayISO(), now = Date.now();
+        jt.blur();
+        if (jid) { ui.thJEdit = null; commit(function (s) { s.thesis.journal.forEach(function (x) { if (x.id === jid) { x.text = jv.slice(0, 20000); x.date = jdate; x.updated = now; } }); }); }
+        else { jt.value = ''; commit(function (s) { s.thesis.journal.push({ id: uid(), date: jdate, text: jv.slice(0, 20000), created: now, updated: now }); }); }
+        return;
+      }
       if (f.dataset.form === 'th-mark-add') {
         var ta = $('#th-mark-new'), v = ta.value.trim(); if (!v) return;
         ta.value = ''; ta.blur();
         commit(function (s) { s.thesis.marks.push({ id: uid(), page: null, text: v.slice(0, 3000), created: Date.now() }); });
       } else if (f.dataset.form === 'th-topic-add') {
         var inp = $('#th-topic-new'), tv = inp.value.trim(); if (!tv) return;
+        var us = $('#th-topic-umb'), umb = us ? us.value || null : null; ui.thUmbSel = us ? us.value : undefined;
         inp.value = ''; inp.blur();
         var nid = uid(); ui.thTopic = nid;
-        commit(function (s) { s.thesis.topics.push({ id: nid, title: tv.slice(0, 300), status: 'exploring', checks: [], notes: '', created: Date.now() }); });
+        commit(function (s) { s.thesis.topics.push({ id: nid, title: tv.slice(0, 300), status: 'exploring', checks: [], notes: '', umb: umb, created: Date.now() }); });
+      } else if (f.dataset.form === 'th-umb-add') {
+        var ui0 = $('#th-umb-new'), un = ui0.value.trim(); if (!un) return;
+        if (state.thesis.umbrellas.length >= TH_UMB_MAX) return;
+        ui0.value = ''; ui0.blur();
+        var nu = uid(); ui.thUmbSel = nu;
+        commit(function (s) { s.thesis.umbrellas.push({ id: nu, name: un.slice(0, 80), created: Date.now() }); });
+      } else if (f.dataset.form === 'th-card-add') {
+        var k1 = f.dataset.k, L1 = thListDef(k1), ci = f.querySelector('input'), cv = ci.value.trim(); if (!cv || !L1) return;
+        if (L1.cap && (state.thesis.lists[k1] || []).length >= L1.cap) return;
+        ci.value = ''; ci.blur();
+        var cid = uid(); if (!L1.check && L1.fields && L1.fields.length) ui.thCard = cid;
+        commit(function (s) { (s.thesis.lists[k1] = s.thesis.lists[k1] || []).push({ id: cid, title: cv.slice(0, 300), status: L1.st[0][0], f: {}, created: Date.now() }); });
+        var again = $('#' + f.querySelector('input').id); if (again && L1.check) again.focus();
       }
     });
     box.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && e.target.id === 'th-mark-new') { e.preventDefault(); var f = e.target.closest('form'); if (f.requestSubmit) f.requestSubmit(); }
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && (e.target.id === 'th-mark-new' || e.target.id === 'th-j-text' || /^th-je-/.test(e.target.id))) { e.preventDefault(); var f = e.target.closest('form'); if (f.requestSubmit) f.requestSubmit(); }
     });
     box.addEventListener('input', function (e) {
       var t = e.target;
@@ -3622,6 +3948,18 @@ td.c-break{display:none}
       if (t.hasAttribute('data-grow')) thGrow(t);
       if (t.dataset.cv) { var k = t.dataset.cv, v = t.value.slice(0, 4000); thQuiet(function (s) { s.thesis.canvas[k] = v; }); }
       else if (t.dataset.topicNotes) { var tid = t.dataset.topicNotes, nv = t.value.slice(0, 4000); thQuiet(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === tid) tp.notes = nv; }); }); }
+      else if (t.dataset.umbName) { var un = t.dataset.umbName, uv = t.value.trim().slice(0, 80); if (uv) thQuiet(function (s) { s.thesis.umbrellas.forEach(function (u) { if (u.id === un) u.name = uv; }); }); }
+      else if (t.dataset.cf || t.dataset.ct) {
+        var ck = t.dataset.k, cidx = t.dataset.id, fk = t.dataset.cf, fv = t.value.slice(0, fk ? 4000 : 300);
+        if (t.dataset.ct) { if (!fv.trim()) return; var head = t.closest('.th-topic').querySelector('.th-topic-t'); if (head) head.textContent = fv; }
+        thQuiet(function (s) { (s.thesis.lists[ck] || []).forEach(function (it) { if (it.id !== cidx) return; if (fk) { if (fv) it.f[fk] = fv; else delete it.f[fk]; } else it.title = fv.trim(); }); });
+      }
+    });
+    box.addEventListener('paste', function (e) { if (e.target.matches && e.target.matches('textarea[data-md-paste]')) thOnPaste(e); });
+    box.addEventListener('change', function (e) {
+      var t = e.target;
+      if (t.id === 'th-topic-umb') ui.thUmbSel = t.value;
+      else if (t.dataset.topicUmb) { var tid = t.dataset.topicUmb, uv = t.value || null; commit(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === tid) tp.umb = uv; }); }); }
     });
   }
 
