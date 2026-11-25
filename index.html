@@ -119,12 +119,14 @@ button,input,select,textarea{font:inherit;color:inherit}
 .link-btn:hover{text-decoration:underline;text-underline-offset:3px}
 .link-btn.danger{color:var(--stop)}
 
-input[type="text"],input[type="date"],input[type="search"],input:not([type]),select,textarea{
-  width:100%;padding:8px 11px;border:1px solid var(--rule);border-radius:8px;background:var(--panel-2);color:var(--ink);
+input[type="text"],input[type="date"],input[type="time"],input[type="search"],input[type="number"],input[type="url"],input[type="email"],input[type="password"],input:not([type]),select,textarea{
+  width:100%;min-width:0;max-width:100%;padding:8px 11px;border:1px solid var(--rule);border-radius:8px;background:var(--panel-2);color:var(--ink);
 }
 input::placeholder,textarea::placeholder{color:#5f6780}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
 textarea{resize:vertical;min-height:64px;line-height:1.45}
+input[type="date"],input[type="time"]{-webkit-appearance:none;appearance:none;display:block;min-height:38px}
+input[type="date"]::-webkit-date-and-time-value,input[type="time"]::-webkit-date-and-time-value{text-align:left}
 label{font-size:13px;font-weight:500;color:var(--muted)}
 
 /* ---------- sample banner ---------- */
@@ -261,8 +263,12 @@ label{font-size:13px;font-weight:500;color:var(--muted)}
 
 /* ---------- modal ---------- */
 .modal-backdrop{position:fixed;inset:0;z-index:50;background:rgba(4,6,12,.62);display:grid;place-items:center;padding:16px}
+.modal-shell{position:relative;width:min(540px,100%);display:flex;flex-direction:column;max-height:88vh;max-height:88dvh}
+.modal-shell.is-wide{width:min(780px,100%)}
+.modal-x{position:absolute;top:12px;right:12px;z-index:3;display:grid;place-items:center;background:var(--panel-2)}
+.modal h2:first-child,.modal .modal-head{padding-right:42px}
 .modal{
-  width:min(540px,100%);max-height:88vh;overflow:auto;
+  width:100%;max-height:inherit;overflow:auto;overscroll-behavior:contain;
   background:var(--panel);border:1px solid var(--rule);border-radius:14px;
   box-shadow:0 24px 64px rgba(0,0,0,.55);padding:20px 22px 18px;
 }
@@ -593,7 +599,7 @@ body[data-view="compass"] #quick-add,body[data-view="compass"] #reminders{displa
 .view-tab.is-hot[aria-current="page"]{color:var(--warn);background:rgba(255,184,107,.1);box-shadow:inset 0 0 0 1px rgba(255,184,107,.4)}
 
 /* ---------- parking: wide windows ---------- */
-.modal.is-wide{width:min(780px,100%)}
+
 
 /* ---------- thesis ---------- */
 body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:none !important}
@@ -1073,7 +1079,7 @@ td.c-break{display:none}
   .quick-add #qa-date{display:none}
   .quick-add #qa-text,.quick-add button[type="submit"]{grid-column:auto}
   .quick-add .qa-error{order:-1}
-  input[type="text"],input[type="date"],input[type="time"],input[type="search"],input:not([type]),select,textarea{font-size:16px}
+  input[type="text"],input[type="date"],input[type="time"],input[type="search"],input[type="number"],input[type="url"],input[type="email"],input[type="password"],input:not([type]),select,textarea{font-size:16px}
 
   /* timeline: each project's name sits above its line, so the line gets the full width */
   .tl-toolbar{gap:8px}
@@ -1106,8 +1112,10 @@ td.c-break{display:none}
   .reminder-acts{width:100%;padding-left:26px;margin-top:2px}
 
   /* pop-ups slide up from the bottom */
-  .modal-backdrop{place-items:end center;padding:0}
-  .modal{width:100%;max-height:92vh;border-radius:18px 18px 0 0;border-width:1px 0 0;padding:18px max(18px, env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left))}
+  .modal-backdrop{place-items:end center;padding:calc(env(safe-area-inset-top) + 14px) 0 0}
+  .modal-shell{width:100%;max-height:calc(100vh - 14px - env(safe-area-inset-top));max-height:calc(100dvh - 14px - env(safe-area-inset-top))}
+  .modal-x{top:10px;right:max(12px, env(safe-area-inset-right));width:38px;height:38px;font-size:20px}
+  .modal{width:100%;max-height:inherit;border-radius:18px 18px 0 0;border-width:1px 0 0;padding:18px max(18px, env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left))}
   .modal-actions .btn{flex:1 1 auto;justify-content:center}
   .field-row{grid-template-columns:1fr}
 
@@ -1147,11 +1155,11 @@ td.c-break{display:none}
 
   /* project window fills the screen */
   .hub{place-items:stretch;padding:0}
-  .hub-panel{width:100%;max-height:none;height:100%;border-radius:0;border-width:3px 0 0;padding:14px max(14px, env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left))}
+  .hub-panel{width:100%;max-height:none;height:100%;border-radius:0;border-width:3px 0 0;padding:calc(14px + env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left))}
   .hub-head{flex-wrap:wrap}
   .hub-titles h2{font-size:18px}
   .hub-acts{width:100%;justify-content:flex-start;order:3}
-  .hub-acts .hub-close{position:absolute;top:12px;right:max(12px, env(safe-area-inset-right))}
+  .hub-acts .hub-close{position:absolute;top:calc(10px + env(safe-area-inset-top));right:max(12px, env(safe-area-inset-right));width:38px;height:38px;font-size:20px}
   .hub-titles{padding-right:40px}
   .hub-body{gap:12px;margin-top:12px}
   .hub .task-add{grid-template-columns:minmax(0,1fr) auto}
@@ -1306,7 +1314,8 @@ td.c-break{display:none}
 
 <div class="hub" id="hub" hidden></div>
 <div class="modal-backdrop" id="modal" hidden>
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" id="modal-body"></div>
+  <div class="modal-shell" id="modal-shell"><button type="button" class="icon-x modal-x" data-close aria-label="Close" title="Close (Esc)">×</button>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" id="modal-body"></div></div>
 </div>
 <div class="tooltip" id="tooltip" hidden></div>
 </template>
@@ -3202,6 +3211,7 @@ td.c-break{display:none}
   }
   function thOpen(id, reading) {
     ui.thPage = id; if (reading !== undefined) ui.thReading = reading;
+    if (reading === true && isPhone()) layerOpen('th');
     try { localStorage.setItem(TH_PAGE_KEY, id); } catch (e) {}
     renderThesis(todayISO());
   }
@@ -3765,7 +3775,7 @@ td.c-break{display:none}
       var b = e.target.closest('[data-act]'); if (!b) return;
       var a = b.dataset.act, T = todayISO(), id = b.dataset.id;
       if (a === 'th-open') { thOpen(id, true); if (isPhone()) window.scrollTo(0, 0); else { var w = $('#th-wrap'); if (w && w.getBoundingClientRect().top < 0) w.scrollIntoView({ block: 'start' }); } }
-      else if (a === 'th-back') { ui.thReading = false; renderThesis(T); }
+      else if (a === 'th-back') { ui.thReading = false; layerClosed('th'); renderThesis(T); }
       else if (a === 'th-paste') openThEditor('new');
       else if (a === 'th-note') openThEditor('note');
       else if (a === 'th-edit') openThesisEdit();
@@ -3797,7 +3807,7 @@ td.c-break{display:none}
       else if (a === 'th-del-page') {
         var pid = thCurrent(), pg = getThPage(pid); if (!pg) return;
         confirmDialog({ title: 'Delete “' + truncate(pg.title, 50) + '”?', body: 'The page goes away. Anything you marked Important from it stays on your Important page.', yes: 'Delete page', danger: true,
-          onYes: function () { commit(function (s) { s.thesis.pages = s.thesis.pages.filter(function (x) { return x.id !== pid; }); s.thesis.marks.forEach(function (m) { if (m.page === pid) m.page = null; }); }); ui.thPage = null; ui.thReading = false; try { localStorage.removeItem(TH_PAGE_KEY); } catch (er) {} renderThesis(T); } });
+          onYes: function () { commit(function (s) { s.thesis.pages = s.thesis.pages.filter(function (x) { return x.id !== pid; }); s.thesis.marks.forEach(function (m) { if (m.page === pid) m.page = null; }); }); ui.thPage = null; ui.thReading = false; layerClosed('th'); try { localStorage.removeItem(TH_PAGE_KEY); } catch (er) {} renderThesis(T); } });
       }
       else if (a === 'th-jump') { var q = $('#th-you-' + b.dataset.i); if (q) q.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       else if (a === 'th-showall') { var sec = b.closest('.th-b, .th-jentry'); if (sec) sec.classList.remove('is-long'); b.remove(); }
@@ -4412,19 +4422,46 @@ td.c-break{display:none}
   }
   function hideTip() { var t = $('#tooltip'); if (t) t.hidden = true; }
 
+  /* ================= back closes what's on top ================= */
+  // Each window (and a Thesis page opened on a phone) gets a history entry, so going back closes it.
+  var layers = [], popIgnore = 0, backN = 0;
+  function layerOpen(name) {
+    if (layers.indexOf(name) >= 0) return;
+    layers.push(name);
+    if (backN > 0) { backN--; return; }   // reuse the entry a window just closed
+    try { history.pushState({ polaris: layers.length }, ''); } catch (e) {}
+  }
+  function layerClosed(name) {
+    var i = layers.lastIndexOf(name); if (i < 0) return;
+    layers.splice(i, 1);
+    if (!backN) setTimeout(function () { var n = backN; backN = 0; if (!n) return; popIgnore++; try { history.go(-n); } catch (e) { popIgnore--; } }, 0);
+    backN++;
+  }
+  window.addEventListener('popstate', function () {
+    if (popIgnore > 0) { popIgnore--; return; }
+    var top = layers.pop(); if (!top) return;
+    if (top === 'modal') closeModal(true);
+    else if (top === 'hub') closeHub(true);
+    else if (top === 'th') { ui.thReading = false; renderThesis(todayISO()); }
+  });
+  try { if (history.state && history.state.polaris) history.replaceState(null, ''); } catch (e) {}
+
   /* ================= modal ================= */
   var modalCtx = null, lastFocus = null;
   function openModal(ctx) {
     hideTip();
     modalCtx = ctx; lastFocus = document.activeElement;
-    $('#modal-body').className = 'modal' + (ctx.wide ? ' is-wide' : '');
+    $('#modal-shell').className = 'modal-shell' + (ctx.wide ? ' is-wide' : '');
+    if ($('#modal').hidden) layerOpen('modal');
     $('#modal').hidden = false;
     ctx.draw();
-    var f = $('#modal [autofocus]') || $('#modal input:not([type=hidden]), #modal textarea, #modal button');
+    var bodyEl = $('#modal-body'); bodyEl.scrollTop = 0;
+    var f = $('#modal-body [autofocus]') || (isPhone() ? null : $('#modal-body input:not([type=hidden]), #modal-body textarea, #modal-body button'));
     if (f) f.focus();
   }
-  function closeModal() {
+  function closeModal(fromBack) {
     if ($('#modal').hidden) return;
+    if (fromBack !== true) layerClosed('modal');
     var cx = modalCtx; if (cx && cx.onClose) { try { cx.onClose(); } catch (er) {} }
     $('#modal').hidden = true; $('#modal-body').innerHTML = ''; modalCtx = null;
     if (lastFocus && document.contains(lastFocus)) { try { lastFocus.focus(); } catch (e) {} }
@@ -5214,7 +5251,7 @@ td.c-break{display:none}
     if (!$('#modal').hidden) closeModal();
     hideTip();
     if (ui.hub !== pid) { ui.hubShowDone = false; ui.hubAllLog = false; ui.hubAllTasks = false; $('#hub').dataset.pid = ''; }
-    if (!ui.hub) hubFocusBack = document.activeElement;
+    if (!ui.hub) { hubFocusBack = document.activeElement; layerOpen('hub'); }
     ui.hub = pid;
     $('#hub').hidden = false;
     document.body.classList.add('hub-open');
@@ -5231,8 +5268,9 @@ td.c-break{display:none}
     var v = el.value.slice(0, 10000);
     if (v !== (p.notes || '')) commit(function () { p.notes = v; });
   }
-  function closeHub() {
+  function closeHub(fromBack) {
     if (!ui.hub) return;
+    if (fromBack !== true) layerClosed('hub');
     saveHubNotes();
     ui.hub = null;
     var box = $('#hub'); box.hidden = true; box.innerHTML = ''; box.dataset.pid = '';
