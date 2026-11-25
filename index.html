@@ -174,6 +174,26 @@ label{font-size:13px;font-weight:500;color:var(--muted)}
 }
 .label-name{font-weight:600;font-size:14px;line-height:1.25;overflow-wrap:anywhere}
 .label-meta{font:400 11.5px/1.35 var(--font-mono);color:var(--muted)}
+.row.parked .label-box{border-left-color:color-mix(in srgb,var(--pc) 45%,transparent);background:rgba(17,22,36,.5);border-style:dashed;border-left-style:solid}
+.row.parked .label-name{color:#b4bccf}
+.row.parked .label-meta{color:#727a90}
+.row.parked .label-meta .due{color:inherit}
+.row.parked .line{opacity:.28;box-shadow:none}
+.row.parked .node{opacity:.55;filter:saturate(.65);box-shadow:0 0 0 1px var(--pc)}
+.row.parked .flag-mark,.row.parked .ms-mark,.row.parked .due-off{opacity:.45}
+.park-tag{color:var(--pc) !important;border-color:color-mix(in srgb,var(--pc) 45%,transparent) !important;opacity:.85}
+.park-divider span{display:inline-flex;align-items:center;gap:6px}
+.park-divider svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.label-acts .act.park:hover,.label-acts .act.unpark:hover{color:var(--accent)}
+.pill.parked{color:#9aa3b8;border-style:dashed}
+.hub-parked{color:#9aa3b8;font-style:italic}
+.pk-h{display:flex;align-items:center;gap:8px;margin:16px 0 8px;font:600 13px var(--font-body);color:var(--ink)}
+.pk-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.pk-row{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--rule);border-radius:10px;background:var(--panel)}
+.pk-row.is-extra{border-color:rgba(255,184,107,.35)}
+.pk-name{flex:1;min-width:0;display:flex;flex-direction:column;font-size:14px;font-weight:500}
+.pk-sub{font:400 12px var(--font-mono);color:var(--muted)}
+.pk-row .btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-right:5px;vertical-align:-2px}
 .row.ended .label-box{border-left-color:var(--muted);background:transparent}
 .row.ended .label-name{color:var(--muted)}
 
@@ -573,6 +593,192 @@ body[data-view="compass"] #quick-add,body[data-view="compass"] #reminders{displa
 .cp-empty-big{margin:0 0 14px;font-size:14px;line-height:1.5;color:#aeb6cb}
 .cp-kick-btn{margin-left:auto;font:500 12px var(--font-body);letter-spacing:0;text-transform:none}
 .cp-top.is-solo{grid-template-columns:1fr}
+/* ---------- hot tabs ---------- */
+.view-tab.is-hot{color:var(--warn)}
+.view-tab.is-hot:hover{color:#ffd2a3}
+.view-tab.is-hot[aria-current="page"]{color:var(--warn);background:rgba(255,184,107,.1);box-shadow:inset 0 0 0 1px rgba(255,184,107,.4)}
+
+/* ---------- parking: wide windows ---------- */
+.modal.is-wide{width:min(780px,100%)}
+
+/* ---------- thesis ---------- */
+body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:none !important}
+.view-thesis{display:flex;flex-direction:column;gap:16px;padding-bottom:30px}
+.th-kicker{margin:0 0 8px;font:600 11px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.th-kicker .star,.th-kicker .ico{width:12px;height:12px;color:var(--warn)}
+.ico{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.th-head{background:radial-gradient(110% 160% at 0% 0%,rgba(255,184,107,.09),transparent 55%),var(--panel);border:1px solid #3a3326;border-radius:16px;padding:20px 22px 16px}
+.th-head-top{display:flex;align-items:flex-start;gap:14px}
+.th-head-main{flex:1;min-width:0}
+.th-title{margin:0;font:600 clamp(20px,2.6vw,28px)/1.2 var(--font-display);letter-spacing:-.01em;color:var(--ink);text-wrap:balance}
+.th-title.is-empty,.th-q.is-empty{color:#626a82}
+.th-q{margin:8px 0 0;font-size:15.5px;line-height:1.5;color:#c9d0e2;max-width:80ch}
+.th-meta{margin:8px 0 0;font:500 12.5px var(--font-mono);color:var(--muted)}
+.th-meta b{color:var(--ink);font-weight:600}
+.th-meta .is-soon{color:var(--warn)}
+.th-stages{list-style:none;margin:18px 0 0;padding:0;display:flex;gap:0}
+.th-stages li{flex:1;min-width:0;position:relative}
+.th-stages li::before{content:"";position:absolute;top:12px;left:calc(-50% + 14px);right:calc(50% + 14px);height:1px;background:var(--rule)}
+.th-stages li:first-child::before{display:none}
+.th-stages li.is-done::before,.th-stages li.is-now::before{background:rgba(255,184,107,.55)}
+.th-stages button{width:100%;display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;padding:0 2px;color:var(--muted);cursor:pointer;font:inherit}
+.th-stages button:disabled{cursor:default}
+.th-dot{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;border:1px solid #343c55;background:var(--space);font:600 11.5px var(--font-mono);color:var(--muted);transition:border-color .15s,box-shadow .15s}
+.th-dot .ck{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.th-sname{font-size:12px;line-height:1.25;text-align:center}
+.th-stages button:not(:disabled):hover .th-dot{border-color:rgba(255,184,107,.6)}
+.th-stages li.is-done .th-dot{background:rgba(255,184,107,.16);border-color:rgba(255,184,107,.5);color:var(--warn)}
+.th-stages li.is-now .th-dot{background:var(--warn);border-color:var(--warn);color:#1a1408;box-shadow:0 0 14px rgba(255,184,107,.5)}
+.th-stages li.is-now .th-sname{color:var(--ink);font-weight:600}
+.th-now{margin:14px 0 0;font-size:13px;color:var(--muted)}
+.th-now b{color:var(--warn);font-weight:600}
+
+.th-wrap{display:grid;grid-template-columns:minmax(230px,290px) minmax(0,1fr);gap:16px;align-items:start}
+.th-index{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.th-tools{display:flex;gap:6px}
+.th-tools .btn{flex:1;justify-content:center}
+.th-search{width:100%;box-sizing:border-box}
+.th-pins{display:flex;flex-direction:column;gap:2px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.th-item{display:flex;flex-direction:column;gap:2px;width:100%;text-align:left;background:none;border:0;border-left:2px solid transparent;border-radius:8px;padding:7px 10px;color:var(--ink);font:inherit;cursor:pointer}
+.th-item:hover{background:var(--panel-2)}
+.th-item.is-on{background:var(--panel-2);border-left-color:var(--warn)}
+.th-pin{flex-direction:row;align-items:center;gap:9px}
+.th-pin .star,.th-pin .ico{width:14px;height:14px;flex:none;color:var(--warn)}
+.th-iname{font-size:13.5px;font-weight:500;line-height:1.35;flex:1;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.th-isub{font:400 11.5px/1.4 var(--font-mono);color:var(--muted);overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.th-isub mark{background:rgba(255,184,107,.3);color:var(--ink);border-radius:2px}
+.th-n{font:500 11px var(--font-mono);color:var(--muted);background:rgba(255,255,255,.05);border-radius:999px;padding:1px 7px}
+.th-sec-h{margin:8px 0 2px;padding:0 10px;font:600 10.5px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#6c748c}
+.th-none{margin:6px 4px;font-size:13px;line-height:1.5;color:var(--muted)}
+.th-warn{margin:6px 4px 0;font-size:12px;line-height:1.45;color:var(--warn)}
+.th-back{display:none}
+
+/* the page: a sheet with a faint margin line, like a notebook */
+.th-page{position:relative;min-width:0;min-height:60vh;background:linear-gradient(90deg,transparent 21px,rgba(255,120,110,.13) 21px,rgba(255,120,110,.13) 22px,transparent 22px),#10141f;border:1px solid var(--rule);border-radius:16px;padding:24px 34px 30px 46px}
+.th-ph{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:18px;padding-bottom:16px;border-bottom:1px dashed #283049}
+.th-ph-main{flex:1;min-width:220px}
+.th-ptitle{margin:0;font:600 clamp(19px,2.2vw,24px)/1.25 var(--font-display);color:var(--ink);text-wrap:balance}
+.th-sub{margin:6px 0 0;font-size:14px;color:var(--muted)}
+.th-pacts{display:flex;gap:6px;flex-wrap:wrap}
+.th-toc{margin:0 0 22px;padding:12px 16px;border:1px solid var(--rule);border-radius:12px;background:rgba(255,255,255,.015)}
+.th-toc ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:3px}
+.th-toc li::marker{font:500 12px var(--font-mono);color:var(--muted)}
+.th-toc-q{display:block;width:100%;background:none;border:0;padding:2px 0;text-align:left;color:#b9c6e6;font:inherit;font-size:13.5px;line-height:1.45;cursor:pointer}
+.th-toc-q:hover{color:var(--accent);text-decoration:underline}
+.th-blocks{display:flex;flex-direction:column;gap:6px}
+.th-b{position:relative;scroll-margin-top:16px}
+.th-who{margin:0 0 6px;font:600 10.5px var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:#6f7893}
+.th-b.is-you{margin:18px 0 8px;padding:12px 16px;background:rgba(138,180,255,.06);border:1px solid rgba(138,180,255,.16);border-left:3px solid var(--accent);border-radius:10px}
+.th-b.is-you:first-child{margin-top:0}
+.th-b.is-you .th-who{color:var(--accent)}
+.th-b.is-you .md{font-size:14.5px;color:#d5dcef}
+.th-b.is-long .md{max-height:9.5em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
+.th-showall{margin-top:4px;font-size:12.5px}
+.th-b.is-ai,.th-b.is-note{padding:2px 2px 6px}
+.th-tip{margin:22px 0 0;font-size:12.5px;color:#6c748c;display:flex;align-items:center;gap:6px}
+.th-tip .star{width:12px;height:12px;color:var(--warn)}
+.th-note{margin:0 0 12px;font-size:13px;color:var(--muted)}
+.th-lbl{font-size:12.5px;color:var(--muted)}
+
+/* rendered Markdown */
+.md{font-size:15.5px;line-height:1.68;color:#dde2ee;max-width:76ch;overflow-wrap:anywhere}
+.md>*:first-child{margin-top:0}
+.md>*:last-child{margin-bottom:0}
+.md p{margin:0 0 .85em}
+.md .md-h{font-family:var(--font-display);font-weight:600;color:var(--ink);line-height:1.3;margin:1.3em 0 .5em;letter-spacing:-.005em}
+.md .md-h1{font-size:20px}.md .md-h2{font-size:18px}.md .md-h3{font-size:16.5px}.md .md-h4,.md .md-h5,.md .md-h6{font-size:15px}
+.md ul,.md ol{margin:0 0 .85em;padding-left:1.4em}
+.md li{margin:.22em 0}
+.md li::marker{color:#7d87a3}
+.md li>ul,.md li>ol{margin:.2em 0 .3em}
+.md strong{color:#fff;font-weight:650}
+.md em{color:#e9ecf5}
+.md a{color:var(--accent)}
+.md code{font:13px var(--font-mono);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:5px;padding:1px 5px}
+.md .md-pre{position:relative;margin:0 0 1em;background:#0a0e18;border:1px solid var(--rule);border-radius:10px;padding:14px 16px;overflow:auto;max-width:100%}
+.md .md-pre code{background:none;border:0;padding:0;font-size:12.8px;line-height:1.55;white-space:pre}
+.md .md-lang{position:absolute;top:6px;right:10px;font:500 10.5px var(--font-mono);color:#5f6780;text-transform:lowercase}
+.md blockquote{margin:0 0 1em;padding:2px 0 2px 14px;border-left:3px solid #3a4462;color:#c3cadb}
+.md hr{border:0;border-top:1px dashed #2c3550;margin:1.4em 0}
+.md .md-table{overflow:auto;margin:0 0 1em;border:1px solid var(--rule);border-radius:10px}
+.md table{border-collapse:collapse;font-size:14px;min-width:100%}
+.md th,.md td{padding:7px 12px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.md th{background:rgba(255,255,255,.035);font-weight:600;color:var(--ink);white-space:nowrap}
+.md tr:last-child td{border-bottom:0}
+.md .md-math{font-family:var(--font-mono);font-size:.92em;color:#cfe0ff}
+.md .md-math.is-typeset{font-family:inherit;font-size:1em;color:inherit}
+.md .md-mathblock{margin:.4em 0 1em;overflow-x:auto;overflow-y:hidden;text-align:center;padding:2px 0}
+.md .md-mathblock .md-math:not(.is-typeset){display:block;white-space:pre-wrap;text-align:left;padding:8px 12px;background:rgba(255,255,255,.03);border-radius:8px}
+.md .katex{font-size:1.06em}
+.md .md-box{color:var(--muted)}
+mark.th-hl{background:rgba(255,184,107,.24);color:inherit;border-radius:3px;padding:0 1px;box-shadow:0 1px 0 rgba(255,184,107,.55)}
+mark.th-hl.is-flash{animation:thflash 1.4s ease}
+@keyframes thflash{0%,40%{background:rgba(255,184,107,.65)}100%{background:rgba(255,184,107,.24)}}
+
+.th-markbtn{position:absolute;z-index:60;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:0;border-radius:999px;background:var(--warn);color:#1b1407;font:600 13px var(--font-body);box-shadow:0 8px 24px rgba(0,0,0,.45);cursor:pointer}
+.th-markbtn .star{width:13px;height:13px}
+.th-markbtn[hidden]{display:none}
+.th-toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));z-index:70;transform:translate(-50%,20px);opacity:0;pointer-events:none;display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:#2a2417;border:1px solid rgba(255,184,107,.45);color:#ffe3c2;font-size:13.5px;transition:opacity .2s,transform .2s}
+.th-toast .star{width:13px;height:13px;color:var(--warn)}
+.th-toast.is-on{opacity:1;transform:translate(-50%,0)}
+
+/* Important, topics, canvas */
+.th-quick{display:flex;gap:8px;align-items:flex-start;margin:0 0 16px}
+.th-quick textarea,.th-quick input{flex:1;min-width:0}
+.th-marks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.th-mark{padding:12px 16px 10px;border:1px solid var(--rule);border-left:3px solid var(--warn);border-radius:10px;background:rgba(255,184,107,.035)}
+.th-mark blockquote{margin:0;font-size:15.5px;line-height:1.6;color:#e6e9f2}
+.th-mark-foot{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:12.5px;color:var(--muted)}
+.th-mark-foot .link-btn{font-size:12.5px;padding-left:0}
+.th-mark-d{font-family:var(--font-mono)}
+.th-unmark{margin-left:auto;color:var(--muted) !important}
+.th-unmark:hover{color:var(--stop) !important}
+.th-topics{display:flex;flex-direction:column;gap:10px}
+.th-topic{border:1px solid var(--rule);border-radius:12px;background:var(--panel)}
+.th-topic.is-chosen{border-color:rgba(255,184,107,.55);box-shadow:0 0 0 1px rgba(255,184,107,.15),0 0 22px rgba(255,184,107,.08)}
+.th-topic.is-dropped{opacity:.55}
+.th-topic-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;width:100%;padding:12px 14px;background:none;border:0;text-align:left;color:var(--ink);font:inherit;cursor:pointer}
+.th-topic-t{flex:1;min-width:180px;font-size:14.5px;font-weight:500;line-height:1.4}
+.th-tag{display:inline-flex;align-items:center;gap:4px;font:600 10.5px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--rule);border-radius:999px;padding:2px 8px}
+.th-tag .star{width:10px;height:10px}
+.th-tag.is-chosen{color:var(--warn);border-color:rgba(255,184,107,.5)}
+.th-score{margin:0 !important;flex:none;font:500 12px var(--font-mono) !important}
+.th-topic-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;border-top:1px dashed var(--rule);padding-top:12px}
+.th-topic-acts{display:flex;gap:6px;flex-wrap:wrap}
+.th-topic-acts .star{width:12px;height:12px;margin-right:4px;vertical-align:-1px}
+.th-canvas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.th-cv{display:flex;flex-direction:column;gap:6px;padding:12px 14px;border:1px solid var(--rule);border-radius:12px;background:var(--panel)}
+.th-cv:focus-within{border-color:rgba(255,184,107,.5)}
+.th-cv label{display:flex;align-items:center;gap:8px;font:600 13px var(--font-body);color:var(--ink)}
+.th-cvn{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font:600 10.5px var(--font-mono);color:var(--warn);border:1px solid rgba(255,184,107,.45)}
+.th-cv textarea{background:transparent;border:0;padding:0;resize:none;min-height:48px;font-size:14.5px;line-height:1.55;color:var(--ink);box-shadow:none;outline:none}
+.th-cv textarea::placeholder{color:#59617a}
+
+/* the paste window */
+.thp-text{font:12.5px/1.5 var(--font-mono);min-height:240px;resize:vertical}
+.thp-found{margin:2px 0 0 !important;font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:6px;min-height:1em}
+.thp-found .ck{width:13px;height:13px;flex:none;fill:none;stroke:var(--ok);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+@media (max-width: 900px){
+  .th-canvas{grid-template-columns:1fr}
+}
+@media (max-width: 640px){
+  .th-head{padding:16px 16px 12px}
+  .th-stages{overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+  .th-stages li{flex:0 0 74px}
+  .th-sname{font-size:11px}
+  #view-thesis.is-reading .th-head{display:none}
+  .th-wrap{grid-template-columns:1fr}
+  .th-wrap:not(.is-reading) .th-page{display:none}
+  .th-wrap.is-reading .th-index{display:none}
+  .th-index{position:static;max-height:none}
+  .th-back{display:inline-block;margin:0 0 10px;padding-left:0}
+  .th-page{padding:16px 16px 22px;background:#10141f;min-height:0}
+  .md{font-size:15px}
+  .th-ph{margin-bottom:14px}
+  .th-markbtn{padding:9px 15px;font-size:14px}
+}
+
 .cp-foot{margin:0;font-size:12px;color:#5f6780;text-align:center}
 .cp-line{display:flex;align-items:baseline;gap:8px;padding:10px 14px;border:1px solid var(--rule);border-radius:12px;background:var(--panel);color:var(--muted);font-size:13.5px;text-decoration:none;line-height:1.45}
 .cp-line:hover{border-color:#3a4870;color:var(--ink)}
@@ -803,7 +1009,7 @@ td.c-break{display:none}
   .tick.is-today .tick-wd{font-size:8.5px}
   .divider{padding-top:16px}
   .empty{padding:24px 0}
-  .view-tab{padding:6px 10px;font-size:13.5px}
+  .view-tab{padding:6px 9px;font-size:13px}
   .save-status.is-ok,.save-status.is-saving{font-size:0;gap:0}
   .save-status.is-warn,.save-status.is-err{grid-column:1 / -1;grid-row:3;justify-self:end}
   .chips{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none}
@@ -901,7 +1107,8 @@ td.c-break{display:none}
     <nav class="views" aria-label="Views">
       <a class="view-tab" href="#todo" data-view="todo">To-do<span class="tab-n" id="todo-n" hidden></span></a>
       <a class="view-tab" href="#timeline" data-view="timeline">Timeline</a>
-      <a class="view-tab" href="#compass" data-view="compass">Compass</a>
+      <a class="view-tab is-hot" href="#compass" data-view="compass">Compass</a>
+      <a class="view-tab is-hot" href="#thesis" data-view="thesis">Thesis</a>
     </nav>
     <div class="top-actions">
       <span class="save-status" id="save-status" role="status"></span>
@@ -914,6 +1121,7 @@ td.c-break{display:none}
       <div class="more-menu" id="more-menu" hidden>
         <button type="button" id="mm-library">Library</button>
         <button type="button" id="mm-review">Weekly review</button>
+        <button type="button" id="mm-parking">Parking lot</button>
         <button type="button" id="mm-backup">Backup</button>
       </div>
     </div>
@@ -942,6 +1150,7 @@ td.c-break{display:none}
 
   <main>
     <section id="view-compass" class="view-compass" aria-label="Compass" hidden></section>
+    <section id="view-thesis" class="view-thesis" aria-label="Thesis" hidden></section>
     <section id="view-todo" class="view-todo" aria-label="To-do" hidden>
       <form class="todo-add edit-only" id="todo-add" autocomplete="off">
         <label for="td-text" class="sr-only">New task</label>
@@ -1052,6 +1261,9 @@ td.c-break{display:none}
     link: '<path d="M6.6 9.4a2.6 2.6 0 0 0 3.7 0l2.3-2.3a2.6 2.6 0 0 0-3.7-3.7l-1 1"/><path d="M9.4 6.6a2.6 2.6 0 0 0-3.7 0L3.4 8.9a2.6 2.6 0 0 0 3.7 3.7l1-1"/>'
   };
   var END_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 4.5l7 7M11.5 4.5l-7 7"/></svg>';
+  var PARK_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="3"/><path d="M6.6 11.2V4.9h2.1a1.75 1.75 0 0 1 0 3.5H6.6"/></svg>';
+  var UNPARK_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3.5M4.2 7.2 8 3.4l3.8 3.8"/></svg>';
+  var FOCUS_MAX = 3;   // projects in orbit before Polaris suggests parking one
   var REOPEN_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 8a4.8 4.8 0 1 0 1.4-3.4M3.2 2.6v2.9h2.9"/></svg>';
   var TRASH_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.6 8.5h5.8l.6-8.5M6.8 7v4M9.2 7v4"/></svg>';
   var CLIP = '<svg class="clip" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7.5 8.2 12.3a3 3 0 0 1-4.3-4.3l5-5a2 2 0 0 1 2.9 2.9l-5 5a1 1 0 0 1-1.4-1.4L10 4.9"/></svg>';
@@ -1258,6 +1470,7 @@ td.c-break{display:none}
       return { id: typeof r.id === 'string' && r.id ? r.id : 'cp' + i + Math.random().toString(36).slice(2, 7), stage: stageIds[r.stage] ? r.stage : 'always',
         title: r.title.trim().slice(0, 120), text: typeof r.text === 'string' ? r.text.trim().slice(0, 1500) : '', from: typeof r.from === 'string' ? r.from.trim().slice(0, 80) : '' };
     });
+    out.thesis = normThesis(s);
     out.compassTests = (Array.isArray(s.compassTests) ? s.compassTests : []).filter(function (t) { return typeof t === 'string' && t.trim(); }).slice(0, 15).map(function (t) { return t.trim().slice(0, 160); });
     var areaIds = {};
     (Array.isArray(s.areas) ? s.areas : DEFAULT_AREAS).forEach(function (a) {
@@ -1334,6 +1547,7 @@ td.c-break{display:none}
         start: p.start, ended: isISO(p.ended) ? p.ended : null,
         deadline: dl, deadlineAt: dAt, deadlineTz: dAt && validTz(p.deadlineTz) ? p.deadlineTz : '', pointsTotal: numOrNull(p.pointsTotal),
         endedBy: p.endedBy === 'deadline' ? 'deadline' : null,
+        parked: !isISO(p.ended) && isISO(p.parked) ? p.parked : null,
         area: areaIds[p.area] && !dropArea[p.area] ? String(p.area) : null, goal: goalIds[p.goal] ? String(p.goal) : null, milestones: ms,
         links: normLinks(p.links), notes: typeof p.notes === 'string' ? p.notes.slice(0, 10000) : '',
         created: Number(p.created) || 0, sample: !!p.sample
@@ -1440,12 +1654,21 @@ td.c-break{display:none}
     });
     return m;
   }
+  // Parked: paused on purpose. Quiet (no to-dos, nudges or Doing), but the final deadline still counts.
+  function isParked(p) { return !p.ended && !!p.parked; }
+  function inOrbit() { return state.projects.filter(function (p) { return !p.ended && !p.parked; }); }
+  function parkProject(pid, on) {
+    var p = getProject(pid); if (!p || p.ended || mode === 'readonly') return;
+    if (!!p.parked === !!on) return;
+    commit(function () { p.parked = on ? todayISO() : null; });
+  }
   function boardProjects(T) {
     var inArea = function (p) { return ui.area === 'all' || p.area === ui.area; };
-    var active = state.projects.filter(function (p) { return !p.ended && inArea(p); });
+    var active = state.projects.filter(function (p) { return !p.ended && !p.parked && inArea(p); });
+    var parked = state.projects.filter(function (p) { return isParked(p) && inArea(p); });
     var ended = state.projects.filter(function (p) { return p.ended && statusOf(p, T) === 'ended' && inArea(p); })
       .sort(function (a, b) { return a.ended < b.ended ? 1 : a.ended > b.ended ? -1 : 0; });
-    return { active: active, ended: ended };
+    return { active: active, parked: parked, ended: ended };
   }
   function leastUsedColor() {
     var counts = [0, 0, 0, 0, 0, 0], T = todayISO();
@@ -1458,7 +1681,7 @@ td.c-break{display:none}
   // Done in memory on every render; it is saved with the next change you make.
   function autoEndPass(T) {
     state.projects.forEach(function (p) {
-      if (!p.ended && p.deadline && p.deadline < T) { p.ended = p.deadline; p.endedBy = 'deadline'; }
+      if (!p.ended && p.deadline && p.deadline < T) { p.ended = p.deadline; p.endedBy = 'deadline'; p.parked = null; }
     });
   }
   function dueLabel(n) { return n <= 0 ? 'today' : n === 1 ? 'tomorrow' : 'in ' + n + ' days'; }
@@ -1474,11 +1697,11 @@ td.c-break{display:none}
   function goalById(id) { var g = null; state.mission.goals.forEach(function (x) { if (x.id === id) g = x; }); return g; }
   function lastActivity(p) { return lastUpdate(p) || p.start; }
   function driftDays(p, T) { return p.ended ? 0 : Math.max(0, diffDays(lastActivity(p), T)); }
-  function isDrifting(p, T) { return !p.ended && driftDays(p, T) >= DRIFT_DAYS; }
+  function isDrifting(p, T) { return !p.ended && !p.parked && driftDays(p, T) >= DRIFT_DAYS; }
   function taskById(p, mid) { var m = null; p.milestones.forEach(function (x) { if (x.id === mid) m = x; }); return m; }
   function doingAll() {
     var out = [];
-    state.projects.forEach(function (p) { if (p.ended) return; piecesOf(p).forEach(function (m) { if (!m.done && m.status === 'doing') out.push({ p: p, m: m }); }); });
+    state.projects.forEach(function (p) { if (p.ended || p.parked) return; piecesOf(p).forEach(function (m) { if (!m.done && m.status === 'doing') out.push({ p: p, m: m }); }); });
     return out;
   }
   function piecesOf(p) { return p.milestones.filter(function (m) { return !m.parent; }); }
@@ -1617,6 +1840,7 @@ td.c-break{display:none}
     state.projects.forEach(function (p) {
       if (p.ended) return;
       if (p.deadline) items.push({ kind: 'deadline', date: p.deadline, p: p, title: p.name, done: false });
+      if (p.parked) return;
       p.milestones.forEach(function (m) { if (m.date && !m.parent) items.push({ kind: 'milestone', date: m.date, p: p, m: m, title: m.title, done: m.done }); });
     });
     return items.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
@@ -1810,6 +2034,11 @@ td.c-break{display:none}
   function ghRepoCheck(c) { return ghFetch(c, 'https://api.github.com/repos/' + c.repo, { cache: 'no-store' }); }
   function ghGet(c) {
     return ghFetch(c, ghUrl(c) + '?ref=' + encodeURIComponent(c.branch), { cache: 'no-store' }).then(function (j) {
+      if (j && !j.content && j.sha && (j.encoding === 'none' || j.size > 0)) {
+        return ghFetch(c, 'https://api.github.com/repos/' + c.repo + '/git/blobs/' + j.sha, { cache: 'no-store' }).then(function (b) { return { sha: j.sha, content: b.content || '' }; });
+      }
+      return j;
+    }).then(function (j) {
       var data = null;
       try { data = normalize(JSON.parse(b64decode(j.content || ''))); } catch (e) { data = null; }
       if (!data) { var er = new Error(c.path + ' in that repository isn’t a Polaris board. Use another file name.'); er.status = 0; throw er; }
@@ -1941,8 +2170,9 @@ td.c-break{display:none}
     if (h === '#todo') return 'todo';
     if (h === '#timeline') return 'timeline';
     if (h === '#compass') return 'compass';
+    if (h === '#thesis') return 'thesis';
     var saved = null; try { saved = localStorage.getItem(VIEW_KEY); } catch (e) {}
-    return saved === 'timeline' || saved === 'compass' ? saved : 'todo';
+    return saved === 'timeline' || saved === 'compass' || saved === 'thesis' ? saved : 'todo';
   }
 
   function render() {
@@ -1959,10 +2189,11 @@ td.c-break{display:none}
     $('#view-timeline').hidden = view !== 'timeline';
     $('#view-todo').hidden = view !== 'todo';
     $('#view-compass').hidden = view !== 'compass';
+    $('#view-thesis').hidden = view !== 'thesis';
     $('#view-table').hidden = view !== 'table';
     var lb = $('#btn-library'); if (lb) lb.setAttribute('aria-pressed', String(view === 'table'));
     renderTodoCount(T);
-    if (view === 'timeline') renderBoard(T); else if (view === 'todo') renderTodo(T); else if (view === 'compass') renderCompass(T); else renderTables(T);
+    if (view === 'timeline') renderBoard(T); else if (view === 'todo') renderTodo(T); else if (view === 'compass') renderCompass(T); else if (view === 'thesis') renderThesis(T); else renderTables(T);
     if (ui.hub) renderHub();
     if (!inViewer && gcalState === 'off' && gcalCfg()) gcalBoot();
     whenWatch('#td-text', '#td-when'); if (ui.hub) whenWatch('#ta-title', '#ta-when');
@@ -1980,14 +2211,14 @@ td.c-break{display:none}
 
   function renderQuickAdd(T) {
     var sel = $('#qa-project');
-    var active = state.projects.filter(function (p) { return !p.ended; });
+    var active = inOrbit().concat(state.projects.filter(isParked));
     var cur = sel.value || sel.dataset.want || '';
     if (!active.length) {
       sel.innerHTML = '<option value="">No active projects yet</option>';
       sel.disabled = true;
     } else {
       sel.disabled = false;
-      sel.innerHTML = active.map(function (p) { return '<option value="' + esc(p.id) + '">' + esc(p.name) + '</option>'; }).join('');
+      sel.innerHTML = active.map(function (p) { return '<option value="' + esc(p.id) + '">' + esc(p.name) + (p.parked ? ' (parked)' : '') + '</option>'; }).join('');
       if (active.some(function (p) { return p.id === cur; })) sel.value = cur;
     }
     sel.dataset.want = '';
@@ -2053,8 +2284,13 @@ td.c-break{display:none}
         '. Finishing one before starting the next gets more done. Aim for ' + DOING_MAX + '.</span><span class="reminder-acts">' +
         '<button type="button" class="link-btn edit-only" data-act="review">Pick my 3</button>' + dismissBtn('doing|' + T) + '</span></div>' });
     }
+    var orbit = inOrbit();
+    if (orbit.length > FOCUS_MAX && !dismissed['focus|' + T]) {
+      cards.push({ n: 45, html: '<div class="reminder">' + ORBIT + '<span class="msg"><b>' + orbit.length + ' projects in orbit.</b> Keep the ' + FOCUS_MAX + ' that matter most and park the rest. Parked projects wait quietly until you bring them back.</span><span class="reminder-acts">' +
+        '<button type="button" class="link-btn edit-only" data-act="park-pick">Choose what to park</button>' + dismissBtn('focus|' + T) + '</span></div>' });
+    }
     state.projects.forEach(function (p) {
-      if (p.ended) return;
+      if (p.ended || p.parked) return;
       p.milestones.forEach(function (m) {
         if (m.done || m.status !== 'waiting' || !m.waitSince) return;
         var w = diffDays(m.waitSince, T), key = 'wait|' + m.id + '|' + T;
@@ -2172,7 +2408,10 @@ td.c-break{display:none}
           '" style="left:' + cx(mi).toFixed(3) + '%" title="' + esc(tipM) + '" aria-label="Milestone: ' + esc(tipM) + '">' + DIAMOND + '</button>';
       });
       var parts = [], tc = taskCounts(p);
-      if (st === 'active') {
+      if (st === 'parked') {
+        parts.push('Parked ' + fmtShort(p.parked) + (tc.total ? ' · ' + tc.done + '/' + tc.total : ''));
+        if (p.deadline) parts.push('<span class="due">' + FLAG + 'Due ' + deadlineText(p, T) + ' · ' + leftText(p, T) + '</span>');
+      } else if (st === 'active') {
         if (p.deadline) {
           var d2 = diffDays(T, p.deadline);
           parts.push('<span class="due' + (d2 <= DUE_SOON ? ' is-soon' : '') + '">' + FLAG + (d2 <= 0 && !p.deadlineAt ? 'Due today' : 'Due ' + deadlineText(p, T) + ' · ' + leftText(p, T)) + '</span>');
@@ -2191,12 +2430,16 @@ td.c-break{display:none}
       var dlTitle = p.deadline ? 'Change deadline' : 'Set a deadline';
       var btns = st === 'active'
         ? '<button type="button" class="act edit-only" data-act="deadline" data-pid="' + esc(p.id) + '" title="' + dlTitle + '" aria-label="' + dlTitle + '">' + FLAG + '</button>' +
+          '<button type="button" class="act park edit-only" data-act="park" data-pid="' + esc(p.id) + '" title="Park it for later" aria-label="Park ' + esc(p.name) + '">' + PARK_ICO + '</button>' +
+          '<button type="button" class="act end edit-only" data-act="end" data-pid="' + esc(p.id) + '" title="End project" aria-label="End project">' + END_ICO + '</button>'
+        : st === 'parked'
+        ? '<button type="button" class="act unpark edit-only" data-act="unpark" data-pid="' + esc(p.id) + '" title="Bring it back into orbit" aria-label="Bring ' + esc(p.name) + ' back">' + UNPARK_ICO + '</button>' +
           '<button type="button" class="act end edit-only" data-act="end" data-pid="' + esc(p.id) + '" title="End project" aria-label="End project">' + END_ICO + '</button>'
         : '<button type="button" class="act edit-only" data-act="reopen" data-pid="' + esc(p.id) + '" title="Reopen project" aria-label="Reopen project">' + REOPEN_ICO + '</button>' +
           '<button type="button" class="act del edit-only" data-act="delete-now" data-pid="' + esc(p.id) + '" title="Delete now" aria-label="Delete ' + esc(p.name) + ' now">' + TRASH_ICO + '</button>';
-      return '<div class="row ' + st + (isDrifting(p, T) ? ' drifting' : '') + '"' + (st === 'active' ? sortAttr(p.id) : '') + ' style="--pc:var(--c' + p.color + ')">' +
+      return '<div class="row ' + st + (isDrifting(p, T) ? ' drifting' : '') + '"' + (st !== 'ended' ? sortAttr(p.id) : '') + ' style="--pc:var(--c' + p.color + ')">' +
         '<div class="label"><button type="button" class="label-box" data-act="project" data-pid="' + esc(p.id) + '" title="Open project"><span class="label-name">' + esc(p.name) +
-        (areaOf(p) ? '<span class="area-tag">' + esc(areaOf(p).name) + '</span>' : '') + '</span><span class="label-meta">' + meta + '</span></button>' +
+        (st === 'parked' ? '<span class="area-tag park-tag">Parked</span>' : areaOf(p) ? '<span class="area-tag">' + esc(areaOf(p).name) + '</span>' : '') + '</span><span class="label-meta">' + meta + '</span></button>' +
         '<div class="label-acts">' + btns + '</div></div>' +
         '<div class="lane" data-pid="' + esc(p.id) + '">' + out + '<span class="ghost" aria-hidden="true">+</span></div></div>';
     }
@@ -2205,11 +2448,16 @@ td.c-break{display:none}
       return '<div class="col' + (d === T ? ' is-today' : '') + (d > T ? ' is-future' : (isWeekend(d) ? ' is-wknd' : '')) + '"></div>';
     }).join('') + '</div>';
 
-    if (!vis.active.length && !vis.ended.length) {
+    if (!vis.active.length && !vis.parked.length && !vis.ended.length) {
       html += '<div class="empty"><p>' + (ui.area !== 'all' && state.projects.length ? 'No projects in this area yet.' : 'Nothing on the board yet.') + '</p><button type="button" class="btn primary edit-only" data-act="new-project">+ New project</button>' +
         (!inViewer && !gh ? '<button type="button" class="btn" data-act="sync">Load my board from GitHub</button>' : '') + '</div>';
     }
     html += vis.active.map(function (p) { return rowHTML(p, 'active'); }).join('');
+    // the Parking lot: drag a project below this line to park it, above it to bring it back
+    if (vis.parked.length || vis.active.length > FOCUS_MAX) {
+      html += '<div class="divider park-divider"' + sortAttr('__park') + '><span>' + PARK_ICO + 'Parking lot · ' + (vis.parked.length ? 'paused for later, drag one up to bring it back' : 'drag a project here, or tap its P') + '</span></div>';
+      html += vis.parked.map(function (p) { return rowHTML(p, 'parked'); }).join('');
+    }
     if (vis.ended.length) {
       html += '<div class="divider"><span>Ended · each leaves the board ' + KEEP_DAYS + ' days after its ✕</span></div>';
       html += vis.ended.map(function (p) { return rowHTML(p, 'ended'); }).join('');
@@ -2250,7 +2498,8 @@ td.c-break{display:none}
         var p = x.p, st = x.st, lu = lastUpdate(p);
         var dl = p.deadline ? diffDays(T, p.deadline) : null;
         var pill;
-        if (st === 'active') pill = (dl !== null && dl <= DUE_SOON) ? '<span class="pill due">Due ' + dueLabel(dl) + '</span>' : '<span class="pill active">Active</span>';
+        if (st === 'active' && p.parked) pill = '<span class="pill parked">Parked ' + fmtShort(p.parked) + '</span>';
+        else if (st === 'active') pill = (dl !== null && dl <= DUE_SOON) ? '<span class="pill due">Due ' + dueLabel(dl) + '</span>' : '<span class="pill active">Active</span>';
         else if (st === 'ended') pill = '<span class="pill ended">' + (p.endedBy === 'deadline' ? 'Hit deadline ' : 'Ended ') + fmtShort(p.ended) + ' · leaves ' + fmtShort(leavesOn(p)) + '</span>';
         else pill = '<span class="pill archived">Archived · ended ' + fmtShort(p.ended) + '</span>';
         var dlCell;
@@ -2363,7 +2612,7 @@ td.c-break{display:none}
     });
     state.projects.forEach(function (p) {
       if (p.ended) return;
-      p.milestones.forEach(function (m) {
+      if (!p.parked) p.milestones.forEach(function (m) {
         if (m.done) { if (recentDone(m.doneAt)) done.push({ kind: 'ms', p: p, m: m, at: m.doneAt }); return; }
         var due = m.date && m.date <= T, pulled = m.today && m.today <= T;
         if (due || pulled) today.push({ kind: 'ms', p: p, m: m, rank: m.date && m.date < T ? 0 : due ? 1 : 2, key: (m.date || '') + (m.time || '') });
@@ -2380,7 +2629,7 @@ td.c-break{display:none}
     week = week.filter(function (x) { return x.kind !== 'quick' || !x.t.done; });
     // Next steps: projects with nothing on today's list or this week, and the first open to-do of each
     state.projects.forEach(function (p) {
-      if (p.ended) return;
+      if (p.ended || p.parked) return;
       var busy = today.concat(week).some(function (x) { return x.p && x.p === p && x.kind === 'ms'; });
       if (busy) return;
       next.push({ p: p, m: nextAction(p) });
@@ -2395,7 +2644,7 @@ td.c-break{display:none}
   }
   function renderTodoProjects() {
     var sel = $('#td-project'); if (!sel) return;
-    var cur = sel.value, act = state.projects.filter(function (p) { return !p.ended; });
+    var cur = sel.value, act = inOrbit();
     sel.innerHTML = '<option value="">No project</option>' + act.map(function (p) { return '<option value="' + esc(p.id) + '">' + esc(p.name) + '</option>'; }).join('');
     if (act.some(function (p) { return p.id === cur; })) sel.value = cur;
   }
@@ -2527,6 +2776,715 @@ td.c-break{display:none}
       if (e.target.id !== 'cp-idea') return;
       var v = loadIdea(); v.text = e.target.value.slice(0, 400);
       try { localStorage.setItem('polaris:idea', JSON.stringify(v)); } catch (er) {}
+    });
+  }
+
+  /* ================= Thesis: one notebook for the big project ================= */
+  var TH_STAGES = [
+    { id: 'topic', name: 'Topic selection', hint: 'Line up ideas, test them, choose one problem' },
+    { id: 'proposal', name: 'Proposal', hint: 'Write the plan and get it approved' },
+    { id: 'lit', name: 'Literature review', hint: 'Read with a theme and pin down the gap' },
+    { id: 'method', name: 'Method', hint: 'Model it, design the fix, prove it' },
+    { id: 'results', name: 'Results', hint: 'Run it and explain what you see' },
+    { id: 'writing', name: 'Writing', hint: 'Tell it as one story' },
+    { id: 'defense', name: 'Defense', hint: 'Present it and answer the questions' }
+  ];
+  var TH_CANVAS = [
+    { id: 'forest', name: 'Big picture', hint: 'The bigger problem this lives in, and why anyone should care' },
+    { id: 'gap', name: 'The gap', hint: 'What is still unsolved, in one or two lines' },
+    { id: 'leaf', name: 'Your contribution', hint: 'What you add. Take it away and nothing new is left' },
+    { id: 'method', name: 'Method', hint: 'The effect, why it causes trouble, your fix, how you prove it, how you show it' },
+    { id: 'scope', name: 'Scope', hint: 'What you do first, and what you leave for future work' },
+    { id: 'risks', name: 'Risks and plan B', hint: 'What could stop you, and what you do then' }
+  ];
+  var TH_MAX_BLOCK = 200000, TH_PAGE_KEY = 'polaris:th-page';
+  var TARGET_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.6"/></svg>';
+  var CANVAS_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M2.5 7h11M7 7v6.5"/></svg>';
+
+  function normThesis(s) {
+    var th = s.thesis && typeof s.thesis === 'object' ? s.thesis : {};
+    var stIds = {}; TH_STAGES.forEach(function (g) { stIds[g.id] = true; });
+    function str(v, n) { return typeof v === 'string' ? v.slice(0, n) : ''; }
+    var cv = th.canvas && typeof th.canvas === 'object' ? th.canvas : {}, canvas = {};
+    TH_CANVAS.forEach(function (f) { canvas[f.id] = str(cv[f.id], 4000); });
+    var stage = stIds[th.stage] ? th.stage : 'topic', out = {
+      title: str(th.title, 200).trim(), question: str(th.question, 600).trim(), advisor: str(th.advisor, 120).trim(),
+      due: isISO(th.due) ? th.due : null, stage: stage, canvas: canvas, pages: [], marks: [], topics: []
+    };
+    var pids = {};
+    (Array.isArray(th.pages) ? th.pages : []).slice(0, 500).forEach(function (pg) {
+      if (!pg || typeof pg !== 'object') return;
+      var id = typeof pg.id === 'string' && pg.id ? pg.id.slice(0, 40) : uid();
+      if (pids[id]) return; pids[id] = true;
+      var blocks = (Array.isArray(pg.blocks) ? pg.blocks : []).filter(function (b) { return b && typeof b.text === 'string' && b.text.trim(); }).slice(0, 600)
+        .map(function (b) { return { role: b.role === 'you' || b.role === 'ai' ? b.role : 'note', text: b.text.slice(0, TH_MAX_BLOCK) }; });
+      var cr = Number(pg.created) || Date.now();
+      out.pages.push({ id: id, title: str(pg.title, 160).trim() || 'Untitled', kind: pg.kind === 'chat' ? 'chat' : 'note',
+        source: pg.source === 'claude' || pg.source === 'chatgpt' ? pg.source : '', stage: stIds[pg.stage] ? pg.stage : stage,
+        created: cr, updated: Number(pg.updated) || cr, blocks: blocks });
+    });
+    (Array.isArray(th.marks) ? th.marks : []).slice(0, 1000).forEach(function (m) {
+      if (!m || typeof m.text !== 'string' || !m.text.trim()) return;
+      out.marks.push({ id: typeof m.id === 'string' && m.id ? m.id.slice(0, 40) : uid(), page: pids[m.page] ? m.page : null, text: m.text.trim().slice(0, 3000), created: Number(m.created) || Date.now() });
+    });
+    var chosen = false;
+    (Array.isArray(th.topics) ? th.topics : []).slice(0, 60).forEach(function (t) {
+      if (!t || typeof t.title !== 'string' || !t.title.trim()) return;
+      var stt = t.status === 'chosen' && !chosen ? 'chosen' : t.status === 'dropped' ? 'dropped' : 'exploring';
+      if (stt === 'chosen') chosen = true;
+      out.topics.push({ id: typeof t.id === 'string' && t.id ? t.id.slice(0, 40) : uid(), title: t.title.trim().slice(0, 300), status: stt,
+        checks: (Array.isArray(t.checks) ? t.checks : []).filter(function (c) { return typeof c === 'string'; }).slice(0, 20).map(function (c) { return c.slice(0, 160); }),
+        notes: str(t.notes, 4000), created: Number(t.created) || Date.now() });
+    });
+    return out;
+  }
+
+  /* ---- reading what you paste ---- */
+  // Speaker lines like "You said:", "ChatGPT said:", "Claude:" or "User:" on their own line split a chat into turns.
+  var TH_WHO = /^[ \t]*(?:#{1,6}[ \t]*)?(?:\*\*|__)?[ \t]*(you|me|i|user|human|chatgpt|claude|assistant|ai|gemini)[ \t]*(?:said[ \t]*:?|:)[ \t]*(?:\*\*|__)?[ \t]*$/i;
+  function parseChat(raw, src) {
+    var lines = String(raw || '').replace(/\r\n?/g, '\n').split('\n'), blocks = [], cur = null, source = '', fence = false, found = 0;
+    function push() { if (cur) { var t = cur.lines.join('\n').replace(/^\s*\n/, '').replace(/\s+$/, ''); if (t.trim()) blocks.push({ role: cur.role, text: t }); } }
+    lines.forEach(function (l) {
+      if (/^\s*(```|~~~)/.test(l)) fence = !fence;
+      var m = !fence && l.match(TH_WHO);
+      if (m) {
+        var who = m[1].toLowerCase();
+        if (who === 'chatgpt') source = 'chatgpt'; else if (who === 'claude') source = 'claude';
+        push(); found++;
+        cur = { role: /^(you|me|i|user|human)$/.test(who) ? 'you' : 'ai', lines: [] };
+        return;
+      }
+      if (!cur) cur = { role: src ? 'ai' : 'note', lines: [] };
+      cur.lines.push(l);
+    });
+    push();
+    var out = [];
+    blocks.forEach(function (b) { var last = out[out.length - 1]; if (last && last.role === b.role) last.text += '\n\n' + b.text; else out.push({ role: b.role, text: b.text.slice(0, TH_MAX_BLOCK) }); });
+    return { blocks: out, source: source, split: found > 0 };
+  }
+  function thSerialize(pg) {
+    var ai = pg.source === 'chatgpt' ? 'ChatGPT' : pg.source === 'claude' ? 'Claude' : 'AI';
+    return pg.blocks.map(function (b, i) {
+      if (b.role === 'note' || (i === 0 && b.role === 'ai' && pg.blocks.length === 1)) return b.text;
+      return (b.role === 'you' ? 'You said:' : ai + ' said:') + '\n\n' + b.text;
+    }).join('\n\n');
+  }
+  // Rich copies (select all on a chat page, Google Docs) arrive as HTML: turn them into tidy Markdown,
+  // keep the math as TeX, and mark who said what when the page tells us.
+  function htmlToMd(html) {
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var md = mdOf(doc.body, false).replace(/ /g, ' ').replace(/[ \t]+\n/g, '\n').replace(/\n[ \t]+\n/g, '\n\n').replace(/\n{3,}/g, '\n\n').trim();
+    // pages often say who's speaking twice (a hidden heading and the message itself): keep one plain line
+    md = md.replace(/^#{1,6}[ \t]*((?:You|ChatGPT|Claude) said:)[ \t]*$/gm, '$1');
+    for (var k = 0; k < 3; k++) md = md.replace(/(^|\n)((?:You|ChatGPT|Claude) said:)\n+\2(?=\n|$)/g, '$1$2');
+    return md;
+  }
+  function spaces(n) { return new Array(n + 1).join(' '); }
+  function texOf(el) { var a = el.querySelector('annotation[encoding="application/x-tex"]'); return a ? a.textContent.trim() : ''; }
+  function roleLine(el) {
+    var r = el.getAttribute('data-message-author-role');
+    if (r === 'user') return 'You said:';
+    if (r === 'assistant') return 'ChatGPT said:';
+    if (el.getAttribute('data-testid') === 'user-message') return 'You said:';
+    var c = typeof el.className === 'string' ? el.className : '';
+    if (/\bfont-claude-(response|message)\b/.test(c)) return 'Claude said:';
+    return '';
+  }
+  function mdOf(node, pre) { var s = ''; for (var c = node.firstChild; c; c = c.nextSibling) s += mdNode(c, pre); return s; }
+  function mdNode(n, pre) {
+    if (n.nodeType === 3) return pre ? n.nodeValue : n.nodeValue.replace(/\s+/g, ' ');
+    if (n.nodeType !== 1) return '';
+    var tag = n.tagName.toLowerCase(), cls = typeof n.className === 'string' ? n.className : '';
+    if (/^(script|style|noscript|svg|button|img|picture|video|audio|canvas|iframe|template|select|input|textarea|head|meta|link|title)$/.test(tag)) return '';
+    if (/\bkatex-display\b/.test(cls)) { var td = texOf(n); return td ? '\n\n$$' + td + '$$\n\n' : ''; }
+    if (/\bkatex\b/.test(cls) || tag === 'math') {
+      var ti = texOf(n) || (tag === 'math' ? n.getAttribute('alttext') || '' : '');
+      if (!ti) return mdOf(n, pre);
+      return tag === 'math' && n.getAttribute('display') === 'block' ? '\n\n$$' + ti + '$$\n\n' : '$' + ti + '$';
+    }
+    if (n.getAttribute('aria-hidden') === 'true') return '';
+    var who = roleLine(n);
+    if (who) return '\n\n' + who + '\n\n' + mdOf(n, pre) + '\n\n';
+    switch (tag) {
+      case 'br': return '\n';
+      case 'hr': return '\n\n---\n\n';
+      case 'h1': case 'h2': case 'h3': case 'h4': case 'h5': case 'h6':
+        var hx = mdOf(n, false).replace(/\s+/g, ' ').trim();
+        return hx ? '\n\n' + '######'.slice(0, +tag[1]) + ' ' + hx + '\n\n' : '';
+      case 'pre':
+        var code = n.querySelector('code') || n, lang = ((typeof code.className === 'string' ? code.className : '').match(/language-([\w+#.-]+)/) || [])[1] || '';
+        return '\n\n```' + lang + '\n' + code.textContent.replace(/\n+$/, '') + '\n```\n\n';
+      case 'code': return pre ? n.textContent : '`' + n.textContent.replace(/`/g, 'ˋ') + '`';
+      case 'strong': case 'b': var bt = mdOf(n, pre); return bt.trim() ? '**' + bt.trim() + '**' + (/\s$/.test(bt) ? ' ' : '') : bt;
+      case 'em': case 'i': var et = mdOf(n, pre); return et.trim() ? '*' + et.trim() + '*' + (/\s$/.test(et) ? ' ' : '') : et;
+      case 'del': case 's': var dt = mdOf(n, pre); return dt.trim() ? '~~' + dt.trim() + '~~' : dt;
+      case 'a':
+        var href = n.getAttribute('href') || '', at = mdOf(n, pre).trim();
+        return /^https?:\/\//i.test(href) && at ? (at === href ? href : '[' + at + '](' + href + ')') : at;
+      case 'blockquote': return '\n\n' + mdOf(n, pre).trim().split('\n').map(function (l) { return '> ' + l; }).join('\n') + '\n\n';
+      case 'ul': case 'ol': return '\n\n' + listMd(n, tag === 'ol') + '\n\n';
+      case 'table': return '\n\n' + tableMd(n) + '\n\n';
+      case 'p': case 'div': case 'section': case 'article': case 'header': case 'footer': case 'main': case 'aside': case 'figure': case 'figcaption':
+      case 'details': case 'summary': case 'dl': case 'dd': case 'dt': case 'li': case 'body': case 'nav':
+        return '\n\n' + mdOf(n, pre) + '\n\n';
+      default: return mdOf(n, pre);
+    }
+  }
+  function listMd(el, ordered) {
+    var k = parseInt(el.getAttribute('start'), 10) || 1, out = [];
+    for (var c = el.firstChild; c; c = c.nextSibling) {
+      if (c.nodeType !== 1 || c.tagName.toLowerCase() !== 'li') continue;
+      var bullet = ordered ? (k++) + '. ' : '- ';
+      var body = mdOf(c, false).replace(/[ \t]+\n/g, '\n').replace(/\n{2,}/g, '\n').trim();
+      out.push(bullet + body.replace(/\n/g, '\n' + spaces(bullet.length)));
+    }
+    return out.join('\n');
+  }
+  function tableMd(t) {
+    var rows = Array.prototype.map.call(t.querySelectorAll('tr'), function (tr) {
+      return Array.prototype.filter.call(tr.children, function (c) { return /^(td|th)$/i.test(c.tagName); })
+        .map(function (c) { return mdOf(c, false).replace(/\s+/g, ' ').trim().replace(/\|/g, '\\|'); });
+    }).filter(function (r) { return r.length; });
+    if (!rows.length) return '';
+    var w = Math.max.apply(null, rows.map(function (r) { return r.length; }));
+    function line(r) { var c = []; for (var i = 0; i < w; i++) c.push(r[i] || ''); return '| ' + c.join(' | ') + ' |'; }
+    var sep = []; for (var i = 0; i < w; i++) sep.push('---');
+    return [line(rows[0]), '| ' + sep.join(' | ') + ' |'].concat(rows.slice(1).map(line)).join('\n');
+  }
+
+  /* ---- showing it: a small, safe Markdown renderer (with TeX math) ---- */
+  function mathSpan(t, display) { t = t.trim(); return '<span class="md-math' + (display ? ' is-display' : '') + '" data-tex="' + esc(t) + '">' + esc(t) + '</span>'; }
+  function mdInline(s) {
+    var keep = [];
+    function stash(h) { keep.push(h); return '\u0000' + (keep.length - 1) + '\u0000'; }
+    s = String(s).replace(/\u0000/g, '');
+    s = s.replace(/`([^`\n]+)`/g, function (m, c) { return stash('<code>' + esc(c) + '</code>'); });
+    s = s.replace(/\$\$([^$]+?)\$\$/g, function (m, t) { return stash(mathSpan(t, true)); });
+    s = s.replace(/\\\[([\s\S]+?)\\\]/g, function (m, t) { return stash(mathSpan(t, true)); });
+    s = s.replace(/\\\(([\s\S]+?)\\\)/g, function (m, t) { return stash(mathSpan(t, false)); });
+    s = s.replace(/(^|[^\\$\w])\$(?=[^\s$])([^$\n]*?[^\s$\\])\$(?![\w$])/g, function (m, pre, t) { return pre + stash(mathSpan(t, false)); });
+    s = s.replace(/(^|[^\\$\w])\$([^\s$])\$(?![\w$])/g, function (m, pre, t) { return pre + stash(mathSpan(t, false)); });
+    s = esc(s);
+    s = s.replace(/!?\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)/g, function (m, t, u) { return stash('<a href="' + u + '" target="_blank" rel="noopener noreferrer">' + t + '</a>'); });
+    s = s.replace(/(^|[\s(])(https?:\/\/[^\s<]+[^\s<.,;:!?)\]'"])/g, function (m, pre, u) { return pre + stash('<a href="' + u + '" target="_blank" rel="noopener noreferrer">' + u + '</a>'); });
+    s = s.replace(/\*\*(?=\S)([\s\S]*?\S)\*\*/g, '<strong>$1</strong>');
+    s = s.replace(/(^|[^\w])__(?=\S)([\s\S]*?\S)__(?!\w)/g, '$1<strong>$2</strong>');
+    s = s.replace(/(^|[^*\w])\*(?=[^\s*])([^*\n]*?[^\s*])?\*(?![*\w])/g, function (m, pre, t) { return t === undefined ? m : pre + '<em>' + t + '</em>'; });
+    s = s.replace(/(^|[^*\w])\*([^\s*])\*(?![*\w])/g, '$1<em>$2</em>');
+    s = s.replace(/(^|[^_\w])_(?=[^\s_])([^_\n]*?[^\s_])_(?![_\w])/g, '$1<em>$2</em>');
+    s = s.replace(/~~(?=\S)([\s\S]*?\S)~~/g, '<del>$1</del>');
+    s = s.replace(/^\[( |x|X)\]\s/, function (m, x) { return '<span class="md-box">' + (x === ' ' ? '☐' : '☑') + '</span> '; });
+    for (var guard = 0; guard < 3 && /\u0000\d+\u0000/.test(s); guard++) s = s.replace(/\u0000(\d+)\u0000/g, function (m, k) { return keep[+k] || ''; });
+    return s;
+  }
+  function mdIsStart(l) {
+    return /^\s*(```|~~~|\$\$|\\\[|#{1,6}\s|>)/.test(l) || /^\s*([-*+]|\d+[.)])\s+\S/.test(l) || /^\s{0,3}([-*_])(\s*\1){2,}\s*$/.test(l);
+  }
+  function mdToHtml(src) {
+    var L = String(src || '').replace(/\r\n?/g, '\n').replace(/\t/g, '    ').split('\n'), out = [], i = 0, m;
+    var SEP = /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/;
+    function cells(r) {
+      r = r.trim().replace(/\\\|/g, '\u0001');
+      if (r[0] === '|') r = r.slice(1);
+      if (r.slice(-1) === '|') r = r.slice(0, -1);
+      return r.split('|').map(function (c) { return c.trim().replace(/\u0001/g, '|'); });
+    }
+    while (i < L.length) {
+      var l = L[i];
+      if (!l.trim()) { i++; continue; }
+      if ((m = l.match(/^\s*(```+|~~~+)\s*([^\s`]*)/))) {
+        var fence = m[1], code = []; i++;
+        while (i < L.length && L[i].trim().indexOf(fence) !== 0) code.push(L[i++]);
+        i++;
+        out.push('<pre class="md-pre">' + (m[2] ? '<span class="md-lang">' + esc(m[2]) + '</span>' : '') + '<code>' + esc(code.join('\n')) + '</code></pre>');
+        continue;
+      }
+      if (/^\s*(\$\$|\\\[)/.test(l)) {
+        var t0 = l.trim(), close = t0.slice(0, 2) === '$$' ? '$$' : '\\]', buf = t0.slice(2), done = false, k0 = buf.indexOf(close);
+        if (k0 >= 0) { buf = buf.slice(0, k0); done = true; }
+        i++;
+        while (!done && i < L.length) { var tl = L[i++], kk = tl.indexOf(close); if (kk >= 0) { buf += '\n' + tl.slice(0, kk); done = true; } else buf += '\n' + tl; }
+        if (buf.trim()) out.push('<div class="md-mathblock">' + mathSpan(buf, true) + '</div>');
+        continue;
+      }
+      if ((m = l.match(/^\s{0,3}(#{1,6})\s+(.*?)\s*#*\s*$/))) {
+        var lv = m[1].length; out.push('<h' + Math.min(6, lv + 2) + ' class="md-h md-h' + lv + '">' + mdInline(m[2]) + '</h' + Math.min(6, lv + 2) + '>'); i++; continue;
+      }
+      if (/^\s{0,3}([-*_])(\s*\1){2,}\s*$/.test(l)) { out.push('<hr>'); i++; continue; }
+      if (l.indexOf('|') >= 0 && i + 1 < L.length && SEP.test(L[i + 1]) && L[i + 1].indexOf('-') >= 0) {
+        var head = cells(l), al = cells(L[i + 1]).map(function (a) { return /^:-+:$/.test(a) ? ' style="text-align:center"' : /-+:$/.test(a) ? ' style="text-align:right"' : ''; });
+        i += 2; var rows = [];
+        while (i < L.length && L[i].trim() && L[i].indexOf('|') >= 0) rows.push(cells(L[i++]));
+        out.push('<div class="md-table"><table><thead><tr>' + head.map(function (c, k) { return '<th' + (al[k] || '') + '>' + mdInline(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+          rows.map(function (r) { return '<tr>' + head.map(function (x, k) { return '<td' + (al[k] || '') + '>' + mdInline(r[k] || '') + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>');
+        continue;
+      }
+      if (/^\s*>/.test(l)) {
+        var q = []; while (i < L.length && /^\s*>/.test(L[i])) q.push(L[i++].replace(/^\s*>\s?/, ''));
+        out.push('<blockquote>' + mdToHtml(q.join('\n')) + '</blockquote>'); continue;
+      }
+      if ((m = l.match(/^(\s*)([-*+]|\d+[.)])\s+(.*)$/))) {
+        var base = m[1].length, ordered = /\d/.test(m[2]), start = parseInt(m[2], 10) || 1, items = [], it = null;
+        while (i < L.length) {
+          var t = L[i], mm = t.match(/^(\s*)([-*+]|\d+[.)])\s+(.*)$/);
+          if (mm && mm[1].length <= base + 1) {
+            if (/\d/.test(mm[2]) !== ordered) break;
+            it = { lines: [mm[3]], col: mm[1].length + mm[2].length + 1 }; items.push(it); i++; continue;
+          }
+          if (!t.trim()) {
+            var j = i + 1; while (j < L.length && !L[j].trim()) j++;
+            var nx = j < L.length ? L[j] : '', ni = nx.match(/^\s*/)[0].length, nm = nx.match(/^(\s*)([-*+]|\d+[.)])\s+/);
+            if (j < L.length && (ni > base || (nm && ni <= base + 1 && /\d/.test(nm[2]) === ordered))) { it.lines.push(''); i++; continue; }
+            break;
+          }
+          var ind = t.match(/^\s*/)[0].length;
+          if (ind > base) { it.lines.push(t.slice(Math.min(ind, it.col))); i++; continue; }
+          if (mdIsStart(t) || it.lines[it.lines.length - 1] === '') break;
+          it.lines.push(t.trim()); i++;
+        }
+        out.push((ordered ? '<ol' + (start !== 1 ? ' start="' + start + '"' : '') + '>' : '<ul>') + items.map(function (x) {
+          var body = x.lines.join('\n').replace(/\n+$/, '');
+          var h = /\n/.test(body) ? mdToHtml(body) : '<p>' + mdInline(body) + '</p>';
+          return '<li>' + h.replace(/^<p>([\s\S]*?)<\/p>/, '$1') + '</li>';
+        }).join('') + (ordered ? '</ol>' : '</ul>'));
+        continue;
+      }
+      var para = [l]; i++;
+      while (i < L.length && L[i].trim() && !mdIsStart(L[i])) para.push(L[i++]);
+      out.push('<p>' + mdInline(para.join('\n')).replace(/\n/g, '<br>') + '</p>');
+    }
+    return out.join('');
+  }
+  // TeX math is drawn with KaTeX, fetched the first time a page needs it. Without it, the TeX shows as is.
+  var KATEX = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/', katexState = 0;
+  function thTypeset(el) {
+    var ms = el.querySelectorAll('.md-math:not(.is-typeset)'); if (!ms.length) return;
+    if (window.katex) {
+      Array.prototype.forEach.call(ms, function (x) {
+        try { window.katex.render(x.getAttribute('data-tex'), x, { displayMode: x.classList.contains('is-display'), throwOnError: false, output: 'html', strict: false }); x.classList.add('is-typeset'); } catch (e) {}
+      });
+      return;
+    }
+    if (katexState) return;
+    katexState = 1;
+    var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = KATEX + 'katex.min.css'; css.crossOrigin = 'anonymous'; document.head.appendChild(css);
+    var js = document.createElement('script'); js.src = KATEX + 'katex.min.js'; js.async = true; js.crossOrigin = 'anonymous';
+    js.onload = function () { katexState = 2; var p = $('#th-page'); if (p) thTypeset(p); };
+    js.onerror = function () { katexState = -1; };
+    document.head.appendChild(js);
+  }
+
+  /* ---- the tab ---- */
+  function thStageIndex() { for (var i = 0; i < TH_STAGES.length; i++) if (TH_STAGES[i].id === state.thesis.stage) return i; return 0; }
+  function thStageName(id) { for (var i = 0; i < TH_STAGES.length; i++) if (TH_STAGES[i].id === id) return TH_STAGES[i].name; return ''; }
+  function getThPage(id) { var r = null; state.thesis.pages.forEach(function (p) { if (p.id === id) r = p; }); return r; }
+  function thAiName(pg) { return pg.source === 'chatgpt' ? 'ChatGPT' : pg.source === 'claude' ? 'Claude' : 'AI'; }
+  function thSourceName(pg) { return pg.kind === 'note' ? 'Note' : pg.source === 'chatgpt' ? 'ChatGPT' : pg.source === 'claude' ? 'Claude' : 'Chat'; }
+  function thPlain(t) { return String(t || '').replace(/```[\s\S]*?```/g, ' ').replace(/[#*_`>$|\\]/g, '').replace(/\s+/g, ' ').trim(); }
+  function thAutoTitle(blocks) {
+    var y = blocks.filter(function (b) { return b.role === 'you'; })[0], b0 = y || blocks[0];
+    if (!b0) return 'Untitled';
+    var h = b0.text.match(/^\s{0,3}#{1,6}\s+(.+)$/m);
+    var t = thPlain(h && !y ? h[1] : b0.text.split('\n').filter(function (x) { return x.trim(); })[0] || '');
+    return truncate(t || 'Untitled', 70);
+  }
+  function thCurrent() {
+    var id = ui.thPage;
+    if (!id) { try { id = localStorage.getItem(TH_PAGE_KEY); } catch (e) {} }
+    if (id && (id === 'th:important' || id === 'th:topics' || id === 'th:canvas' || getThPage(id))) return id;
+    var P = state.thesis.pages.slice().sort(function (a, b) { return b.updated - a.updated; });
+    return P.length ? P[0].id : 'th:canvas';
+  }
+  function thOpen(id, reading) {
+    ui.thPage = id; if (reading !== undefined) ui.thReading = reading;
+    try { localStorage.setItem(TH_PAGE_KEY, id); } catch (e) {}
+    renderThesis(todayISO());
+  }
+
+  function renderThesis(T) {
+    var box = $('#view-thesis'); if (!box) return;
+    if (!$('#th-list')) {
+      box.innerHTML = '<div class="th-head" id="th-head"></div><div class="th-wrap" id="th-wrap">' +
+        '<aside class="th-index" aria-label="Notebook"><div class="th-tools edit-only"><button type="button" class="btn btn-sm primary" data-act="th-paste">+ Paste a chat</button><button type="button" class="btn btn-sm" data-act="th-note">+ Note</button></div>' +
+        '<label for="th-q" class="sr-only">Search the notebook</label><input id="th-q" class="th-search" type="search" placeholder="Search the notebook" autocomplete="off">' +
+        '<nav id="th-list" aria-label="Pages"></nav></aside><article class="th-page" id="th-page"></article></div>';
+    }
+    renderThHead(T); renderThList(); renderThPage();
+  }
+  function renderThHead(T) {
+    var th = state.thesis, ro = mode === 'readonly', si = thStageIndex(), meta = [];
+    if (th.advisor) meta.push('Advisor: ' + esc(th.advisor));
+    if (th.due) { var dl = diffDays(T, th.due); meta.push('Due ' + fmtYear(th.due) + ' · <span class="' + (dl <= 14 ? 'is-soon' : '') + '">' + (dl < 0 ? plural(-dl, 'day') + ' ago' : dl === 0 ? 'today' : plural(dl, 'day') + ' left') + '</span>'); }
+    var chosen = th.topics.filter(function (t) { return t.status === 'chosen'; })[0];
+    $('#th-head').innerHTML = '<div class="th-head-top"><div class="th-head-main">' +
+      '<p class="th-kicker">' + STAR + 'Thesis · stage ' + (si + 1) + ' of ' + TH_STAGES.length + '</p>' +
+      (th.title ? '<h2 class="th-title">' + esc(th.title) + '</h2>' : '<h2 class="th-title is-empty">' + (ro ? 'Thesis' : 'Name your thesis') + '</h2>') +
+      (th.question ? '<p class="th-q">' + esc(th.question) + '</p>' : ro ? '' : '<p class="th-q is-empty">Your research question, in one sentence</p>') +
+      (meta.length || chosen ? '<p class="th-meta">' + meta.concat(chosen ? ['Topic: <b>' + esc(truncate(chosen.title, 90)) + '</b>'] : []).join(' · ') + '</p>' : '') + '</div>' +
+      (ro ? '' : '<button type="button" class="btn btn-sm" data-act="th-edit">Edit</button>') + '</div>' +
+      '<ol class="th-stages" aria-label="Thesis stages">' + TH_STAGES.map(function (g, i) {
+        return '<li class="' + (i < si ? 'is-done' : i === si ? 'is-now' : '') + '"><button type="button" data-act="th-stage" data-stage="' + g.id + '" title="' + esc(g.hint) + '"' + (ro ? ' disabled' : '') + (i === si ? ' aria-current="step"' : '') + '>' +
+          '<span class="th-dot">' + (i < si ? CK : i + 1) + '</span><span class="th-sname">' + esc(g.name) + '</span></button></li>';
+      }).join('') + '</ol>' +
+      '<p class="th-now"><b>Now:</b> ' + esc(TH_STAGES[si].hint) + '.</p>';
+  }
+  function thSnippet(pg, q) {
+    for (var i = 0; i < pg.blocks.length; i++) {
+      var t = thPlain(pg.blocks[i].text), k = t.toLowerCase().indexOf(q);
+      if (k >= 0) { var a = Math.max(0, k - 30); return (a ? '…' : '') + esc(t.slice(a, k)) + '<mark>' + esc(t.slice(k, k + q.length)) + '</mark>' + esc(t.slice(k + q.length, k + q.length + 50)) + '…'; }
+    }
+    return '';
+  }
+  function renderThList() {
+    var th = state.thesis, q = (ui.thQuery || '').trim().toLowerCase(), cur = thCurrent();
+    function pin(id, ico, name, n) {
+      return '<button type="button" class="th-item th-pin' + (cur === id ? ' is-on' : '') + '" data-act="th-open" data-id="' + id + '">' + ico + '<span class="th-iname">' + name + '</span>' + (n !== '' ? '<span class="th-n">' + n + '</span>' : '') + '</button>';
+    }
+    var filled = TH_CANVAS.filter(function (f) { return th.canvas[f.id].trim(); }).length;
+    var h = '<div class="th-pins">' + pin('th:important', STAR, 'Important', th.marks.length || '') +
+      pin('th:topics', TARGET_ICO, 'Topic candidates', th.topics.filter(function (t) { return t.status !== 'dropped'; }).length || '') +
+      pin('th:canvas', CANVAS_ICO, 'Thesis canvas', filled + '/' + TH_CANVAS.length) + '</div>';
+    var pages = th.pages.slice().sort(function (a, b) { return b.updated - a.updated; }), shown = 0;
+    TH_STAGES.forEach(function (g) {
+      var list = pages.filter(function (pg) { return pg.stage === g.id; }).map(function (pg) {
+        var sn = q ? (pg.title.toLowerCase().indexOf(q) >= 0 ? ' ' : thSnippet(pg, q)) : ' ';
+        return sn ? { pg: pg, sn: sn.trim() } : null;
+      }).filter(Boolean);
+      if (!list.length) return;
+      shown += list.length;
+      h += '<div class="th-sec"><p class="th-sec-h">' + esc(g.name) + '</p>' + list.map(function (x) {
+        return '<button type="button" class="th-item' + (cur === x.pg.id ? ' is-on' : '') + '" data-act="th-open" data-id="' + esc(x.pg.id) + '"><span class="th-iname">' + esc(x.pg.title) + '</span>' +
+          '<span class="th-isub">' + (x.sn ? x.sn : thSourceName(x.pg) + ' · ' + fmtShort(isoOf(x.pg.updated))) + '</span></button>';
+      }).join('') + '</div>';
+    });
+    if (!shown) h += '<p class="th-none">' + (q ? 'Nothing matches “' + esc(ui.thQuery.trim()) + '”.' : 'No pages yet. Paste a chat from Claude or ChatGPT, or write a note.') + '</p>';
+    var size = 0; try { size = JSON.stringify(state).length; } catch (e) {}
+    if (size > 3500000) h += '<p class="th-warn">Your notebook is getting big (' + (size / 1048576).toFixed(1) + ' MB). It still syncs, but phones keep less offline. Old chats you no longer need can go.</p>';
+    $('#th-list').innerHTML = h;
+  }
+  function thPageKey(id) {
+    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + (ui.thTopic || '') + '|' + JSON.stringify(state.compassTests || []).length;
+    var pg = getThPage(id); if (!pg) return id + '|gone';
+    return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',');
+  }
+  function renderThPage() {
+    var el = $('#th-page'), wrap = $('#th-wrap'), id = thCurrent();
+    wrap.classList.toggle('is-reading', !!ui.thReading); $('#view-thesis').classList.toggle('is-reading', !!ui.thReading);
+    var ae = document.activeElement;
+    if (ae && el.contains(ae) && (ae.tagName === 'TEXTAREA' || (ae.tagName === 'INPUT' && /^(text|search)$/.test(ae.type))) && el.dataset.id === id) return;   // you're typing here
+    var key = thPageKey(id);
+    if (el.dataset.key === key) return;
+    var same = el.dataset.id === id, y = el.scrollTop;
+    el.dataset.key = key; el.dataset.id = id;
+    var back = '<button type="button" class="link-btn th-back" data-act="th-back">← Notebook</button>';
+    el.innerHTML = back + (id === 'th:important' ? thImportantHTML() : id === 'th:topics' ? thTopicsHTML() : id === 'th:canvas' ? thCanvasHTML() : thChatHTML(getThPage(id)));
+    if (same) el.scrollTop = y;
+    if (id.indexOf('th:') !== 0) { thPaintMarks(el, id); thTypeset(el); }
+    $$('#th-page textarea[data-grow]').forEach(thGrow);
+  }
+  function thGrow(ta) { ta.style.height = 'auto'; ta.style.height = Math.min(600, ta.scrollHeight + 2) + 'px'; }
+  function thHeader(kicker, title, sub, acts) {
+    return '<header class="th-ph"><div class="th-ph-main"><p class="th-kicker">' + kicker + '</p><h2 class="th-ptitle">' + title + '</h2>' + (sub ? '<p class="th-sub">' + sub + '</p>' : '') + '</div>' + (acts || '') + '</header>';
+  }
+  function thChatHTML(pg) {
+    if (!pg) return '<p class="th-none">That page is gone.</p>';
+    var ro = mode === 'readonly', you = pg.blocks.filter(function (b) { return b.role === 'you'; }), yi = 0;
+    var h = thHeader(esc(thSourceName(pg)) + ' · ' + fmtLong(isoOf(pg.created)) + ' · ' + esc(thStageName(pg.stage)), esc(pg.title), '',
+      ro ? '' : '<div class="th-pacts"><button type="button" class="btn btn-sm" data-act="th-more">+ Add more</button><button type="button" class="btn btn-sm" data-act="th-edit-page">Edit</button><button type="button" class="btn btn-sm btn-quiet" data-act="th-del-page">Delete</button></div>');
+    if (you.length > 1) h += '<nav class="th-toc" aria-label="Your questions"><p class="th-kicker">In this chat</p><ol>' + you.map(function (b, i) {
+      return '<li><button type="button" class="th-toc-q" data-act="th-jump" data-i="' + i + '">' + esc(truncate(thPlain(b.text), 110)) + '</button></li>';
+    }).join('') + '</ol></nav>';
+    h += '<div class="th-blocks">' + pg.blocks.map(function (b) {
+      var who = b.role === 'you' ? 'You' : b.role === 'ai' ? thAiName(pg) : '', long = b.role === 'you' && b.text.length > 700;
+      return '<section class="th-b is-' + b.role + (long ? ' is-long' : '') + '"' + (b.role === 'you' ? ' id="th-you-' + (yi++) + '"' : '') + '>' +
+        (who ? '<p class="th-who">' + who + '</p>' : '') + '<div class="md">' + mdToHtml(b.text) + '</div>' +
+        (long ? '<button type="button" class="link-btn th-showall" data-act="th-showall">Show all</button>' : '') + '</section>';
+    }).join('') + '</div>';
+    if (!ro) h += '<p class="th-tip">' + STAR + 'Select any text and tap <b>Important</b> to keep it on your Important page.</p>';
+    return h;
+  }
+  function thImportantHTML() {
+    var th = state.thesis, ro = mode === 'readonly';
+    var h = thHeader(STAR + 'Pinned', 'Important', 'The lines worth remembering, pulled from your chats and notes.');
+    if (!ro) h += '<form class="th-quick" data-form="th-mark-add"><label for="th-mark-new" class="sr-only">Something important</label><textarea id="th-mark-new" rows="2" data-grow placeholder="Write something important…"></textarea><button type="submit" class="btn btn-sm">Add</button></form>';
+    if (!th.marks.length) return h + '<p class="th-none">Nothing here yet. Open any page, select a line, and tap <b>Important</b>.</p>';
+    return h + '<ul class="th-marks">' + th.marks.slice().sort(function (a, b) { return b.created - a.created; }).map(function (m) {
+      var pg = m.page && getThPage(m.page);
+      return '<li class="th-mark"><blockquote>' + esc(m.text).replace(/\n/g, '<br>') + '</blockquote><div class="th-mark-foot">' +
+        (pg ? '<button type="button" class="link-btn" data-act="th-goto-mark" data-id="' + esc(m.id) + '">' + esc(truncate(pg.title, 60)) + ' →</button>' : '<span>Your note</span>') +
+        '<span class="th-mark-d">' + fmtShort(isoOf(m.created)) + '</span>' +
+        (ro ? '' : '<button type="button" class="link-btn th-unmark" data-act="th-unmark" data-id="' + esc(m.id) + '">Remove</button>') + '</div></li>';
+    }).join('') + '</ul>';
+  }
+  function thTopicsHTML() {
+    var th = state.thesis, ro = mode === 'readonly', tests = state.compassTests || [], N = tests.length;
+    var h = thHeader(TARGET_ICO + 'Topic selection', 'Topic candidates', 'Line up the ideas, run each one through your idea checks, then choose one.');
+    if (!ro) h += '<form class="th-quick" data-form="th-topic-add"><label for="th-topic-new" class="sr-only">A candidate topic</label><input id="th-topic-new" type="text" maxlength="300" placeholder="A candidate topic, in one sentence"><button type="submit" class="btn btn-sm">Add</button></form>';
+    if (!N) h += '<p class="th-note">Add your idea checks on the <a href="#compass">Compass</a> tab to score each candidate.</p>';
+    var order = { chosen: 0, exploring: 1, dropped: 2 };
+    var T = th.topics.slice().sort(function (a, b) { return order[a.status] - order[b.status] || a.created - b.created; });
+    if (!T.length) return h + '<p class="th-none">No candidates yet. Add every idea you’re weighing, even the half-formed ones.</p>';
+    return h + '<div class="th-topics">' + T.map(function (tp) {
+      var n = tests.filter(function (t) { return tp.checks.indexOf(t) >= 0; }).length, open = ui.thTopic === tp.id;
+      var cls = N && n === N ? 'is-go' : N && n > 0 && n >= N - 2 ? 'is-close' : 'is-no';
+      var tag = tp.status === 'chosen' ? '<span class="th-tag is-chosen">' + STAR + 'Chosen</span>' : tp.status === 'dropped' ? '<span class="th-tag">Dropped</span>' : '';
+      var body = '';
+      if (open) {
+        body = '<div class="th-topic-body">' + (N ? '<ul class="cp-checks">' + tests.map(function (t, i) {
+          return '<li><label class="check"><input type="checkbox" data-act="th-topic-check" data-id="' + esc(tp.id) + '" data-i="' + i + '"' + (tp.checks.indexOf(t) >= 0 ? ' checked' : '') + (ro ? ' disabled' : '') + '> <span>' + esc(t) + '</span></label></li>';
+        }).join('') + '</ul>' : '') +
+          '<label for="th-tn-' + esc(tp.id) + '" class="th-lbl">Notes</label><textarea id="th-tn-' + esc(tp.id) + '" data-topic-notes="' + esc(tp.id) + '" data-grow rows="2" placeholder="Why it’s interesting, what worries you, who to ask"' + (ro ? ' readonly' : '') + '>' + esc(tp.notes) + '</textarea>' +
+          (ro ? '' : '<div class="th-topic-acts">' + (tp.status !== 'chosen' ? '<button type="button" class="btn btn-sm primary" data-act="th-topic-status" data-id="' + esc(tp.id) + '" data-status="chosen">' + STAR + 'Choose this one</button>' : '<button type="button" class="btn btn-sm" data-act="th-topic-status" data-id="' + esc(tp.id) + '" data-status="exploring">Unchoose</button>') +
+            (tp.status !== 'dropped' ? '<button type="button" class="btn btn-sm btn-quiet" data-act="th-topic-status" data-id="' + esc(tp.id) + '" data-status="dropped">Drop</button>' : '<button type="button" class="btn btn-sm" data-act="th-topic-status" data-id="' + esc(tp.id) + '" data-status="exploring">Bring back</button>') +
+            '<button type="button" class="btn btn-sm btn-quiet" data-act="th-topic-del" data-id="' + esc(tp.id) + '" style="margin-left:auto">Delete</button></div>') + '</div>';
+      }
+      return '<article class="th-topic is-' + tp.status + (open ? ' is-open' : '') + '"><button type="button" class="th-topic-h" data-act="th-topic-toggle" data-id="' + esc(tp.id) + '" aria-expanded="' + open + '">' +
+        '<span class="th-topic-t">' + esc(tp.title) + '</span>' + tag +
+        (N ? '<span class="th-score cp-verdict ' + cls + '"><i class="cp-meter"><i style="width:' + Math.round(n / N * 100) + '%"></i></i>' + n + '/' + N + '</span>' : '') + '</button>' + body + '</article>';
+    }).join('') + '</div>';
+  }
+  function thCanvasHTML() {
+    var th = state.thesis, ro = mode === 'readonly';
+    return thHeader(CANVAS_ICO + 'The whole thesis on one page', 'Thesis canvas', 'Fill it in a line at a time. It gets sharper as you read and test.') +
+      '<div class="th-canvas">' + TH_CANVAS.map(function (f, i) {
+        return '<div class="th-cv"><label for="th-cv-' + f.id + '"><span class="th-cvn">' + (i + 1) + '</span>' + esc(f.name) + '</label><textarea id="th-cv-' + f.id + '" data-cv="' + f.id + '" data-grow rows="2" placeholder="' + esc(f.hint) + '"' + (ro ? ' readonly' : '') + '>' + esc(th.canvas[f.id]) + '</textarea></div>';
+      }).join('') + '</div>' + (ro ? '' : '<p class="th-tip">Saves as you type.</p>');
+  }
+  function thPaintMarks(el, pid) {
+    var root = el.querySelector('.th-blocks'); if (!root) return;
+    state.thesis.marks.forEach(function (m) {
+      if (m.page !== pid) return;
+      var tries = [m.text.trim()], first = m.text.trim().split('\n')[0].trim();
+      if (first !== tries[0] && first.length >= 12) tries.push(first);
+      tries.some(function (needle) {
+        if (needle.length < 2) return false;
+        var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
+        while ((n = w.nextNode())) {
+          if (n.parentNode.closest('.md-math, mark, pre')) continue;
+          var k = n.nodeValue.indexOf(needle);
+          if (k >= 0) {
+            var r = document.createRange(); r.setStart(n, k); r.setEnd(n, k + needle.length);
+            var mk = document.createElement('mark'); mk.className = 'th-hl'; mk.setAttribute('data-mid', m.id);
+            try { r.surroundContents(mk); return true; } catch (e) { return false; }
+          }
+        }
+        return false;
+      });
+    });
+  }
+
+  // The little "★ Important" button that shows up when you select text in a page
+  var thSel = null;
+  function thSelInit() {
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.id = 'th-markbtn'; btn.className = 'th-markbtn'; btn.innerHTML = STAR + 'Important'; btn.hidden = true;
+    document.body.appendChild(btn);
+    document.addEventListener('selectionchange', function () {
+      var s = window.getSelection(), root = $('#th-page .th-blocks');
+      if (mode === 'readonly' || currentView() !== 'thesis' || !root || !s || s.isCollapsed || !s.rangeCount) { btn.hidden = true; thSel = null; return; }
+      var r = s.getRangeAt(0), t = s.toString().replace(/\s+\n/g, '\n').trim();
+      if (!root.contains(r.commonAncestorContainer) || !t) { btn.hidden = true; thSel = null; return; }
+      thSel = { text: t, page: thCurrent() };
+      var rects = r.getClientRects(), last = rects[rects.length - 1] || r.getBoundingClientRect();
+      btn.hidden = false;
+      var top = last.bottom + 8, left = Math.min(window.innerWidth - btn.offsetWidth - 8, Math.max(8, last.right - btn.offsetWidth / 2));
+      if (top + 44 > window.innerHeight) top = Math.max(8, last.top - 44);
+      btn.style.top = (top + (window.scrollY || 0)) + 'px'; btn.style.left = left + 'px';
+    });
+    btn.addEventListener('mousedown', function (e) { e.preventDefault(); });
+    btn.addEventListener('click', function () {
+      var x = thSel; if (!x || mode === 'readonly') return;
+      commit(function (s) { s.thesis.marks.push({ id: uid(), page: x.page, text: x.text.slice(0, 3000), created: Date.now() }); });
+      try { window.getSelection().removeAllRanges(); } catch (e) {}
+      btn.hidden = true; thSel = null;
+      thToast('Kept on your Important page');
+    });
+  }
+  function thToast(msg) {
+    var t = $('#th-toast');
+    if (!t) { t = document.createElement('div'); t.id = 'th-toast'; t.className = 'th-toast'; t.setAttribute('role', 'status'); document.body.appendChild(t); }
+    t.innerHTML = STAR + esc(msg); t.classList.remove('is-on'); void t.offsetWidth; t.classList.add('is-on');
+    clearTimeout(t._h); t._h = setTimeout(function () { t.classList.remove('is-on'); }, 2200);
+  }
+
+  /* ---- windows ---- */
+  function openThesisEdit() {
+    if (mode === 'readonly') return;
+    var th = state.thesis;
+    openModal({
+      draw: function () {
+        $('#modal-body').innerHTML = '<h2 id="modal-title">Your thesis</h2><form id="the-form" novalidate>' +
+          '<div class="field"><label for="the-title">Working title</label><input id="the-title" type="text" maxlength="200" value="' + esc(th.title) + '" placeholder="It can change; write the best one you have"></div>' +
+          '<div class="field"><label for="the-q">Research question</label><textarea id="the-q" rows="2" maxlength="600" placeholder="One sentence">' + esc(th.question) + '</textarea></div>' +
+          '<div class="field-row"><div class="field"><label for="the-adv">Advisor</label><input id="the-adv" type="text" maxlength="120" value="' + esc(th.advisor) + '"></div>' +
+          '<div class="field"><label for="the-due">Due <span class="muted">(optional)</span></label><input id="the-due" type="date" value="' + (th.due || '') + '"></div></div>' +
+          '<div class="modal-actions"><button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
+      },
+      onSubmit: function () {
+        var d = $('#the-due').value;
+        commit(function (s) {
+          s.thesis.title = $('#the-title').value.trim().slice(0, 200); s.thesis.question = $('#the-q').value.trim().slice(0, 600);
+          s.thesis.advisor = $('#the-adv').value.trim().slice(0, 120); s.thesis.due = isISO(d) ? d : null;
+        });
+        closeModal();
+      }
+    });
+  }
+  // One window for every way text comes in: a new chat, a new note, more for a page, or editing a page.
+  function openThEditor(how, pageId) {
+    if (mode === 'readonly') return;
+    var pg = pageId ? getThPage(pageId) : null; if ((how === 'more' || how === 'edit') && !pg) return;
+    var srcPref = 'claude'; try { srcPref = localStorage.getItem('polaris:th-src') || 'claude'; } catch (e) {}
+    var d = { source: how === 'note' ? '' : pg ? (pg.kind === 'note' ? '' : pg.source || '') : srcPref };
+    var isNote = function () { return d.source === ''; };
+    var ctx = {
+      wide: true,
+      draw: function () {
+        var title = how === 'edit' ? 'Edit page' : how === 'more' ? 'Add to “' + esc(truncate(pg.title, 40)) + '”' : how === 'note' ? 'New note' : 'Paste a chat';
+        var stageSel = '<select id="thp-stage">' + TH_STAGES.map(function (g) { return '<option value="' + g.id + '"' + ((pg ? pg.stage : state.thesis.stage) === g.id ? ' selected' : '') + '>' + esc(g.name) + '</option>'; }).join('') + '</select>';
+        var seg = [['claude', 'Claude'], ['chatgpt', 'ChatGPT'], ['', 'My note']].map(function (o) {
+          return '<button type="button" class="chip" data-act="thp-src" data-src="' + o[0] + '" aria-pressed="' + (d.source === o[0]) + '">' + o[1] + '</button>';
+        }).join('');
+        $('#modal-body').innerHTML = '<h2 id="modal-title">' + title + '</h2><form id="thp-form" novalidate>' +
+          (how === 'more' ? '' : '<div class="field-row"><div class="field"><label for="thp-title">Title <span class="muted">(optional)</span></label><input id="thp-title" type="text" maxlength="160" value="' + esc(pg ? pg.title : '') + '" placeholder="Made from the first line if empty"></div>' +
+            '<div class="field"><label for="thp-stage">Section</label>' + stageSel + '</div></div>') +
+          '<div class="field"><span class="th-lbl">From</span><div class="chips">' + seg + '</div></div>' +
+          '<div class="field"><label for="thp-text">' + (how === 'edit' ? 'Text' : isNote() ? 'Your note' : 'Paste here') + '</label><textarea id="thp-text" rows="12" class="thp-text"' + (how === 'edit' ? '' : ' autofocus') + ' placeholder="' +
+            (isNote() ? 'Write freely. **bold**, - lists, # headings and $math$ all work.' : 'Copy the whole chat (select all, then copy) or one answer with its copy button, then paste here.') + '"></textarea></div>' +
+          '<p class="thp-found" id="thp-found"></p><p class="form-error" id="thp-error" hidden></p>' +
+          '<div class="modal-actions"><button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">' + (how === 'edit' ? 'Save' : how === 'more' ? 'Add to page' : 'Save page') + '</button></div></form>';
+        var ta = $('#thp-text');
+        if (how === 'edit' && !ta.value) ta.value = thSerialize(pg);
+        ta.addEventListener('paste', thOnPaste);
+        ctx.found();
+      },
+      found: function () {
+        var el = $('#thp-found'), v = $('#thp-text').value; if (!el) return;
+        if (!v.trim() || isNote()) { el.textContent = isNote() ? '' : 'Tip: speaker lines like “You said:” and “ChatGPT said:” split a chat into turns. Polaris finds them on its own.'; return; }
+        var r = parseChat(v, d.source), y = r.blocks.filter(function (b) { return b.role === 'you'; }).length, a = r.blocks.filter(function (b) { return b.role === 'ai'; }).length;
+        el.innerHTML = r.split ? CK + 'Found ' + plural(y, 'message') + ' from you and ' + plural(a, 'answer') + '.' : 'One block, shown as one ' + (d.source === 'chatgpt' ? 'ChatGPT' : 'Claude') + ' answer. To split turns, put “You said:” and “' + (d.source === 'chatgpt' ? 'ChatGPT' : 'Claude') + ' said:” on their own lines.';
+        if (r.source && r.source !== d.source && how !== 'note') { d.source = r.source; $$('#modal-body [data-act="thp-src"]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.src === d.source)); }); }
+      },
+      onInput: function (e) { if (e.target.id === 'thp-text') ctx.found(); },
+      onClick: function (e) {
+        var b = e.target.closest('[data-act="thp-src"]'); if (!b) return;
+        d.source = b.dataset.src;
+        $$('#modal-body [data-act="thp-src"]').forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.src === d.source)); });
+        var ta = $('#thp-text'); if (ta) ta.placeholder = isNote() ? 'Write freely. **bold**, - lists, # headings and $math$ all work.' : 'Copy the whole chat (select all, then copy) or one answer with its copy button, then paste here.';
+        ctx.found();
+      },
+      onSubmit: function () {
+        var raw = $('#thp-text').value, err = $('#thp-error');
+        if (!raw.trim()) { err.textContent = how === 'note' || isNote() ? 'Write something first.' : 'Paste something first.'; err.hidden = false; return; }
+        var r = isNote() ? { blocks: [{ role: 'note', text: raw.replace(/\s+$/, '').slice(0, TH_MAX_BLOCK) }], source: '' } : parseChat(raw, d.source);
+        if (d.source) { try { localStorage.setItem('polaris:th-src', d.source); } catch (er) {} }
+        var tIn = $('#thp-title'), title = tIn ? tIn.value.trim().slice(0, 160) : '', stage = $('#thp-stage') ? $('#thp-stage').value : null, now = Date.now(), newId = null;
+        commit(function (s) {
+          var P = null; s.thesis.pages.forEach(function (x) { if (pg && x.id === pg.id) P = x; });
+          if (how === 'more' && P) { P.blocks = P.blocks.concat(r.blocks); P.updated = now; if (P.kind === 'note' && !isNote()) P.kind = 'chat'; if (!P.source && d.source) P.source = d.source; }
+          else if (how === 'edit' && P) { P.blocks = r.blocks; P.title = title || thAutoTitle(r.blocks); P.stage = stage || P.stage; P.kind = isNote() ? 'note' : 'chat'; P.source = d.source; P.updated = now; }
+          else {
+            newId = uid();
+            s.thesis.pages.push({ id: newId, title: title || thAutoTitle(r.blocks), kind: isNote() ? 'note' : 'chat', source: d.source, stage: stage || s.thesis.stage, created: now, updated: now, blocks: r.blocks });
+          }
+        });
+        closeModal();
+        if (newId) thOpen(newId, true);
+      }
+    };
+    openModal(ctx);
+  }
+  function thOnPaste(e) {
+    var cd = e.clipboardData; if (!cd) return;
+    var html = cd.getData('text/html'), text = cd.getData('text/plain') || '';
+    if (!html) return;
+    var looksMd = /(^|\n)\s{0,3}(#{1,6}\s|[-*+]\s|\d+[.)]\s|```|>\s)|\*\*[^*\n]+\*\*|\$\$|\\\(|\\\[/.test(text);
+    var rich = /katex|data-message-author-role|user-message|font-claude/.test(html);
+    if (looksMd && !rich) return;
+    var md = ''; try { md = htmlToMd(html); } catch (er) { md = ''; }
+    if (!md.trim()) return;
+    e.preventDefault();
+    var ta = e.target, a = ta.selectionStart, b = ta.selectionEnd;
+    ta.value = ta.value.slice(0, a) + md + ta.value.slice(b);
+    ta.selectionStart = ta.selectionEnd = a + md.length;
+    ta.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
+  // typing in the canvas or a topic's notes saves quietly, without redrawing under your cursor
+  var thTypeTimer = 0;
+  function thQuiet(fn) {
+    if (mode === 'readonly') return;
+    fn(state);
+    clearTimeout(thTypeTimer);
+    thTypeTimer = setTimeout(function () { state.rev = (state.rev || 0) + 1; scheduleSave(); renderThList(); }, 500);
+  }
+  function initThesis() {
+    var box = $('#view-thesis'); if (!box) return;
+    thSelInit();
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-act]'); if (!b) return;
+      var a = b.dataset.act, T = todayISO(), id = b.dataset.id;
+      if (a === 'th-open') { thOpen(id, true); if (isPhone()) window.scrollTo(0, 0); else { var w = $('#th-wrap'); if (w && w.getBoundingClientRect().top < 0) w.scrollIntoView({ block: 'start' }); } }
+      else if (a === 'th-back') { ui.thReading = false; renderThesis(T); }
+      else if (a === 'th-paste') openThEditor('new');
+      else if (a === 'th-note') openThEditor('note');
+      else if (a === 'th-edit') openThesisEdit();
+      else if (a === 'th-stage') { var sid = b.dataset.stage; if (sid !== state.thesis.stage) commit(function (s) { s.thesis.stage = sid; }); }
+      else if (a === 'th-more') openThEditor('more', thCurrent());
+      else if (a === 'th-edit-page') openThEditor('edit', thCurrent());
+      else if (a === 'th-del-page') {
+        var pid = thCurrent(), pg = getThPage(pid); if (!pg) return;
+        confirmDialog({ title: 'Delete “' + truncate(pg.title, 50) + '”?', body: 'The page goes away. Anything you marked Important from it stays on your Important page.', yes: 'Delete page', danger: true,
+          onYes: function () { commit(function (s) { s.thesis.pages = s.thesis.pages.filter(function (x) { return x.id !== pid; }); s.thesis.marks.forEach(function (m) { if (m.page === pid) m.page = null; }); }); ui.thPage = null; ui.thReading = false; try { localStorage.removeItem(TH_PAGE_KEY); } catch (er) {} renderThesis(T); } });
+      }
+      else if (a === 'th-jump') { var q = $('#th-you-' + b.dataset.i); if (q) q.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      else if (a === 'th-showall') { var sec = b.closest('.th-b'); if (sec) sec.classList.remove('is-long'); b.remove(); }
+      else if (a === 'th-unmark') commit(function (s) { s.thesis.marks = s.thesis.marks.filter(function (m) { return m.id !== id; }); });
+      else if (a === 'th-goto-mark') {
+        var mk = state.thesis.marks.filter(function (m) { return m.id === id; })[0]; if (!mk || !mk.page) return;
+        thOpen(mk.page, true);
+        var hit = $('#th-page mark[data-mid="' + id + '"]');
+        if (hit) { hit.scrollIntoView({ behavior: 'smooth', block: 'center' }); hit.classList.add('is-flash'); setTimeout(function () { hit.classList.remove('is-flash'); }, 1600); }
+      }
+      else if (a === 'th-topic-toggle') { ui.thTopic = ui.thTopic === id ? null : id; renderThPage(); }
+      else if (a === 'th-topic-check') {
+        var tests = state.compassTests || [], t = tests[+b.dataset.i]; if (t === undefined) return;
+        commit(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id !== id) return; tp.checks = tp.checks.filter(function (c) { return c !== t; }); if (b.checked) tp.checks.push(t); }); });
+      }
+      else if (a === 'th-topic-status') {
+        var stt = b.dataset.status;
+        commit(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === id) tp.status = stt; else if (stt === 'chosen' && tp.status === 'chosen') tp.status = 'exploring'; }); });
+      }
+      else if (a === 'th-topic-del') {
+        var tp0 = state.thesis.topics.filter(function (x) { return x.id === id; })[0]; if (!tp0) return;
+        confirmDialog({ title: 'Delete this candidate?', body: esc(truncate(tp0.title, 120)), yes: 'Delete', danger: true,
+          onYes: function () { commit(function (s) { s.thesis.topics = s.thesis.topics.filter(function (x) { return x.id !== id; }); }); } });
+      }
+    });
+    box.addEventListener('submit', function (e) {
+      var f = e.target.closest('[data-form]'); if (!f) return;
+      e.preventDefault();
+      if (f.dataset.form === 'th-mark-add') {
+        var ta = $('#th-mark-new'), v = ta.value.trim(); if (!v) return;
+        ta.value = ''; ta.blur();
+        commit(function (s) { s.thesis.marks.push({ id: uid(), page: null, text: v.slice(0, 3000), created: Date.now() }); });
+      } else if (f.dataset.form === 'th-topic-add') {
+        var inp = $('#th-topic-new'), tv = inp.value.trim(); if (!tv) return;
+        inp.value = ''; inp.blur();
+        var nid = uid(); ui.thTopic = nid;
+        commit(function (s) { s.thesis.topics.push({ id: nid, title: tv.slice(0, 300), status: 'exploring', checks: [], notes: '', created: Date.now() }); });
+      }
+    });
+    box.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && e.target.id === 'th-mark-new') { e.preventDefault(); var f = e.target.closest('form'); if (f.requestSubmit) f.requestSubmit(); }
+    });
+    box.addEventListener('input', function (e) {
+      var t = e.target;
+      if (t.id === 'th-q') { ui.thQuery = t.value; renderThList(); return; }
+      if (t.hasAttribute('data-grow')) thGrow(t);
+      if (t.dataset.cv) { var k = t.dataset.cv, v = t.value.slice(0, 4000); thQuiet(function (s) { s.thesis.canvas[k] = v; }); }
+      else if (t.dataset.topicNotes) { var tid = t.dataset.topicNotes, nv = t.value.slice(0, 4000); thQuiet(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === tid) tp.notes = nv; }); }); }
     });
   }
 
@@ -2760,7 +3718,14 @@ td.c-break{display:none}
   }
   function applySort(list, ids) {
     if (list === 'projects' || list === 'next') {
-      commit(function (s) { var r = reorderSubset(s.projects, ids, function (p) { return p.id; }); if (r) s.projects = r; });
+      var pk = ids.indexOf('__park'), T0 = todayISO();
+      commit(function (s) {
+        if (pk >= 0) ids.forEach(function (id, i) {
+          if (id === '__park') return;
+          s.projects.forEach(function (p) { if (p.id !== id || p.ended) return; if (i > pk && !p.parked) p.parked = T0; else if (i < pk && p.parked) p.parked = null; });
+        });
+        var r = reorderSubset(s.projects, ids.filter(function (k) { return k !== '__park'; }), function (p) { return p.id; }); if (r) s.projects = r;
+      });
     } else if (list.indexOf('hub:') === 0) {
       var pid = list.slice(4);
       commit(function (s) {
@@ -3045,6 +4010,7 @@ td.c-break{display:none}
   function openModal(ctx) {
     hideTip();
     modalCtx = ctx; lastFocus = document.activeElement;
+    $('#modal-body').className = 'modal' + (ctx.wide ? ' is-wide' : '');
     $('#modal').hidden = false;
     ctx.draw();
     var f = $('#modal [autofocus]') || $('#modal input:not([type=hidden]), #modal textarea, #modal button');
@@ -3245,7 +4211,7 @@ td.c-break{display:none}
   function openReview() {
     if (mode === 'readonly') return;
     var T = todayISO(), mon = addDays(T, -((dow(T) + 6) % 7)), from = addDays(mon, -7), to = addDays(mon, -1);
-    var act = state.projects.filter(function (p) { return !p.ended; });
+    var act = inOrbit();
     var finished = [], stuck = [];
     act.concat(state.projects.filter(function (p) { return p.ended; })).forEach(function (p) {
       piecesOf(p).forEach(function (m) { if (m.done && m.doneOn && m.doneOn >= from && m.doneOn <= T) finished.push({ p: p, m: m }); });
@@ -3294,7 +4260,7 @@ td.c-break{display:none}
         } else if (b.dataset.act === 'rv-save') {
           commit(function (s) {
             s.projects.forEach(function (p) {
-              if (p.ended) return;
+              if (p.ended || p.parked) return;
               piecesOf(p).forEach(function (m) {
                 if (m.done) return;
                 if (picks[m.id] && m.status !== 'doing') setStatus2(s, p, m, 'doing', T);
@@ -3305,6 +4271,32 @@ td.c-break{display:none}
           });
           closeModal();
         }
+      }
+    };
+    openModal(ctx);
+  }
+  function openParking() {
+    if (mode === 'readonly') return;
+    var ctx = {
+      draw: function () {
+        var orbit = inOrbit(), parked = state.projects.filter(isParked), T = todayISO();
+        function row(p, i, on) {
+          return '<li class="pk-row' + (on && i >= FOCUS_MAX ? ' is-extra' : '') + '"><i class="rv-dot" style="background:var(--c' + p.color + ')"></i><span class="pk-name">' + esc(p.name) +
+            '<span class="pk-sub">' + (on ? (i < FOCUS_MAX ? 'in focus' : 'over ' + FOCUS_MAX) : 'parked ' + fmtShort(p.parked)) + (p.deadline ? ' · due ' + fmtShort(p.deadline) + ' (' + leftText(p, T) + ')' : '') + '</span></span>' +
+            (on ? '<button type="button" class="btn btn-sm" data-act="pk-park" data-pid="' + esc(p.id) + '">' + PARK_ICO + 'Park</button>'
+                : '<button type="button" class="btn btn-sm" data-act="pk-back" data-pid="' + esc(p.id) + '">' + UNPARK_ICO + 'Bring back</button>') + '</li>';
+        }
+        $('#modal-body').innerHTML = '<h2 id="modal-title">Parking lot</h2>' +
+          '<p class="modal-sub">Keep ' + FOCUS_MAX + ' in orbit. The top ' + FOCUS_MAX + ' on your Timeline are your focus; drag rows there to change the order.</p>' +
+          '<h3 class="pk-h">In orbit <span class="rv-n' + (orbit.length > FOCUS_MAX ? ' is-over' : '') + '">' + orbit.length + ' of ' + FOCUS_MAX + '</span></h3>' +
+          (orbit.length ? '<ul class="pk-list">' + orbit.map(function (p, i) { return row(p, i, true); }).join('') + '</ul>' : '<p class="muted">Nothing in orbit.</p>') +
+          '<h3 class="pk-h">Parked</h3>' +
+          (parked.length ? '<ul class="pk-list">' + parked.map(function (p, i) { return row(p, i, false); }).join('') + '</ul>' : '<p class="muted" style="font-size:13px">Nothing parked yet. Parked projects drop out of your To-do and nudges; their final deadline still counts.</p>') +
+          '<div class="modal-actions"><button type="button" class="btn primary" data-close>Done</button></div>';
+      },
+      onClick: function (e) {
+        var b = e.target.closest('[data-act]'); if (!b) return;
+        if (b.dataset.act === 'pk-park' || b.dataset.act === 'pk-back') { parkProject(b.dataset.pid, b.dataset.act === 'pk-park'); ctx.draw(); }
       }
     };
     openModal(ctx);
@@ -3687,6 +4679,8 @@ td.c-break{display:none}
     // header
     var sub = [area ? esc(area.name) : ''];
     if (p.ended) sub.push((p.endedBy === 'deadline' ? 'hit its deadline ' : 'ended ') + fmtYear(p.ended));
+    if (p.parked) sub.push('<span class="hub-parked">parked since ' + fmtShort(p.parked) + '</span>');
+    if (p.ended) {}
     else if (p.deadline) {
       var dl = diffDays(T, p.deadline), srcD = srcNote(p.deadlineAt, p.deadlineTz);
       sub.push('due ' + deadlineText(p, T, true) + (srcD ? ' <span class="hub-src">(' + esc(srcD) + ')</span>' : ''));
@@ -3695,7 +4689,8 @@ td.c-break{display:none}
     sub = sub.filter(Boolean).join(' · ');
     var acts = (ro ? '' : '<button type="button" class="btn btn-sm" data-act="hub-edit">Edit</button>' +
         (p.ended ? '<button type="button" class="btn btn-sm" data-act="reopen">Reopen</button><button type="button" class="btn btn-sm btn-quiet btn-del" data-act="delete-now">Delete now</button>'
-          : '<button type="button" class="btn btn-sm btn-quiet" data-act="end">End</button>')) +
+          : (p.parked ? '<button type="button" class="btn btn-sm" data-act="unpark">Bring back</button>' : '<button type="button" class="btn btn-sm btn-quiet" data-act="park" title="Pause it for later">Park</button>') +
+            '<button type="button" class="btn btn-sm btn-quiet" data-act="end">End</button>')) +
       '<button type="button" class="icon-x hub-close" data-act="hub-close" aria-label="Close project" title="Close (Esc)">×</button>';
 
     // progress, pace and where the points are
@@ -3864,7 +4859,7 @@ td.c-break{display:none}
         var d = $('#end-date').value, note = $('#end-note').value.trim(), err = $('#end-error');
         if (!isISO(d) || d > T || d < min) { err.textContent = 'Pick a date between ' + fmtShort(min) + ' and today.'; err.hidden = false; return; }
         commit(function (s) {
-          s.projects.forEach(function (x) { if (x.id === pid) { x.ended = d; x.endedBy = null; } });
+          s.projects.forEach(function (x) { if (x.id === pid) { x.ended = d; x.endedBy = null; x.parked = null; } });
           if (note) s.updates.push({ id: uid(), projectId: pid, date: d, text: note, created: Date.now() });
         });
         closeModal();
@@ -4029,6 +5024,7 @@ td.c-break{display:none}
     $('#mm-backup').addEventListener('click', function () { closeMenu(); openBackup(); });
     $('#mm-library').addEventListener('click', function () { closeMenu(); location.hash = '#library'; });
     $('#mm-review').addEventListener('click', function () { closeMenu(); openReview(); });
+    $('#mm-parking').addEventListener('click', function () { closeMenu(); openParking(); });
 
     // re-draw when the window crosses between phone and laptop layouts
     if (window.matchMedia) {
@@ -4071,6 +5067,7 @@ td.c-break{display:none}
       else if (a === 'more-reminders') { ui.allReminders = !ui.allReminders; render(); }
       else if (a === 'gc-signin') gcalSignIn('');
       else if (a === 'review') openReview();
+      else if (a === 'park-pick') openParking();
       else if (a === 'dismiss') {
         dismissed[b.dataset.key] = true;
         try { localStorage.setItem(LS_KEY + ':dismissed', JSON.stringify(dismissed)); } catch (er) {}
@@ -4168,6 +5165,8 @@ td.c-break{display:none}
         else if (act.dataset.act === 'reopen') openReopen(pid);
         else if (act.dataset.act === 'delete-now') deleteNow(pid);
         else if (act.dataset.act === 'deadline') openDeadline(pid);
+        else if (act.dataset.act === 'park') parkProject(pid, true);
+        else if (act.dataset.act === 'unpark') parkProject(pid, false);
         else if (act.dataset.act === 'project') openHub(pid);
         else if (act.dataset.act === 'files') openHub(pid, 'files');
         else if (act.dataset.act === 'milestone') openMilestone(pid, act.dataset.mid);
@@ -4280,6 +5279,8 @@ td.c-break{display:none}
       if (a === 'hub-close') closeHub();
       else if (a === 'hub-edit') openProject(pid);
       else if (a === 'scoring') openScoring(pid);
+      else if (a === 'park') parkProject(pid, true);
+      else if (a === 'unpark') parkProject(pid, false);
       else if (a === 'end') openEnd(pid);
       else if (a === 'reopen') openReopen(pid);
       else if (a === 'delete-now') deleteNow(pid);
@@ -4435,6 +5436,7 @@ td.c-break{display:none}
     gcalBoot();
     initDrag();
     initCompass();
+    initThesis();
     try { localStorage.removeItem('polaris:ai'); sessionStorage.removeItem('polaris:chat'); } catch (e) {}   // AI was removed: forget any saved key
     // offline copy for the installed app (needs sw.js next to index.html; harmless without it)
     if ('serviceWorker' in navigator && !inViewer && (location.protocol === 'https:' || location.hostname === 'localhost') && !/claude|anthropic/.test(location.hostname))
