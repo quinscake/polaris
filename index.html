@@ -551,16 +551,6 @@ body.hub-open{overflow:hidden}
 /* ---------- compass ---------- */
 body[data-view="compass"] #quick-add,body[data-view="compass"] #reminders{display:none !important}
 .view-compass{display:flex;flex-direction:column;gap:22px;padding-bottom:30px}
-.cp-top{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:14px}
-.cp-kicker{margin:0 0 10px;font:600 11px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
-.cp-kicker .star{width:12px;height:12px}
-.cp-spot,.cp-test{background:var(--panel);border:1px solid var(--rule);border-radius:16px;padding:20px 22px}
-.cp-spot{background:radial-gradient(120% 140% at 0% 0%,rgba(138,180,255,.13),transparent 55%),var(--panel);border-color:#2c3756;display:flex;flex-direction:column}
-.cp-spot.is-flip{animation:cpflip .45s ease}
-@keyframes cpflip{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:none}}
-.cp-spot-title{margin:auto 0 10px;font:600 clamp(22px,3.2vw,32px)/1.15 var(--font-display);letter-spacing:-.01em;color:var(--ink)}
-.cp-spot-text{margin:0;font-size:16px;line-height:1.55;color:#c9d0e2}
-.cp-spot-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:16px}
 .cp-from{font:500 12px var(--font-mono);color:#7d87a3}
 .cp-from::before{content:"— "}
 #cp-idea{width:100%;resize:vertical;font-size:15px;margin-bottom:8px}
@@ -573,26 +563,30 @@ body[data-view="compass"] #quick-add,body[data-view="compass"] #reminders{displa
 .cp-verdict.is-go{color:var(--ok)}.cp-verdict.is-go .cp-meter i{background:var(--ok)}
 .cp-verdict.is-close{color:var(--warn)}.cp-verdict.is-close .cp-meter i{background:var(--warn)}
 .cp-verdict .link-btn{margin-left:auto;font-size:12.5px}
+.cp-always{margin:0 0 26px}
+.cp-always-h{display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.cp-always-h h3{display:flex;align-items:center;gap:8px;margin:0;font:600 11.5px var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.cp-always-h h3 .star{width:13px;height:13px}
+.cp-big{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.cp-bigcard{display:flex;flex-direction:column;gap:8px;text-align:left;padding:20px 22px;border:1px solid #2c3756;border-radius:16px;background:radial-gradient(130% 160% at 0% 0%,rgba(138,180,255,.12),transparent 55%),var(--panel);color:var(--ink);font:inherit;cursor:pointer;transition:border-color .15s,transform .15s}
+.cp-bigcard:hover{border-color:#3e4c78;transform:translateY(-1px)}
+.cp-big-title{font:600 clamp(19px,2.2vw,24px)/1.2 var(--font-display);letter-spacing:-.01em}
+.cp-big-text{font-size:15px;line-height:1.55;color:#c9d0e2}
+.cp-bigcard .cp-from{margin-top:auto}
 .cp-path{position:relative;display:flex;flex-direction:column;gap:22px}
 .cp-path::before{content:"";position:absolute;left:15px;top:20px;bottom:20px;width:1px;background:linear-gradient(var(--rule),rgba(138,180,255,.35),var(--rule))}
 .cp-stage{position:relative;padding-left:46px}
 .cp-stage-h{display:flex;align-items:flex-start;gap:12px;margin:0 0 10px}
 .cp-node{position:absolute;left:0;top:-1px;width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:var(--space);border:1px solid #33406a;color:var(--accent);font:600 13px var(--font-mono)}
 .cp-node .star{width:14px;height:14px}
-.cp-stage.is-always .cp-node{border-color:rgba(138,180,255,.6);box-shadow:0 0 14px rgba(138,180,255,.35)}
-.cp-stage-h h3{margin:3px 0 1px;font:600 15px var(--font-display);color:var(--ink)}
-.cp-stage-h p{margin:0;font-size:12.5px;color:var(--muted)}
+.cp-stage-h h3{margin:6px 0 0;font:600 15px var(--font-display);color:var(--ink)}
 .cp-add{margin-left:auto;margin-top:4px;font-size:12.5px}
 .cp-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
 .cp-card{display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;color:var(--ink);font:inherit;cursor:pointer;transition:border-color .15s,transform .15s,background .15s}
 .cp-card:hover{border-color:#3a4870;background:var(--panel-2);transform:translateY(-1px)}
-.cp-card.is-today{border-color:rgba(138,180,255,.55);box-shadow:inset 0 0 0 1px rgba(138,180,255,.2)}
 .cp-card-title{font:600 15px/1.3 var(--font-body)}
 .cp-card-text{font-size:13.5px;line-height:1.5;color:#aeb6cb}
 .cp-empty{margin:0;font-size:13px;color:var(--muted)}
-.cp-empty-big{margin:0 0 14px;font-size:14px;line-height:1.5;color:#aeb6cb}
-.cp-kick-btn{margin-left:auto;font:500 12px var(--font-body);letter-spacing:0;text-transform:none}
-.cp-top.is-solo{grid-template-columns:1fr}
 /* ---------- hot tabs ---------- */
 .view-tab.is-hot{color:var(--warn)}
 .view-tab.is-hot:hover{color:#ffd2a3}
@@ -630,8 +624,6 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .th-stages li.is-done .th-dot{background:rgba(255,184,107,.16);border-color:rgba(255,184,107,.5);color:var(--warn)}
 .th-stages li.is-now .th-dot{background:var(--warn);border-color:var(--warn);color:#1a1408;box-shadow:0 0 14px rgba(255,184,107,.5)}
 .th-stages li.is-now .th-sname{color:var(--ink);font-weight:600}
-.th-now{margin:14px 0 0;font-size:13px;color:var(--muted)}
-.th-now b{color:var(--warn);font-weight:600}
 
 .th-wrap{display:grid;grid-template-columns:minmax(230px,290px) minmax(0,1fr);gap:16px;align-items:start}
 .th-index{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:10px}
@@ -879,19 +871,11 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
   .th-umb-grid{grid-template-columns:1fr 1fr}
 }
 
-.cp-foot{margin:0;font-size:12px;color:#5f6780;text-align:center}
-.cp-line{display:flex;align-items:baseline;gap:8px;padding:10px 14px;border:1px solid var(--rule);border-radius:12px;background:var(--panel);color:var(--muted);font-size:13.5px;text-decoration:none;line-height:1.45}
-.cp-line:hover{border-color:#3a4870;color:var(--ink)}
-.cp-line .star{width:12px;height:12px;flex:none;color:var(--accent);align-self:center}
-.cp-line b{color:var(--ink);font-weight:600;white-space:nowrap}
-.cp-line span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 @media (max-width: 760px){
-  .cp-top{grid-template-columns:1fr}
   .cp-cards{grid-template-columns:1fr}
-  .cp-spot,.cp-test{padding:16px 18px}
+  .cp-big{grid-template-columns:1fr}
+  .cp-bigcard{padding:16px 18px}
   .cp-stage{padding-left:40px}
-  .cp-line{flex-wrap:wrap}
-  .cp-line span{white-space:normal}
 }
 
 /* ---------- typed dates, doing limit, weekly review ---------- */
@@ -2386,8 +2370,8 @@ td.c-break{display:none}
     }
     var orbit = inOrbit();
     if (orbit.length > FOCUS_MAX && !dismissed['focus|' + T]) {
-      cards.push({ n: 45, html: '<div class="reminder">' + ORBIT + '<span class="msg"><b>' + orbit.length + ' projects in orbit.</b> Keep the ' + FOCUS_MAX + ' that matter most and park the rest. Parked projects wait quietly until you bring them back.</span><span class="reminder-acts">' +
-        '<button type="button" class="link-btn edit-only" data-act="park-pick">Choose what to park</button>' + dismissBtn('focus|' + T) + '</span></div>' });
+      cards.push({ n: 45, html: '<div class="reminder">' + ORBIT + '<span class="msg"><b>' + orbit.length + ' projects in orbit.</b> Park one to keep ' + FOCUS_MAX + '.</span><span class="reminder-acts">' +
+        '<button type="button" class="link-btn edit-only" data-act="park-pick">Park one</button>' + dismissBtn('focus|' + T) + '</span></div>' });
     }
     state.projects.forEach(function (p) {
       if (p.ended || p.parked) return;
@@ -2555,7 +2539,7 @@ td.c-break{display:none}
     html += vis.active.map(function (p) { return rowHTML(p, 'active'); }).join('');
     // the Parking lot: drag a project below this line to park it, above it to bring it back
     if (vis.parked.length || vis.active.length > FOCUS_MAX) {
-      html += '<div class="divider park-divider"' + sortAttr('__park') + '><span>' + PARK_ICO + 'Parking lot · ' + (vis.parked.length ? 'paused for later, drag one up to bring it back' : 'drag a project here, or tap its P') + '</span></div>';
+      html += '<div class="divider park-divider"' + sortAttr('__park') + '><span>' + PARK_ICO + 'Parking lot</span></div>';
       html += vis.parked.map(function (p) { return rowHTML(p, 'parked'); }).join('');
     }
     if (vis.ended.length) {
@@ -2750,58 +2734,30 @@ td.c-break{display:none}
   }
 
   // today's rule: the same all day, different tomorrow; "Another" steps through the rest
-  function compassPick(T) {
-    var R = state.compass || []; if (!R.length) return null;
-    var h = 0; for (var i = 0; i < T.length; i++) h = (h * 31 + T.charCodeAt(i)) >>> 0;
-    return R[(h + (ui.compassShift || 0)) % R.length];
-  }
   function compassFrom(r) { return r.from ? '<span class="cp-from">' + esc(r.from) + '</span>' : ''; }
   function compassText(t) { return esc(t).replace(/\n/g, '<br>'); }
-  function loadIdea() { try { var v = JSON.parse(localStorage.getItem('polaris:idea') || 'null'); if (v && typeof v.text === 'string' && Array.isArray(v.checks)) return v; } catch (e) {} return { text: '', checks: [] }; }
-  function ideaVerdict(n, all) {
-    return n === all ? { cls: 'is-go', txt: 'All ' + all + '. This is a gap worth chasing.' }
-      : n > 0 && n >= all - 2 ? { cls: 'is-close', txt: n + ' of ' + all + '. Close: sharpen the ones still open.' }
-      : { cls: 'is-no', txt: n + ' of ' + all + '. Not yet: scope it down or find a different angle.' };
-  }
   function renderCompass(T) {
     var box = $('#view-compass'); if (!box) return;
-    var R = state.compass || [], ro = mode === 'readonly', pick = compassPick(T), idea = loadIdea(), TESTS = state.compassTests || [];
-    var stg = {}; COMPASS_STAGES.forEach(function (g) { stg[g.id] = g; });
-    var nChecked = TESTS.filter(function (t, i) { return idea.checks[i]; }).length, verdict = ideaVerdict(nChecked, TESTS.length);
-    var testCard = !TESTS.length ? (ro ? '' : '<article class="cp-test" aria-label="Test an idea"><p class="cp-kicker">Test an idea</p>' +
-        '<p class="cp-empty-big">List the checks an idea has to pass before you commit to it. Then tick them off for any new idea.</p>' +
-        '<button type="button" class="btn btn-sm" data-act="cp-tests">Add checks</button></article>')
-      : '<article class="cp-test" aria-label="Test an idea"><p class="cp-kicker">Test an idea' + (ro ? '' : '<button type="button" class="link-btn edit-only cp-kick-btn" data-act="cp-tests">Edit checks</button>') + '</p>' +
-        '<label for="cp-idea" class="sr-only">Your idea in one sentence</label><textarea id="cp-idea" rows="2" maxlength="400" placeholder="Your idea in one sentence">' + esc(idea.text) + '</textarea>' +
-        '<ul class="cp-checks">' + TESTS.map(function (t, i) {
-          return '<li><label class="check"><input type="checkbox" data-act="cp-check" data-i="' + i + '"' + (idea.checks[i] ? ' checked' : '') + '> <span>' + esc(t) + '</span></label></li>';
-        }).join('') + '</ul>' +
-        '<div class="cp-verdict ' + verdict.cls + '"><i class="cp-meter"><i style="width:' + Math.round(nChecked / TESTS.length * 100) + '%"></i></i><span>' + verdict.txt + '</span>' +
-        (idea.text || nChecked ? '<button type="button" class="link-btn" data-act="cp-clear">Clear</button>' : '') + '</div></article>';
-    var h = '<div class="cp-top' + (testCard ? '' : ' is-solo') + '">' +
-      (!pick && !ro ? '<article class="cp-spot" aria-label="Today’s reminder"><p class="cp-kicker">' + STAR + 'Today’s reminder</p>' +
-        '<h2 class="cp-spot-title">Your Compass is empty</h2><p class="cp-spot-text">Add the rules you keep forgetting. One of them shows up here each day, and on your To-do page.</p>' +
-        '<div class="cp-spot-foot"><span></span><button type="button" class="btn btn-sm" data-act="cp-add" data-stage="always">+ Add a rule</button></div></article>' : '') +
-      (pick ? '<article class="cp-spot" aria-label="Today’s reminder"><p class="cp-kicker">' + STAR + 'Today’s reminder · ' + esc(stg[pick.stage].name) + '</p>' +
-        '<h2 class="cp-spot-title">' + esc(pick.title) + '</h2><p class="cp-spot-text">' + compassText(pick.text) + '</p>' +
-        '<div class="cp-spot-foot">' + compassFrom(pick) + (R.length > 1 ? '<button type="button" class="btn btn-sm" data-act="cp-next">Another</button>' : '') + '</div></article>' : '') +
-      testCard + '</div>';
-    h += '<div class="cp-path">';
+    var R = state.compass || [], ro = mode === 'readonly', add = function (g) { return ro ? '' : '<button type="button" class="link-btn edit-only cp-add" data-act="cp-add" data-stage="' + g + '">+ Add</button>'; };
+    var always = R.filter(function (r) { return r.stage === 'always'; });
+    var h = '<section class="cp-always" aria-labelledby="cps-always"><div class="cp-always-h"><h3 id="cps-always">' + STAR + 'Always</h3>' + add('always') + '</div>' +
+      (always.length ? '<div class="cp-big">' + always.map(function (r) {
+        return '<button type="button" class="cp-bigcard" data-act="cp-open" data-id="' + esc(r.id) + '"><span class="cp-big-title">' + esc(r.title) + '</span>' +
+          (r.text ? '<span class="cp-big-text">' + compassText(r.text) + '</span>' : '') + compassFrom(r) + '</button>';
+      }).join('') + '</div>' : '') + '</section><div class="cp-path">';
     var step = 0;
     COMPASS_STAGES.forEach(function (g) {
+      if (g.id === 'always') return;
       var rules = R.filter(function (r) { return r.stage === g.id; });
+      step++;
       if (!rules.length && ro) return;
-      var num = g.id === 'always' ? '' : String(++step);
-      h += '<section class="cp-stage' + (g.id === 'always' ? ' is-always' : '') + '" aria-labelledby="cps-' + g.id + '">' +
-        '<div class="cp-stage-h"><span class="cp-node">' + (num || STAR) + '</span><div><h3 id="cps-' + g.id + '">' + esc(g.name) + '</h3><p>' + esc(g.hint) + '</p></div>' +
-        (ro ? '' : '<button type="button" class="link-btn edit-only cp-add" data-act="cp-add" data-stage="' + g.id + '">+ Add</button>') + '</div>' +
-        '<div class="cp-cards">' + rules.map(function (r) {
-          return '<button type="button" class="cp-card' + (pick && r.id === pick.id ? ' is-today' : '') + '" data-act="cp-open" data-id="' + esc(r.id) + '">' +
-            '<span class="cp-card-title">' + esc(r.title) + '</span>' + (r.text ? '<span class="cp-card-text">' + compassText(r.text) + '</span>' : '') + compassFrom(r) + '</button>';
-        }).join('') + (rules.length ? '' : '<p class="cp-empty">Nothing here yet.</p>') + '</div></section>';
+      h += '<section class="cp-stage" aria-labelledby="cps-' + g.id + '"><div class="cp-stage-h"><span class="cp-node">' + step + '</span><h3 id="cps-' + g.id + '">' + esc(g.name) + '</h3>' + add(g.id) + '</div>' +
+        (rules.length ? '<div class="cp-cards">' + rules.map(function (r) {
+          return '<button type="button" class="cp-card" data-act="cp-open" data-id="' + esc(r.id) + '"><span class="cp-card-title">' + esc(r.title) + '</span>' +
+            (r.text ? '<span class="cp-card-text">' + compassText(r.text) + '</span>' : '') + compassFrom(r) + '</button>';
+        }).join('') + '</div>' : '') + '</section>';
     });
-    h += '</div>' + (R.length && !ro ? '<p class="cp-foot">Tap a card to edit it.</p>' : '');
-    box.innerHTML = h;
+    box.innerHTML = h + '</div>';
   }
   function openCompassRule(id, stage) {
     if (mode === 'readonly') return;
@@ -2842,15 +2798,10 @@ td.c-break{display:none}
         $('#modal-body').innerHTML = '<h2 id="modal-title">Idea checks</h2>' +
           '<form id="cpt-form" novalidate>' +
           '<div class="field"><label for="cpt-text">One check per line</label><textarea id="cpt-text" rows="8" placeholder="I can say it in one sentence&#10;Nobody has done it yet&#10;I can finish it in about 6 months">' + esc((state.compassTests || []).join('\n')) + '</textarea></div>' +
-          '<p class="muted" style="font-size:13px;margin:0">Write each one so that a tick means yes. Up to 15.</p>' +
           '<div class="modal-actions"><button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
       },
       onSubmit: function () {
         var lines = $('#cpt-text').value.split('\n').map(function (t) { return t.trim().slice(0, 160); }).filter(Boolean).slice(0, 15);
-        // ticks follow their check, so adding or reordering lines keeps them
-        var prev = state.compassTests || [], v = loadIdea();
-        v.checks = lines.map(function (t) { var i = prev.indexOf(t); return i >= 0 && !!v.checks[i]; });
-        try { localStorage.setItem('polaris:idea', JSON.stringify(v)); } catch (er) {}
         commit(function (st) { st.compassTests = lines; });
         closeModal();
       }
@@ -2858,24 +2809,11 @@ td.c-break{display:none}
   }
   function initCompass() {
     var box = $('#view-compass'); if (!box) return;
+    try { localStorage.removeItem('polaris:idea'); } catch (er) {}
     box.addEventListener('click', function (e) {
       var b = e.target.closest('[data-act]'); if (!b) return;
-      var a = b.dataset.act;
-      if (a === 'cp-next') { ui.compassShift = (ui.compassShift || 0) + 1; renderCompass(todayISO()); var sp = $('.cp-spot'); if (sp) { sp.classList.remove('is-flip'); void sp.offsetWidth; sp.classList.add('is-flip'); } }
-      else if (a === 'cp-open') openCompassRule(b.dataset.id);
-      else if (a === 'cp-add') openCompassRule(null, b.dataset.stage);
-      else if (a === 'cp-tests') openCompassTests();
-      else if (a === 'cp-check') {
-        var v = loadIdea(); v.checks[+b.dataset.i] = b.checked;
-        try { localStorage.setItem('polaris:idea', JSON.stringify(v)); } catch (er) {}
-        renderCompass(todayISO());
-      }
-      else if (a === 'cp-clear') { try { localStorage.removeItem('polaris:idea'); } catch (er) {} renderCompass(todayISO()); }
-    });
-    box.addEventListener('input', function (e) {
-      if (e.target.id !== 'cp-idea') return;
-      var v = loadIdea(); v.text = e.target.value.slice(0, 400);
-      try { localStorage.setItem('polaris:idea', JSON.stringify(v)); } catch (er) {}
+      if (b.dataset.act === 'cp-open') openCompassRule(b.dataset.id);
+      else if (b.dataset.act === 'cp-add') openCompassRule(null, b.dataset.stage);
     });
   }
 
@@ -3284,9 +3222,8 @@ td.c-break{display:none}
     if (th.due) { var dl = diffDays(T, th.due); meta.push('Due ' + fmtYear(th.due) + ' · <span class="' + (dl <= 14 ? 'is-soon' : '') + '">' + (dl < 0 ? plural(-dl, 'day') + ' ago' : dl === 0 ? 'today' : plural(dl, 'day') + ' left') + '</span>'); }
     var chosen = th.topics.filter(function (t) { return t.status === 'chosen'; })[0];
     $('#th-head').innerHTML = '<div class="th-head-top"><div class="th-head-main">' +
-      '<p class="th-kicker">' + STAR + 'Thesis · stage ' + (si + 1) + ' of ' + TH_STAGES.length + '</p>' +
       (th.title ? '<h2 class="th-title">' + esc(th.title) + '</h2>' : '<h2 class="th-title is-empty">' + (ro ? 'Thesis' : 'Name your thesis') + '</h2>') +
-      (th.question ? '<p class="th-q">' + esc(th.question) + '</p>' : ro ? '' : '<p class="th-q is-empty">Your research question, in one sentence</p>') +
+      (th.question ? '<p class="th-q">' + esc(th.question) + '</p>' : '') +
       (meta.length || chosen ? '<p class="th-meta">' + meta.concat(chosen ? ['Topic: <b>' + esc(truncate(chosen.title, 90)) + '</b>'] : []).join(' · ') + '</p>' : '') + '</div>' +
       '<div class="th-head-acts"><button type="button" class="btn btn-sm th-hot" data-act="th-journal" aria-pressed="' + (thCurrent() === 'th:journal') + '">' + BOOK_ICO + 'Journal' +
         (th.journal.length ? '<span class="th-hot-n">' + th.journal.length + '</span>' : '') + '</button>' +
@@ -3294,8 +3231,7 @@ td.c-break{display:none}
       '<ol class="th-stages" aria-label="Thesis stages">' + TH_STAGES.map(function (g, i) {
         return '<li class="' + (i < si ? 'is-done' : i === si ? 'is-now' : '') + '"><button type="button" data-act="th-stage" data-stage="' + g.id + '" title="' + esc(g.hint) + '"' + (ro ? ' disabled' : '') + (i === si ? ' aria-current="step"' : '') + '>' +
           '<span class="th-dot">' + (i < si ? CK : i + 1) + '</span><span class="th-sname">' + esc(g.name) + '</span></button></li>';
-      }).join('') + '</ol>' +
-      '<p class="th-now"><b>Now:</b> ' + esc(TH_STAGES[si].hint) + '.</p>';
+      }).join('') + '</ol>';
   }
   function thSnippet(pg, q) {
     for (var i = 0; i < pg.blocks.length; i++) {
@@ -3337,7 +3273,7 @@ td.c-break{display:none}
         }).join('') + '</div>';
       }
     }
-    if (!shown) h += '<p class="th-none">' + (q ? 'Nothing matches “' + esc(ui.thQuery.trim()) + '”.' : 'No pages yet. Paste a chat from Claude or ChatGPT, or write a note.') + '</p>';
+    if (!shown) h += '<p class="th-none">' + (q ? 'Nothing matches “' + esc(ui.thQuery.trim()) + '”.' : 'No pages yet.') + '</p>';
     var size = 0; try { size = JSON.stringify(state).length; } catch (e) {}
     if (size > 3500000) h += '<p class="th-warn">Your notebook is getting big (' + (size / 1048576).toFixed(1) + ' MB). It still syncs, but phones keep less offline. Old chats you no longer need can go.</p>';
     $('#th-list').innerHTML = h;
@@ -3375,11 +3311,11 @@ td.c-break{display:none}
   function thHHMM(ms) { var d = new Date(ms); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
   function thJournalHTML() {
     var J = state.thesis.journal, ro = mode === 'readonly', T = todayISO();
-    var h = thHeader(BOOK_ICO + 'Your log', 'Journal', 'What you did, one entry at a time. Start an entry with <b># Title</b> to name it.');
+    var h = thHeader('', 'Journal', '');
     if (!ro) h += '<form class="th-jnew" data-form="th-j-add"><label for="th-j-text" class="sr-only">New journal entry</label>' +
       '<textarea id="th-j-text" data-grow data-md-paste rows="4" placeholder="# What you did&#10;What you tried, what you found, what’s next."></textarea>' +
-      '<div class="th-jnew-foot"><label for="th-j-date" class="th-lbl">Date</label><input type="date" id="th-j-date" value="' + T + '" max="' + T + '"><span class="th-jhint">Ctrl + Enter saves</span><button type="submit" class="btn btn-sm th-hot">Add entry</button></div></form>';
-    if (!J.length) return h + '<p class="th-none">No entries yet. Log what you did today, even if it was small.</p>';
+      '<div class="th-jnew-foot"><label for="th-j-date" class="th-lbl">Date</label><input type="date" id="th-j-date" value="' + T + '" max="' + T + '"><span class="th-jhint"></span><button type="submit" class="btn btn-sm th-hot">Add entry</button></div></form>';
+    if (!J.length) return h;
     var last = null;
     return h + '<div class="th-jlist">' + J.slice().sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : b.created - a.created; }).map(function (e) {
       var day = e.date !== last ? '<p class="th-jday">' + (e.date === T ? 'Today · ' : '') + (e.date.slice(0, 4) === T.slice(0, 4) ? fmtLong(e.date) : fmtYear(e.date)) + '</p>' : ''; last = e.date;
@@ -3397,7 +3333,7 @@ td.c-break{display:none}
     }).join('') + '</div>';
   }
   function thHeader(kicker, title, sub, acts) {
-    return '<header class="th-ph"><div class="th-ph-main"><p class="th-kicker">' + kicker + '</p><h2 class="th-ptitle">' + title + '</h2>' + (sub ? '<p class="th-sub">' + sub + '</p>' : '') + '</div>' + (acts || '') + '</header>';
+    return '<header class="th-ph"><div class="th-ph-main">' + (kicker ? '<p class="th-kicker">' + kicker + '</p>' : '') + '<h2 class="th-ptitle">' + title + '</h2>' + (sub ? '<p class="th-sub">' + sub + '</p>' : '') + '</div>' + (acts || '') + '</header>';
   }
   function thChatHTML(pg) {
     if (!pg) return '<p class="th-none">That page is gone.</p>';
@@ -3413,14 +3349,13 @@ td.c-break{display:none}
         (who ? '<p class="th-who">' + who + '</p>' : '') + '<div class="md">' + mdToHtml(b.text) + '</div>' +
         (long ? '<button type="button" class="link-btn th-showall" data-act="th-showall">Show all</button>' : '') + '</section>';
     }).join('') + '</div>';
-    if (!ro) h += '<p class="th-tip">' + STAR + 'Select any text to highlight it, strike it, fade it, or keep it as <b>Important</b>. Tap a mark to change it.</p>';
     return h;
   }
   function thImportantHTML() {
     var th = state.thesis, ro = mode === 'readonly';
-    var h = thHeader(STAR + 'Pinned', 'Important', 'The lines worth remembering, pulled from your chats and notes.');
+    var h = thHeader('', 'Important', '');
     if (!ro) h += '<form class="th-quick" data-form="th-mark-add"><label for="th-mark-new" class="sr-only">Something important</label><textarea id="th-mark-new" rows="2" data-grow placeholder="Write something important…"></textarea><button type="submit" class="btn btn-sm">Add</button></form>';
-    if (!th.marks.length) return h + '<p class="th-none">Nothing here yet. Open any page, select a line, and tap <b>Important</b>.</p>';
+    if (!th.marks.length) return h;
     return h + '<ul class="th-marks">' + th.marks.slice().sort(function (a, b) { return b.created - a.created; }).map(function (m) {
       var pg = m.page && getThPage(m.page);
       return '<li class="th-mark"><blockquote>' + esc(m.text).replace(/\n/g, '<br>') + '</blockquote><div class="th-mark-foot">' +
@@ -3459,7 +3394,7 @@ td.c-break{display:none}
   }
   function thTopicsHTML() {
     var th = state.thesis, ro = mode === 'readonly', tests = state.compassTests || [], N = tests.length, U = th.umbrellas, full = U.length >= TH_UMB_MAX;
-    var h = thHeader(TARGET_ICO + 'Stage 1 · Topic selection', 'Topic candidates', 'Pick up to ' + TH_UMB_MAX + ' umbrellas, line up topics under them, test each one, then choose.');
+    var h = thHeader('', 'Topic candidates', '', ro ? '' : '<button type="button" class="btn btn-sm" data-act="th-checks">' + (N ? 'Edit checks' : 'Add checks') + '</button>');
     var live = function (id) { return th.topics.filter(function (t) { return t.umb === id && t.status !== 'dropped'; }).length; };
     h += '<section class="th-umbs" aria-label="Umbrellas"><p class="th-kicker">Umbrellas <span class="th-umb-count' + (full ? ' is-full' : '') + '">' + U.length + ' of ' + TH_UMB_MAX + '</span></p><div class="th-umb-grid">' +
       U.map(function (u, i) {
@@ -3468,21 +3403,19 @@ td.c-break{display:none}
           '<span class="th-umb-c">' + plural(live(u.id), 'topic') + '</span>' +
           (ro ? '' : '<button type="button" class="th-umb-x" data-act="th-umb-del" data-id="' + esc(u.id) + '" title="Delete this umbrella" aria-label="Delete ' + esc(u.name) + '">' + END_ICO + '</button>') + '</div>';
       }).join('') +
-      (!ro && !full ? '<form class="th-umb th-umb-add" data-form="th-umb-add"><label class="sr-only" for="th-umb-new">New umbrella</label><input id="th-umb-new" maxlength="80" autocomplete="off" placeholder="+ Umbrella, like Solar sails"></form>' : '') +
-      '</div>' + (full && !ro ? '<p class="th-note">' + TH_UMB_MAX + ' umbrellas, the limit. To explore a new area, delete one first.</p>'
-        : !U.length ? '<p class="th-note">Umbrellas are the big areas your topics fall under. Keep it to ' + TH_UMB_MAX + ' at most.</p>' : '') + '</section>';
+      (!ro && !full ? '<form class="th-umb th-umb-add" data-form="th-umb-add"><label class="sr-only" for="th-umb-new">New umbrella</label><input id="th-umb-new" maxlength="80" autocomplete="off" placeholder="+ Umbrella"></form>' : '') +
+      '</div></section>';
     if (!ro) h += '<form class="th-quick" data-form="th-topic-add"><label for="th-topic-new" class="sr-only">A candidate topic</label><input id="th-topic-new" type="text" maxlength="300" autocomplete="off" placeholder="A candidate topic, in one sentence">' +
       (U.length ? '<label for="th-topic-umb" class="sr-only">Umbrella</label><select id="th-topic-umb" class="th-topic-umb">' + U.map(function (u) { return '<option value="' + esc(u.id) + '"' + (ui.thUmbSel === u.id ? ' selected' : '') + '>' + esc(u.name) + '</option>'; }).join('') + '<option value=""' + (ui.thUmbSel === '' ? ' selected' : '') + '>No umbrella</option></select>' : '') +
       '<button type="submit" class="btn btn-sm">Add</button></form>';
-    if (!N) h += '<p class="th-note">Add your idea checks on the <a href="#compass">Compass</a> tab to score each candidate.</p>';
     var order = { chosen: 0, exploring: 1, dropped: 2 };
     var T = th.topics.slice().sort(function (a, b) { return order[a.status] - order[b.status] || a.created - b.created; });
-    if (!T.length) return h + '<p class="th-none">No candidates yet. Add every idea you’re weighing, even the half-formed ones.</p>';
+    if (!T.length) return h;
     U.concat([{ id: null, name: 'No umbrella' }]).forEach(function (g, i) {
       var list = T.filter(function (t) { return (t.umb || null) === g.id; });
-      if (!list.length && (g.id === null || !U.length)) return;
+      if (!list.length) return;
       h += '<div class="th-group"' + (g.id ? ' style="--uc:' + thUmbColor(i) + '"' : '') + '>' + (U.length ? '<p class="th-group-h"><i></i>' + esc(g.name) + '</p>' : '') +
-        (list.length ? '<div class="th-topics">' + list.map(function (tp) { return thTopicCard(tp, tests, U); }).join('') + '</div>' : '<p class="th-none th-none-sm">No topics under this one yet.</p>') + '</div>';
+        '<div class="th-topics">' + list.map(function (tp) { return thTopicCard(tp, tests, U); }).join('') + '</div></div>';
     });
     return h;
   }
@@ -3522,30 +3455,30 @@ td.c-break{display:none}
   }
   function thToolHTML(stg) {
     var tool = TH_TOOLS[stg], ro = mode === 'readonly', si = thStageIndex();
-    var h = thHeader(tool.ico + 'Stage ' + (si + 1) + ' · ' + esc(thStageName(stg)), esc(tool.name), esc(tool.sub));
+    var h = thHeader('', esc(tool.name), '');
     tool.lists.forEach(function (L) {
       var key = stg + '.' + L.key, items = state.thesis.lists[key] || [], full = L.cap && items.length >= L.cap, prog = thProgress(L, items), kid = 'th-add-' + stg + '-' + L.key;
-      h += '<section class="th-list"><div class="th-list-h"><h3>' + esc(L.title) + '</h3>' + (prog ? '<span class="th-prog">' + prog + '</span>' : '') + '</div>';
+      var solo = tool.lists.length === 1;
+      h += '<section class="th-list">' + (solo && !prog ? '' : '<div class="th-list-h">' + (solo ? '' : '<h3>' + esc(L.title) + '</h3>') + (prog ? '<span class="th-prog">' + prog + '</span>' : '') + '</div>');
       if (L.check) {
         h += items.length ? '<ul class="th-checklist">' + items.map(function (it) {
           return '<li><label class="check"><input type="checkbox" data-act="th-card-check" data-k="' + key + '" data-id="' + esc(it.id) + '"' + (it.status === L.done ? ' checked' : '') + (ro ? ' disabled' : '') + '> <span>' + esc(it.title) + '</span></label>' +
             (ro ? '' : '<button type="button" class="th-row-x" data-act="th-card-del" data-k="' + key + '" data-id="' + esc(it.id) + '" title="Delete" aria-label="Delete ' + esc(it.title) + '">' + END_ICO + '</button>') + '</li>';
-        }).join('') + '</ul>' : '<p class="th-none">' + esc(L.empty || 'Nothing here yet.') + '</p>';
+        }).join('') + '</ul>' : '';
       } else {
-        h += items.length ? '<div class="th-topics">' + items.map(function (it, i) { return thCardHTML(L, key, it, i); }).join('') + '</div>' : '<p class="th-none">' + esc(L.empty || 'Nothing here yet.') + '</p>';
+        h += items.length ? '<div class="th-topics">' + items.map(function (it, i) { return thCardHTML(L, key, it, i); }).join('') + '</div>' : '';
       }
-      if (!ro) h += full ? '<p class="th-note">' + esc(L.capMsg || (L.cap + ', the limit.')) + '</p>'
-        : '<form class="th-quick th-add" data-form="th-card-add" data-k="' + key + '"><label class="sr-only" for="' + kid + '">' + esc(L.add) + '</label><input id="' + kid + '" maxlength="300" autocomplete="off" placeholder="' + esc(L.add) + '"><button type="submit" class="btn btn-sm">Add</button></form>';
+      if (!ro && !full) h += '<form class="th-quick th-add" data-form="th-card-add" data-k="' + key + '"><label class="sr-only" for="' + kid + '">' + esc(L.add) + '</label><input id="' + kid + '" maxlength="300" autocomplete="off" placeholder="' + esc(L.add) + '"><button type="submit" class="btn btn-sm">Add</button></form>';
       h += '</section>';
     });
     return h;
   }
   function thCanvasHTML() {
     var th = state.thesis, ro = mode === 'readonly';
-    return thHeader(CANVAS_ICO + 'The whole thesis on one page', 'Thesis canvas', 'Fill it in a line at a time. It gets sharper as you read and test.') +
+    return thHeader('', 'Thesis canvas', '') +
       '<div class="th-canvas">' + TH_CANVAS.map(function (f, i) {
         return '<div class="th-cv"><label for="th-cv-' + f.id + '"><span class="th-cvn">' + (i + 1) + '</span>' + esc(f.name) + '</label><textarea id="th-cv-' + f.id + '" data-cv="' + f.id + '" data-grow rows="2" placeholder="' + esc(f.hint) + '"' + (ro ? ' readonly' : '') + '>' + esc(th.canvas[f.id]) + '</textarea></div>';
-      }).join('') + '</div>' + (ro ? '' : '<p class="th-tip">Saves as you type.</p>');
+      }).join('') + '</div>';
   }
   // Marks are anchored to the page's text (the words, plus a little context on each side),
   // so they survive re-rendering and can run across bold words, list items and paragraphs.
@@ -3764,9 +3697,9 @@ td.c-break{display:none}
       },
       found: function () {
         var el = $('#thp-found'), v = $('#thp-text').value; if (!el) return;
-        if (!v.trim() || isNote()) { el.textContent = isNote() ? '' : 'Tip: speaker lines like “You said:” and “ChatGPT said:” split a chat into turns. Polaris finds them on its own.'; return; }
+        if (!v.trim() || isNote()) { el.textContent = ''; return; }
         var r = parseChat(v, d.source), y = r.blocks.filter(function (b) { return b.role === 'you'; }).length, a = r.blocks.filter(function (b) { return b.role === 'ai'; }).length;
-        el.innerHTML = r.split ? CK + 'Found ' + plural(y, 'message') + ' from you and ' + plural(a, 'answer') + '.' : 'One block, shown as one ' + (d.source === 'chatgpt' ? 'ChatGPT' : 'Claude') + ' answer. To split turns, put “You said:” and “' + (d.source === 'chatgpt' ? 'ChatGPT' : 'Claude') + ' said:” on their own lines.';
+        el.innerHTML = r.split ? CK + 'Found ' + plural(y, 'message') + ' from you and ' + plural(a, 'answer') + '.' : 'One block.';
         if (r.source && r.source !== d.source && how !== 'note') { d.source = r.source; $$('#modal-body [data-act="thp-src"]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.src === d.source)); }); }
       },
       onInput: function (e) { if (e.target.id === 'thp-text') ctx.found(); },
@@ -3841,6 +3774,7 @@ td.c-break{display:none}
         if (sid !== state.thesis.stage) commit(function (s) { s.thesis.stage = sid; });
         thOpen('th:stage', true);
       }
+      else if (a === 'th-checks') openCompassTests();
       else if (a === 'th-umb-del') {
         var u0 = state.thesis.umbrellas.filter(function (u) { return u.id === id; })[0]; if (!u0) return;
         var nT = state.thesis.topics.filter(function (t) { return t.umb === id; }).length;
@@ -4043,16 +3977,14 @@ td.c-break{display:none}
     var openN = L.today.filter(function (x) { return x.kind !== 'deadline'; }).length;
     var todaySec = '<section class="hsec" aria-labelledby="td-h-today"><div class="hsec-h"><h3 id="td-h-today">Today</h3><span class="hsec-date">' + fmtLong(T) + '</span><span class="count">' + (openN || '') + '</span></div>' +
       (L.today.length ? '<ul class="task-list" data-sort-list="today">' + L.today.map(function (x) { return todayRow(x).replace('<li ', '<li' + sortAttr(todayKey(x)) + ' '); }).join('') + '</ul>'
-        : '<p class="todo-empty">' + (L.done.length ? 'All done for today.' : 'Nothing on today’s list yet. Add something that came up, or pull in a next step with ☀.') + '</p>') +
+        : '<p class="todo-empty">' + (L.done.length ? 'All done for today.' : 'Nothing for today.') + '</p>') +
       (L.done.length ? '<ul class="task-list task-stars" aria-label="Done in the last 48 hours">' + L.done.map(doneRow).join('') + '</ul>' : '') +
       '</section>';
     var weekSec = '<section class="hsec" aria-labelledby="td-h-week"><div class="hsec-h"><h3 id="td-h-week">This week</h3><span class="count">' + (L.week.length || '') + '</span></div>' +
       (L.week.length ? '<ul class="task-list">' + L.week.map(weekRow).join('') + '</ul>' : '<p class="todo-empty">Nothing due in the next 7 days.</p>') + '</section>';
     var nextSec = L.next.length ? '<section class="hsec" aria-labelledby="td-h-next"><div class="hsec-h"><h3 id="td-h-next">Next steps</h3></div>' +
-      '<p class="hub-hint" style="margin:-4px 0 8px">Projects with nothing due this week. Tap ☀ to pull a step into today. ' + (isPhone() ? 'Hold and drag' : 'Drag') + ' to put the ones you’re on first.</p>' +
       '<ul class="task-list" data-sort-list="next">' + L.next.map(function (x) { return nextRow(x).replace('<li ', '<li' + sortAttr(x.p.id) + ' '); }).join('') + '</ul></section>' : '';
-    var cpk = compassPick(T);
-    $('#todo-body').innerHTML = (cpk ? '<a class="cp-line" href="#compass" title="Open Compass">' + STAR + '<b>' + esc(cpk.title) + '.</b> <span>' + esc(cpk.text.split('\n')[0]) + '</span></a>' : '') + '<div class="todo-grid"><div class="todo-main">' + todaySec + '</div><div class="todo-side">' + weekSec + nextSec + '</div></div>';
+    $('#todo-body').innerHTML = '<div class="todo-grid"><div class="todo-main">' + todaySec + '</div><div class="todo-side">' + weekSec + nextSec + '</div></div>';
   }
 
   // A quick task: rename it, attach a link, or move it into one of your projects.
@@ -4762,11 +4694,10 @@ td.c-break{display:none}
                 : '<button type="button" class="btn btn-sm" data-act="pk-back" data-pid="' + esc(p.id) + '">' + UNPARK_ICO + 'Bring back</button>') + '</li>';
         }
         $('#modal-body').innerHTML = '<h2 id="modal-title">Parking lot</h2>' +
-          '<p class="modal-sub">Keep ' + FOCUS_MAX + ' in orbit. The top ' + FOCUS_MAX + ' on your Timeline are your focus; drag rows there to change the order.</p>' +
           '<h3 class="pk-h">In orbit <span class="rv-n' + (orbit.length > FOCUS_MAX ? ' is-over' : '') + '">' + orbit.length + ' of ' + FOCUS_MAX + '</span></h3>' +
           (orbit.length ? '<ul class="pk-list">' + orbit.map(function (p, i) { return row(p, i, true); }).join('') + '</ul>' : '<p class="muted">Nothing in orbit.</p>') +
           '<h3 class="pk-h">Parked</h3>' +
-          (parked.length ? '<ul class="pk-list">' + parked.map(function (p, i) { return row(p, i, false); }).join('') + '</ul>' : '<p class="muted" style="font-size:13px">Nothing parked yet. Parked projects drop out of your To-do and nudges; their final deadline still counts.</p>') +
+          (parked.length ? '<ul class="pk-list">' + parked.map(function (p, i) { return row(p, i, false); }).join('') + '</ul>' : '<p class="muted" style="font-size:13px">Nothing parked.</p>') +
           '<div class="modal-actions"><button type="button" class="btn primary" data-close>Done</button></div>';
       },
       onClick: function (e) {
@@ -5197,8 +5128,8 @@ td.c-break{display:none}
         '<label for="ta-date" class="sr-only">Due date (optional)</label><input id="ta-date" data-keep type="date" title="Due date (optional)">' +
         '<button type="submit" class="btn btn-sm primary">Add</button></form>') +
       (Popen.length ? '<ul class="task-list pieces" data-sort-list="hub:' + esc(p.id) + '">' + Popen.map(pieceRow).join('') + '</ul>' +
-          (ro ? '' : '<p class="hub-hint">Tap one to add its exact rule, deadline, points or small steps. ' + (isPhone() ? 'Hold and drag' : 'Drag') + ' to reorder.</p>')
-        : '<p class="hub-empty">' + (P.length ? 'All stages are done. They’re in the archive at the bottom.' : 'Add the stages this project goes through. Tap one to add its exact rule, deadline, points or small steps.') + '</p>') +
+          ''
+        : '<p class="hub-empty">' + (P.length ? 'All stages done.' : 'No stages yet.') + '</p>') +
       '</section>';
 
     // archive: finished stages, kept for the record, faded at the very bottom
@@ -5210,7 +5141,7 @@ td.c-break{display:none}
         if (m.points) meta.push(m.points + ' pts');
         return '<li class="task piece arch-row"><div class="piece-top">' + stSelect(m) +
           '<button type="button" class="task-main" data-act="task" data-mid="' + esc(m.id) + '"><span class="task-title">' + esc(m.title) + '</span><span class="task-meta">' + esc(meta.join(' · ')) + '</span></button>' + linkA(m) + '</div></li>';
-      }).join('') + '</ul>' + (ro ? '' : '<p class="hub-hint">To bring one back, change its status.</p>') + '</section>' : '';
+      }).join('') + '</ul>' + '</section>' : '';
 
     // files and links: the project's own (links on a stage stay on the stage)
     var order = { published: 0, file: 1, link: 2 };
