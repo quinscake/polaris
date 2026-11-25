@@ -79,7 +79,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .brand input.board-title:focus{outline:none;border-bottom-color:var(--accent)}
 .today-stamp{font:500 13px var(--font-mono);color:var(--muted);white-space:nowrap}
 .views{display:flex;gap:2px;padding:3px;background:var(--panel);border:1px solid var(--rule);border-radius:999px}
-.view-tab{font-weight:500;font-size:14px;text-decoration:none;color:var(--muted);padding:5px 15px;border-radius:999px}
+.view-tab{font-weight:500;font-size:14px;text-decoration:none;color:var(--muted);padding:5px 15px;border-radius:999px;white-space:nowrap}
 .view-tab:hover{color:var(--ink)}
 .view-tab[aria-current="page"]{color:var(--ink);background:var(--panel-2);box-shadow:inset 0 0 0 1px var(--rule)}
 .top-actions{position:relative;margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -528,6 +528,66 @@ body.hub-open{overflow:hidden}
 .sc-sum{font:500 12px var(--font-mono);color:var(--muted);margin:8px 0 0}
 .sc-sum:empty{display:none}
 
+/* ---------- compass ---------- */
+body[data-view="compass"] #quick-add,body[data-view="compass"] #reminders{display:none !important}
+.view-compass{display:flex;flex-direction:column;gap:22px;padding-bottom:30px}
+.cp-top{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:14px}
+.cp-kicker{margin:0 0 10px;font:600 11px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.cp-kicker .star{width:12px;height:12px}
+.cp-spot,.cp-test{background:var(--panel);border:1px solid var(--rule);border-radius:16px;padding:20px 22px}
+.cp-spot{background:radial-gradient(120% 140% at 0% 0%,rgba(138,180,255,.13),transparent 55%),var(--panel);border-color:#2c3756;display:flex;flex-direction:column}
+.cp-spot.is-flip{animation:cpflip .45s ease}
+@keyframes cpflip{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:none}}
+.cp-spot-title{margin:auto 0 10px;font:600 clamp(22px,3.2vw,32px)/1.15 var(--font-display);letter-spacing:-.01em;color:var(--ink)}
+.cp-spot-text{margin:0;font-size:16px;line-height:1.55;color:#c9d0e2}
+.cp-spot-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:16px}
+.cp-from{font:500 12px var(--font-mono);color:#7d87a3}
+.cp-from::before{content:"— "}
+#cp-idea{width:100%;resize:vertical;font-size:15px;margin-bottom:8px}
+.cp-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.cp-checks .check{font-size:14px;align-items:flex-start;line-height:1.4}
+.cp-checks .check input{margin-top:2px}
+.cp-verdict{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--muted)}
+.cp-meter{flex:0 0 90px;height:6px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
+.cp-meter i{display:block;height:100%;background:var(--muted);border-radius:3px;transition:width .25s}
+.cp-verdict.is-go{color:var(--ok)}.cp-verdict.is-go .cp-meter i{background:var(--ok)}
+.cp-verdict.is-close{color:var(--warn)}.cp-verdict.is-close .cp-meter i{background:var(--warn)}
+.cp-verdict .link-btn{margin-left:auto;font-size:12.5px}
+.cp-path{position:relative;display:flex;flex-direction:column;gap:22px}
+.cp-path::before{content:"";position:absolute;left:15px;top:20px;bottom:20px;width:1px;background:linear-gradient(var(--rule),rgba(138,180,255,.35),var(--rule))}
+.cp-stage{position:relative;padding-left:46px}
+.cp-stage-h{display:flex;align-items:flex-start;gap:12px;margin:0 0 10px}
+.cp-node{position:absolute;left:0;top:-1px;width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:var(--space);border:1px solid #33406a;color:var(--accent);font:600 13px var(--font-mono)}
+.cp-node .star{width:14px;height:14px}
+.cp-stage.is-always .cp-node{border-color:rgba(138,180,255,.6);box-shadow:0 0 14px rgba(138,180,255,.35)}
+.cp-stage-h h3{margin:3px 0 1px;font:600 15px var(--font-display);color:var(--ink)}
+.cp-stage-h p{margin:0;font-size:12.5px;color:var(--muted)}
+.cp-add{margin-left:auto;margin-top:4px;font-size:12.5px}
+.cp-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.cp-card{display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;color:var(--ink);font:inherit;cursor:pointer;transition:border-color .15s,transform .15s,background .15s}
+.cp-card:hover{border-color:#3a4870;background:var(--panel-2);transform:translateY(-1px)}
+.cp-card.is-today{border-color:rgba(138,180,255,.55);box-shadow:inset 0 0 0 1px rgba(138,180,255,.2)}
+.cp-card-title{font:600 15px/1.3 var(--font-body)}
+.cp-card-text{font-size:13.5px;line-height:1.5;color:#aeb6cb}
+.cp-empty{margin:0;font-size:13px;color:var(--muted)}
+.cp-empty-big{margin:0 0 14px;font-size:14px;line-height:1.5;color:#aeb6cb}
+.cp-kick-btn{margin-left:auto;font:500 12px var(--font-body);letter-spacing:0;text-transform:none}
+.cp-top.is-solo{grid-template-columns:1fr}
+.cp-foot{margin:0;font-size:12px;color:#5f6780;text-align:center}
+.cp-line{display:flex;align-items:baseline;gap:8px;padding:10px 14px;border:1px solid var(--rule);border-radius:12px;background:var(--panel);color:var(--muted);font-size:13.5px;text-decoration:none;line-height:1.45}
+.cp-line:hover{border-color:#3a4870;color:var(--ink)}
+.cp-line .star{width:12px;height:12px;flex:none;color:var(--accent);align-self:center}
+.cp-line b{color:var(--ink);font-weight:600;white-space:nowrap}
+.cp-line span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+@media (max-width: 760px){
+  .cp-top{grid-template-columns:1fr}
+  .cp-cards{grid-template-columns:1fr}
+  .cp-spot,.cp-test{padding:16px 18px}
+  .cp-stage{padding-left:40px}
+  .cp-line{flex-wrap:wrap}
+  .cp-line span{white-space:normal}
+}
+
 /* ---------- typed dates, doing limit, weekly review ---------- */
 .when-chip{grid-column:1 / -1;justify-self:start;display:inline-flex;align-items:center;gap:6px;font:500 12px var(--font-mono);color:var(--accent);
   background:rgba(138,180,255,.1);border:1px solid rgba(138,180,255,.35);border-radius:999px;padding:3px 4px 3px 9px}
@@ -743,7 +803,7 @@ td.c-break{display:none}
   .tick.is-today .tick-wd{font-size:8.5px}
   .divider{padding-top:16px}
   .empty{padding:24px 0}
-  .view-tab{padding:6px 13px}
+  .view-tab{padding:6px 10px;font-size:13.5px}
   .save-status.is-ok,.save-status.is-saving{font-size:0;gap:0}
   .save-status.is-warn,.save-status.is-err{grid-column:1 / -1;grid-row:3;justify-self:end}
   .chips{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none}
@@ -841,6 +901,7 @@ td.c-break{display:none}
     <nav class="views" aria-label="Views">
       <a class="view-tab" href="#todo" data-view="todo">To-do<span class="tab-n" id="todo-n" hidden></span></a>
       <a class="view-tab" href="#timeline" data-view="timeline">Timeline</a>
+      <a class="view-tab" href="#compass" data-view="compass">Compass</a>
     </nav>
     <div class="top-actions">
       <span class="save-status" id="save-status" role="status"></span>
@@ -880,6 +941,7 @@ td.c-break{display:none}
   </form>
 
   <main>
+    <section id="view-compass" class="view-compass" aria-label="Compass" hidden></section>
     <section id="view-todo" class="view-todo" aria-label="To-do" hidden>
       <form class="todo-add edit-only" id="todo-add" autocomplete="off">
         <label for="td-text" class="sr-only">New task</label>
@@ -1164,7 +1226,18 @@ td.c-break{display:none}
   var ST_ORDER = ['todo', 'doing', 'waiting', 'done'];
   var ST_LABEL = { todo: 'To do', doing: 'Doing', waiting: 'Waiting', done: 'Done' };
   var WAIT_NUDGE = 7;
-  var DOING_MAX = 3;   // stages in Doing across all projects before Polaris suggests finishing one first   // days before a "Waiting" piece gets a follow-up reminder
+  var DOING_MAX = 3;
+  // Compass: the rules you live by, grouped by the moment you need them.
+  var COMPASS_STAGES = [
+    { id: 'always', name: 'Always', hint: 'How to carry yourself' },
+    { id: 'choose', name: 'Choosing a problem', hint: 'Before you commit' },
+    { id: 'gap', name: 'Finding the gap', hint: 'While you read' },
+    { id: 'build', name: 'Doing the work', hint: 'While you build' },
+    { id: 'share', name: 'Writing and presenting', hint: 'When you tell it' },
+    { id: 'feedback', name: 'When feedback comes', hint: 'After you submit' }
+  ];
+  // Your rules and idea checks live in your private data (state.compass, state.compassTests), not in this public file.
+  var COMPASS_DEFAULT = [];   // stages in Doing across all projects before Polaris suggests finishing one first   // days before a "Waiting" piece gets a follow-up reminder
   function listLabel() { return 'Stages'; }
   function numOrNull(v) { var n = Number(v); return v === null || v === '' || v === undefined || !isFinite(n) || n <= 0 ? null : Math.min(100000, Math.round(n * 100) / 100); }
   // Your North Star starts empty: you name it and add your own goals.
@@ -1180,6 +1253,12 @@ td.c-break{display:none}
       title: typeof s.title === 'string' && s.title.trim() && s.title !== 'Work' && s.title !== 'KEPLER' ? s.title.slice(0, 40) : 'Polaris',
       areas: [], mission: null, projects: [], updates: [], tasks: [], kindsV: 3, reviewWeek: isISO(s.reviewWeek) ? s.reviewWeek : null
     };
+    var stageIds = {}; COMPASS_STAGES.forEach(function (g) { stageIds[g.id] = true; });
+    out.compass = (Array.isArray(s.compass) ? s.compass : COMPASS_DEFAULT).filter(function (r) { return r && typeof r.title === 'string' && r.title.trim(); }).slice(0, 300).map(function (r, i) {
+      return { id: typeof r.id === 'string' && r.id ? r.id : 'cp' + i + Math.random().toString(36).slice(2, 7), stage: stageIds[r.stage] ? r.stage : 'always',
+        title: r.title.trim().slice(0, 120), text: typeof r.text === 'string' ? r.text.trim().slice(0, 1500) : '', from: typeof r.from === 'string' ? r.from.trim().slice(0, 80) : '' };
+    });
+    out.compassTests = (Array.isArray(s.compassTests) ? s.compassTests : []).filter(function (t) { return typeof t === 'string' && t.trim(); }).slice(0, 15).map(function (t) { return t.trim().slice(0, 160); });
     var areaIds = {};
     (Array.isArray(s.areas) ? s.areas : DEFAULT_AREAS).forEach(function (a) {
       if (!a || typeof a.name !== 'string' || !a.name.trim()) return;
@@ -1861,8 +1940,9 @@ td.c-break{display:none}
     if (h === '#library' || h === '#table') return 'table';
     if (h === '#todo') return 'todo';
     if (h === '#timeline') return 'timeline';
+    if (h === '#compass') return 'compass';
     var saved = null; try { saved = localStorage.getItem(VIEW_KEY); } catch (e) {}
-    return saved === 'timeline' ? 'timeline' : 'todo';
+    return saved === 'timeline' || saved === 'compass' ? saved : 'todo';
   }
 
   function render() {
@@ -1878,10 +1958,11 @@ td.c-break{display:none}
     $$('.view-tab').forEach(function (a) { if (a.dataset.view === view) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     $('#view-timeline').hidden = view !== 'timeline';
     $('#view-todo').hidden = view !== 'todo';
+    $('#view-compass').hidden = view !== 'compass';
     $('#view-table').hidden = view !== 'table';
     var lb = $('#btn-library'); if (lb) lb.setAttribute('aria-pressed', String(view === 'table'));
     renderTodoCount(T);
-    if (view === 'timeline') renderBoard(T); else if (view === 'todo') renderTodo(T); else renderTables(T);
+    if (view === 'timeline') renderBoard(T); else if (view === 'todo') renderTodo(T); else if (view === 'compass') renderCompass(T); else renderTables(T);
     if (ui.hub) renderHub();
     if (!inViewer && gcalState === 'off' && gcalCfg()) gcalBoot();
     whenWatch('#td-text', '#td-when'); if (ui.hub) whenWatch('#ta-title', '#ta-when');
@@ -2319,6 +2400,136 @@ td.c-break{display:none}
     if (act.some(function (p) { return p.id === cur; })) sel.value = cur;
   }
 
+  // today's rule: the same all day, different tomorrow; "Another" steps through the rest
+  function compassPick(T) {
+    var R = state.compass || []; if (!R.length) return null;
+    var h = 0; for (var i = 0; i < T.length; i++) h = (h * 31 + T.charCodeAt(i)) >>> 0;
+    return R[(h + (ui.compassShift || 0)) % R.length];
+  }
+  function compassFrom(r) { return r.from ? '<span class="cp-from">' + esc(r.from) + '</span>' : ''; }
+  function compassText(t) { return esc(t).replace(/\n/g, '<br>'); }
+  function loadIdea() { try { var v = JSON.parse(localStorage.getItem('polaris:idea') || 'null'); if (v && typeof v.text === 'string' && Array.isArray(v.checks)) return v; } catch (e) {} return { text: '', checks: [] }; }
+  function ideaVerdict(n, all) {
+    return n === all ? { cls: 'is-go', txt: 'All ' + all + '. This is a gap worth chasing.' }
+      : n > 0 && n >= all - 2 ? { cls: 'is-close', txt: n + ' of ' + all + '. Close: sharpen the ones still open.' }
+      : { cls: 'is-no', txt: n + ' of ' + all + '. Not yet: scope it down or find a different angle.' };
+  }
+  function renderCompass(T) {
+    var box = $('#view-compass'); if (!box) return;
+    var R = state.compass || [], ro = mode === 'readonly', pick = compassPick(T), idea = loadIdea(), TESTS = state.compassTests || [];
+    var stg = {}; COMPASS_STAGES.forEach(function (g) { stg[g.id] = g; });
+    var nChecked = TESTS.filter(function (t, i) { return idea.checks[i]; }).length, verdict = ideaVerdict(nChecked, TESTS.length);
+    var testCard = !TESTS.length ? (ro ? '' : '<article class="cp-test" aria-label="Test an idea"><p class="cp-kicker">Test an idea</p>' +
+        '<p class="cp-empty-big">List the checks an idea has to pass before you commit to it. Then tick them off for any new idea.</p>' +
+        '<button type="button" class="btn btn-sm" data-act="cp-tests">Add checks</button></article>')
+      : '<article class="cp-test" aria-label="Test an idea"><p class="cp-kicker">Test an idea' + (ro ? '' : '<button type="button" class="link-btn edit-only cp-kick-btn" data-act="cp-tests">Edit checks</button>') + '</p>' +
+        '<label for="cp-idea" class="sr-only">Your idea in one sentence</label><textarea id="cp-idea" rows="2" maxlength="400" placeholder="Your idea in one sentence">' + esc(idea.text) + '</textarea>' +
+        '<ul class="cp-checks">' + TESTS.map(function (t, i) {
+          return '<li><label class="check"><input type="checkbox" data-act="cp-check" data-i="' + i + '"' + (idea.checks[i] ? ' checked' : '') + '> <span>' + esc(t) + '</span></label></li>';
+        }).join('') + '</ul>' +
+        '<div class="cp-verdict ' + verdict.cls + '"><i class="cp-meter"><i style="width:' + Math.round(nChecked / TESTS.length * 100) + '%"></i></i><span>' + verdict.txt + '</span>' +
+        (idea.text || nChecked ? '<button type="button" class="link-btn" data-act="cp-clear">Clear</button>' : '') + '</div></article>';
+    var h = '<div class="cp-top' + (testCard ? '' : ' is-solo') + '">' +
+      (!pick && !ro ? '<article class="cp-spot" aria-label="Today’s reminder"><p class="cp-kicker">' + STAR + 'Today’s reminder</p>' +
+        '<h2 class="cp-spot-title">Your Compass is empty</h2><p class="cp-spot-text">Add the rules you keep forgetting. One of them shows up here each day, and on your To-do page.</p>' +
+        '<div class="cp-spot-foot"><span></span><button type="button" class="btn btn-sm" data-act="cp-add" data-stage="always">+ Add a rule</button></div></article>' : '') +
+      (pick ? '<article class="cp-spot" aria-label="Today’s reminder"><p class="cp-kicker">' + STAR + 'Today’s reminder · ' + esc(stg[pick.stage].name) + '</p>' +
+        '<h2 class="cp-spot-title">' + esc(pick.title) + '</h2><p class="cp-spot-text">' + compassText(pick.text) + '</p>' +
+        '<div class="cp-spot-foot">' + compassFrom(pick) + (R.length > 1 ? '<button type="button" class="btn btn-sm" data-act="cp-next">Another</button>' : '') + '</div></article>' : '') +
+      testCard + '</div>';
+    h += '<div class="cp-path">';
+    var step = 0;
+    COMPASS_STAGES.forEach(function (g) {
+      var rules = R.filter(function (r) { return r.stage === g.id; });
+      if (!rules.length && ro) return;
+      var num = g.id === 'always' ? '' : String(++step);
+      h += '<section class="cp-stage' + (g.id === 'always' ? ' is-always' : '') + '" aria-labelledby="cps-' + g.id + '">' +
+        '<div class="cp-stage-h"><span class="cp-node">' + (num || STAR) + '</span><div><h3 id="cps-' + g.id + '">' + esc(g.name) + '</h3><p>' + esc(g.hint) + '</p></div>' +
+        (ro ? '' : '<button type="button" class="link-btn edit-only cp-add" data-act="cp-add" data-stage="' + g.id + '">+ Add</button>') + '</div>' +
+        '<div class="cp-cards">' + rules.map(function (r) {
+          return '<button type="button" class="cp-card' + (pick && r.id === pick.id ? ' is-today' : '') + '" data-act="cp-open" data-id="' + esc(r.id) + '">' +
+            '<span class="cp-card-title">' + esc(r.title) + '</span>' + (r.text ? '<span class="cp-card-text">' + compassText(r.text) + '</span>' : '') + compassFrom(r) + '</button>';
+        }).join('') + (rules.length ? '' : '<p class="cp-empty">Nothing here yet.</p>') + '</div></section>';
+    });
+    h += '</div>' + (R.length && !ro ? '<p class="cp-foot">Tap a card to edit it.</p>' : '');
+    box.innerHTML = h;
+  }
+  function openCompassRule(id, stage) {
+    if (mode === 'readonly') return;
+    var r = id ? (state.compass || []).filter(function (x) { return x.id === id; })[0] : null;
+    if (id && !r) return;
+    var d = r ? { title: r.title, text: r.text, from: r.from, stage: r.stage } : { title: '', text: '', from: '', stage: stage || 'always' };
+    openModal({
+      draw: function () {
+        $('#modal-body').innerHTML = '<h2 id="modal-title">' + (r ? 'Edit rule' : 'New rule') + '</h2>' +
+          '<form id="cp-form" novalidate>' +
+          '<div class="field"><label for="cpf-title">The rule, short</label><input id="cpf-title" type="text" maxlength="120" value="' + esc(d.title) + '" placeholder="Simulate first"></div>' +
+          '<div class="field"><label for="cpf-text">What it means</label><textarea id="cpf-text" rows="4" maxlength="1500" placeholder="One or two lines you’ll want to read when you forget">' + esc(d.text) + '</textarea></div>' +
+          '<div class="field-row"><div class="field"><label for="cpf-from">From <span class="muted">(optional)</span></label><input id="cpf-from" type="text" maxlength="80" value="' + esc(d.from) + '" placeholder="Who taught you"></div>' +
+          '<div class="field"><label for="cpf-stage">When you need it</label><select id="cpf-stage">' + COMPASS_STAGES.map(function (g) { return '<option value="' + g.id + '"' + (d.stage === g.id ? ' selected' : '') + '>' + esc(g.name) + '</option>'; }).join('') + '</select></div></div>' +
+          '<p class="form-error" id="cpf-error" hidden></p>' +
+          '<div class="modal-actions">' + (r ? '<button type="button" class="btn btn-quiet" data-act="cpf-del" style="margin-right:auto">Delete</button>' : '') +
+          '<button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">' + (r ? 'Save' : 'Add') + '</button></div></form>';
+      },
+      onClick: function (e) {
+        if (e.target.closest('[data-act="cpf-del"]')) { commit(function (st) { st.compass = st.compass.filter(function (x) { return x.id !== id; }); }); closeModal(); }
+      },
+      onSubmit: function () {
+        var t = $('#cpf-title').value.trim(), err = $('#cpf-error');
+        if (!t) { err.textContent = 'Give the rule a short name.'; err.hidden = false; return; }
+        var v = { title: t.slice(0, 120), text: $('#cpf-text').value.trim().slice(0, 1500), from: $('#cpf-from').value.trim().slice(0, 80), stage: $('#cpf-stage').value };
+        commit(function (st) {
+          if (r) Object.assign(r, v);
+          else st.compass.push(Object.assign({ id: uid() }, v));
+        });
+        closeModal();
+      }
+    });
+  }
+  function openCompassTests() {
+    if (mode === 'readonly') return;
+    openModal({
+      draw: function () {
+        $('#modal-body').innerHTML = '<h2 id="modal-title">Idea checks</h2>' +
+          '<form id="cpt-form" novalidate>' +
+          '<div class="field"><label for="cpt-text">One check per line</label><textarea id="cpt-text" rows="8" placeholder="I can say it in one sentence&#10;Nobody has done it yet&#10;I can finish it in about 6 months">' + esc((state.compassTests || []).join('\n')) + '</textarea></div>' +
+          '<p class="muted" style="font-size:13px;margin:0">Write each one so that a tick means yes. Up to 15.</p>' +
+          '<div class="modal-actions"><button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
+      },
+      onSubmit: function () {
+        var lines = $('#cpt-text').value.split('\n').map(function (t) { return t.trim().slice(0, 160); }).filter(Boolean).slice(0, 15);
+        // ticks follow their check, so adding or reordering lines keeps them
+        var prev = state.compassTests || [], v = loadIdea();
+        v.checks = lines.map(function (t) { var i = prev.indexOf(t); return i >= 0 && !!v.checks[i]; });
+        try { localStorage.setItem('polaris:idea', JSON.stringify(v)); } catch (er) {}
+        commit(function (st) { st.compassTests = lines; });
+        closeModal();
+      }
+    });
+  }
+  function initCompass() {
+    var box = $('#view-compass'); if (!box) return;
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-act]'); if (!b) return;
+      var a = b.dataset.act;
+      if (a === 'cp-next') { ui.compassShift = (ui.compassShift || 0) + 1; renderCompass(todayISO()); var sp = $('.cp-spot'); if (sp) { sp.classList.remove('is-flip'); void sp.offsetWidth; sp.classList.add('is-flip'); } }
+      else if (a === 'cp-open') openCompassRule(b.dataset.id);
+      else if (a === 'cp-add') openCompassRule(null, b.dataset.stage);
+      else if (a === 'cp-tests') openCompassTests();
+      else if (a === 'cp-check') {
+        var v = loadIdea(); v.checks[+b.dataset.i] = b.checked;
+        try { localStorage.setItem('polaris:idea', JSON.stringify(v)); } catch (er) {}
+        renderCompass(todayISO());
+      }
+      else if (a === 'cp-clear') { try { localStorage.removeItem('polaris:idea'); } catch (er) {} renderCompass(todayISO()); }
+    });
+    box.addEventListener('input', function (e) {
+      if (e.target.id !== 'cp-idea') return;
+      var v = loadIdea(); v.text = e.target.value.slice(0, 400);
+      try { localStorage.setItem('polaris:idea', JSON.stringify(v)); } catch (er) {}
+    });
+  }
+
   function renderTodo(T) {
     renderTodoProjects();
     var L = todoLists(T), ro = mode === 'readonly';
@@ -2407,7 +2618,8 @@ td.c-break{display:none}
     var nextSec = L.next.length ? '<section class="hsec" aria-labelledby="td-h-next"><div class="hsec-h"><h3 id="td-h-next">Next steps</h3></div>' +
       '<p class="hub-hint" style="margin:-4px 0 8px">Projects with nothing due this week. Tap ☀ to pull a step into today. ' + (isPhone() ? 'Hold and drag' : 'Drag') + ' to put the ones you’re on first.</p>' +
       '<ul class="task-list" data-sort-list="next">' + L.next.map(function (x) { return nextRow(x).replace('<li ', '<li' + sortAttr(x.p.id) + ' '); }).join('') + '</ul></section>' : '';
-    $('#todo-body').innerHTML = '<div class="todo-grid"><div class="todo-main">' + todaySec + '</div><div class="todo-side">' + weekSec + nextSec + '</div></div>';
+    var cpk = compassPick(T);
+    $('#todo-body').innerHTML = (cpk ? '<a class="cp-line" href="#compass" title="Open Compass">' + STAR + '<b>' + esc(cpk.title) + '.</b> <span>' + esc(cpk.text.split('\n')[0]) + '</span></a>' : '') + '<div class="todo-grid"><div class="todo-main">' + todaySec + '</div><div class="todo-side">' + weekSec + nextSec + '</div></div>';
   }
 
   // A quick task: rename it, attach a link, or move it into one of your projects.
@@ -4222,6 +4434,7 @@ td.c-break{display:none}
     initStorage();
     gcalBoot();
     initDrag();
+    initCompass();
     try { localStorage.removeItem('polaris:ai'); sessionStorage.removeItem('polaris:chat'); } catch (e) {}   // AI was removed: forget any saved key
     // offline copy for the installed app (needs sw.js next to index.html; harmless without it)
     if ('serviceWorker' in navigator && !inViewer && (location.protocol === 'https:' || location.hostname === 'localhost') && !/claude|anthropic/.test(location.hostname))
