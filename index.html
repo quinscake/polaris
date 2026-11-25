@@ -711,11 +711,35 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .md .md-mathblock .md-math:not(.is-typeset){display:block;white-space:pre-wrap;text-align:left;padding:8px 12px;background:rgba(255,255,255,.03);border-radius:8px}
 .md .katex{font-size:1.06em}
 .md .md-box{color:var(--muted)}
-mark.th-hl{background:rgba(255,184,107,.24);color:inherit;border-radius:3px;padding:0 1px;box-shadow:0 1px 0 rgba(255,184,107,.55)}
+mark.th-hl{background:none;color:inherit;border-radius:0;padding:0;box-shadow:inset 0 -2px 0 rgba(255,184,107,.85)}
+mark.th-ann{background:none;color:inherit;border-radius:3px;padding:.05em 0;-webkit-box-decoration-break:clone;box-decoration-break:clone;cursor:pointer}
+mark.th-a-yellow{background:#f3d63c;color:#1d1905}
+mark.th-a-yellow *,mark.th-a-red *{color:inherit !important}
+mark.th-a-red{background:#f06464;color:#220909}
+mark.th-a-strike{text-decoration:line-through;text-decoration-thickness:1.6px;text-decoration-color:currentColor}
+mark.th-a-fade,mark.th-a-fade *{color:rgba(205,212,230,.2) !important;text-decoration-color:rgba(205,212,230,.2) !important;transition:color .2s}
+mark.th-a-fade mark.th-ann{background:rgba(255,255,255,.03);box-shadow:none}
+mark.th-a-fade:hover,mark.th-a-fade:hover *{color:rgba(205,212,230,.4) !important}
+mark.th-a-fade{background:rgba(0,0,0,.18)}
+mark.th-hl.is-flash{background:rgba(255,184,107,.4);border-radius:3px}
 mark.th-hl.is-flash{animation:thflash 1.4s ease}
+.th-pen{position:absolute;z-index:60;display:flex;align-items:center;gap:2px;padding:4px;border-radius:12px;background:#1b2133;border:1px solid #333c58;box-shadow:0 10px 28px rgba(0,0,0,.5)}
+.th-pen[hidden]{display:none}
+.th-pen button{display:inline-grid;place-items:center;min-width:32px;height:32px;padding:0 6px;border:0;border-radius:8px;background:none;color:#d5dbea;font:600 13px var(--font-body);cursor:pointer}
+.th-pen button:hover{background:rgba(255,255,255,.07)}
+.th-pen button[hidden]{display:none}
+.th-pen .pen-imp{display:inline-flex;align-items:center;gap:6px;padding:0 10px;color:var(--warn)}
+.th-pen .pen-imp .star{width:13px;height:13px}
+.th-pen .pen-sep{width:1px;height:20px;background:#333c58;margin:0 3px}
+.th-pen .sw{width:15px;height:15px;border-radius:50%;display:block}
+.th-pen .sw-y{background:#ffde40;box-shadow:0 0 8px rgba(255,222,64,.45)}
+.th-pen .sw-r{background:#ff5a5a;box-shadow:0 0 8px rgba(255,90,90,.45)}
+.th-pen .pen-s{font:600 15px var(--font-body);text-decoration:line-through;text-decoration-thickness:1.6px}
+.th-pen .ico{width:16px;height:16px}
+.th-pen .pen-clear{color:#ff8f8f}
 @keyframes thflash{0%,40%{background:rgba(255,184,107,.65)}100%{background:rgba(255,184,107,.24)}}
 
-.th-markbtn{position:absolute;z-index:60;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:0;border-radius:999px;background:var(--warn);color:#1b1407;font:600 13px var(--font-body);box-shadow:0 8px 24px rgba(0,0,0,.45);cursor:pointer}
+.th-markbtn-old{position:absolute;z-index:60;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:0;border-radius:999px;background:var(--warn);color:#1b1407;font:600 13px var(--font-body);box-shadow:0 8px 24px rgba(0,0,0,.45);cursor:pointer}
 .th-markbtn .star{width:13px;height:13px}
 .th-markbtn[hidden]{display:none}
 .th-toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));z-index:70;transform:translate(-50%,20px);opacity:0;pointer-events:none;display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:#2a2417;border:1px solid rgba(255,184,107,.45);color:#ffe3c2;font-size:13.5px;transition:opacity .2s,transform .2s}
@@ -776,7 +800,7 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
   .th-page{padding:16px 16px 22px;background:#10141f;min-height:0}
   .md{font-size:15px}
   .th-ph{margin-bottom:14px}
-  .th-markbtn{padding:9px 15px;font-size:14px}
+  .th-pen button{min-width:38px;height:38px}
 }
 
 .cp-foot{margin:0;font-size:12px;color:#5f6780;text-align:center}
@@ -2798,6 +2822,7 @@ td.c-break{display:none}
     { id: 'risks', name: 'Risks and plan B', hint: 'What could stop you, and what you do then' }
   ];
   var TH_MAX_BLOCK = 200000, TH_PAGE_KEY = 'polaris:th-page';
+  var TH_PENS = { yellow: 1, red: 1, strike: 1, fade: 1 };
   var TARGET_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.6"/></svg>';
   var CANVAS_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M2.5 7h11M7 7v6.5"/></svg>';
 
@@ -2821,11 +2846,15 @@ td.c-break{display:none}
       var cr = Number(pg.created) || Date.now();
       out.pages.push({ id: id, title: str(pg.title, 160).trim() || 'Untitled', kind: pg.kind === 'chat' ? 'chat' : 'note',
         source: pg.source === 'claude' || pg.source === 'chatgpt' ? pg.source : '', stage: stIds[pg.stage] ? pg.stage : stage,
-        created: cr, updated: Number(pg.updated) || cr, blocks: blocks });
+        created: cr, updated: Number(pg.updated) || cr, blocks: blocks,
+        ann: (Array.isArray(pg.ann) ? pg.ann : []).filter(function (a) { return a && TH_PENS[a.kind] && typeof a.q === 'string' && a.q.trim(); }).slice(0, 800)
+          .map(function (a) { return { id: typeof a.id === 'string' && a.id ? a.id.slice(0, 40) : uid(), kind: a.kind, q: a.q.slice(0, 20000), pre: str(a.pre, 40), suf: str(a.suf, 40) }; }) });
     });
     (Array.isArray(th.marks) ? th.marks : []).slice(0, 1000).forEach(function (m) {
       if (!m || typeof m.text !== 'string' || !m.text.trim()) return;
-      out.marks.push({ id: typeof m.id === 'string' && m.id ? m.id.slice(0, 40) : uid(), page: pids[m.page] ? m.page : null, text: m.text.trim().slice(0, 3000), created: Number(m.created) || Date.now() });
+      var mk = { id: typeof m.id === 'string' && m.id ? m.id.slice(0, 40) : uid(), page: pids[m.page] ? m.page : null, text: m.text.trim().slice(0, 3000), created: Number(m.created) || Date.now() };
+      if (mk.page && typeof m.q === 'string' && m.q.trim()) { mk.q = m.q.slice(0, 20000); mk.pre = str(m.pre, 40); mk.suf = str(m.suf, 40); }
+      out.marks.push(mk);
     });
     var chosen = false;
     (Array.isArray(th.topics) ? th.topics : []).slice(0, 60).forEach(function (t) {
@@ -3166,7 +3195,8 @@ td.c-break{display:none}
   function thPageKey(id) {
     if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + (ui.thTopic || '') + '|' + JSON.stringify(state.compassTests || []).length;
     var pg = getThPage(id); if (!pg) return id + '|gone';
-    return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',');
+    return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',') +
+      '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',');
   }
   function renderThPage() {
     var el = $('#th-page'), wrap = $('#th-wrap'), id = thCurrent();
@@ -3180,7 +3210,7 @@ td.c-break{display:none}
     var back = '<button type="button" class="link-btn th-back" data-act="th-back">← Notebook</button>';
     el.innerHTML = back + (id === 'th:important' ? thImportantHTML() : id === 'th:topics' ? thTopicsHTML() : id === 'th:canvas' ? thCanvasHTML() : thChatHTML(getThPage(id)));
     if (same) el.scrollTop = y;
-    if (id.indexOf('th:') !== 0) { thPaintMarks(el, id); thTypeset(el); }
+    if (id.indexOf('th:') !== 0) { thPaint(el, id); thTypeset(el); }
     $$('#th-page textarea[data-grow]').forEach(thGrow);
   }
   function thGrow(ta) { ta.style.height = 'auto'; ta.style.height = Math.min(600, ta.scrollHeight + 2) + 'px'; }
@@ -3201,7 +3231,7 @@ td.c-break{display:none}
         (who ? '<p class="th-who">' + who + '</p>' : '') + '<div class="md">' + mdToHtml(b.text) + '</div>' +
         (long ? '<button type="button" class="link-btn th-showall" data-act="th-showall">Show all</button>' : '') + '</section>';
     }).join('') + '</div>';
-    if (!ro) h += '<p class="th-tip">' + STAR + 'Select any text and tap <b>Important</b> to keep it on your Important page.</p>';
+    if (!ro) h += '<p class="th-tip">' + STAR + 'Select any text to highlight it, strike it, fade it, or keep it as <b>Important</b>. Tap a mark to change it.</p>';
     return h;
   }
   function thImportantHTML() {
@@ -3251,10 +3281,64 @@ td.c-break{display:none}
         return '<div class="th-cv"><label for="th-cv-' + f.id + '"><span class="th-cvn">' + (i + 1) + '</span>' + esc(f.name) + '</label><textarea id="th-cv-' + f.id + '" data-cv="' + f.id + '" data-grow rows="2" placeholder="' + esc(f.hint) + '"' + (ro ? ' readonly' : '') + '>' + esc(th.canvas[f.id]) + '</textarea></div>';
       }).join('') + '</div>' + (ro ? '' : '<p class="th-tip">Saves as you type.</p>');
   }
-  function thPaintMarks(el, pid) {
-    var root = el.querySelector('.th-blocks'); if (!root) return;
+  // Marks are anchored to the page's text (the words, plus a little context on each side),
+  // so they survive re-rendering and can run across bold words, list items and paragraphs.
+  function thTextIndex(root) {
+    var nodes = [], full = '', w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
+    while ((n = w.nextNode())) {
+      if (n.parentNode.closest('.md-math, .th-who, button')) continue;
+      nodes.push({ n: n, a: full.length }); full += n.nodeValue;
+    }
+    return { nodes: nodes, full: full };
+  }
+  function thOffsets(idx, r) {
+    var s0 = -1, e0 = -1;
+    idx.nodes.forEach(function (x) {
+      if (!r.intersectsNode(x.n)) return;
+      var from = x.n === r.startContainer ? r.startOffset : 0, to = x.n === r.endContainer ? r.endOffset : x.n.nodeValue.length;
+      if (to <= from) return;
+      if (s0 < 0) s0 = x.a + from;
+      e0 = x.a + to;
+    });
+    if (s0 < 0) return null;
+    while (s0 < e0 && /\s/.test(idx.full[s0])) s0++;
+    while (e0 > s0 && /\s/.test(idx.full[e0 - 1])) e0--;
+    return e0 > s0 ? { s: s0, e: e0 } : null;
+  }
+  function thAnchor(idx, o) { return { q: idx.full.slice(o.s, o.e), pre: idx.full.slice(Math.max(0, o.s - 32), o.s), suf: idx.full.slice(o.e, o.e + 32) }; }
+  function thFind(full, a) {
+    var best = -1, top = -1, i = full.indexOf(a.q);
+    while (i >= 0) {
+      var sc = 0, k, p = full.slice(Math.max(0, i - (a.pre || '').length), i), f = full.slice(i + a.q.length, i + a.q.length + (a.suf || '').length);
+      for (k = 1; k <= Math.min(p.length, a.pre.length) && p[p.length - k] === a.pre[a.pre.length - k]; k++) sc++;
+      for (k = 0; k < Math.min(f.length, a.suf.length) && f[k] === a.suf[k]; k++) sc++;
+      if (sc > top) { top = sc; best = i; }
+      i = full.indexOf(a.q, i + 1);
+    }
+    return best;
+  }
+  function thWrap(idx, s0, e0, make) {
+    idx.nodes.forEach(function (x) {
+      var a = x.a, b = x.a + x.n.nodeValue.length;
+      if (b <= s0 || a >= e0) return;
+      var from = Math.max(s0, a) - a, to = Math.min(e0, b) - a, node = x.n;
+      if (!node.nodeValue.slice(from, to).trim()) return;
+      if (to < node.nodeValue.length) node.splitText(to);
+      if (from > 0) node = node.splitText(from);
+      var m = make(); node.parentNode.insertBefore(m, node); m.appendChild(node);
+    });
+  }
+  function thPaint(el, pid) {
+    var root = el.querySelector('.th-blocks'); ui.thAnnPos = {}; if (!root) return;
+    var pg = getThPage(pid);
+    // Important lines first (outermost), then fades, highlights and strikes
     state.thesis.marks.forEach(function (m) {
       if (m.page !== pid) return;
+      if (m.q) {
+        var idx = thTextIndex(root), at = thFind(idx.full, m); if (at < 0) return;
+        thWrap(idx, at, at + m.q.length, function () { var x = document.createElement('mark'); x.className = 'th-hl'; x.setAttribute('data-mid', m.id); return x; });
+        return;
+      }
       var tries = [m.text.trim()], first = m.text.trim().split('\n')[0].trim();
       if (first !== tries[0] && first.length >= 12) tries.push(first);
       tries.some(function (needle) {
@@ -3272,33 +3356,86 @@ td.c-break{display:none}
         return false;
       });
     });
+    var order = { fade: 0, yellow: 1, red: 1, strike: 2 };
+    ((pg && pg.ann) || []).slice().sort(function (a, b) { return order[a.kind] - order[b.kind]; }).forEach(function (a) {
+      var idx = thTextIndex(root), at = thFind(idx.full, a); if (at < 0) return;
+      ui.thAnnPos[a.id] = [at, at + a.q.length];
+      thWrap(idx, at, at + a.q.length, function () { var x = document.createElement('mark'); x.className = 'th-ann th-a-' + a.kind; x.setAttribute('data-aid', a.id); return x; });
+    });
+  }
+  function thOverlaps(o) {
+    var out = [], P = ui.thAnnPos || {};
+    Object.keys(P).forEach(function (id) { if (P[id][0] < o.e && P[id][1] > o.s) out.push(id); });
+    return out;
   }
 
-  // The little "★ Important" button that shows up when you select text in a page
-  var thSel = null;
+  // The pen bar that shows up when you select text in a page
+  var thSel = null, thSelRaf = 0;
+  var PEN_FADE = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.8 8S4 4.2 8 4.2 14.2 8 14.2 8 12 11.8 8 11.8 1.8 8 1.8 8z"/><circle cx="8" cy="8" r="1.9"/><path d="M3 13.2 13 2.8"/></svg>';
+  var PEN_CLEAR = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.6 2.9l3.5 3.5-6 6.1H4.3L2.4 10.6z"/><path d="M6.4 5.9l3.6 3.6M8.2 12.5h5.4"/></svg>';
   function thSelInit() {
-    var btn = document.createElement('button');
-    btn.type = 'button'; btn.id = 'th-markbtn'; btn.className = 'th-markbtn'; btn.innerHTML = STAR + 'Important'; btn.hidden = true;
-    document.body.appendChild(btn);
-    document.addEventListener('selectionchange', function () {
-      var s = window.getSelection(), root = $('#th-page .th-blocks');
-      if (mode === 'readonly' || currentView() !== 'thesis' || !root || !s || s.isCollapsed || !s.rangeCount) { btn.hidden = true; thSel = null; return; }
-      var r = s.getRangeAt(0), t = s.toString().replace(/\s+\n/g, '\n').trim();
-      if (!root.contains(r.commonAncestorContainer) || !t) { btn.hidden = true; thSel = null; return; }
-      thSel = { text: t, page: thCurrent() };
+    var bar = document.createElement('div');
+    bar.id = 'th-pen'; bar.className = 'th-pen'; bar.setAttribute('role', 'toolbar'); bar.setAttribute('aria-label', 'Mark the selected text'); bar.hidden = true;
+    bar.innerHTML = '<button type="button" class="pen-imp" data-pen="important" title="Keep it on your Important page">' + STAR + 'Important</button><i class="pen-sep"></i>' +
+      '<button type="button" data-pen="yellow" title="Yellow highlight" aria-label="Yellow highlight"><i class="sw sw-y"></i></button>' +
+      '<button type="button" data-pen="red" title="Red highlight" aria-label="Red highlight"><i class="sw sw-r"></i></button>' +
+      '<button type="button" data-pen="strike" title="Strike through" aria-label="Strike through"><span class="pen-s">S</span></button>' +
+      '<button type="button" data-pen="fade" title="Fade it: still there, just quiet" aria-label="Fade">' + PEN_FADE + '</button>' +
+      '<button type="button" class="pen-clear" data-pen="clear" title="Remove the marks here" aria-label="Remove marks">' + PEN_CLEAR + '</button>';
+    document.body.appendChild(bar);
+    function hide() { bar.hidden = true; thSel = null; }
+    function update() {
+      thSelRaf = 0;
+      var sel = window.getSelection(), root = $('#th-page .th-blocks');
+      if (mode === 'readonly' || currentView() !== 'thesis' || !root || !sel || sel.isCollapsed || !sel.rangeCount) return hide();
+      var r = sel.getRangeAt(0), t = sel.toString().replace(/\s+\n/g, '\n').trim();
+      if (!root.contains(r.commonAncestorContainer) || !t) return hide();
+      var idx = thTextIndex(root), o = thOffsets(idx, r);
+      if (!o) return hide();
+      thSel = { text: t, page: thCurrent(), o: o, a: thAnchor(idx, o), hits: thOverlaps(o) };
+      bar.querySelector('.pen-clear').hidden = !thSel.hits.length;
       var rects = r.getClientRects(), last = rects[rects.length - 1] || r.getBoundingClientRect();
-      btn.hidden = false;
-      var top = last.bottom + 8, left = Math.min(window.innerWidth - btn.offsetWidth - 8, Math.max(8, last.right - btn.offsetWidth / 2));
-      if (top + 44 > window.innerHeight) top = Math.max(8, last.top - 44);
-      btn.style.top = (top + (window.scrollY || 0)) + 'px'; btn.style.left = left + 'px';
+      bar.hidden = false;
+      var top = last.bottom + 10, left = Math.min(window.innerWidth - bar.offsetWidth - 8, Math.max(8, last.right - bar.offsetWidth / 2));
+      if (top + 52 > window.innerHeight) top = Math.max(8, last.top - 52);
+      bar.style.top = (top + (window.scrollY || 0)) + 'px'; bar.style.left = left + 'px';
+    }
+    document.addEventListener('selectionchange', function () { if (!thSelRaf) thSelRaf = requestAnimationFrame(update); });
+    bar.addEventListener('mousedown', function (e) { e.preventDefault(); });
+    bar.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-pen]'), x = thSel; if (!b || !x || mode === 'readonly') return;
+      var pen = b.dataset.pen;
+      if (pen === 'important') {
+        commit(function (s) { s.thesis.marks.push({ id: uid(), page: x.page, text: x.text.slice(0, 3000), q: x.a.q, pre: x.a.pre, suf: x.a.suf, created: Date.now() }); });
+        thToast('Kept on your Important page');
+      } else if (pen === 'clear') {
+        commit(function (s) { s.thesis.pages.forEach(function (pg) { if (pg.id === x.page) pg.ann = pg.ann.filter(function (a) { return x.hits.indexOf(a.id) < 0; }); }); });
+      } else {
+        commit(function (s) {
+          s.thesis.pages.forEach(function (pg) {
+            if (pg.id !== x.page) return;
+            // the same words marked again with the same kind of pen: replace instead of stacking
+            pg.ann = pg.ann.filter(function (a) { var P = ui.thAnnPos[a.id]; return !(P && P[0] === x.o.s && P[1] === x.o.e && (a.kind === pen || (a.kind !== 'strike' && a.kind !== 'fade' && pen !== 'strike' && pen !== 'fade'))); });
+            pg.ann.push({ id: uid(), kind: pen, q: x.a.q, pre: x.a.pre, suf: x.a.suf });
+          });
+        });
+      }
+      try { window.getSelection().removeAllRanges(); } catch (er) {}
+      hide();
     });
-    btn.addEventListener('mousedown', function (e) { e.preventDefault(); });
-    btn.addEventListener('click', function () {
-      var x = thSel; if (!x || mode === 'readonly') return;
-      commit(function (s) { s.thesis.marks.push({ id: uid(), page: x.page, text: x.text.slice(0, 3000), created: Date.now() }); });
-      try { window.getSelection().removeAllRanges(); } catch (e) {}
-      btn.hidden = true; thSel = null;
-      thToast('Kept on your Important page');
+    // tap a mark to select it, so the bar shows up with "remove" ready
+    document.addEventListener('click', function (e) {
+      var m = e.target.closest && e.target.closest('#th-page mark.th-ann'); if (!m || mode === 'readonly' || e.target.closest('a')) return;
+      var sel = window.getSelection(); if (sel && !sel.isCollapsed) return;
+      var P = (ui.thAnnPos || {})[m.getAttribute('data-aid')], root = $('#th-page .th-blocks'); if (!P || !root) return;
+      var idx = thTextIndex(root), r = document.createRange(), set = 0;
+      idx.nodes.forEach(function (x) {
+        var a = x.a, b = x.a + x.n.nodeValue.length;
+        if (!(set & 1) && P[0] >= a && P[0] < b) { r.setStart(x.n, P[0] - a); set |= 1; }
+        if (!(set & 2) && P[1] > a && P[1] <= b) { r.setEnd(x.n, P[1] - a); set |= 2; }
+      });
+      if (set !== 3) return;
+      sel.removeAllRanges(); sel.addRange(r);
     });
   }
   function thToast(msg) {
