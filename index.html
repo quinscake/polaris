@@ -23,7 +23,7 @@
   --tint-today:rgba(138,180,255,.09);
   --tint-hover:rgba(138,180,255,.05);
   --tint-wknd:rgba(255,255,255,.018);
-  --c0:#8ab4ff; --c1:#5fd4c4; --c2:#b79cff; --c3:#ffb86b; --c4:#9be07a; --c5:#ff86b3;
+  --c0:#8ab4ff; --c1:#5fd4c4; --c2:#b79cff; --c3:#ffb86b; --c4:#9be07a; --c5:#ff86b3; --c6:#ffd25c;
   --font-display:"Unbounded","Geist",system-ui,-apple-system,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
   --font-body:"Geist",system-ui,-apple-system,"Segoe UI","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
   --font-mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,"PingFang TC","Noto Sans TC",monospace;
@@ -617,61 +617,62 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .th-meta b{color:var(--ink);font-weight:600}
 .th-meta .is-soon{color:var(--warn)}
 .th-stages{list-style:none;margin:18px 0 0;padding:0;display:flex;gap:0}
-.th-stages li.is-view button .th-dot{box-shadow:0 0 0 3px rgba(255,184,107,.22)}
-.th-stages li.is-view .th-sname{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(255,184,107,.6);text-underline-offset:4px}
-.th-plan{margin:14px 0 0;padding:12px 0 0;border-top:1px dashed #2e2a22}
-.th-plan-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 6px}
+.th-stages li.is-view button .th-dot{box-shadow:0 0 0 3px rgba(255,210,92,.25)}
+.th-stages li.is-view .th-sname{color:var(--ink);text-decoration:underline;text-decoration-color:var(--c6);text-underline-offset:4px}
+.th-stages li.has-r .th-dot{border-color:var(--c6)}
+.th-plan{margin:14px 0 0;padding:12px 0 0;border-top:1px dashed #2e2a22;display:flex;flex-direction:column;gap:10px}
+.th-plan-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .th-plan-k{margin:0;display:flex;align-items:center;gap:8px;font:600 11px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .th-now-tag{font:700 9.5px var(--font-mono);letter-spacing:.08em;color:#1b1407;background:var(--warn);border-radius:999px;padding:1px 7px}
+.th-plan-act{margin-left:auto;font-size:12.5px;padding:0;display:inline-flex;align-items:center;gap:5px}
+.th-plan-act .star{width:12px;height:12px;color:var(--c6)}
 .th-plan-n{display:inline-flex;align-items:center;gap:8px;font:500 11.5px var(--font-mono);color:var(--muted)}
 .th-plan-n .th-proj-bar{display:block;width:80px;flex:none}
-.th-plan-n .th-proj-bar i{background:var(--warn)}
-.th-plan-act{margin-left:auto;font-size:12.5px;padding:0;display:inline-flex;align-items:center;gap:5px}
-.th-plan-act .star{width:12px;height:12px;color:var(--warn)}
+.th-plan-n .th-proj-bar i{background:var(--c6)}
+.th-rp{padding:10px 12px;border:1px solid rgba(255,210,92,.28);border-left:3px solid var(--c6);border-radius:10px;background:rgba(255,210,92,.03)}
+.th-rp.is-done{border-color:var(--rule);border-left-color:rgba(255,210,92,.45);background:none;opacity:.7}
+.th-rp-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 4px}
+.th-rp-name{display:inline-flex;align-items:center;gap:8px;padding:0;border:0;background:none;color:var(--ink);font:600 14.5px var(--font-body);cursor:pointer;text-align:left}
+.th-rp-name:hover span{text-decoration:underline;text-decoration-color:var(--c6);text-underline-offset:3px}
+.th-rp-name .star{width:13px;height:13px;color:var(--c6)}
+.th-rp-s{font:500 11.5px var(--font-mono);color:var(--muted)}
+.th-rp-s.is-behind{color:var(--warn)}
+.th-rp-more{font-size:12.5px;padding:0}
+.th-rp-start{align-self:flex-start;padding:8px 14px;border:1px dashed rgba(255,210,92,.5);border-radius:10px;background:none;color:var(--c6);font:600 13.5px var(--font-body);cursor:pointer}
+.th-rp-start:hover{background:rgba(255,210,92,.07)}
+.th-rp-elsewhere{margin:0;font-size:13px;color:var(--muted)}
+.th-rp-elsewhere .link-btn{padding:0;font-size:13px}
 .th-tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
-.th-task{border-radius:8px}
-.th-task.is-open{background:rgba(255,255,255,.025)}
-.th-task-row{display:flex;align-items:center;gap:10px;min-height:32px;padding:2px 6px}
-.th-task-ck{flex:none;width:16px;height:16px;margin:0;accent-color:var(--warn);cursor:pointer}
-.th-task-star{flex:none;width:16px;height:16px;padding:0;border:0;background:none;color:var(--warn);opacity:.45;cursor:pointer;display:grid;place-items:center}
+.th-task-row{display:flex;align-items:center;gap:10px;min-height:32px;padding:2px 4px}
+.th-task-ck{flex:none;width:16px;height:16px;margin:0;accent-color:var(--c6);cursor:pointer}
+.th-task-star{flex:none;width:16px;height:16px;padding:0;border:0;background:none;color:var(--c6);opacity:.5;cursor:pointer;display:grid;place-items:center}
+.th-task-star:disabled{cursor:default}
 .th-task-star .star{width:13px;height:13px}
-.th-task-star:hover{opacity:.9}
 .th-task-t{flex:1;min-width:0;text-align:left;background:none;border:0;padding:4px 0;color:var(--ink);font:inherit;font-size:14px;line-height:1.4;cursor:pointer}
 .th-task.is-done .th-task-t{color:#6c748c}
-.th-task-due{flex:none;font:500 11.5px var(--font-mono);color:var(--muted)}
+.th-task-due,.th-task-st{flex:none;font:500 11.5px var(--font-mono);color:var(--muted)}
+.th-task-st.is-doing{color:var(--accent)}
+.th-task-st.is-waiting{color:var(--warn)}
 .th-task-due.is-today{color:var(--warn)}
 .th-task-due.is-late{color:var(--stop)}
-.th-task-note{flex:none;max-width:42%;display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border:1px solid var(--rule);border-radius:999px;background:none;color:#9fb0d6;font:500 11.5px var(--font-body);cursor:pointer;overflow:hidden}
-.th-task-note span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.th-task-note .ico{width:12px;height:12px;flex:none}
-.th-task-note:hover{color:var(--accent);border-color:rgba(138,180,255,.4)}
-.th-task-ed{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 6px 10px 32px}
-.th-task-ed .th-task-title{flex:1 1 100%}
-.th-task-ed input[type=date]{width:auto;display:inline-block}
-.th-task-ed select{width:auto;max-width:260px}
-.th-task-ed .th-unmark{margin-left:auto}
-.th-task-add{margin:4px 0 0}
 .th-task-add input{background:transparent !important;border:1px dashed #343c55 !important;box-shadow:none !important;font-size:14px}
-.th-task-add input:focus{border-style:solid !important;border-color:rgba(255,184,107,.5) !important}
-.th-ntasks{margin:-6px 0 18px;padding:6px 8px;border:1px solid var(--rule);border-radius:10px;background:rgba(255,184,107,.03)}
-.th-done{display:inline-flex;align-items:center;gap:5px;color:var(--warn)}
-.th-done .star{width:12px;height:12px}
+.th-task-add input:focus{border-style:solid !important;border-color:rgba(255,210,92,.5) !important}
 .th-sec-h{display:flex !important;align-items:center;gap:6px;width:100%;background:none;border:0;cursor:pointer;text-align:left}
 .th-sec-h:hover{color:var(--ink)}
 .th-sec-h svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .th-chev{width:10px !important;height:10px !important;transition:transform .15s;transform:rotate(90deg)}
 .th-sec.is-folded .th-chev{transform:none}
 .th-sec-c{margin-left:auto;font:500 10.5px var(--font-mono);letter-spacing:0;color:#59617a}
-.row.research .label-box{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(255,184,107,.07),transparent 70%),var(--panel)}
-.row.research .label-name .star{width:12px;height:12px;color:var(--warn);margin-right:5px;vertical-align:-1px}
-.r-tag{color:var(--warn) !important;border-color:rgba(255,184,107,.45) !important}
-.node.is-r{cursor:default;display:grid;place-items:center}
-.ms-mark.is-r,.flag-mark.is-r{cursor:default;pointer-events:auto}
-.r-star{position:absolute;top:50%;z-index:2;width:16px;height:16px;transform:translate(-50%,-50%);color:var(--warn)}
+.row.research.active .label-box{background:linear-gradient(90deg,rgba(255,210,92,.08),transparent 70%),var(--panel)}
+.row.research.ended{opacity:.6}
+.row.research.ended .label-box{border-left-color:var(--c6)}
+.row.research.ended .line{background:var(--c6);opacity:.35}
+.row.research.ended .label-meta .star{width:11px;height:11px;color:var(--c6);margin-right:4px;vertical-align:-1px}
+.r-star{position:absolute;top:50%;z-index:2;width:16px;height:16px;transform:translate(-50%,-50%);color:var(--c6);pointer-events:none}
 .r-star .star{width:100%;height:100%;display:block}
-.row.research.silent{opacity:.5}
-.row.research.silent .line{opacity:.35;box-shadow:none}
-.row.research.silent .node{filter:saturate(.6)}
+.r-divider span{display:inline-flex;align-items:center;gap:6px;color:var(--c6)}
+.r-divider .star{width:11px;height:11px}
+.r-color-note{display:flex;align-items:center;gap:8px;font-size:13px;margin:-4px 0 4px}
 .th-proj{display:flex;align-items:center;gap:10px;width:100%;margin:14px 0 0;padding:6px 0 0;background:none;border:0;border-top:1px dashed #2e2a22;color:var(--muted);font:500 11.5px var(--font-mono);text-align:left;cursor:pointer}
 .th-proj-n{flex:none;max-width:40%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#9aa3b8}
 .th-proj-bar{flex:1;min-width:60px;height:3px;border-radius:2px;background:rgba(255,255,255,.07);overflow:hidden}
@@ -1427,6 +1428,7 @@ td.c-break{display:none}
   var LS_KEY = 'kepler:v1';
   var KEEP_DAYS = 7;
   var INKS = 6;
+  var RESEARCH_INK = 6;   // gold, kept for Research projects only
   var MIN_COL = { 7: 70, 14: 42, 30: 30 };
   var MIN_COL_PHONE = { 7: 30, 14: 19, 30: 20 };
   function isPhone() { return !!(window.matchMedia && window.matchMedia('(max-width: 640px)').matches); }
@@ -1622,9 +1624,7 @@ td.c-break{display:none}
     { id: 'research', name: 'Research' }, { id: 'application', name: 'Application' }, { id: 'class', name: 'Class' }
   ];
   // What a new project of each kind starts with. You can rename or delete any of them.
-  var KIND_STAGES = {
-    research: ['Reading and question', 'Simulations or experiments', 'Results', 'Write-up', 'Submit']
-  };
+  var KIND_STAGES = {};
   var ST_ORDER = ['todo', 'doing', 'waiting', 'done'];
   var ST_LABEL = { todo: 'To do', doing: 'Doing', waiting: 'Waiting', done: 'Done' };
   var WAIT_NUDGE = 7;
@@ -1738,10 +1738,18 @@ td.c-break{display:none}
         deadline: dl, deadlineAt: dAt, deadlineTz: dAt && validTz(p.deadlineTz) ? p.deadlineTz : '', pointsTotal: numOrNull(p.pointsTotal),
         endedBy: p.endedBy === 'deadline' ? 'deadline' : null,
         parked: !isISO(p.ended) && isISO(p.parked) ? p.parked : null,
-        area: areaIds[p.area] && !dropArea[p.area] && p.area !== 'research' ? String(p.area) : null, goal: goalIds[p.goal] ? String(p.goal) : null, milestones: ms,
+        area: areaIds[p.area] && !dropArea[p.area] ? String(p.area) : null, goal: goalIds[p.goal] ? String(p.goal) : null, milestones: ms,
         links: normLinks(p.links), notes: typeof p.notes === 'string' ? p.notes.slice(0, 10000) : '',
-        created: Number(p.created) || 0, sample: !!p.sample
+        created: Number(p.created) || 0, sample: !!p.sample, rstage: typeof p.rstage === 'string' ? p.rstage : null
       });
+    });
+    // Research: one running at a time (the newest keeps the tag), always gold, filed under a research stage
+    var rLive = out.projects.filter(function (x) { return x.area === 'research' && !x.ended; }).sort(function (a, b) { return b.created - a.created; });
+    rLive.slice(1).forEach(function (x) { x.area = null; });
+    var rIds = {}; TH_STAGES.forEach(function (g) { rIds[g.id] = true; });
+    out.projects.forEach(function (x) {
+      if (x.area === 'research') { x.color = RESEARCH_INK; if (!rIds[x.rstage]) x.rstage = guessRStage(x.name) || out.thesis.stage; }
+      else { x.rstage = null; if (x.color === RESEARCH_INK) x.color = 0; }
     });
     (Array.isArray(s.updates) ? s.updates : []).forEach(function (u) {
       if (!u || !ids[String(u.projectId)] || !isISO(u.date) || typeof u.text !== 'string') return;
@@ -1828,7 +1836,7 @@ td.c-break{display:none}
 
   /* ---------- derived ---------- */
   function getProject(id) { for (var i = 0; i < state.projects.length; i++) if (state.projects[i].id === id) return state.projects[i]; return null; }
-  function statusOf(p, T) { if (!p.ended) return 'active'; return diffDays(p.ended, T) >= KEEP_DAYS ? 'archived' : 'ended'; }
+  function statusOf(p, T) { if (!p.ended) return 'active'; if (p.area === 'research') return 'ended'; return diffDays(p.ended, T) >= KEEP_DAYS ? 'archived' : 'ended'; }
   function leavesOn(p) { return addDays(p.ended, KEEP_DAYS); }
   function updatesFor(pid, d) { return state.updates.filter(function (u) { return u.projectId === pid && u.date === d; }).sort(function (a, b) { return a.created - b.created; }); }
   function countFor(pid) { var n = 0; state.updates.forEach(function (u) { if (u.projectId === pid) n++; }); return n; }
@@ -1846,13 +1854,19 @@ td.c-break{display:none}
   }
   // Parked: paused on purpose. Quiet (no to-dos, nudges or Doing), but the final deadline still counts.
   function isParked(p) { return !p.ended && !!p.parked; }
-  // The Research tab is one project of its own: it shows on the Timeline and counts in orbit until it's complete.
-  function researchShown() { var th = state.thesis; return !!(th && (th.title || th.tasks.length || th.pages.length || th.journal.length)); }
-  function researchActive() { return researchShown() && !state.thesis.done; }
-  function orbitCount() { return inOrbit().length + (researchActive() ? 1 : 0); }
+  function isResearch(p) { return p.area === 'research'; }
+  function activeResearch() { for (var i = 0; i < state.projects.length; i++) { var p = state.projects[i]; if (p.area === 'research' && !p.ended) return p; } return null; }
+  // quiet on the To-do side: parked projects, and Research (it lives in the Research tab)
+  function offTodo(p) { return !!p.parked || p.area === 'research'; }
+  function guessRStage(name) {
+    var n = String(name || '').toLowerCase(), M = [['literat', 'lit'], ['reading', 'lit'], ['proposal', 'proposal'], ['method', 'method'], ['result', 'results'], ['writ', 'writing'], ['defen', 'defense'], ['topic', 'topic']];
+    for (var i = 0; i < M.length; i++) if (n.indexOf(M[i][0]) >= 0) return M[i][1];
+    return null;
+  }
   function inOrbit() { return state.projects.filter(function (p) { return !p.ended && !p.parked; }); }
   function parkProject(pid, on) {
     var p = getProject(pid); if (!p || p.ended || mode === 'readonly') return;
+    if (on && isResearch(p)) return;
     if (!!p.parked === !!on) return;
     commit(function () { p.parked = on ? todayISO() : null; });
   }
@@ -1866,7 +1880,7 @@ td.c-break{display:none}
   }
   function leastUsedColor() {
     var counts = [0, 0, 0, 0, 0, 0], T = todayISO();
-    state.projects.forEach(function (p) { if (statusOf(p, T) !== 'archived') counts[p.color]++; });
+    state.projects.forEach(function (p) { if (statusOf(p, T) !== 'archived' && p.color < INKS) counts[p.color]++; });
     var best = 0; for (var i = 1; i < INKS; i++) if (counts[i] < counts[best]) best = i;
     return best;
   }
@@ -1891,11 +1905,11 @@ td.c-break{display:none}
   function goalById(id) { var g = null; state.mission.goals.forEach(function (x) { if (x.id === id) g = x; }); return g; }
   function lastActivity(p) { return lastUpdate(p) || p.start; }
   function driftDays(p, T) { return p.ended ? 0 : Math.max(0, diffDays(lastActivity(p), T)); }
-  function isDrifting(p, T) { return !p.ended && !p.parked && driftDays(p, T) >= DRIFT_DAYS; }
+  function isDrifting(p, T) { return !p.ended && !offTodo(p) && driftDays(p, T) >= DRIFT_DAYS; }
   function taskById(p, mid) { var m = null; p.milestones.forEach(function (x) { if (x.id === mid) m = x; }); return m; }
   function doingAll() {
     var out = [];
-    state.projects.forEach(function (p) { if (p.ended || p.parked) return; piecesOf(p).forEach(function (m) { if (!m.done && m.status === 'doing') out.push({ p: p, m: m }); }); });
+    state.projects.forEach(function (p) { if (p.ended || offTodo(p)) return; piecesOf(p).forEach(function (m) { if (!m.done && m.status === 'doing') out.push({ p: p, m: m }); }); });
     return out;
   }
   function piecesOf(p) { return p.milestones.filter(function (m) { return !m.parent; }); }
@@ -2032,7 +2046,7 @@ td.c-break{display:none}
   function dueItems() {
     var items = [];
     state.projects.forEach(function (p) {
-      if (p.ended) return;
+      if (p.ended || p.area === 'research') return;
       if (p.deadline) items.push({ kind: 'deadline', date: p.deadline, p: p, title: p.name, done: false });
       if (p.parked) return;
       p.milestones.forEach(function (m) { if (m.date && !m.parent) items.push({ kind: 'milestone', date: m.date, p: p, m: m, title: m.title, done: m.done }); });
@@ -2478,13 +2492,13 @@ td.c-break{display:none}
         '. Finishing one before starting the next gets more done. Aim for ' + DOING_MAX + '.</span><span class="reminder-acts">' +
         '<button type="button" class="link-btn edit-only" data-act="review">Pick my 3</button>' + dismissBtn('doing|' + T) + '</span></div>' });
     }
-    var orbitN = orbitCount();
-    if (orbitN > FOCUS_MAX && !dismissed['focus|' + T]) {
-      cards.push({ n: 45, html: '<div class="reminder">' + ORBIT + '<span class="msg"><b>' + orbitN + ' projects in orbit.</b> Park one to keep ' + FOCUS_MAX + '.</span><span class="reminder-acts">' +
+    var orbit = inOrbit();
+    if (orbit.length > FOCUS_MAX && !dismissed['focus|' + T]) {
+      cards.push({ n: 45, html: '<div class="reminder">' + ORBIT + '<span class="msg"><b>' + orbit.length + ' projects in orbit.</b> Park one to keep ' + FOCUS_MAX + '.</span><span class="reminder-acts">' +
         '<button type="button" class="link-btn edit-only" data-act="park-pick">Park one</button>' + dismissBtn('focus|' + T) + '</span></div>' });
     }
     state.projects.forEach(function (p) {
-      if (p.ended || p.parked) return;
+      if (p.ended || offTodo(p)) return;
       p.milestones.forEach(function (m) {
         if (m.done || m.status !== 'waiting' || !m.waitSince) return;
         var w = diffDays(m.waitSince, T), key = 'wait|' + m.id + '|' + T;
@@ -2537,7 +2551,6 @@ td.c-break{display:none}
     if (ui.area !== 'all' && !state.areas.some(function (a) { return a.id === ui.area; })) ui.area = 'all';
     var areaCount = {};
     state.projects.forEach(function (p) { if (statusOf(p, T) !== 'archived' && p.area) areaCount[p.area] = (areaCount[p.area] || 0) + 1; });
-    if (researchActive()) areaCount.research = 1;
     $('#area-chips').innerHTML = '<button type="button" class="chip" data-area="all" aria-pressed="' + (ui.area === 'all') + '">All</button>' +
       state.areas.map(function (a) {
         return '<button type="button" class="chip" data-area="' + esc(a.id) + '" aria-pressed="' + (ui.area === a.id) + '">' + esc(a.name) + (areaCount[a.id] ? '<span class="n">' + areaCount[a.id] + '</span>' : '') + '</button>';
@@ -2561,43 +2574,6 @@ td.c-break{display:none}
       return '<div class="' + cls + '" style="left:' + l.toFixed(3) + '%;width:' + (r - l).toFixed(3) + '%"></div>';
     }
 
-    function researchRowHTML() {
-      var th = state.thesis, done = th.done, c = thTaskCount(), si = thStageIndex(), days = {}, out = '';
-      th.journal.forEach(function (e) { (days[e.date] = days[e.date] || { n: 0, t: 0 }).n++; });
-      th.tasks.forEach(function (t) { if (!t.done || !t.doneAt) return; var d = isoOf(t.doneAt); (days[d] = days[d] || { n: 0, t: 0 }).n++; days[d].t++; });
-      var f = idx(thStart());
-      if (done) out += seg('line', cx(f), cx(idx(done)));
-      else { out += seg('line', cx(f), cx(ti)); out += th.due ? seg('line plan', cx(ti), cx(idx(th.due))) : seg('line stub', cx(ti), cx(ti) + colW * 0.9, true); }
-      Object.keys(days).forEach(function (d) {
-        var k = idx(d); if (k < 0 || k > N - 1) return;
-        var x = days[d], bits = [];
-        if (x.t) bits.push(plural(x.t, 'task') + ' done');
-        if (x.n - x.t) bits.push((x.n - x.t) + ' journal ' + (x.n - x.t === 1 ? 'entry' : 'entries'));
-        out += '<span class="node is-r' + (x.n > 1 ? ' multi' : '') + '" style="left:' + cx(k).toFixed(3) + '%" title="' + esc(fmtLong(d) + ': ' + bits.join(', ')) + '">' + (x.n > 1 ? x.n : x.t ? CK : '') + '</span>';
-      });
-      th.tasks.forEach(function (t) {
-        if (t.done || !t.due) return;
-        var mi = idx(t.due); if (mi < 0 || mi > N - 1) return;
-        var ml = diffDays(T, t.due);
-        out += '<span class="ms-mark is-r' + (ml >= 0 && ml <= DUE_SOON ? ' is-soon' : '') + '" style="left:' + cx(mi).toFixed(3) + '%" title="' + esc(t.title + ' · ' + fmtLong(t.due)) + '">' + DIAMOND + '</span>';
-      });
-      if (done) { var d0 = idx(done); if (d0 >= 0 && d0 <= N - 1) out += '<span class="r-star" style="left:' + cx(d0).toFixed(3) + '%" title="Completed ' + fmtLong(done) + '">' + STAR + '</span>'; }
-      else if (th.due) {
-        var di = idx(th.due), dl = diffDays(T, th.due);
-        out += di <= N - 1 ? '<span class="flag-mark is-r' + (dl <= DUE_SOON ? ' is-soon' : '') + '" style="left:' + cx(di).toFixed(3) + '%" title="Due ' + fmtLong(th.due) + '">' + FLAG + '</span>'
-          : '<span class="due-off">due ' + fmtShort(th.due) + ' →</span>';
-      }
-      var parts = [];
-      if (done) parts.push('Completed ' + fmtShort(done) + (c.total ? ' · ' + c.done + '/' + c.total : ''));
-      else {
-        if (th.due) { var d2 = diffDays(T, th.due); parts.push('<span class="due' + (d2 <= DUE_SOON ? ' is-soon' : '') + '">' + FLAG + 'Due ' + fmtShort(th.due) + ' · ' + (d2 < 0 ? plural(-d2, 'day') + ' over' : d2 === 0 ? 'today' : plural(d2, 'day') + ' left') + '</span>'); }
-        parts.push((si + 1) + ' of ' + TH_STAGES.length + ' · ' + esc(TH_STAGES[si].name));
-        if (c.total) parts.push('<span class="prog"><i class="mbar"><i style="width:' + Math.round(c.done / c.total * 100) + '%"></i></i>' + c.done + '/' + c.total + '</span>');
-      }
-      return '<div class="row research ' + (done ? 'silent' : 'active') + '" style="--pc:var(--warn)"><div class="label"><button type="button" class="label-box" data-act="research" title="Open Research">' +
-        '<span class="label-name">' + (done ? STAR : '') + esc(th.title || 'Research') + '<span class="area-tag r-tag">Research</span></span><span class="label-meta">' + parts.join('<br>') + '</span></button><div class="label-acts"></div></div>' +
-        '<div class="lane is-r">' + out + '</div></div>';
-    }
     function rowHTML(p, st) {
       var ups = groups[p.id] || {};
       var f = firstDate(p), si = idx(f), out = '';
@@ -2618,7 +2594,8 @@ td.c-break{display:none}
       });
       if (p.ended) {
         var ei = idx(p.ended);
-        if (ei >= 0 && ei <= N - 1) out += '<span class="xmark" style="left:' + cx(ei).toFixed(3) + '%" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5.5 L19.5 18.5"/><path d="M18.5 4.5 L5.5 19.5"/></svg></span>';
+        if (isResearch(p)) { if (ei >= 0 && ei <= N - 1) out += '<span class="r-star" style="left:' + cx(ei).toFixed(3) + '%" title="Completed ' + fmtLong(p.ended) + '">' + STAR + '</span>'; }
+        else if (ei >= 0 && ei <= N - 1) out += '<span class="xmark" style="left:' + cx(ei).toFixed(3) + '%" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5.5 L19.5 18.5"/><path d="M18.5 4.5 L5.5 19.5"/></svg></span>';
       } else if (p.deadline) {
         var di = idx(p.deadline), dl = diffDays(T, p.deadline), soon = dl <= DUE_SOON;
         var tip = 'Deadline: ' + fmtLong(p.deadline) + (p.deadlineAt ? ', ' + localTimeOf(p.deadlineAt) : '') + ' (' + leftText(p, T) + ')';
@@ -2656,20 +2633,21 @@ td.c-break{display:none}
         if (isDrifting(p, T)) parts.push('<span class="drift">quiet for ' + driftDays(p, T) + ' days</span>');
       } else {
         var left2 = KEEP_DAYS - diffDays(p.ended, T);
-        parts.push((p.endedBy === 'deadline' ? 'Hit deadline ' : 'Ended ') + fmtShort(p.ended) + ' · ' + (left2 <= 1 ? 'leaves tomorrow' : 'leaves in ' + left2 + ' days'));
+        if (isResearch(p)) parts.push(STAR + 'Completed ' + fmtShort(p.ended) + (tc.total ? ' · ' + tc.done + '/' + tc.total : ''));
+        else parts.push((p.endedBy === 'deadline' ? 'Hit deadline ' : 'Ended ') + fmtShort(p.ended) + ' · ' + (left2 <= 1 ? 'leaves tomorrow' : 'leaves in ' + left2 + ' days'));
       }
       var meta = parts.join('<br>');
       var dlTitle = p.deadline ? 'Change deadline' : 'Set a deadline';
       var btns = st === 'active'
         ? '<button type="button" class="act edit-only" data-act="deadline" data-pid="' + esc(p.id) + '" title="' + dlTitle + '" aria-label="' + dlTitle + '">' + FLAG + '</button>' +
-          '<button type="button" class="act park edit-only" data-act="park" data-pid="' + esc(p.id) + '" title="Park it for later" aria-label="Park ' + esc(p.name) + '">' + PARK_ICO + '</button>' +
+          (isResearch(p) ? '' : '<button type="button" class="act park edit-only" data-act="park" data-pid="' + esc(p.id) + '" title="Park it for later" aria-label="Park ' + esc(p.name) + '">' + PARK_ICO + '</button>') +
           '<button type="button" class="act end edit-only" data-act="end" data-pid="' + esc(p.id) + '" title="End project" aria-label="End project">' + END_ICO + '</button>'
         : st === 'parked'
         ? '<button type="button" class="act unpark edit-only" data-act="unpark" data-pid="' + esc(p.id) + '" title="Bring it back into orbit" aria-label="Bring ' + esc(p.name) + ' back">' + UNPARK_ICO + '</button>' +
           '<button type="button" class="act end edit-only" data-act="end" data-pid="' + esc(p.id) + '" title="End project" aria-label="End project">' + END_ICO + '</button>'
         : '<button type="button" class="act edit-only" data-act="reopen" data-pid="' + esc(p.id) + '" title="Reopen project" aria-label="Reopen project">' + REOPEN_ICO + '</button>' +
           '<button type="button" class="act del edit-only" data-act="delete-now" data-pid="' + esc(p.id) + '" title="Delete now" aria-label="Delete ' + esc(p.name) + ' now">' + TRASH_ICO + '</button>';
-      return '<div class="row ' + st + (isDrifting(p, T) ? ' drifting' : '') + '"' + (st !== 'ended' ? sortAttr(p.id) : '') + ' style="--pc:var(--c' + p.color + ')">' +
+      return '<div class="row ' + st + (isResearch(p) ? ' research' : '') + (isDrifting(p, T) ? ' drifting' : '') + '"' + (st !== 'ended' ? sortAttr(p.id) : '') + ' style="--pc:var(--c' + p.color + ')">' +
         '<div class="label"><button type="button" class="label-box" data-act="project" data-pid="' + esc(p.id) + '" title="Open project"><span class="label-name">' + esc(p.name) +
         (st === 'parked' ? '<span class="area-tag park-tag">Parked</span>' : areaOf(p) ? '<span class="area-tag">' + esc(areaOf(p).name) + '</span>' : '') + '</span><span class="label-meta">' + meta + '</span></button>' +
         '<div class="label-acts">' + btns + '</div></div>' +
@@ -2680,22 +2658,24 @@ td.c-break{display:none}
       return '<div class="col' + (d === T ? ' is-today' : '') + (d > T ? ' is-future' : (isWeekend(d) ? ' is-wknd' : '')) + '"></div>';
     }).join('') + '</div>';
 
-    var showR = researchShown() && (ui.area === 'all' || ui.area === 'research');
-    if (!vis.active.length && !vis.parked.length && !vis.ended.length && !showR) {
+    if (!vis.active.length && !vis.parked.length && !vis.ended.length) {
       html += '<div class="empty"><p>' + (ui.area !== 'all' && state.projects.length ? 'No projects in this area yet.' : 'Nothing on the board yet.') + '</p><button type="button" class="btn primary edit-only" data-act="new-project">+ New project</button>' +
         (!inViewer && !gh ? '<button type="button" class="btn" data-act="sync">Load my board from GitHub</button>' : '') + '</div>';
     }
-    if (showR && !state.thesis.done) html += researchRowHTML();
-    html += vis.active.map(function (p) { return rowHTML(p, 'active'); }).join('');
-    if (showR && state.thesis.done) html += researchRowHTML();
+    html += vis.active.filter(isResearch).concat(vis.active.filter(function (p) { return !isResearch(p); })).map(function (p) { return rowHTML(p, 'active'); }).join('');
     // the Parking lot: drag a project below this line to park it, above it to bring it back
-    if (vis.parked.length || orbitCount() > FOCUS_MAX) {
+    if (vis.parked.length || vis.active.length > FOCUS_MAX) {
       html += '<div class="divider park-divider"' + sortAttr('__park') + '><span>' + PARK_ICO + 'Parking lot</span></div>';
       html += vis.parked.map(function (p) { return rowHTML(p, 'parked'); }).join('');
     }
-    if (vis.ended.length) {
+    var endedR = vis.ended.filter(isResearch), endedO = vis.ended.filter(function (p) { return !isResearch(p); });
+    if (endedO.length) {
       html += '<div class="divider"><span>Ended · each leaves the board ' + KEEP_DAYS + ' days after its ✕</span></div>';
-      html += vis.ended.map(function (p) { return rowHTML(p, 'ended'); }).join('');
+      html += endedO.map(function (p) { return rowHTML(p, 'ended'); }).join('');
+    }
+    if (endedR.length) {
+      html += '<div class="divider r-divider"><span>' + STAR + 'Research done</span></div>';
+      html += endedR.map(function (p) { return rowHTML(p, 'ended'); }).join('');
     }
 
     var wdLen = phone ? (past <= 7 ? 2 : 1) : (past <= 7 ? 3 : past <= 14 ? 2 : 1);
@@ -2847,7 +2827,7 @@ td.c-break{display:none}
     });
     state.projects.forEach(function (p) {
       if (p.ended) return;
-      if (!p.parked) p.milestones.forEach(function (m) {
+      if (!offTodo(p)) p.milestones.forEach(function (m) {
         if (m.done) { if (recentDone(m.doneAt)) done.push({ kind: 'ms', p: p, m: m, at: m.doneAt }); return; }
         var due = m.date && m.date <= T, pulled = m.today && m.today <= T;
         if (due || pulled) today.push({ kind: 'ms', p: p, m: m, rank: m.date && m.date < T ? 0 : due ? 1 : 2, key: (m.date || '') + (m.time || '') });
@@ -2864,7 +2844,7 @@ td.c-break{display:none}
     week = week.filter(function (x) { return x.kind !== 'quick' || !x.t.done; });
     // Next steps: projects with nothing on today's list or this week, and the first open to-do of each
     state.projects.forEach(function (p) {
-      if (p.ended || p.parked) return;
+      if (p.ended || offTodo(p)) return;
       var busy = today.concat(week).some(function (x) { return x.p && x.p === p && x.kind === 'ms'; });
       if (busy) return;
       next.push({ p: p, m: nextAction(p) });
@@ -2879,7 +2859,7 @@ td.c-break{display:none}
   }
   function renderTodoProjects() {
     var sel = $('#td-project'); if (!sel) return;
-    var cur = sel.value, act = inOrbit();
+    var cur = sel.value, act = inOrbit().filter(function (p) { return !isResearch(p); });
     sel.innerHTML = '<option value="">No project</option>' + act.map(function (p) { return '<option value="' + esc(p.id) + '">' + esc(p.name) + '</option>'; }).join('');
     if (act.some(function (p) { return p.id === cur; })) sel.value = cur;
   }
@@ -3040,7 +3020,7 @@ td.c-break{display:none}
     TH_CANVAS.forEach(function (f) { canvas[f.id] = str(cv[f.id], 4000); });
     var stage = stIds[th.stage] ? th.stage : 'topic', out = {
       title: str(th.title, 200).trim(), question: str(th.question, 600).trim(), advisor: str(th.advisor, 120).trim(),
-      due: isISO(th.due) ? th.due : null, stage: stage, done: isISO(th.done) ? th.done : null, canvas: canvas, pages: [], marks: [], topics: []
+      due: isISO(th.due) ? th.due : null, stage: stage, canvas: canvas, pages: [], marks: [], topics: []
     };
     var pids = {};
     (Array.isArray(th.pages) ? th.pages : []).slice(0, 500).forEach(function (pg) {
@@ -3061,11 +3041,6 @@ td.c-break{display:none}
       var mk = { id: typeof m.id === 'string' && m.id ? m.id.slice(0, 40) : uid(), page: pids[m.page] ? m.page : null, text: m.text.trim().slice(0, 3000), created: Number(m.created) || Date.now() };
       if (mk.page && typeof m.q === 'string' && m.q.trim()) { mk.q = m.q.slice(0, 20000); mk.pre = str(m.pre, 40); mk.suf = str(m.suf, 40); }
       out.marks.push(mk);
-    });
-    out.tasks = (Array.isArray(th.tasks) ? th.tasks : []).filter(function (t) { return t && typeof t.title === 'string' && t.title.trim(); }).slice(0, 1500).map(function (t) {
-      var cr = Number(t.created) || Date.now();
-      return { id: typeof t.id === 'string' && t.id ? t.id.slice(0, 40) : uid(), stage: stIds[t.stage] ? t.stage : stage, title: t.title.trim().slice(0, 300),
-        done: !!t.done, doneAt: t.done ? (Number(t.doneAt) || cr) : 0, due: isISO(t.due) ? t.due : null, note: pids[t.note] ? t.note : null, created: cr };
     });
     var umbIds = {};
     out.journal = (Array.isArray(th.journal) ? th.journal : []).filter(function (e) { return e && typeof e.text === 'string' && e.text.trim(); }).slice(0, 3000).map(function (e) {
@@ -3394,55 +3369,55 @@ td.c-break{display:none}
     renderThHead(T); renderThList(); renderThPage();
   }
   function thViewStage() { var v = ui.thView; for (var i = 0; i < TH_STAGES.length; i++) if (TH_STAGES[i].id === v) return v; return state.thesis.stage; }
-  function thStageTasks(stg) {
-    var L = state.thesis.tasks.filter(function (t) { return t.stage === stg; });
-    return L.filter(function (t) { return !t.done; }).sort(function (a, b) { return a.created - b.created; })
-      .concat(L.filter(function (t) { return t.done; }).sort(function (a, b) { return a.doneAt - b.doneAt; }));
+  function thStageName(id) { for (var i = 0; i < TH_STAGES.length; i++) if (TH_STAGES[i].id === id) return TH_STAGES[i].name; return ''; }
+  function thPieceRow(p, m, ro) {
+    var T = todayISO(), pid = esc(p.id), mid = esc(m.id), live = !p.ended && !ro;
+    var due = m.date && !m.done ? '<span class="th-task-due' + (m.date < T ? ' is-late' : m.date === T ? ' is-today' : '') + '">' + (m.date === T ? 'today' : fmtShort(m.date)) + '</span>' : '';
+    var st = !m.done && m.status !== 'todo' ? '<span class="th-task-st is-' + m.status + '">' + ST_LABEL[m.status] + '</span>' : '';
+    var mark = m.done
+      ? '<button type="button" class="th-task-star" data-act="th-r-done" data-pid="' + pid + '" data-mid="' + mid + '" title="Done' + (m.doneOn ? ' ' + fmtShort(m.doneOn) : '') + (live ? '. Tap to reopen' : '') + '"' + (live ? '' : ' disabled') + '>' + STAR + '</button>'
+      : '<input type="checkbox" class="th-task-ck" data-act="th-r-done" data-pid="' + pid + '" data-mid="' + mid + '" aria-label="Done: ' + esc(m.title) + '"' + (live ? '' : ' disabled') + '>';
+    var steps = stepsOf(p, m), sd = steps.filter(function (x) { return x.done; }).length;
+    return '<li class="th-task' + (m.done ? ' is-done' : '') + '"><div class="th-task-row">' + mark +
+      '<button type="button" class="th-task-t" data-act="th-r-piece" data-pid="' + pid + '" data-mid="' + mid + '">' + esc(m.title) + '</button>' +
+      (steps.length ? '<span class="th-task-due">' + sd + '/' + steps.length + '</span>' : '') + st + due + '</div></li>';
   }
-  function thTaskCount(stg) { var L = state.thesis.tasks.filter(function (t) { return !stg || t.stage === stg; }); return { done: L.filter(function (t) { return t.done; }).length, total: L.length }; }
-  function thStart() {
-    var th = state.thesis, f = todayISO();
-    th.pages.forEach(function (x) { var d = isoOf(x.created); if (d < f) f = d; });
-    th.journal.forEach(function (e) { if (e.date < f) f = e.date; });
-    th.tasks.forEach(function (t) { var d = isoOf(t.created); if (d < f) f = d; });
-    return f;
-  }
-  function thTaskRow(t, inPage) {
-    var ro = mode === 'readonly', open = !inPage && ui.thTask === t.id, T = todayISO(), pg = !inPage && t.note ? getThPage(t.note) : null, id = esc(t.id);
-    var due = t.due && !t.done ? '<span class="th-task-due' + (t.due < T ? ' is-late' : t.due === T ? ' is-today' : '') + '">' + (t.due === T ? 'today' : fmtShort(t.due)) + '</span>' : '';
-    var note = pg ? '<button type="button" class="th-task-note" data-act="th-open" data-id="' + esc(pg.id) + '" title="Open the note">' + DOC_ICO + '<span>' + esc(truncate(pg.title, 38)) + '</span></button>' : '';
-    var mark = t.done
-      ? '<button type="button" class="th-task-star" data-act="th-task-done" data-id="' + id + '" title="Done ' + fmtShort(isoOf(t.doneAt)) + (ro ? '' : '. Tap to reopen') + '"' + (ro ? ' disabled' : '') + '>' + STAR + '</button>'
-      : '<input type="checkbox" class="th-task-ck" data-act="th-task-done" data-id="' + id + '" aria-label="Done: ' + esc(t.title) + '"' + (ro ? ' disabled' : '') + '>';
-    var h = '<li class="th-task' + (t.done ? ' is-done' : '') + (open ? ' is-open' : '') + '"><div class="th-task-row">' + mark +
-      (inPage || ro ? '<span class="th-task-t">' + esc(t.title) + '</span>' : '<button type="button" class="th-task-t" data-act="th-task-open" data-id="' + id + '">' + esc(t.title) + '</button>') + due + note + '</div>';
-    if (open && !ro) {
-      var P = state.thesis.pages.slice().sort(function (x, y) { return (x.stage === t.stage ? 0 : 1) - (y.stage === t.stage ? 0 : 1) || y.updated - x.updated; });
-      h += '<div class="th-task-ed"><label class="sr-only" for="th-tt-' + id + '">Task</label><input id="th-tt-' + id + '" class="th-task-title" data-task-title="' + id + '" value="' + esc(t.title) + '" maxlength="300">' +
-        '<label class="th-lbl" for="th-td-' + id + '">Due</label><input type="date" id="th-td-' + id + '" data-task-due="' + id + '" value="' + (t.due || '') + '">' +
-        '<label class="th-lbl" for="th-tk-' + id + '">Note</label><select id="th-tk-' + id + '" data-task-note="' + id + '"><option value="">None</option>' +
-        P.map(function (x) { return '<option value="' + esc(x.id) + '"' + (x.id === t.note ? ' selected' : '') + '>' + esc(truncate(x.title, 60)) + '</option>'; }).join('') + '</select>' +
-        '<button type="button" class="link-btn th-unmark" data-act="th-task-del" data-id="' + id + '">Delete</button></div>';
-    }
-    return h + '</li>';
+  function thProjBlock(p, T) {
+    var ro = mode === 'readonly', P = piecesOf(p), open = P.filter(function (m) { return !m.done; }), done = P.filter(function (m) { return m.done; });
+    var tc = taskCounts(p), pc = paceOf(p), bits = [];
+    if (p.ended) bits.push('Completed ' + fmtShort(p.ended));
+    else { if (p.deadline) bits.push('due ' + fmtShort(p.deadline) + ' · ' + leftText(p, T)); if (pc && pc.key !== 'done') bits.push(pc.label.toLowerCase()); }
+    var h = '<div class="th-rp' + (p.ended ? ' is-done' : '') + '"><div class="th-rp-h">' +
+      '<button type="button" class="th-rp-name" data-act="th-r-hub" data-pid="' + esc(p.id) + '" title="Open the project window">' + (p.ended ? STAR : '<i class="rv-dot" style="background:var(--c' + RESEARCH_INK + ')"></i>') + '<span>' + esc(p.name) + '</span></button>' +
+      (tc.total ? '<span class="th-plan-n"><i class="th-proj-bar"><i style="width:' + Math.round(tc.done / tc.total * 100) + '%"></i></i>' + tc.done + '/' + tc.total + '</span>' : '') +
+      '<span class="th-rp-s' + (pc && pc.key === 'behind' && !p.ended ? ' is-behind' : '') + '">' + esc(bits.join(' · ')) + '</span>' +
+      (ro || p.ended ? '' : '<button type="button" class="link-btn th-plan-act" data-act="th-r-complete" data-pid="' + esc(p.id) + '">' + STAR + 'Complete</button>') + '</div>';
+    if (!p.ended || ui.thPast === p.id) {
+      h += (open.length || done.length ? '<ul class="th-tasks">' + open.concat(done).map(function (m) { return thPieceRow(p, m, ro); }).join('') + '</ul>' : '') +
+        (ro || p.ended ? '' : '<form class="th-task-add" data-form="th-r-add" data-pid="' + esc(p.id) + '"><label class="sr-only" for="th-r-new">New task</label><input id="th-r-new" maxlength="140" autocomplete="off" placeholder="+ Task for ' + esc(p.name) + '"></form>');
+    } else h += '<button type="button" class="link-btn th-rp-more" data-act="th-r-past" data-pid="' + esc(p.id) + '">Show its ' + plural(P.length, 'task') + '</button>';
+    return h + '</div>';
   }
   function renderThHead(T) {
     var head = $('#th-head'), ae = document.activeElement;
-    if (ae && head.contains(ae) && ae.tagName === 'INPUT' && ae.type !== 'checkbox' && ae.type !== 'date') return;   // you're typing up there
+    if (ae && head.contains(ae) && ae.tagName === 'INPUT' && ae.type !== 'checkbox') return;   // you're typing up there
     var th = state.thesis, ro = mode === 'readonly', si = thStageIndex(), meta = [];
-    if (th.done) meta.push('<span class="th-done">' + STAR + 'Completed ' + fmtShort(th.done) + '</span>');
     if (th.advisor) meta.push('Advisor: ' + esc(th.advisor));
-    if (th.due && !th.done) { var dl = diffDays(T, th.due); meta.push('Due ' + fmtYear(th.due) + ' · <span class="' + (dl <= 14 ? 'is-soon' : '') + '">' + (dl < 0 ? plural(-dl, 'day') + ' ago' : dl === 0 ? 'today' : plural(dl, 'day') + ' left') + '</span>'); }
+    if (th.due) { var dl = diffDays(T, th.due); meta.push('Due ' + fmtYear(th.due) + ' · <span class="' + (dl <= 14 ? 'is-soon' : '') + '">' + (dl < 0 ? plural(-dl, 'day') + ' ago' : dl === 0 ? 'today' : plural(dl, 'day') + ' left') + '</span>'); }
     var chosen = th.topics.filter(function (t) { return t.status === 'chosen'; })[0];
     var vs = thViewStage(), vi = 0; TH_STAGES.forEach(function (g, i) { if (g.id === vs) vi = i; });
-    var g = TH_STAGES[vi], tasks = thStageTasks(vs), cnt = thTaskCount(vs), isNow = vs === th.stage, last = vi === TH_STAGES.length - 1;
-    var act = ro ? '' : th.done && isNow && last ? '<button type="button" class="link-btn th-plan-act" data-act="th-reopen">Reopen</button>'
-      : isNow ? (last ? '<button type="button" class="link-btn th-plan-act" data-act="th-complete">' + STAR + 'Complete research</button>' : '<button type="button" class="link-btn th-plan-act" data-act="th-next">Next stage →</button>')
+    var g = TH_STAGES[vi], isNow = vs === th.stage, last = vi === TH_STAGES.length - 1, ar = activeResearch();
+    var here = state.projects.filter(function (p) { return isResearch(p) && p.rstage === vs; });
+    var live = here.filter(function (p) { return !p.ended; })[0], past = here.filter(function (p) { return p.ended; }).sort(function (a, b) { return a.ended < b.ended ? 1 : -1; });
+    var act = ro ? '' : isNow ? (last ? '' : '<button type="button" class="link-btn th-plan-act" data-act="th-next">Next stage →</button>')
       : '<button type="button" class="link-btn th-plan-act" data-act="th-make-now" data-stage="' + vs + '">Make this the current stage</button>';
-    var panel = '<section class="th-plan" aria-label="' + esc(g.name) + ' tasks"><div class="th-plan-h"><p class="th-plan-k">' + esc(g.name) + (isNow && !th.done ? '<span class="th-now-tag">Now</span>' : '') + '</p>' +
-      (cnt.total ? '<span class="th-plan-n"><i class="th-proj-bar"><i style="width:' + Math.round(cnt.done / cnt.total * 100) + '%"></i></i>' + cnt.done + '/' + cnt.total + '</span>' : '') + act + '</div>' +
-      (tasks.length ? '<ul class="th-tasks">' + tasks.map(function (t) { return thTaskRow(t); }).join('') + '</ul>' : '') +
-      (ro ? '' : '<form class="th-task-add" data-form="th-task-add"><label class="sr-only" for="th-task-new">New task</label><input id="th-task-new" maxlength="300" autocomplete="off" placeholder="+ Task for ' + esc(g.name) + '"></form>') + '</section>';
+    var body = live ? thProjBlock(live, T) : '';
+    if (!live && !ro) {
+      body += ar ? '<p class="th-rp-elsewhere">Working on <button type="button" class="link-btn" data-act="th-stage" data-stage="' + esc(ar.rstage) + '">' + esc(ar.name) + '</button> in ' + esc(thStageName(ar.rstage)) + '. One research project at a time.</p>'
+        : '<button type="button" class="th-rp-start" data-act="th-r-start" data-stage="' + vs + '">+ Start the ' + esc(g.name) + ' project</button>';
+    }
+    body += past.map(function (p) { return thProjBlock(p, T); }).join('');
+    var panel = '<section class="th-plan" aria-label="' + esc(g.name) + '"><div class="th-plan-h"><p class="th-plan-k">' + esc(g.name) + (isNow ? '<span class="th-now-tag">Now</span>' : '') + '</p>' + act + '</div>' + body + '</section>';
     head.innerHTML = '<div class="th-head-top"><div class="th-head-main">' +
       (th.title ? '<h2 class="th-title">' + esc(th.title) + '</h2>' : '<h2 class="th-title is-empty">' + (ro ? 'Research' : 'Name your research') + '</h2>') +
       (th.question ? '<p class="th-q">' + esc(th.question) + '</p>' : '') +
@@ -3451,9 +3426,9 @@ td.c-break{display:none}
         (th.journal.length ? '<span class="th-hot-n">' + th.journal.length + '</span>' : '') + '</button>' +
       (ro ? '' : '<button type="button" class="btn btn-sm" data-act="th-edit">Edit</button>') + '</div></div>' +
       '<ol class="th-stages" aria-label="Research stages">' + TH_STAGES.map(function (x, i) {
-        var c = thTaskCount(x.id);
-        return '<li class="' + (i < si || th.done ? 'is-done' : i === si ? 'is-now' : '') + (x.id === vs ? ' is-view' : '') + '"><button type="button" data-act="th-stage" data-stage="' + x.id + '" title="' + esc(x.hint) + (c.total ? ' · ' + c.done + '/' + c.total + ' tasks' : '') + '"' +
-          (i === si ? ' aria-current="step"' : '') + ' aria-pressed="' + (x.id === vs) + '"><span class="th-dot">' + (i < si || th.done ? CK : i + 1) + '</span><span class="th-sname">' + esc(x.name) + '</span></button></li>';
+        var hasR = state.projects.some(function (p) { return isResearch(p) && p.rstage === x.id; });
+        return '<li class="' + (i < si ? 'is-done' : i === si ? 'is-now' : '') + (x.id === vs ? ' is-view' : '') + (hasR ? ' has-r' : '') + '"><button type="button" data-act="th-stage" data-stage="' + x.id + '" title="' + esc(x.hint) + '"' +
+          (i === si ? ' aria-current="step"' : '') + ' aria-pressed="' + (x.id === vs) + '"><span class="th-dot">' + (i < si ? CK : i + 1) + '</span><span class="th-sname">' + esc(x.name) + '</span></button></li>';
       }).join('') + '</ol>' + panel;
   }
   function thSnippet(pg, q) {
@@ -3512,7 +3487,7 @@ td.c-break{display:none}
     if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify(state.compassTests || []).length;
     var pg = getThPage(id); if (!pg) return id + '|gone';
     return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + (pg.parked || '') + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',') +
-      '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',') + '|' + state.thesis.tasks.filter(function (t) { return t.note === id; }).map(function (t) { return t.id + t.done + t.title + (t.due || ''); }).join(',');
+      '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',');
   }
   function renderThPage() {
     var el = $('#th-page'), wrap = $('#th-wrap'), id = thCurrent();
@@ -3574,8 +3549,6 @@ td.c-break{display:none}
       ro ? esc(pg.title) : '<span class="th-edtitle" contenteditable="true" spellcheck="true" data-ed="t" role="textbox" aria-label="Page title">' + esc(pg.title) + '</span>', '',
       ro ? '' : '<div class="th-pacts"><button type="button" class="btn btn-sm" data-act="th-more">+ Add more</button><button type="button" class="btn btn-sm btn-quiet" data-act="th-edit-page" title="Edit the plain text, speaker lines and all">Raw text</button>' +
         (pg.parked ? '<button type="button" class="btn btn-sm" data-act="th-unpark-page">Bring back</button>' : '<button type="button" class="btn btn-sm btn-quiet" data-act="th-park-page" title="Set it aside without deleting it">Park</button>') + '<button type="button" class="btn btn-sm btn-quiet" data-act="th-del-page">Delete</button></div>');
-    var LT = state.thesis.tasks.filter(function (t) { return t.note === pg.id; });
-    if (LT.length) h += '<ul class="th-tasks th-ntasks" aria-label="Tasks for this note">' + LT.map(function (t) { return thTaskRow(t, true); }).join('') + '</ul>';
     if (you.length > 1) h += '<nav class="th-toc" aria-label="Your questions"><p class="th-kicker">In this chat</p><ol>' + you.map(function (b, i) {
       return '<li><button type="button" class="th-toc-q" data-act="th-jump" data-i="' + i + '">' + esc(truncate(thPlain(b.text), 110)) + '</button></li>';
     }).join('') + '</ol></nav>';
@@ -4057,26 +4030,25 @@ td.c-break{display:none}
         if (tt) { tt.focus(); try { var rr = document.createRange(); rr.selectNodeContents(tt); var ss = getSelection(); ss.removeAllRanges(); ss.addRange(rr); } catch (er) {} }
       }
       else if (a === 'th-edit') openThesisEdit();
-      else if (a === 'th-stage') { ui.thView = b.dataset.stage; ui.thTask = null; ui.thCard = null; ui.thSecs = {}; renderThesis(T); }
+      else if (a === 'th-stage') { ui.thView = b.dataset.stage; ui.thCard = null; ui.thSecs = {}; ui.thPast = null; renderThesis(T); }
       else if (a === 'th-make-now') { var mk0 = b.dataset.stage; commit(function (s) { s.thesis.stage = mk0; }); }
-      else if (a === 'th-next') {
-        var ci = thStageIndex(), nx = TH_STAGES[ci + 1]; if (!nx) return;
-        var openN = state.thesis.tasks.filter(function (t) { return t.stage === state.thesis.stage && !t.done; }).length;
-        var go = function () { ui.thView = nx.id; ui.thSecs = {}; commit(function (s) { s.thesis.stage = nx.id; }); };
-        if (openN) confirmDialog({ title: 'Move on to ' + nx.name + '?', body: plural(openN, 'task') + ' in ' + TH_STAGES[ci].name + (openN === 1 ? ' is' : ' are') + ' still open. They stay there.', yes: 'Move on', onYes: go });
-        else go();
-      }
-      else if (a === 'th-complete') {
-        confirmDialog({ title: 'Complete your research?', body: 'It stays on your Timeline as a quiet star. You can reopen it any time.', yes: 'Complete', onYes: function () { commit(function (s) { s.thesis.done = todayISO(); }); } });
-      }
-      else if (a === 'th-reopen') commit(function (s) { s.thesis.done = null; });
-      else if (a === 'th-task-open') { ui.thTask = ui.thTask === id ? null : id; renderThHead(T); var ti0 = $('#th-tt-' + id); if (ti0) ti0.focus(); }
-      else if (a === 'th-task-done') {
-        var on0 = b.tagName === 'INPUT' ? b.checked : false;
-        commit(function (s) { s.thesis.tasks.forEach(function (t) { if (t.id !== id) return; t.done = b.tagName === 'INPUT' ? on0 : !t.done; t.doneAt = t.done ? Date.now() : 0; }); });
-      }
-      else if (a === 'th-task-del') { ui.thTask = null; commit(function (s) { s.thesis.tasks = s.thesis.tasks.filter(function (t) { return t.id !== id; }); }); }
+      else if (a === 'th-next') { var nx = TH_STAGES[thStageIndex() + 1]; if (!nx) return; ui.thView = nx.id; ui.thSecs = {}; commit(function (s) { s.thesis.stage = nx.id; }); }
       else if (a === 'th-sec') { var sk = b.dataset.sec, exp = b.getAttribute('aria-expanded') === 'true'; ui.thSecs = ui.thSecs || {}; ui.thSecs[sk] = !exp; renderThList(); }
+      else if (a === 'th-r-start') openResearchProject(b.dataset.stage);
+      else if (a === 'th-r-hub') openHub(b.dataset.pid);
+      else if (a === 'th-r-piece') openMilestone(b.dataset.pid, b.dataset.mid);
+      else if (a === 'th-r-past') { ui.thPast = b.dataset.pid; renderThHead(T); }
+      else if (a === 'th-r-done') {
+        var rp = getProject(b.dataset.pid), rm = rp && taskById(rp, b.dataset.mid); if (!rm || rp.ended) return;
+        var want = b.tagName === 'INPUT' ? b.checked : !rm.done;
+        commit(function (s) { setTaskDone(s, rp, rm, want, T); });
+      }
+      else if (a === 'th-r-complete') {
+        var cp = getProject(b.dataset.pid); if (!cp) return;
+        var openP = piecesOf(cp).filter(function (m) { return !m.done; }).length;
+        confirmDialog({ title: 'Complete “' + truncate(cp.name, 50) + '”?', body: (openP ? plural(openP, 'task') + ' still open. ' : '') + 'It stays here and on your Timeline as a gold star, so you can come back to it.', yes: 'Complete',
+          onYes: function () { commit(function (s) { s.projects.forEach(function (x) { if (x.id === cp.id) { x.ended = T; x.endedBy = null; x.parked = null; } }); }); } });
+      }
       else if (a === 'th-checks') openCompassTests();
       else if (a === 'th-umb-del') {
         var u0 = state.thesis.umbrellas.filter(function (u) { return u.id === id; })[0]; if (!u0) return;
@@ -4146,11 +4118,11 @@ td.c-break{display:none}
     box.addEventListener('submit', function (e) {
       var f = e.target.closest('[data-form]'); if (!f) return;
       e.preventDefault();
-      if (f.dataset.form === 'th-task-add') {
-        var tin = $('#th-task-new'), tv0 = tin.value.trim(); if (!tv0) return;
-        var vs0 = thViewStage(); tin.value = ''; tin.blur();
-        commit(function (s) { s.thesis.tasks.push({ id: uid(), stage: vs0, title: tv0.slice(0, 300), done: false, doneAt: 0, due: null, note: null, created: Date.now() }); });
-        var again = $('#th-task-new'); if (again) again.focus();
+      if (f.dataset.form === 'th-r-add') {
+        var rin = f.querySelector('input'), rv = rin.value.trim(), rpp = getProject(f.dataset.pid); if (!rv || !rpp) return;
+        rin.value = ''; rin.blur();
+        commit(function (s) { s.projects.forEach(function (x) { if (x.id === rpp.id) x.milestones.push(newPiece(rv, x.milestones.length)); }); });
+        var again = $('#th-r-new'); if (again) again.focus();
         return;
       }
       if (f.dataset.form === 'th-j-add' || f.dataset.form === 'th-j-save') {
@@ -4198,7 +4170,6 @@ td.c-break{display:none}
       if (t.hasAttribute('data-grow')) thGrow(t);
       if (t.dataset.cv) { var k = t.dataset.cv, v = t.value.slice(0, 4000); thQuiet(function (s) { s.thesis.canvas[k] = v; }); }
       else if (t.dataset.topicNotes) { var tid = t.dataset.topicNotes, nv = t.value.slice(0, 4000); thQuiet(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === tid) tp.notes = nv; }); }); }
-      else if (t.dataset.taskTitle) { var tk = t.dataset.taskTitle, tvv = t.value.trim().slice(0, 300); if (tvv) thQuiet(function (s) { s.thesis.tasks.forEach(function (x) { if (x.id === tk) x.title = tvv; }); }); var rowT = t.closest('.th-task').querySelector('.th-task-t'); if (rowT && tvv) rowT.textContent = tvv; }
       else if (t.dataset.umbName) { var un = t.dataset.umbName, uv = t.value.trim().slice(0, 80); if (uv) thQuiet(function (s) { s.thesis.umbrellas.forEach(function (u) { if (u.id === un) u.name = uv; }); }); }
       else if (t.dataset.cf || t.dataset.ct) {
         var ck = t.dataset.k, cidx = t.dataset.id, fk = t.dataset.cf, fv = t.value.slice(0, fk ? 4000 : 300);
@@ -4241,11 +4212,6 @@ td.c-break{display:none}
     });
     box.addEventListener('change', function (e) {
       var t = e.target;
-      if (t.dataset.taskDue || t.dataset.taskNote) {
-        var tkid = t.dataset.taskDue || t.dataset.taskNote, isDue = !!t.dataset.taskDue, vv = t.value;
-        commit(function (s) { s.thesis.tasks.forEach(function (x) { if (x.id !== tkid) return; if (isDue) x.due = isISO(vv) ? vv : null; else x.note = vv || null; }); });
-        return;
-      }
       if (t.dataset.pageStage) { var spid = thCurrent(), sv = t.value; commit(function (s) { s.thesis.pages.forEach(function (x) { if (x.id === spid) x.stage = sv; }); }); return; }
       if (t.id === 'th-topic-umb') ui.thUmbSel = t.value;
       else if (t.dataset.topicUmb) { var tid = t.dataset.topicUmb, uv = t.value || null; commit(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === tid) tp.umb = uv; }); }); }
@@ -4484,7 +4450,7 @@ td.c-break{display:none}
       commit(function (s) {
         if (pk >= 0) ids.forEach(function (id, i) {
           if (id === '__park') return;
-          s.projects.forEach(function (p) { if (p.id !== id || p.ended) return; if (i > pk && !p.parked) p.parked = T0; else if (i < pk && p.parked) p.parked = null; });
+          s.projects.forEach(function (p) { if (p.id !== id || p.ended) return; if (i > pk && !p.parked && p.area !== 'research') p.parked = T0; else if (i < pk && p.parked) p.parked = null; });
         });
         var r = reorderSubset(s.projects, ids.filter(function (k) { return k !== '__park'; }), function (p) { return p.id; }); if (r) s.projects = r;
       });
@@ -4897,19 +4863,20 @@ td.c-break{display:none}
   }
 
   // The basics of a project: name, area, dates and color. To-dos, files and notes live in the project window.
-  function openProject(pid) {
+  function openProject(pid, opts) {
     if (mode === 'readonly') return;
+    opts = opts || {};
     var T = todayISO(), p0 = pid ? getProject(pid) : null;
     if (pid && !p0) return;
-    var isNew = !p0;
+    var isNew = !p0, rOnly = !!opts.research, rTaken = activeResearch(), rFree = !rTaken || (p0 && rTaken.id === p0.id);
     var d = isNew
-      ? { name: '', area: ui.area !== 'all' ? ui.area : null, goal: null, color: leastUsedColor(), start: T, deadline: null, note: '', dl: {}, pts: '', stages: true }
+      ? { name: opts.name || '', area: rOnly ? 'research' : ui.area !== 'all' && ui.area !== 'research' ? ui.area : null, goal: null, color: leastUsedColor(), start: T, deadline: null, note: '', dl: {}, pts: '', stages: true }
       : { name: p0.name, area: p0.area, goal: p0.goal, color: p0.color, start: p0.start, deadline: p0.deadline, note: '',
           dl: { date: p0.deadline, time: p0.deadlineAt ? localTimeOf(p0.deadlineAt) : '', at: p0.deadlineAt, tz: p0.deadlineTz }, pts: p0.pointsTotal || '' };
     function opt(v, label, cur) { return '<option value="' + esc(v) + '"' + (v === (cur || '') ? ' selected' : '') + '>' + esc(label) + '</option>'; }
     function readForm() {
       d.name = $('#pj-name').value;
-      d.area = $('#pj-area').value || null;
+      d.area = rOnly ? 'research' : ($('#pj-area').value || null);
       d.start = $('#pj-start').value;
       d.when = whenRead('pj-dl');
       d.pts = $('#pj-pts') ? $('#pj-pts').value : d.pts;
@@ -4924,14 +4891,18 @@ td.c-break{display:none}
         $('#modal-body').innerHTML = '<h2 id="modal-title">' + (isNew ? 'New project' : 'Edit project') + '</h2>' +
           '<form id="pj-form" novalidate>' +
           '<div class="field"><label for="pj-name">Name</label><input id="pj-name" type="text" maxlength="80" value="' + esc(d.name) + '" placeholder="e.g. Physics 101, Exoplanet research"' + (isNew ? ' autofocus' : '') + '></div>' +
-          '<div class="field"><label for="pj-area">Kind</label><select id="pj-area">' + opt('', 'None', d.area) +
-            state.areas.filter(function (a) { return a.id !== 'research'; }).map(function (a) { return opt(a.id, a.name, d.area); }).join('') + '</select></div>' +
+          '<div class="field"><label for="pj-area">Kind</label><select id="pj-area"' + (rOnly ? ' disabled' : '') + '>' + (rOnly ? '' : opt('', 'None', d.area)) +
+            state.areas.filter(function (a) { return !rOnly || a.id === 'research'; }).map(function (a) {
+              if (a.id === 'research' && !rFree) return '<option value="research" disabled>Research · taken by ' + esc(truncate(rTaken.name, 30)) + '</option>';
+              return opt(a.id, a.name, d.area);
+            }).join('') + '</select></div>' +
           (isNew ? '<label class="check kind-stages" id="pj-stages-row" hidden><input type="checkbox" id="pj-stages"' + (d.stages ? ' checked' : '') + '> <span id="pj-stages-txt"></span></label>' : '') +
           '<p class="hub-hint kind-hint" id="pj-kind-hint" hidden>Add one stage per document the call asks for. Tap one to paste its exact rule, points and deadline.</p>' +
           '<div class="field"><label for="pj-start">Start date</label><input id="pj-start" type="date" value="' + esc(d.start) + '" max="' + T + '"></div>' +
           whenFields('pj-dl', 'Final deadline <span class="muted">(ends the project)</span>', d.dl, p0 && p0.ended ? '' : T) +
           '<div class="field" id="pj-pts-row" hidden><label for="pj-pts">Total points in the scoring <span class="muted">(optional)</span></label><input id="pj-pts" type="number" min="0" step="1" inputmode="numeric" value="' + esc(String(d.pts || '')) + '" placeholder="e.g. 140"></div>' +
-          '<div class="field"><fieldset class="swatches"><legend>Line color</legend>' + sw + '</fieldset></div>' +
+          '<div class="field" id="pj-color-row"><fieldset class="swatches"><legend>Line color</legend>' + sw + '</fieldset></div>' +
+          '<p class="muted r-color-note" id="pj-rcolor" hidden><i class="rv-dot" style="background:var(--c' + RESEARCH_INK + ')"></i> Research projects are always gold.</p>' +
           (isNew ? '<div class="field"><label for="pj-note">First update <span class="muted">(optional, logged on the start date)</span></label><textarea id="pj-note" rows="2" placeholder="Kickoff, goal, first step…">' + esc(d.note) + '</textarea></div>' +
             '<p class="muted" style="font-size:13px;margin:4px 0 0">Next, the project window opens, where you add its to-dos, files and notes.</p>' : '') +
           '<p class="form-error" id="pj-error" hidden></p>' +
@@ -4943,6 +4914,7 @@ td.c-break{display:none}
           if (row) { row.hidden = !st; if (st) $('#pj-stages-txt').textContent = 'Start with these stages: ' + st.join(', '); }
           $('#pj-kind-hint').hidden = !(isNew && k === 'application');
           $('#pj-pts-row').hidden = k !== 'application' && !d.pts;
+          $('#pj-color-row').hidden = k === 'research'; $('#pj-rcolor').hidden = k !== 'research';
         };
         $('#pj-area').addEventListener('change', kindUpd); kindUpd();
       },
@@ -4969,24 +4941,30 @@ td.c-break{display:none}
         if (d.deadline && active && d.deadline < T && (isNew || d.deadline !== p0.deadline)) return fail('The final deadline has to be today or later.');
         var pts = numOrNull(d.pts);
         var note = (d.note || '').trim();
+        var rNow = activeResearch();
+        if (d.area === 'research' && rNow && (isNew || rNow.id !== p0.id) && (isNew || !p0.ended)) return fail('“' + rNow.name + '” is your research project right now. Complete it before starting another.');
+        var rst = d.area === 'research' ? (opts.rstage || (p0 && p0.rstage) || state.thesis.stage) : null;
+        var col = d.area === 'research' ? RESEARCH_INK : d.color === RESEARCH_INK ? 0 : d.color;
         if (isNew) {
           var id = uid();
           commit(function (s) {
-            var np = { id: id, name: name.slice(0, 80), color: d.color, start: d.start, ended: null, deadline: null, deadlineAt: 0, deadlineTz: '', endedBy: null,
+            var np = { id: id, name: name.slice(0, 80), color: col, rstage: rst, start: d.start, ended: null, deadline: null, deadlineAt: 0, deadlineTz: '', endedBy: null,
               area: d.area, goal: d.goal, milestones: [], links: [], notes: '', created: Date.now(), sample: false, pointsTotal: pts };
             applyDeadline(np, d.when);
             if (d.stages && KIND_STAGES[d.area]) KIND_STAGES[d.area].forEach(function (t, i) { np.milestones.push(newPiece(t, i)); });
             s.projects.push(np);
+            if (rst) s.thesis.stage = rst;   // starting a research project makes its stage the current one
             if (note) s.updates.push({ id: uid(), projectId: id, date: d.start, text: note, created: Date.now() });
           });
           if (note) justAdded = id + '|' + d.start;
           $('#qa-project').value = id;
           closeModal(); render();
-          openHub(id, 'tasks');
+          if (d.area === 'research' && currentView() === 'thesis') { ui.thView = rst; renderThesis(todayISO()); }
+          else openHub(id, 'tasks');
         } else {
           commit(function () {
-            p0.name = name.slice(0, 80); p0.color = d.color; p0.start = d.start; applyDeadline(p0, d.when);
-            p0.area = d.area; p0.goal = d.goal; p0.pointsTotal = pts;
+            p0.name = name.slice(0, 80); p0.color = col; p0.start = d.start; applyDeadline(p0, d.when);
+            p0.area = d.area; p0.goal = d.goal; p0.pointsTotal = pts; p0.rstage = rst;
           });
           closeModal();
         }
@@ -4994,13 +4972,27 @@ td.c-break{display:none}
     };
     openModal(ctx);
   }
-  function openNewProject() { openProject(null); }
+  function openNewProject() {
+    var v = currentView();
+    if (v === 'thesis' || v === 'compass') return openResearchProject(v === 'thesis' ? thViewStage() : state.thesis.stage);
+    openProject(null);
+  }
+  function openResearchProject(rstage) {
+    if (mode === 'readonly') return;
+    var ar = activeResearch();
+    if (ar) {
+      confirmDialog({ title: 'One research project at a time', body: 'You’re working on <b>' + esc(ar.name) + '</b>. Complete it before you start another.', yes: 'Open it', onYes: function () { openHub(ar.id); } });
+      return;
+    }
+    var g = TH_STAGES.filter(function (x) { return x.id === rstage; })[0];
+    openProject(null, { research: true, rstage: rstage, name: g ? g.name : '' });
+  }
 
   // A 2-minute look back and ahead. The stages you pick become your Doing for the week.
   function openReview() {
     if (mode === 'readonly') return;
     var T = todayISO(), mon = addDays(T, -((dow(T) + 6) % 7)), from = addDays(mon, -7), to = addDays(mon, -1);
-    var act = inOrbit();
+    var act = inOrbit().filter(function (p) { return !isResearch(p); });
     var finished = [], stuck = [];
     act.concat(state.projects.filter(function (p) { return p.ended; })).forEach(function (p) {
       piecesOf(p).forEach(function (m) { if (m.done && m.doneOn && m.doneOn >= from && m.doneOn <= T) finished.push({ p: p, m: m }); });
@@ -5049,7 +5041,7 @@ td.c-break{display:none}
         } else if (b.dataset.act === 'rv-save') {
           commit(function (s) {
             s.projects.forEach(function (p) {
-              if (p.ended || p.parked) return;
+              if (p.ended || offTodo(p)) return;
               piecesOf(p).forEach(function (m) {
                 if (m.done) return;
                 if (picks[m.id] && m.status !== 'doing') setStatus2(s, p, m, 'doing', T);
@@ -5068,18 +5060,16 @@ td.c-break{display:none}
     if (mode === 'readonly') return;
     var ctx = {
       draw: function () {
-        var orbit = inOrbit(), parked = state.projects.filter(isParked), T = todayISO(), rA = researchActive() ? 1 : 0;
+        var orbit = inOrbit(), parked = state.projects.filter(isParked), T = todayISO();
         function row(p, i, on) {
-          i += on ? rA : 0;
           return '<li class="pk-row' + (on && i >= FOCUS_MAX ? ' is-extra' : '') + '"><i class="rv-dot" style="background:var(--c' + p.color + ')"></i><span class="pk-name">' + esc(p.name) +
             '<span class="pk-sub">' + (on ? (i < FOCUS_MAX ? 'in focus' : 'over ' + FOCUS_MAX) : 'parked ' + fmtShort(p.parked)) + (p.deadline ? ' · due ' + fmtShort(p.deadline) + ' (' + leftText(p, T) + ')' : '') + '</span></span>' +
-            (on ? '<button type="button" class="btn btn-sm" data-act="pk-park" data-pid="' + esc(p.id) + '">' + PARK_ICO + 'Park</button>'
+            (on ? (isResearch(p) ? '' : '<button type="button" class="btn btn-sm" data-act="pk-park" data-pid="' + esc(p.id) + '">' + PARK_ICO + 'Park</button>')
                 : '<button type="button" class="btn btn-sm" data-act="pk-back" data-pid="' + esc(p.id) + '">' + UNPARK_ICO + 'Bring back</button>') + '</li>';
         }
         $('#modal-body').innerHTML = '<h2 id="modal-title">Parking lot</h2>' +
-          '<h3 class="pk-h">In orbit <span class="rv-n' + (orbit.length + rA > FOCUS_MAX ? ' is-over' : '') + '">' + (orbit.length + rA) + ' of ' + FOCUS_MAX + '</span></h3>' +
-          (orbit.length + rA ? '<ul class="pk-list">' + (rA ? '<li class="pk-row"><i class="rv-dot" style="background:var(--warn)"></i><span class="pk-name">' + esc(state.thesis.title || 'Research') + '<span class="pk-sub">Research · always in orbit</span></span></li>' : '') +
-            orbit.map(function (p, i) { return row(p, i, true); }).join('') + '</ul>' : '<p class="muted">Nothing in orbit.</p>') +
+          '<h3 class="pk-h">In orbit <span class="rv-n' + (orbit.length > FOCUS_MAX ? ' is-over' : '') + '">' + orbit.length + ' of ' + FOCUS_MAX + '</span></h3>' +
+          (orbit.length ? '<ul class="pk-list">' + orbit.map(function (p, i) { return row(p, i, true); }).join('') + '</ul>' : '<p class="muted">Nothing in orbit.</p>') +
           '<h3 class="pk-h">Parked</h3>' +
           (parked.length ? '<ul class="pk-list">' + parked.map(function (p, i) { return row(p, i, false); }).join('') + '</ul>' : '<p class="muted" style="font-size:13px">Nothing parked.</p>') +
           '<div class="modal-actions"><button type="button" class="btn primary" data-close>Done</button></div>';
@@ -5479,7 +5469,7 @@ td.c-break{display:none}
     sub = sub.filter(Boolean).join(' · ');
     var acts = (ro ? '' : '<button type="button" class="btn btn-sm" data-act="hub-edit">Edit</button>' +
         (p.ended ? '<button type="button" class="btn btn-sm" data-act="reopen">Reopen</button><button type="button" class="btn btn-sm btn-quiet btn-del" data-act="delete-now">Delete now</button>'
-          : (p.parked ? '<button type="button" class="btn btn-sm" data-act="unpark">Bring back</button>' : '<button type="button" class="btn btn-sm btn-quiet" data-act="park" title="Pause it for later">Park</button>') +
+          : (p.parked ? '<button type="button" class="btn btn-sm" data-act="unpark">Bring back</button>' : isResearch(p) ? '' : '<button type="button" class="btn btn-sm btn-quiet" data-act="park" title="Pause it for later">Park</button>') +
             '<button type="button" class="btn btn-sm btn-quiet" data-act="end">End</button>')) +
       '<button type="button" class="icon-x hub-close" data-act="hub-close" aria-label="Close project" title="Close (Esc)">×</button>';
 
@@ -5634,17 +5624,19 @@ td.c-break{display:none}
     if (min > T) min = T;
     openModal({
       draw: function () {
-        $('#modal-body').innerHTML = '<h2 id="modal-title">End “' + esc(p.name) + '”?</h2>' +
-          '<p>Its line stops with an <b style="color:var(--stop)">✕</b> and it sinks to the bottom of the board. A week after the end date it leaves the board, but stays in the <b>Library</b> under <i>Show archived</i>.</p>' +
+        var rsch = isResearch(p);
+        $('#modal-body').innerHTML = '<h2 id="modal-title">' + (rsch ? 'Complete' : 'End') + ' “' + esc(p.name) + '”?</h2>' +
+          (rsch ? '<p>It stays on your Timeline and under its stage in Research as a gold star, so you can come back to it.</p>'
+            : '<p>Its line stops with an <b style="color:var(--stop)">✕</b> and it sinks to the bottom of the board. A week after the end date it leaves the board, but stays in the <b>Library</b> under <i>Show archived</i>.</p>') +
           '<form id="end-form" novalidate>' +
           '<div class="field"><label for="end-date">End date</label><input id="end-date" type="date" value="' + T + '" min="' + min + '" max="' + T + '"></div>' +
           '<div class="field"><label for="end-note">Final note <span class="muted">(optional)</span></label><textarea id="end-note" rows="2" placeholder="How it wrapped up, a link, the result…" autofocus></textarea></div>' +
-          '<p class="muted" id="end-leaves">Leaves the board on ' + fmtLong(addDays(T, KEEP_DAYS)) + '.</p>' +
+          (rsch ? '' : '<p class="muted" id="end-leaves">Leaves the board on ' + fmtLong(addDays(T, KEEP_DAYS)) + '.</p>') +
           '<p class="form-error" id="end-error" hidden></p>' +
           '<div class="modal-actions"><button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn danger">End project</button></div></form>';
       },
       onInput: function (e) {
-        if (e.target.id === 'end-date' && isISO(e.target.value)) $('#end-leaves').textContent = 'Leaves the board on ' + fmtLong(addDays(e.target.value, KEEP_DAYS)) + '.';
+        if (e.target.id === 'end-date' && isISO(e.target.value) && $('#end-leaves')) $('#end-leaves').textContent = 'Leaves the board on ' + fmtLong(addDays(e.target.value, KEEP_DAYS)) + '.';
       },
       onSubmit: function () {
         var d = $('#end-date').value, note = $('#end-note').value.trim(), err = $('#end-error');
@@ -5952,7 +5944,6 @@ td.c-break{display:none}
       var act = e.target.closest('[data-act]');
       if (act) {
         var pid = act.dataset.pid;
-        if (act.dataset.act === 'research') { location.hash = '#research'; return; }
         if (act.dataset.act === 'end') openEnd(pid);
         else if (act.dataset.act === 'reopen') openReopen(pid);
         else if (act.dataset.act === 'delete-now') deleteNow(pid);
@@ -5966,7 +5957,7 @@ td.c-break{display:none}
         else if (act.dataset.act === 'sync') openSync();
         return;
       }
-      var node = e.target.closest('.node:not(.is-r)');
+      var node = e.target.closest('.node');
       if (node) { hideTip(); openDay(node.dataset.pid, node.dataset.date); return; }
       var lane = e.target.closest('.lane');
       if (lane) {
@@ -5975,9 +5966,9 @@ td.c-break{display:none}
         if (canAddOn(p, info.date, todayISO())) openDay(p.id, info.date);
       }
     });
-    board.addEventListener('pointerover', function (e) { if (e.pointerType !== 'mouse') return; var n = e.target.closest('.node:not(.is-r)'); if (n) showTip(n); });
+    board.addEventListener('pointerover', function (e) { if (e.pointerType !== 'mouse') return; var n = e.target.closest('.node'); if (n) showTip(n); });
     board.addEventListener('pointerout', function (e) { if (e.target.closest('.node')) hideTip(); });
-    board.addEventListener('focusin', function (e) { var n = e.target.closest('.node:not(.is-r)'); if (n && n.matches(':focus-visible')) showTip(n); });
+    board.addEventListener('focusin', function (e) { var n = e.target.closest('.node'); if (n && n.matches(':focus-visible')) showTip(n); });
     board.addEventListener('focusout', hideTip);
     $('#tl-scroll').addEventListener('scroll', hideTip, { passive: true });
     window.addEventListener('scroll', hideTip, { passive: true });
