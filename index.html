@@ -682,6 +682,16 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .md{font-size:15.5px;line-height:1.68;color:#dde2ee;max-width:76ch;overflow-wrap:anywhere}
 .md>*:first-child{margin-top:0}
 .md>*:last-child{margin-bottom:0}
+.md .md-sec{margin:0 0 .9em 2px;padding-left:18px;border-left:1px solid rgba(140,155,195,.14)}
+.md .md-sec:empty{display:none}
+.md .md-sec>*:last-child{margin-bottom:0}
+.md .md-sec.is-lead{border-left-color:rgba(140,155,195,.08)}
+.md .md-lead{margin:0 0 .35em}
+.md .md-lead strong{color:#fff}
+.th-park .th-sec-h{display:flex;align-items:center;gap:6px}
+.th-park .th-sec-h svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.th-park .th-item{opacity:.6}
+.th-park .th-item:hover,.th-park .th-item.is-on{opacity:1}
 .md p{margin:0 0 .85em}
 .md .md-h{font-family:var(--font-display);font-weight:600;color:var(--ink);line-height:1.3;margin:1.3em 0 .5em;letter-spacing:-.005em}
 .md .md-h1{font-size:20px}.md .md-h2{font-size:18px}.md .md-h3{font-size:16.5px}.md .md-h4,.md .md-h5,.md .md-h6{font-size:15px}
@@ -713,12 +723,16 @@ mark.th-hl{background:none;color:inherit;border-radius:0;padding:0;box-shadow:in
 mark.th-ann{background:none;color:inherit;border-radius:3px;padding:.05em 0;-webkit-box-decoration-break:clone;box-decoration-break:clone;cursor:pointer}
 mark.th-a-yellow{background:#f3d63c;color:#1d1905}
 mark.th-a-yellow *,mark.th-a-red *{color:inherit !important}
+mark.th-a-tyellow,mark.th-a-tyellow *{color:#ffd84d !important}
+mark.th-a-tred,mark.th-a-tred *{color:#ff6e6e !important}
+mark.th-a-yellow mark.th-a-tyellow,mark.th-a-yellow mark.th-a-tyellow *{color:#7a5c00 !important}
+mark.th-a-yellow mark.th-a-tred,mark.th-a-yellow mark.th-a-tred *{color:#c3141b !important}
+mark.th-a-red mark.th-a-tred,mark.th-a-red mark.th-a-tred *{color:#5e0909 !important}
+mark.th-a-red mark.th-a-tyellow,mark.th-a-red mark.th-a-tyellow *{color:#fff2a8 !important}
 mark.th-a-red{background:#f06464;color:#220909}
 mark.th-a-strike{text-decoration:line-through;text-decoration-thickness:1.6px;text-decoration-color:currentColor}
-mark.th-a-fade,mark.th-a-fade *{color:rgba(205,212,230,.2) !important;text-decoration-color:rgba(205,212,230,.2) !important;transition:color .2s}
-mark.th-a-fade mark.th-ann{background:rgba(255,255,255,.03);box-shadow:none}
-mark.th-a-fade:hover,mark.th-a-fade:hover *{color:rgba(205,212,230,.4) !important}
-mark.th-a-fade{background:rgba(0,0,0,.18)}
+mark.th-a-fade{opacity:.24;transition:opacity .2s}
+mark.th-a-fade:hover{opacity:.5}
 mark.th-hl.is-flash{background:rgba(255,184,107,.4);border-radius:3px}
 mark.th-hl.is-flash{animation:thflash 1.4s ease}
 .th-pen{position:absolute;z-index:60;display:flex;align-items:center;gap:2px;padding:4px;border-radius:12px;background:#1b2133;border:1px solid #333c58;box-shadow:0 10px 28px rgba(0,0,0,.5)}
@@ -732,6 +746,9 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
 .th-pen .sw{width:15px;height:15px;border-radius:50%;display:block}
 .th-pen .sw-y{background:#ffde40;box-shadow:0 0 8px rgba(255,222,64,.45)}
 .th-pen .sw-r{background:#ff5a5a;box-shadow:0 0 8px rgba(255,90,90,.45)}
+.th-pen .pen-a{font:700 16px var(--font-body);line-height:1;padding-bottom:2px;border-bottom:3px solid currentColor}
+.th-pen .pen-a-y{color:#ffd84d}
+.th-pen .pen-a-r{color:#ff6e6e}
 .th-pen .pen-s{font:600 15px var(--font-body);text-decoration:line-through;text-decoration-thickness:1.6px}
 .th-pen .ico{width:16px;height:16px}
 .th-pen .pen-clear{color:#ff8f8f}
@@ -870,7 +887,10 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
   .th-page{padding:16px 16px 22px;background:#10141f;min-height:0}
   .md{font-size:15px}
   .th-ph{margin-bottom:14px}
-  .th-pen button{min-width:38px;height:38px}
+  .th-pen button{min-width:36px;height:38px}
+  .th-pen .pen-imp .pen-lbl{display:none}
+  .th-pen .pen-imp{padding:0 8px}
+  .md .md-sec{padding-left:12px}
   .th-topic-umb{flex:1 1 auto;max-width:none}
   .th-head-top{flex-wrap:wrap}
   .th-jhint{display:none}
@@ -2845,7 +2865,9 @@ td.c-break{display:none}
     { id: 'risks', name: 'Risks and plan B', hint: 'What could stop you, and what you do then' }
   ];
   var TH_MAX_BLOCK = 200000, TH_PAGE_KEY = 'polaris:th-page';
-  var TH_PENS = { yellow: 1, red: 1, strike: 1, fade: 1 };
+  var TH_PENS = { yellow: 1, red: 1, tyellow: 1, tred: 1, strike: 1, fade: 1 };
+  // one layer each: highlight, text color, strike, ghost. Layers stack; inside a layer the newest wins.
+  function penLayer(k) { return k === 'yellow' || k === 'red' ? 'hl' : k === 'tyellow' || k === 'tred' ? 'tc' : k; }
   var TARGET_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="2.6"/></svg>';
   var CANVAS_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M2.5 7h11M7 7v6.5"/></svg>';
 
@@ -2908,7 +2930,7 @@ td.c-break{display:none}
       var cr = Number(pg.created) || Date.now();
       out.pages.push({ id: id, title: str(pg.title, 160).trim() || 'Untitled', kind: pg.kind === 'chat' ? 'chat' : 'note',
         source: pg.source === 'claude' || pg.source === 'chatgpt' ? pg.source : '', stage: stIds[pg.stage] ? pg.stage : stage,
-        created: cr, updated: Number(pg.updated) || cr, blocks: blocks,
+        created: cr, updated: Number(pg.updated) || cr, blocks: blocks, parked: isISO(pg.parked) ? pg.parked : null,
         ann: (Array.isArray(pg.ann) ? pg.ann : []).filter(function (a) { return a && TH_PENS[a.kind] && typeof a.q === 'string' && a.q.trim(); }).slice(0, 800)
           .map(function (a) { return { id: typeof a.id === 'string' && a.id ? a.id.slice(0, 40) : uid(), kind: a.kind, q: a.q.slice(0, 20000), pre: str(a.pre, 40), suf: str(a.suf, 40) }; }) });
     });
@@ -3094,7 +3116,8 @@ td.c-break{display:none}
     return /^\s*(```|~~~|\$\$|\\\[|#{1,6}\s|>)/.test(l) || /^\s*([-*+]|\d+[.)])\s+\S/.test(l) || /^\s{0,3}([-*_])(\s*\1){2,}\s*$/.test(l);
   }
   function mdToHtml(src) {
-    var L = String(src || '').replace(/\r\n?/g, '\n').replace(/\t/g, '    ').split('\n'), out = [], i = 0, m;
+    var L = String(src || '').replace(/\r\n?/g, '\n').replace(/\t/g, '    ').split('\n'), out = [], lev = [], i = 0, m;
+    function put(h, lv) { out.push(h); lev.push(lv || 0); }
     var SEP = /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/;
     function cells(r) {
       r = r.trim().replace(/\\\|/g, '\u0001');
@@ -3109,7 +3132,7 @@ td.c-break{display:none}
         var fence = m[1], code = []; i++;
         while (i < L.length && L[i].trim().indexOf(fence) !== 0) code.push(L[i++]);
         i++;
-        out.push('<pre class="md-pre">' + (m[2] ? '<span class="md-lang">' + esc(m[2]) + '</span>' : '') + '<code>' + esc(code.join('\n')) + '</code></pre>');
+        put('<pre class="md-pre">' + (m[2] ? '<span class="md-lang">' + esc(m[2]) + '</span>' : '') + '<code>' + esc(code.join('\n')) + '</code></pre>');
         continue;
       }
       if (/^\s*(\$\$|\\\[)/.test(l)) {
@@ -3117,24 +3140,24 @@ td.c-break{display:none}
         if (k0 >= 0) { buf = buf.slice(0, k0); done = true; }
         i++;
         while (!done && i < L.length) { var tl = L[i++], kk = tl.indexOf(close); if (kk >= 0) { buf += '\n' + tl.slice(0, kk); done = true; } else buf += '\n' + tl; }
-        if (buf.trim()) out.push('<div class="md-mathblock">' + mathSpan(buf, true) + '</div>');
+        if (buf.trim()) put('<div class="md-mathblock">' + mathSpan(buf, true) + '</div>');
         continue;
       }
       if ((m = l.match(/^\s{0,3}(#{1,6})\s+(.*?)\s*#*\s*$/))) {
-        var lv = m[1].length; out.push('<h' + Math.min(6, lv + 2) + ' class="md-h md-h' + lv + '">' + mdInline(m[2]) + '</h' + Math.min(6, lv + 2) + '>'); i++; continue;
+        var lv = m[1].length; put('<h' + Math.min(6, lv + 2) + ' class="md-h md-h' + lv + '">' + mdInline(m[2]) + '</h' + Math.min(6, lv + 2) + '>', lv); i++; continue;
       }
-      if (/^\s{0,3}([-*_])(\s*\1){2,}\s*$/.test(l)) { out.push('<hr>'); i++; continue; }
+      if (/^\s{0,3}([-*_])(\s*\1){2,}\s*$/.test(l)) { put('<hr>'); i++; continue; }
       if (l.indexOf('|') >= 0 && i + 1 < L.length && SEP.test(L[i + 1]) && L[i + 1].indexOf('-') >= 0) {
         var head = cells(l), al = cells(L[i + 1]).map(function (a) { return /^:-+:$/.test(a) ? ' style="text-align:center"' : /-+:$/.test(a) ? ' style="text-align:right"' : ''; });
         i += 2; var rows = [];
         while (i < L.length && L[i].trim() && L[i].indexOf('|') >= 0) rows.push(cells(L[i++]));
-        out.push('<div class="md-table"><table><thead><tr>' + head.map(function (c, k) { return '<th' + (al[k] || '') + '>' + mdInline(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+        put('<div class="md-table"><table><thead><tr>' + head.map(function (c, k) { return '<th' + (al[k] || '') + '>' + mdInline(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
           rows.map(function (r) { return '<tr>' + head.map(function (x, k) { return '<td' + (al[k] || '') + '>' + mdInline(r[k] || '') + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>');
         continue;
       }
       if (/^\s*>/.test(l)) {
         var q = []; while (i < L.length && /^\s*>/.test(L[i])) q.push(L[i++].replace(/^\s*>\s?/, ''));
-        out.push('<blockquote>' + mdToHtml(q.join('\n')) + '</blockquote>'); continue;
+        put('<blockquote>' + mdToHtml(q.join('\n')) + '</blockquote>'); continue;
       }
       if ((m = l.match(/^(\s*)([-*+]|\d+[.)])\s+(.*)$/))) {
         var base = m[1].length, ordered = /\d/.test(m[2]), start = parseInt(m[2], 10) || 1, items = [], it = null;
@@ -3155,7 +3178,7 @@ td.c-break{display:none}
           if (mdIsStart(t) || it.lines[it.lines.length - 1] === '') break;
           it.lines.push(t.trim()); i++;
         }
-        out.push((ordered ? '<ol' + (start !== 1 ? ' start="' + start + '"' : '') + '>' : '<ul>') + items.map(function (x) {
+        put((ordered ? '<ol' + (start !== 1 ? ' start="' + start + '"' : '') + '>' : '<ul>') + items.map(function (x) {
           var body = x.lines.join('\n').replace(/\n+$/, '');
           var h = /\n/.test(body) ? mdToHtml(body) : '<p>' + mdInline(body) + '</p>';
           return '<li>' + h.replace(/^<p>([\s\S]*?)<\/p>/, '$1') + '</li>';
@@ -3164,9 +3187,23 @@ td.c-break{display:none}
       }
       var para = [l]; i++;
       while (i < L.length && L[i].trim() && !mdIsStart(L[i])) para.push(L[i++]);
-      out.push('<p>' + mdInline(para.join('\n')).replace(/\n/g, '<br>') + '</p>');
+      // a line that is only bold ("**Theme card:**") is a lead: what follows sits under it
+      if (/^\s*(\*\*[^*\n]+\*\*|__[^_\n]+__)\s*:?\s*$/.test(para[0])) {
+        put('<p class="md-lead">' + mdInline(para[0].trim()) + '</p>', 7);
+        if (para.length > 1) put('<p>' + mdInline(para.slice(1).join('\n')).replace(/\n/g, '<br>') + '</p>');
+        continue;
+      }
+      put('<p>' + mdInline(para.join('\n')).replace(/\n/g, '<br>') + '</p>');
     }
-    return out.join('');
+    var html = '', open = [];
+    out.forEach(function (h, k) {
+      var lv = lev[k];
+      if (!lv) { html += h; return; }
+      while (open.length && open[open.length - 1] >= lv) { html += '</div>'; open.pop(); }
+      html += h + '<div class="md-sec' + (lv === 7 ? ' is-lead' : '') + '">'; open.push(lv);
+    });
+    while (open.length) { html += '</div>'; open.pop(); }
+    return html;
   }
   // TeX math is drawn with KaTeX, fetched the first time a page needs it. Without it, the TeX shows as is.
   var KATEX = 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/', katexState = 0;
@@ -3206,7 +3243,7 @@ td.c-break{display:none}
     if (!id) { try { id = localStorage.getItem(TH_PAGE_KEY); } catch (e) {} }
     if (id === 'th:topics') id = 'th:stage';
     if (id && (id === 'th:important' || id === 'th:stage' || id === 'th:canvas' || id === 'th:journal' || getThPage(id))) return id;
-    var P = state.thesis.pages.slice().sort(function (a, b) { return b.updated - a.updated; });
+    var P = state.thesis.pages.slice().sort(function (a, b) { return (a.parked ? 1 : 0) - (b.parked ? 1 : 0) || b.updated - a.updated; });
     return P.length ? P[0].id : 'th:stage';
   }
   function thOpen(id, reading) {
@@ -3260,14 +3297,15 @@ td.c-break{display:none}
       pin('th:stage', TH_TOOLS[th.stage].ico, esc(TH_TOOLS[th.stage].name), thToolCount(th.stage)) +
       pin('th:canvas', CANVAS_ICO, 'Thesis canvas', filled + '/' + TH_CANVAS.length) + '</div>';
     var pages = th.pages.slice().sort(function (a, b) { return b.updated - a.updated; }), shown = 0;
-    TH_STAGES.forEach(function (g) {
-      var list = pages.filter(function (pg) { return pg.stage === g.id; }).map(function (pg) {
+    TH_STAGES.concat([{ id: '__parked', name: 'Parking lot' }]).forEach(function (g) {
+      var parkSec = g.id === '__parked';
+      var list = pages.filter(function (pg) { return parkSec ? !!pg.parked : !pg.parked && pg.stage === g.id; }).map(function (pg) {
         var sn = q ? (pg.title.toLowerCase().indexOf(q) >= 0 ? ' ' : thSnippet(pg, q)) : ' ';
         return sn ? { pg: pg, sn: sn.trim() } : null;
       }).filter(Boolean);
       if (!list.length) return;
       shown += list.length;
-      h += '<div class="th-sec"><p class="th-sec-h">' + esc(g.name) + '</p>' + list.map(function (x) {
+      h += '<div class="th-sec' + (parkSec ? ' th-park' : '') + '"><p class="th-sec-h">' + (parkSec ? PARK_ICO : '') + esc(g.name) + '</p>' + list.map(function (x) {
         return '<button type="button" class="th-item' + (cur === x.pg.id ? ' is-on' : '') + '" data-act="th-open" data-id="' + esc(x.pg.id) + '"><span class="th-iname">' + esc(x.pg.title) + '</span>' +
           '<span class="th-isub">' + (x.sn ? x.sn : thSourceName(x.pg) + ' · ' + fmtShort(isoOf(x.pg.updated))) + '</span></button>';
       }).join('') + '</div>';
@@ -3291,7 +3329,7 @@ td.c-break{display:none}
   function thPageKey(id) {
     if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify(state.compassTests || []).length;
     var pg = getThPage(id); if (!pg) return id + '|gone';
-    return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',') +
+    return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + (pg.parked || '') + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',') +
       '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',');
   }
   function renderThPage() {
@@ -3348,8 +3386,9 @@ td.c-break{display:none}
   function thChatHTML(pg) {
     if (!pg) return '<p class="th-none">That page is gone.</p>';
     var ro = mode === 'readonly', you = pg.blocks.filter(function (b) { return b.role === 'you'; }), yi = 0;
-    var h = thHeader(esc(thSourceName(pg)) + ' · ' + fmtLong(isoOf(pg.created)) + ' · ' + esc(thStageName(pg.stage)), esc(pg.title), '',
-      ro ? '' : '<div class="th-pacts"><button type="button" class="btn btn-sm" data-act="th-more">+ Add more</button><button type="button" class="btn btn-sm" data-act="th-edit-page">Edit</button><button type="button" class="btn btn-sm btn-quiet" data-act="th-del-page">Delete</button></div>');
+    var h = thHeader(esc(thSourceName(pg)) + ' · ' + fmtLong(isoOf(pg.created)) + ' · ' + (pg.parked ? 'Parked ' + fmtShort(pg.parked) : esc(thStageName(pg.stage))), esc(pg.title), '',
+      ro ? '' : '<div class="th-pacts"><button type="button" class="btn btn-sm" data-act="th-more">+ Add more</button><button type="button" class="btn btn-sm" data-act="th-edit-page">Edit</button>' +
+        (pg.parked ? '<button type="button" class="btn btn-sm" data-act="th-unpark-page">Bring back</button>' : '<button type="button" class="btn btn-sm btn-quiet" data-act="th-park-page" title="Set it aside without deleting it">Park</button>') + '<button type="button" class="btn btn-sm btn-quiet" data-act="th-del-page">Delete</button></div>');
     if (you.length > 1) h += '<nav class="th-toc" aria-label="Your questions"><p class="th-kicker">In this chat</p><ol>' + you.map(function (b, i) {
       return '<li><button type="button" class="th-toc-q" data-act="th-jump" data-i="' + i + '">' + esc(truncate(thPlain(b.text), 110)) + '</button></li>';
     }).join('') + '</ol></nav>';
@@ -3565,12 +3604,29 @@ td.c-break{display:none}
         return false;
       });
     });
-    var order = { fade: 0, yellow: 1, red: 1, strike: 2 };
+    var order = { fade: 0, yellow: 1, red: 1, tyellow: 2, tred: 2, strike: 3 };
     ((pg && pg.ann) || []).slice().sort(function (a, b) { return order[a.kind] - order[b.kind]; }).forEach(function (a) {
       var idx = thTextIndex(root), at = thFind(idx.full, a); if (at < 0) return;
       ui.thAnnPos[a.id] = [at, at + a.q.length];
       thWrap(idx, at, at + a.q.length, function () { var x = document.createElement('mark'); x.className = 'th-ann th-a-' + a.kind; x.setAttribute('data-aid', a.id); return x; });
     });
+  }
+  // Cut the range o out of the marks that match: what's left of each mark on either side stays.
+  function thCarve(anns, o, idx, match) {
+    var out = [];
+    anns.forEach(function (a) {
+      var P = (ui.thAnnPos || {})[a.id];
+      if (!match(a) || !P || P[1] <= o.s || P[0] >= o.e) { out.push(a); return; }
+      [[P[0], o.s], [o.e, P[1]]].forEach(function (r) {
+        var s0 = r[0], e0 = r[1];
+        while (s0 < e0 && /\s/.test(idx.full[s0])) s0++;
+        while (e0 > s0 && /\s/.test(idx.full[e0 - 1])) e0--;
+        if (e0 - s0 < 1) return;
+        var an = thAnchor(idx, { s: s0, e: e0 });
+        out.push({ id: uid(), kind: a.kind, q: an.q, pre: an.pre, suf: an.suf });
+      });
+    });
+    return out;
   }
   function thOverlaps(o) {
     var out = [], P = ui.thAnnPos || {};
@@ -3585,11 +3641,13 @@ td.c-break{display:none}
   function thSelInit() {
     var bar = document.createElement('div');
     bar.id = 'th-pen'; bar.className = 'th-pen'; bar.setAttribute('role', 'toolbar'); bar.setAttribute('aria-label', 'Mark the selected text'); bar.hidden = true;
-    bar.innerHTML = '<button type="button" class="pen-imp" data-pen="important" title="Keep it on your Important page">' + STAR + 'Important</button><i class="pen-sep"></i>' +
+    bar.innerHTML = '<button type="button" class="pen-imp" data-pen="important" title="Keep it on your Important page" aria-label="Important">' + STAR + '<span class="pen-lbl">Important</span></button><i class="pen-sep"></i>' +
       '<button type="button" data-pen="yellow" title="Yellow highlight" aria-label="Yellow highlight"><i class="sw sw-y"></i></button>' +
-      '<button type="button" data-pen="red" title="Red highlight" aria-label="Red highlight"><i class="sw sw-r"></i></button>' +
+      '<button type="button" data-pen="red" title="Red highlight" aria-label="Red highlight"><i class="sw sw-r"></i></button><i class="pen-sep"></i>' +
+      '<button type="button" data-pen="tyellow" title="Yellow text" aria-label="Yellow text"><span class="pen-a pen-a-y">A</span></button>' +
+      '<button type="button" data-pen="tred" title="Red text" aria-label="Red text"><span class="pen-a pen-a-r">A</span></button><i class="pen-sep"></i>' +
       '<button type="button" data-pen="strike" title="Strike through" aria-label="Strike through"><span class="pen-s">S</span></button>' +
-      '<button type="button" data-pen="fade" title="Fade it: still there, just quiet" aria-label="Fade">' + PEN_FADE + '</button>' +
+      '<button type="button" data-pen="fade" title="Ghost it out: still there, just quiet" aria-label="Ghost out">' + PEN_FADE + '</button>' +
       '<button type="button" class="pen-clear" data-pen="clear" title="Remove the marks here" aria-label="Remove marks">' + PEN_CLEAR + '</button>';
     document.body.appendChild(bar);
     function hide() { bar.hidden = true; thSel = null; }
@@ -3601,7 +3659,7 @@ td.c-break{display:none}
       if (!root.contains(r.commonAncestorContainer) || !t) return hide();
       var idx = thTextIndex(root), o = thOffsets(idx, r);
       if (!o) return hide();
-      thSel = { text: t, page: thCurrent(), o: o, a: thAnchor(idx, o), hits: thOverlaps(o) };
+      thSel = { text: t, page: thCurrent(), o: o, a: thAnchor(idx, o), hits: thOverlaps(o), idx: idx };
       bar.querySelector('.pen-clear').hidden = !thSel.hits.length;
       var rects = r.getClientRects(), last = rects[rects.length - 1] || r.getBoundingClientRect();
       bar.hidden = false;
@@ -3618,13 +3676,13 @@ td.c-break{display:none}
         commit(function (s) { s.thesis.marks.push({ id: uid(), page: x.page, text: x.text.slice(0, 3000), q: x.a.q, pre: x.a.pre, suf: x.a.suf, created: Date.now() }); });
         thToast('Kept on your Important page');
       } else if (pen === 'clear') {
-        commit(function (s) { s.thesis.pages.forEach(function (pg) { if (pg.id === x.page) pg.ann = pg.ann.filter(function (a) { return x.hits.indexOf(a.id) < 0; }); }); });
+        // erase only what you selected; the rest of each mark stays
+        commit(function (s) { s.thesis.pages.forEach(function (pg) { if (pg.id === x.page) pg.ann = thCarve(pg.ann, x.o, x.idx, function () { return true; }); }); });
       } else {
         commit(function (s) {
           s.thesis.pages.forEach(function (pg) {
             if (pg.id !== x.page) return;
-            // the same words marked again with the same kind of pen: replace instead of stacking
-            pg.ann = pg.ann.filter(function (a) { var P = ui.thAnnPos[a.id]; return !(P && P[0] === x.o.s && P[1] === x.o.e && (a.kind === pen || (a.kind !== 'strike' && a.kind !== 'fade' && pen !== 'strike' && pen !== 'fade'))); });
+            pg.ann = thCarve(pg.ann, x.o, x.idx, function (a) { return penLayer(a.kind) === penLayer(pen); });
             pg.ann.push({ id: uid(), kind: pen, q: x.a.q, pre: x.a.pre, suf: x.a.suf });
           });
         });
@@ -3803,6 +3861,10 @@ td.c-break{display:none}
         else gone();
       }
       else if (a === 'th-more') openThEditor('more', thCurrent());
+      else if (a === 'th-park-page' || a === 'th-unpark-page') {
+        var ppid = thCurrent(), on = a === 'th-park-page';
+        commit(function (s) { s.thesis.pages.forEach(function (x) { if (x.id === ppid) x.parked = on ? todayISO() : null; }); });
+      }
       else if (a === 'th-edit-page') openThEditor('edit', thCurrent());
       else if (a === 'th-del-page') {
         var pid = thCurrent(), pg = getThPage(pid); if (!pg) return;
