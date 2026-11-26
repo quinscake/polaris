@@ -23,7 +23,7 @@
   --tint-today:rgba(138,180,255,.09);
   --tint-hover:rgba(138,180,255,.05);
   --tint-wknd:rgba(255,255,255,.018);
-  --c0:#8ab4ff; --c1:#5fd4c4; --c2:#b79cff; --c3:#ffb86b; --c4:#9be07a; --c5:#ff86b3; --c6:#ffd25c;
+  --c0:#8ab4ff; --c1:#5fd4c4; --c2:#b79cff; --c3:#ffb86b; --c4:#9be07a; --c5:#ff86b3; --c6:#e07bff;
   --font-display:"Unbounded","Geist",system-ui,-apple-system,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
   --font-body:"Geist",system-ui,-apple-system,"Segoe UI","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
   --font-mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,"PingFang TC","Noto Sans TC",monospace;
@@ -617,7 +617,7 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .th-meta b{color:var(--ink);font-weight:600}
 .th-meta .is-soon{color:var(--warn)}
 .th-stages{list-style:none;margin:18px 0 0;padding:0;display:flex;gap:0}
-.th-stages li.is-view button .th-dot{box-shadow:0 0 0 3px rgba(255,210,92,.25)}
+.th-stages li.is-view button .th-dot{box-shadow:0 0 0 3px rgba(224,123,255,.25)}
 .th-stages li.is-view .th-sname{color:var(--ink);text-decoration:underline;text-decoration-color:var(--c6);text-underline-offset:4px}
 .th-stages li.has-r .th-dot{border-color:var(--c6)}
 .th-plan{margin:14px 0 0;padding:12px 0 0;border-top:1px dashed #2e2a22;display:flex;flex-direction:column;gap:10px}
@@ -629,8 +629,8 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .th-plan-n{display:inline-flex;align-items:center;gap:8px;font:500 11.5px var(--font-mono);color:var(--muted)}
 .th-plan-n .th-proj-bar{display:block;width:80px;flex:none}
 .th-plan-n .th-proj-bar i{background:var(--c6)}
-.th-rp{padding:10px 12px;border:1px solid rgba(255,210,92,.28);border-left:3px solid var(--c6);border-radius:10px;background:rgba(255,210,92,.03)}
-.th-rp.is-done{border-color:var(--rule);border-left-color:rgba(255,210,92,.45);background:none;opacity:.7}
+.th-rp{padding:10px 12px;border:1px solid rgba(224,123,255,.28);border-left:3px solid var(--c6);border-radius:10px;background:rgba(224,123,255,.03)}
+.th-rp.is-done{border-color:var(--rule);border-left-color:rgba(224,123,255,.45);background:none;opacity:.7}
 .th-rp-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 4px}
 .th-rp-name{display:inline-flex;align-items:center;gap:8px;padding:0;border:0;background:none;color:var(--ink);font:600 14.5px var(--font-body);cursor:pointer;text-align:left}
 .th-rp-name:hover span{text-decoration:underline;text-decoration-color:var(--c6);text-underline-offset:3px}
@@ -638,8 +638,8 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .th-rp-s{font:500 11.5px var(--font-mono);color:var(--muted)}
 .th-rp-s.is-behind{color:var(--warn)}
 .th-rp-more{font-size:12.5px;padding:0}
-.th-rp-start{align-self:flex-start;padding:8px 14px;border:1px dashed rgba(255,210,92,.5);border-radius:10px;background:none;color:var(--c6);font:600 13.5px var(--font-body);cursor:pointer}
-.th-rp-start:hover{background:rgba(255,210,92,.07)}
+.th-rp-start{align-self:flex-start;padding:8px 14px;border:1px dashed rgba(224,123,255,.5);border-radius:10px;background:none;color:var(--c6);font:600 13.5px var(--font-body);cursor:pointer}
+.th-rp-start:hover{background:rgba(224,123,255,.07)}
 .th-rp-elsewhere{margin:0;font-size:13px;color:var(--muted)}
 .th-rp-elsewhere .link-btn{padding:0;font-size:13px}
 .th-tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
@@ -656,14 +656,14 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .th-task-due.is-today{color:var(--warn)}
 .th-task-due.is-late{color:var(--stop)}
 .th-task-add input{background:transparent !important;border:1px dashed #343c55 !important;box-shadow:none !important;font-size:14px}
-.th-task-add input:focus{border-style:solid !important;border-color:rgba(255,210,92,.5) !important}
+.th-task-add input:focus{border-style:solid !important;border-color:rgba(224,123,255,.5) !important}
 .th-sec-h{display:flex !important;align-items:center;gap:6px;width:100%;background:none;border:0;cursor:pointer;text-align:left}
 .th-sec-h:hover{color:var(--ink)}
 .th-sec-h svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .th-chev{width:10px !important;height:10px !important;transition:transform .15s;transform:rotate(90deg)}
 .th-sec.is-folded .th-chev{transform:none}
 .th-sec-c{margin-left:auto;font:500 10.5px var(--font-mono);letter-spacing:0;color:#59617a}
-.row.research.active .label-box{background:linear-gradient(90deg,rgba(255,210,92,.08),transparent 70%),var(--panel)}
+.row.research.active .label-box{background:linear-gradient(90deg,rgba(224,123,255,.08),transparent 70%),var(--panel)}
 .row.research.ended{opacity:.6}
 .row.research.ended .label-box{border-left-color:var(--c6)}
 .row.research.ended .line{background:var(--c6);opacity:.35}
@@ -672,6 +672,38 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .r-star .star{width:100%;height:100%;display:block}
 .r-divider span{display:inline-flex;align-items:center;gap:6px;color:var(--c6)}
 .r-divider .star{width:11px;height:11px}
+.th-plink{display:inline-flex;align-items:center;gap:2px;margin-left:10px;vertical-align:1px;border:1px solid rgba(224,123,255,.4);border-radius:999px;padding:0 4px 0 9px;background:rgba(224,123,255,.08)}
+.th-plink-n{display:inline-flex;align-items:center;gap:6px;padding:2px 0;border:0;background:none;color:var(--c6);font:600 12px var(--font-body);letter-spacing:0;text-transform:none;cursor:pointer}
+.th-plink-n:hover{text-decoration:underline;text-underline-offset:3px}
+.th-plink-n .star{width:11px;height:11px}
+.th-plink-dot{display:inline-block;flex:none;width:7px;height:7px;border-radius:50%;background:var(--c6)}
+.th-plink-x{width:20px;height:20px;padding:0;border:0;border-radius:50%;background:none;color:var(--muted);font:500 14px/1 var(--font-body);cursor:pointer}
+.th-plink-x:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+.th-plink.is-add{padding:2px 10px;border-style:dashed;border-color:rgba(224,123,255,.35);background:none;color:#a98bbd;font:500 12px var(--font-body);letter-spacing:0;text-transform:none;cursor:pointer}
+.th-plink.is-add:hover{color:var(--c6);border-color:rgba(224,123,255,.6)}
+.th-lfilter{display:flex;align-items:center;gap:8px;margin:10px 0 2px;padding:7px 10px;border:1px solid rgba(224,123,255,.3);border-radius:9px;background:rgba(224,123,255,.06)}
+.th-lfilter .th-plink-n{cursor:default;text-decoration:none !important;min-width:0}
+.th-lfilter .th-sec-c{margin-left:0}
+.th-lfilter .link-btn{margin-left:auto;padding:0;font-size:12.5px}
+.th-rp-name .th-plink-dot{width:8px;height:8px}
+.th-rp-b{display:flex;align-items:center;gap:12px;min-height:30px}
+.th-rp-b .th-next{flex:1;min-width:0}
+.th-rp-b .th-next .th-task-row{padding:0}
+.th-rp-done{flex:1;margin:0;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.th-rp-done .star{width:12px;height:12px;color:var(--c6)}
+.th-rp-links{display:inline-flex;align-items:center;gap:14px;margin-left:auto;flex:none}
+.th-rp-links .link-btn{padding:0;font-size:12.5px;white-space:nowrap}
+.th-rp .th-task-add{margin-top:6px}
+.th-rp-past{list-style:none;margin:0;padding:0 2px;display:flex;flex-direction:column;gap:4px;opacity:.72}
+.th-rp-past li{display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-height:26px}
+.th-rp-past .th-rp-name{font-size:13.5px;font-weight:500}
+.th-rp-past .link-btn{padding:0;font-size:12.5px}
+.hub-rnotes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.hub-rnote{width:100%;display:flex;align-items:baseline;gap:10px;padding:7px 2px;border:0;border-bottom:1px solid var(--rule);background:none;color:var(--ink);font:inherit;font-size:14px;text-align:left;cursor:pointer}
+.hub-rnote span:first-child{flex:1;min-width:0}
+.hub-rnote:hover span:first-child{color:var(--c6)}
+.hub-rnote .muted{font:500 11.5px var(--font-mono)}
+@media (max-width:640px){.th-rp-b{flex-wrap:wrap;row-gap:4px}.th-rp-b .th-next,.th-rp-b .th-rp-done{flex-basis:100%}.th-rp-links{margin-left:0}.th-plink{margin-left:0;margin-top:6px}}
 .r-color-note{display:flex;align-items:center;gap:8px;font-size:13px;margin:-4px 0 4px}
 .th-proj{display:flex;align-items:center;gap:10px;width:100%;margin:14px 0 0;padding:6px 0 0;background:none;border:0;border-top:1px dashed #2e2a22;color:var(--muted);font:500 11.5px var(--font-mono);text-align:left;cursor:pointer}
 .th-proj-n{flex:none;max-width:40%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#9aa3b8}
@@ -1428,7 +1460,7 @@ td.c-break{display:none}
   var LS_KEY = 'kepler:v1';
   var KEEP_DAYS = 7;
   var INKS = 6;
-  var RESEARCH_INK = 6;   // gold, kept for Research projects only
+  var RESEARCH_INK = 6;   // orchid, kept for Research projects only
   var MIN_COL = { 7: 70, 14: 42, 30: 30 };
   var MIN_COL_PHONE = { 7: 30, 14: 19, 30: 20 };
   function isPhone() { return !!(window.matchMedia && window.matchMedia('(max-width: 640px)').matches); }
@@ -1744,13 +1776,20 @@ td.c-break{display:none}
         created: Number(p.created) || 0, sample: !!p.sample, rstage: typeof p.rstage === 'string' ? p.rstage : null
       });
     });
-    // Research: one running at a time (the newest keeps the tag), always gold, filed under a research stage
+    // Research: one running at a time (the newest keeps the tag), always orchid, filed under a research stage
     var rLive = out.projects.filter(function (x) { return x.area === 'research' && !x.ended; }).sort(function (a, b) { return b.created - a.created; });
     rLive.slice(1).forEach(function (x) { x.area = null; });
     var rIds = {}; TH_STAGES.forEach(function (g) { rIds[g.id] = true; });
     out.projects.forEach(function (x) {
       if (x.area === 'research') { x.color = RESEARCH_INK; if (thOld && x.rstage === 'topic') x.rstage = 'lit'; if (!rIds[x.rstage]) x.rstage = guessRStage(x.name) || out.thesis.stage; }
       else { x.rstage = null; if (x.color === RESEARCH_INK) x.color = 0; }
+    });
+    // research notes point at their research project; the first time, notes in the running project's stage join it
+    var rOk = {}, rRun = null;
+    out.projects.forEach(function (x) { if (x.area === 'research') { rOk[x.id] = true; if (!x.ended) rRun = x; } });
+    out.thesis.pages.forEach(function (pg) {
+      if (pg.proj === undefined) pg.proj = rRun && !pg.parked && pg.stage === rRun.rstage ? rRun.id : null;
+      else if (pg.proj && !rOk[pg.proj]) pg.proj = null;
     });
     (Array.isArray(s.updates) ? s.updates : []).forEach(function (u) {
       if (!u || !ids[String(u.projectId)] || !isISO(u.date) || typeof u.text !== 'string') return;
@@ -2726,7 +2765,7 @@ td.c-break{display:none}
           : '<button type="button" class="name-btn" data-act="project" data-pid="' + esc(p.id) + '" title="Open project">' + esc(p.name) + '</button>';
         var tc = taskCounts(p);
         var acts = (st === 'active'
-          ? '<button type="button" class="link-btn edit-only" data-act="end" data-pid="' + esc(p.id) + '">End</button>'
+          ? '<button type="button" class="link-btn edit-only" data-act="end" data-pid="' + esc(p.id) + '">' + (isResearch(p) ? 'Complete' : 'End') + '</button>'
           : '<button type="button" class="link-btn edit-only" data-act="reopen" data-pid="' + esc(p.id) + '">Reopen</button>') +
           '<button type="button" class="link-btn danger edit-only" data-act="delete-project" data-pid="' + esc(p.id) + '">Delete</button>';
         return '<tr class="' + (st === 'archived' ? 'is-archived' : '') + '" style="--pc:var(--c' + p.color + ')">' +
@@ -3034,7 +3073,7 @@ td.c-break{display:none}
       var cr = Number(pg.created) || Date.now();
       out.pages.push({ id: id, title: str(pg.title, 160).trim() || 'Untitled', kind: pg.kind === 'chat' ? 'chat' : 'note',
         source: pg.source === 'claude' || pg.source === 'chatgpt' ? pg.source : '', stage: stIds[was(pg.stage)] ? was(pg.stage) : stage,
-        created: cr, updated: Number(pg.updated) || cr, blocks: blocks, parked: isISO(pg.parked) ? pg.parked : null,
+        created: cr, updated: Number(pg.updated) || cr, blocks: blocks, parked: isISO(pg.parked) ? pg.parked : null, proj: typeof pg.proj === 'string' && pg.proj ? pg.proj.slice(0, 40) : pg.proj === null ? null : undefined,
         ann: (Array.isArray(pg.ann) ? pg.ann : []).filter(function (a) { return a && TH_PENS[a.kind] && typeof a.q === 'string' && a.q.trim(); }).slice(0, 800)
           .map(function (a) { return { id: typeof a.id === 'string' && a.id ? a.id.slice(0, 40) : uid(), kind: a.kind, q: a.q.slice(0, 20000), pre: str(a.pre, 40), suf: str(a.suf, 40) }; }) });
     });
@@ -3370,6 +3409,20 @@ td.c-break{display:none}
     }
     renderThHead(T); renderThList(); renderThPage();
   }
+  function thAutoLink() { var ar = activeResearch(); return ar ? ar.id : null; }
+  function thNotesOf(pid) { return state.thesis.pages.filter(function (pg) { return pg.proj === pid; }); }
+  function thLinkChip(pg) {
+    var ro = mode === 'readonly', lp = pg.proj ? getProject(pg.proj) : null, ar = activeResearch();
+    if (lp && isResearch(lp)) return '<span class="th-plink"><button type="button" class="th-plink-n" data-act="th-plink-open" data-pid="' + esc(lp.id) + '" title="Open the project">' +
+      (lp.ended ? STAR : '<i class="th-plink-dot"></i>') + esc(truncate(lp.name, 40)) + '</button>' +
+      (ro ? '' : '<button type="button" class="th-plink-x" data-act="th-plink-x" title="Unlink" aria-label="Unlink from ' + esc(lp.name) + '">×</button>') + '</span>';
+    if (!ro && ar) return '<button type="button" class="th-plink is-add" data-act="th-plink-add" title="Link this page to ' + esc(ar.name) + '">+ ' + esc(truncate(ar.name, 40)) + '</button>';
+    return '';
+  }
+  function thLinkKey(pg) {
+    var lp = pg.proj ? getProject(pg.proj) : null, ar = activeResearch();
+    return (pg.proj || '') + (lp ? lp.name + (lp.ended || '') : '') + '/' + (ar ? ar.id + ar.name : '');
+  }
   function thViewStage() { var v = ui.thView; for (var i = 0; i < TH_STAGES.length; i++) if (TH_STAGES[i].id === v) return v; return state.thesis.stage; }
   function thStageName(id) { for (var i = 0; i < TH_STAGES.length; i++) if (TH_STAGES[i].id === id) return TH_STAGES[i].name; return ''; }
   function thPieceRow(p, m, ro) {
@@ -3385,20 +3438,31 @@ td.c-break{display:none}
       (steps.length ? '<span class="th-task-due">' + sd + '/' + steps.length + '</span>' : '') + st + due + '</div></li>';
   }
   function thProjBlock(p, T) {
-    var ro = mode === 'readonly', P = piecesOf(p), open = P.filter(function (m) { return !m.done; }), done = P.filter(function (m) { return m.done; });
-    var tc = taskCounts(p), pc = paceOf(p), bits = [];
-    if (p.ended) bits.push('Completed ' + fmtShort(p.ended));
-    else { if (p.deadline) bits.push('due ' + fmtShort(p.deadline) + ' · ' + leftText(p, T)); if (pc && pc.key !== 'done') bits.push(pc.label.toLowerCase()); }
-    var h = '<div class="th-rp' + (p.ended ? ' is-done' : '') + '"><div class="th-rp-h">' +
-      '<button type="button" class="th-rp-name" data-act="th-r-hub" data-pid="' + esc(p.id) + '" title="Open the project window">' + (p.ended ? STAR : '<i class="rv-dot" style="background:var(--c' + RESEARCH_INK + ')"></i>') + '<span>' + esc(p.name) + '</span></button>' +
+    var ro = mode === 'readonly', P = piecesOf(p), open = P.filter(function (m) { return !m.done; }), next = open[0];
+    var tc = taskCounts(p), pc = paceOf(p), nN = thNotesOf(p.id).length, bits = [];
+    if (p.deadline) bits.push('due ' + fmtShort(p.deadline) + ' · ' + leftText(p, T));
+    if (pc && pc.key !== 'done' && tc.total) bits.push(pc.label.toLowerCase());
+    var adding = !ro && (!P.length || ui.thAdd === p.id);
+    return '<div class="th-rp"><div class="th-rp-h">' +
+      '<button type="button" class="th-rp-name" data-act="th-r-hub" data-pid="' + esc(p.id) + '" title="Open the project window"><i class="th-plink-dot"></i><span>' + esc(p.name) + '</span></button>' +
       (tc.total ? '<span class="th-plan-n"><i class="th-proj-bar"><i style="width:' + Math.round(tc.done / tc.total * 100) + '%"></i></i>' + tc.done + '/' + tc.total + '</span>' : '') +
-      '<span class="th-rp-s' + (pc && pc.key === 'behind' && !p.ended ? ' is-behind' : '') + '">' + esc(bits.join(' · ')) + '</span>' +
-      (ro || p.ended ? '' : '<button type="button" class="link-btn th-plan-act" data-act="th-r-complete" data-pid="' + esc(p.id) + '">' + STAR + 'Complete</button>') + '</div>';
-    if (!p.ended || ui.thPast === p.id) {
-      h += (open.length || done.length ? '<ul class="th-tasks">' + open.concat(done).map(function (m) { return thPieceRow(p, m, ro); }).join('') + '</ul>' : '') +
-        (ro || p.ended ? '' : '<form class="th-task-add" data-form="th-r-add" data-pid="' + esc(p.id) + '"><label class="sr-only" for="th-r-new">New task</label><input id="th-r-new" maxlength="140" autocomplete="off" placeholder="+ Task for ' + esc(p.name) + '"></form>');
-    } else h += '<button type="button" class="link-btn th-rp-more" data-act="th-r-past" data-pid="' + esc(p.id) + '">Show its ' + plural(P.length, 'task') + '</button>';
-    return h + '</div>';
+      (bits.length ? '<span class="th-rp-s' + (pc && pc.key === 'behind' ? ' is-behind' : '') + '">' + esc(bits.join(' · ')) + '</span>' : '') +
+      (ro ? '' : '<button type="button" class="link-btn th-plan-act" data-act="th-r-complete" data-pid="' + esc(p.id) + '">' + STAR + 'Complete</button>') + '</div>' +
+      '<div class="th-rp-b">' +
+        (next ? '<ul class="th-tasks th-next">' + thPieceRow(p, next, ro) + '</ul>' : P.length ? '<p class="th-rp-done">' + STAR + 'All tasks done</p>' : '<span></span>') +
+        '<span class="th-rp-links">' +
+          (ro || !P.length ? '' : '<button type="button" class="link-btn" data-act="th-r-add" data-pid="' + esc(p.id) + '" aria-expanded="' + adding + '">+ Task</button>') +
+          (P.length ? '<button type="button" class="link-btn" data-act="th-r-hub" data-pid="' + esc(p.id) + '">' + plural(P.length, 'task') + '</button>' : '') +
+          (nN ? '<button type="button" class="link-btn" data-act="th-plink-filter" data-pid="' + esc(p.id) + '">' + plural(nN, 'note') + '</button>' : '') +
+        '</span></div>' +
+      (adding ? '<form class="th-task-add" data-form="th-r-add" data-pid="' + esc(p.id) + '"><label class="sr-only" for="th-r-new">New task</label><input id="th-r-new" maxlength="140" autocomplete="off" placeholder="+ Task for ' + esc(p.name) + '"></form>' : '') +
+      '</div>';
+  }
+  function thPastRow(p) {
+    var tc = taskCounts(p), nN = thNotesOf(p.id).length;
+    return '<li><button type="button" class="th-rp-name" data-act="th-r-hub" data-pid="' + esc(p.id) + '" title="Open the project window">' + STAR + '<span>' + esc(p.name) + '</span></button>' +
+      '<span class="th-rp-s">Completed ' + fmtShort(p.ended) + (tc.total ? ' · ' + tc.done + '/' + tc.total : '') + '</span>' +
+      (nN ? '<button type="button" class="link-btn" data-act="th-plink-filter" data-pid="' + esc(p.id) + '">' + plural(nN, 'note') + '</button>' : '') + '</li>';
   }
   function renderThHead(T) {
     var head = $('#th-head'), ae = document.activeElement;
@@ -3418,7 +3482,7 @@ td.c-break{display:none}
       body += ar ? '<p class="th-rp-elsewhere">Working on <button type="button" class="link-btn" data-act="th-stage" data-stage="' + esc(ar.rstage) + '">' + esc(ar.name) + '</button> in ' + esc(thStageName(ar.rstage)) + '. One research project at a time.</p>'
         : '<button type="button" class="th-rp-start" data-act="th-r-start" data-stage="' + vs + '">+ Start the ' + esc(g.name) + ' project</button>';
     }
-    body += past.map(function (p) { return thProjBlock(p, T); }).join('');
+    if (past.length) body += '<ul class="th-rp-past">' + past.map(thPastRow).join('') + '</ul>';
     var panel = '<section class="th-plan" aria-label="' + esc(g.name) + '"><div class="th-plan-h"><p class="th-plan-k">' + esc(g.name) + (isNow ? '<span class="th-now-tag">Now</span>' : '') + '</p>' + act + '</div>' + body + '</section>';
     head.innerHTML = '<div class="th-head-top"><div class="th-head-main">' +
       (th.title ? '<h2 class="th-title">' + esc(th.title) + '</h2>' : '<h2 class="th-title is-empty">' + (ro ? 'Research' : 'Name your research') + '</h2>') +
@@ -3449,7 +3513,10 @@ td.c-break{display:none}
     var h = '<div class="th-pins">' + pin('th:important', STAR, 'Important', th.marks.length || '') +
       pin('th:stage', TH_TOOLS[thViewStage()].ico, esc(TH_TOOLS[thViewStage()].name), thToolCount(thViewStage())) +
       pin('th:canvas', CANVAS_ICO, 'Research canvas', filled + '/' + TH_CANVAS.length) + '</div>';
-    var pages = th.pages.slice().sort(function (a, b) { return b.updated - a.updated; }), shown = 0;
+    var lf = ui.thLink && getProject(ui.thLink); if (!lf) ui.thLink = null;
+    var pages = th.pages.slice().sort(function (a, b) { return b.updated - a.updated; }).filter(function (pg) { return !lf || pg.proj === lf.id; }), shown = 0;
+    if (lf) h += '<div class="th-lfilter"><span class="th-plink-n">' + (lf.ended ? STAR : '<i class="th-plink-dot"></i>') + esc(truncate(lf.name, 40)) + '</span><span class="th-sec-c">' + plural(pages.length, 'note') + '</span>' +
+      '<button type="button" class="link-btn" data-act="th-plink-clear">Show all</button></div>';
     TH_STAGES.concat([{ id: '__parked', name: 'Parking lot' }]).forEach(function (g) {
       var parkSec = g.id === '__parked';
       var list = pages.filter(function (pg) { return parkSec ? !!pg.parked : !pg.parked && pg.stage === g.id; }).map(function (pg) {
@@ -3460,7 +3527,7 @@ td.c-break{display:none}
       shown += list.length;
       // the stage you're looking at is open; the others fold away (tap to open)
       var has = list.some(function (x) { return x.pg.id === cur; }), tog = (ui.thSecs || {})[g.id];
-      var open = !!q || (tog !== undefined ? tog : (g.id === thViewStage() || has));
+      var open = !!q || !!lf || (tog !== undefined ? tog : (g.id === thViewStage() || has));
       h += '<div class="th-sec' + (parkSec ? ' th-park' : '') + (open ? '' : ' is-folded') + '"><button type="button" class="th-sec-h" data-act="th-sec" data-sec="' + g.id + '" aria-expanded="' + open + '">' +
         '<svg class="th-chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 2l3.5 3L3 8"/></svg>' + (parkSec ? PARK_ICO : '') + '<span>' + esc(g.name) + '</span><span class="th-sec-c">' + list.length + '</span></button>' + (open ? '' : '</div>');
       if (!open) return;
@@ -3480,7 +3547,7 @@ td.c-break{display:none}
         }).join('') + '</div>';
       }
     }
-    if (!shown) h += '<p class="th-none">' + (q ? 'Nothing matches “' + esc(ui.thQuery.trim()) + '”.' : 'No pages yet.') + '</p>';
+    if (!shown) h += '<p class="th-none">' + (q ? 'Nothing matches “' + esc(ui.thQuery.trim()) + '”.' : lf ? 'No notes linked yet.' : 'No pages yet.') + '</p>';
     var size = 0; try { size = JSON.stringify(state).length; } catch (e) {}
     if (size > 3500000) h += '<p class="th-warn">Your notebook is getting big (' + (size / 1048576).toFixed(1) + ' MB). It still syncs, but phones keep less offline. Old chats you no longer need can go.</p>';
     $('#th-list').innerHTML = h;
@@ -3489,7 +3556,7 @@ td.c-break{display:none}
     if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify(state.compassTests || []).length;
     var pg = getThPage(id); if (!pg) return id + '|gone';
     return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + (pg.parked || '') + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',') +
-      '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',');
+      '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',') + '|' + thLinkKey(pg);
   }
   function renderThPage() {
     var el = $('#th-page'), wrap = $('#th-wrap'), id = thCurrent();
@@ -3547,7 +3614,7 @@ td.c-break{display:none}
     var ro = mode === 'readonly', you = pg.blocks.filter(function (b) { return b.role === 'you'; }), yi = 0;
     var secSel = ro || pg.parked ? (pg.parked ? 'Parked ' + fmtShort(pg.parked) : esc(thStageName(pg.stage))) : '<label class="sr-only" for="th-psec">Section</label><select id="th-psec" class="th-ksel" data-page-stage="1">' +
       TH_STAGES.map(function (g) { return '<option value="' + g.id + '"' + (g.id === pg.stage ? ' selected' : '') + '>' + esc(g.name) + '</option>'; }).join('') + '</select>';
-    var h = thHeader(esc(thSourceName(pg)) + ' · ' + fmtLong(isoOf(pg.created)) + ' · ' + secSel,
+    var h = thHeader(esc(thSourceName(pg)) + ' · ' + fmtLong(isoOf(pg.created)) + ' · ' + secSel + thLinkChip(pg),
       ro ? esc(pg.title) : '<span class="th-edtitle" contenteditable="true" spellcheck="true" data-ed="t" role="textbox" aria-label="Page title">' + esc(pg.title) + '</span>', '',
       ro ? '' : '<div class="th-pacts"><button type="button" class="btn btn-sm" data-act="th-more">+ Add more</button><button type="button" class="btn btn-sm btn-quiet" data-act="th-edit-page" title="Edit the plain text, speaker lines and all">Raw text</button>' +
         (pg.parked ? '<button type="button" class="btn btn-sm" data-act="th-unpark-page">Bring back</button>' : '<button type="button" class="btn btn-sm btn-quiet" data-act="th-park-page" title="Set it aside without deleting it">Park</button>') + '<button type="button" class="btn btn-sm btn-quiet" data-act="th-del-page">Delete</button></div>');
@@ -3979,7 +4046,7 @@ td.c-break{display:none}
           else if (how === 'edit' && P) { P.blocks = r.blocks; P.title = title || thAutoTitle(r.blocks); P.stage = stage || P.stage; P.kind = isNote() ? 'note' : 'chat'; P.source = d.source; P.updated = now; }
           else {
             newId = uid();
-            s.thesis.pages.push({ id: newId, title: title || thAutoTitle(r.blocks), kind: isNote() ? 'note' : 'chat', source: d.source, stage: stage || s.thesis.stage, created: now, updated: now, blocks: r.blocks });
+            s.thesis.pages.push({ id: newId, title: title || thAutoTitle(r.blocks), kind: isNote() ? 'note' : 'chat', source: d.source, stage: stage || s.thesis.stage, created: now, updated: now, blocks: r.blocks, proj: thAutoLink() });
           }
         });
         closeModal();
@@ -4026,7 +4093,7 @@ td.c-break{display:none}
       else if (a === 'th-paste') openThEditor('new');
       else if (a === 'th-note') {
         var nid = uid(), now = Date.now();
-        commit(function (s) { s.thesis.pages.push({ id: nid, title: 'Untitled', kind: 'note', source: '', stage: s.thesis.stage, created: now, updated: now, blocks: [], parked: null, ann: [] }); });
+        commit(function (s) { s.thesis.pages.push({ id: nid, title: 'Untitled', kind: 'note', source: '', stage: s.thesis.stage, created: now, updated: now, blocks: [], parked: null, ann: [], proj: thAutoLink() }); });
         thOpen(nid, true); if (isPhone()) window.scrollTo(0, 0);
         var tt = $('#th-page [data-ed="t"]');
         if (tt) { tt.focus(); try { var rr = document.createRange(); rr.selectNodeContents(tt); var ss = getSelection(); ss.removeAllRanges(); ss.addRange(rr); } catch (er) {} }
@@ -4039,7 +4106,14 @@ td.c-break{display:none}
       else if (a === 'th-r-start') openResearchProject(b.dataset.stage);
       else if (a === 'th-r-hub') openHub(b.dataset.pid);
       else if (a === 'th-r-piece') openMilestone(b.dataset.pid, b.dataset.mid);
-      else if (a === 'th-r-past') { ui.thPast = b.dataset.pid; renderThHead(T); }
+      else if (a === 'th-r-add') { ui.thAdd = ui.thAdd === b.dataset.pid ? null : b.dataset.pid; renderThHead(T); var ain = $('#th-r-new'); if (ain) ain.focus(); }
+      else if (a === 'th-plink-open') openHub(b.dataset.pid);
+      else if (a === 'th-plink-x' || a === 'th-plink-add') {
+        var lpid = thCurrent(), to = a === 'th-plink-add' ? thAutoLink() : null;
+        commit(function (s) { s.thesis.pages.forEach(function (x) { if (x.id === lpid) x.proj = to; }); });
+      }
+      else if (a === 'th-plink-filter') { ui.thLink = b.dataset.pid; ui.thQuery = ''; var qi = $('#th-q'); if (qi) qi.value = ''; renderThList(); var tl = $('#th-list'); if (tl) tl.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+      else if (a === 'th-plink-clear') { ui.thLink = null; renderThList(); }
       else if (a === 'th-r-done') {
         var rp = getProject(b.dataset.pid), rm = rp && taskById(rp, b.dataset.mid); if (!rm || rp.ended) return;
         var want = b.tagName === 'INPUT' ? b.checked : !rm.done;
@@ -4048,7 +4122,7 @@ td.c-break{display:none}
       else if (a === 'th-r-complete') {
         var cp = getProject(b.dataset.pid); if (!cp) return;
         var openP = piecesOf(cp).filter(function (m) { return !m.done; }).length;
-        confirmDialog({ title: 'Complete “' + truncate(cp.name, 50) + '”?', body: (openP ? plural(openP, 'task') + ' still open. ' : '') + 'It stays here and on your Timeline as a gold star, so you can come back to it.', yes: 'Complete',
+        confirmDialog({ title: 'Complete “' + truncate(cp.name, 50) + '”?', body: (openP ? plural(openP, 'task') + ' still open. ' : '') + 'It stays here and on your Timeline as a star, so you can come back to it.', yes: 'Complete',
           onYes: function () { commit(function (s) { s.projects.forEach(function (x) { if (x.id === cp.id) { x.ended = T; x.endedBy = null; x.parked = null; } }); }); } });
       }
       else if (a === 'th-checks') openCompassTests();
@@ -4904,7 +4978,7 @@ td.c-break{display:none}
           whenFields('pj-dl', 'Final deadline <span class="muted">(ends the project)</span>', d.dl, p0 && p0.ended ? '' : T) +
           '<div class="field" id="pj-pts-row" hidden><label for="pj-pts">Total points in the scoring <span class="muted">(optional)</span></label><input id="pj-pts" type="number" min="0" step="1" inputmode="numeric" value="' + esc(String(d.pts || '')) + '" placeholder="e.g. 140"></div>' +
           '<div class="field" id="pj-color-row"><fieldset class="swatches"><legend>Line color</legend>' + sw + '</fieldset></div>' +
-          '<p class="muted r-color-note" id="pj-rcolor" hidden><i class="rv-dot" style="background:var(--c' + RESEARCH_INK + ')"></i> Research projects are always gold.</p>' +
+          '<p class="muted r-color-note" id="pj-rcolor" hidden><i class="rv-dot" style="background:var(--c' + RESEARCH_INK + ')"></i> Research projects always use this color.</p>' +
           (isNew ? '<div class="field"><label for="pj-note">First update <span class="muted">(optional, logged on the start date)</span></label><textarea id="pj-note" rows="2" placeholder="Kickoff, goal, first step…">' + esc(d.note) + '</textarea></div>' +
             '<p class="muted" style="font-size:13px;margin:4px 0 0">Next, the project window opens, where you add its to-dos, files and notes.</p>' : '') +
           '<p class="form-error" id="pj-error" hidden></p>' +
@@ -5472,7 +5546,7 @@ td.c-break{display:none}
     var acts = (ro ? '' : '<button type="button" class="btn btn-sm" data-act="hub-edit">Edit</button>' +
         (p.ended ? '<button type="button" class="btn btn-sm" data-act="reopen">Reopen</button><button type="button" class="btn btn-sm btn-quiet btn-del" data-act="delete-now">Delete now</button>'
           : (p.parked ? '<button type="button" class="btn btn-sm" data-act="unpark">Bring back</button>' : isResearch(p) ? '' : '<button type="button" class="btn btn-sm btn-quiet" data-act="park" title="Pause it for later">Park</button>') +
-            '<button type="button" class="btn btn-sm btn-quiet" data-act="end">End</button>')) +
+            '<button type="button" class="btn btn-sm btn-quiet" data-act="end">' + (isResearch(p) ? 'Complete' : 'End') + '</button>')) +
       '<button type="button" class="icon-x hub-close" data-act="hub-close" aria-label="Close project" title="Close (Esc)">×</button>';
 
     // progress, pace and where the points are
@@ -5554,9 +5628,16 @@ td.c-break{display:none}
     return '<div class="hub-panel" role="dialog" aria-modal="true" aria-labelledby="hub-title" style="--pc:var(--c' + p.color + ')">' +
       '<header class="hub-head"><i class="dot" aria-hidden="true"></i><div class="hub-titles"><h2 id="hub-title">' + esc(p.name) + '</h2><p class="hub-sub">' + sub + '</p></div>' +
       '<div class="hub-acts">' + acts + '</div></header>' + (overview ? '<div class="hub-overview">' + overview + '</div>' : '') +
-      '<div class="hub-body">' + tasksSec + logSec + filesSec + archSec + '</div></div>';
+      '<div class="hub-body">' + tasksSec + hubNotesSec(p) + logSec + filesSec + archSec + '</div></div>';
   }
 
+  function hubNotesSec(p) {
+    if (!isResearch(p)) return '';
+    var N = thNotesOf(p.id).sort(function (a, b) { return b.updated - a.updated; });
+    if (!N.length) return '';
+    return '<section class="hsec hsec-rnotes" aria-labelledby="hs-rnotes"><div class="hsec-h"><h3 id="hs-rnotes">Notes</h3><span class="count">' + N.length + '</span></div><ul class="hub-rnotes">' +
+      N.map(function (pg) { return '<li><button type="button" class="hub-rnote" data-act="hub-th-note" data-id="' + esc(pg.id) + '"><span>' + esc(pg.title) + '</span><span class="muted">' + fmtShort(isoOf(pg.updated)) + '</span></button></li>'; }).join('') + '</ul></section>';
+  }
   // Redraw the open project window, keeping whatever you were typing and where you were.
   function renderHub() {
     var box = $('#hub'); if (!box) return;
@@ -5628,7 +5709,7 @@ td.c-break{display:none}
       draw: function () {
         var rsch = isResearch(p);
         $('#modal-body').innerHTML = '<h2 id="modal-title">' + (rsch ? 'Complete' : 'End') + ' “' + esc(p.name) + '”?</h2>' +
-          (rsch ? '<p>It stays on your Timeline and under its stage in Research as a gold star, so you can come back to it.</p>'
+          (rsch ? '<p>It stays on your Timeline and under its stage in Research as a star, so you can come back to it.</p>'
             : '<p>Its line stops with an <b style="color:var(--stop)">✕</b> and it sinks to the bottom of the board. A week after the end date it leaves the board, but stays in the <b>Library</b> under <i>Show archived</i>.</p>') +
           '<form id="end-form" novalidate>' +
           '<div class="field"><label for="end-date">End date</label><input id="end-date" type="date" value="' + T + '" min="' + min + '" max="' + T + '"></div>' +
@@ -6084,6 +6165,9 @@ td.c-break{display:none}
       else if (a === 'hub-done') { ui.hubShowDone = !ui.hubShowDone; renderHub(); }
       else if (a === 'hub-all') { ui.hubAllTasks = !ui.hubAllTasks; renderHub(); }
       else if (a === 'hub-log') { ui.hubAllLog = !ui.hubAllLog; renderHub(); }
+      else if (a === 'hub-th-note') { var hn = b.dataset.id; closeHub(); ui.thPage = hn; try { localStorage.setItem(TH_PAGE_KEY, hn); } catch (e) {} if (currentView() === 'thesis') { thOpen(hn, true); return; }
+        var toR = function () { location.hash = '#research'; };
+        if (backN) window.addEventListener('popstate', function once() { window.removeEventListener('popstate', once); setTimeout(toR, 0); }); else toR(); }
     });
     hub.addEventListener('submit', function (e) {
       e.preventDefault();
