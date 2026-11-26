@@ -1660,6 +1660,7 @@ td.c-break{display:none}
       return { id: typeof r.id === 'string' && r.id ? r.id : 'cp' + i + Math.random().toString(36).slice(2, 7), stage: stageIds[r.stage] ? r.stage : 'always',
         title: r.title.trim().slice(0, 120), text: typeof r.text === 'string' ? r.text.trim().slice(0, 1500) : '', from: typeof r.from === 'string' ? r.from.trim().slice(0, 80) : '' };
     });
+    var thOld = !(s.thesis && s.thesis.v === 2);
     out.thesis = normThesis(s);
     out.compassTests = (Array.isArray(s.compassTests) ? s.compassTests : []).filter(function (t) { return typeof t === 'string' && t.trim(); }).slice(0, 15).map(function (t) { return t.trim().slice(0, 160); });
     var areaIds = {};
@@ -1748,7 +1749,7 @@ td.c-break{display:none}
     rLive.slice(1).forEach(function (x) { x.area = null; });
     var rIds = {}; TH_STAGES.forEach(function (g) { rIds[g.id] = true; });
     out.projects.forEach(function (x) {
-      if (x.area === 'research') { x.color = RESEARCH_INK; if (!rIds[x.rstage]) x.rstage = guessRStage(x.name) || out.thesis.stage; }
+      if (x.area === 'research') { x.color = RESEARCH_INK; if (thOld && x.rstage === 'topic') x.rstage = 'lit'; if (!rIds[x.rstage]) x.rstage = guessRStage(x.name) || out.thesis.stage; }
       else { x.rstage = null; if (x.color === RESEARCH_INK) x.color = 0; }
     });
     (Array.isArray(s.updates) ? s.updates : []).forEach(function (u) {
@@ -2950,9 +2951,9 @@ td.c-break{display:none}
 
   /* ================= Thesis: one notebook for the big project ================= */
   var TH_STAGES = [
+    { id: 'lit', name: 'Literature review', hint: 'Read the field, learn the foundations, find the gap' },
     { id: 'topic', name: 'Topic selection', hint: 'Line up ideas, test them, choose one problem' },
     { id: 'proposal', name: 'Proposal', hint: 'Write the plan and get it approved' },
-    { id: 'lit', name: 'Literature review', hint: 'Read with a theme and pin down the gap' },
     { id: 'method', name: 'Method', hint: 'Model it, design the fix, prove it' },
     { id: 'results', name: 'Results', hint: 'Run it and explain what you see' },
     { id: 'writing', name: 'Writing', hint: 'Tell it as one story' },
@@ -2993,7 +2994,7 @@ td.c-break{display:none}
       { key: 'papers', title: 'Papers', st: [['toread', 'To read', ''], ['carded', 'Carded', 'go']], done: 'carded', doneWord: 'carded', showCap: true,
         fields: [['link', 'Link', 'https://…', 'url'], ['problem', 'Problem', 'What they set out to solve'], ['method', 'Method', 'How they did it'], ['result', 'Result', 'What they found'],
           ['limit', 'What they didn’t do', 'Your gap often hides here'], ['use', 'How it helps you', 'Where it fits in your research']],
-        add: 'Paper title', cap: 20, capMsg: '20 cards: the limit. Cut one before adding another, or narrow your theme.', empty: 'No papers yet. Add the ones closest to your topic first.' }] },
+        add: 'Paper title', cap: 20, capMsg: '20 cards: the limit. Cut one before adding another, or narrow your theme.', empty: 'No papers yet. Start with a survey or two and the classics.' }] },
     method: { name: 'Method chain', ico: CHAIN_ICO, sub: 'Each link leads to the next. Make one solid before leaning on it.', lists: [
       { key: 'chain', title: 'The chain', numbered: true, seed: ['The effect', 'Why it causes trouble', 'Your fix', 'The proof', 'The simulation'],
         st: [['open', 'Open', ''], ['working', 'Working on it', 'mid'], ['solid', 'Solid', 'go']], done: 'solid', doneWord: 'solid', fields: [['notes', 'Notes', 'Equations, choices, open questions']], add: 'Another link', cap: 8 }] },
@@ -3018,7 +3019,8 @@ td.c-break{display:none}
     function str(v, n) { return typeof v === 'string' ? v.slice(0, n) : ''; }
     var cv = th.canvas && typeof th.canvas === 'object' ? th.canvas : {}, canvas = {};
     TH_CANVAS.forEach(function (f) { canvas[f.id] = str(cv[f.id], 4000); });
-    var stage = stIds[th.stage] ? th.stage : 'topic', out = {
+    var old = th.v !== 2, was = function (id) { return old && id === 'topic' ? 'lit' : id; };
+    var stage = stIds[was(th.stage)] ? was(th.stage) : TH_STAGES[0].id, out = { v: 2,
       title: str(th.title, 200).trim(), question: str(th.question, 600).trim(), advisor: str(th.advisor, 120).trim(),
       due: isISO(th.due) ? th.due : null, stage: stage, canvas: canvas, pages: [], marks: [], topics: []
     };
@@ -3031,7 +3033,7 @@ td.c-break{display:none}
         .map(function (b) { return { role: b.role === 'you' || b.role === 'ai' ? b.role : 'note', text: b.text.slice(0, TH_MAX_BLOCK) }; });
       var cr = Number(pg.created) || Date.now();
       out.pages.push({ id: id, title: str(pg.title, 160).trim() || 'Untitled', kind: pg.kind === 'chat' ? 'chat' : 'note',
-        source: pg.source === 'claude' || pg.source === 'chatgpt' ? pg.source : '', stage: stIds[pg.stage] ? pg.stage : stage,
+        source: pg.source === 'claude' || pg.source === 'chatgpt' ? pg.source : '', stage: stIds[was(pg.stage)] ? was(pg.stage) : stage,
         created: cr, updated: Number(pg.updated) || cr, blocks: blocks, parked: isISO(pg.parked) ? pg.parked : null,
         ann: (Array.isArray(pg.ann) ? pg.ann : []).filter(function (a) { return a && TH_PENS[a.kind] && typeof a.q === 'string' && a.q.trim(); }).slice(0, 800)
           .map(function (a) { return { id: typeof a.id === 'string' && a.id ? a.id.slice(0, 40) : uid(), kind: a.kind, q: a.q.slice(0, 20000), pre: str(a.pre, 40), suf: str(a.suf, 40) }; }) });
