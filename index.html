@@ -617,6 +617,14 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .th-meta b{color:var(--ink);font-weight:600}
 .th-meta .is-soon{color:var(--warn)}
 .th-stages{list-style:none;margin:18px 0 0;padding:0;display:flex;gap:0}
+.th-proj{display:flex;align-items:center;gap:10px;width:100%;margin:14px 0 0;padding:6px 0 0;background:none;border:0;border-top:1px dashed #2e2a22;color:var(--muted);font:500 11.5px var(--font-mono);text-align:left;cursor:pointer}
+.th-proj-n{flex:none;max-width:40%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#9aa3b8}
+.th-proj-bar{flex:1;min-width:60px;height:3px;border-radius:2px;background:rgba(255,255,255,.07);overflow:hidden}
+.th-proj-bar i{display:block;height:100%;border-radius:2px;background:var(--pc);opacity:.75;transition:width .3s}
+.th-proj-s{flex:none;white-space:nowrap}
+.th-proj.is-behind .th-proj-s{color:var(--warn)}
+.th-proj:hover .th-proj-n{color:var(--ink)}
+.th-proj:hover .th-proj-bar i{opacity:1}
 .th-stages li{flex:1;min-width:0;position:relative}
 .th-stages li::before{content:"";position:absolute;top:12px;left:calc(-50% + 14px);right:calc(50% + 14px);height:1px;background:var(--rule)}
 .th-stages li:first-child::before{display:none}
@@ -903,6 +911,9 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
   .th-pen .pen-imp{padding:0 8px}
   .md .md-sec{padding-left:12px}
   .th-topic-umb{flex:1 1 auto;max-width:none}
+  .th-proj{flex-wrap:wrap;gap:4px 10px}
+  .th-proj-bar{order:3;flex:1 1 100%}
+  .th-proj-n{max-width:60%}
   .th-head-top{flex-wrap:wrap}
   .th-jhint{display:none}
   .th-umb-grid{grid-template-columns:1fr 1fr}
@@ -1231,7 +1242,7 @@ td.c-break{display:none}
       <a class="view-tab" href="#todo" data-view="todo">To-do<span class="tab-n" id="todo-n" hidden></span></a>
       <a class="view-tab" href="#timeline" data-view="timeline">Timeline</a>
       <a class="view-tab is-hot" href="#compass" data-view="compass">Compass</a>
-      <a class="view-tab is-hot" href="#thesis" data-view="thesis">Thesis</a>
+      <a class="view-tab is-hot" href="#research" data-view="thesis">Research</a>
     </nav>
     <div class="top-actions">
       <span class="save-status" id="save-status" role="status"></span>
@@ -1273,7 +1284,7 @@ td.c-break{display:none}
 
   <main>
     <section id="view-compass" class="view-compass" aria-label="Compass" hidden></section>
-    <section id="view-thesis" class="view-thesis" aria-label="Thesis" hidden></section>
+    <section id="view-thesis" class="view-thesis" aria-label="Research" hidden></section>
     <section id="view-todo" class="view-todo" aria-label="To-do" hidden>
       <form class="todo-add edit-only" id="todo-add" autocomplete="off">
         <label for="td-text" class="sr-only">New task</label>
@@ -2294,7 +2305,7 @@ td.c-break{display:none}
     if (h === '#todo') return 'todo';
     if (h === '#timeline') return 'timeline';
     if (h === '#compass') return 'compass';
-    if (h === '#thesis') return 'thesis';
+    if (h === '#research' || h === '#thesis') return 'thesis';
     var saved = null; try { saved = localStorage.getItem(VIEW_KEY); } catch (e) {}
     return saved === 'timeline' || saved === 'compass' || saved === 'thesis' ? saved : 'todo';
   }
@@ -2901,7 +2912,7 @@ td.c-break{display:none}
     lit: { name: 'Paper cards', ico: CARDS_ICO, sub: 'Five short lines per paper. Stop at 20: needing more means the theme is too wide.', lists: [
       { key: 'papers', title: 'Papers', st: [['toread', 'To read', ''], ['carded', 'Carded', 'go']], done: 'carded', doneWord: 'carded', showCap: true,
         fields: [['link', 'Link', 'https://…', 'url'], ['problem', 'Problem', 'What they set out to solve'], ['method', 'Method', 'How they did it'], ['result', 'Result', 'What they found'],
-          ['limit', 'What they didn’t do', 'Your gap often hides here'], ['use', 'How it helps you', 'Where it fits in your thesis']],
+          ['limit', 'What they didn’t do', 'Your gap often hides here'], ['use', 'How it helps you', 'Where it fits in your research']],
         add: 'Paper title', cap: 20, capMsg: '20 cards: the limit. Cut one before adding another, or narrow your theme.', empty: 'No papers yet. Add the ones closest to your topic first.' }] },
     method: { name: 'Method chain', ico: CHAIN_ICO, sub: 'Each link leads to the next. Make one solid before leaning on it.', lists: [
       { key: 'chain', title: 'The chain', numbered: true, seed: ['The effect', 'Why it causes trouble', 'Your fix', 'The proof', 'The simulation'],
@@ -2929,7 +2940,7 @@ td.c-break{display:none}
     TH_CANVAS.forEach(function (f) { canvas[f.id] = str(cv[f.id], 4000); });
     var stage = stIds[th.stage] ? th.stage : 'topic', out = {
       title: str(th.title, 200).trim(), question: str(th.question, 600).trim(), advisor: str(th.advisor, 120).trim(),
-      due: isISO(th.due) ? th.due : null, stage: stage, canvas: canvas, pages: [], marks: [], topics: []
+      due: isISO(th.due) ? th.due : null, stage: stage, project: typeof th.project === 'string' && th.project ? th.project.slice(0, 40) : null, canvas: canvas, pages: [], marks: [], topics: []
     };
     var pids = {};
     (Array.isArray(th.pages) ? th.pages : []).slice(0, 500).forEach(function (pg) {
@@ -3282,17 +3293,25 @@ td.c-break{display:none}
     if (th.advisor) meta.push('Advisor: ' + esc(th.advisor));
     if (th.due) { var dl = diffDays(T, th.due); meta.push('Due ' + fmtYear(th.due) + ' · <span class="' + (dl <= 14 ? 'is-soon' : '') + '">' + (dl < 0 ? plural(-dl, 'day') + ' ago' : dl === 0 ? 'today' : plural(dl, 'day') + ' left') + '</span>'); }
     var chosen = th.topics.filter(function (t) { return t.status === 'chosen'; })[0];
+    // the linked Timeline project: one thin bar, its own progress
+    var lp = th.project ? getProject(th.project) : null, projBar = '';
+    if (lp) {
+      var tc = taskCounts(lp), pct = tc.total ? Math.round(tc.done / tc.total * 100) : 0, pc = paceOf(lp), bits = [tc.total ? tc.done + '/' + tc.total : 'no stages yet'];
+      if (lp.ended) bits.push('ended'); else { if (pc && pc.key !== 'done') bits.push(pc.label.toLowerCase()); if (lp.deadline) bits.push(leftText(lp, T)); }
+      projBar = '<button type="button" class="th-proj' + (pc && pc.key === 'behind' && !lp.ended ? ' is-behind' : '') + '" data-act="th-proj" style="--pc:var(--c' + lp.color + ')" title="Open ' + esc(lp.name) + '">' +
+        '<span class="th-proj-n">' + esc(lp.name) + '</span><span class="th-proj-bar"><i style="width:' + pct + '%"></i></span><span class="th-proj-s">' + esc(bits.join(' · ')) + '</span></button>';
+    }
     $('#th-head').innerHTML = '<div class="th-head-top"><div class="th-head-main">' +
-      (th.title ? '<h2 class="th-title">' + esc(th.title) + '</h2>' : '<h2 class="th-title is-empty">' + (ro ? 'Thesis' : 'Name your thesis') + '</h2>') +
+      (th.title ? '<h2 class="th-title">' + esc(th.title) + '</h2>' : '<h2 class="th-title is-empty">' + (ro ? 'Research' : 'Name your research') + '</h2>') +
       (th.question ? '<p class="th-q">' + esc(th.question) + '</p>' : '') +
       (meta.length || chosen ? '<p class="th-meta">' + meta.concat(chosen ? ['Topic: <b>' + esc(truncate(chosen.title, 90)) + '</b>'] : []).join(' · ') + '</p>' : '') + '</div>' +
       '<div class="th-head-acts"><button type="button" class="btn btn-sm th-hot" data-act="th-journal" aria-pressed="' + (thCurrent() === 'th:journal') + '">' + BOOK_ICO + 'Journal' +
         (th.journal.length ? '<span class="th-hot-n">' + th.journal.length + '</span>' : '') + '</button>' +
       (ro ? '' : '<button type="button" class="btn btn-sm" data-act="th-edit">Edit</button>') + '</div></div>' +
-      '<ol class="th-stages" aria-label="Thesis stages">' + TH_STAGES.map(function (g, i) {
+      '<ol class="th-stages" aria-label="Research stages">' + TH_STAGES.map(function (g, i) {
         return '<li class="' + (i < si ? 'is-done' : i === si ? 'is-now' : '') + '"><button type="button" data-act="th-stage" data-stage="' + g.id + '" title="' + esc(g.hint) + '"' + (ro ? ' disabled' : '') + (i === si ? ' aria-current="step"' : '') + '>' +
           '<span class="th-dot">' + (i < si ? CK : i + 1) + '</span><span class="th-sname">' + esc(g.name) + '</span></button></li>';
-      }).join('') + '</ol>';
+      }).join('') + '</ol>' + projBar;
   }
   function thSnippet(pg, q) {
     for (var i = 0; i < pg.blocks.length; i++) {
@@ -3309,7 +3328,7 @@ td.c-break{display:none}
     var filled = TH_CANVAS.filter(function (f) { return th.canvas[f.id].trim(); }).length;
     var h = '<div class="th-pins">' + pin('th:important', STAR, 'Important', th.marks.length || '') +
       pin('th:stage', TH_TOOLS[th.stage].ico, esc(TH_TOOLS[th.stage].name), thToolCount(th.stage)) +
-      pin('th:canvas', CANVAS_ICO, 'Thesis canvas', filled + '/' + TH_CANVAS.length) + '</div>';
+      pin('th:canvas', CANVAS_ICO, 'Research canvas', filled + '/' + TH_CANVAS.length) + '</div>';
     var pages = th.pages.slice().sort(function (a, b) { return b.updated - a.updated; }), shown = 0;
     TH_STAGES.concat([{ id: '__parked', name: 'Parking lot' }]).forEach(function (g) {
       var parkSec = g.id === '__parked';
@@ -3542,7 +3561,7 @@ td.c-break{display:none}
   }
   function thCanvasHTML() {
     var th = state.thesis, ro = mode === 'readonly';
-    return thHeader('', 'Thesis canvas', '') +
+    return thHeader('', 'Research canvas', '') +
       '<div class="th-canvas">' + TH_CANVAS.map(function (f, i) {
         return '<div class="th-cv"><label for="th-cv-' + f.id + '"><span class="th-cvn">' + (i + 1) + '</span>' + esc(f.name) + '</label><textarea id="th-cv-' + f.id + '" data-cv="' + f.id + '" data-grow rows="2" placeholder="' + esc(f.hint) + '"' + (ro ? ' readonly' : '') + '>' + esc(th.canvas[f.id]) + '</textarea></div>';
       }).join('') + '</div>';
@@ -3762,11 +3781,16 @@ td.c-break{display:none}
     var th = state.thesis;
     openModal({
       draw: function () {
-        $('#modal-body').innerHTML = '<h2 id="modal-title">Your thesis</h2><form id="the-form" novalidate>' +
+        $('#modal-body').innerHTML = '<h2 id="modal-title">Your research</h2><form id="the-form" novalidate>' +
           '<div class="field"><label for="the-title">Working title</label><input id="the-title" type="text" maxlength="200" value="' + esc(th.title) + '" placeholder="It can change; write the best one you have"></div>' +
           '<div class="field"><label for="the-q">Research question</label><textarea id="the-q" rows="2" maxlength="600" placeholder="One sentence">' + esc(th.question) + '</textarea></div>' +
           '<div class="field-row"><div class="field"><label for="the-adv">Advisor</label><input id="the-adv" type="text" maxlength="120" value="' + esc(th.advisor) + '"></div>' +
           '<div class="field"><label for="the-due">Due <span class="muted">(optional)</span></label><input id="the-due" type="date" value="' + (th.due || '') + '"></div></div>' +
+          (function () {
+            var R = state.projects.filter(function (x) { return (x.area === 'research' && !x.ended) || x.id === th.project; });
+            return '<div class="field"><label for="the-proj">Timeline project</label><select id="the-proj"' + (R.length ? '' : ' disabled') + '><option value="">' + (R.length ? 'None' : 'No Research projects on the Timeline') + '</option>' +
+              R.map(function (x) { return '<option value="' + esc(x.id) + '"' + (x.id === th.project ? ' selected' : '') + '>' + esc(x.name) + (x.ended ? ' (ended)' : '') + '</option>'; }).join('') + '</select></div>';
+          })() +
           '<div class="modal-actions"><button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
       },
       onSubmit: function () {
@@ -3774,6 +3798,7 @@ td.c-break{display:none}
         commit(function (s) {
           s.thesis.title = $('#the-title').value.trim().slice(0, 200); s.thesis.question = $('#the-q').value.trim().slice(0, 600);
           s.thesis.advisor = $('#the-adv').value.trim().slice(0, 120); s.thesis.due = isISO(d) ? d : null;
+          var pj = $('#the-proj'); if (pj && !pj.disabled) s.thesis.project = pj.value || null;
         });
         closeModal();
       }
@@ -3887,6 +3912,7 @@ td.c-break{display:none}
         if (tt) { tt.focus(); try { var rr = document.createRange(); rr.selectNodeContents(tt); var ss = getSelection(); ss.removeAllRanges(); ss.addRange(rr); } catch (er) {} }
       }
       else if (a === 'th-edit') openThesisEdit();
+      else if (a === 'th-proj') { if (state.thesis.project && getProject(state.thesis.project)) openHub(state.thesis.project); }
       else if (a === 'th-stage') {
         var sid = b.dataset.stage; ui.thCard = null;
         if (sid !== state.thesis.stage) commit(function (s) { s.thesis.stage = sid; });
