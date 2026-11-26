@@ -655,6 +655,18 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .th-page{position:relative;min-width:0;min-height:60vh;background:linear-gradient(90deg,transparent 21px,rgba(255,120,110,.13) 21px,rgba(255,120,110,.13) 22px,transparent 22px),#10141f;border:1px solid var(--rule);border-radius:16px;padding:24px 34px 30px 46px}
 .th-ph{display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:18px;padding-bottom:16px;border-bottom:1px dashed #283049}
 .th-ph-main{flex:1;min-width:220px}
+.th-edtitle{display:inline;outline:none;border-radius:4px;caret-color:var(--warn)}
+.th-edtitle:hover{background:rgba(255,255,255,.03)}
+.th-edtitle:focus{background:rgba(255,184,107,.06);box-shadow:0 0 0 4px rgba(255,184,107,.06)}
+.th-page .md[contenteditable="true"]{outline:none;caret-color:var(--warn);border-radius:8px;transition:background .15s}
+.th-page .md[contenteditable="true"]:focus{background:rgba(255,255,255,.012);box-shadow:0 0 0 6px rgba(255,255,255,.012)}
+.th-page [data-ed] a[href]{cursor:pointer}
+.th-page .md[data-ph]:empty::before{content:attr(data-ph);color:#59617a}
+.th-page .md[data-ph]:empty{min-height:3em}
+.th-b.is-long:focus-within .md{max-height:none;-webkit-mask-image:none;mask-image:none}
+.th-ksel{display:inline-block;width:auto !important;min-height:0 !important;padding:0 14px 0 0 !important;border:0 !important;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M1 1l3 3 3-3' fill='none' stroke='%238a93ad' stroke-width='1.3'/%3E%3C/svg%3E") no-repeat right center !important;box-shadow:none !important;-webkit-appearance:none;appearance:none;font:inherit !important;letter-spacing:inherit;text-transform:inherit;color:inherit;cursor:pointer}
+.th-ksel:hover,.th-ksel:focus{color:var(--ink)}
+.th-ksel option{text-transform:none;background:var(--panel);color:var(--ink)}
 .th-ptitle{margin:0;font:600 clamp(19px,2.2vw,24px)/1.25 var(--font-display);color:var(--ink);text-wrap:balance}
 .th-sub{margin:6px 0 0;font-size:14px;color:var(--muted)}
 .th-pacts{display:flex;gap:6px;flex-wrap:wrap}
@@ -682,10 +694,9 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .md{font-size:15.5px;line-height:1.68;color:#dde2ee;max-width:76ch;overflow-wrap:anywhere}
 .md>*:first-child{margin-top:0}
 .md>*:last-child{margin-bottom:0}
-.md .md-sec{margin:0 0 .9em 2px;padding-left:18px;border-left:1px solid rgba(140,155,195,.14)}
+.md .md-sec{margin:0 0 .9em 0;padding-left:20px}
 .md .md-sec:empty{display:none}
 .md .md-sec>*:last-child{margin-bottom:0}
-.md .md-sec.is-lead{border-left-color:rgba(140,155,195,.08)}
 .md .md-lead{margin:0 0 .35em}
 .md .md-lead strong{color:#fff}
 .th-park .th-sec-h{display:flex;align-items:center;gap:6px}
@@ -3031,6 +3042,9 @@ td.c-break{display:none}
     if (n.nodeType !== 1) return '';
     var tag = n.tagName.toLowerCase(), cls = typeof n.className === 'string' ? n.className : '';
     if (/^(script|style|noscript|svg|button|img|picture|video|audio|canvas|iframe|template|select|input|textarea|head|meta|link|title)$/.test(tag)) return '';
+    if (/\bmd-math\b/.test(cls) && n.getAttribute('data-tex') !== null) { var tx = n.getAttribute('data-tex'); return /\bis-display\b/.test(cls) ? '\n\n$$' + tx + '$$\n\n' : '$' + tx + '$'; }
+    if (/\bmd-lang\b/.test(cls)) return '';
+    if (/\bmd-box\b/.test(cls)) return n.textContent.indexOf('☑') >= 0 ? '[x]' : '[ ]';
     if (/\bkatex-display\b/.test(cls)) { var td = texOf(n); return td ? '\n\n$$' + td + '$$\n\n' : ''; }
     if (/\bkatex\b/.test(cls) || tag === 'math') {
       var ti = texOf(n) || (tag === 'math' ? n.getAttribute('alttext') || '' : '');
@@ -3044,8 +3058,8 @@ td.c-break{display:none}
       case 'br': return '\n';
       case 'hr': return '\n\n---\n\n';
       case 'h1': case 'h2': case 'h3': case 'h4': case 'h5': case 'h6':
-        var hx = mdOf(n, false).replace(/\s+/g, ' ').trim();
-        return hx ? '\n\n' + '######'.slice(0, +tag[1]) + ' ' + hx + '\n\n' : '';
+        var hx = mdOf(n, false).replace(/\s+/g, ' ').trim(), hl = +((cls.match(/\bmd-h([1-6])\b/) || [])[1] || tag[1]);
+        return hx ? '\n\n' + '######'.slice(0, hl) + ' ' + hx + '\n\n' : '';
       case 'pre':
         var code = n.querySelector('code') || n, lang = ((typeof code.className === 'string' ? code.className : '').match(/language-([\w+#.-]+)/) || [])[1] || '';
         return '\n\n```' + lang + '\n' + code.textContent.replace(/\n+$/, '') + '\n```\n\n';
@@ -3056,7 +3070,7 @@ td.c-break{display:none}
       case 'a':
         var href = n.getAttribute('href') || '', at = mdOf(n, pre).trim();
         return /^https?:\/\//i.test(href) && at ? (at === href ? href : '[' + at + '](' + href + ')') : at;
-      case 'blockquote': return '\n\n' + mdOf(n, pre).trim().split('\n').map(function (l) { return '> ' + l; }).join('\n') + '\n\n';
+      case 'blockquote': return '\n\n' + mdOf(n, pre).replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim().split('\n').map(function (l) { return l.trim() ? '> ' + l : '>'; }).join('\n') + '\n\n';
       case 'ul': case 'ol': return '\n\n' + listMd(n, tag === 'ol') + '\n\n';
       case 'table': return '\n\n' + tableMd(n) + '\n\n';
       case 'p': case 'div': case 'section': case 'article': case 'header': case 'footer': case 'main': case 'aside': case 'figure': case 'figcaption':
@@ -3088,7 +3102,7 @@ td.c-break{display:none}
   }
 
   /* ---- showing it: a small, safe Markdown renderer (with TeX math) ---- */
-  function mathSpan(t, display) { t = t.trim(); return '<span class="md-math' + (display ? ' is-display' : '') + '" data-tex="' + esc(t) + '">' + esc(t) + '</span>'; }
+  function mathSpan(t, display) { t = t.trim(); return '<span class="md-math' + (display ? ' is-display' : '') + '" contenteditable="false" data-tex="' + esc(t) + '">' + esc(t) + '</span>'; }
   function mdInline(s) {
     var keep = [];
     function stash(h) { keep.push(h); return '\u0000' + (keep.length - 1) + '\u0000'; }
@@ -3132,7 +3146,7 @@ td.c-break{display:none}
         var fence = m[1], code = []; i++;
         while (i < L.length && L[i].trim().indexOf(fence) !== 0) code.push(L[i++]);
         i++;
-        put('<pre class="md-pre">' + (m[2] ? '<span class="md-lang">' + esc(m[2]) + '</span>' : '') + '<code>' + esc(code.join('\n')) + '</code></pre>');
+        put('<pre class="md-pre">' + (m[2] ? '<span class="md-lang" contenteditable="false">' + esc(m[2]) + '</span>' : '') + '<code' + (m[2] ? ' class="language-' + esc(m[2]) + '"' : '') + '>' + esc(code.join('\n')) + '</code></pre>');
         continue;
       }
       if (/^\s*(\$\$|\\\[)/.test(l)) {
@@ -3336,7 +3350,7 @@ td.c-break{display:none}
     var el = $('#th-page'), wrap = $('#th-wrap'), id = thCurrent();
     wrap.classList.toggle('is-reading', !!ui.thReading); $('#view-thesis').classList.toggle('is-reading', !!ui.thReading);
     var ae = document.activeElement;
-    if (ae && el.contains(ae) && (ae.tagName === 'TEXTAREA' || (ae.tagName === 'INPUT' && /^(text|search)$/.test(ae.type))) && el.dataset.id === id) return;   // you're typing here
+    if (ae && el.contains(ae) && (ae.tagName === 'TEXTAREA' || ae.isContentEditable || (ae.tagName === 'INPUT' && /^(text|search)$/.test(ae.type))) && el.dataset.id === id) return;   // you're typing here
     var key = thPageKey(id);
     if (el.dataset.key === key) return;
     var same = el.dataset.id === id, y = el.scrollTop;
@@ -3386,18 +3400,22 @@ td.c-break{display:none}
   function thChatHTML(pg) {
     if (!pg) return '<p class="th-none">That page is gone.</p>';
     var ro = mode === 'readonly', you = pg.blocks.filter(function (b) { return b.role === 'you'; }), yi = 0;
-    var h = thHeader(esc(thSourceName(pg)) + ' · ' + fmtLong(isoOf(pg.created)) + ' · ' + (pg.parked ? 'Parked ' + fmtShort(pg.parked) : esc(thStageName(pg.stage))), esc(pg.title), '',
-      ro ? '' : '<div class="th-pacts"><button type="button" class="btn btn-sm" data-act="th-more">+ Add more</button><button type="button" class="btn btn-sm" data-act="th-edit-page">Edit</button>' +
+    var secSel = ro || pg.parked ? (pg.parked ? 'Parked ' + fmtShort(pg.parked) : esc(thStageName(pg.stage))) : '<label class="sr-only" for="th-psec">Section</label><select id="th-psec" class="th-ksel" data-page-stage="1">' +
+      TH_STAGES.map(function (g) { return '<option value="' + g.id + '"' + (g.id === pg.stage ? ' selected' : '') + '>' + esc(g.name) + '</option>'; }).join('') + '</select>';
+    var h = thHeader(esc(thSourceName(pg)) + ' · ' + fmtLong(isoOf(pg.created)) + ' · ' + secSel,
+      ro ? esc(pg.title) : '<span class="th-edtitle" contenteditable="true" spellcheck="true" data-ed="t" role="textbox" aria-label="Page title">' + esc(pg.title) + '</span>', '',
+      ro ? '' : '<div class="th-pacts"><button type="button" class="btn btn-sm" data-act="th-more">+ Add more</button><button type="button" class="btn btn-sm btn-quiet" data-act="th-edit-page" title="Edit the plain text, speaker lines and all">Raw text</button>' +
         (pg.parked ? '<button type="button" class="btn btn-sm" data-act="th-unpark-page">Bring back</button>' : '<button type="button" class="btn btn-sm btn-quiet" data-act="th-park-page" title="Set it aside without deleting it">Park</button>') + '<button type="button" class="btn btn-sm btn-quiet" data-act="th-del-page">Delete</button></div>');
     if (you.length > 1) h += '<nav class="th-toc" aria-label="Your questions"><p class="th-kicker">In this chat</p><ol>' + you.map(function (b, i) {
       return '<li><button type="button" class="th-toc-q" data-act="th-jump" data-i="' + i + '">' + esc(truncate(thPlain(b.text), 110)) + '</button></li>';
     }).join('') + '</ol></nav>';
-    h += '<div class="th-blocks">' + pg.blocks.map(function (b) {
+    var ed = ro ? '' : ' contenteditable="true" spellcheck="true" data-ed="b"';
+    h += '<div class="th-blocks">' + (pg.blocks.length ? pg.blocks.map(function (b, bi) {
       var who = b.role === 'you' ? 'You' : b.role === 'ai' ? thAiName(pg) : '', long = b.role === 'you' && b.text.length > 700;
       return '<section class="th-b is-' + b.role + (long ? ' is-long' : '') + '"' + (b.role === 'you' ? ' id="th-you-' + (yi++) + '"' : '') + '>' +
-        (who ? '<p class="th-who">' + who + '</p>' : '') + '<div class="md">' + mdToHtml(b.text) + '</div>' +
+        (who ? '<p class="th-who">' + who + '</p>' : '') + '<div class="md"' + ed + ' data-bi="' + bi + '">' + mdToHtml(b.text) + '</div>' +
         (long ? '<button type="button" class="link-btn th-showall" data-act="th-showall">Show all</button>' : '') + '</section>';
-    }).join('') + '</div>';
+    }).join('') : ro ? '' : '<section class="th-b is-note"><div class="md"' + ed + ' data-bi="0" data-ph="Write here…"></div></section>') + '</div>';
     return h;
   }
   function thImportantHTML() {
@@ -3628,6 +3646,43 @@ td.c-break{display:none}
     });
     return out;
   }
+  // Typing in a page: each edited block is turned back into Markdown and saved a moment later.
+  // When you leave the page text, it's redrawn (sections, math, marks back in place).
+  var thEdDirty = {}, thEdTimer = 0;
+  function thEdMark(el) {
+    var pid = thCurrent(), key = el.dataset.ed === 't' ? 't|' + pid : 'b|' + pid + '|' + el.dataset.bi;
+    thEdDirty[key] = el;
+    clearTimeout(thEdTimer); thEdTimer = setTimeout(function () { thEdFlush(false); }, 700);
+  }
+  function thEdFlush(final) {
+    clearTimeout(thEdTimer); thEdTimer = 0;
+    var keys = Object.keys(thEdDirty); if (!keys.length || mode === 'readonly') { thEdDirty = {}; return false; }
+    var D = thEdDirty, now = Date.now(), touched = {}; thEdDirty = {};
+    keys.forEach(function (k) {
+      var parts = k.split('|'), pg = getThPage(parts[1]), el = D[k]; if (!pg || !el) return;
+      if (parts[0] === 't') {
+        var t = el.textContent.replace(/\s+/g, ' ').trim().slice(0, 160);
+        if (t) pg.title = t; else if (final) el.textContent = pg.title;
+      } else {
+        var bi = +parts[2], md = htmlToMd(el.innerHTML).slice(0, TH_MAX_BLOCK);
+        if (pg.blocks[bi]) pg.blocks[bi].text = md;
+        else if (md.trim()) pg.blocks.push({ role: 'note', text: md });
+      }
+      pg.updated = now; touched[pg.id] = pg;
+    });
+    if (final) Object.keys(touched).forEach(function (id) { touched[id].blocks = touched[id].blocks.filter(function (b) { return b.text.trim(); }); });
+    state.rev = (state.rev || 0) + 1; scheduleSave(); renderThList();
+    return true;
+  }
+  // where each mark sits right now, read from the page itself (so it stays right while you edit)
+  function thMarkPos(idx) {
+    var P = {};
+    idx.nodes.forEach(function (x) {
+      var a = x.a, b = x.a + x.n.nodeValue.length, m = x.n.parentNode;
+      while (m && m.closest) { m = m.closest('mark[data-aid]'); if (!m) break; var id = m.getAttribute('data-aid'); if (!P[id]) P[id] = [a, b]; else { P[id][0] = Math.min(P[id][0], a); P[id][1] = Math.max(P[id][1], b); } m = m.parentNode; }
+    });
+    return P;
+  }
   function thOverlaps(o) {
     var out = [], P = ui.thAnnPos || {};
     Object.keys(P).forEach(function (id) { if (P[id][0] < o.e && P[id][1] > o.s) out.push(id); });
@@ -3659,6 +3714,7 @@ td.c-break{display:none}
       if (!root.contains(r.commonAncestorContainer) || !t) return hide();
       var idx = thTextIndex(root), o = thOffsets(idx, r);
       if (!o) return hide();
+      ui.thAnnPos = thMarkPos(idx);
       thSel = { text: t, page: thCurrent(), o: o, a: thAnchor(idx, o), hits: thOverlaps(o), idx: idx };
       bar.querySelector('.pen-clear').hidden = !thSel.hits.length;
       var rects = r.getClientRects(), last = rects[rects.length - 1] || r.getBoundingClientRect();
@@ -3672,6 +3728,8 @@ td.c-break{display:none}
     bar.addEventListener('click', function (e) {
       var b = e.target.closest('[data-pen]'), x = thSel; if (!b || !x || mode === 'readonly') return;
       var pen = b.dataset.pen;
+      thEdFlush(false); ui.thAnnPos = thMarkPos(x.idx);
+      var ae = document.activeElement; if (ae && ae.isContentEditable) ae.blur();
       if (pen === 'important') {
         commit(function (s) { s.thesis.marks.push({ id: uid(), page: x.page, text: x.text.slice(0, 3000), q: x.a.q, pre: x.a.pre, suf: x.a.suf, created: Date.now() }); });
         thToast('Kept on your Important page');
@@ -3689,20 +3747,6 @@ td.c-break{display:none}
       }
       try { window.getSelection().removeAllRanges(); } catch (er) {}
       hide();
-    });
-    // tap a mark to select it, so the bar shows up with "remove" ready
-    document.addEventListener('click', function (e) {
-      var m = e.target.closest && e.target.closest('#th-page mark.th-ann'); if (!m || mode === 'readonly' || e.target.closest('a')) return;
-      var sel = window.getSelection(); if (sel && !sel.isCollapsed) return;
-      var P = (ui.thAnnPos || {})[m.getAttribute('data-aid')], root = $('#th-page .th-blocks'); if (!P || !root) return;
-      var idx = thTextIndex(root), r = document.createRange(), set = 0;
-      idx.nodes.forEach(function (x) {
-        var a = x.a, b = x.a + x.n.nodeValue.length;
-        if (!(set & 1) && P[0] >= a && P[0] < b) { r.setStart(x.n, P[0] - a); set |= 1; }
-        if (!(set & 2) && P[1] > a && P[1] <= b) { r.setEnd(x.n, P[1] - a); set |= 2; }
-      });
-      if (set !== 3) return;
-      sel.removeAllRanges(); sel.addRange(r);
     });
   }
   function thToast(msg) {
@@ -3835,7 +3879,13 @@ td.c-break{display:none}
       if (a === 'th-open') { thOpen(id, true); if (isPhone()) window.scrollTo(0, 0); else { var w = $('#th-wrap'); if (w && w.getBoundingClientRect().top < 0) w.scrollIntoView({ block: 'start' }); } }
       else if (a === 'th-back') { ui.thReading = false; layerClosed('th'); renderThesis(T); }
       else if (a === 'th-paste') openThEditor('new');
-      else if (a === 'th-note') openThEditor('note');
+      else if (a === 'th-note') {
+        var nid = uid(), now = Date.now();
+        commit(function (s) { s.thesis.pages.push({ id: nid, title: 'Untitled', kind: 'note', source: '', stage: s.thesis.stage, created: now, updated: now, blocks: [], parked: null, ann: [] }); });
+        thOpen(nid, true); if (isPhone()) window.scrollTo(0, 0);
+        var tt = $('#th-page [data-ed="t"]');
+        if (tt) { tt.focus(); try { var rr = document.createRange(); rr.selectNodeContents(tt); var ss = getSelection(); ss.removeAllRanges(); ss.addRange(rr); } catch (er) {} }
+      }
       else if (a === 'th-edit') openThesisEdit();
       else if (a === 'th-stage') {
         var sid = b.dataset.stage; ui.thCard = null;
@@ -3951,6 +4001,8 @@ td.c-break{display:none}
     box.addEventListener('input', function (e) {
       var t = e.target;
       if (t.id === 'th-q') { ui.thQuery = t.value; renderThList(); return; }
+      var edEl = t.closest && t.closest('[data-ed]');
+      if (edEl && edEl.isContentEditable) { thEdMark(edEl); return; }
       if (t.hasAttribute('data-grow')) thGrow(t);
       if (t.dataset.cv) { var k = t.dataset.cv, v = t.value.slice(0, 4000); thQuiet(function (s) { s.thesis.canvas[k] = v; }); }
       else if (t.dataset.topicNotes) { var tid = t.dataset.topicNotes, nv = t.value.slice(0, 4000); thQuiet(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === tid) tp.notes = nv; }); }); }
@@ -3961,9 +4013,42 @@ td.c-break{display:none}
         thQuiet(function (s) { (s.thesis.lists[ck] || []).forEach(function (it) { if (it.id !== cidx) return; if (fk) { if (fv) it.f[fk] = fv; else delete it.f[fk]; } else it.title = fv.trim(); }); });
       }
     });
-    box.addEventListener('paste', function (e) { if (e.target.matches && e.target.matches('textarea[data-md-paste]')) thOnPaste(e); });
+    box.addEventListener('paste', function (e) {
+      if (e.target.matches && e.target.matches('textarea[data-md-paste]')) { thOnPaste(e); return; }
+      var edEl = e.target.closest && e.target.closest('[data-ed]'); if (!edEl || !edEl.isContentEditable || !e.clipboardData) return;
+      // paste as text (Markdown from rich copies): it's formatted when the page redraws
+      var html = e.clipboardData.getData('text/html'), text = e.clipboardData.getData('text/plain') || '', md = text;
+      if (edEl.dataset.ed === 'b' && html) {
+        try { var c = htmlToMd(html), w = function (x) { return (x.match(/[A-Za-z0-9À-￿]/g) || []).length; }; if (c.trim() && w(c) >= w(text) * 0.6) md = c; } catch (er) {}
+      }
+      if (edEl.dataset.ed === 't') md = md.replace(/\s+/g, ' ');
+      e.preventDefault();
+      document.execCommand('insertText', false, md);
+    });
+    // links inside editable text: Ctrl/Cmd+click opens them (a tap on a phone)
+    box.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('#th-page [data-ed] a[href]'); if (!a) return;
+      if (e.ctrlKey || e.metaKey || isPhone()) { e.preventDefault(); window.open(a.href, '_blank', 'noopener'); }
+    });
+    box.addEventListener('focusout', function (e) {
+      if (!e.target.isContentEditable) return;
+      setTimeout(function () {
+        var ae = document.activeElement, pe = $('#th-page');
+        if (ae && pe && pe.contains(ae) && ae.isContentEditable) { thEdFlush(false); return; }
+        if (thEdFlush(true)) renderThPage();
+      }, 0);
+    });
+    box.addEventListener('keydown', function (e) {
+      var t = e.target;
+      if (t.dataset && t.dataset.ed === 't' && e.key === 'Enter') {   // Enter on the title jumps into the text
+        e.preventDefault();
+        var first = $('#th-page [data-ed="b"]');
+        if (first) { first.focus(); try { var r = document.createRange(); r.selectNodeContents(first); r.collapse(true); var sl = getSelection(); sl.removeAllRanges(); sl.addRange(r); } catch (er) {} } else t.blur();
+      } else if (t.dataset && t.dataset.ed === 't' && e.key === 'Escape') t.blur();
+    });
     box.addEventListener('change', function (e) {
       var t = e.target;
+      if (t.dataset.pageStage) { var spid = thCurrent(), sv = t.value; commit(function (s) { s.thesis.pages.forEach(function (x) { if (x.id === spid) x.stage = sv; }); }); return; }
       if (t.id === 'th-topic-umb') ui.thUmbSel = t.value;
       else if (t.dataset.topicUmb) { var tid = t.dataset.topicUmb, uv = t.value || null; commit(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === tid) tp.umb = uv; }); }); }
     });
