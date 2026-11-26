@@ -617,6 +617,61 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .th-meta b{color:var(--ink);font-weight:600}
 .th-meta .is-soon{color:var(--warn)}
 .th-stages{list-style:none;margin:18px 0 0;padding:0;display:flex;gap:0}
+.th-stages li.is-view button .th-dot{box-shadow:0 0 0 3px rgba(255,184,107,.22)}
+.th-stages li.is-view .th-sname{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(255,184,107,.6);text-underline-offset:4px}
+.th-plan{margin:14px 0 0;padding:12px 0 0;border-top:1px dashed #2e2a22}
+.th-plan-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 6px}
+.th-plan-k{margin:0;display:flex;align-items:center;gap:8px;font:600 11px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.th-now-tag{font:700 9.5px var(--font-mono);letter-spacing:.08em;color:#1b1407;background:var(--warn);border-radius:999px;padding:1px 7px}
+.th-plan-n{display:inline-flex;align-items:center;gap:8px;font:500 11.5px var(--font-mono);color:var(--muted)}
+.th-plan-n .th-proj-bar{display:block;width:80px;flex:none}
+.th-plan-n .th-proj-bar i{background:var(--warn)}
+.th-plan-act{margin-left:auto;font-size:12.5px;padding:0;display:inline-flex;align-items:center;gap:5px}
+.th-plan-act .star{width:12px;height:12px;color:var(--warn)}
+.th-tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.th-task{border-radius:8px}
+.th-task.is-open{background:rgba(255,255,255,.025)}
+.th-task-row{display:flex;align-items:center;gap:10px;min-height:32px;padding:2px 6px}
+.th-task-ck{flex:none;width:16px;height:16px;margin:0;accent-color:var(--warn);cursor:pointer}
+.th-task-star{flex:none;width:16px;height:16px;padding:0;border:0;background:none;color:var(--warn);opacity:.45;cursor:pointer;display:grid;place-items:center}
+.th-task-star .star{width:13px;height:13px}
+.th-task-star:hover{opacity:.9}
+.th-task-t{flex:1;min-width:0;text-align:left;background:none;border:0;padding:4px 0;color:var(--ink);font:inherit;font-size:14px;line-height:1.4;cursor:pointer}
+.th-task.is-done .th-task-t{color:#6c748c}
+.th-task-due{flex:none;font:500 11.5px var(--font-mono);color:var(--muted)}
+.th-task-due.is-today{color:var(--warn)}
+.th-task-due.is-late{color:var(--stop)}
+.th-task-note{flex:none;max-width:42%;display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border:1px solid var(--rule);border-radius:999px;background:none;color:#9fb0d6;font:500 11.5px var(--font-body);cursor:pointer;overflow:hidden}
+.th-task-note span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.th-task-note .ico{width:12px;height:12px;flex:none}
+.th-task-note:hover{color:var(--accent);border-color:rgba(138,180,255,.4)}
+.th-task-ed{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 6px 10px 32px}
+.th-task-ed .th-task-title{flex:1 1 100%}
+.th-task-ed input[type=date]{width:auto;display:inline-block}
+.th-task-ed select{width:auto;max-width:260px}
+.th-task-ed .th-unmark{margin-left:auto}
+.th-task-add{margin:4px 0 0}
+.th-task-add input{background:transparent !important;border:1px dashed #343c55 !important;box-shadow:none !important;font-size:14px}
+.th-task-add input:focus{border-style:solid !important;border-color:rgba(255,184,107,.5) !important}
+.th-ntasks{margin:-6px 0 18px;padding:6px 8px;border:1px solid var(--rule);border-radius:10px;background:rgba(255,184,107,.03)}
+.th-done{display:inline-flex;align-items:center;gap:5px;color:var(--warn)}
+.th-done .star{width:12px;height:12px}
+.th-sec-h{display:flex !important;align-items:center;gap:6px;width:100%;background:none;border:0;cursor:pointer;text-align:left}
+.th-sec-h:hover{color:var(--ink)}
+.th-sec-h svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.th-chev{width:10px !important;height:10px !important;transition:transform .15s;transform:rotate(90deg)}
+.th-sec.is-folded .th-chev{transform:none}
+.th-sec-c{margin-left:auto;font:500 10.5px var(--font-mono);letter-spacing:0;color:#59617a}
+.row.research .label-box{border-left-color:var(--warn);background:linear-gradient(90deg,rgba(255,184,107,.07),transparent 70%),var(--panel)}
+.row.research .label-name .star{width:12px;height:12px;color:var(--warn);margin-right:5px;vertical-align:-1px}
+.r-tag{color:var(--warn) !important;border-color:rgba(255,184,107,.45) !important}
+.node.is-r{cursor:default;display:grid;place-items:center}
+.ms-mark.is-r,.flag-mark.is-r{cursor:default;pointer-events:auto}
+.r-star{position:absolute;top:50%;z-index:2;width:16px;height:16px;transform:translate(-50%,-50%);color:var(--warn)}
+.r-star .star{width:100%;height:100%;display:block}
+.row.research.silent{opacity:.5}
+.row.research.silent .line{opacity:.35;box-shadow:none}
+.row.research.silent .node{filter:saturate(.6)}
 .th-proj{display:flex;align-items:center;gap:10px;width:100%;margin:14px 0 0;padding:6px 0 0;background:none;border:0;border-top:1px dashed #2e2a22;color:var(--muted);font:500 11.5px var(--font-mono);text-align:left;cursor:pointer}
 .th-proj-n{flex:none;max-width:40%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#9aa3b8}
 .th-proj-bar{flex:1;min-width:60px;height:3px;border-radius:2px;background:rgba(255,255,255,.07);overflow:hidden}
@@ -1683,7 +1738,7 @@ td.c-break{display:none}
         deadline: dl, deadlineAt: dAt, deadlineTz: dAt && validTz(p.deadlineTz) ? p.deadlineTz : '', pointsTotal: numOrNull(p.pointsTotal),
         endedBy: p.endedBy === 'deadline' ? 'deadline' : null,
         parked: !isISO(p.ended) && isISO(p.parked) ? p.parked : null,
-        area: areaIds[p.area] && !dropArea[p.area] ? String(p.area) : null, goal: goalIds[p.goal] ? String(p.goal) : null, milestones: ms,
+        area: areaIds[p.area] && !dropArea[p.area] && p.area !== 'research' ? String(p.area) : null, goal: goalIds[p.goal] ? String(p.goal) : null, milestones: ms,
         links: normLinks(p.links), notes: typeof p.notes === 'string' ? p.notes.slice(0, 10000) : '',
         created: Number(p.created) || 0, sample: !!p.sample
       });
@@ -1791,6 +1846,10 @@ td.c-break{display:none}
   }
   // Parked: paused on purpose. Quiet (no to-dos, nudges or Doing), but the final deadline still counts.
   function isParked(p) { return !p.ended && !!p.parked; }
+  // The Research tab is one project of its own: it shows on the Timeline and counts in orbit until it's complete.
+  function researchShown() { var th = state.thesis; return !!(th && (th.title || th.tasks.length || th.pages.length || th.journal.length)); }
+  function researchActive() { return researchShown() && !state.thesis.done; }
+  function orbitCount() { return inOrbit().length + (researchActive() ? 1 : 0); }
   function inOrbit() { return state.projects.filter(function (p) { return !p.ended && !p.parked; }); }
   function parkProject(pid, on) {
     var p = getProject(pid); if (!p || p.ended || mode === 'readonly') return;
@@ -2419,9 +2478,9 @@ td.c-break{display:none}
         '. Finishing one before starting the next gets more done. Aim for ' + DOING_MAX + '.</span><span class="reminder-acts">' +
         '<button type="button" class="link-btn edit-only" data-act="review">Pick my 3</button>' + dismissBtn('doing|' + T) + '</span></div>' });
     }
-    var orbit = inOrbit();
-    if (orbit.length > FOCUS_MAX && !dismissed['focus|' + T]) {
-      cards.push({ n: 45, html: '<div class="reminder">' + ORBIT + '<span class="msg"><b>' + orbit.length + ' projects in orbit.</b> Park one to keep ' + FOCUS_MAX + '.</span><span class="reminder-acts">' +
+    var orbitN = orbitCount();
+    if (orbitN > FOCUS_MAX && !dismissed['focus|' + T]) {
+      cards.push({ n: 45, html: '<div class="reminder">' + ORBIT + '<span class="msg"><b>' + orbitN + ' projects in orbit.</b> Park one to keep ' + FOCUS_MAX + '.</span><span class="reminder-acts">' +
         '<button type="button" class="link-btn edit-only" data-act="park-pick">Park one</button>' + dismissBtn('focus|' + T) + '</span></div>' });
     }
     state.projects.forEach(function (p) {
@@ -2478,6 +2537,7 @@ td.c-break{display:none}
     if (ui.area !== 'all' && !state.areas.some(function (a) { return a.id === ui.area; })) ui.area = 'all';
     var areaCount = {};
     state.projects.forEach(function (p) { if (statusOf(p, T) !== 'archived' && p.area) areaCount[p.area] = (areaCount[p.area] || 0) + 1; });
+    if (researchActive()) areaCount.research = 1;
     $('#area-chips').innerHTML = '<button type="button" class="chip" data-area="all" aria-pressed="' + (ui.area === 'all') + '">All</button>' +
       state.areas.map(function (a) {
         return '<button type="button" class="chip" data-area="' + esc(a.id) + '" aria-pressed="' + (ui.area === a.id) + '">' + esc(a.name) + (areaCount[a.id] ? '<span class="n">' + areaCount[a.id] + '</span>' : '') + '</button>';
@@ -2501,6 +2561,43 @@ td.c-break{display:none}
       return '<div class="' + cls + '" style="left:' + l.toFixed(3) + '%;width:' + (r - l).toFixed(3) + '%"></div>';
     }
 
+    function researchRowHTML() {
+      var th = state.thesis, done = th.done, c = thTaskCount(), si = thStageIndex(), days = {}, out = '';
+      th.journal.forEach(function (e) { (days[e.date] = days[e.date] || { n: 0, t: 0 }).n++; });
+      th.tasks.forEach(function (t) { if (!t.done || !t.doneAt) return; var d = isoOf(t.doneAt); (days[d] = days[d] || { n: 0, t: 0 }).n++; days[d].t++; });
+      var f = idx(thStart());
+      if (done) out += seg('line', cx(f), cx(idx(done)));
+      else { out += seg('line', cx(f), cx(ti)); out += th.due ? seg('line plan', cx(ti), cx(idx(th.due))) : seg('line stub', cx(ti), cx(ti) + colW * 0.9, true); }
+      Object.keys(days).forEach(function (d) {
+        var k = idx(d); if (k < 0 || k > N - 1) return;
+        var x = days[d], bits = [];
+        if (x.t) bits.push(plural(x.t, 'task') + ' done');
+        if (x.n - x.t) bits.push((x.n - x.t) + ' journal ' + (x.n - x.t === 1 ? 'entry' : 'entries'));
+        out += '<span class="node is-r' + (x.n > 1 ? ' multi' : '') + '" style="left:' + cx(k).toFixed(3) + '%" title="' + esc(fmtLong(d) + ': ' + bits.join(', ')) + '">' + (x.n > 1 ? x.n : x.t ? CK : '') + '</span>';
+      });
+      th.tasks.forEach(function (t) {
+        if (t.done || !t.due) return;
+        var mi = idx(t.due); if (mi < 0 || mi > N - 1) return;
+        var ml = diffDays(T, t.due);
+        out += '<span class="ms-mark is-r' + (ml >= 0 && ml <= DUE_SOON ? ' is-soon' : '') + '" style="left:' + cx(mi).toFixed(3) + '%" title="' + esc(t.title + ' · ' + fmtLong(t.due)) + '">' + DIAMOND + '</span>';
+      });
+      if (done) { var d0 = idx(done); if (d0 >= 0 && d0 <= N - 1) out += '<span class="r-star" style="left:' + cx(d0).toFixed(3) + '%" title="Completed ' + fmtLong(done) + '">' + STAR + '</span>'; }
+      else if (th.due) {
+        var di = idx(th.due), dl = diffDays(T, th.due);
+        out += di <= N - 1 ? '<span class="flag-mark is-r' + (dl <= DUE_SOON ? ' is-soon' : '') + '" style="left:' + cx(di).toFixed(3) + '%" title="Due ' + fmtLong(th.due) + '">' + FLAG + '</span>'
+          : '<span class="due-off">due ' + fmtShort(th.due) + ' →</span>';
+      }
+      var parts = [];
+      if (done) parts.push('Completed ' + fmtShort(done) + (c.total ? ' · ' + c.done + '/' + c.total : ''));
+      else {
+        if (th.due) { var d2 = diffDays(T, th.due); parts.push('<span class="due' + (d2 <= DUE_SOON ? ' is-soon' : '') + '">' + FLAG + 'Due ' + fmtShort(th.due) + ' · ' + (d2 < 0 ? plural(-d2, 'day') + ' over' : d2 === 0 ? 'today' : plural(d2, 'day') + ' left') + '</span>'); }
+        parts.push((si + 1) + ' of ' + TH_STAGES.length + ' · ' + esc(TH_STAGES[si].name));
+        if (c.total) parts.push('<span class="prog"><i class="mbar"><i style="width:' + Math.round(c.done / c.total * 100) + '%"></i></i>' + c.done + '/' + c.total + '</span>');
+      }
+      return '<div class="row research ' + (done ? 'silent' : 'active') + '" style="--pc:var(--warn)"><div class="label"><button type="button" class="label-box" data-act="research" title="Open Research">' +
+        '<span class="label-name">' + (done ? STAR : '') + esc(th.title || 'Research') + '<span class="area-tag r-tag">Research</span></span><span class="label-meta">' + parts.join('<br>') + '</span></button><div class="label-acts"></div></div>' +
+        '<div class="lane is-r">' + out + '</div></div>';
+    }
     function rowHTML(p, st) {
       var ups = groups[p.id] || {};
       var f = firstDate(p), si = idx(f), out = '';
@@ -2583,13 +2680,16 @@ td.c-break{display:none}
       return '<div class="col' + (d === T ? ' is-today' : '') + (d > T ? ' is-future' : (isWeekend(d) ? ' is-wknd' : '')) + '"></div>';
     }).join('') + '</div>';
 
-    if (!vis.active.length && !vis.parked.length && !vis.ended.length) {
+    var showR = researchShown() && (ui.area === 'all' || ui.area === 'research');
+    if (!vis.active.length && !vis.parked.length && !vis.ended.length && !showR) {
       html += '<div class="empty"><p>' + (ui.area !== 'all' && state.projects.length ? 'No projects in this area yet.' : 'Nothing on the board yet.') + '</p><button type="button" class="btn primary edit-only" data-act="new-project">+ New project</button>' +
         (!inViewer && !gh ? '<button type="button" class="btn" data-act="sync">Load my board from GitHub</button>' : '') + '</div>';
     }
+    if (showR && !state.thesis.done) html += researchRowHTML();
     html += vis.active.map(function (p) { return rowHTML(p, 'active'); }).join('');
+    if (showR && state.thesis.done) html += researchRowHTML();
     // the Parking lot: drag a project below this line to park it, above it to bring it back
-    if (vis.parked.length || vis.active.length > FOCUS_MAX) {
+    if (vis.parked.length || orbitCount() > FOCUS_MAX) {
       html += '<div class="divider park-divider"' + sortAttr('__park') + '><span>' + PARK_ICO + 'Parking lot</span></div>';
       html += vis.parked.map(function (p) { return rowHTML(p, 'parked'); }).join('');
     }
@@ -2940,7 +3040,7 @@ td.c-break{display:none}
     TH_CANVAS.forEach(function (f) { canvas[f.id] = str(cv[f.id], 4000); });
     var stage = stIds[th.stage] ? th.stage : 'topic', out = {
       title: str(th.title, 200).trim(), question: str(th.question, 600).trim(), advisor: str(th.advisor, 120).trim(),
-      due: isISO(th.due) ? th.due : null, stage: stage, project: typeof th.project === 'string' && th.project ? th.project.slice(0, 40) : null, canvas: canvas, pages: [], marks: [], topics: []
+      due: isISO(th.due) ? th.due : null, stage: stage, done: isISO(th.done) ? th.done : null, canvas: canvas, pages: [], marks: [], topics: []
     };
     var pids = {};
     (Array.isArray(th.pages) ? th.pages : []).slice(0, 500).forEach(function (pg) {
@@ -2961,6 +3061,11 @@ td.c-break{display:none}
       var mk = { id: typeof m.id === 'string' && m.id ? m.id.slice(0, 40) : uid(), page: pids[m.page] ? m.page : null, text: m.text.trim().slice(0, 3000), created: Number(m.created) || Date.now() };
       if (mk.page && typeof m.q === 'string' && m.q.trim()) { mk.q = m.q.slice(0, 20000); mk.pre = str(m.pre, 40); mk.suf = str(m.suf, 40); }
       out.marks.push(mk);
+    });
+    out.tasks = (Array.isArray(th.tasks) ? th.tasks : []).filter(function (t) { return t && typeof t.title === 'string' && t.title.trim(); }).slice(0, 1500).map(function (t) {
+      var cr = Number(t.created) || Date.now();
+      return { id: typeof t.id === 'string' && t.id ? t.id.slice(0, 40) : uid(), stage: stIds[t.stage] ? t.stage : stage, title: t.title.trim().slice(0, 300),
+        done: !!t.done, doneAt: t.done ? (Number(t.doneAt) || cr) : 0, due: isISO(t.due) ? t.due : null, note: pids[t.note] ? t.note : null, created: cr };
     });
     var umbIds = {};
     out.journal = (Array.isArray(th.journal) ? th.journal : []).filter(function (e) { return e && typeof e.text === 'string' && e.text.trim(); }).slice(0, 3000).map(function (e) {
@@ -3288,30 +3393,68 @@ td.c-break{display:none}
     }
     renderThHead(T); renderThList(); renderThPage();
   }
-  function renderThHead(T) {
-    var th = state.thesis, ro = mode === 'readonly', si = thStageIndex(), meta = [];
-    if (th.advisor) meta.push('Advisor: ' + esc(th.advisor));
-    if (th.due) { var dl = diffDays(T, th.due); meta.push('Due ' + fmtYear(th.due) + ' · <span class="' + (dl <= 14 ? 'is-soon' : '') + '">' + (dl < 0 ? plural(-dl, 'day') + ' ago' : dl === 0 ? 'today' : plural(dl, 'day') + ' left') + '</span>'); }
-    var chosen = th.topics.filter(function (t) { return t.status === 'chosen'; })[0];
-    // the linked Timeline project: one thin bar, its own progress
-    var lp = th.project ? getProject(th.project) : null, projBar = '';
-    if (lp) {
-      var tc = taskCounts(lp), pct = tc.total ? Math.round(tc.done / tc.total * 100) : 0, pc = paceOf(lp), bits = [tc.total ? tc.done + '/' + tc.total : 'no stages yet'];
-      if (lp.ended) bits.push('ended'); else { if (pc && pc.key !== 'done') bits.push(pc.label.toLowerCase()); if (lp.deadline) bits.push(leftText(lp, T)); }
-      projBar = '<button type="button" class="th-proj' + (pc && pc.key === 'behind' && !lp.ended ? ' is-behind' : '') + '" data-act="th-proj" style="--pc:var(--c' + lp.color + ')" title="Open ' + esc(lp.name) + '">' +
-        '<span class="th-proj-n">' + esc(lp.name) + '</span><span class="th-proj-bar"><i style="width:' + pct + '%"></i></span><span class="th-proj-s">' + esc(bits.join(' · ')) + '</span></button>';
+  function thViewStage() { var v = ui.thView; for (var i = 0; i < TH_STAGES.length; i++) if (TH_STAGES[i].id === v) return v; return state.thesis.stage; }
+  function thStageTasks(stg) {
+    var L = state.thesis.tasks.filter(function (t) { return t.stage === stg; });
+    return L.filter(function (t) { return !t.done; }).sort(function (a, b) { return a.created - b.created; })
+      .concat(L.filter(function (t) { return t.done; }).sort(function (a, b) { return a.doneAt - b.doneAt; }));
+  }
+  function thTaskCount(stg) { var L = state.thesis.tasks.filter(function (t) { return !stg || t.stage === stg; }); return { done: L.filter(function (t) { return t.done; }).length, total: L.length }; }
+  function thStart() {
+    var th = state.thesis, f = todayISO();
+    th.pages.forEach(function (x) { var d = isoOf(x.created); if (d < f) f = d; });
+    th.journal.forEach(function (e) { if (e.date < f) f = e.date; });
+    th.tasks.forEach(function (t) { var d = isoOf(t.created); if (d < f) f = d; });
+    return f;
+  }
+  function thTaskRow(t, inPage) {
+    var ro = mode === 'readonly', open = !inPage && ui.thTask === t.id, T = todayISO(), pg = !inPage && t.note ? getThPage(t.note) : null, id = esc(t.id);
+    var due = t.due && !t.done ? '<span class="th-task-due' + (t.due < T ? ' is-late' : t.due === T ? ' is-today' : '') + '">' + (t.due === T ? 'today' : fmtShort(t.due)) + '</span>' : '';
+    var note = pg ? '<button type="button" class="th-task-note" data-act="th-open" data-id="' + esc(pg.id) + '" title="Open the note">' + DOC_ICO + '<span>' + esc(truncate(pg.title, 38)) + '</span></button>' : '';
+    var mark = t.done
+      ? '<button type="button" class="th-task-star" data-act="th-task-done" data-id="' + id + '" title="Done ' + fmtShort(isoOf(t.doneAt)) + (ro ? '' : '. Tap to reopen') + '"' + (ro ? ' disabled' : '') + '>' + STAR + '</button>'
+      : '<input type="checkbox" class="th-task-ck" data-act="th-task-done" data-id="' + id + '" aria-label="Done: ' + esc(t.title) + '"' + (ro ? ' disabled' : '') + '>';
+    var h = '<li class="th-task' + (t.done ? ' is-done' : '') + (open ? ' is-open' : '') + '"><div class="th-task-row">' + mark +
+      (inPage || ro ? '<span class="th-task-t">' + esc(t.title) + '</span>' : '<button type="button" class="th-task-t" data-act="th-task-open" data-id="' + id + '">' + esc(t.title) + '</button>') + due + note + '</div>';
+    if (open && !ro) {
+      var P = state.thesis.pages.slice().sort(function (x, y) { return (x.stage === t.stage ? 0 : 1) - (y.stage === t.stage ? 0 : 1) || y.updated - x.updated; });
+      h += '<div class="th-task-ed"><label class="sr-only" for="th-tt-' + id + '">Task</label><input id="th-tt-' + id + '" class="th-task-title" data-task-title="' + id + '" value="' + esc(t.title) + '" maxlength="300">' +
+        '<label class="th-lbl" for="th-td-' + id + '">Due</label><input type="date" id="th-td-' + id + '" data-task-due="' + id + '" value="' + (t.due || '') + '">' +
+        '<label class="th-lbl" for="th-tk-' + id + '">Note</label><select id="th-tk-' + id + '" data-task-note="' + id + '"><option value="">None</option>' +
+        P.map(function (x) { return '<option value="' + esc(x.id) + '"' + (x.id === t.note ? ' selected' : '') + '>' + esc(truncate(x.title, 60)) + '</option>'; }).join('') + '</select>' +
+        '<button type="button" class="link-btn th-unmark" data-act="th-task-del" data-id="' + id + '">Delete</button></div>';
     }
-    $('#th-head').innerHTML = '<div class="th-head-top"><div class="th-head-main">' +
+    return h + '</li>';
+  }
+  function renderThHead(T) {
+    var head = $('#th-head'), ae = document.activeElement;
+    if (ae && head.contains(ae) && ae.tagName === 'INPUT' && ae.type !== 'checkbox' && ae.type !== 'date') return;   // you're typing up there
+    var th = state.thesis, ro = mode === 'readonly', si = thStageIndex(), meta = [];
+    if (th.done) meta.push('<span class="th-done">' + STAR + 'Completed ' + fmtShort(th.done) + '</span>');
+    if (th.advisor) meta.push('Advisor: ' + esc(th.advisor));
+    if (th.due && !th.done) { var dl = diffDays(T, th.due); meta.push('Due ' + fmtYear(th.due) + ' · <span class="' + (dl <= 14 ? 'is-soon' : '') + '">' + (dl < 0 ? plural(-dl, 'day') + ' ago' : dl === 0 ? 'today' : plural(dl, 'day') + ' left') + '</span>'); }
+    var chosen = th.topics.filter(function (t) { return t.status === 'chosen'; })[0];
+    var vs = thViewStage(), vi = 0; TH_STAGES.forEach(function (g, i) { if (g.id === vs) vi = i; });
+    var g = TH_STAGES[vi], tasks = thStageTasks(vs), cnt = thTaskCount(vs), isNow = vs === th.stage, last = vi === TH_STAGES.length - 1;
+    var act = ro ? '' : th.done && isNow && last ? '<button type="button" class="link-btn th-plan-act" data-act="th-reopen">Reopen</button>'
+      : isNow ? (last ? '<button type="button" class="link-btn th-plan-act" data-act="th-complete">' + STAR + 'Complete research</button>' : '<button type="button" class="link-btn th-plan-act" data-act="th-next">Next stage →</button>')
+      : '<button type="button" class="link-btn th-plan-act" data-act="th-make-now" data-stage="' + vs + '">Make this the current stage</button>';
+    var panel = '<section class="th-plan" aria-label="' + esc(g.name) + ' tasks"><div class="th-plan-h"><p class="th-plan-k">' + esc(g.name) + (isNow && !th.done ? '<span class="th-now-tag">Now</span>' : '') + '</p>' +
+      (cnt.total ? '<span class="th-plan-n"><i class="th-proj-bar"><i style="width:' + Math.round(cnt.done / cnt.total * 100) + '%"></i></i>' + cnt.done + '/' + cnt.total + '</span>' : '') + act + '</div>' +
+      (tasks.length ? '<ul class="th-tasks">' + tasks.map(function (t) { return thTaskRow(t); }).join('') + '</ul>' : '') +
+      (ro ? '' : '<form class="th-task-add" data-form="th-task-add"><label class="sr-only" for="th-task-new">New task</label><input id="th-task-new" maxlength="300" autocomplete="off" placeholder="+ Task for ' + esc(g.name) + '"></form>') + '</section>';
+    head.innerHTML = '<div class="th-head-top"><div class="th-head-main">' +
       (th.title ? '<h2 class="th-title">' + esc(th.title) + '</h2>' : '<h2 class="th-title is-empty">' + (ro ? 'Research' : 'Name your research') + '</h2>') +
       (th.question ? '<p class="th-q">' + esc(th.question) + '</p>' : '') +
       (meta.length || chosen ? '<p class="th-meta">' + meta.concat(chosen ? ['Topic: <b>' + esc(truncate(chosen.title, 90)) + '</b>'] : []).join(' · ') + '</p>' : '') + '</div>' +
       '<div class="th-head-acts"><button type="button" class="btn btn-sm th-hot" data-act="th-journal" aria-pressed="' + (thCurrent() === 'th:journal') + '">' + BOOK_ICO + 'Journal' +
         (th.journal.length ? '<span class="th-hot-n">' + th.journal.length + '</span>' : '') + '</button>' +
       (ro ? '' : '<button type="button" class="btn btn-sm" data-act="th-edit">Edit</button>') + '</div></div>' +
-      '<ol class="th-stages" aria-label="Research stages">' + TH_STAGES.map(function (g, i) {
-        return '<li class="' + (i < si ? 'is-done' : i === si ? 'is-now' : '') + '"><button type="button" data-act="th-stage" data-stage="' + g.id + '" title="' + esc(g.hint) + '"' + (ro ? ' disabled' : '') + (i === si ? ' aria-current="step"' : '') + '>' +
-          '<span class="th-dot">' + (i < si ? CK : i + 1) + '</span><span class="th-sname">' + esc(g.name) + '</span></button></li>';
-      }).join('') + '</ol>' + projBar;
+      '<ol class="th-stages" aria-label="Research stages">' + TH_STAGES.map(function (x, i) {
+        var c = thTaskCount(x.id);
+        return '<li class="' + (i < si || th.done ? 'is-done' : i === si ? 'is-now' : '') + (x.id === vs ? ' is-view' : '') + '"><button type="button" data-act="th-stage" data-stage="' + x.id + '" title="' + esc(x.hint) + (c.total ? ' · ' + c.done + '/' + c.total + ' tasks' : '') + '"' +
+          (i === si ? ' aria-current="step"' : '') + ' aria-pressed="' + (x.id === vs) + '"><span class="th-dot">' + (i < si || th.done ? CK : i + 1) + '</span><span class="th-sname">' + esc(x.name) + '</span></button></li>';
+      }).join('') + '</ol>' + panel;
   }
   function thSnippet(pg, q) {
     for (var i = 0; i < pg.blocks.length; i++) {
@@ -3327,7 +3470,7 @@ td.c-break{display:none}
     }
     var filled = TH_CANVAS.filter(function (f) { return th.canvas[f.id].trim(); }).length;
     var h = '<div class="th-pins">' + pin('th:important', STAR, 'Important', th.marks.length || '') +
-      pin('th:stage', TH_TOOLS[th.stage].ico, esc(TH_TOOLS[th.stage].name), thToolCount(th.stage)) +
+      pin('th:stage', TH_TOOLS[thViewStage()].ico, esc(TH_TOOLS[thViewStage()].name), thToolCount(thViewStage())) +
       pin('th:canvas', CANVAS_ICO, 'Research canvas', filled + '/' + TH_CANVAS.length) + '</div>';
     var pages = th.pages.slice().sort(function (a, b) { return b.updated - a.updated; }), shown = 0;
     TH_STAGES.concat([{ id: '__parked', name: 'Parking lot' }]).forEach(function (g) {
@@ -3338,7 +3481,13 @@ td.c-break{display:none}
       }).filter(Boolean);
       if (!list.length) return;
       shown += list.length;
-      h += '<div class="th-sec' + (parkSec ? ' th-park' : '') + '"><p class="th-sec-h">' + (parkSec ? PARK_ICO : '') + esc(g.name) + '</p>' + list.map(function (x) {
+      // the stage you're looking at is open; the others fold away (tap to open)
+      var has = list.some(function (x) { return x.pg.id === cur; }), tog = (ui.thSecs || {})[g.id];
+      var open = !!q || (tog !== undefined ? tog : (g.id === thViewStage() || has));
+      h += '<div class="th-sec' + (parkSec ? ' th-park' : '') + (open ? '' : ' is-folded') + '"><button type="button" class="th-sec-h" data-act="th-sec" data-sec="' + g.id + '" aria-expanded="' + open + '">' +
+        '<svg class="th-chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 2l3.5 3L3 8"/></svg>' + (parkSec ? PARK_ICO : '') + '<span>' + esc(g.name) + '</span><span class="th-sec-c">' + list.length + '</span></button>' + (open ? '' : '</div>');
+      if (!open) return;
+      h += list.map(function (x) {
         return '<button type="button" class="th-item' + (cur === x.pg.id ? ' is-on' : '') + '" data-act="th-open" data-id="' + esc(x.pg.id) + '"><span class="th-iname">' + esc(x.pg.title) + '</span>' +
           '<span class="th-isub">' + (x.sn ? x.sn : thSourceName(x.pg) + ' · ' + fmtShort(isoOf(x.pg.updated))) + '</span></button>';
       }).join('') + '</div>';
@@ -3360,10 +3509,10 @@ td.c-break{display:none}
     $('#th-list').innerHTML = h;
   }
   function thPageKey(id) {
-    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify(state.compassTests || []).length;
+    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify(state.compassTests || []).length;
     var pg = getThPage(id); if (!pg) return id + '|gone';
     return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + (pg.parked || '') + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',') +
-      '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',');
+      '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',') + '|' + state.thesis.tasks.filter(function (t) { return t.note === id; }).map(function (t) { return t.id + t.done + t.title + (t.due || ''); }).join(',');
   }
   function renderThPage() {
     var el = $('#th-page'), wrap = $('#th-wrap'), id = thCurrent();
@@ -3375,7 +3524,7 @@ td.c-break{display:none}
     var same = el.dataset.id === id, y = el.scrollTop;
     el.dataset.key = key; el.dataset.id = id;
     var back = '<button type="button" class="link-btn th-back" data-act="th-back">← Notebook</button>';
-    el.innerHTML = back + (id === 'th:journal' ? thJournalHTML() : id === 'th:important' ? thImportantHTML() : id === 'th:stage' ? (state.thesis.stage === 'topic' ? thTopicsHTML() : thToolHTML(state.thesis.stage)) : id === 'th:canvas' ? thCanvasHTML() : thChatHTML(getThPage(id)));
+    el.innerHTML = back + (id === 'th:journal' ? thJournalHTML() : id === 'th:important' ? thImportantHTML() : id === 'th:stage' ? (thViewStage() === 'topic' ? thTopicsHTML() : thToolHTML(thViewStage())) : id === 'th:canvas' ? thCanvasHTML() : thChatHTML(getThPage(id)));
     if (same) el.scrollTop = y;
     if (id.indexOf('th:') !== 0) { thPaint(el, id); thTypeset(el); }
     else if (id === 'th:journal') thTypeset(el);
@@ -3425,6 +3574,8 @@ td.c-break{display:none}
       ro ? esc(pg.title) : '<span class="th-edtitle" contenteditable="true" spellcheck="true" data-ed="t" role="textbox" aria-label="Page title">' + esc(pg.title) + '</span>', '',
       ro ? '' : '<div class="th-pacts"><button type="button" class="btn btn-sm" data-act="th-more">+ Add more</button><button type="button" class="btn btn-sm btn-quiet" data-act="th-edit-page" title="Edit the plain text, speaker lines and all">Raw text</button>' +
         (pg.parked ? '<button type="button" class="btn btn-sm" data-act="th-unpark-page">Bring back</button>' : '<button type="button" class="btn btn-sm btn-quiet" data-act="th-park-page" title="Set it aside without deleting it">Park</button>') + '<button type="button" class="btn btn-sm btn-quiet" data-act="th-del-page">Delete</button></div>');
+    var LT = state.thesis.tasks.filter(function (t) { return t.note === pg.id; });
+    if (LT.length) h += '<ul class="th-tasks th-ntasks" aria-label="Tasks for this note">' + LT.map(function (t) { return thTaskRow(t, true); }).join('') + '</ul>';
     if (you.length > 1) h += '<nav class="th-toc" aria-label="Your questions"><p class="th-kicker">In this chat</p><ol>' + you.map(function (b, i) {
       return '<li><button type="button" class="th-toc-q" data-act="th-jump" data-i="' + i + '">' + esc(truncate(thPlain(b.text), 110)) + '</button></li>';
     }).join('') + '</ol></nav>';
@@ -3786,11 +3937,6 @@ td.c-break{display:none}
           '<div class="field"><label for="the-q">Research question</label><textarea id="the-q" rows="2" maxlength="600" placeholder="One sentence">' + esc(th.question) + '</textarea></div>' +
           '<div class="field-row"><div class="field"><label for="the-adv">Advisor</label><input id="the-adv" type="text" maxlength="120" value="' + esc(th.advisor) + '"></div>' +
           '<div class="field"><label for="the-due">Due <span class="muted">(optional)</span></label><input id="the-due" type="date" value="' + (th.due || '') + '"></div></div>' +
-          (function () {
-            var R = state.projects.filter(function (x) { return (x.area === 'research' && !x.ended) || x.id === th.project; });
-            return '<div class="field"><label for="the-proj">Timeline project</label><select id="the-proj"' + (R.length ? '' : ' disabled') + '><option value="">' + (R.length ? 'None' : 'No Research projects on the Timeline') + '</option>' +
-              R.map(function (x) { return '<option value="' + esc(x.id) + '"' + (x.id === th.project ? ' selected' : '') + '>' + esc(x.name) + (x.ended ? ' (ended)' : '') + '</option>'; }).join('') + '</select></div>';
-          })() +
           '<div class="modal-actions"><button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
       },
       onSubmit: function () {
@@ -3798,7 +3944,6 @@ td.c-break{display:none}
         commit(function (s) {
           s.thesis.title = $('#the-title').value.trim().slice(0, 200); s.thesis.question = $('#the-q').value.trim().slice(0, 600);
           s.thesis.advisor = $('#the-adv').value.trim().slice(0, 120); s.thesis.due = isISO(d) ? d : null;
-          var pj = $('#the-proj'); if (pj && !pj.disabled) s.thesis.project = pj.value || null;
         });
         closeModal();
       }
@@ -3912,12 +4057,26 @@ td.c-break{display:none}
         if (tt) { tt.focus(); try { var rr = document.createRange(); rr.selectNodeContents(tt); var ss = getSelection(); ss.removeAllRanges(); ss.addRange(rr); } catch (er) {} }
       }
       else if (a === 'th-edit') openThesisEdit();
-      else if (a === 'th-proj') { if (state.thesis.project && getProject(state.thesis.project)) openHub(state.thesis.project); }
-      else if (a === 'th-stage') {
-        var sid = b.dataset.stage; ui.thCard = null;
-        if (sid !== state.thesis.stage) commit(function (s) { s.thesis.stage = sid; });
-        thOpen('th:stage', true);
+      else if (a === 'th-stage') { ui.thView = b.dataset.stage; ui.thTask = null; ui.thCard = null; ui.thSecs = {}; renderThesis(T); }
+      else if (a === 'th-make-now') { var mk0 = b.dataset.stage; commit(function (s) { s.thesis.stage = mk0; }); }
+      else if (a === 'th-next') {
+        var ci = thStageIndex(), nx = TH_STAGES[ci + 1]; if (!nx) return;
+        var openN = state.thesis.tasks.filter(function (t) { return t.stage === state.thesis.stage && !t.done; }).length;
+        var go = function () { ui.thView = nx.id; ui.thSecs = {}; commit(function (s) { s.thesis.stage = nx.id; }); };
+        if (openN) confirmDialog({ title: 'Move on to ' + nx.name + '?', body: plural(openN, 'task') + ' in ' + TH_STAGES[ci].name + (openN === 1 ? ' is' : ' are') + ' still open. They stay there.', yes: 'Move on', onYes: go });
+        else go();
       }
+      else if (a === 'th-complete') {
+        confirmDialog({ title: 'Complete your research?', body: 'It stays on your Timeline as a quiet star. You can reopen it any time.', yes: 'Complete', onYes: function () { commit(function (s) { s.thesis.done = todayISO(); }); } });
+      }
+      else if (a === 'th-reopen') commit(function (s) { s.thesis.done = null; });
+      else if (a === 'th-task-open') { ui.thTask = ui.thTask === id ? null : id; renderThHead(T); var ti0 = $('#th-tt-' + id); if (ti0) ti0.focus(); }
+      else if (a === 'th-task-done') {
+        var on0 = b.tagName === 'INPUT' ? b.checked : false;
+        commit(function (s) { s.thesis.tasks.forEach(function (t) { if (t.id !== id) return; t.done = b.tagName === 'INPUT' ? on0 : !t.done; t.doneAt = t.done ? Date.now() : 0; }); });
+      }
+      else if (a === 'th-task-del') { ui.thTask = null; commit(function (s) { s.thesis.tasks = s.thesis.tasks.filter(function (t) { return t.id !== id; }); }); }
+      else if (a === 'th-sec') { var sk = b.dataset.sec, exp = b.getAttribute('aria-expanded') === 'true'; ui.thSecs = ui.thSecs || {}; ui.thSecs[sk] = !exp; renderThList(); }
       else if (a === 'th-checks') openCompassTests();
       else if (a === 'th-umb-del') {
         var u0 = state.thesis.umbrellas.filter(function (u) { return u.id === id; })[0]; if (!u0) return;
@@ -3987,6 +4146,13 @@ td.c-break{display:none}
     box.addEventListener('submit', function (e) {
       var f = e.target.closest('[data-form]'); if (!f) return;
       e.preventDefault();
+      if (f.dataset.form === 'th-task-add') {
+        var tin = $('#th-task-new'), tv0 = tin.value.trim(); if (!tv0) return;
+        var vs0 = thViewStage(); tin.value = ''; tin.blur();
+        commit(function (s) { s.thesis.tasks.push({ id: uid(), stage: vs0, title: tv0.slice(0, 300), done: false, doneAt: 0, due: null, note: null, created: Date.now() }); });
+        var again = $('#th-task-new'); if (again) again.focus();
+        return;
+      }
       if (f.dataset.form === 'th-j-add' || f.dataset.form === 'th-j-save') {
         var jid = f.dataset.id, jt = f.querySelector('textarea'), jd = f.querySelector('input[type=date]'), jv = jt.value.replace(/\s+$/, '');
         if (!jv.trim()) { jt.focus(); return; }
@@ -4032,6 +4198,7 @@ td.c-break{display:none}
       if (t.hasAttribute('data-grow')) thGrow(t);
       if (t.dataset.cv) { var k = t.dataset.cv, v = t.value.slice(0, 4000); thQuiet(function (s) { s.thesis.canvas[k] = v; }); }
       else if (t.dataset.topicNotes) { var tid = t.dataset.topicNotes, nv = t.value.slice(0, 4000); thQuiet(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === tid) tp.notes = nv; }); }); }
+      else if (t.dataset.taskTitle) { var tk = t.dataset.taskTitle, tvv = t.value.trim().slice(0, 300); if (tvv) thQuiet(function (s) { s.thesis.tasks.forEach(function (x) { if (x.id === tk) x.title = tvv; }); }); var rowT = t.closest('.th-task').querySelector('.th-task-t'); if (rowT && tvv) rowT.textContent = tvv; }
       else if (t.dataset.umbName) { var un = t.dataset.umbName, uv = t.value.trim().slice(0, 80); if (uv) thQuiet(function (s) { s.thesis.umbrellas.forEach(function (u) { if (u.id === un) u.name = uv; }); }); }
       else if (t.dataset.cf || t.dataset.ct) {
         var ck = t.dataset.k, cidx = t.dataset.id, fk = t.dataset.cf, fv = t.value.slice(0, fk ? 4000 : 300);
@@ -4074,6 +4241,11 @@ td.c-break{display:none}
     });
     box.addEventListener('change', function (e) {
       var t = e.target;
+      if (t.dataset.taskDue || t.dataset.taskNote) {
+        var tkid = t.dataset.taskDue || t.dataset.taskNote, isDue = !!t.dataset.taskDue, vv = t.value;
+        commit(function (s) { s.thesis.tasks.forEach(function (x) { if (x.id !== tkid) return; if (isDue) x.due = isISO(vv) ? vv : null; else x.note = vv || null; }); });
+        return;
+      }
       if (t.dataset.pageStage) { var spid = thCurrent(), sv = t.value; commit(function (s) { s.thesis.pages.forEach(function (x) { if (x.id === spid) x.stage = sv; }); }); return; }
       if (t.id === 'th-topic-umb') ui.thUmbSel = t.value;
       else if (t.dataset.topicUmb) { var tid = t.dataset.topicUmb, uv = t.value || null; commit(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === tid) tp.umb = uv; }); }); }
@@ -4753,7 +4925,7 @@ td.c-break{display:none}
           '<form id="pj-form" novalidate>' +
           '<div class="field"><label for="pj-name">Name</label><input id="pj-name" type="text" maxlength="80" value="' + esc(d.name) + '" placeholder="e.g. Physics 101, Exoplanet research"' + (isNew ? ' autofocus' : '') + '></div>' +
           '<div class="field"><label for="pj-area">Kind</label><select id="pj-area">' + opt('', 'None', d.area) +
-            state.areas.map(function (a) { return opt(a.id, a.name, d.area); }).join('') + '</select></div>' +
+            state.areas.filter(function (a) { return a.id !== 'research'; }).map(function (a) { return opt(a.id, a.name, d.area); }).join('') + '</select></div>' +
           (isNew ? '<label class="check kind-stages" id="pj-stages-row" hidden><input type="checkbox" id="pj-stages"' + (d.stages ? ' checked' : '') + '> <span id="pj-stages-txt"></span></label>' : '') +
           '<p class="hub-hint kind-hint" id="pj-kind-hint" hidden>Add one stage per document the call asks for. Tap one to paste its exact rule, points and deadline.</p>' +
           '<div class="field"><label for="pj-start">Start date</label><input id="pj-start" type="date" value="' + esc(d.start) + '" max="' + T + '"></div>' +
@@ -4896,16 +5068,18 @@ td.c-break{display:none}
     if (mode === 'readonly') return;
     var ctx = {
       draw: function () {
-        var orbit = inOrbit(), parked = state.projects.filter(isParked), T = todayISO();
+        var orbit = inOrbit(), parked = state.projects.filter(isParked), T = todayISO(), rA = researchActive() ? 1 : 0;
         function row(p, i, on) {
+          i += on ? rA : 0;
           return '<li class="pk-row' + (on && i >= FOCUS_MAX ? ' is-extra' : '') + '"><i class="rv-dot" style="background:var(--c' + p.color + ')"></i><span class="pk-name">' + esc(p.name) +
             '<span class="pk-sub">' + (on ? (i < FOCUS_MAX ? 'in focus' : 'over ' + FOCUS_MAX) : 'parked ' + fmtShort(p.parked)) + (p.deadline ? ' · due ' + fmtShort(p.deadline) + ' (' + leftText(p, T) + ')' : '') + '</span></span>' +
             (on ? '<button type="button" class="btn btn-sm" data-act="pk-park" data-pid="' + esc(p.id) + '">' + PARK_ICO + 'Park</button>'
                 : '<button type="button" class="btn btn-sm" data-act="pk-back" data-pid="' + esc(p.id) + '">' + UNPARK_ICO + 'Bring back</button>') + '</li>';
         }
         $('#modal-body').innerHTML = '<h2 id="modal-title">Parking lot</h2>' +
-          '<h3 class="pk-h">In orbit <span class="rv-n' + (orbit.length > FOCUS_MAX ? ' is-over' : '') + '">' + orbit.length + ' of ' + FOCUS_MAX + '</span></h3>' +
-          (orbit.length ? '<ul class="pk-list">' + orbit.map(function (p, i) { return row(p, i, true); }).join('') + '</ul>' : '<p class="muted">Nothing in orbit.</p>') +
+          '<h3 class="pk-h">In orbit <span class="rv-n' + (orbit.length + rA > FOCUS_MAX ? ' is-over' : '') + '">' + (orbit.length + rA) + ' of ' + FOCUS_MAX + '</span></h3>' +
+          (orbit.length + rA ? '<ul class="pk-list">' + (rA ? '<li class="pk-row"><i class="rv-dot" style="background:var(--warn)"></i><span class="pk-name">' + esc(state.thesis.title || 'Research') + '<span class="pk-sub">Research · always in orbit</span></span></li>' : '') +
+            orbit.map(function (p, i) { return row(p, i, true); }).join('') + '</ul>' : '<p class="muted">Nothing in orbit.</p>') +
           '<h3 class="pk-h">Parked</h3>' +
           (parked.length ? '<ul class="pk-list">' + parked.map(function (p, i) { return row(p, i, false); }).join('') + '</ul>' : '<p class="muted" style="font-size:13px">Nothing parked.</p>') +
           '<div class="modal-actions"><button type="button" class="btn primary" data-close>Done</button></div>';
@@ -5778,6 +5952,7 @@ td.c-break{display:none}
       var act = e.target.closest('[data-act]');
       if (act) {
         var pid = act.dataset.pid;
+        if (act.dataset.act === 'research') { location.hash = '#research'; return; }
         if (act.dataset.act === 'end') openEnd(pid);
         else if (act.dataset.act === 'reopen') openReopen(pid);
         else if (act.dataset.act === 'delete-now') deleteNow(pid);
@@ -5791,7 +5966,7 @@ td.c-break{display:none}
         else if (act.dataset.act === 'sync') openSync();
         return;
       }
-      var node = e.target.closest('.node');
+      var node = e.target.closest('.node:not(.is-r)');
       if (node) { hideTip(); openDay(node.dataset.pid, node.dataset.date); return; }
       var lane = e.target.closest('.lane');
       if (lane) {
@@ -5800,9 +5975,9 @@ td.c-break{display:none}
         if (canAddOn(p, info.date, todayISO())) openDay(p.id, info.date);
       }
     });
-    board.addEventListener('pointerover', function (e) { if (e.pointerType !== 'mouse') return; var n = e.target.closest('.node'); if (n) showTip(n); });
+    board.addEventListener('pointerover', function (e) { if (e.pointerType !== 'mouse') return; var n = e.target.closest('.node:not(.is-r)'); if (n) showTip(n); });
     board.addEventListener('pointerout', function (e) { if (e.target.closest('.node')) hideTip(); });
-    board.addEventListener('focusin', function (e) { var n = e.target.closest('.node'); if (n && n.matches(':focus-visible')) showTip(n); });
+    board.addEventListener('focusin', function (e) { var n = e.target.closest('.node:not(.is-r)'); if (n && n.matches(':focus-visible')) showTip(n); });
     board.addEventListener('focusout', hideTip);
     $('#tl-scroll').addEventListener('scroll', hideTip, { passive: true });
     window.addEventListener('scroll', hideTip, { passive: true });
