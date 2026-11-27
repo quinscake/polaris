@@ -956,6 +956,42 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
 .th-cf{display:flex;flex-direction:column;gap:4px}
 .th-cf textarea{min-height:38px;resize:none}
 .th-url{display:flex;gap:8px;align-items:center}
+.th-card .th-topic-h{gap:10px}
+.th-card .th-chev,.th-grp .th-chev{flex:none;width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;color:var(--muted);transition:transform .15s;transform:rotate(90deg)}
+.th-card:not(.is-open) .th-chev{transform:none}
+.th-grp.is-folded .th-chev{transform:none}
+.th-card-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.th-card-g{margin-left:auto}
+.th-card-g select,.th-add-g{width:auto;min-width:0;max-width:220px;padding:6px 30px 6px 10px;font-size:13px}
+.th-links{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.th-links li{display:inline-flex;align-items:center;gap:2px;max-width:100%;border:1px solid var(--rule);border-radius:999px;padding:0 4px 0 10px;background:rgba(255,255,255,.02)}
+.th-links a,.th-links li > span{display:inline-flex;align-items:center;gap:6px;min-width:0;padding:5px 0;color:var(--ink);font-size:13px;text-decoration:none}
+.th-links a:hover span{text-decoration:underline;text-underline-offset:3px}
+.th-links a span,.th-links li > span span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:260px}
+.th-links a i{font-style:normal;color:var(--muted);font-size:11px}
+.th-links svg{width:13px;height:13px;flex:none;color:var(--muted)}
+.th-link-x{width:22px;height:22px;padding:0;border:0;border-radius:50%;background:none;color:var(--muted);font:500 14px/1 var(--font-body);cursor:pointer}
+.th-link-x:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+.th-link-add{display:flex;gap:8px;flex-wrap:wrap}
+.th-link-add input[type=url]{flex:2 1 220px;min-width:0}
+.th-link-add input[type=text]{flex:1 1 140px;min-width:0}
+.th-grp{margin:0 0 14px}
+.th-grp-h{display:flex;align-items:center;gap:4px;margin:0 0 8px;min-height:30px}
+.th-grp-t{display:inline-flex;align-items:center;gap:8px;padding:4px 2px;border:0;background:none;color:var(--ink);font:600 14px var(--font-body);cursor:pointer;text-align:left;min-width:0}
+.th-grp-t > span:not(.th-sec-c){overflow:hidden;text-overflow:ellipsis}
+.th-grp-t .th-sec-c{margin-left:6px}
+.th-grp.is-none .th-grp-t{color:var(--muted);font-weight:500}
+.th-grp-a{width:26px;height:26px;padding:0;display:grid;place-items:center;border:0;border-radius:7px;background:none;color:#59617a;font:500 15px/1 var(--font-body);cursor:pointer;opacity:.7}
+.th-grp-a:hover,.th-grp-a:focus-visible{opacity:1;color:var(--ink);background:rgba(255,255,255,.05)}
+.th-grp-a svg{width:13px;height:13px}
+.th-grp-h .th-grp-a:first-of-type{margin-left:auto}
+.th-grp-ren{display:flex;gap:8px;flex:1}
+.th-grp-ren input{flex:1;min-width:0}
+.th-grp .th-topics{padding-left:14px;border-left:1px solid var(--rule)}
+.th-grp-empty{margin:0 0 0 14px;font-size:13px;color:var(--muted)}
+.th-grp-new{margin-left:auto;padding:0;font-size:13px}
+.th-grp-form{margin:0 0 12px}
+.th-add .th-add-g{flex:none}
 .th-url input{flex:1;min-width:0}
 .th-checklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 .th-checklist li{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--rule);border-radius:10px;background:var(--panel)}
@@ -3019,6 +3055,7 @@ td.c-break{display:none}
   var CARDS_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="4.5" width="9" height="9" rx="1.8"/><path d="M5 2.5h7a1.5 1.5 0 0 1 1.5 1.5v7"/></svg>';
   var CHAIN_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3.5" cy="8" r="1.6"/><circle cx="8" cy="8" r="1.6"/><circle cx="12.5" cy="8" r="1.6"/><path d="M5.1 8h1.3M9.6 8h1.3"/></svg>';
   var CHART_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.5h11M4.5 11V8M8 11V4.5M11.5 11V6.5"/></svg>';
+  var CLIP_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 9.5l3-3"/><path d="M7.5 4.5l1-1a2.5 2.5 0 013.5 3.5l-1 1"/><path d="M8.5 11.5l-1 1A2.5 2.5 0 014 9l1-1"/></svg>';
   var PENCIL_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M10.6 2.9l2.5 2.5-7.4 7.4-3.2.7.7-3.2z"/></svg>';
   var MIC_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="6" y="2.2" width="4" height="7.3" rx="2"/><path d="M3.8 8a4.2 4.2 0 0 0 8.4 0M8 12.2v1.8"/></svg>';
   var TH_FEEDBACK = { key: 'feedback', title: 'Feedback to address', st: [['open', 'Open', 'warn'], ['done', 'Addressed', 'go']], done: 'done', doneWord: 'addressed',
@@ -3030,8 +3067,8 @@ td.c-break{display:none}
         st: [['todo', 'To write', ''], ['draft', 'Draft', 'mid'], ['done', 'Done', 'go']], done: 'done', doneWord: 'done', fields: [['notes', 'Key points', 'What this section has to say']], add: 'Another section', cap: 10 },
       TH_FEEDBACK] },
     lit: { name: 'Paper cards', ico: CARDS_ICO, sub: 'Five short lines per paper. Stop at 20: needing more means the theme is too wide.', lists: [
-      { key: 'papers', title: 'Papers', st: [['toread', 'To read', ''], ['carded', 'Carded', 'go']], done: 'carded', doneWord: 'carded', showCap: true,
-        fields: [['link', 'Link', 'https://…', 'url'], ['problem', 'Problem', 'What they set out to solve'], ['method', 'Method', 'How they did it'], ['result', 'Result', 'What they found'],
+      { key: 'papers', title: 'Papers', st: [['toread', 'To read', ''], ['carded', 'Carded', 'go']], done: 'carded', doneWord: 'carded', showCap: true, links: true, groups: true,
+        fields: [['problem', 'Problem', 'What they set out to solve'], ['method', 'Method', 'How they did it'], ['result', 'Result', 'What they found'],
           ['limit', 'What they didn’t do', 'Your gap often hides here'], ['use', 'How it helps you', 'Where it fits in your research']],
         add: 'Paper title', cap: 20, capMsg: '20 cards: the limit. Cut one before adding another, or narrow your theme.', empty: 'No papers yet. Start with a survey or two and the classics.' }] },
     method: { name: 'Method chain', ico: CHAIN_ICO, sub: 'Each link leads to the next. Make one solid before leaning on it.', lists: [
@@ -3092,15 +3129,24 @@ td.c-break{display:none}
       var id = typeof u.id === 'string' && u.id ? u.id.slice(0, 40) : uid(); umbIds[id] = true;
       return { id: id, name: u.name.trim().slice(0, 80), created: Number(u.created) || Date.now() };
     });
-    out.lists = {};
-    var srcL = th.lists && typeof th.lists === 'object' ? th.lists : {};
+    out.lists = {}; out.groups = {};
+    var srcL = th.lists && typeof th.lists === 'object' ? th.lists : {}, srcG = th.groups && typeof th.groups === 'object' ? th.groups : {};
     Object.keys(TH_TOOLS).forEach(function (stg) {
       (TH_TOOLS[stg].lists || []).forEach(function (L) {
-        var key = stg + '.' + L.key, src = srcL[key], ids = L.st.map(function (x) { return x[0]; });
+        var key = stg + '.' + L.key, src = srcL[key], ids = L.st.map(function (x) { return x[0]; }), gIds = {};
+        if (L.groups) out.groups[key] = (Array.isArray(srcG[key]) ? srcG[key] : []).filter(function (g) { return g && typeof g.name === 'string' && g.name.trim(); }).slice(0, 12).map(function (g) {
+          var gid = typeof g.id === 'string' && g.id ? g.id.slice(0, 40) : uid(); gIds[gid] = true; return { id: gid, name: g.name.trim().slice(0, 60) };
+        });
         if (!Array.isArray(src)) { out.lists[key] = (L.seed || []).map(function (t, i) { return { id: key + '-' + i, title: t, status: ids[0], f: {}, created: 0 }; }); return; }
         out.lists[key] = src.filter(function (it) { return it && typeof it.title === 'string' && it.title.trim(); }).slice(0, 300).map(function (it) {
           var f = {}; (L.fields || []).forEach(function (fd) { if (it.f && typeof it.f[fd[0]] === 'string' && it.f[fd[0]]) f[fd[0]] = it.f[fd[0]].slice(0, 4000); });
-          return { id: typeof it.id === 'string' && it.id ? it.id.slice(0, 60) : uid(), title: it.title.trim().slice(0, 300), status: ids.indexOf(it.status) >= 0 ? it.status : ids[0], f: f, created: Number(it.created) || 0 };
+          var o = { id: typeof it.id === 'string' && it.id ? it.id.slice(0, 60) : uid(), title: it.title.trim().slice(0, 300), status: ids.indexOf(it.status) >= 0 ? it.status : ids[0], f: f, created: Number(it.created) || 0 };
+          if (L.links) {
+            o.links = (Array.isArray(it.links) ? it.links : []).filter(function (x) { return x && typeof x.u === 'string' && x.u; }).slice(0, 12).map(function (x) { return { u: x.u.slice(0, 2000), n: typeof x.n === 'string' ? x.n.slice(0, 80) : '' }; });
+            if (it.f && typeof it.f.link === 'string' && it.f.link.trim() && !o.links.some(function (x) { return x.u === it.f.link.trim(); })) o.links.unshift({ u: it.f.link.trim().slice(0, 2000), n: '' });   // the old single Link field
+          }
+          if (L.groups && typeof it.g === 'string' && gIds[it.g]) o.g = it.g;
+          return o;
         });
       });
     });
@@ -3553,7 +3599,7 @@ td.c-break{display:none}
     $('#th-list').innerHTML = h;
   }
   function thPageKey(id) {
-    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify(state.compassTests || []).length;
+    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify([ui.thGFold || {}, ui.thGAdd || '', ui.thGRen || '']) + '|' + JSON.stringify(state.compassTests || []).length;
     var pg = getThPage(id); if (!pg) return id + '|gone';
     return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + (pg.parked || '') + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',') +
       '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',') + '|' + thLinkKey(pg);
@@ -3711,14 +3757,17 @@ td.c-break{display:none}
   }
   function thCardHTML(L, key, it, i) {
     var ro = mode === 'readonly', open = ui.thCard === it.id, st = thSt(L, it.status), id = esc(it.id), dk = ' data-k="' + key + '" data-id="' + id + '"';
-    var F = (L.fields || []).filter(function (fd) { return fd[3] !== 'url'; }), filled = F.filter(function (fd) { return it.f[fd[0]]; }).length;
+    var G = L.groups ? (state.thesis.groups[key] || []) : [];
     var body = '';
     if (open) {
       body = '<div class="th-topic-body">' +
         (ro ? '' : '<div class="th-cf"><label class="th-lbl" for="th-ct-' + id + '">Title</label><input id="th-ct-' + id + '" class="th-ct" data-ct="1"' + dk + ' value="' + esc(it.title) + '" maxlength="300"></div>') +
-        '<div class="th-seg" role="group" aria-label="Status">' + L.st.map(function (x) {
+        '<div class="th-card-row"><div class="th-seg" role="group" aria-label="Status">' + L.st.map(function (x) {
           return '<button type="button" class="chip tone-' + (x[2] || 'none') + '" data-act="th-card-status"' + dk + ' data-st="' + x[0] + '" aria-pressed="' + (it.status === x[0]) + '"' + (ro ? ' disabled' : '') + '>' + esc(x[1]) + '</button>';
         }).join('') + '</div>' +
+        (G.length ? '<label class="th-card-g"><span class="sr-only">Group</span><select data-cg="1"' + dk + (ro ? ' disabled' : '') + '><option value="">No group</option>' +
+          G.map(function (g) { return '<option value="' + esc(g.id) + '"' + (it.g === g.id ? ' selected' : '') + '>' + esc(g.name) + '</option>'; }).join('') + '</select></label>' : '') + '</div>' +
+        (L.links ? thLinksHTML(key, it, ro) : '') +
         (L.fields || []).map(function (fd) {
           var fid = 'th-cf-' + id + '-' + fd[0], v = it.f[fd[0]] || '';
           if (fd[3] === 'url') return '<div class="th-cf"><label class="th-lbl" for="' + fid + '">' + esc(fd[1]) + '</label><div class="th-url"><input type="url" id="' + fid + '" data-cf="' + fd[0] + '"' + dk + ' value="' + esc(v) + '" placeholder="' + esc(fd[2]) + '"' + (ro ? ' readonly' : '') + '>' +
@@ -3728,9 +3777,38 @@ td.c-break{display:none}
         (ro ? '' : '<div class="th-topic-acts"><button type="button" class="btn btn-sm btn-quiet" data-act="th-card-del"' + dk + ' style="margin-left:auto">Delete</button></div>') + '</div>';
     }
     return '<article class="th-topic th-card' + (open ? ' is-open' : '') + (st[2] === 'go' ? ' is-done' : '') + '"><button type="button" class="th-topic-h" data-act="th-card-toggle" data-id="' + id + '" aria-expanded="' + open + '">' +
+      '<svg class="th-chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 2l3.5 3L3 8"/></svg>' +
       (L.numbered ? '<span class="th-cvn">' + (i + 1) + '</span>' : '') + '<span class="th-topic-t">' + esc(it.title) + '</span>' +
-      (F.length > 1 && !open ? '<span class="th-fill">' + filled + '/' + F.length + '</span>' : '') +
       '<span class="th-st tone-' + (st[2] || 'none') + '">' + esc(st[1]) + '</span></button>' + body + '</article>';
+  }
+  function thLinkName(x) {
+    if (x.n) return x.n;
+    var u = x.u.replace(/^https?:\/\//i, '').replace(/^www\./i, ''), host = u.split(/[\/?#]/)[0];
+    if (/\.pdf($|[?#])/i.test(x.u)) return 'PDF · ' + host;
+    if (/drive\.google|docs\.google/i.test(host)) return 'Google Drive';
+    return host || x.u;
+  }
+  function thLinksHTML(key, it, ro) {
+    var dk = ' data-k="' + key + '" data-id="' + esc(it.id) + '"', L = it.links || [];
+    return '<div class="th-cf"><span class="th-lbl">Links &amp; files</span>' +
+      (L.length ? '<ul class="th-links">' + L.map(function (x, li) {
+        var ok = /^https?:\/\//i.test(x.u);
+        return '<li>' + (ok ? '<a href="' + esc(x.u) + '" target="_blank" rel="noopener noreferrer" title="' + esc(x.u) + '">' : '<span title="' + esc(x.u) + '">') + CLIP_ICO + '<span>' + esc(thLinkName(x)) + '</span>' + (ok ? '<i aria-hidden="true">↗</i></a>' : '</span>') +
+          (ro ? '' : '<button type="button" class="th-link-x" data-act="th-link-del"' + dk + ' data-li="' + li + '" title="Remove" aria-label="Remove ' + esc(thLinkName(x)) + '">×</button>') + '</li>';
+      }).join('') + '</ul>' : '') +
+      (ro || L.length >= 12 ? '' : '<form class="th-link-add" data-form="th-link-add" novalidate' + dk + '><label class="sr-only" for="th-lu-' + esc(it.id) + '">Link</label><input id="th-lu-' + esc(it.id) + '" type="url" placeholder="Paste a link: the PDF, a Drive file, your notes…" autocomplete="off">' +
+        '<label class="sr-only" for="th-ln-' + esc(it.id) + '">Name</label><input id="th-ln-' + esc(it.id) + '" type="text" maxlength="80" placeholder="Name (optional)" autocomplete="off"><button type="submit" class="btn btn-sm">Add</button></form>') + '</div>';
+  }
+  function thGroupHTML(L, key, g, its, ro) {
+    var fold = ui.thGFold && ui.thGFold[g ? g.id : '_none'], ren = g && ui.thGRen === g.id && !ro, done = its.filter(function (it) { return it.status === L.done; }).length;
+    var h = '<section class="th-grp' + (fold ? ' is-folded' : '') + (g ? '' : ' is-none') + '"><div class="th-grp-h">';
+    if (ren) h += '<form class="th-grp-ren" data-form="th-grp-ren" data-k="' + key + '" data-gid="' + esc(g.id) + '"><label class="sr-only" for="th-gr-' + esc(g.id) + '">Group name</label><input id="th-gr-' + esc(g.id) + '" maxlength="60" value="' + esc(g.name) + '"><button type="submit" class="btn btn-sm">Save</button></form>';
+    else h += '<button type="button" class="th-grp-t" data-act="th-grp-fold" data-gid="' + (g ? esc(g.id) : '_none') + '" aria-expanded="' + !fold + '"><svg class="th-chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 2l3.5 3L3 8"/></svg><span>' + (g ? esc(g.name) : 'No group') + '</span>' +
+      (its.length ? '<span class="th-sec-c">' + (L.done ? done + '/' + its.length : its.length) + '</span>' : '') + '</button>' +
+      (g && !ro ? '<button type="button" class="th-grp-a" data-act="th-grp-ren" data-gid="' + esc(g.id) + '" title="Rename" aria-label="Rename ' + esc(g.name) + '">' + PENCIL_ICO + '</button><button type="button" class="th-grp-a" data-act="th-grp-del" data-k="' + key + '" data-gid="' + esc(g.id) + '" title="Delete group" aria-label="Delete ' + esc(g.name) + '">×</button>' : '');
+    h += '</div>';
+    if (!fold) h += its.length ? '<div class="th-topics">' + its.map(function (it, i) { return thCardHTML(L, key, it, i); }).join('') + '</div>' : '<p class="th-grp-empty">Nothing here yet.</p>';
+    return h + '</section>';
   }
   function thToolHTML(stg) {
     var tool = TH_TOOLS[stg], ro = mode === 'readonly', si = thStageIndex();
@@ -3738,16 +3816,25 @@ td.c-break{display:none}
     tool.lists.forEach(function (L) {
       var key = stg + '.' + L.key, items = state.thesis.lists[key] || [], full = L.cap && items.length >= L.cap, prog = thProgress(L, items), kid = 'th-add-' + stg + '-' + L.key;
       var solo = tool.lists.length === 1;
-      h += '<section class="th-list">' + (solo && !prog ? '' : '<div class="th-list-h">' + (solo ? '' : '<h3>' + esc(L.title) + '</h3>') + (prog ? '<span class="th-prog">' + prog + '</span>' : '') + '</div>');
+      var G = L.groups ? (state.thesis.groups[key] || []) : [], gAdd = L.groups && !ro && ui.thGAdd === key;
+      h += '<section class="th-list">' + (solo && !prog && !L.groups ? '' : '<div class="th-list-h">' + (solo ? '' : '<h3>' + esc(L.title) + '</h3>') + (prog ? '<span class="th-prog">' + prog + '</span>' : '') +
+        (L.groups && !ro && G.length < 12 ? '<button type="button" class="link-btn th-grp-new" data-act="th-grp-add" data-k="' + key + '" aria-expanded="' + gAdd + '">+ Group</button>' : '') + '</div>');
+      if (gAdd) h += '<form class="th-quick th-grp-form" data-form="th-grp-new" data-k="' + key + '"><label class="sr-only" for="th-gn-' + key + '">Group name</label><input id="th-gn-' + key + '" maxlength="60" autocomplete="off" placeholder="A general idea, like Relative motion"><button type="submit" class="btn btn-sm">Add</button></form>';
       if (L.check) {
         h += items.length ? '<ul class="th-checklist">' + items.map(function (it) {
           return '<li><label class="check"><input type="checkbox" data-act="th-card-check" data-k="' + key + '" data-id="' + esc(it.id) + '"' + (it.status === L.done ? ' checked' : '') + (ro ? ' disabled' : '') + '> <span>' + esc(it.title) + '</span></label>' +
             (ro ? '' : '<button type="button" class="th-row-x" data-act="th-card-del" data-k="' + key + '" data-id="' + esc(it.id) + '" title="Delete" aria-label="Delete ' + esc(it.title) + '">' + END_ICO + '</button>') + '</li>';
         }).join('') + '</ul>' : '';
       } else {
-        h += items.length ? '<div class="th-topics">' + items.map(function (it, i) { return thCardHTML(L, key, it, i); }).join('') + '</div>' : '';
+        if (G.length) {
+          h += G.map(function (g) { return thGroupHTML(L, key, g, items.filter(function (it) { return it.g === g.id; }), ro); }).join('');
+          var loose = items.filter(function (it) { return !it.g; }); if (loose.length) h += thGroupHTML(L, key, null, loose, ro);
+        } else h += items.length ? '<div class="th-topics">' + items.map(function (it, i) { return thCardHTML(L, key, it, i); }).join('') + '</div>' : '';
       }
-      if (!ro && !full) h += '<form class="th-quick th-add" data-form="th-card-add" data-k="' + key + '"><label class="sr-only" for="' + kid + '">' + esc(L.add) + '</label><input id="' + kid + '" maxlength="300" autocomplete="off" placeholder="' + esc(L.add) + '"><button type="submit" class="btn btn-sm">Add</button></form>';
+      var gPick = ui.thAddG && ui.thAddG[key]; if (!G.some(function (g) { return g.id === gPick; })) gPick = '';
+      if (!ro && !full) h += '<form class="th-quick th-add" data-form="th-card-add" data-k="' + key + '"><label class="sr-only" for="' + kid + '">' + esc(L.add) + '</label><input id="' + kid + '" maxlength="300" autocomplete="off" placeholder="' + esc(L.add) + '">' +
+        (G.length ? '<label class="sr-only" for="' + kid + '-g">Group</label><select id="' + kid + '-g" class="th-add-g" data-addg="' + key + '"><option value="">No group</option>' + G.map(function (g) { return '<option value="' + esc(g.id) + '"' + (g.id === gPick ? ' selected' : '') + '>' + esc(g.name) + '</option>'; }).join('') + '</select>' : '') +
+        '<button type="submit" class="btn btn-sm">Add</button></form>';
       h += '</section>';
     });
     return h;
@@ -4133,6 +4220,20 @@ td.c-break{display:none}
           onYes: function () { commit(function (s) { s.thesis.umbrellas = s.thesis.umbrellas.filter(function (u) { return u.id !== id; }); s.thesis.topics.forEach(function (t) { if (t.umb === id) t.umb = null; }); }); } });
       }
       else if (a === 'th-card-toggle') { ui.thCard = ui.thCard === id ? null : id; renderThPage(); }
+      else if (a === 'th-grp-fold') { var gf = b.dataset.gid; ui.thGFold = ui.thGFold || {}; ui.thGFold[gf] = !ui.thGFold[gf]; renderThPage(); }
+      else if (a === 'th-grp-add') { ui.thGAdd = ui.thGAdd === b.dataset.k ? null : b.dataset.k; renderThPage(); var gni = $('#th-gn-' + b.dataset.k.replace('.', '\\.')); if (gni) gni.focus(); }
+      else if (a === 'th-grp-ren') { ui.thGRen = b.dataset.gid; renderThPage(); var gri = $('#th-gr-' + b.dataset.gid); if (gri) { gri.focus(); gri.select(); } }
+      else if (a === 'th-grp-del') {
+        var gk = b.dataset.k, gd = b.dataset.gid, g0 = (state.thesis.groups[gk] || []).filter(function (g) { return g.id === gd; })[0]; if (!g0) return;
+        var nG = (state.thesis.lists[gk] || []).filter(function (it) { return it.g === gd; }).length;
+        var dropG = function () { commit(function (s) { s.thesis.groups[gk] = (s.thesis.groups[gk] || []).filter(function (g) { return g.id !== gd; }); (s.thesis.lists[gk] || []).forEach(function (it) { if (it.g === gd) delete it.g; }); }); };
+        if (!nG) dropG();
+        else confirmDialog({ title: 'Delete the “' + truncate(g0.name, 40) + '” group?', body: 'Its ' + plural(nG, 'card') + ' stay, under No group.', yes: 'Delete group', danger: true, onYes: dropG });
+      }
+      else if (a === 'th-link-del') {
+        var lk = b.dataset.k, li0 = Number(b.dataset.li);
+        commit(function (s) { (s.thesis.lists[lk] || []).forEach(function (it) { if (it.id === id && it.links) it.links.splice(li0, 1); }); });
+      }
       else if (a === 'th-card-status' || a === 'th-card-check') {
         var L0 = thListDef(b.dataset.k), nst = a === 'th-card-check' ? (b.checked ? L0.done : L0.st[0][0]) : b.dataset.st; if (!L0) return;
         commit(function (s) { (s.thesis.lists[b.dataset.k] || []).forEach(function (it) { if (it.id === id) it.status = nst; }); });
@@ -4140,7 +4241,7 @@ td.c-break{display:none}
       else if (a === 'th-card-del') {
         var k0 = b.dataset.k, it0 = (state.thesis.lists[k0] || []).filter(function (it) { return it.id === id; })[0]; if (!it0) return;
         var gone = function () { commit(function (s) { s.thesis.lists[k0] = s.thesis.lists[k0].filter(function (it) { return it.id !== id; }); }); };
-        if (Object.keys(it0.f).length) confirmDialog({ title: 'Delete “' + truncate(it0.title, 50) + '”?', body: 'Its notes go with it.', yes: 'Delete', danger: true, onYes: gone });
+        if (Object.keys(it0.f).length || (it0.links || []).length) confirmDialog({ title: 'Delete “' + truncate(it0.title, 50) + '”?', body: 'Its notes and links go with it.', yes: 'Delete', danger: true, onYes: gone });
         else gone();
       }
       else if (a === 'th-more') openThEditor('more', thCurrent());
@@ -4226,12 +4327,25 @@ td.c-break{display:none}
         ui0.value = ''; ui0.blur();
         var nu = uid(); ui.thUmbSel = nu;
         commit(function (s) { s.thesis.umbrellas.push({ id: nu, name: un.slice(0, 80), created: Date.now() }); });
+      } else if (f.dataset.form === 'th-grp-new') {
+        var gnk = f.dataset.k, gni2 = f.querySelector('input'), gnv = gni2.value.trim(); if (!gnv) return;
+        gni2.value = ''; gni2.blur(); ui.thGAdd = null;
+        var ngid = uid(); ui.thAddG = ui.thAddG || {}; ui.thAddG[gnk] = ngid;
+        commit(function (s) { (s.thesis.groups[gnk] = s.thesis.groups[gnk] || []).push({ id: ngid, name: gnv.slice(0, 60) }); });
+      } else if (f.dataset.form === 'th-grp-ren') {
+        var grk = f.dataset.k, grid = f.dataset.gid, grv = f.querySelector('input').value.trim(); f.querySelector('input').blur(); ui.thGRen = null;
+        if (grv) commit(function (s) { (s.thesis.groups[grk] || []).forEach(function (g) { if (g.id === grid) g.name = grv.slice(0, 60); }); }); else renderThPage();
+      } else if (f.dataset.form === 'th-link-add') {
+        var lak = f.dataset.k, laid = f.dataset.id, ins = f.querySelectorAll('input'), lu = ins[0].value.trim(), ln = ins[1].value.trim(); if (!lu) return;
+        if (!/^[a-z][a-z0-9+.-]*:/i.test(lu) && /\./.test(lu)) lu = 'https://' + lu;
+        ins[0].value = ''; ins[1].value = ''; ins[0].blur(); ins[1].blur();
+        commit(function (s) { (s.thesis.lists[lak] || []).forEach(function (it) { if (it.id !== laid) return; it.links = it.links || []; if (it.links.length < 12) it.links.push({ u: lu.slice(0, 2000), n: ln.slice(0, 80) }); }); });
       } else if (f.dataset.form === 'th-card-add') {
         var k1 = f.dataset.k, L1 = thListDef(k1), ci = f.querySelector('input'), cv = ci.value.trim(); if (!cv || !L1) return;
         if (L1.cap && (state.thesis.lists[k1] || []).length >= L1.cap) return;
         ci.value = ''; ci.blur();
-        var cid = uid(); if (!L1.check && L1.fields && L1.fields.length) ui.thCard = cid;
-        commit(function (s) { (s.thesis.lists[k1] = s.thesis.lists[k1] || []).push({ id: cid, title: cv.slice(0, 300), status: L1.st[0][0], f: {}, created: Date.now() }); });
+        var cid = uid(), gsel = f.querySelector('select[data-addg]'), cg = gsel ? gsel.value : '';
+        commit(function (s) { var it = { id: cid, title: cv.slice(0, 300), status: L1.st[0][0], f: {}, created: Date.now() }; if (L1.links) it.links = []; if (cg) it.g = cg; (s.thesis.lists[k1] = s.thesis.lists[k1] || []).push(it); });
         var again = $('#' + f.querySelector('input').id); if (again && L1.check) again.focus();
       }
     });
@@ -4290,6 +4404,8 @@ td.c-break{display:none}
       var t = e.target;
       if (t.dataset.pageStage) { var spid = thCurrent(), sv = t.value; commit(function (s) { s.thesis.pages.forEach(function (x) { if (x.id === spid) x.stage = sv; }); }); return; }
       if (t.id === 'th-topic-umb') ui.thUmbSel = t.value;
+      else if (t.dataset.addg) { ui.thAddG = ui.thAddG || {}; ui.thAddG[t.dataset.addg] = t.value; }
+      else if (t.dataset.cg) { var cgk = t.dataset.k, cgid = t.dataset.id, cgv = t.value; commit(function (s) { (s.thesis.lists[cgk] || []).forEach(function (it) { if (it.id !== cgid) return; if (cgv) it.g = cgv; else delete it.g; }); }); }
       else if (t.dataset.topicUmb) { var tid = t.dataset.topicUmb, uv = t.value || null; commit(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === tid) tp.umb = uv; }); }); }
     });
   }
@@ -5220,6 +5336,7 @@ td.c-break{display:none}
   // One piece (or one small step inside a piece): status, the exact rule, due moment, points, link, steps.
   function openMilestone(pid, mid) {
     var p = getProject(pid); if (!p || mode === 'readonly') return;
+    var rsch = isResearch(p);   // Research tasks skip the rule and points fields
     var m = taskById(p, mid);
     if (!m) return;
     var T = todayISO(), isStep = !!m.parent, parent = isStep ? taskById(p, m.parent) : null;
@@ -5241,9 +5358,9 @@ td.c-break{display:none}
           '<div class="field"><label for="ms-title">' + (isStep ? 'Step' : 'Name') + '</label><input id="ms-title" type="text" maxlength="140" value="' + esc(m.title) + '"></div>' +
           (isStep ? '<div class="field"><label class="check"><input type="checkbox" id="ms-done"' + (m.done ? ' checked' : '') + '> Done</label></div>'
             : '<div class="field"><label for="ms-status">Status</label><select id="ms-status">' + ST_ORDER.map(function (k) { return '<option value="' + k + '"' + (m.status === k ? ' selected' : '') + '>' + ST_LABEL[k] + '</option>'; }).join('') + '</select></div>' +
-              '<div class="field"><label for="ms-rule">Exact rule <span class="muted">(optional: limits, format, who signs, where it goes)</span></label><textarea id="ms-rule" rows="3" maxlength="1500" placeholder="e.g. Max 400 words, signed and stamped, uploaded on the platform">' + esc(m.rule || '') + '</textarea></div>') +
+              (rsch ? '' : '<div class="field"><label for="ms-rule">Exact rule <span class="muted">(optional: limits, format, who signs, where it goes)</span></label><textarea id="ms-rule" rows="3" maxlength="1500" placeholder="e.g. Max 400 words, signed and stamped, uploaded on the platform">' + esc(m.rule || '') + '</textarea></div>')) +
           whenFields('ms', 'Due <span class="muted">(optional)</span>', m, '') +
-          (isStep ? '' : '<div class="field"><label for="ms-pts">Points <span class="muted">(optional, if it’s scored)</span></label><input id="ms-pts" type="number" min="0" step="1" inputmode="numeric" value="' + esc(m.points ? String(m.points) : '') + '"></div>') +
+          (isStep || rsch ? '' : '<div class="field"><label for="ms-pts">Points <span class="muted">(optional, if it’s scored)</span></label><input id="ms-pts" type="number" min="0" step="1" inputmode="numeric" value="' + esc(m.points ? String(m.points) : '') + '"></div>') +
           '<div class="field"><label for="ms-url">Link <span class="muted">(optional: the doc or file you work on for this)</span></label><input id="ms-url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="Paste a link" value="' + esc(m.url || '') + '"></div>' +
           (m.url ? '<p style="margin:6px 0 0"><a class="btn btn-sm" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer">' + EXT + 'Open link</a></p>' : '') +
           (isStep ? '' : '<div class="field"><span class="field-label">Steps <span class="muted">(optional, small things inside this one)</span></span><ul class="st-list" id="ms-steps"></ul>' +
@@ -5279,7 +5396,7 @@ td.c-break{display:none}
         var stv = isStep ? ($('#ms-done').checked ? 'done' : 'todo') : $('#ms-status').value;
         commit(function (s) {
           m.title = t.slice(0, 140); m.date = w.date; m.time = w.time; m.at = w.at; m.tz = w.tz; m.url = url;
-          if (!isStep) { m.rule = $('#ms-rule').value.trim().slice(0, 1500); m.points = numOrNull($('#ms-pts').value); }
+          if (!isStep && !rsch) { m.rule = $('#ms-rule').value.trim().slice(0, 1500); m.points = numOrNull($('#ms-pts').value); }
           setStatus2(s, p, m, stv, T);
         });
         closeModal();
