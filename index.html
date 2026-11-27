@@ -957,6 +957,26 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
 .th-cf textarea{min-height:38px;resize:none}
 .th-url{display:flex;gap:8px;align-items:center}
 .th-card .th-topic-h{gap:10px}
+.th-card-hd{display:flex;align-items:stretch}
+.th-card-hd .th-topic-h{flex:1;min-width:0}
+.th-grip{flex:none;display:grid;place-items:center;width:26px;margin-left:4px;padding:0;border:0;border-radius:7px;background:none;color:#4c546b;cursor:grab;touch-action:none;opacity:0;transition:opacity .12s,color .12s}
+.th-grip svg{width:10px;height:16px;fill:currentColor}
+.th-card-hd:hover .th-grip,.th-grp-h:hover .th-grip,.th-grip:focus-visible{opacity:1}
+.th-grip:hover{color:var(--ink)}
+.th-card-hd .th-grip + .th-topic-h{padding-left:6px}
+.th-grp-h .th-grip{width:22px;height:28px;margin:0 0 0 -24px}
+@media (hover:none){.th-grip{opacity:.8}.th-grp-h .th-grip{margin-left:0}}
+.th-list.is-sorting{user-select:none;-webkit-user-select:none}
+.th-list.is-sorting .th-grip{cursor:grabbing}
+.th-card.is-dragging,.th-grp.is-dragging{position:relative;z-index:3;border-color:rgba(138,180,255,.55);box-shadow:0 10px 28px rgba(0,0,0,.45),0 0 0 1px rgba(138,180,255,.35);background:#1a2134}
+.th-card.is-dragging .th-grip,.th-grp.is-dragging .th-grip{opacity:1;color:var(--accent)}
+.th-grp.is-dragging{border-radius:10px;padding:0 6px}
+.th-list.is-grp-sort .th-grp .th-topics,.th-list.is-grp-sort .th-grp-empty{display:none}
+.th-list.is-grp-sort .th-grp{margin-bottom:4px}
+.th-grp.is-drop-target .th-grp-t{color:var(--accent)}
+.th-grp.is-drop-target .th-grp-h{background:rgba(138,180,255,.08);border-radius:8px}
+.th-topics:has(> .th-card) > .th-grp-empty{display:none}
+.th-grp .th-topics:not(:has(> .th-card)){min-height:40px}
 .th-card .th-chev,.th-grp .th-chev{flex:none;width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;color:var(--muted);transition:transform .15s;transform:rotate(90deg)}
 .th-card:not(.is-open) .th-chev{transform:none}
 .th-grp.is-folded .th-chev{transform:none}
@@ -3100,6 +3120,7 @@ td.c-break{display:none}
   var CARDS_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="4.5" width="9" height="9" rx="1.8"/><path d="M5 2.5h7a1.5 1.5 0 0 1 1.5 1.5v7"/></svg>';
   var CHAIN_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3.5" cy="8" r="1.6"/><circle cx="8" cy="8" r="1.6"/><circle cx="12.5" cy="8" r="1.6"/><path d="M5.1 8h1.3M9.6 8h1.3"/></svg>';
   var CHART_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.5h11M4.5 11V8M8 11V4.5M11.5 11V6.5"/></svg>';
+  var GRIP_ICO = '<svg viewBox="0 0 10 16" aria-hidden="true"><circle cx="3" cy="3" r="1.2"/><circle cx="7" cy="3" r="1.2"/><circle cx="3" cy="8" r="1.2"/><circle cx="7" cy="8" r="1.2"/><circle cx="3" cy="13" r="1.2"/><circle cx="7" cy="13" r="1.2"/></svg>';
   var FILE_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4 1.75h5.25L12.5 5v9.25H4z"/><path d="M9 1.75V5.25h3.5"/></svg>';
   var CLIP_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 9.5l3-3"/><path d="M7.5 4.5l1-1a2.5 2.5 0 013.5 3.5l-1 1"/><path d="M8.5 11.5l-1 1A2.5 2.5 0 014 9l1-1"/></svg>';
   var PENCIL_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M10.6 2.9l2.5 2.5-7.4 7.4-3.2.7.7-3.2z"/></svg>';
@@ -3655,6 +3676,7 @@ td.c-break{display:none}
       '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',') + '|' + thLinkKey(pg);
   }
   function renderThPage() {
+    if (ui.thDrag) return;   // a card or group is being dragged; the drop redraws
     var el = $('#th-page'), wrap = $('#th-wrap'), id = thCurrent();
     wrap.classList.toggle('is-reading', !!ui.thReading); $('#view-thesis').classList.toggle('is-reading', !!ui.thReading);
     var ae = document.activeElement;
@@ -3826,10 +3848,12 @@ td.c-break{display:none}
         }).join('') +
         (ro ? '' : '<div class="th-topic-acts"><button type="button" class="btn btn-sm btn-quiet" data-act="th-card-del"' + dk + ' style="margin-left:auto">Delete</button></div>') + '</div>';
     }
-    return '<article class="th-topic th-card' + (open ? ' is-open' : '') + (st[2] === 'go' ? ' is-done' : '') + '"><button type="button" class="th-topic-h" data-act="th-card-toggle" data-id="' + id + '" aria-expanded="' + open + '">' +
+    return '<article class="th-topic th-card' + (open ? ' is-open' : '') + (st[2] === 'go' ? ' is-done' : '') + '" data-cid="' + id + '"><div class="th-card-hd">' +
+      (ro ? '' : '<button type="button" class="th-grip" data-grip="card" aria-label="Move ' + esc(it.title) + ' (drag, or use the arrow keys)" title="Drag to move">' + GRIP_ICO + '</button>') +
+      '<button type="button" class="th-topic-h" data-act="th-card-toggle" data-id="' + id + '" aria-expanded="' + open + '">' +
       '<svg class="th-chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 2l3.5 3L3 8"/></svg>' +
       (L.numbered ? '<span class="th-cvn">' + (i + 1) + '</span>' : '') + '<span class="th-topic-t">' + esc(it.title) + '</span>' +
-      '<span class="th-st tone-' + (st[2] || 'none') + '">' + esc(st[1]) + '</span></button>' + body + '</article>';
+      '<span class="th-st tone-' + (st[2] || 'none') + '">' + esc(st[1]) + '</span></button></div>' + body + '</article>';
   }
   // files from your computer go up to the private data repository, one after another; the card keeps only a reference
   function thUploadFiles(k, cid, files) {
@@ -3855,6 +3879,20 @@ td.c-break{display:none}
     if (!gh || !list.length) return;
     list.reduce(function (pr, x) { return pr.then(function () { return ghDeleteFile(gh, x); }); }, Promise.resolve()).catch(function (e) {
       if (cardId) { ui.thFileErr = { id: cardId, msg: 'Removed here, but GitHub kept the file: ' + e.message }; renderThPage(); }
+    });
+  }
+  // Put a dragged card in its new group and order. Cards show grouped, so only the order inside each group matters;
+  // groups that were folded during the drag keep their order, and a card dropped on one goes to its end.
+  function thPlaceCard(arr, cid, gid, toEnd, seq) {
+    var it = arr.filter(function (x) { return x.id === cid; })[0]; if (!it) return;
+    if (gid) it.g = gid; else delete it.g;
+    if (toEnd) { arr.splice(arr.indexOf(it), 1); arr.push(it); }
+    Object.keys(seq).forEach(function (g) {
+      var pos = [], want = [];
+      arr.forEach(function (x, i) { if ((x.g || '') === g) pos.push(i); });
+      seq[g].forEach(function (id) { var x = arr.filter(function (y) { return y.id === id; })[0]; if (x && (x.g || '') === g && want.indexOf(x) < 0) want.push(x); });
+      arr.forEach(function (x) { if ((x.g || '') === g && want.indexOf(x) < 0) want.push(x); });
+      var snap = want.slice(); pos.forEach(function (p, i) { arr[p] = snap[i]; });
     });
   }
   function thLinkName(x) {
@@ -3884,13 +3922,14 @@ td.c-break{display:none}
   }
   function thGroupHTML(L, key, g, its, ro) {
     var fold = ui.thGFold && ui.thGFold[g ? g.id : '_none'], ren = g && ui.thGRen === g.id && !ro, done = its.filter(function (it) { return it.status === L.done; }).length;
-    var h = '<section class="th-grp' + (fold ? ' is-folded' : '') + (g ? '' : ' is-none') + '"><div class="th-grp-h">';
+    var h = '<section class="th-grp' + (fold ? ' is-folded' : '') + (g ? '' : ' is-none') + '" data-gid="' + (g ? esc(g.id) : '') + '"><div class="th-grp-h">' +
+      (g && !ro && !ren ? '<button type="button" class="th-grip" data-grip="grp" aria-label="Move the ' + esc(g.name) + ' group (drag, or use the arrow keys)" title="Drag to move">' + GRIP_ICO + '</button>' : '');
     if (ren) h += '<form class="th-grp-ren" data-form="th-grp-ren" data-k="' + key + '" data-gid="' + esc(g.id) + '"><label class="sr-only" for="th-gr-' + esc(g.id) + '">Group name</label><input id="th-gr-' + esc(g.id) + '" maxlength="60" value="' + esc(g.name) + '"><button type="submit" class="btn btn-sm">Save</button></form>';
     else h += '<button type="button" class="th-grp-t" data-act="th-grp-fold" data-gid="' + (g ? esc(g.id) : '_none') + '" aria-expanded="' + !fold + '"><svg class="th-chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 2l3.5 3L3 8"/></svg><span>' + (g ? esc(g.name) : 'No group') + '</span>' +
       (its.length ? '<span class="th-sec-c">' + (L.done ? done + '/' + its.length : its.length) + '</span>' : '') + '</button>' +
       (g && !ro ? '<button type="button" class="th-grp-a" data-act="th-grp-ren" data-gid="' + esc(g.id) + '" title="Rename" aria-label="Rename ' + esc(g.name) + '">' + PENCIL_ICO + '</button><button type="button" class="th-grp-a" data-act="th-grp-del" data-k="' + key + '" data-gid="' + esc(g.id) + '" title="Delete group" aria-label="Delete ' + esc(g.name) + '">×</button>' : '');
     h += '</div>';
-    if (!fold) h += its.length ? '<div class="th-topics">' + its.map(function (it, i) { return thCardHTML(L, key, it, i); }).join('') + '</div>' : '<p class="th-grp-empty">Nothing here yet.</p>';
+    if (!fold) h += '<div class="th-topics" data-gid="' + (g ? esc(g.id) : '') + '">' + (its.length ? its.map(function (it, i) { return thCardHTML(L, key, it, i); }).join('') : '<p class="th-grp-empty">Nothing here yet.</p>') + '</div>';
     return h + '</section>';
   }
   function thToolHTML(stg) {
@@ -3900,7 +3939,7 @@ td.c-break{display:none}
       var key = stg + '.' + L.key, items = state.thesis.lists[key] || [], full = L.cap && items.length >= L.cap, prog = thProgress(L, items), kid = 'th-add-' + stg + '-' + L.key;
       var solo = tool.lists.length === 1;
       var G = L.groups ? (state.thesis.groups[key] || []) : [], gAdd = L.groups && !ro && ui.thGAdd === key;
-      h += '<section class="th-list">' + (solo && !prog && !L.groups ? '' : '<div class="th-list-h">' + (solo ? '' : '<h3>' + esc(L.title) + '</h3>') + (prog ? '<span class="th-prog">' + prog + '</span>' : '') +
+      h += '<section class="th-list" data-k="' + key + '">' + (solo && !prog && !L.groups ? '' : '<div class="th-list-h">' + (solo ? '' : '<h3>' + esc(L.title) + '</h3>') + (prog ? '<span class="th-prog">' + prog + '</span>' : '') +
         (L.groups && !ro && G.length < 12 ? '<button type="button" class="link-btn th-grp-new" data-act="th-grp-add" data-k="' + key + '" aria-expanded="' + gAdd + '">+ Group</button>' : '') + '</div>');
       if (gAdd) h += '<form class="th-quick th-grp-form" data-form="th-grp-new" data-k="' + key + '"><label class="sr-only" for="th-gn-' + key + '">Group name</label><input id="th-gn-' + key + '" maxlength="60" autocomplete="off" placeholder="A general idea, like Relative motion"><button type="submit" class="btn btn-sm">Add</button></form>';
       if (L.check) {
@@ -3912,7 +3951,7 @@ td.c-break{display:none}
         if (G.length) {
           h += G.map(function (g) { return thGroupHTML(L, key, g, items.filter(function (it) { return it.g === g.id; }), ro); }).join('');
           var loose = items.filter(function (it) { return !it.g; }); if (loose.length) h += thGroupHTML(L, key, null, loose, ro);
-        } else h += items.length ? '<div class="th-topics">' + items.map(function (it, i) { return thCardHTML(L, key, it, i); }).join('') + '</div>' : '';
+        } else h += items.length ? '<div class="th-topics" data-gid="">' + items.map(function (it, i) { return thCardHTML(L, key, it, i); }).join('') + '</div>' : '';
       }
       var gPick = ui.thAddG && ui.thAddG[key]; if (!G.some(function (g) { return g.id === gPick; })) gPick = '';
       if (!ro && !full) h += '<form class="th-quick th-add" data-form="th-card-add" data-k="' + key + '"><label class="sr-only" for="' + kid + '">' + esc(L.add) + '</label><input id="' + kid + '" maxlength="300" autocomplete="off" placeholder="' + esc(L.add) + '">' +
@@ -4501,6 +4540,98 @@ td.c-break{display:none}
         var first = $('#th-page [data-ed="b"]');
         if (first) { first.focus(); try { var r = document.createRange(); r.selectNodeContents(first); r.collapse(true); var sl = getSelection(); sl.removeAllRanges(); sl.addRange(r); } catch (er) {} } else t.blur();
       } else if (t.dataset && t.dataset.ed === 't' && e.key === 'Escape') t.blur();
+    });
+    // ---- rearrange cards and groups ----
+    var drag = null;
+    var scrollBox = function (el) { for (var n = el.parentElement; n && n !== document.body; n = n.parentElement) { var cs = getComputedStyle(n); if (/(auto|scroll)/.test(cs.overflowY) && n.scrollHeight > n.clientHeight + 2) return n; } return null; };
+    var nearest = function (els, y) {
+      var best = null, bd = Infinity;
+      els.forEach(function (x) { var r = x.getBoundingClientRect(), dd = y < r.top ? r.top - y : y > r.bottom ? y - r.bottom : 0; if (dd < bd) { bd = dd; best = x; } });
+      return best;
+    };
+    var dragOver = function (x, y) {
+      var d = drag; if (!d) return;
+      d.list.querySelectorAll('.is-drop-target').forEach(function (n) { n.classList.remove('is-drop-target'); });
+      if (d.kind === 'grp') {
+        var secs = [].slice.call(d.list.querySelectorAll('.th-grp:not(.is-none)')).filter(function (n) { return n !== d.el; }), before = null;
+        for (var i = 0; i < secs.length; i++) { var r = secs[i].getBoundingClientRect(); if (y < r.top + r.height / 2) { before = secs[i]; break; } }
+        if (!before) before = d.list.querySelector('.th-grp.is-none') || (secs.length ? secs[secs.length - 1].nextElementSibling : null);
+        if (before !== d.el && d.el.nextElementSibling !== before) d.el.parentNode.insertBefore(d.el, before);
+        return;
+      }
+      d.foldG = null;
+      var sec = nearest([].slice.call(d.list.querySelectorAll('.th-grp')), y), box2 = sec ? sec.querySelector('.th-topics') : d.list.querySelector('.th-topics');
+      if (sec && !box2) { d.foldG = sec.dataset.gid; sec.classList.add('is-drop-target'); return; }   // a folded group: the card joins its end
+      if (!box2) return;
+      var cards = [].slice.call(box2.querySelectorAll(':scope > .th-card')).filter(function (n) { return n !== d.el; }), ref = null;
+      for (var j = 0; j < cards.length; j++) { var rc = cards[j].getBoundingClientRect(); if (y < rc.top + rc.height / 2) { ref = cards[j]; break; } }
+      if (d.el.parentNode !== box2 || d.el.nextElementSibling !== ref) {
+        if (ref) box2.insertBefore(d.el, ref); else box2.appendChild(d.el);
+      }
+    };
+    var tick = function () {
+      var d = drag; if (!d || !d.moved) return;
+      var sb = d.sb, top = sb ? sb.getBoundingClientRect().top : 0, bot = sb ? sb.getBoundingClientRect().bottom : window.innerHeight, v = 0, edge = 70;
+      if (d.cy < top + edge) v = -Math.ceil((top + edge - d.cy) / 5); else if (d.cy > bot - edge) v = Math.ceil((d.cy - (bot - edge)) / 5);
+      if (v) { if (sb) sb.scrollTop += v; else window.scrollBy(0, v); dragOver(d.cx, d.cy); }
+      d.raf = requestAnimationFrame(tick);
+    };
+    box.addEventListener('pointerdown', function (e) {
+      var g = e.target.closest && e.target.closest('[data-grip]'); if (!g || mode === 'readonly' || e.button > 0 || drag) return;
+      var list = g.closest('.th-list'), el = g.dataset.grip === 'grp' ? g.closest('.th-grp') : g.closest('.th-card'); if (!list || !el) return;
+      e.preventDefault();
+      drag = { kind: g.dataset.grip, grip: g, el: el, list: list, k: list.dataset.k, id: g.dataset.grip === 'grp' ? el.dataset.gid : el.dataset.cid, y0: e.clientY, cx: e.clientX, cy: e.clientY, moved: false, pid: e.pointerId, sb: scrollBox(list), foldG: null };
+      try { g.setPointerCapture(e.pointerId); } catch (er) {}
+    });
+    box.addEventListener('pointermove', function (e) {
+      var d = drag; if (!d || e.pointerId !== d.pid) return;
+      d.cx = e.clientX; d.cy = e.clientY;
+      if (!d.moved) {
+        if (Math.abs(e.clientY - d.y0) < 5) return;
+        d.moved = true; ui.thDrag = true;
+        d.el.classList.add('is-dragging'); d.list.classList.add('is-sorting'); if (d.kind === 'grp') d.list.classList.add('is-grp-sort');
+        d.raf = requestAnimationFrame(tick);
+      }
+      e.preventDefault();
+      dragOver(e.clientX, e.clientY);
+    });
+    var dragEnd = function (e) {
+      var d = drag; if (!d || (e && e.pointerId !== d.pid)) return;
+      drag = null; cancelAnimationFrame(d.raf);
+      try { d.grip.releasePointerCapture(d.pid); } catch (er) {}
+      d.el.classList.remove('is-dragging'); d.list.classList.remove('is-sorting', 'is-grp-sort');
+      d.list.querySelectorAll('.is-drop-target').forEach(function (n) { n.classList.remove('is-drop-target'); });
+      if (!d.moved) return;
+      ui.thDrag = false;
+      if (d.kind === 'grp') {
+        var order = [].map.call(d.list.querySelectorAll('.th-grp:not(.is-none)'), function (n) { return n.dataset.gid; });
+        commit(function (s) { var G = s.thesis.groups[d.k] || []; s.thesis.groups[d.k] = order.map(function (id) { return G.filter(function (g) { return g.id === id; })[0]; }).filter(Boolean).concat(G.filter(function (g) { return order.indexOf(g.id) < 0; })); });
+        return;
+      }
+      var seq = {}, home = d.el.closest('.th-topics');
+      d.list.querySelectorAll('.th-topics').forEach(function (c) { seq[c.dataset.gid || ''] = [].map.call(c.querySelectorAll(':scope > .th-card'), function (a) { return a.dataset.cid; }); });
+      var tg = d.foldG != null ? d.foldG : home ? home.dataset.gid || '' : '';
+      commit(function (s) { thPlaceCard(s.thesis.lists[d.k] || [], d.id, tg, d.foldG != null, seq); });
+    };
+    box.addEventListener('pointerup', dragEnd);
+    box.addEventListener('pointercancel', dragEnd);
+    box.addEventListener('keydown', function (e) {
+      var g = e.target.closest && e.target.closest('[data-grip]'); if (!g || mode === 'readonly' || (e.key !== 'ArrowUp' && e.key !== 'ArrowDown')) return;
+      e.preventDefault();
+      var list = g.closest('.th-list'), k = list && list.dataset.k, up = e.key === 'ArrowUp'; if (!k) return;
+      if (g.dataset.grip === 'grp') {
+        var gid = g.closest('.th-grp').dataset.gid;
+        commit(function (s) { var G = s.thesis.groups[k] || [], i = -1; G.forEach(function (x, n) { if (x.id === gid) i = n; }); var j = up ? i - 1 : i + 1; if (i < 0 || j < 0 || j >= G.length) return; var t = G[i]; G[i] = G[j]; G[j] = t; });
+        setTimeout(function () { var n = document.querySelector('.th-grp[data-gid="' + gid + '"] [data-grip]'); if (n) n.focus(); }, 0);
+      } else {
+        var cid = g.closest('.th-card').dataset.cid;
+        commit(function (s) {
+          var arr = s.thesis.lists[k] || [], it = arr.filter(function (x) { return x.id === cid; })[0]; if (!it) return;
+          var same = arr.filter(function (x) { return (x.g || '') === (it.g || ''); }), i = same.indexOf(it), other = same[up ? i - 1 : i + 1]; if (!other) return;
+          var a = arr.indexOf(it), b2 = arr.indexOf(other); arr[a] = other; arr[b2] = it;
+        });
+        setTimeout(function () { var n = document.querySelector('.th-card[data-cid="' + cid + '"] [data-grip]'); if (n) n.focus(); }, 0);
+      }
     });
     var dropZone = function (e) { var z = e.target.closest && e.target.closest('[data-drop]'); return z && e.dataTransfer && Array.prototype.indexOf.call(e.dataTransfer.types || [], 'Files') >= 0 ? z : null; };
     box.addEventListener('dragover', function (e) { var z = dropZone(e); if (!z) return; e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; z.classList.add('is-drop'); });
