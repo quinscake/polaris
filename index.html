@@ -973,6 +973,24 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
 .th-link-x{width:22px;height:22px;padding:0;border:0;border-radius:50%;background:none;color:var(--muted);font:500 14px/1 var(--font-body);cursor:pointer}
 .th-link-x:hover{color:var(--ink);background:rgba(255,255,255,.06)}
 .th-link-add{display:flex;gap:8px;flex-wrap:wrap}
+.th-file{display:inline-flex;align-items:center;gap:6px;min-width:0;padding:5px 0;border:0;background:none;color:var(--ink);font:inherit;font-size:13px;cursor:pointer;text-align:left}
+.th-file span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:260px}
+.th-file:hover:not(:disabled) span{text-decoration:underline;text-underline-offset:3px}
+.th-file:disabled{cursor:default;opacity:.6}
+.th-file i{font:500 11px var(--font-mono);font-style:normal;color:var(--muted)}
+.th-file.is-loading{opacity:.55;cursor:progress}
+.th-links li.is-file{border-color:#2f3a58;background:rgba(138,180,255,.05)}
+.th-links li.is-up{opacity:.7;padding-right:10px}
+.th-links li.is-up i{animation:th-pulse 1.2s ease-in-out infinite}
+@keyframes th-pulse{50%{opacity:.35}}
+.th-attach{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.th-attach svg{width:13px;height:13px}
+.th-attach:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.th-file-err{margin:0 0 8px;font-size:13px;color:var(--warn)}
+.th-shelf{border-radius:10px;transition:background .12s,box-shadow .12s}
+.th-shelf.is-drop{background:rgba(138,180,255,.07);box-shadow:0 0 0 2px rgba(138,180,255,.45)}
+.th-drop-hint{color:#59617a}
+@media (hover:none){.th-drop-hint{display:none}}
 .th-link-add input[type=url]{flex:2 1 220px;min-width:0}
 .th-link-add input[type=text]{flex:1 1 140px;min-width:0}
 .th-grp{margin:0 0 14px}
@@ -2315,6 +2333,33 @@ td.c-break{display:none}
       return r.json().catch(function () { return {}; }).then(function (j) { throw ghError(r.status, j); });
     });
   }
+  var FILE_MAX = 25 * 1024 * 1024;
+  function ghPathUrl(c, path) { return 'https://api.github.com/repos/' + c.repo + '/contents/' + path.split('/').map(encodeURIComponent).join('/'); }
+  function ghFilesDir(c) { return (c.path.indexOf('/') >= 0 ? c.path.replace(/\/[^\/]*$/, '/') : '') + 'files/'; }
+  function ghUploadFile(c, file) {
+    return new Promise(function (ok, no) { var r = new FileReader(); r.onload = function () { ok(String(r.result)); }; r.onerror = function () { no(new Error('Couldn’t read that file.')); }; r.readAsDataURL(file); })
+      .then(function (dataUrl) {
+        var safe = file.name.replace(/[^\w.\- ]+/g, '').trim().replace(/\s+/g, '-').slice(-80) || 'file';
+        var path = ghFilesDir(c) + todayISO().slice(0, 7) + '/' + uid().slice(-6) + '-' + safe;
+        var body = JSON.stringify({ message: 'Polaris: add ' + file.name, content: dataUrl.slice(dataUrl.indexOf(',') + 1), branch: c.branch });
+        var put = function () { return ghFetch(c, ghPathUrl(c, path), { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: body }); };
+        // a save of data.json landing at the same moment can bump the branch: try once more
+        return put().catch(function (e) { if (e.status === 409) return new Promise(function (ok) { setTimeout(ok, 900); }).then(put); throw e; })
+          .then(function (j) { return { f: path, sha: j && j.content ? j.content.sha : '', n: file.name.slice(0, 80), s: file.size, t: (file.type || '').slice(0, 100) }; });
+      });
+  }
+  function ghReadFile(c, x) {
+    return fetch(ghPathUrl(c, x.f) + '?ref=' + encodeURIComponent(c.branch), { headers: { 'Accept': 'application/vnd.github.raw+json', 'Authorization': 'Bearer ' + c.token }, cache: 'no-store' })
+      .catch(function () { var e = new Error('Couldn’t reach GitHub. Check your internet connection.'); e.status = 0; throw e; })
+      .then(function (r) { if (!r.ok) return r.json().catch(function () { return {}; }).then(function (j) { throw r.status === 404 ? new Error('That file isn’t in your data repository anymore.') : ghError(r.status, j); }); return r.blob(); })
+      .then(function (b) { return new Blob([b], { type: x.t || b.type || 'application/octet-stream' }); });
+  }
+  function ghDeleteFile(c, x) {
+    var del = function (sha) { return ghFetch(c, ghPathUrl(c, x.f), { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: 'Polaris: remove ' + (x.n || x.f), sha: sha, branch: c.branch }) }); };
+    var look = function () { return ghFetch(c, ghPathUrl(c, x.f) + '?ref=' + encodeURIComponent(c.branch), { cache: 'no-store' }).then(function (j) { return j.sha; }); };
+    return (x.sha ? del(x.sha).catch(function (e) { if (e.status === 409 || e.status === 422) return look().then(del); throw e; }) : look().then(del))
+      .catch(function (e) { if (e.status === 404) return; throw e; });
+  }
   function ghRepoCheck(c) { return ghFetch(c, 'https://api.github.com/repos/' + c.repo, { cache: 'no-store' }); }
   function ghGet(c) {
     return ghFetch(c, ghUrl(c) + '?ref=' + encodeURIComponent(c.branch), { cache: 'no-store' }).then(function (j) {
@@ -3055,6 +3100,7 @@ td.c-break{display:none}
   var CARDS_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="4.5" width="9" height="9" rx="1.8"/><path d="M5 2.5h7a1.5 1.5 0 0 1 1.5 1.5v7"/></svg>';
   var CHAIN_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3.5" cy="8" r="1.6"/><circle cx="8" cy="8" r="1.6"/><circle cx="12.5" cy="8" r="1.6"/><path d="M5.1 8h1.3M9.6 8h1.3"/></svg>';
   var CHART_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.5h11M4.5 11V8M8 11V4.5M11.5 11V6.5"/></svg>';
+  var FILE_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4 1.75h5.25L12.5 5v9.25H4z"/><path d="M9 1.75V5.25h3.5"/></svg>';
   var CLIP_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 9.5l3-3"/><path d="M7.5 4.5l1-1a2.5 2.5 0 013.5 3.5l-1 1"/><path d="M8.5 11.5l-1 1A2.5 2.5 0 014 9l1-1"/></svg>';
   var PENCIL_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M10.6 2.9l2.5 2.5-7.4 7.4-3.2.7.7-3.2z"/></svg>';
   var MIC_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="6" y="2.2" width="4" height="7.3" rx="2"/><path d="M3.8 8a4.2 4.2 0 0 0 8.4 0M8 12.2v1.8"/></svg>';
@@ -3142,7 +3188,11 @@ td.c-break{display:none}
           var f = {}; (L.fields || []).forEach(function (fd) { if (it.f && typeof it.f[fd[0]] === 'string' && it.f[fd[0]]) f[fd[0]] = it.f[fd[0]].slice(0, 4000); });
           var o = { id: typeof it.id === 'string' && it.id ? it.id.slice(0, 60) : uid(), title: it.title.trim().slice(0, 300), status: ids.indexOf(it.status) >= 0 ? it.status : ids[0], f: f, created: Number(it.created) || 0 };
           if (L.links) {
-            o.links = (Array.isArray(it.links) ? it.links : []).filter(function (x) { return x && typeof x.u === 'string' && x.u; }).slice(0, 12).map(function (x) { return { u: x.u.slice(0, 2000), n: typeof x.n === 'string' ? x.n.slice(0, 80) : '' }; });
+            o.links = (Array.isArray(it.links) ? it.links : []).filter(function (x) { return x && ((typeof x.u === 'string' && x.u) || (typeof x.f === 'string' && /^[\w.\- \/]+$/.test(x.f))); }).slice(0, 12).map(function (x) {
+              var nm = typeof x.n === 'string' ? x.n.slice(0, 80) : '';
+              if (x.f) return { f: x.f.slice(0, 300), n: nm, s: Number(x.s) || 0, t: typeof x.t === 'string' ? x.t.slice(0, 100) : '', sha: typeof x.sha === 'string' ? x.sha.slice(0, 64) : '' };
+              return { u: x.u.slice(0, 2000), n: nm };
+            });
             if (it.f && typeof it.f.link === 'string' && it.f.link.trim() && !o.links.some(function (x) { return x.u === it.f.link.trim(); })) o.links.unshift({ u: it.f.link.trim().slice(0, 2000), n: '' });   // the old single Link field
           }
           if (L.groups && typeof it.g === 'string' && gIds[it.g]) o.g = it.g;
@@ -3599,7 +3649,7 @@ td.c-break{display:none}
     $('#th-list').innerHTML = h;
   }
   function thPageKey(id) {
-    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify([ui.thGFold || {}, ui.thGAdd || '', ui.thGRen || '']) + '|' + JSON.stringify(state.compassTests || []).length;
+    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify([ui.thGFold || {}, ui.thGAdd || '', ui.thGRen || '', ui.thUp || '', ui.thFileErr || '', !!gh]) + '|' + JSON.stringify(state.compassTests || []).length;
     var pg = getThPage(id); if (!pg) return id + '|gone';
     return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + (pg.parked || '') + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',') +
       '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',') + '|' + thLinkKey(pg);
@@ -3781,6 +3831,32 @@ td.c-break{display:none}
       (L.numbered ? '<span class="th-cvn">' + (i + 1) + '</span>' : '') + '<span class="th-topic-t">' + esc(it.title) + '</span>' +
       '<span class="th-st tone-' + (st[2] || 'none') + '">' + esc(st[1]) + '</span></button>' + body + '</article>';
   }
+  // files from your computer go up to the private data repository, one after another; the card keeps only a reference
+  function thUploadFiles(k, cid, files) {
+    if (!gh || !files.length || ui.thUp) return;
+    var it0 = (state.thesis.lists[k] || []).filter(function (it) { return it.id === cid; })[0]; if (!it0) return;
+    var room = 12 - (it0.links || []).length, big = files.filter(function (f) { return f.size > FILE_MAX; }), go = files.filter(function (f) { return f.size <= FILE_MAX; }).slice(0, Math.max(0, room));
+    var errs = big.map(function (f) { return '“' + f.name + '” is ' + thSize(f.size) + ' (25 MB at most; link it instead).'; });
+    if (files.length - big.length > go.length) errs.push('A card holds 12 links and files.');
+    ui.thFileErr = errs.length ? { id: cid, msg: errs.join(' ') } : null;
+    var next = function (i) {
+      if (i >= go.length) { ui.thUp = null; renderThPage(); return; }
+      ui.thUp = { id: cid, name: go[i].name + (go.length > 1 ? ' (' + (i + 1) + ' of ' + go.length + ')' : '') }; renderThPage();
+      ghUploadFile(gh, go[i]).then(function (ref) {
+        ui.thUp = null;
+        commit(function (s) { (s.thesis.lists[k] || []).forEach(function (it) { if (it.id === cid) { it.links = it.links || []; it.links.push(ref); } }); });
+        next(i + 1);
+      }, function (e) { ui.thUp = null; ui.thFileErr = { id: cid, msg: (errs.length ? errs.join(' ') + ' ' : '') + 'Couldn’t upload “' + go[i].name + '”. ' + e.message }; renderThPage(); });
+    };
+    next(0);
+  }
+  // files leave the data repository after their reference does (never blocks the board)
+  function thDropFiles(list, cardId) {
+    if (!gh || !list.length) return;
+    list.reduce(function (pr, x) { return pr.then(function () { return ghDeleteFile(gh, x); }); }, Promise.resolve()).catch(function (e) {
+      if (cardId) { ui.thFileErr = { id: cardId, msg: 'Removed here, but GitHub kept the file: ' + e.message }; renderThPage(); }
+    });
+  }
   function thLinkName(x) {
     if (x.n) return x.n;
     var u = x.u.replace(/^https?:\/\//i, '').replace(/^www\./i, ''), host = u.split(/[\/?#]/)[0];
@@ -3788,16 +3864,23 @@ td.c-break{display:none}
     if (/drive\.google|docs\.google/i.test(host)) return 'Google Drive';
     return host || x.u;
   }
+  function thSize(n) { return n >= 1048576 ? (n / 1048576).toFixed(n >= 10485760 ? 0 : 1) + ' MB' : Math.max(1, Math.round(n / 1024)) + ' KB'; }
   function thLinksHTML(key, it, ro) {
-    var dk = ' data-k="' + key + '" data-id="' + esc(it.id) + '"', L = it.links || [];
-    return '<div class="th-cf"><span class="th-lbl">Links &amp; files</span>' +
-      (L.length ? '<ul class="th-links">' + L.map(function (x, li) {
-        var ok = /^https?:\/\//i.test(x.u);
-        return '<li>' + (ok ? '<a href="' + esc(x.u) + '" target="_blank" rel="noopener noreferrer" title="' + esc(x.u) + '">' : '<span title="' + esc(x.u) + '">') + CLIP_ICO + '<span>' + esc(thLinkName(x)) + '</span>' + (ok ? '<i aria-hidden="true">↗</i></a>' : '</span>') +
-          (ro ? '' : '<button type="button" class="th-link-x" data-act="th-link-del"' + dk + ' data-li="' + li + '" title="Remove" aria-label="Remove ' + esc(thLinkName(x)) + '">×</button>') + '</li>';
-      }).join('') + '</ul>' : '') +
-      (ro || L.length >= 12 ? '' : '<form class="th-link-add" data-form="th-link-add" novalidate' + dk + '><label class="sr-only" for="th-lu-' + esc(it.id) + '">Link</label><input id="th-lu-' + esc(it.id) + '" type="url" placeholder="Paste a link: the PDF, a Drive file, your notes…" autocomplete="off">' +
-        '<label class="sr-only" for="th-ln-' + esc(it.id) + '">Name</label><input id="th-ln-' + esc(it.id) + '" type="text" maxlength="80" placeholder="Name (optional)" autocomplete="off"><button type="submit" class="btn btn-sm">Add</button></form>') + '</div>';
+    var dk = ' data-k="' + key + '" data-id="' + esc(it.id) + '"', L = it.links || [], up = ui.thUp && ui.thUp.id === it.id ? ui.thUp : null, er = ui.thFileErr && ui.thFileErr.id === it.id ? ui.thFileErr.msg : '';
+    var items = L.map(function (x, li) {
+      var x0 = ro ? '' : '<button type="button" class="th-link-x" data-act="th-link-del"' + dk + ' data-li="' + li + '" title="Remove" aria-label="Remove ' + esc(x.n || thLinkName(x)) + '">×</button>';
+      if (x.f) return '<li class="is-file"><button type="button" class="th-file" data-act="th-file-open"' + dk + ' data-li="' + li + '"' + (gh ? '' : ' disabled title="Connect GitHub to open files"') + '>' + FILE_ICO + '<span>' + esc(x.n || x.f.split('/').pop()) + '</span>' + (x.s ? '<i>' + thSize(x.s) + '</i>' : '') + '</button>' + x0 + '</li>';
+      var ok = /^https?:\/\//i.test(x.u);
+      return '<li>' + (ok ? '<a href="' + esc(x.u) + '" target="_blank" rel="noopener noreferrer" title="' + esc(x.u) + '">' : '<span title="' + esc(x.u) + '">') + CLIP_ICO + '<span>' + esc(thLinkName(x)) + '</span>' + (ok ? '<i aria-hidden="true">↗</i></a>' : '</span>') + x0 + '</li>';
+    });
+    if (up) items.push('<li class="is-file is-up"><span class="th-file">' + FILE_ICO + '<span>' + esc(up.name) + '</span><i>uploading…</i></span></li>');
+    var room = !ro && L.length < 12 && !up;
+    return '<div class="th-cf th-shelf"' + (gh && !ro ? ' data-drop="1"' + dk : '') + '><span class="th-lbl">Links &amp; files' + (gh && !ro ? '<span class="th-drop-hint"> · drop files here</span>' : '') + '</span>' +
+      (items.length ? '<ul class="th-links">' + items.join('') + '</ul>' : '') +
+      (er ? '<p class="th-file-err" role="alert">' + esc(er) + '</p>' : '') +
+      (room ? '<form class="th-link-add" data-form="th-link-add" novalidate' + dk + '><label class="sr-only" for="th-lu-' + esc(it.id) + '">Link</label><input id="th-lu-' + esc(it.id) + '" type="url" placeholder="Paste a link" autocomplete="off">' +
+        '<label class="sr-only" for="th-ln-' + esc(it.id) + '">Name</label><input id="th-ln-' + esc(it.id) + '" type="text" maxlength="80" placeholder="Name (optional)" autocomplete="off"><button type="submit" class="btn btn-sm">Add</button>' +
+        (gh ? '<label class="btn btn-sm th-attach" title="Upload a file (up to 25 MB) to your private data repository">' + FILE_ICO + 'Attach file<input type="file" multiple class="sr-only" data-file-up="1"' + dk + '></label>' : '') + '</form>' : '') + '</div>';
   }
   function thGroupHTML(L, key, g, its, ro) {
     var fold = ui.thGFold && ui.thGFold[g ? g.id : '_none'], ren = g && ui.thGRen === g.id && !ro, done = its.filter(function (it) { return it.status === L.done; }).length;
@@ -4231,8 +4314,27 @@ td.c-break{display:none}
         else confirmDialog({ title: 'Delete the “' + truncate(g0.name, 40) + '” group?', body: 'Its ' + plural(nG, 'card') + ' stay, under No group.', yes: 'Delete group', danger: true, onYes: dropG });
       }
       else if (a === 'th-link-del') {
-        var lk = b.dataset.k, li0 = Number(b.dataset.li);
-        commit(function (s) { (s.thesis.lists[lk] || []).forEach(function (it) { if (it.id === id && it.links) it.links.splice(li0, 1); }); });
+        var lk = b.dataset.k, li0 = Number(b.dataset.li), lit0 = (state.thesis.lists[lk] || []).filter(function (it) { return it.id === id; })[0], lx = lit0 && lit0.links && lit0.links[li0]; if (!lx) return;
+        var unlink = function () { commit(function (s) { (s.thesis.lists[lk] || []).forEach(function (it) { if (it.id === id && it.links) it.links = it.links.filter(function (y) { return y.f ? y.f !== lx.f : y.u !== lx.u || y.n !== lx.n; }); }); }); };
+        if (!lx.f) unlink();
+        else confirmDialog({ title: 'Delete “' + truncate(lx.n || lx.f, 50) + '”?', body: 'It’s removed from your data repository too.', yes: 'Delete file', danger: true,
+          onYes: function () { unlink(); thDropFiles([lx], id); } });
+      }
+      else if (a === 'th-file-open') {
+        var fk0 = b.dataset.k, fit = (state.thesis.lists[fk0] || []).filter(function (it) { return it.id === id; })[0], fx = fit && fit.links && fit.links[Number(b.dataset.li)]; if (!fx || !fx.f || !gh) return;
+        var view = /^(application\/pdf|image\/|text\/|video\/|audio\/)/.test(fx.t || '');
+        var w = view ? window.open('', '_blank') : null;
+        if (w) { try { w.document.title = fx.n || 'File'; w.document.body.style.cssText = 'margin:0;background:#0b1020;color:#9aa3bd;font:14px system-ui;display:grid;place-items:center;height:100vh'; w.document.body.textContent = 'Opening ' + (fx.n || 'the file') + '…'; } catch (e) {} }
+        b.classList.add('is-loading');
+        ghReadFile(gh, fx).then(function (blob) {
+          b.classList.remove('is-loading');
+          var url = URL.createObjectURL(blob); setTimeout(function () { URL.revokeObjectURL(url); }, 120000);
+          if (w && !w.closed) { w.location.href = url; return; }
+          var dl = document.createElement('a'); dl.href = url; dl.download = fx.n || fx.f.split('/').pop(); document.body.appendChild(dl); dl.click(); dl.remove();
+        }, function (e) {
+          b.classList.remove('is-loading'); if (w) try { w.close(); } catch (er) {}
+          ui.thFileErr = { id: id, msg: e.message }; renderThPage();
+        });
       }
       else if (a === 'th-card-status' || a === 'th-card-check') {
         var L0 = thListDef(b.dataset.k), nst = a === 'th-card-check' ? (b.checked ? L0.done : L0.st[0][0]) : b.dataset.st; if (!L0) return;
@@ -4240,7 +4342,7 @@ td.c-break{display:none}
       }
       else if (a === 'th-card-del') {
         var k0 = b.dataset.k, it0 = (state.thesis.lists[k0] || []).filter(function (it) { return it.id === id; })[0]; if (!it0) return;
-        var gone = function () { commit(function (s) { s.thesis.lists[k0] = s.thesis.lists[k0].filter(function (it) { return it.id !== id; }); }); };
+        var gone = function () { commit(function (s) { s.thesis.lists[k0] = s.thesis.lists[k0].filter(function (it) { return it.id !== id; }); }); thDropFiles((it0.links || []).filter(function (x) { return x.f; }), null); };
         if (Object.keys(it0.f).length || (it0.links || []).length) confirmDialog({ title: 'Delete “' + truncate(it0.title, 50) + '”?', body: 'Its notes and links go with it.', yes: 'Delete', danger: true, onYes: gone });
         else gone();
       }
@@ -4336,7 +4438,7 @@ td.c-break{display:none}
         var grk = f.dataset.k, grid = f.dataset.gid, grv = f.querySelector('input').value.trim(); f.querySelector('input').blur(); ui.thGRen = null;
         if (grv) commit(function (s) { (s.thesis.groups[grk] || []).forEach(function (g) { if (g.id === grid) g.name = grv.slice(0, 60); }); }); else renderThPage();
       } else if (f.dataset.form === 'th-link-add') {
-        var lak = f.dataset.k, laid = f.dataset.id, ins = f.querySelectorAll('input'), lu = ins[0].value.trim(), ln = ins[1].value.trim(); if (!lu) return;
+        var lak = f.dataset.k, laid = f.dataset.id, ins = f.querySelectorAll('input:not([type=file])'), lu = ins[0].value.trim(), ln = ins[1].value.trim(); if (!lu) return;
         if (!/^[a-z][a-z0-9+.-]*:/i.test(lu) && /\./.test(lu)) lu = 'https://' + lu;
         ins[0].value = ''; ins[1].value = ''; ins[0].blur(); ins[1].blur();
         commit(function (s) { (s.thesis.lists[lak] || []).forEach(function (it) { if (it.id !== laid) return; it.links = it.links || []; if (it.links.length < 12) it.links.push({ u: lu.slice(0, 2000), n: ln.slice(0, 80) }); }); });
@@ -4400,10 +4502,18 @@ td.c-break{display:none}
         if (first) { first.focus(); try { var r = document.createRange(); r.selectNodeContents(first); r.collapse(true); var sl = getSelection(); sl.removeAllRanges(); sl.addRange(r); } catch (er) {} } else t.blur();
       } else if (t.dataset && t.dataset.ed === 't' && e.key === 'Escape') t.blur();
     });
+    var dropZone = function (e) { var z = e.target.closest && e.target.closest('[data-drop]'); return z && e.dataTransfer && Array.prototype.indexOf.call(e.dataTransfer.types || [], 'Files') >= 0 ? z : null; };
+    box.addEventListener('dragover', function (e) { var z = dropZone(e); if (!z) return; e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; z.classList.add('is-drop'); });
+    box.addEventListener('dragleave', function (e) { var z = dropZone(e); if (z && !z.contains(e.relatedTarget)) z.classList.remove('is-drop'); });
+    box.addEventListener('drop', function (e) {
+      var z = dropZone(e); if (!z) return; e.preventDefault(); z.classList.remove('is-drop');
+      thUploadFiles(z.dataset.k, z.dataset.id, Array.prototype.slice.call(e.dataTransfer.files || []));
+    });
     box.addEventListener('change', function (e) {
       var t = e.target;
       if (t.dataset.pageStage) { var spid = thCurrent(), sv = t.value; commit(function (s) { s.thesis.pages.forEach(function (x) { if (x.id === spid) x.stage = sv; }); }); return; }
       if (t.id === 'th-topic-umb') ui.thUmbSel = t.value;
+      else if (t.dataset.fileUp) { var picked = Array.prototype.slice.call(t.files || []); t.value = ''; thUploadFiles(t.dataset.k, t.dataset.id, picked); }
       else if (t.dataset.addg) { ui.thAddG = ui.thAddG || {}; ui.thAddG[t.dataset.addg] = t.value; }
       else if (t.dataset.cg) { var cgk = t.dataset.k, cgid = t.dataset.id, cgv = t.value; commit(function (s) { (s.thesis.lists[cgk] || []).forEach(function (it) { if (it.id !== cgid) return; if (cgv) it.g = cgv; else delete it.g; }); }); }
       else if (t.dataset.topicUmb) { var tid = t.dataset.topicUmb, uv = t.value || null; commit(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === tid) tp.umb = uv; }); }); }
