@@ -1011,6 +1011,21 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
 .th-simnew{padding:0 4px;font-size:13px}
 .th-simadd{display:flex;gap:8px;flex:1 1 260px}
 .th-simadd input{flex:1;min-width:0}
+.th-run{display:flex;flex-direction:column;gap:8px}
+.th-run-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.th-run-main{width:auto;max-width:220px;padding:6px 30px 6px 10px;font-size:13px}
+.th-run-st{font:500 12px var(--font-mono);color:var(--muted)}
+.th-run-st.is-busy{color:var(--accent);animation:th-pulse 1.4s ease-in-out infinite}
+.th-run-st.is-bad{color:var(--stop)}
+.th-run-log{margin:0;max-height:260px;overflow:auto;padding:10px 12px;border:1px solid var(--rule);border-radius:10px;background:#0b0f1a;color:#c9d1e6;font:400 12.5px/1.5 var(--font-mono);white-space:pre-wrap;word-break:break-word}
+.th-run-log.is-err{color:#ffb4a8;border-color:rgba(255,120,100,.35)}
+.th-figs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.th-fig{margin:0;padding:8px;border:1px solid var(--rule);border-radius:10px;background:#fff}
+.th-fig img{display:block;width:100%;height:auto;border-radius:4px}
+.th-fig figcaption{display:flex;justify-content:flex-end;padding-top:6px}
+.th-fig figcaption .link-btn{padding:0;font-size:12.5px;color:#2856c6}
+.th-kept{font:500 12px var(--font-body);color:#1d7a46}
+.th-run-hint{margin:-2px 0 0;font-size:12.5px;color:var(--muted)}
 .th-cardback{padding:0;border:0;background:none;color:var(--accent);font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
 .th-cardback:hover{text-decoration:underline;text-underline-offset:3px}
 .th-card-g{margin-left:auto}
@@ -1798,7 +1813,7 @@ td.c-break{display:none}
     var stageIds = {}; COMPASS_STAGES.forEach(function (g) { stageIds[g.id] = true; });
     out.compass = (Array.isArray(s.compass) ? s.compass : COMPASS_DEFAULT).filter(function (r) { return r && typeof r.title === 'string' && r.title.trim(); }).slice(0, 300).map(function (r, i) {
       return { id: typeof r.id === 'string' && r.id ? r.id : 'cp' + i + Math.random().toString(36).slice(2, 7), stage: stageIds[r.stage] ? r.stage : 'always',
-        title: r.title.trim().slice(0, 120), text: typeof r.text === 'string' ? r.text.trim().slice(0, 1500) : '', from: typeof r.from === 'string' ? r.from.trim().slice(0, 80) : '' };
+        title: r.title.trim().slice(0, 120), text: typeof r.text === 'string' ? r.text.trim().replace('Run an idea through the test at the top.', 'Run each candidate through the checks on the Topic candidates page.').slice(0, 1500) : '', from: typeof r.from === 'string' ? r.from.trim().slice(0, 80) : '' };
     });
     var thOld = !(s.thesis && s.thesis.v === 2);
     out.thesis = normThesis(s);
@@ -2389,12 +2404,14 @@ td.c-break{display:none}
   }
   var FILE_MAX = 25 * 1024 * 1024;
   function ghPathUrl(c, path) { return 'https://api.github.com/repos/' + c.repo + '/contents/' + path.split('/').map(encodeURIComponent).join('/'); }
-  function ghFilesDir(c) { return (c.path.indexOf('/') >= 0 ? c.path.replace(/\/[^\/]*$/, '/') : '') + 'files/'; }
-  function ghUploadFile(c, file) {
+  function ghRootDir(c) { return c.path.indexOf('/') >= 0 ? c.path.replace(/\/[^\/]*$/, '/') : ''; }
+  function ghFilesDir(c) { return ghRootDir(c) + 'files/'; }
+  function thSlug(t) { return String(t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'sim'; }
+  function ghUploadFile(c, file, dir) {
     return new Promise(function (ok, no) { var r = new FileReader(); r.onload = function () { ok(String(r.result)); }; r.onerror = function () { no(new Error('Couldn’t read that file.')); }; r.readAsDataURL(file); })
       .then(function (dataUrl) {
         var safe = file.name.replace(/[^\w.\- ]+/g, '').trim().replace(/\s+/g, '-').slice(-80) || 'file';
-        var path = ghFilesDir(c) + todayISO().slice(0, 7) + '/' + uid().slice(-6) + '-' + safe;
+        var path = (dir ? ghRootDir(c) + dir : ghFilesDir(c) + todayISO().slice(0, 7) + '/') + uid().slice(-6) + '-' + safe;
         var body = JSON.stringify({ message: 'Polaris: add ' + file.name, content: dataUrl.slice(dataUrl.indexOf(',') + 1), branch: c.branch });
         var put = function () { return ghFetch(c, ghPathUrl(c, path), { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: body }); };
         // a save of data.json landing at the same moment can bump the branch: try once more
@@ -3198,7 +3215,7 @@ td.c-break{display:none}
     // not a stage: small simulations that check what you read; they use the Reading cards' groups
     sims: { name: 'Sims', ico: SIM_ICO, lists: [
       { key: 'list', title: 'Sims', st: [['tobuild', 'To build', ''], ['built', 'Built', 'mid'], ['got', 'Understood', 'go']], done: 'got', doneWord: 'understood',
-        links: true, groups: true, groupsFrom: 'lit.papers', notes: true, paper: true, template: '## What I want to see\n\n## My prediction\n\n## What I saw\n',
+        links: true, groups: true, groupsFrom: 'lit.papers', notes: true, paper: true, run: true, template: '## What I want to see\n\n## My prediction\n\n## What I saw\n',
         add: 'A sim, like “CW drift from an offset start”', empty: 'No sims yet. Add one here or from a reading card.' }] }
   };
   function thGKey(k) { var L = thListDef(k); return L && L.groupsFrom ? L.groupsFrom : k; }
@@ -3920,6 +3937,8 @@ td.c-break{display:none}
         (G.length ? '<label class="th-card-g"><span class="sr-only">Group</span><select data-cg="1"' + dk + (ro ? ' disabled' : '') + '><option value="">No group</option>' +
           G.map(function (g) { return '<option value="' + esc(g.id) + '"' + (it.g === g.id ? ' selected' : '') + '>' + esc(g.name) + '</option>'; }).join('') + '</select></label>' : '') + '</div>' +
         (L.links ? thLinksHTML(key, it, ro) : '') +
+        (L.run ? (thSimFiles(it).some(function (x) { return /\.py$/i.test(thFileName(x)); }) ? '<div class="th-cf th-run" id="th-run-' + id + '">' + thRunInner(key, it, ro) + '</div>'
+          : ro ? '' : '<p class="th-run-hint">Attach a .py file to run it here.</p>') : '') +
         (L.notes ? '<div class="th-cf th-cnotes"><span class="th-lbl">Notes</span>' +
           (ntxt ? '<button type="button" class="th-cnote-prev" data-act="th-card-notes"' + dk + ' title="Open the notes">' + esc(ntxt.slice(0, 320)) + '</button>' : '') +
           (npg || !ro ? '<button type="button" class="btn btn-sm' + (npg ? '' : ' primary') + '" data-act="th-card-notes"' + dk + '>' + (npg ? 'Open notes →' : 'Write notes') + '</button>' : '') + '</div>' : '') +
@@ -3953,13 +3972,135 @@ td.c-break{display:none}
     var next = function (i) {
       if (i >= go.length) { ui.thUp = null; renderThPage(); return; }
       ui.thUp = { id: cid, name: go[i].name + (go.length > 1 ? ' (' + (i + 1) + ' of ' + go.length + ')' : '') }; renderThPage();
-      ghUploadFile(gh, go[i]).then(function (ref) {
+      ghUploadFile(gh, go[i], k === 'sims.list' ? 'sims/' + thSlug(it0.title) + '/' : null).then(function (ref) {
         ui.thUp = null;
-        commit(function (s) { (s.thesis.lists[k] || []).forEach(function (it) { if (it.id === cid) { it.links = it.links || []; it.links.push(ref); } }); });
+        var old = null;
+        commit(function (s) { (s.thesis.lists[k] || []).forEach(function (it) {
+          if (it.id !== cid) return; it.links = it.links || [];
+          var at = -1; it.links.forEach(function (x, j) { if (x.f && x.n === ref.n) at = j; });
+          if (at >= 0) { old = it.links[at]; it.links[at] = ref; } else it.links.push(ref);   // same name: the new version replaces the old
+        }); });
+        if (old) thDropFiles([old], cid);
         next(i + 1);
       }, function (e) { ui.thUp = null; ui.thFileErr = { id: cid, msg: (errs.length ? errs.join(' ') + ' ' : '') + 'Couldn’t upload “' + go[i].name + '”. ' + e.message }; renderThPage(); });
     };
     next(0);
+  }
+  // ---- run a sim's Python right here (Pyodide in a background worker; first run downloads Python, then the browser keeps it) ----
+  var PY_CDN = 'https://cdn.jsdelivr.net/pyodide/v314.0.8/full/';
+  var PY_FILES = /\.(py|csv|txt|json|toml|ya?ml|npz|npy|dat|mat)$/i;
+  var pyW = null, pyJob = 0, pyCache = {};
+  function pyWorkerMain(CDN) {
+    var ready = null, dir = '/home/pyodide/polaris-run', job = 0;
+    function post(m) { m.id = job; self.postMessage(m); }
+    function boot() {
+      if (!ready) ready = (async function () {
+        post({ t: 'status', s: 'Loading Python… (the first run takes a little longer)' });
+        var mod = await import(CDN + 'pyodide.mjs');
+        var py = await mod.loadPyodide({ indexURL: CDN });
+        py.setStdout({ batched: function (x) { post({ t: 'out', s: x }); } });
+        py.setStderr({ batched: function (x) { post({ t: 'err', s: x }); } });
+        return py;
+      })();
+      return ready;
+    }
+    var POST = ['def _polaris_figs():', '    import sys', "    if 'matplotlib.pyplot' not in sys.modules:", '        return []', '    import io, base64',
+      '    import matplotlib.pyplot as plt', '    out = []', '    for n in plt.get_fignums():', '        b = io.BytesIO()',
+      "        plt.figure(n).savefig(b, format='png', dpi=110, bbox_inches='tight')", "        out.append(base64.b64encode(b.getvalue()).decode('ascii'))",
+      "    plt.close('all')", '    return out', '_polaris_figs()'].join('\n');
+    self.onmessage = async function (e) {
+      job = e.data.id;
+      try {
+        var py = await boot(), files = e.data.files, main = e.data.main, dec = new TextDecoder();
+        try { py.FS.mkdirTree(dir); } catch (er) {}
+        try { py.FS.readdir(dir).forEach(function (n) { if (n !== '.' && n !== '..') { try { py.FS.unlink(dir + '/' + n); } catch (er) {} } }); } catch (er) {}
+        files.forEach(function (f) { py.FS.writeFile(dir + '/' + f.name, f.data); });
+        var code = files.filter(function (f) { return /\.py$/i.test(f.name); }).map(function (f) { return dec.decode(f.data); }).join('\n');
+        var src = dec.decode(files.filter(function (f) { return f.name === main; })[0].data);
+        post({ t: 'status', s: 'Loading packages…' });
+        await py.loadPackagesFromImports(code, { messageCallback: function () {}, errorCallback: function () {} });
+        var mpl = code.indexOf('matplotlib') >= 0;
+        await py.runPythonAsync(['import os, sys', "os.environ['MPLBACKEND'] = 'agg'", "_d = '" + dir + "'", 'os.chdir(_d)',
+          'if _d not in sys.path: sys.path.insert(0, _d)',
+          "for _m in [k for k, v in list(sys.modules.items()) if str(getattr(v, '__file__', '') or '').startswith(_d)]: del sys.modules[_m]"].concat(mpl ? [
+          'import matplotlib', "matplotlib.use('agg')", 'import matplotlib.pyplot as _plt', "_plt.close('all')", '_plt.show = lambda *a, **k: None',
+          'import warnings', "warnings.filterwarnings('ignore', category=matplotlib.MatplotlibDeprecationWarning)"] : []).join('\n'));
+        post({ t: 'status', s: 'Running…' });
+        var g = py.globals.get('dict')(); g.set('__name__', '__main__'); g.set('__file__', dir + '/' + main);
+        var t0 = performance.now();
+        try { await py.runPythonAsync(src, { globals: g, filename: main }); } finally { g.destroy(); }
+        var ms = performance.now() - t0, figs = [];
+        if (mpl) { var fp = py.runPython(POST); figs = fp.toJs(); fp.destroy(); }
+        post({ t: 'done', ms: ms, figs: figs });
+      } catch (err) {
+        // keep your own frames; drop the ones from inside Python's runner
+        var skip = false, msg = String(err && err.message || err).split('\n').filter(function (l) {
+          if (/^  File "/.test(l)) { skip = /\/lib\/python|_pyodide|pyodide\.asm|<exec>/.test(l); return !skip; }
+          if (/^    /.test(l)) return !skip;
+          skip = false; return true;
+        }).join('\n').trim();
+        post({ t: 'fail', s: msg || 'Python stopped with an error.' });
+      }
+    };
+  }
+  function pyWorker() {
+    if (pyW) return pyW;
+    var src = '(' + pyWorkerMain.toString() + ')(' + JSON.stringify(PY_CDN) + ');';
+    pyW = new Worker(URL.createObjectURL(new Blob([src], { type: 'text/javascript' })), { type: 'module', name: 'Polaris Python' });
+    pyW.onmessage = function (e) { thRunMsg(e.data); };
+    pyW.onerror = function (e) { if (ui.thRun) thRunMsg({ id: ui.thRun.job, t: 'fail', s: 'Python couldn’t start here. ' + (e.message || 'Check your internet connection.') }); if (e.preventDefault) e.preventDefault(); };
+    return pyW;
+  }
+  function pyStop() { if (pyW) { pyW.terminate(); pyW = null; } }
+  function thFileName(x) { return String(x.n || x.f.split('/').pop()).replace(/[\/\\]/g, '_'); }
+  function thSimFiles(it) { return (it.links || []).filter(function (x) { return x.f && PY_FILES.test(thFileName(x)); }); }
+  function thSimFile(x) {
+    var key = x.f + '@' + (x.sha || '');
+    if (pyCache[key]) return Promise.resolve({ name: thFileName(x), data: pyCache[key] });
+    return ghReadFile(gh, x).then(function (b) { return b.arrayBuffer(); }).then(function (buf) { var u = new Uint8Array(buf); pyCache[key] = u; return { name: thFileName(x), data: u }; });
+  }
+  function thRunSim(k, cid) {
+    var it = (state.thesis.lists[k] || []).filter(function (x) { return x.id === cid; })[0]; if (!it || !gh) return;
+    var files = thSimFiles(it), pys = files.filter(function (x) { return /\.py$/i.test(thFileName(x)); }); if (!pys.length) return;
+    var pick = ui.thRunMain && ui.thRunMain[cid], main = pys.some(function (x) { return thFileName(x) === pick; }) ? pick : thFileName(pys[0]);
+    if (ui.thRun && (ui.thRun.state === 'loading' || ui.thRun.state === 'running')) pyStop();   // one run at a time
+    var job = ++pyJob;
+    ui.thRun = { id: cid, k: k, job: job, state: 'loading', status: 'Getting your files…', out: '', figs: [], kept: {}, err: '', ms: 0, main: main };
+    thRunPaint();
+    Promise.all(files.map(thSimFile)).then(function (arr) {
+      if (!ui.thRun || ui.thRun.job !== job) return;
+      pyWorker().postMessage({ id: job, main: main, files: arr });
+    }, function (e) { thRunMsg({ id: job, t: 'fail', s: 'Couldn’t get your files from GitHub. ' + e.message }); });
+  }
+  function thRunMsg(m) {
+    var r = ui.thRun; if (!r || m.id !== r.job) return;
+    if (m.t === 'status') r.status = m.s;
+    else if (m.t === 'out' || m.t === 'err') { r.state = 'running'; r.out = (r.out + m.s + '\n').slice(-20000); }
+    else if (m.t === 'done') { r.state = 'done'; r.ms = m.ms; r.figs = m.figs || []; r.status = 'Ran ' + r.main + ' in ' + (m.ms < 1000 ? Math.max(1, Math.round(m.ms)) + ' ms' : (m.ms / 1000).toFixed(1) + ' s'); }
+    else if (m.t === 'fail') { r.state = 'fail'; r.err = m.s; r.status = 'Stopped with an error'; }
+    thRunPaint();
+  }
+  function thRunInner(k, it, ro) {
+    var pys = thSimFiles(it).filter(function (x) { return /\.py$/i.test(thFileName(x)); }), r = ui.thRun && ui.thRun.id === it.id ? ui.thRun : null;
+    var busy = r && (r.state === 'loading' || r.state === 'running'), dk = ' data-k="' + k + '" data-id="' + esc(it.id) + '"';
+    var pick = (ui.thRunMain || {})[it.id], h = '<span class="th-lbl">Run</span><div class="th-run-bar">' +
+      (busy ? '<button type="button" class="btn btn-sm" data-act="th-run-stop"' + dk + '>Stop</button>'
+        : '<button type="button" class="btn btn-sm primary" data-act="th-run"' + dk + (gh ? '' : ' disabled title="Connect GitHub to run sims"') + '>▶ Run</button>') +
+      (pys.length > 1 ? '<label class="sr-only" for="th-rm-' + esc(it.id) + '">File to run</label><select id="th-rm-' + esc(it.id) + '" class="th-run-main" data-runmain="' + esc(it.id) + '">' +
+        pys.map(function (x) { var n = thFileName(x); return '<option' + (n === pick ? ' selected' : '') + '>' + esc(n) + '</option>'; }).join('') + '</select>' : '') +
+      (r && r.status ? '<span class="th-run-st' + (busy ? ' is-busy' : r.state === 'fail' ? ' is-bad' : '') + '">' + esc(r.status) + '</span>' : '') + '</div>';
+    if (r && r.out) h += '<pre class="th-run-log">' + esc(r.out) + '</pre>';
+    if (r && r.err) h += '<pre class="th-run-log is-err">' + esc(r.err) + '</pre>';
+    if (r && r.figs.length) h += '<div class="th-figs">' + r.figs.map(function (b64, i) {
+      return '<figure class="th-fig"><img src="data:image/png;base64,' + b64 + '" alt="Figure ' + (i + 1) + ' from ' + esc(r.main) + '">' +
+        (ro || !gh ? '' : '<figcaption>' + (r.kept[i] ? '<span class="th-kept">Kept ✓</span>' : '<button type="button" class="link-btn" data-act="th-fig-keep"' + dk + ' data-i="' + i + '">Keep this plot</button>') + '</figcaption>') + '</figure>';
+    }).join('') + '</div>';
+    return h;
+  }
+  function thRunPaint() {
+    var r = ui.thRun; if (!r) return;
+    var el = document.getElementById('th-run-' + r.id), it = (state.thesis.lists[r.k] || []).filter(function (x) { return x.id === r.id; })[0];
+    if (el && it) el.innerHTML = thRunInner(r.k, it, mode === 'readonly');
   }
   // files leave the data repository after their reference does (never blocks the board)
   function thDropFiles(list, cardId) {
@@ -4499,6 +4640,16 @@ td.c-break{display:none}
         if (cb.k === 'sims.list') thOpen('th:sims', true); else { ui.thView = cb.k.split('.')[0]; thOpen('th:stage', true); }
       }
       else if (a === 'th-sim-open') { ui.thCard = id; thOpen('th:sims', true); }
+      else if (a === 'th-run') thRunSim(b.dataset.k, id);
+      else if (a === 'th-run-stop') { pyStop(); if (ui.thRun && ui.thRun.id === id) { ui.thRun.state = 'stopped'; ui.thRun.status = 'Stopped'; thRunPaint(); } }
+      else if (a === 'th-fig-keep') {
+        var rr = ui.thRun, fi = +b.dataset.i; if (!rr || rr.id !== id || !rr.figs[fi]) return;
+        var bin = atob(rr.figs[fi]), u8 = new Uint8Array(bin.length); for (var bi2 = 0; bi2 < bin.length; bi2++) u8[bi2] = bin.charCodeAt(bi2);
+        var nowd = new Date(), stamp = todayISO().replace(/-/g, '') + '-' + ('0' + nowd.getHours()).slice(-2) + ('0' + nowd.getMinutes()).slice(-2);
+        var pf = new File([u8], rr.main.replace(/\.py$/i, '') + '-' + stamp + (rr.figs.length > 1 ? '-' + (fi + 1) : '') + '.png', { type: 'image/png' });
+        rr.kept[fi] = true; thRunPaint();
+        thUploadFiles(b.dataset.k, id, [pf]);
+      }
       else if (a === 'th-sim-add') { ui.thSimAdd = ui.thSimAdd === id ? null : id; renderThPage(); var sn = $('#th-sn-' + id); if (sn) sn.focus(); }
       else if (a === 'th-park-page' || a === 'th-unpark-page') {
         var ppid = thCurrent(), on = a === 'th-park-page';
@@ -4771,6 +4922,7 @@ td.c-break{display:none}
       var t = e.target;
       if (t.dataset.pageStage) { var spid = thCurrent(), sv = t.value; commit(function (s) { s.thesis.pages.forEach(function (x) { if (x.id === spid) x.stage = sv; }); }); return; }
       if (t.id === 'th-topic-umb') ui.thUmbSel = t.value;
+      else if (t.dataset.runmain) { ui.thRunMain = ui.thRunMain || {}; ui.thRunMain[t.dataset.runmain] = t.value; }
       else if (t.dataset.fileUp) { var picked = Array.prototype.slice.call(t.files || []); t.value = ''; thUploadFiles(t.dataset.k, t.dataset.id, picked); }
       else if (t.dataset.addg) { ui.thAddG = ui.thAddG || {}; ui.thAddG[t.dataset.addg] = t.value; }
       else if (t.dataset.cp) {
