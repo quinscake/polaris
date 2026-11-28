@@ -1037,7 +1037,13 @@ body.sim-max{overflow:hidden}
 .th-simgrp-h .link-btn:hover span{text-decoration:underline;text-underline-offset:3px}
 .th-simgrp-h .ico{width:14px;height:14px;color:var(--muted)}
 .th-simgrp-h > span{font:600 14px var(--font-body);color:var(--muted)}
-.th-csims .th-simform{margin:6px 0 0}
+.th-csims .th-simform,.th-cnotes .th-simform{margin:6px 0 0;width:100%}
+.th-cnotes{align-items:stretch}
+.th-cnotes .th-simnew{align-self:flex-start}
+.th-noterow .th-simfile{font:400 12.5px var(--font-body)}
+.th-note-go{flex:none;padding:0 8px;color:var(--muted)}
+.th-noterow:hover{border-color:#3a4566}
+.th-noterow:hover .th-note-go{color:var(--accent)}
 .th-simn{flex:none;min-width:22px;text-align:center;font:600 12px var(--font-mono);color:var(--muted)}
 .th-simname{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:12px 6px;border:0;background:none;color:var(--ink);text-align:left;cursor:pointer}
 .th-simt{font:600 15px var(--font-body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
@@ -3258,7 +3264,8 @@ td.c-break{display:none}
   function thGKey(k) { var L = thListDef(k); return L && L.groupsFrom ? L.groupsFrom : k; }
   function thGroupsFor(k) { return (state.thesis.groups || {})[thGKey(k)] || []; }
   function thSharing(gk) { var out = [gk]; Object.keys(TH_TOOLS).forEach(function (t) { (TH_TOOLS[t].lists || []).forEach(function (L) { if (L.groupsFrom === gk) out.push(t + '.' + L.key); }); }); return out; }
-  function thCardPage(k, id) { var c = k + '|' + id; return state.thesis.pages.filter(function (pg) { return pg.card === c; })[0] || null; }
+  function thCardPages(k, id) { var c = k + '|' + id; return state.thesis.pages.filter(function (pg) { return pg.card === c; }).sort(function (a, b) { return a.created - b.created; }); }
+  function thCardPage(k, id) { return thCardPages(k, id)[0] || null; }
   function thCardOf(c) { var i = String(c || '').indexOf('|'); if (i < 0) return null; var k = c.slice(0, i), id = c.slice(i + 1); return { k: k, id: id, it: (state.thesis.lists[k] || []).filter(function (x) { return x.id === id; })[0] || null }; }
   function thListDef(key) { var p = key.split('.'), t = TH_TOOLS[p[0]]; return t && t.lists ? t.lists.filter(function (L) { return L.key === p[1]; })[0] : null; }
   function normThesis(s) {
@@ -3793,7 +3800,7 @@ td.c-break{display:none}
     $('#th-list').innerHTML = h;
   }
   function thPageKey(id) {
-    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify([ui.thGOpen || {}, ui.thGAdd || '', ui.thGRen || '', ui.thUp || '', ui.thFileErr || '', !!gh, ui.thSimAdd || '', ui.thSimOpen || '']) + '|' + JSON.stringify(state.compassTests || []).length;
+    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify([ui.thNoteAdd || '', ui.thGOpen || {}, ui.thGAdd || '', ui.thGRen || '', ui.thUp || '', ui.thFileErr || '', !!gh, ui.thSimAdd || '', ui.thSimOpen || '']) + '|' + JSON.stringify(state.compassTests || []).length;
     var pg = getThPage(id); if (!pg) return id + '|gone';
     return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + (pg.parked || '') + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',') +
       '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',') + '|' + thLinkKey(pg);
@@ -3968,7 +3975,7 @@ td.c-break{display:none}
     var G = L.groups ? thGroupsFor(key) : [];
     var body = '';
     if (open) {
-      var npg = L.notes ? thCardPage(key, it.id) : null, ntxt = npg ? thPlain(npg.blocks.map(function (b) { return b.text; }).join('\n')).replace(/\s+/g, ' ').trim() : '';
+      var notes = L.notes ? thCardPages(key, it.id) : [];
       var papers = L.paper ? (state.thesis.lists['lit.papers'] || []) : [];
       var mySims = L.sims ? (state.thesis.lists['sims.list'] || []).filter(function (x) { return x.p === it.id; }) : [];
       body = '<div class="th-topic-body">' +
@@ -3984,9 +3991,14 @@ td.c-break{display:none}
         (L.run ? (thSimFiles(it).some(function (x) { return /\.py$/i.test(thFileName(x)); }) ? '<div class="th-cf th-run" id="th-run-' + id + '">' + thRunInner(key, it, ro) + '</div>'
           : ro ? '' : '<p class="th-run-hint">Attach a .py file to run it here.</p>') : '') +
         (L.notes ? '<div class="th-cf th-cnotes"><span class="th-lbl">Notes</span>' +
-          (ntxt ? '<div class="th-cnote-prev" role="button" tabindex="0" data-act="th-card-notes"' + dk + ' data-pg="' + esc(npg.id) + '" title="Open the notes"><div class="th-blocks">' +
-            npg.blocks.map(function (b) { return '<div class="th-b"><div class="md">' + mdToHtml(b.text) + '</div></div>'; }).join('') + '</div></div>' : '') +
-          (npg || !ro ? '<button type="button" class="btn btn-sm' + (npg ? '' : ' primary') + '" data-act="th-card-notes"' + dk + '>' + (npg ? 'Open notes →' : 'Write notes') + '</button>' : '') + '</div>' : '') +
+          (notes.length ? '<div class="th-simlist">' + notes.map(function (pg, ni) {
+            var sn = thPlain(pg.blocks.map(function (b2) { return b2.text; }).join(' ')).replace(/\s+/g, ' ').trim();
+            return '<div class="th-simrow th-noterow"><div class="th-simhd"><span class="th-simn">' + (ni + 1) + '</span>' +
+              '<button type="button" class="th-simname" data-act="th-open" data-id="' + esc(pg.id) + '" title="Open this note"><span class="th-simt">' + esc(pg.title) + '</span>' +
+              '<span class="th-simfile">' + (sn ? esc(truncate(sn, 120)) : 'Empty') + '</span></button><span class="th-note-go" aria-hidden="true">→</span></div></div>';
+          }).join('') + '</div>' : '') +
+          (ro ? '' : ui.thNoteAdd === it.id ? '<form class="th-simform" data-form="th-note-new"' + dk + ' autocomplete="off"><label class="sr-only" for="th-nn-' + id + '">Main idea</label><input id="th-nn-' + id + '" maxlength="160" placeholder="Main idea, like “Hill frame and the CW equations”"><button type="submit" class="btn btn-sm primary">Add</button></form>'
+            : '<button type="button" class="link-btn th-simnew" data-act="th-note-add" data-id="' + id + '">+ Note</button>') + '</div>' : '') +
         (L.sims ? '<div class="th-cf th-csims"><span class="th-lbl">Sims</span>' +
           (mySims.length ? '<div class="th-simlist">' + mySims.map(function (x, si) { return thSimRow('sims.list', x, si, ro); }).join('') + '</div>' : '') +
           (ro ? '' : !gh ? '<p class="th-run-hint">Connect GitHub to add sims.</p>' : ui.thSimAdd === it.id ? thSimForm(it.id)
@@ -4438,7 +4450,7 @@ td.c-break{display:none}
       var parts = k.split('|'), pg = getThPage(parts[1]), el = D[k]; if (!pg || !el) return;
       if (parts[0] === 't') {
         var t = el.textContent.replace(/\s+/g, ' ').trim().slice(0, 160);
-        if (t) { pg.title = t; var co = pg.card && thCardOf(pg.card); if (co && co.it) co.it.title = t.slice(0, 300); } else if (final) el.textContent = pg.title;
+        if (t) pg.title = t; else if (final) el.textContent = pg.title;
       } else {
         var bi = +parts[2], md = htmlToMd(el.innerHTML).slice(0, TH_MAX_BLOCK);
         if (pg.blocks[bi]) pg.blocks[bi].text = md;
@@ -4736,11 +4748,11 @@ td.c-break{display:none}
       }
       else if (a === 'th-card-del') {
         var k0 = b.dataset.k, it0 = (state.thesis.lists[k0] || []).filter(function (it) { return it.id === id; })[0]; if (!it0) return;
-        var np0 = thCardPage(k0, id);
+        var nps0 = thCardPages(k0, id), np0 = nps0.length ? nps0[0] : null, npIds = {}; nps0.forEach(function (x) { npIds[x.id] = true; });
         var gone = function () {
           commit(function (s) {
             s.thesis.lists[k0] = s.thesis.lists[k0].filter(function (it) { return it.id !== id; });
-            if (np0) { s.thesis.pages = s.thesis.pages.filter(function (x) { return x.id !== np0.id; }); s.thesis.marks.forEach(function (m) { if (m.page === np0.id) m.page = null; }); }
+            if (np0) { s.thesis.pages = s.thesis.pages.filter(function (x) { return !npIds[x.id]; }); s.thesis.marks.forEach(function (m) { if (npIds[m.page]) m.page = null; }); }
             if (k0 === 'lit.papers') (s.thesis.lists['sims.list'] || []).forEach(function (x) { if (x.p === id) delete x.p; });
           });
           thDropFiles((it0.links || []).filter(function (x) { return x.f; }), null);
@@ -4779,6 +4791,7 @@ td.c-break{display:none}
         rr.kept[fi] = true; thRunPaint();
         thUploadFiles(b.dataset.k, id, [pf]);
       }
+      else if (a === 'th-note-add') { ui.thNoteAdd = ui.thNoteAdd === id ? null : id; renderThPage(); var nn = $('#th-nn-' + id); if (nn) nn.focus(); }
       else if (a === 'th-sim-add') { ui.thSimAdd = ui.thSimAdd === id ? null : id; renderThPage(); var sn = $('#th-simname-' + id); if (sn) sn.focus(); }
       else if (a === 'th-sim-more') { ui.thSimOpen = ui.thSimOpen === id ? null : id; renderThPage(); }
       else if (a === 'th-sim-reading') { ui.thView = 'lit'; ui.thCard = id; thOpen('th:stage', true); }
@@ -4864,6 +4877,12 @@ td.c-break{display:none}
         ui0.value = ''; ui0.blur();
         var nu = uid(); ui.thUmbSel = nu;
         commit(function (s) { s.thesis.umbrellas.push({ id: nu, name: un.slice(0, 80), created: Date.now() }); });
+      } else if (f.dataset.form === 'th-note-new') {
+        var nk2 = f.dataset.k, nid2 = f.dataset.id, nin2 = f.querySelector('input'), nt2 = nin2.value.trim(); if (!nt2) return;
+        nin2.value = ''; nin2.blur(); ui.thNoteAdd = null;
+        var npid2 = uid(), now2 = Date.now();
+        commit(function (s) { s.thesis.pages.push({ id: npid2, title: nt2.slice(0, 160), kind: 'note', source: '', stage: nk2 === 'lit.papers' ? 'lit' : s.thesis.stage, created: now2, updated: now2, blocks: [], parked: null, card: nk2 + '|' + nid2, proj: null, ann: [] }); });
+        thOpen(npid2, true);
       } else if (f.dataset.form === 'th-sim-create') {
         var pick = f.querySelector('input[type=file]'); if (pick) pick.click();
       } else if (f.dataset.form === 'th-sim-new') {
@@ -4910,7 +4929,6 @@ td.c-break{display:none}
         if (t.dataset.ct) { if (!fv.trim()) return; var head = t.closest('.th-simrow, .th-topic').querySelector('.th-simrow > .th-simhd .th-simt, .th-topic-t'); if (head) head.textContent = fv; }
         thQuiet(function (s) {
           (s.thesis.lists[ck] || []).forEach(function (it) { if (it.id !== cidx) return; if (fk) { if (fv) it.f[fk] = fv; else delete it.f[fk]; } else it.title = fv.trim(); });
-          if (!fk) s.thesis.pages.forEach(function (pg) { if (pg.card === ck + '|' + cidx) pg.title = fv.trim().slice(0, 160); });
         });
       }
     });
