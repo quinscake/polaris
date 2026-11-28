@@ -330,7 +330,9 @@ tr.is-archived td{color:var(--muted)}
 .count{font:500 12px var(--font-mono);color:var(--muted)}
 tr.editing td{background:var(--tint-hover)}
 
-.label-acts{display:flex;flex-direction:column;gap:2px}
+.label-acts{display:flex;flex-direction:column;gap:2px;opacity:0;transition:opacity .15s}
+.row:hover .label-acts,.label-acts:focus-within{opacity:1}
+@media (hover:none){.label-acts{display:none !important}}
 .label-acts .act{position:relative;display:inline-grid;place-items:center;width:24px;height:22px;padding:0;border:1px solid transparent;border-radius:6px;background:none;color:var(--muted);cursor:pointer}
 .label-acts .act:hover{color:var(--ink);background:var(--panel-2);border-color:var(--rule)}
 .label-acts .act.end:hover{color:var(--stop)}
@@ -534,6 +536,7 @@ body.hub-open{overflow:hidden}
 
 /* ---------- delete an ended project now ---------- */
 .label-acts .act.del:hover{color:var(--stop)}
+.label-meta .drift{white-space:nowrap}
 .btn-del:hover{color:var(--stop);border-color:rgba(255,120,110,.5)}
 
 /* ---------- archive and scoring ---------- */
@@ -604,7 +607,8 @@ body[data-view="compass"] #quick-add,body[data-view="compass"] #reminders{displa
 /* ---------- thesis ---------- */
 body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:none !important}
 .view-thesis{display:flex;flex-direction:column;gap:16px;padding-bottom:30px}
-.th-kicker{margin:0 0 8px;font:600 11px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.th-kicker{margin:0 0 8px;font:600 11px var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;align-items:center;gap:4px 7px}
+.th-kicker .th-ksel,.th-kicker .th-plink{flex:none;max-width:100%}
 .th-kicker .star,.th-kicker .ico{width:12px;height:12px;color:var(--warn)}
 .ico{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .th-head{background:radial-gradient(110% 160% at 0% 0%,rgba(255,184,107,.09),transparent 55%),var(--panel);border:1px solid #3a3326;border-radius:16px;padding:20px 22px 16px}
@@ -672,9 +676,20 @@ body[data-view="thesis"] #quick-add,body[data-view="thesis"] #reminders{display:
 .r-star .star{width:100%;height:100%;display:block}
 .r-divider span{display:inline-flex;align-items:center;gap:6px;color:var(--c6)}
 .r-divider .star{width:11px;height:11px}
+.th-menu{position:relative;display:inline-block}
+.th-menu > summary{list-style:none;cursor:pointer;min-width:34px;text-align:center;letter-spacing:.06em}
+.th-menu > summary::-webkit-details-marker{display:none}
+.th-menu[open] > summary{color:var(--ink);border-color:var(--accent)}
+.th-menu-pop{position:absolute;right:0;top:calc(100% + 6px);z-index:20;min-width:150px;display:flex;flex-direction:column;padding:6px;border:1px solid var(--rule);border-radius:12px;background:#121829;box-shadow:0 14px 34px rgba(0,0,0,.5)}
+.th-menu-pop button{padding:9px 12px;border:0;border-radius:8px;background:none;color:var(--ink);font:500 14px var(--font-body);text-align:left;cursor:pointer}
+.th-menu-pop button:hover,.th-menu-pop button:focus-visible{background:rgba(255,255,255,.06)}
+.th-menu-pop button.is-danger{color:var(--stop)}
+.th-plan.is-now .th-plan-h{min-height:0;margin-bottom:-4px}
 .th-plink{display:inline-flex;align-items:center;gap:2px;margin-left:10px;vertical-align:1px;border:1px solid rgba(224,123,255,.4);border-radius:999px;padding:0 4px 0 9px;background:rgba(224,123,255,.08)}
 .th-plink-n{display:inline-flex;align-items:center;gap:6px;padding:2px 0;border:0;background:none;color:var(--c6);font:600 12px var(--font-body);letter-spacing:0;text-transform:none;cursor:pointer}
 .th-plink-n:hover{text-decoration:underline;text-underline-offset:3px}
+.th-plink-n{min-width:0;max-width:100%}
+.th-plink-t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .th-plink-n .star{width:11px;height:11px}
 .th-plink-dot{display:inline-block;flex:none;width:7px;height:7px;border-radius:50%;background:var(--c6)}
 .th-plink-x{width:20px;height:20px;padding:0;border:0;border-radius:50%;background:none;color:var(--muted);font:500 14px/1 var(--font-body);cursor:pointer}
@@ -981,6 +996,23 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
 .th-card:not(.is-open) .th-chev{transform:none}
 .th-grp.is-folded .th-chev{transform:none}
 .th-card-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.th-card-p{margin-left:auto}
+.th-card-p + .th-card-g{margin-left:0}
+.th-cnotes{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.th-cnote-prev{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;width:100%;padding:10px 12px;border:1px solid var(--rule);border-radius:10px;background:rgba(255,255,255,.02);color:#b9c0d4;font:400 14px/1.5 var(--font-body);text-align:left;cursor:pointer}
+.th-cnote-prev:hover{border-color:#3a4566;color:var(--ink)}
+.th-csims-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.th-simchip{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:5px 10px;border:1px solid var(--rule);border-radius:999px;background:rgba(255,255,255,.02);color:var(--ink);font:500 13px var(--font-body);cursor:pointer}
+.th-simchip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.th-simchip .ico{width:13px;height:13px;flex:none;color:var(--muted)}
+.th-simchip.tone-mid .ico{color:var(--accent)}
+.th-simchip.tone-go .ico{color:var(--go,#7ee0a1)}
+.th-simchip:hover{border-color:#3a4566}
+.th-simnew{padding:0 4px;font-size:13px}
+.th-simadd{display:flex;gap:8px;flex:1 1 260px}
+.th-simadd input{flex:1;min-width:0}
+.th-cardback{padding:0;border:0;background:none;color:var(--accent);font:inherit;letter-spacing:inherit;text-transform:inherit;cursor:pointer}
+.th-cardback:hover{text-decoration:underline;text-underline-offset:3px}
 .th-card-g{margin-left:auto}
 .th-card-g select,.th-add-g{width:auto;min-width:0;max-width:220px;padding:6px 30px 6px 10px;font-size:13px}
 .th-links{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
@@ -1293,6 +1325,7 @@ td.c-break{display:none}
   .label{position:sticky;left:0;max-width:calc(100vw - 28px);padding:0;background:none;gap:8px;align-items:stretch}
   .label-box{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:1px 8px;padding:6px 10px;border:0;border-left:3px solid var(--pc);border-radius:6px;background:rgba(17,22,36,.78)}
   .label-meta br{display:none}
+  .label-meta{display:flex;flex-wrap:wrap;align-items:center;gap:2px 10px}
   .label-meta .due{margin-left:6px}
   .row.ended .label-box{background:rgba(17,22,36,.45)}
   .label-acts{display:flex;flex-direction:row;align-items:center}
@@ -1419,6 +1452,7 @@ td.c-break{display:none}
         <button type="button" id="mm-review">Weekly review</button>
         <button type="button" id="mm-parking">Parking lot</button>
         <button type="button" id="mm-backup">Backup</button>
+        <button type="button" id="mm-gcal" hidden>Google Calendar</button>
       </div>
     </div>
   </header>
@@ -1746,7 +1780,7 @@ td.c-break{display:none}
   ];
   // Your rules and idea checks live in your private data (state.compass, state.compassTests), not in this public file.
   var COMPASS_DEFAULT = [];   // stages in Doing across all projects before Polaris suggests finishing one first   // days before a "Waiting" piece gets a follow-up reminder
-  function listLabel() { return 'Stages'; }
+  function listLabel() { return 'Tasks'; }
   function numOrNull(v) { var n = Number(v); return v === null || v === '' || v === undefined || !isFinite(n) || n <= 0 ? null : Math.min(100000, Math.round(n * 100) / 100); }
   // Your North Star starts empty: you name it and add your own goals.
   function defaultMission() {
@@ -2556,6 +2590,11 @@ td.c-break{display:none}
     $('#sample-banner').hidden = !hasSamples();
     $('#btn-sync').hidden = inViewer;
     $('#sync-badges').hidden = inViewer;
+    calBadgeVis();
+  }
+  function calBadgeVis() {
+    var off = gcalState === 'off' && !gcalCfg(), b = $('#sb-c'), m = $('#mm-gcal');
+    if (b) b.hidden = off; if (m) m.hidden = !off || inViewer;
   }
 
   function renderQuickAdd(T) {
@@ -2628,7 +2667,7 @@ td.c-break{display:none}
     });
     var DA = doingAll();
     if (DA.length > DOING_MAX && !dismissed['doing|' + T]) {
-      cards.push({ n: 40, html: '<div class="reminder">' + ORBIT + '<span class="msg"><b>' + DA.length + ' stages in Doing</b>: ' +
+      cards.push({ n: 40, html: '<div class="reminder">' + ORBIT + '<span class="msg"><b>' + DA.length + ' tasks in Doing</b>: ' +
         DA.slice(0, 5).map(function (x) { return esc(truncate(x.m.title, 28)) + ' (' + esc(truncate(x.p.name, 18)) + ')'; }).join(', ') +
         '. Finishing one before starting the next gets more done. Aim for ' + DOING_MAX + '.</span><span class="reminder-acts">' +
         '<button type="button" class="link-btn edit-only" data-act="review">Pick my 3</button>' + dismissBtn('doing|' + T) + '</span></div>' });
@@ -2672,6 +2711,8 @@ td.c-break{display:none}
     }
     var rc = recapHTML(T);
     if (rc) cards.push({ n: 300, html: rc });
+    // reminders live on To-do; other views only show what needs you right now (a project that just ended, a calendar sign-in)
+    if (currentView() !== 'todo') cards = cards.filter(function (c) { return c.n === 100 || c.n === -99; });
     var cap = isPhone() ? 2 : 3;
     var shown = ui.allReminders ? cards : cards.slice(0, cap);
     box.innerHTML = shown.map(function (c) { return c.html; }).join('') +
@@ -3117,6 +3158,7 @@ td.c-break{display:none}
   // Each stage gets one working page, shown only while you're on that stage. Stage 1 is Topic candidates.
   var TH_UMB_MAX = 4, TH_UMB_COLORS = [1, 2, 5, 4];
   var DOC_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h5.5L12.5 5.5v8H4z"/><path d="M9.5 2.5v3h3M6 8.5h4.5M6 11h3"/></svg>';
+  var SIM_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 9.5c1.6-5 3.2-5 4.8 0s3.2 5 4.8 0 2.4-3.4 3.4-2.2"/><circle cx="13.6" cy="7.2" r="1.1"/></svg>';
   var CARDS_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="4.5" width="9" height="9" rx="1.8"/><path d="M5 2.5h7a1.5 1.5 0 0 1 1.5 1.5v7"/></svg>';
   var CHAIN_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3.5" cy="8" r="1.6"/><circle cx="8" cy="8" r="1.6"/><circle cx="12.5" cy="8" r="1.6"/><path d="M5.1 8h1.3M9.6 8h1.3"/></svg>';
   var CHART_ICO = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.5h11M4.5 11V8M8 11V4.5M11.5 11V6.5"/></svg>';
@@ -3133,11 +3175,10 @@ td.c-break{display:none}
       { key: 'sections', title: 'Sections', seed: ['Problem and motivation', 'Objectives', 'Method and validation', 'Timeline', 'Expected contribution'],
         st: [['todo', 'To write', ''], ['draft', 'Draft', 'mid'], ['done', 'Done', 'go']], done: 'done', doneWord: 'done', fields: [['notes', 'Key points', 'What this section has to say']], add: 'Another section', cap: 10 },
       TH_FEEDBACK] },
-    lit: { name: 'Paper cards', ico: CARDS_ICO, sub: 'Five short lines per paper. Stop at 20: needing more means the theme is too wide.', lists: [
-      { key: 'papers', title: 'Papers', st: [['toread', 'To read', ''], ['carded', 'Carded', 'go']], done: 'carded', doneWord: 'carded', showCap: true, links: true, groups: true,
-        fields: [['problem', 'Problem', 'What they set out to solve'], ['method', 'Method', 'How they did it'], ['result', 'Result', 'What they found'],
-          ['limit', 'What they didn’t do', 'Your gap often hides here'], ['use', 'How it helps you', 'Where it fits in your research']],
-        add: 'Paper title', cap: 20, capMsg: '20 cards: the limit. Cut one before adding another, or narrow your theme.', empty: 'No papers yet. Start with a survey or two and the classics.' }] },
+    lit: { name: 'Reading cards', ico: CARDS_ICO, lists: [
+      { key: 'papers', title: 'Reading', st: [['toread', 'To read', ''], ['carded', 'Read', 'go']], done: 'carded', doneWord: 'read', showCap: true, links: true, groups: true, notes: true, sims: true,
+        legacy: [['problem', 'Problem'], ['method', 'Method'], ['result', 'Result'], ['limit', 'What they didn’t do'], ['use', 'How it helps you']],
+        add: 'A paper, book or chapter', cap: 20, capMsg: '20 cards: the limit. Cut one before adding another, or narrow your theme.', empty: 'No papers yet. Start with a survey or two and the classics.' }] },
     method: { name: 'Method chain', ico: CHAIN_ICO, sub: 'Each link leads to the next. Make one solid before leaning on it.', lists: [
       { key: 'chain', title: 'The chain', numbered: true, seed: ['The effect', 'Why it causes trouble', 'Your fix', 'The proof', 'The simulation'],
         st: [['open', 'Open', ''], ['working', 'Working on it', 'mid'], ['solid', 'Solid', 'go']], done: 'solid', doneWord: 'solid', fields: [['notes', 'Notes', 'Equations, choices, open questions']], add: 'Another link', cap: 8 }] },
@@ -3153,8 +3194,18 @@ td.c-break{display:none}
       { key: 'prep', title: 'Ready to present', check: true, seed: ['Slides ready', 'Practiced out loud twice', 'Timed under the limit', 'Backup slides for the hard questions'],
         st: [['todo', 'To do', ''], ['done', 'Done', 'go']], done: 'done', doneWord: 'done', add: 'Another step', cap: 10 },
       { key: 'questions', title: 'Questions they’ll ask', st: [['open', 'Not ready', ''], ['ready', 'Ready', 'go']], done: 'ready', doneWord: 'ready',
-        fields: [['answer', 'Your answer', 'Two or three lines you can say without notes']], add: 'A question you expect', empty: 'Add the questions you’d ask if you were on the committee.' }] }
+        fields: [['answer', 'Your answer', 'Two or three lines you can say without notes']], add: 'A question you expect', empty: 'Add the questions you’d ask if you were on the committee.' }] },
+    // not a stage: small simulations that check what you read; they use the Reading cards' groups
+    sims: { name: 'Sims', ico: SIM_ICO, lists: [
+      { key: 'list', title: 'Sims', st: [['tobuild', 'To build', ''], ['built', 'Built', 'mid'], ['got', 'Understood', 'go']], done: 'got', doneWord: 'understood',
+        links: true, groups: true, groupsFrom: 'lit.papers', notes: true, paper: true, template: '## What I want to see\n\n## My prediction\n\n## What I saw\n',
+        add: 'A sim, like “CW drift from an offset start”', empty: 'No sims yet. Add one here or from a reading card.' }] }
   };
+  function thGKey(k) { var L = thListDef(k); return L && L.groupsFrom ? L.groupsFrom : k; }
+  function thGroupsFor(k) { return (state.thesis.groups || {})[thGKey(k)] || []; }
+  function thSharing(gk) { var out = [gk]; Object.keys(TH_TOOLS).forEach(function (t) { (TH_TOOLS[t].lists || []).forEach(function (L) { if (L.groupsFrom === gk) out.push(t + '.' + L.key); }); }); return out; }
+  function thCardPage(k, id) { var c = k + '|' + id; return state.thesis.pages.filter(function (pg) { return pg.card === c; })[0] || null; }
+  function thCardOf(c) { var i = String(c || '').indexOf('|'); if (i < 0) return null; var k = c.slice(0, i), id = c.slice(i + 1); return { k: k, id: id, it: (state.thesis.lists[k] || []).filter(function (x) { return x.id === id; })[0] || null }; }
   function thListDef(key) { var p = key.split('.'), t = TH_TOOLS[p[0]]; return t && t.lists ? t.lists.filter(function (L) { return L.key === p[1]; })[0] : null; }
   function normThesis(s) {
     var th = s.thesis && typeof s.thesis === 'object' ? s.thesis : {};
@@ -3177,7 +3228,7 @@ td.c-break{display:none}
       var cr = Number(pg.created) || Date.now();
       out.pages.push({ id: id, title: str(pg.title, 160).trim() || 'Untitled', kind: pg.kind === 'chat' ? 'chat' : 'note',
         source: pg.source === 'claude' || pg.source === 'chatgpt' ? pg.source : '', stage: stIds[was(pg.stage)] ? was(pg.stage) : stage,
-        created: cr, updated: Number(pg.updated) || cr, blocks: blocks, parked: isISO(pg.parked) ? pg.parked : null, proj: typeof pg.proj === 'string' && pg.proj ? pg.proj.slice(0, 40) : pg.proj === null ? null : undefined,
+        created: cr, updated: Number(pg.updated) || cr, blocks: blocks, parked: isISO(pg.parked) ? pg.parked : null, card: typeof pg.card === 'string' && /^[\w.]+\|[\w.\-]+$/.test(pg.card) ? pg.card.slice(0, 120) : null, proj: typeof pg.proj === 'string' && pg.proj ? pg.proj.slice(0, 40) : pg.proj === null ? null : undefined,
         ann: (Array.isArray(pg.ann) ? pg.ann : []).filter(function (a) { return a && TH_PENS[a.kind] && typeof a.q === 'string' && a.q.trim(); }).slice(0, 800)
           .map(function (a) { return { id: typeof a.id === 'string' && a.id ? a.id.slice(0, 40) : uid(), kind: a.kind, q: a.q.slice(0, 20000), pre: str(a.pre, 40), suf: str(a.suf, 40) }; }) });
     });
@@ -3196,12 +3247,13 @@ td.c-break{display:none}
       var id = typeof u.id === 'string' && u.id ? u.id.slice(0, 40) : uid(); umbIds[id] = true;
       return { id: id, name: u.name.trim().slice(0, 80), created: Number(u.created) || Date.now() };
     });
-    out.lists = {}; out.groups = {};
+    out.lists = {}; out.groups = {}; var legacyNotes = [];
     var srcL = th.lists && typeof th.lists === 'object' ? th.lists : {}, srcG = th.groups && typeof th.groups === 'object' ? th.groups : {};
     Object.keys(TH_TOOLS).forEach(function (stg) {
       (TH_TOOLS[stg].lists || []).forEach(function (L) {
         var key = stg + '.' + L.key, src = srcL[key], ids = L.st.map(function (x) { return x[0]; }), gIds = {};
-        if (L.groups) out.groups[key] = (Array.isArray(srcG[key]) ? srcG[key] : []).filter(function (g) { return g && typeof g.name === 'string' && g.name.trim(); }).slice(0, 12).map(function (g) {
+        if (L.groupsFrom) (out.groups[L.groupsFrom] || []).forEach(function (g) { gIds[g.id] = true; });
+        else if (L.groups) out.groups[key] = (Array.isArray(srcG[key]) ? srcG[key] : []).filter(function (g) { return g && typeof g.name === 'string' && g.name.trim(); }).slice(0, 12).map(function (g) {
           var gid = typeof g.id === 'string' && g.id ? g.id.slice(0, 40) : uid(); gIds[gid] = true; return { id: gid, name: g.name.trim().slice(0, 60) };
         });
         if (!Array.isArray(src)) { out.lists[key] = (L.seed || []).map(function (t, i) { return { id: key + '-' + i, title: t, status: ids[0], f: {}, created: 0 }; }); return; }
@@ -3217,10 +3269,24 @@ td.c-break{display:none}
             if (it.f && typeof it.f.link === 'string' && it.f.link.trim() && !o.links.some(function (x) { return x.u === it.f.link.trim(); })) o.links.unshift({ u: it.f.link.trim().slice(0, 2000), n: '' });   // the old single Link field
           }
           if (L.groups && typeof it.g === 'string' && gIds[it.g]) o.g = it.g;
+          if (L.paper && typeof it.p === 'string' && it.p) o.p = it.p.slice(0, 60);
+          if (L.legacy && it.f) {   // the old five boxes become the card's notes
+            var md = L.legacy.map(function (fd) { return typeof it.f[fd[0]] === 'string' && it.f[fd[0]].trim() ? '## ' + fd[1] + '\n' + it.f[fd[0]].trim() : ''; }).filter(Boolean).join('\n\n');
+            if (md) legacyNotes.push({ c: key + '|' + o.id, title: o.title, md: md, created: o.created || Date.now() });
+          }
           return o;
         });
       });
     });
+    // cards and their notes: a note whose card is gone becomes an ordinary note; sims whose paper is gone lose the link
+    var cardIds = {};
+    Object.keys(out.lists).forEach(function (k) { out.lists[k].forEach(function (it) { cardIds[k + '|' + it.id] = true; }); });
+    out.pages.forEach(function (pg) { if (pg.card && !cardIds[pg.card]) pg.card = null; });
+    legacyNotes.forEach(function (n) {
+      if (out.pages.some(function (pg) { return pg.card === n.c; })) return;
+      out.pages.push({ id: uid(), title: n.title.slice(0, 160), kind: 'note', source: '', stage: 'lit', created: n.created, updated: n.created, blocks: [{ role: 'note', text: n.md.slice(0, TH_MAX_BLOCK) }], parked: null, card: n.c, proj: null, ann: [] });
+    });
+    (out.lists['sims.list'] || []).forEach(function (it) { if (it.p && !cardIds['lit.papers|' + it.p]) delete it.p; });
     var chosen = false;
     (Array.isArray(th.topics) ? th.topics : []).slice(0, 60).forEach(function (t) {
       if (!t || typeof t.title !== 'string' || !t.title.trim()) return;
@@ -3505,7 +3571,7 @@ td.c-break{display:none}
     var id = ui.thPage;
     if (!id) { try { id = localStorage.getItem(TH_PAGE_KEY); } catch (e) {} }
     if (id === 'th:topics') id = 'th:stage';
-    if (id && (id === 'th:important' || id === 'th:stage' || id === 'th:canvas' || id === 'th:journal' || getThPage(id))) return id;
+    if (id && (id === 'th:important' || id === 'th:stage' || id === 'th:sims' || id === 'th:canvas' || id === 'th:journal' || getThPage(id))) return id;
     var P = state.thesis.pages.slice().sort(function (a, b) { return (a.parked ? 1 : 0) - (b.parked ? 1 : 0) || b.updated - a.updated; });
     return P.length ? P[0].id : 'th:stage';
   }
@@ -3531,7 +3597,7 @@ td.c-break{display:none}
   function thLinkChip(pg) {
     var ro = mode === 'readonly', lp = pg.proj ? getProject(pg.proj) : null, ar = activeResearch();
     if (lp && isResearch(lp)) return '<span class="th-plink"><button type="button" class="th-plink-n" data-act="th-plink-open" data-pid="' + esc(lp.id) + '" title="Open the project">' +
-      (lp.ended ? STAR : '<i class="th-plink-dot"></i>') + esc(truncate(lp.name, 40)) + '</button>' +
+      (lp.ended ? STAR : '<i class="th-plink-dot"></i>') + '<span class="th-plink-t">' + esc(truncate(lp.name, 40)) + '</span></button>' +
       (ro ? '' : '<button type="button" class="th-plink-x" data-act="th-plink-x" title="Unlink" aria-label="Unlink from ' + esc(lp.name) + '">×</button>') + '</span>';
     if (!ro && ar) return '<button type="button" class="th-plink is-add" data-act="th-plink-add" title="Link this page to ' + esc(ar.name) + '">+ ' + esc(truncate(ar.name, 40)) + '</button>';
     return '';
@@ -3600,7 +3666,8 @@ td.c-break{display:none}
         : '<button type="button" class="th-rp-start" data-act="th-r-start" data-stage="' + vs + '">+ Start the ' + esc(g.name) + ' project</button>';
     }
     if (past.length) body += '<ul class="th-rp-past">' + past.map(thPastRow).join('') + '</ul>';
-    var panel = '<section class="th-plan" aria-label="' + esc(g.name) + '"><div class="th-plan-h"><p class="th-plan-k">' + esc(g.name) + (isNow ? '<span class="th-now-tag">Now</span>' : '') + '</p>' + act + '</div>' + body + '</section>';
+    var planH = isNow ? (act ? '<div class="th-plan-h">' + act + '</div>' : '') : '<div class="th-plan-h"><p class="th-plan-k">' + esc(g.name) + '</p>' + act + '</div>';
+    var panel = '<section class="th-plan' + (isNow ? ' is-now' : '') + '" aria-label="' + esc(g.name) + '">' + planH + body + '</section>';
     head.innerHTML = '<div class="th-head-top"><div class="th-head-main">' +
       (th.title ? '<h2 class="th-title">' + esc(th.title) + '</h2>' : '<h2 class="th-title is-empty">' + (ro ? 'Research' : 'Name your research') + '</h2>') +
       (th.question ? '<p class="th-q">' + esc(th.question) + '</p>' : '') +
@@ -3629,14 +3696,16 @@ td.c-break{display:none}
     var filled = TH_CANVAS.filter(function (f) { return th.canvas[f.id].trim(); }).length;
     var h = '<div class="th-pins">' + pin('th:important', STAR, 'Important', th.marks.length || '') +
       pin('th:stage', TH_TOOLS[thViewStage()].ico, esc(TH_TOOLS[thViewStage()].name), thToolCount(thViewStage())) +
+      pin('th:sims', SIM_ICO, 'Sims', thToolCount('sims')) +
       pin('th:canvas', CANVAS_ICO, 'Research canvas', filled + '/' + TH_CANVAS.length) + '</div>';
     var lf = ui.thLink && getProject(ui.thLink); if (!lf) ui.thLink = null;
     var pages = th.pages.slice().sort(function (a, b) { return b.updated - a.updated; }).filter(function (pg) { return !lf || pg.proj === lf.id; }), shown = 0;
     if (lf) h += '<div class="th-lfilter"><span class="th-plink-n">' + (lf.ended ? STAR : '<i class="th-plink-dot"></i>') + esc(truncate(lf.name, 40)) + '</span><span class="th-sec-c">' + plural(pages.length, 'note') + '</span>' +
       '<button type="button" class="link-btn" data-act="th-plink-clear">Show all</button></div>';
-    TH_STAGES.concat([{ id: '__parked', name: 'Parking lot' }]).forEach(function (g) {
-      var parkSec = g.id === '__parked';
-      var list = pages.filter(function (pg) { return parkSec ? !!pg.parked : !pg.parked && pg.stage === g.id; }).map(function (pg) {
+    TH_STAGES.concat([{ id: '__parked', name: 'Parking lot' }, { id: '__cards', name: 'Card notes' }]).forEach(function (g) {
+      var parkSec = g.id === '__parked', cardSec = g.id === '__cards';
+      if (cardSec && !q) return;   // card notes open from their cards; search finds them too
+      var list = pages.filter(function (pg) { return cardSec ? !!pg.card : pg.card ? false : parkSec ? !!pg.parked : !pg.parked && pg.stage === g.id; }).map(function (pg) {
         var sn = q ? (pg.title.toLowerCase().indexOf(q) >= 0 ? ' ' : thSnippet(pg, q)) : ' ';
         return sn ? { pg: pg, sn: sn.trim() } : null;
       }).filter(Boolean);
@@ -3670,7 +3739,7 @@ td.c-break{display:none}
     $('#th-list').innerHTML = h;
   }
   function thPageKey(id) {
-    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify([ui.thGFold || {}, ui.thGAdd || '', ui.thGRen || '', ui.thUp || '', ui.thFileErr || '', !!gh]) + '|' + JSON.stringify(state.compassTests || []).length;
+    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify([ui.thGFold || {}, ui.thGAdd || '', ui.thGRen || '', ui.thUp || '', ui.thFileErr || '', !!gh, ui.thSimAdd || '']) + '|' + JSON.stringify(state.compassTests || []).length;
     var pg = getThPage(id); if (!pg) return id + '|gone';
     return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + (pg.parked || '') + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',') +
       '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',') + '|' + thLinkKey(pg);
@@ -3686,7 +3755,7 @@ td.c-break{display:none}
     var same = el.dataset.id === id, y = el.scrollTop;
     el.dataset.key = key; el.dataset.id = id;
     var back = '<button type="button" class="link-btn th-back" data-act="th-back">← Notebook</button>';
-    el.innerHTML = back + (id === 'th:journal' ? thJournalHTML() : id === 'th:important' ? thImportantHTML() : id === 'th:stage' ? (thViewStage() === 'topic' ? thTopicsHTML() : thToolHTML(thViewStage())) : id === 'th:canvas' ? thCanvasHTML() : thChatHTML(getThPage(id)));
+    el.innerHTML = back + (id === 'th:journal' ? thJournalHTML() : id === 'th:important' ? thImportantHTML() : id === 'th:stage' ? (thViewStage() === 'topic' ? thTopicsHTML() : thToolHTML(thViewStage())) : id === 'th:canvas' ? thCanvasHTML() : id === 'th:sims' ? thToolHTML('sims') : thChatHTML(getThPage(id)));
     if (same) el.scrollTop = y;
     if (id.indexOf('th:') !== 0) { thPaint(el, id); thTypeset(el); }
     else if (id === 'th:journal') thTypeset(el);
@@ -3730,12 +3799,18 @@ td.c-break{display:none}
   function thChatHTML(pg) {
     if (!pg) return '<p class="th-none">That page is gone.</p>';
     var ro = mode === 'readonly', you = pg.blocks.filter(function (b) { return b.role === 'you'; }), yi = 0;
-    var secSel = ro || pg.parked ? (pg.parked ? 'Parked ' + fmtShort(pg.parked) : esc(thStageName(pg.stage))) : '<label class="sr-only" for="th-psec">Section</label><select id="th-psec" class="th-ksel" data-page-stage="1">' +
+    var cardOf = pg.card ? thCardOf(pg.card) : null;
+    var secSel = cardOf ? '' : ro || pg.parked ? (pg.parked ? 'Parked ' + fmtShort(pg.parked) : esc(thStageName(pg.stage))) : '<label class="sr-only" for="th-psec">Section</label><select id="th-psec" class="th-ksel" data-page-stage="1">' +
       TH_STAGES.map(function (g) { return '<option value="' + g.id + '"' + (g.id === pg.stage ? ' selected' : '') + '>' + esc(g.name) + '</option>'; }).join('') + '</select>';
-    var h = thHeader(esc(thSourceName(pg)) + ' · ' + fmtLong(isoOf(pg.created)) + ' · ' + secSel + thLinkChip(pg),
+    var h = thHeader(cardOf ? '<button type="button" class="th-cardback" data-act="th-card-back" data-card="' + esc(pg.card) + '">← ' + (cardOf.k === 'sims.list' ? 'Sim' : 'Reading card') + '</button> · ' + fmtLong(isoOf(pg.created))
+        : esc(thSourceName(pg)) + ' · ' + fmtLong(isoOf(pg.created)) + ' · ' + secSel + thLinkChip(pg),
       ro ? esc(pg.title) : '<span class="th-edtitle" contenteditable="true" spellcheck="true" data-ed="t" role="textbox" aria-label="Page title">' + esc(pg.title) + '</span>', '',
-      ro ? '' : '<div class="th-pacts"><button type="button" class="btn btn-sm" data-act="th-more">+ Add more</button><button type="button" class="btn btn-sm btn-quiet" data-act="th-edit-page" title="Edit the plain text, speaker lines and all">Raw text</button>' +
-        (pg.parked ? '<button type="button" class="btn btn-sm" data-act="th-unpark-page">Bring back</button>' : '<button type="button" class="btn btn-sm btn-quiet" data-act="th-park-page" title="Set it aside without deleting it">Park</button>') + '<button type="button" class="btn btn-sm btn-quiet" data-act="th-del-page">Delete</button></div>');
+      ro ? '' : '<div class="th-pacts"><button type="button" class="btn btn-sm" data-act="th-more">+ Add more</button>' +
+        (pg.parked ? '<button type="button" class="btn btn-sm" data-act="th-unpark-page">Bring back</button>' : '') +
+        '<details class="th-menu"><summary class="btn btn-sm btn-quiet" title="More" aria-label="More for this page">⋯</summary><div class="th-menu-pop">' +
+          '<button type="button" data-act="th-edit-page" title="Edit the plain text, speaker lines and all">Raw text</button>' +
+          (pg.parked || pg.card ? '' : '<button type="button" data-act="th-park-page" title="Set it aside without deleting it">Park</button>') +
+          '<button type="button" class="is-danger" data-act="th-del-page">Delete</button></div></details></div>');
     if (you.length > 1) h += '<nav class="th-toc" aria-label="Your questions"><p class="th-kicker">In this chat</p><ol>' + you.map(function (b, i) {
       return '<li><button type="button" class="th-toc-q" data-act="th-jump" data-i="' + i + '">' + esc(truncate(thPlain(b.text), 110)) + '</button></li>';
     }).join('') + '</ol></nav>';
@@ -3829,17 +3904,29 @@ td.c-break{display:none}
   }
   function thCardHTML(L, key, it, i) {
     var ro = mode === 'readonly', open = ui.thCard === it.id, st = thSt(L, it.status), id = esc(it.id), dk = ' data-k="' + key + '" data-id="' + id + '"';
-    var G = L.groups ? (state.thesis.groups[key] || []) : [];
+    var G = L.groups ? thGroupsFor(key) : [];
     var body = '';
     if (open) {
+      var npg = L.notes ? thCardPage(key, it.id) : null, ntxt = npg ? thPlain(npg.blocks.map(function (b) { return b.text; }).join('\n')).replace(/\s+/g, ' ').trim() : '';
+      var papers = L.paper ? (state.thesis.lists['lit.papers'] || []) : [];
+      var mySims = L.sims ? (state.thesis.lists['sims.list'] || []).filter(function (x) { return x.p === it.id; }) : [];
       body = '<div class="th-topic-body">' +
         (ro ? '' : '<div class="th-cf"><label class="th-lbl" for="th-ct-' + id + '">Title</label><input id="th-ct-' + id + '" class="th-ct" data-ct="1"' + dk + ' value="' + esc(it.title) + '" maxlength="300"></div>') +
         '<div class="th-card-row"><div class="th-seg" role="group" aria-label="Status">' + L.st.map(function (x) {
           return '<button type="button" class="chip tone-' + (x[2] || 'none') + '" data-act="th-card-status"' + dk + ' data-st="' + x[0] + '" aria-pressed="' + (it.status === x[0]) + '"' + (ro ? ' disabled' : '') + '>' + esc(x[1]) + '</button>';
         }).join('') + '</div>' +
+        (L.paper && papers.length ? '<label class="th-card-g th-card-p"><span class="sr-only">From reading</span><select data-cp="1"' + dk + (ro ? ' disabled' : '') + '><option value="">Not from a reading</option>' +
+          papers.map(function (x) { return '<option value="' + esc(x.id) + '"' + (it.p === x.id ? ' selected' : '') + '>' + esc(truncate(x.title, 60)) + '</option>'; }).join('') + '</select></label>' : '') +
         (G.length ? '<label class="th-card-g"><span class="sr-only">Group</span><select data-cg="1"' + dk + (ro ? ' disabled' : '') + '><option value="">No group</option>' +
           G.map(function (g) { return '<option value="' + esc(g.id) + '"' + (it.g === g.id ? ' selected' : '') + '>' + esc(g.name) + '</option>'; }).join('') + '</select></label>' : '') + '</div>' +
         (L.links ? thLinksHTML(key, it, ro) : '') +
+        (L.notes ? '<div class="th-cf th-cnotes"><span class="th-lbl">Notes</span>' +
+          (ntxt ? '<button type="button" class="th-cnote-prev" data-act="th-card-notes"' + dk + ' title="Open the notes">' + esc(ntxt.slice(0, 320)) + '</button>' : '') +
+          (npg || !ro ? '<button type="button" class="btn btn-sm' + (npg ? '' : ' primary') + '" data-act="th-card-notes"' + dk + '>' + (npg ? 'Open notes →' : 'Write notes') + '</button>' : '') + '</div>' : '') +
+        (L.sims ? '<div class="th-cf th-csims"><span class="th-lbl">Sims</span><div class="th-csims-row">' +
+          mySims.map(function (x) { var xs = thSt(TH_TOOLS.sims.lists[0], x.status); return '<button type="button" class="th-simchip tone-' + (xs[2] || 'none') + '" data-act="th-sim-open" data-id="' + esc(x.id) + '" title="' + esc(xs[1]) + '">' + SIM_ICO + '<span>' + esc(truncate(x.title, 48)) + '</span></button>'; }).join('') +
+          (ro ? '' : ui.thSimAdd === it.id ? '<form class="th-simadd" data-form="th-sim-new" data-id="' + id + '"><label class="sr-only" for="th-sn-' + id + '">New sim</label><input id="th-sn-' + id + '" maxlength="300" autocomplete="off" placeholder="What will you simulate?"><button type="submit" class="btn btn-sm">Add</button></form>'
+            : '<button type="button" class="link-btn th-simnew" data-act="th-sim-add" data-id="' + id + '">+ Sim</button>') + '</div></div>' : '') +
         (L.fields || []).map(function (fd) {
           var fid = 'th-cf-' + id + '-' + fd[0], v = it.f[fd[0]] || '';
           if (fd[3] === 'url') return '<div class="th-cf"><label class="th-lbl" for="' + fid + '">' + esc(fd[1]) + '</label><div class="th-url"><input type="url" id="' + fid + '" data-cf="' + fd[0] + '"' + dk + ' value="' + esc(v) + '" placeholder="' + esc(fd[2]) + '"' + (ro ? ' readonly' : '') + '>' +
@@ -3921,15 +4008,17 @@ td.c-break{display:none}
         (gh ? '<label class="btn btn-sm th-attach" title="Upload a file (up to 25 MB) to your private data repository">' + FILE_ICO + 'Attach file<input type="file" multiple class="sr-only" data-file-up="1"' + dk + '></label>' : '') + '</form>' : '') + '</div>';
   }
   function thGroupHTML(L, key, g, its, ro) {
-    var fold = ui.thGFold && ui.thGFold[g ? g.id : '_none'], ren = g && ui.thGRen === g.id && !ro, done = its.filter(function (it) { return it.status === L.done; }).length;
+    var fold = ui.thGFold && ui.thGFold[(L.groupsFrom ? key + ':' : '') + (g ? g.id : '_none')], ren = g && ui.thGRen === g.id && !ro && !L.groupsFrom, done = its.filter(function (it) { return it.status === L.done; }).length;
+    if (L.groupsFrom) ro = true;   // shared groups are named, ordered and deleted on Reading cards
     var h = '<section class="th-grp' + (fold ? ' is-folded' : '') + (g ? '' : ' is-none') + '" data-gid="' + (g ? esc(g.id) : '') + '"><div class="th-grp-h">' +
       (g && !ro && !ren ? '<button type="button" class="th-grip" data-grip="grp" aria-label="Move the ' + esc(g.name) + ' group (drag, or use the arrow keys)" title="Drag to move">' + GRIP_ICO + '</button>' : '');
     if (ren) h += '<form class="th-grp-ren" data-form="th-grp-ren" data-k="' + key + '" data-gid="' + esc(g.id) + '"><label class="sr-only" for="th-gr-' + esc(g.id) + '">Group name</label><input id="th-gr-' + esc(g.id) + '" maxlength="60" value="' + esc(g.name) + '"><button type="submit" class="btn btn-sm">Save</button></form>';
-    else h += '<button type="button" class="th-grp-t" data-act="th-grp-fold" data-gid="' + (g ? esc(g.id) : '_none') + '" aria-expanded="' + !fold + '"><svg class="th-chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 2l3.5 3L3 8"/></svg><span>' + (g ? esc(g.name) : 'No group') + '</span>' +
+    else h += '<button type="button" class="th-grp-t" data-act="th-grp-fold" data-gid="' + (L.groupsFrom ? key + ':' : '') + (g ? esc(g.id) : '_none') + '" aria-expanded="' + !fold + '"><svg class="th-chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 2l3.5 3L3 8"/></svg><span>' + (g ? esc(g.name) : 'No group') + '</span>' +
       (its.length ? '<span class="th-sec-c">' + (L.done ? done + '/' + its.length : its.length) + '</span>' : '') + '</button>' +
       (g && !ro ? '<button type="button" class="th-grp-a" data-act="th-grp-ren" data-gid="' + esc(g.id) + '" title="Rename" aria-label="Rename ' + esc(g.name) + '">' + PENCIL_ICO + '</button><button type="button" class="th-grp-a" data-act="th-grp-del" data-k="' + key + '" data-gid="' + esc(g.id) + '" title="Delete group" aria-label="Delete ' + esc(g.name) + '">×</button>' : '');
     h += '</div>';
     if (!fold) h += '<div class="th-topics" data-gid="' + (g ? esc(g.id) : '') + '">' + (its.length ? its.map(function (it, i) { return thCardHTML(L, key, it, i); }).join('') : '<p class="th-grp-empty">Nothing here yet.</p>') + '</div>';
+    
     return h + '</section>';
   }
   function thToolHTML(stg) {
@@ -3938,9 +4027,9 @@ td.c-break{display:none}
     tool.lists.forEach(function (L) {
       var key = stg + '.' + L.key, items = state.thesis.lists[key] || [], full = L.cap && items.length >= L.cap, prog = thProgress(L, items), kid = 'th-add-' + stg + '-' + L.key;
       var solo = tool.lists.length === 1;
-      var G = L.groups ? (state.thesis.groups[key] || []) : [], gAdd = L.groups && !ro && ui.thGAdd === key;
+      var G = L.groups ? thGroupsFor(key) : [], gAdd = L.groups && !L.groupsFrom && !ro && ui.thGAdd === key;
       h += '<section class="th-list" data-k="' + key + '">' + (solo && !prog && !L.groups ? '' : '<div class="th-list-h">' + (solo ? '' : '<h3>' + esc(L.title) + '</h3>') + (prog ? '<span class="th-prog">' + prog + '</span>' : '') +
-        (L.groups && !ro && G.length < 12 ? '<button type="button" class="link-btn th-grp-new" data-act="th-grp-add" data-k="' + key + '" aria-expanded="' + gAdd + '">+ Group</button>' : '') + '</div>');
+        (L.groups && !L.groupsFrom && !ro && G.length < 12 ? '<button type="button" class="link-btn th-grp-new" data-act="th-grp-add" data-k="' + key + '" aria-expanded="' + gAdd + '">+ Group</button>' : '') + '</div>');
       if (gAdd) h += '<form class="th-quick th-grp-form" data-form="th-grp-new" data-k="' + key + '"><label class="sr-only" for="th-gn-' + key + '">Group name</label><input id="th-gn-' + key + '" maxlength="60" autocomplete="off" placeholder="A general idea, like Relative motion"><button type="submit" class="btn btn-sm">Add</button></form>';
       if (L.check) {
         h += items.length ? '<ul class="th-checklist">' + items.map(function (it) {
@@ -3949,9 +4038,10 @@ td.c-break{display:none}
         }).join('') + '</ul>' : '';
       } else {
         if (G.length) {
-          h += G.map(function (g) { return thGroupHTML(L, key, g, items.filter(function (it) { return it.g === g.id; }), ro); }).join('');
+          h += G.filter(function (g) { return !L.groupsFrom || items.some(function (it) { return it.g === g.id; }); }).map(function (g) { return thGroupHTML(L, key, g, items.filter(function (it) { return it.g === g.id; }), ro); }).join('');
           var loose = items.filter(function (it) { return !it.g; }); if (loose.length) h += thGroupHTML(L, key, null, loose, ro);
         } else h += items.length ? '<div class="th-topics" data-gid="">' + items.map(function (it, i) { return thCardHTML(L, key, it, i); }).join('') + '</div>' : '';
+        if (!items.length && L.groupsFrom && L.empty) h += '<p class="th-none">' + esc(L.empty) + '</p>';
       }
       var gPick = ui.thAddG && ui.thAddG[key]; if (!G.some(function (g) { return g.id === gPick; })) gPick = '';
       if (!ro && !full) h += '<form class="th-quick th-add" data-form="th-card-add" data-k="' + key + '"><label class="sr-only" for="' + kid + '">' + esc(L.add) + '</label><input id="' + kid + '" maxlength="300" autocomplete="off" placeholder="' + esc(L.add) + '">' +
@@ -4083,7 +4173,7 @@ td.c-break{display:none}
       var parts = k.split('|'), pg = getThPage(parts[1]), el = D[k]; if (!pg || !el) return;
       if (parts[0] === 't') {
         var t = el.textContent.replace(/\s+/g, ' ').trim().slice(0, 160);
-        if (t) pg.title = t; else if (final) el.textContent = pg.title;
+        if (t) { pg.title = t; var co = pg.card && thCardOf(pg.card); if (co && co.it) co.it.title = t.slice(0, 300); } else if (final) el.textContent = pg.title;
       } else {
         var bi = +parts[2], md = htmlToMd(el.innerHTML).slice(0, TH_MAX_BLOCK);
         if (pg.blocks[bi]) pg.blocks[bi].text = md;
@@ -4347,8 +4437,8 @@ td.c-break{display:none}
       else if (a === 'th-grp-ren') { ui.thGRen = b.dataset.gid; renderThPage(); var gri = $('#th-gr-' + b.dataset.gid); if (gri) { gri.focus(); gri.select(); } }
       else if (a === 'th-grp-del') {
         var gk = b.dataset.k, gd = b.dataset.gid, g0 = (state.thesis.groups[gk] || []).filter(function (g) { return g.id === gd; })[0]; if (!g0) return;
-        var nG = (state.thesis.lists[gk] || []).filter(function (it) { return it.g === gd; }).length;
-        var dropG = function () { commit(function (s) { s.thesis.groups[gk] = (s.thesis.groups[gk] || []).filter(function (g) { return g.id !== gd; }); (s.thesis.lists[gk] || []).forEach(function (it) { if (it.g === gd) delete it.g; }); }); };
+        var nG = 0; thSharing(gk).forEach(function (lk) { nG += (state.thesis.lists[lk] || []).filter(function (it) { return it.g === gd; }).length; });
+        var dropG = function () { commit(function (s) { s.thesis.groups[gk] = (s.thesis.groups[gk] || []).filter(function (g) { return g.id !== gd; }); thSharing(gk).forEach(function (lk) { (s.thesis.lists[lk] || []).forEach(function (it) { if (it.g === gd) delete it.g; }); }); }); };
         if (!nG) dropG();
         else confirmDialog({ title: 'Delete the “' + truncate(g0.name, 40) + '” group?', body: 'Its ' + plural(nG, 'card') + ' stay, under No group.', yes: 'Delete group', danger: true, onYes: dropG });
       }
@@ -4381,11 +4471,35 @@ td.c-break{display:none}
       }
       else if (a === 'th-card-del') {
         var k0 = b.dataset.k, it0 = (state.thesis.lists[k0] || []).filter(function (it) { return it.id === id; })[0]; if (!it0) return;
-        var gone = function () { commit(function (s) { s.thesis.lists[k0] = s.thesis.lists[k0].filter(function (it) { return it.id !== id; }); }); thDropFiles((it0.links || []).filter(function (x) { return x.f; }), null); };
-        if (Object.keys(it0.f).length || (it0.links || []).length) confirmDialog({ title: 'Delete “' + truncate(it0.title, 50) + '”?', body: 'Its notes and links go with it.', yes: 'Delete', danger: true, onYes: gone });
+        var np0 = thCardPage(k0, id);
+        var gone = function () {
+          commit(function (s) {
+            s.thesis.lists[k0] = s.thesis.lists[k0].filter(function (it) { return it.id !== id; });
+            if (np0) { s.thesis.pages = s.thesis.pages.filter(function (x) { return x.id !== np0.id; }); s.thesis.marks.forEach(function (m) { if (m.page === np0.id) m.page = null; }); }
+            if (k0 === 'lit.papers') (s.thesis.lists['sims.list'] || []).forEach(function (x) { if (x.p === id) delete x.p; });
+          });
+          thDropFiles((it0.links || []).filter(function (x) { return x.f; }), null);
+        };
+        if (Object.keys(it0.f).length || (it0.links || []).length || np0) confirmDialog({ title: 'Delete “' + truncate(it0.title, 50) + '”?', body: 'Its notes and links go with it.', yes: 'Delete', danger: true, onYes: gone });
         else gone();
       }
       else if (a === 'th-more') openThEditor('more', thCurrent());
+      else if (a === 'th-card-notes') {
+        var nk = b.dataset.k, nL = thListDef(nk), nit = (state.thesis.lists[nk] || []).filter(function (x) { return x.id === id; })[0]; if (!nit) return;
+        var have = thCardPage(nk, id); if (have) { thOpen(have.id, true); return; }
+        if (mode === 'readonly') return;
+        var npid = uid(), now0 = Date.now();
+        commit(function (s) { s.thesis.pages.push({ id: npid, title: nit.title.slice(0, 160), kind: 'note', source: '', stage: nk === 'lit.papers' ? 'lit' : s.thesis.stage, created: now0, updated: now0,
+          blocks: nL && nL.template ? [{ role: 'note', text: nL.template }] : [], parked: null, card: nk + '|' + id, proj: null, ann: [] }); });
+        thOpen(npid, true);
+      }
+      else if (a === 'th-card-back') {
+        var cb = thCardOf(b.dataset.card); if (!cb) return;
+        ui.thCard = cb.id;
+        if (cb.k === 'sims.list') thOpen('th:sims', true); else { ui.thView = cb.k.split('.')[0]; thOpen('th:stage', true); }
+      }
+      else if (a === 'th-sim-open') { ui.thCard = id; thOpen('th:sims', true); }
+      else if (a === 'th-sim-add') { ui.thSimAdd = ui.thSimAdd === id ? null : id; renderThPage(); var sn = $('#th-sn-' + id); if (sn) sn.focus(); }
       else if (a === 'th-park-page' || a === 'th-unpark-page') {
         var ppid = thCurrent(), on = a === 'th-park-page';
         commit(function (s) { s.thesis.pages.forEach(function (x) { if (x.id === ppid) x.parked = on ? todayISO() : null; }); });
@@ -4468,6 +4582,11 @@ td.c-break{display:none}
         ui0.value = ''; ui0.blur();
         var nu = uid(); ui.thUmbSel = nu;
         commit(function (s) { s.thesis.umbrellas.push({ id: nu, name: un.slice(0, 80), created: Date.now() }); });
+      } else if (f.dataset.form === 'th-sim-new') {
+        var spid = f.dataset.id, sin = f.querySelector('input'), sv = sin.value.trim(); if (!sv) return;
+        var paper = (state.thesis.lists['lit.papers'] || []).filter(function (x) { return x.id === spid; })[0]; if (!paper) return;
+        sin.value = ''; sin.blur(); ui.thSimAdd = null;
+        commit(function (s) { var sim = { id: uid(), title: sv.slice(0, 300), status: 'tobuild', f: {}, created: Date.now(), links: [], p: spid }; if (paper.g) sim.g = paper.g; (s.thesis.lists['sims.list'] = s.thesis.lists['sims.list'] || []).push(sim); });
       } else if (f.dataset.form === 'th-grp-new') {
         var gnk = f.dataset.k, gni2 = f.querySelector('input'), gnv = gni2.value.trim(); if (!gnv) return;
         gni2.value = ''; gni2.blur(); ui.thGAdd = null;
@@ -4505,7 +4624,10 @@ td.c-break{display:none}
       else if (t.dataset.cf || t.dataset.ct) {
         var ck = t.dataset.k, cidx = t.dataset.id, fk = t.dataset.cf, fv = t.value.slice(0, fk ? 4000 : 300);
         if (t.dataset.ct) { if (!fv.trim()) return; var head = t.closest('.th-topic').querySelector('.th-topic-t'); if (head) head.textContent = fv; }
-        thQuiet(function (s) { (s.thesis.lists[ck] || []).forEach(function (it) { if (it.id !== cidx) return; if (fk) { if (fv) it.f[fk] = fv; else delete it.f[fk]; } else it.title = fv.trim(); }); });
+        thQuiet(function (s) {
+          (s.thesis.lists[ck] || []).forEach(function (it) { if (it.id !== cidx) return; if (fk) { if (fv) it.f[fk] = fv; else delete it.f[fk]; } else it.title = fv.trim(); });
+          if (!fk) s.thesis.pages.forEach(function (pg) { if (pg.card === ck + '|' + cidx) pg.title = fv.trim().slice(0, 160); });
+        });
       }
     });
     box.addEventListener('paste', function (e) {
@@ -4542,6 +4664,11 @@ td.c-break{display:none}
       } else if (t.dataset && t.dataset.ed === 't' && e.key === 'Escape') t.blur();
     });
     // ---- rearrange cards and groups ----
+    // the ⋯ menu on a page closes when you pick something, tap elsewhere or press Esc
+    document.addEventListener('click', function (e) {
+      $$('details.th-menu[open]').forEach(function (d) { if (!d.contains(e.target) || e.target.closest('.th-menu-pop [data-act]')) d.removeAttribute('open'); });
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') $$('details.th-menu[open]').forEach(function (d) { d.removeAttribute('open'); }); });
     var drag = null;
     var scrollBox = function (el) { for (var n = el.parentElement; n && n !== document.body; n = n.parentElement) { var cs = getComputedStyle(n); if (/(auto|scroll)/.test(cs.overflowY) && n.scrollHeight > n.clientHeight + 2) return n; } return null; };
     var nearest = function (els, y) {
@@ -4646,6 +4773,10 @@ td.c-break{display:none}
       if (t.id === 'th-topic-umb') ui.thUmbSel = t.value;
       else if (t.dataset.fileUp) { var picked = Array.prototype.slice.call(t.files || []); t.value = ''; thUploadFiles(t.dataset.k, t.dataset.id, picked); }
       else if (t.dataset.addg) { ui.thAddG = ui.thAddG || {}; ui.thAddG[t.dataset.addg] = t.value; }
+      else if (t.dataset.cp) {
+        var cpk = t.dataset.k, cpid = t.dataset.id, cpv = t.value, cpp = (state.thesis.lists['lit.papers'] || []).filter(function (x) { return x.id === cpv; })[0];
+        commit(function (s) { (s.thesis.lists[cpk] || []).forEach(function (it) { if (it.id !== cpid) return; if (cpv) { it.p = cpv; if (!it.g && cpp && cpp.g) it.g = cpp.g; } else delete it.p; }); });
+      }
       else if (t.dataset.cg) { var cgk = t.dataset.k, cgid = t.dataset.id, cgv = t.value; commit(function (s) { (s.thesis.lists[cgk] || []).forEach(function (it) { if (it.id !== cgid) return; if (cgv) it.g = cgv; else delete it.g; }); }); }
       else if (t.dataset.topicUmb) { var tid = t.dataset.topicUmb, uv = t.value || null; commit(function (s) { s.thesis.topics.forEach(function (tp) { if (tp.id === tid) tp.umb = uv; }); }); }
     });
@@ -4971,6 +5102,7 @@ td.c-break{display:none}
     var calOk = st === 'ok' || (st === 'syncing' && gcalWasOk);
     gcalWasOk = calOk;
     badge('#sb-c', calOk, st === 'off' ? 'Google Calendar: not set up' : calOk ? 'Google Calendar: synced' : st === 'signin' ? 'Google Calendar: not synced (tap to sign in)' : 'Google Calendar: not synced');
+    try { calBadgeVis(); } catch (e) {}
     if (modalCtx && modalCtx.isGcal && gcalCfg()) modalCtx.draw();
     try { if (state) renderReminders(todayISO()); } catch (e) {}
   }
@@ -5330,21 +5462,19 @@ td.c-break{display:none}
               return opt(a.id, a.name, d.area);
             }).join('') + '</select></div>' +
           (isNew ? '<label class="check kind-stages" id="pj-stages-row" hidden><input type="checkbox" id="pj-stages"' + (d.stages ? ' checked' : '') + '> <span id="pj-stages-txt"></span></label>' : '') +
-          '<p class="hub-hint kind-hint" id="pj-kind-hint" hidden>Add one stage per document the call asks for. Tap one to paste its exact rule, points and deadline.</p>' +
+          '<p class="hub-hint kind-hint" id="pj-kind-hint" hidden>Add one task per document the call asks for. Tap one to paste its exact rule, points and deadline.</p>' +
           '<div class="field"><label for="pj-start">Start date</label><input id="pj-start" type="date" value="' + esc(d.start) + '" max="' + T + '"></div>' +
           whenFields('pj-dl', 'Final deadline <span class="muted">(ends the project)</span>', d.dl, p0 && p0.ended ? '' : T) +
           '<div class="field" id="pj-pts-row" hidden><label for="pj-pts">Total points in the scoring <span class="muted">(optional)</span></label><input id="pj-pts" type="number" min="0" step="1" inputmode="numeric" value="' + esc(String(d.pts || '')) + '" placeholder="e.g. 140"></div>' +
           '<div class="field" id="pj-color-row"><fieldset class="swatches"><legend>Line color</legend>' + sw + '</fieldset></div>' +
           '<p class="muted r-color-note" id="pj-rcolor" hidden><i class="rv-dot" style="background:var(--c' + RESEARCH_INK + ')"></i> Research projects always use this color.</p>' +
-          (isNew ? '<div class="field"><label for="pj-note">First update <span class="muted">(optional, logged on the start date)</span></label><textarea id="pj-note" rows="2" placeholder="Kickoff, goal, first step…">' + esc(d.note) + '</textarea></div>' +
-            '<p class="muted" style="font-size:13px;margin:4px 0 0">Next, the project window opens, where you add its to-dos, files and notes.</p>' : '') +
           '<p class="form-error" id="pj-error" hidden></p>' +
           '<div class="modal-actions">' + (isNew ? '' : '<button type="button" class="btn btn-quiet" data-act="del-project" style="margin-right:auto">Delete project</button>') +
           '<button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">' + (isNew ? 'Create project' : 'Save') + '</button></div></form>';
         whenWire('pj-dl');
         var kindUpd = function () {
           var k = $('#pj-area').value, st = KIND_STAGES[k], row = $('#pj-stages-row');
-          if (row) { row.hidden = !st; if (st) $('#pj-stages-txt').textContent = 'Start with these stages: ' + st.join(', '); }
+          if (row) { row.hidden = !st; if (st) $('#pj-stages-txt').textContent = 'Start with these tasks: ' + st.join(', '); }
           $('#pj-kind-hint').hidden = !(isNew && k === 'application');
           $('#pj-pts-row').hidden = k !== 'application' && !d.pts;
           $('#pj-color-row').hidden = k === 'research'; $('#pj-rcolor').hidden = k !== 'research';
@@ -5521,7 +5651,7 @@ td.c-break{display:none}
     confirmDialog({
       title: 'Delete “' + p.name + '” now?', yes: 'Delete now', danger: true,
       body: (p.ended ? 'It would leave on its own ' + (left <= 1 ? 'tomorrow' : 'in ' + left + ' days') + '. ' : '') +
-        'Deleting removes the project, its stages and its ' + plural(n, 'update') + ' for good.',
+        'Deleting removes the project, its tasks and its ' + plural(n, 'update') + ' for good.',
       onYes: function () {
         if (ui.hub === pid) closeHub();
         commit(function (s) { s.projects = s.projects.filter(function (x) { return x.id !== pid; }); s.updates = s.updates.filter(function (u) { return u.projectId !== pid; }); });
@@ -5580,6 +5710,7 @@ td.c-break{display:none}
     var rsch = isResearch(p);   // Research tasks skip the rule and points fields
     var m = taskById(p, mid);
     if (!m) return;
+    var showRule = !rsch && (p.area === 'application' || !!m.rule), showPts = !rsch && (p.area === 'application' || p.area === 'class' || m.points != null);
     var T = todayISO(), isStep = !!m.parent, parent = isStep ? taskById(p, m.parent) : null;
     function drawSteps() {
       var box = $('#ms-steps'); if (!box) return;
@@ -5599,9 +5730,9 @@ td.c-break{display:none}
           '<div class="field"><label for="ms-title">' + (isStep ? 'Step' : 'Name') + '</label><input id="ms-title" type="text" maxlength="140" value="' + esc(m.title) + '"></div>' +
           (isStep ? '<div class="field"><label class="check"><input type="checkbox" id="ms-done"' + (m.done ? ' checked' : '') + '> Done</label></div>'
             : '<div class="field"><label for="ms-status">Status</label><select id="ms-status">' + ST_ORDER.map(function (k) { return '<option value="' + k + '"' + (m.status === k ? ' selected' : '') + '>' + ST_LABEL[k] + '</option>'; }).join('') + '</select></div>' +
-              (rsch ? '' : '<div class="field"><label for="ms-rule">Exact rule <span class="muted">(optional: limits, format, who signs, where it goes)</span></label><textarea id="ms-rule" rows="3" maxlength="1500" placeholder="e.g. Max 400 words, signed and stamped, uploaded on the platform">' + esc(m.rule || '') + '</textarea></div>')) +
+              (!showRule ? '' : '<div class="field"><label for="ms-rule">Exact rule <span class="muted">(optional: limits, format, who signs, where it goes)</span></label><textarea id="ms-rule" rows="3" maxlength="1500" placeholder="e.g. Max 400 words, signed and stamped, uploaded on the platform">' + esc(m.rule || '') + '</textarea></div>')) +
           whenFields('ms', 'Due <span class="muted">(optional)</span>', m, '') +
-          (isStep || rsch ? '' : '<div class="field"><label for="ms-pts">Points <span class="muted">(optional, if it’s scored)</span></label><input id="ms-pts" type="number" min="0" step="1" inputmode="numeric" value="' + esc(m.points ? String(m.points) : '') + '"></div>') +
+          (isStep || !showPts ? '' : '<div class="field"><label for="ms-pts">Points <span class="muted">(optional, if it’s scored)</span></label><input id="ms-pts" type="number" min="0" step="1" inputmode="numeric" value="' + esc(m.points ? String(m.points) : '') + '"></div>') +
           '<div class="field"><label for="ms-url">Link <span class="muted">(optional: the doc or file you work on for this)</span></label><input id="ms-url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="Paste a link" value="' + esc(m.url || '') + '"></div>' +
           (m.url ? '<p style="margin:6px 0 0"><a class="btn btn-sm" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer">' + EXT + 'Open link</a></p>' : '') +
           (isStep ? '' : '<div class="field"><span class="field-label">Steps <span class="muted">(optional, small things inside this one)</span></span><ul class="st-list" id="ms-steps"></ul>' +
@@ -5637,7 +5768,7 @@ td.c-break{display:none}
         var stv = isStep ? ($('#ms-done').checked ? 'done' : 'todo') : $('#ms-status').value;
         commit(function (s) {
           m.title = t.slice(0, 140); m.date = w.date; m.time = w.time; m.at = w.at; m.tz = w.tz; m.url = url;
-          if (!isStep && !rsch) { m.rule = $('#ms-rule').value.trim().slice(0, 1500); m.points = numOrNull($('#ms-pts').value); }
+          if (!isStep) { if ($('#ms-rule')) m.rule = $('#ms-rule').value.trim().slice(0, 1500); if ($('#ms-pts')) m.points = numOrNull($('#ms-pts').value); }
           setStatus2(s, p, m, stv, T);
         });
         closeModal();
@@ -5664,16 +5795,16 @@ td.c-break{display:none}
     function sumUp() {
       var sum = 0; $$('#sc-form input[data-mid]').forEach(function (inp) { sum += numOrNull(inp.value) || 0; });
       var tot = numOrNull($('#sc-total').value), el = $('#sc-sum');
-      el.textContent = sum ? 'Stages add up to ' + Math.round(sum * 100) / 100 + (tot ? ' of ' + tot : '') + ' points.' : '';
+      el.textContent = sum ? 'Tasks add up to ' + Math.round(sum * 100) / 100 + (tot ? ' of ' + tot : '') + ' points.' : '';
     }
     openModal({
       draw: function () {
         $('#modal-body').innerHTML = '<div class="modal-head" style="--pc:var(--c' + p.color + ')"><i class="dot"></i><div><h2 id="modal-title">Scoring</h2><p class="modal-sub">' + esc(p.name) + '</p></div></div>' +
-          '<p class="hub-hint" style="margin-top:0">How many points each stage is worth. Leave it empty if it isn’t scored.</p>' +
+          '<p class="hub-hint" style="margin-top:0">How many points each task is worth. Leave it empty if it isn’t scored.</p>' +
           '<form id="sc-form" novalidate>' + (P.length ? '<div class="sc-list">' + P.map(function (m) {
             return '<label class="sc-row' + (m.done ? ' is-done' : '') + '"><span>' + esc(m.title) + '</span><input type="number" min="0" step="1" inputmode="numeric" data-mid="' + esc(m.id) + '" value="' + (m.points || '') + '" aria-label="Points for ' + esc(m.title) + '"></label>';
-          }).join('') + '</div>' : '<p class="hub-empty">Add stages first, then give them points here.</p>') +
-          '<label class="sc-row sc-total"><span>Total in the scoring <span class="muted">(optional, when some points come from things that aren’t stages, like country)</span></span><input id="sc-total" type="number" min="0" step="1" inputmode="numeric" value="' + (p.pointsTotal || '') + '"></label>' +
+          }).join('') + '</div>' : '<p class="hub-empty">Add tasks first, then give them points here.</p>') +
+          '<label class="sc-row sc-total"><span>Total in the scoring <span class="muted">(optional, when some points come from things that aren’t tasks, like country)</span></span><input id="sc-total" type="number" min="0" step="1" inputmode="numeric" value="' + (p.pointsTotal || '') + '"></label>' +
           '<p class="sc-sum" id="sc-sum"></p>' +
           '<div class="modal-actions"><button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
         $$('#sc-form input').forEach(function (inp) { inp.addEventListener('input', sumUp); });
@@ -5912,7 +6043,7 @@ td.c-break{display:none}
     if (P.length) {
       var DA = doingAll();
       if (DA.length > DOING_MAX && DA.some(function (x) { return x.p === p; }))
-        overview += '<p class="doing-warn">' + DA.length + ' stages are in Doing across your projects. Finishing one before starting another gets more done (aim for ' + DOING_MAX + ').</p>';
+        overview += '<p class="doing-warn">' + DA.length + ' tasks are in Doing across your projects. Finishing one before starting another gets more done (aim for ' + DOING_MAX + ').</p>';
       overview += '<div class="hub-prog"><div class="pbar" role="img" aria-label="' + nDone + ' of ' + P.length + ' done"><i style="width:' + Math.round(nDone / P.length * 100) + '%"></i></div>' +
         '<span class="pbar-n">' + nDone + ' of ' + P.length + ' done</span>' + (pace ? '<span class="pace pace-' + pace.key + '">' + pace.label + '</span>' : '') +
         (!ro && !P.some(function (m) { return m.points; }) ? '<button type="button" class="link-btn pts-add" data-act="scoring">Add scoring</button>' : '') + '</div>';
@@ -5928,7 +6059,7 @@ td.c-break{display:none}
     }
 
     // the pieces
-    var LBL = listLabel(p), kindPh = 'Add a stage, like “draft the essay dec 10”';
+    var LBL = listLabel(p), kindPh = 'Add a task, like “draft the essay dec 10”';
     var tasksSec = '<section class="hsec hsec-tasks" aria-labelledby="hs-tasks"><div class="hsec-h"><h3 id="hs-tasks">' + LBL + '</h3><span class="count">' + (Popen.length || '') + '</span></div>' +
       (ro ? '' : '<form id="task-add" class="task-add" novalidate autocomplete="off">' +
         '<div class="when-chip" id="ta-when" hidden></div>' +
@@ -5937,7 +6068,7 @@ td.c-break{display:none}
         '<button type="submit" class="btn btn-sm primary">Add</button></form>') +
       (Popen.length ? '<ul class="task-list pieces" data-sort-list="hub:' + esc(p.id) + '">' + Popen.map(pieceRow).join('') + '</ul>' +
           ''
-        : '<p class="hub-empty">' + (P.length ? 'All stages done.' : 'No stages yet.') + '</p>') +
+        : '<p class="hub-empty">' + (P.length ? 'All tasks done.' : 'No tasks yet.') + '</p>') +
       '</section>';
 
     // archive: finished stages, kept for the record, faded at the very bottom
@@ -6248,6 +6379,7 @@ td.c-break{display:none}
     $('#mm-backup').addEventListener('click', function () { closeMenu(); openBackup(); });
     $('#mm-library').addEventListener('click', function () { closeMenu(); location.hash = '#library'; });
     $('#mm-review').addEventListener('click', function () { closeMenu(); openReview(); });
+    $('#mm-gcal').addEventListener('click', function () { closeMenu(); openGcal(); });
     $('#mm-parking').addEventListener('click', function () { closeMenu(); openParking(); });
 
     // re-draw when the window crosses between phone and laptop layouts
