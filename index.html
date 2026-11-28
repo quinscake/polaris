@@ -999,8 +999,20 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
 .th-card-p{margin-left:auto}
 .th-card-p + .th-card-g{margin-left:0}
 .th-cnotes{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
-.th-cnote-prev{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;width:100%;padding:10px 12px;border:1px solid var(--rule);border-radius:10px;background:rgba(255,255,255,.02);color:#b9c0d4;font:400 14px/1.5 var(--font-body);text-align:left;cursor:pointer}
-.th-cnote-prev:hover{border-color:#3a4566;color:var(--ink)}
+.th-cnote-prev{position:relative;width:100%;max-height:340px;overflow:hidden;padding:14px 16px 4px;border:1px solid var(--rule);border-radius:12px;background:rgba(255,255,255,.02);cursor:pointer}
+.th-cnote-prev:hover,.th-cnote-prev:focus-visible{border-color:#3a4566}
+.th-cnote-prev .md{font-size:14.5px;line-height:1.6;max-width:none}
+.th-cnote-prev .md h1,.th-cnote-prev .md h2{font-size:16px}
+.th-cnote-prev .md h3,.th-cnote-prev .md h4{font-size:15px}
+.th-cnote-prev.is-long::after{content:'';position:absolute;left:0;right:0;bottom:0;height:70px;background:linear-gradient(rgba(16,21,34,0),#121726 85%);pointer-events:none}
+.th-htmlsim{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#fff}
+.th-htmlsim-bar{display:flex;align-items:center;gap:14px;padding:6px 12px;background:#141a2b;border-bottom:1px solid var(--rule)}
+.th-htmlsim-name{flex:1;min-width:0;font:500 12px var(--font-mono);color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.th-htmlsim-bar .link-btn{padding:0;font-size:12.5px}
+.th-htmlsim-frame{display:block;width:100%;height:min(560px,70vh);border:0;background:#fff}
+.th-htmlsim.is-max{position:fixed;inset:max(10px,env(safe-area-inset-top)) 10px max(10px,env(safe-area-inset-bottom)) 10px;z-index:300;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.th-htmlsim.is-max .th-htmlsim-frame{flex:1;height:auto}
+body.sim-max{overflow:hidden}
 .th-csims-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .th-simchip{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:5px 10px;border:1px solid var(--rule);border-radius:999px;background:rgba(255,255,255,.02);color:var(--ink);font:500 13px var(--font-body);cursor:pointer}
 .th-simchip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -3800,7 +3812,14 @@ td.c-break{display:none}
     el.innerHTML = back + (id === 'th:journal' ? thJournalHTML() : id === 'th:important' ? thImportantHTML() : id === 'th:stage' ? (thViewStage() === 'topic' ? thTopicsHTML() : thToolHTML(thViewStage())) : id === 'th:canvas' ? thCanvasHTML() : id === 'th:sims' ? thSimsHTML() : thChatHTML(getThPage(id)));
     if (same) el.scrollTop = y;
     if (id.indexOf('th:') !== 0) { thPaint(el, id); thTypeset(el); }
-    else if (id === 'th:journal') thTypeset(el);
+    else {
+      var prevs = el.querySelectorAll('.th-cnote-prev[data-pg]');
+      if (prevs.length) {
+        var keepPos = ui.thAnnPos;
+        Array.prototype.forEach.call(prevs, function (pv) { thPaint(pv, pv.dataset.pg); pv.classList.toggle('is-long', pv.scrollHeight > pv.clientHeight + 4); });
+        ui.thAnnPos = keepPos; thTypeset(el);
+      } else if (id === 'th:journal') thTypeset(el);
+    }
     var jb = $('#th-head [data-act="th-journal"]'); if (jb) jb.setAttribute('aria-pressed', String(id === 'th:journal'));
     $$('#th-page textarea[data-grow]').forEach(thGrow);
   }
@@ -3965,7 +3984,8 @@ td.c-break{display:none}
         (L.run ? (thSimFiles(it).some(function (x) { return /\.py$/i.test(thFileName(x)); }) ? '<div class="th-cf th-run" id="th-run-' + id + '">' + thRunInner(key, it, ro) + '</div>'
           : ro ? '' : '<p class="th-run-hint">Attach a .py file to run it here.</p>') : '') +
         (L.notes ? '<div class="th-cf th-cnotes"><span class="th-lbl">Notes</span>' +
-          (ntxt ? '<button type="button" class="th-cnote-prev" data-act="th-card-notes"' + dk + ' title="Open the notes">' + esc(ntxt.slice(0, 320)) + '</button>' : '') +
+          (ntxt ? '<div class="th-cnote-prev" role="button" tabindex="0" data-act="th-card-notes"' + dk + ' data-pg="' + esc(npg.id) + '" title="Open the notes"><div class="th-blocks">' +
+            npg.blocks.map(function (b) { return '<div class="th-b"><div class="md">' + mdToHtml(b.text) + '</div></div>'; }).join('') + '</div></div>' : '') +
           (npg || !ro ? '<button type="button" class="btn btn-sm' + (npg ? '' : ' primary') + '" data-act="th-card-notes"' + dk + '>' + (npg ? 'Open notes →' : 'Write notes') + '</button>' : '') + '</div>' : '') +
         (L.sims ? '<div class="th-cf th-csims"><span class="th-lbl">Sims</span>' +
           (mySims.length ? '<div class="th-simlist">' + mySims.map(function (x, si) { return thSimRow('sims.list', x, si, ro); }).join('') + '</div>' : '') +
@@ -4086,9 +4106,19 @@ td.c-break{display:none}
   }
   function thRunSim(k, cid) {
     var it = (state.thesis.lists[k] || []).filter(function (x) { return x.id === cid; })[0]; if (!it || !gh) return;
-    var files = thSimFiles(it), pys = files.filter(function (x) { return /\.py$/i.test(thFileName(x)); }); if (!pys.length) return;
-    var pick = ui.thRunMain && ui.thRunMain[cid], main = pys.some(function (x) { return thFileName(x) === pick; }) ? pick : thFileName(pys[0]);
+    var main = thSimMain(it); if (!main) return;
     if (ui.thRun && (ui.thRun.state === 'loading' || ui.thRun.state === 'running')) pyStop();   // one run at a time
+    if (/\.html?$/i.test(main)) {   // an HTML sim: fetch it and show it in a sandboxed frame
+      var hx = (it.links || []).filter(function (x) { return x.f && thFileName(x) === main; })[0], hjob = ++pyJob;
+      ui.thRun = { id: cid, k: k, job: hjob, kind: 'html', state: 'loading', status: 'Opening ' + main + '…', out: '', figs: [], kept: {}, err: '', ms: 0, main: main, html: '' };
+      thRunPaint();
+      thSimFile(hx).then(function (f) {
+        var r = ui.thRun; if (!r || r.job !== hjob) return;
+        r.html = new TextDecoder().decode(f.data); r.state = 'done'; r.status = ''; thRunPaint();
+      }, function (e) { thRunMsg({ id: hjob, t: 'fail', s: 'Couldn’t get ' + main + ' from GitHub. ' + e.message }); });
+      return;
+    }
+    var files = thSimFiles(it);
     var job = ++pyJob;
     ui.thRun = { id: cid, k: k, job: job, state: 'loading', status: 'Getting your files…', out: '', figs: [], kept: {}, err: '', ms: 0, main: main };
     thRunPaint();
@@ -4105,19 +4135,29 @@ td.c-break{display:none}
     else if (m.t === 'fail') { r.state = 'fail'; r.err = m.s; r.status = 'Stopped with an error'; }
     thRunPaint();
   }
+  function thRunnable(it) {
+    var all = (it.links || []).filter(function (x) { return x.f && /\.(html?|py)$/i.test(thFileName(x)); });
+    return all.filter(function (x) { return /\.html?$/i.test(thFileName(x)); }).concat(all.filter(function (x) { return /\.py$/i.test(thFileName(x)); }));
+  }
   function thSimMain(it) {
-    var pys = thSimFiles(it).filter(function (x) { return /\.py$/i.test(thFileName(x)); }), pick = (ui.thRunMain || {})[it.id];
-    return pys.some(function (x) { return thFileName(x) === pick; }) ? pick : pys.length ? thFileName(pys[0]) : '';
+    var R = thRunnable(it), pick = (ui.thRunMain || {})[it.id];
+    return R.some(function (x) { return thFileName(x) === pick; }) ? pick : R.length ? thFileName(R[0]) : '';
   }
   function thRunBtn(k, it) {
     var r = ui.thRun && ui.thRun.id === it.id ? ui.thRun : null, busy = r && (r.state === 'loading' || r.state === 'running'), dk = ' data-k="' + k + '" data-id="' + esc(it.id) + '"';
     if (busy) return '<button type="button" class="btn btn-sm th-runbtn" id="th-runbtn-' + esc(it.id) + '" data-act="th-run-stop"' + dk + '>■ Stop</button>';
     var ok = gh && thSimMain(it);
-    return '<button type="button" class="btn btn-sm primary th-runbtn" id="th-runbtn-' + esc(it.id) + '" data-act="th-run"' + dk + (ok ? '' : ' disabled title="' + (gh ? 'Add a .py file first' : 'Connect GitHub to run sims') + '"') + '>▶ Run</button>';
+    return '<button type="button" class="btn btn-sm primary th-runbtn" id="th-runbtn-' + esc(it.id) + '" data-act="th-run"' + dk + (ok ? '' : ' disabled title="' + (gh ? 'Add its HTML file first' : 'Connect GitHub to run sims') + '"') + '>▶ Run</button>';
   }
   // what a run printed and drew
   function thRunInner(k, it, ro) {
     var r = ui.thRun && ui.thRun.id === it.id ? ui.thRun : null; if (!r) return '';
+    if (r.kind === 'html' && r.html) {
+      // no allow-same-origin: the page runs in its own sealed origin and can't touch Polaris, your token or your data
+      return '<div class="th-htmlsim"><div class="th-htmlsim-bar"><span class="th-htmlsim-name">' + esc(r.main) + '</span>' +
+        '<button type="button" class="link-btn" data-act="th-sim-max" data-id="' + esc(it.id) + '">Expand</button><button type="button" class="link-btn" data-act="th-run-close" data-id="' + esc(it.id) + '">Close</button></div>' +
+        '<iframe class="th-htmlsim-frame" sandbox="allow-scripts allow-modals allow-popups allow-forms allow-downloads allow-pointer-lock" allow="fullscreen" title="' + esc(it.title) + '" srcdoc="' + esc(r.html) + '"></iframe></div>';
+    }
     var busy = r.state === 'loading' || r.state === 'running', dk = ' data-k="' + k + '" data-id="' + esc(it.id) + '"';
     var h = r.status ? '<p class="th-run-st' + (busy ? ' is-busy' : r.state === 'fail' ? ' is-bad' : '') + '">' + esc(r.status) + '</p>' : '';
     if (r.out) h += '<pre class="th-run-log">' + esc(r.out) + '</pre>';
@@ -4143,11 +4183,11 @@ td.c-break{display:none}
   function thSimRow(k, it, i, ro) {
     var id = esc(it.id), dk = ' data-k="' + k + '" data-id="' + id + '"', main = thSimMain(it), open = ui.thSimOpen === it.id;
     var up = ui.thUp && ui.thUp.id === it.id ? ui.thUp : null, er = ui.thFileErr && ui.thFileErr.id === it.id ? ui.thFileErr.msg : '';
-    var files = (it.links || []).filter(function (x) { return x.f; }), pys = files.filter(function (x) { return /\.py$/i.test(thFileName(x)); });
+    var files = (it.links || []).filter(function (x) { return x.f; }), pys = thRunnable(it);
     var h = '<div class="th-simrow' + (open ? ' is-open' : '') + '"><div class="th-simhd">' +
       '<span class="th-simn">' + (i + 1) + '</span>' +
       '<button type="button" class="th-simname" data-act="' + (main && gh ? 'th-run' : 'th-sim-more') + '"' + dk + ' title="' + (main ? 'Run ' + esc(main) : 'Add its file') + '"><span class="th-simt">' + esc(it.title) + '</span>' +
-        '<span class="th-simfile">' + (up ? 'Uploading ' + esc(up.name) + '…' : main ? esc(main) + (files.length > 1 ? ' + ' + plural(files.length - 1, 'file') : '') : 'No .py file yet') + '</span></button>' +
+        '<span class="th-simfile">' + (up ? 'Uploading ' + esc(up.name) + '…' : main ? esc(main) + (files.length > 1 ? ' + ' + plural(files.length - 1, 'file') : '') : 'No file yet') + '</span></button>' +
       thRunBtn(k, it) +
       '<button type="button" class="th-simmore" data-act="th-sim-more"' + dk + ' aria-expanded="' + open + '" title="Files, name and delete" aria-label="More for ' + esc(it.title) + '">⋯</button></div>' +
       (er ? '<p class="th-file-err th-sim-err" role="alert">' + esc(er) + '</p>' : '') +
@@ -4720,6 +4760,11 @@ td.c-break{display:none}
       }
       else if (a === 'th-sim-open') { ui.thCard = id; thOpen('th:sims', true); }
       else if (a === 'th-run') thRunSim(b.dataset.k, id);
+      else if (a === 'th-run-close') { if (ui.thRun && ui.thRun.id === id) ui.thRun = null; var ro2 = document.getElementById('th-run-' + id); if (ro2) ro2.innerHTML = ''; document.body.classList.remove('sim-max'); }
+      else if (a === 'th-sim-max') {
+        var box2 = b.closest('.th-htmlsim'); if (!box2) return;
+        var on2 = !box2.classList.contains('is-max'); box2.classList.toggle('is-max', on2); document.body.classList.toggle('sim-max', on2); b.textContent = on2 ? 'Shrink' : 'Expand';
+      }
       else if (a === 'th-run-stop') { pyStop(); if (ui.thRun && ui.thRun.id === id) { ui.thRun.state = 'stopped'; ui.thRun.status = 'Stopped'; thRunPaint(); } }
       else if (a === 'th-fig-keep') {
         var rr = ui.thRun, fi = +b.dataset.i; if (!rr || rr.id !== id || !rr.figs[fi]) return;
@@ -4902,7 +4947,12 @@ td.c-break{display:none}
     document.addEventListener('click', function (e) {
       $$('details.th-menu[open]').forEach(function (d) { if (!d.contains(e.target) || e.target.closest('.th-menu-pop [data-act]')) d.removeAttribute('open'); });
     });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') $$('details.th-menu[open]').forEach(function (d) { d.removeAttribute('open'); }); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      $$('details.th-menu[open]').forEach(function (d) { d.removeAttribute('open'); });
+      $$('.th-htmlsim.is-max').forEach(function (x) { x.classList.remove('is-max'); var mb = x.querySelector('[data-act="th-sim-max"]'); if (mb) mb.textContent = 'Expand'; });
+      document.body.classList.remove('sim-max');
+    });
     var drag = null;
     var scrollBox = function (el) { for (var n = el.parentElement; n && n !== document.body; n = n.parentElement) { var cs = getComputedStyle(n); if (/(auto|scroll)/.test(cs.overflowY) && n.scrollHeight > n.clientHeight + 2) return n; } return null; };
     var nearest = function (els, y) {
@@ -4977,6 +5027,7 @@ td.c-break{display:none}
     box.addEventListener('pointerup', dragEnd);
     box.addEventListener('pointercancel', dragEnd);
     box.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('th-cnote-prev')) { e.preventDefault(); e.target.click(); return; }
       var g = e.target.closest && e.target.closest('[data-grip]'); if (!g || mode === 'readonly' || (e.key !== 'ArrowUp' && e.key !== 'ArrowDown')) return;
       e.preventDefault();
       var list = g.closest('.th-list'), k = list && list.dataset.k, up = e.key === 'ArrowUp'; if (!k) return;
