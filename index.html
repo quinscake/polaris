@@ -3793,7 +3793,7 @@ td.c-break{display:none}
     $('#th-list').innerHTML = h;
   }
   function thPageKey(id) {
-    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify([ui.thGFold || {}, ui.thGAdd || '', ui.thGRen || '', ui.thUp || '', ui.thFileErr || '', !!gh, ui.thSimAdd || '', ui.thSimOpen || '']) + '|' + JSON.stringify(state.compassTests || []).length;
+    if (id.indexOf('th:') === 0) return id + '|' + state.rev + '|' + mode + '|' + state.thesis.stage + '|' + thViewStage() + '|' + (ui.thTopic || '') + '|' + (ui.thCard || '') + '|' + (ui.thJEdit || '') + '|' + JSON.stringify([ui.thGOpen || {}, ui.thGAdd || '', ui.thGRen || '', ui.thUp || '', ui.thFileErr || '', !!gh, ui.thSimAdd || '', ui.thSimOpen || '']) + '|' + JSON.stringify(state.compassTests || []).length;
     var pg = getThPage(id); if (!pg) return id + '|gone';
     return id + '|' + pg.updated + '|' + pg.title + '|' + pg.stage + '|' + (pg.parked || '') + '|' + mode + '|' + state.thesis.marks.filter(function (m) { return m.page === id; }).map(function (m) { return m.id; }).join(',') +
       '|' + (pg.ann || []).map(function (a) { return a.id + a.kind; }).join(',') + '|' + thLinkKey(pg);
@@ -4104,20 +4104,30 @@ td.c-break{display:none}
     if (pyCache[key]) return Promise.resolve({ name: thFileName(x), data: pyCache[key] });
     return ghReadFile(gh, x).then(function (b) { return b.arrayBuffer(); }).then(function (buf) { var u = new Uint8Array(buf); pyCache[key] = u; return { name: thFileName(x), data: u }; });
   }
+  // an HTML sim opens in its own tab: a plain page holding one sandboxed frame (no allow-same-origin),
+  // so the sim runs in a sealed origin and can't read Polaris, your token or your data
+  function thOpenHtmlSim(it, main) {
+    var hx = (it.links || []).filter(function (x) { return x.f && thFileName(x) === main; })[0]; if (!hx) return;
+    var w = window.open('', '_blank');
+    if (w) { try { w.document.title = it.title; w.document.body.style.cssText = 'margin:0;height:100vh;display:grid;place-items:center;background:#0b1020;color:#9aa3bd;font:14px system-ui'; w.document.body.textContent = 'Opening ' + it.title + '…'; } catch (e) {} }
+    thSimFile(hx).then(function (f) {
+      var html = new TextDecoder().decode(f.data);
+      var page = '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(it.title) + '</title>' +
+        '<style>html,body{margin:0;height:100%;background:#fff}iframe{display:block;border:0;width:100%;height:100%}</style></head><body>' +
+        '<iframe sandbox="allow-scripts allow-modals allow-popups allow-forms allow-downloads allow-pointer-lock" allow="fullscreen" allowfullscreen title="' + esc(it.title) + '" srcdoc="' + esc(html) + '"></iframe></body></html>';
+      var url = URL.createObjectURL(new Blob([page], { type: 'text/html' }));
+      if (w && !w.closed) { w.location.href = url; setTimeout(function () { try { w.opener = null; } catch (e) {} }, 0); }
+      else { var a2 = document.createElement('a'); a2.href = url; a2.target = '_blank'; a2.rel = 'noopener'; document.body.appendChild(a2); a2.click(); a2.remove(); }
+    }, function (e) {
+      if (w) { try { w.close(); } catch (er) {} }
+      ui.thFileErr = { id: it.id, msg: 'Couldn’t get ' + main + ' from GitHub. ' + e.message }; renderThPage();
+    });
+  }
   function thRunSim(k, cid) {
     var it = (state.thesis.lists[k] || []).filter(function (x) { return x.id === cid; })[0]; if (!it || !gh) return;
     var main = thSimMain(it); if (!main) return;
     if (ui.thRun && (ui.thRun.state === 'loading' || ui.thRun.state === 'running')) pyStop();   // one run at a time
-    if (/\.html?$/i.test(main)) {   // an HTML sim: fetch it and show it in a sandboxed frame
-      var hx = (it.links || []).filter(function (x) { return x.f && thFileName(x) === main; })[0], hjob = ++pyJob;
-      ui.thRun = { id: cid, k: k, job: hjob, kind: 'html', state: 'loading', status: 'Opening ' + main + '…', out: '', figs: [], kept: {}, err: '', ms: 0, main: main, html: '' };
-      thRunPaint();
-      thSimFile(hx).then(function (f) {
-        var r = ui.thRun; if (!r || r.job !== hjob) return;
-        r.html = new TextDecoder().decode(f.data); r.state = 'done'; r.status = ''; thRunPaint();
-      }, function (e) { thRunMsg({ id: hjob, t: 'fail', s: 'Couldn’t get ' + main + ' from GitHub. ' + e.message }); });
-      return;
-    }
+    if (/\.html?$/i.test(main)) { thOpenHtmlSim(it, main); return; }
     var files = thSimFiles(it);
     var job = ++pyJob;
     ui.thRun = { id: cid, k: k, job: job, state: 'loading', status: 'Getting your files…', out: '', figs: [], kept: {}, err: '', ms: 0, main: main };
@@ -4146,18 +4156,12 @@ td.c-break{display:none}
   function thRunBtn(k, it) {
     var r = ui.thRun && ui.thRun.id === it.id ? ui.thRun : null, busy = r && (r.state === 'loading' || r.state === 'running'), dk = ' data-k="' + k + '" data-id="' + esc(it.id) + '"';
     if (busy) return '<button type="button" class="btn btn-sm th-runbtn" id="th-runbtn-' + esc(it.id) + '" data-act="th-run-stop"' + dk + '>■ Stop</button>';
-    var ok = gh && thSimMain(it);
-    return '<button type="button" class="btn btn-sm primary th-runbtn" id="th-runbtn-' + esc(it.id) + '" data-act="th-run"' + dk + (ok ? '' : ' disabled title="' + (gh ? 'Add its HTML file first' : 'Connect GitHub to run sims') + '"') + '>▶ Run</button>';
+    var mn = thSimMain(it), ok = gh && mn, isHtml = /\.html?$/i.test(mn || '.html');
+    return '<button type="button" class="btn btn-sm primary th-runbtn" id="th-runbtn-' + esc(it.id) + '" data-act="th-run"' + dk + (ok ? (isHtml ? ' title="Open in a new tab"' : '') : ' disabled title="' + (gh ? 'Add its HTML file first' : 'Connect GitHub to open sims') + '"') + '>' + (isHtml ? 'Open ↗' : '▶ Run') + '</button>';
   }
   // what a run printed and drew
   function thRunInner(k, it, ro) {
     var r = ui.thRun && ui.thRun.id === it.id ? ui.thRun : null; if (!r) return '';
-    if (r.kind === 'html' && r.html) {
-      // no allow-same-origin: the page runs in its own sealed origin and can't touch Polaris, your token or your data
-      return '<div class="th-htmlsim"><div class="th-htmlsim-bar"><span class="th-htmlsim-name">' + esc(r.main) + '</span>' +
-        '<button type="button" class="link-btn" data-act="th-sim-max" data-id="' + esc(it.id) + '">Expand</button><button type="button" class="link-btn" data-act="th-run-close" data-id="' + esc(it.id) + '">Close</button></div>' +
-        '<iframe class="th-htmlsim-frame" sandbox="allow-scripts allow-modals allow-popups allow-forms allow-downloads allow-pointer-lock" allow="fullscreen" title="' + esc(it.title) + '" srcdoc="' + esc(r.html) + '"></iframe></div>';
-    }
     var busy = r.state === 'loading' || r.state === 'running', dk = ' data-k="' + k + '" data-id="' + esc(it.id) + '"';
     var h = r.status ? '<p class="th-run-st' + (busy ? ' is-busy' : r.state === 'fail' ? ' is-bad' : '') + '">' + esc(r.status) + '</p>' : '';
     if (r.out) h += '<pre class="th-run-log">' + esc(r.out) + '</pre>';
@@ -4186,7 +4190,7 @@ td.c-break{display:none}
     var files = (it.links || []).filter(function (x) { return x.f; }), pys = thRunnable(it);
     var h = '<div class="th-simrow' + (open ? ' is-open' : '') + '"><div class="th-simhd">' +
       '<span class="th-simn">' + (i + 1) + '</span>' +
-      '<button type="button" class="th-simname" data-act="' + (main && gh ? 'th-run' : 'th-sim-more') + '"' + dk + ' title="' + (main ? 'Run ' + esc(main) : 'Add its file') + '"><span class="th-simt">' + esc(it.title) + '</span>' +
+      '<button type="button" class="th-simname" data-act="' + (main && gh ? 'th-run' : 'th-sim-more') + '"' + dk + ' title="' + (main ? (/\.html?$/i.test(main) ? 'Open ' + esc(main) + ' in a new tab' : 'Run ' + esc(main)) : 'Add its file') + '"><span class="th-simt">' + esc(it.title) + '</span>' +
         '<span class="th-simfile">' + (up ? 'Uploading ' + esc(up.name) + '…' : main ? esc(main) + (files.length > 1 ? ' + ' + plural(files.length - 1, 'file') : '') : 'No file yet') + '</span></button>' +
       thRunBtn(k, it) +
       '<button type="button" class="th-simmore" data-act="th-sim-more"' + dk + ' aria-expanded="' + open + '" title="Files, name and delete" aria-label="More for ' + esc(it.title) + '">⋯</button></div>' +
@@ -4268,7 +4272,8 @@ td.c-break{display:none}
         (gh ? '<label class="btn btn-sm th-attach" title="Upload a file (up to 25 MB) to your private data repository">' + FILE_ICO + 'Attach file<input type="file" multiple class="sr-only" data-file-up="1"' + dk + '></label>' : '') + '</form>' : '') + '</div>';
   }
   function thGroupHTML(L, key, g, its, ro) {
-    var fold = ui.thGFold && ui.thGFold[(L.groupsFrom ? key + ':' : '') + (g ? g.id : '_none')], ren = g && ui.thGRen === g.id && !ro && !L.groupsFrom, done = its.filter(function (it) { return it.status === L.done; }).length;
+    var fkey = (L.groupsFrom ? key + ':' : '') + (g ? g.id : '_none'), tog = (ui.thGOpen || {})[fkey];
+    var fold = tog === undefined ? !its.some(function (it) { return it.id === ui.thCard; }) : !tog, ren = g && ui.thGRen === g.id && !ro && !L.groupsFrom, done = its.filter(function (it) { return it.status === L.done; }).length;
     if (L.groupsFrom) ro = true;   // shared groups are named, ordered and deleted on Reading cards
     var h = '<section class="th-grp' + (fold ? ' is-folded' : '') + (g ? '' : ' is-none') + '" data-gid="' + (g ? esc(g.id) : '') + '"><div class="th-grp-h">' +
       (g && !ro && !ren ? '<button type="button" class="th-grip" data-grip="grp" aria-label="Move the ' + esc(g.name) + ' group (drag, or use the arrow keys)" title="Drag to move">' + GRIP_ICO + '</button>' : '');
@@ -4647,7 +4652,7 @@ td.c-break{display:none}
     box.addEventListener('click', function (e) {
       var b = e.target.closest('[data-act]'); if (!b) return;
       var a = b.dataset.act, T = todayISO(), id = b.dataset.id;
-      if (a === 'th-open') { thOpen(id, true); if (isPhone()) window.scrollTo(0, 0); else { var w = $('#th-wrap'); if (w && w.getBoundingClientRect().top < 0) w.scrollIntoView({ block: 'start' }); } }
+      if (a === 'th-open') { if (id === 'th:stage' || id === 'th:sims') { ui.thGOpen = {}; ui.thCard = null; ui.thSimOpen = null; } thOpen(id, true); if (isPhone()) window.scrollTo(0, 0); else { var w = $('#th-wrap'); if (w && w.getBoundingClientRect().top < 0) w.scrollIntoView({ block: 'start' }); } }
       else if (a === 'th-back') { ui.thReading = false; layerClosed('th'); renderThesis(T); }
       else if (a === 'th-paste') openThEditor('new');
       else if (a === 'th-note') {
@@ -4658,7 +4663,7 @@ td.c-break{display:none}
         if (tt) { tt.focus(); try { var rr = document.createRange(); rr.selectNodeContents(tt); var ss = getSelection(); ss.removeAllRanges(); ss.addRange(rr); } catch (er) {} }
       }
       else if (a === 'th-edit') openThesisEdit();
-      else if (a === 'th-stage') { ui.thView = b.dataset.stage; ui.thCard = null; ui.thSecs = {}; ui.thPast = null; renderThesis(T); }
+      else if (a === 'th-stage') { ui.thView = b.dataset.stage; ui.thCard = null; ui.thGOpen = {}; ui.thSecs = {}; ui.thPast = null; renderThesis(T); }
       else if (a === 'th-make-now') { var mk0 = b.dataset.stage; commit(function (s) { s.thesis.stage = mk0; }); }
       else if (a === 'th-next') { var nx = TH_STAGES[thStageIndex() + 1]; if (!nx) return; ui.thView = nx.id; ui.thSecs = {}; commit(function (s) { s.thesis.stage = nx.id; }); }
       else if (a === 'th-sec') { var sk = b.dataset.sec, exp = b.getAttribute('aria-expanded') === 'true'; ui.thSecs = ui.thSecs || {}; ui.thSecs[sk] = !exp; renderThList(); }
@@ -4692,7 +4697,7 @@ td.c-break{display:none}
           onYes: function () { commit(function (s) { s.thesis.umbrellas = s.thesis.umbrellas.filter(function (u) { return u.id !== id; }); s.thesis.topics.forEach(function (t) { if (t.umb === id) t.umb = null; }); }); } });
       }
       else if (a === 'th-card-toggle') { ui.thCard = ui.thCard === id ? null : id; renderThPage(); }
-      else if (a === 'th-grp-fold') { var gf = b.dataset.gid; ui.thGFold = ui.thGFold || {}; ui.thGFold[gf] = !ui.thGFold[gf]; renderThPage(); }
+      else if (a === 'th-grp-fold') { var gf = b.dataset.gid; ui.thGOpen = ui.thGOpen || {}; ui.thGOpen[gf] = b.getAttribute('aria-expanded') !== 'true'; renderThPage(); }
       else if (a === 'th-grp-add') { ui.thGAdd = ui.thGAdd === b.dataset.k ? null : b.dataset.k; renderThPage(); var gni = $('#th-gn-' + b.dataset.k.replace('.', '\\.')); if (gni) gni.focus(); }
       else if (a === 'th-grp-ren') { ui.thGRen = b.dataset.gid; renderThPage(); var gri = $('#th-gr-' + b.dataset.gid); if (gri) { gri.focus(); gri.select(); } }
       else if (a === 'th-grp-del') {
