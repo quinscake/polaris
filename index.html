@@ -36,8 +36,9 @@
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none !important}
 html,body{margin:0;min-height:100%}
-body{
-  background-color:var(--space);
+body{background-color:var(--space);color:var(--ink);font:15px/1.5 var(--font-body);-webkit-font-smoothing:antialiased}
+/* the starfield: one fixed layer behind everything, so scrolling never repaints it */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background-image:
     radial-gradient(ellipse 55% 45% at 88% -5%, rgba(88,112,210,.20), transparent 70%),
     radial-gradient(ellipse 45% 40% at -5% 105%, rgba(150,92,210,.13), transparent 70%),
@@ -50,12 +51,7 @@ body{
     radial-gradient(circle at 140px 380px, rgba(255,226,180,.85) 0 1.3px, transparent 2.2px),
     radial-gradient(circle at 470px 120px, rgba(190,210,255,.9) 0 1.3px, transparent 2.2px);
   background-size:100% 100%,100% 100%,233px 197px,233px 197px,233px 197px,389px 311px,389px 311px,389px 311px,547px 463px,547px 463px;
-  background-repeat:no-repeat,no-repeat,repeat,repeat,repeat,repeat,repeat,repeat,repeat,repeat;
-  background-attachment:fixed;
-  color:var(--ink);
-  font:15px/1.5 var(--font-body);
-  -webkit-font-smoothing:antialiased;
-}
+  background-repeat:no-repeat,no-repeat,repeat,repeat,repeat,repeat,repeat,repeat,repeat,repeat}
 button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -876,7 +872,6 @@ mark.th-hl.is-flash{animation:thflash 1.4s ease}
 .th-pen .pen-clear{color:#ff8f8f}
 @keyframes thflash{0%,40%{background:rgba(255,184,107,.65)}100%{background:rgba(255,184,107,.24)}}
 
-.th-markbtn-old{position:absolute;z-index:60;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:0;border-radius:999px;background:var(--warn);color:#1b1407;font:600 13px var(--font-body);box-shadow:0 8px 24px rgba(0,0,0,.45);cursor:pointer}
 .th-markbtn .star{width:13px;height:13px}
 .th-markbtn[hidden]{display:none}
 .th-toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));z-index:70;transform:translate(-50%,20px);opacity:0;pointer-events:none;display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:#2a2417;border:1px solid rgba(255,184,107,.45);color:#ffe3c2;font-size:13.5px;transition:opacity .2s,transform .2s}
@@ -1283,8 +1278,6 @@ body[data-view="todo"] #quick-add,body[data-view="table"] #quick-add{display:non
 .orbit circle.p{fill:currentColor;stroke:none}
 .orbit ellipse{fill:none;stroke:currentColor;stroke-width:1.5}
 
-  background:radial-gradient(120% 160% at 0% 0%,rgba(138,180,255,.11),transparent 55%),rgba(17,22,36,.84)}
-
 
 /* areas */
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -1652,8 +1645,8 @@ td.c-break{display:none}
   var MIN_COL_PHONE = { 7: 30, 14: 19, 30: 20 };
   function isPhone() { return !!(window.matchMedia && window.matchMedia('(max-width: 640px)').matches); }
   var lastScrollKey = null;
-  var FUTURE = { 7: 3, 14: 4, 30: 7 };   // days shown after today, so deadlines are visible
   var DUE_SOON = 3;                       // remind this many days before a deadline
+  var TITLE_MAX = 300;                    // longest task or to-do title kept
   var BASE_TITLE = document.title || 'Polaris';
   var FLAG = '<svg class="flag" viewBox="0 0 16 16" aria-hidden="true"><path class="fill" d="M3.5 2.5h8.5l-2.2 3 2.2 3H3.5z"/><path d="M3.5 14.5V2"/><path d="M3.5 2.5h8.5l-2.2 3 2.2 3H3.5"/></svg>';
   var XICO = '<svg class="xico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
@@ -1677,7 +1670,6 @@ td.c-break{display:none}
   var FOCUS_MAX = 3;   // projects in orbit before Polaris suggests parking one
   var REOPEN_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 8a4.8 4.8 0 1 0 1.4-3.4M3.2 2.6v2.9h2.9"/></svg>';
   var TRASH_ICO = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.6 8.5h5.8l.6-8.5M6.8 7v4M9.2 7v4"/></svg>';
-  var CLIP = '<svg class="clip" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 7.5 8.2 12.3a3 3 0 0 1-4.3-4.3l5-5a2 2 0 0 1 2.9 2.9l-5 5a1 1 0 0 1-1.4-1.4L10 4.9"/></svg>';
   var EXT = '<svg class="ext" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5H3.5v9h9V10M9 2.5h4.5V7M13.5 2.5 7.5 8.5"/></svg>';
   function linkTile(svc) { return '<span class="ltile s-' + svc + '"><svg viewBox="0 0 16 16" aria-hidden="true">' + (LK_SVG[svc] || LK_SVG.link) + '</svg></span>'; }
   // Accepts a pasted address, adds https:// if it's missing, and only allows web links.
@@ -1754,11 +1746,9 @@ td.c-break{display:none}
   }
 
   var STAR = '<svg class="star" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1 9.7 6.3 15 8 9.7 9.7 8 15 6.3 9.7 1 8 6.3 6.3z"/></svg>';
-  var CHECK = '<svg class="check" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.4 5 8.8 9.6 3.4"/></svg>';
   var CK = '<svg class="ck" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.4 5 8.8 9.6 3.4"/></svg>';
   var ORBIT = '<svg class="orbit" viewBox="0 0 36 36" aria-hidden="true"><circle class="p" cx="18" cy="18" r="7"/><ellipse cx="18" cy="18" rx="15.5" ry="5.5" transform="rotate(-20 18 18)"/></svg>';
   var DRIFT_DAYS = 5;    // a project with no update for this many days is "drifting"
-  var GOAL_SOON = 14;    // mission goals get a reminder this many days ahead
   var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var WD = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
@@ -1814,13 +1804,6 @@ td.c-break{display:none}
   function fmtYear(iso) { return fmtShort(iso) + ', ' + iso.slice(0, 4); }
   function fmtTime(ms) { if (!ms) return ''; var d = new Date(ms); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
   function isWeekend(iso) { var w = dow(iso); return w === 0 || w === 6; }
-  // Dated to-dos first (soonest first), then undated ones in the order they were added.
-  function cmpTask(a, b) {
-    if (a.date && b.date) return a.date < b.date ? -1 : a.date > b.date ? 1 : 0;
-    if (a.date) return -1;
-    if (b.date) return 1;
-    return 0;
-  }
   function relDay(iso, T) {
     var n = diffDays(iso, T);
     return n === 0 ? 'Today' : n === 1 ? 'Yesterday' : n === -1 ? 'Tomorrow' : fmtShort(iso) + (iso.slice(0, 4) !== T.slice(0, 4) ? ', ' + iso.slice(0, 4) : '');
@@ -1939,7 +1922,7 @@ td.c-break{display:none}
         else if (date && time) at = zonedMs(date, time, '');
         else at = 0;
         var st = x.done ? 'done' : (x.status === 'doing' || x.status === 'waiting') ? x.status : 'todo';
-        ms.push({ id: mid, title: x.title.trim().slice(0, 140), date: date, done: !!x.done,
+        ms.push({ id: mid, title: x.title.trim().slice(0, TITLE_MAX), date: date, done: !!x.done,
           doneOn: x.done && isISO(x.doneOn) ? x.doneOn : null, url: (typeof x.url === 'string' && cleanUrl(x.url)) || '', created: Number(x.created) || 0,
           today: !x.done && isISO(x.today) ? x.today : null, time: time, at: time ? at : 0, tz: time && validTz(x.tz) ? x.tz : '',
           doneAt: x.done ? (Number(x.doneAt) || noonOf(x.doneOn)) : 0,
@@ -2005,7 +1988,7 @@ td.c-break{display:none}
       tids[tid] = true;
       var done = !!t.done, doneOn = done && isISO(t.doneOn) ? t.doneOn : null;
       if (done && doneOn && doneOn < cutoff) return;
-      out.tasks.push({ id: tid, title: t.title.trim().slice(0, 140), url: (typeof t.url === 'string' && cleanUrl(t.url)) || '',
+      out.tasks.push({ id: tid, title: t.title.trim().slice(0, TITLE_MAX), url: (typeof t.url === 'string' && cleanUrl(t.url)) || '',
         day: isISO(t.day) ? t.day : todayISO(), created: Number(t.created) || 0, done: done, doneOn: doneOn,
         time: isTime(t.time) ? t.time : null, doneAt: done ? (Number(t.doneAt) || noonOf(doneOn)) : 0 });
     });
@@ -2057,8 +2040,14 @@ td.c-break{display:none}
     } catch (e) { return null; }
   }
   function loadLocal() {
-    try { var raw = localStorage.getItem(LS_KEY); return raw ? normalize(JSON.parse(raw)) : null; }
-    catch (e) { return null; }
+    var raw = null;
+    try { raw = localStorage.getItem(LS_KEY); } catch (e) { return null; }
+    if (!raw) return null;
+    try { var s0 = normalize(JSON.parse(raw)); if (s0) { lastJsonSize = raw.length; return s0; } } catch (e) {}
+    // the saved copy can't be read: keep it untouched under its own key before anything writes over it
+    var hasGh = false; try { hasGh = !!localStorage.getItem('kepler:github'); if (!localStorage.getItem(CORRUPT_KEY)) localStorage.setItem(CORRUPT_KEY, JSON.stringify({ at: Date.now(), raw: raw })); } catch (e) {}
+    noticeSet('damaged', 'Polaris couldn’t read the copy saved in this browser, so it started from ' + (hasGh ? 'your GitHub board' : 'a blank board') + '. The unreadable copy is kept. ' + keptBtn(CORRUPT_KEY));
+    return null;
   }
 
   /* ---------- derived ---------- */
@@ -2120,16 +2109,11 @@ td.c-break{display:none}
     });
   }
   function dueLabel(n) { return n <= 0 ? 'today' : n === 1 ? 'tomorrow' : 'in ' + n + ' days'; }
-  function dueSoon(T) {
-    return state.projects.filter(function (p) { return !p.ended && p.deadline && diffDays(T, p.deadline) <= DUE_SOON; })
-      .sort(function (a, b) { return a.deadline < b.deadline ? -1 : 1; });
-  }
   function recentlyForced(T) {
     return state.projects.filter(function (p) { return p.ended && p.endedBy === 'deadline' && diffDays(p.ended, T) <= 2; });
   }
 
   function areaOf(p) { for (var i = 0; i < state.areas.length; i++) if (state.areas[i].id === p.area) return state.areas[i]; return null; }
-  function goalById(id) { var g = null; state.mission.goals.forEach(function (x) { if (x.id === id) g = x; }); return g; }
   function lastActivity(p) { return lastUpdate(p) || p.start; }
   function driftDays(p, T) { return p.ended ? 0 : Math.max(0, diffDays(lastActivity(p), T)); }
   function isDrifting(p, T) { return !p.ended && !offTodo(p) && driftDays(p, T) >= DRIFT_DAYS; }
@@ -2266,7 +2250,7 @@ td.c-break{display:none}
       if (url) v = (v.slice(0, hit.index) + ' ' + v.slice(hit.index + hit[0].length)).replace(/\s+/g, ' ').replace(/[\s:–—-]+$/, '').trim();
     }
     if (!v && url) v = linkTitle({ url: url, title: '' });
-    return { title: v.slice(0, 140), url: url };
+    return { title: v.slice(0, TITLE_MAX), url: url };
   }
   // Google Calendar "new event" link for an all-day event
   // Everything with a date: final deadlines and milestones
@@ -2279,14 +2263,6 @@ td.c-break{display:none}
       p.milestones.forEach(function (m) { if (m.date && !m.parent) items.push({ kind: 'milestone', date: m.date, p: p, m: m, title: m.title, done: m.done }); });
     });
     return items.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
-  }
-  // Days in a row with at least one update, counting today once you've logged
-  function streakInfo(T) {
-    var days = {};
-    state.updates.forEach(function (u) { days[u.date] = true; });
-    var today = !!days[T], d = today ? T : addDays(T, -1), n = 0;
-    while (days[d]) { n++; d = addDays(d, -1); }
-    return { n: n, today: today };
   }
 
   /* ================= saving ================= */
@@ -2303,7 +2279,7 @@ td.c-break{display:none}
   function scheduleSave(delay) {
     dirty = true;
     if (mode === 'artifact' || mode === 'pending' || mode === 'github') setStatus('saving');
-    if (mode === 'github') cacheLocal();
+    if (mode === 'github') scheduleCache();
     clearTimeout(saveTimer);
     saveTimer = setTimeout(trySave, delay == null ? (mode === 'local' ? 0 : mode === 'github' ? 1500 : 1200) : delay);
   }
@@ -2318,13 +2294,13 @@ td.c-break{display:none}
   function trySave(force) {
     if (!dirty || mode === 'pending' || mode === 'readonly') return;
     if (mode === 'github') {
-      cacheLocal();
+      clearTimeout(cacheTimer); cacheTimer = 0; cacheLocal();
       if (publishing) { clearTimeout(saveTimer); saveTimer = setTimeout(trySave, 800); return; }
       ghPush(false, force);
       return;
     }
     if (mode === 'local') {
-      try { localStorage.setItem(LS_KEY, JSON.stringify(state)); dirty = false; setStatus(localOnlyInViewer ? 'localOnly' : 'local'); }
+      try { var lj = JSON.stringify(state); lastJsonSize = lj.length; localStorage.setItem(LS_KEY, lj); dirty = false; setStatus(localOnlyInViewer ? 'localOnly' : 'local'); }
       catch (e) { setStatus('errorLocal'); }
       return;
     }
@@ -2380,14 +2356,20 @@ td.c-break{display:none}
       gh: ['', ''],
       ghLoading: ['', ''],
       ghNewer: ['', ''],
-      ghError: ['', '']
+      ghOffline: ['Offline · saved on this device', 'is-warn'],
+      ghError: ['Not synced', 'is-err']
     };
     var m = map[kind] || map[''];
     ghSub(kind);
     el.className = 'save-status ' + m[1];
     el.textContent = m[0];
     el.title = detail || '';
-    ghLastError = kind === 'ghError' ? (detail || 'Couldn’t sync with GitHub.') : kind === 'gh' || kind === 'ghNewer' ? '' : ghLastError;
+    ghLastError = kind === 'ghError' || kind === 'ghOffline' ? (detail || 'Couldn’t sync with GitHub.') : kind === 'gh' || kind === 'ghNewer' ? '' : ghLastError;
+    if (kind === 'ghError') {
+      var fx = document.createElement('button'); fx.type = 'button'; fx.textContent = 'Fix';
+      fx.addEventListener('click', function () { openSync(ghLastError || undefined); });
+      el.appendChild(document.createTextNode(' · ')); el.appendChild(fx);
+    }
     if (kind === 'error') {
       var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Retry';
       b.addEventListener('click', function () { scheduleSave(0); });
@@ -2425,7 +2407,40 @@ td.c-break{display:none}
   var GH_KEY = 'kepler:github';
   var gh = null, ghSha = null;
 
-  function cacheLocal() { try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {} }
+  var cacheTimer = 0, lastJsonSize = 0, localFull = false;
+  function cacheLocal() {
+    var json; try { json = JSON.stringify(state); } catch (e) { return; }
+    lastJsonSize = json.length;
+    try { localStorage.setItem(LS_KEY, json); if (localFull) { localFull = false; noticeClear('full'); } }
+    catch (e) {
+      if (!localFull) { localFull = true; noticeSet('full', 'This browser is out of room for Polaris’s offline copy. Your board still saves to GitHub, but changes made here while offline could be lost. Deleting old pages or chats you don’t need frees room.'); }
+    }
+  }
+  function scheduleCache() { clearTimeout(cacheTimer); cacheTimer = setTimeout(function () { cacheTimer = 0; cacheLocal(); }, 300); }
+  function flushCache() { if (cacheTimer) { clearTimeout(cacheTimer); cacheTimer = 0; cacheLocal(); } }
+  // Notices: short messages about your data (a merge, a damaged copy, a full browser), shown on every tab until dismissed.
+  var notices = {};
+  function noticeSet(key, html) { notices[key] = html; try { renderReminders(todayISO()); } catch (e) {} }
+  function noticeClear(key) { if (!notices[key]) return; delete notices[key]; try { renderReminders(todayISO()); } catch (e) {} }
+  // Copies kept in this browser: the board from before a merge or a replacement, and a saved copy Polaris couldn't read.
+  var BACKUP_KEY = 'polaris:backup', CORRUPT_KEY = LS_KEY + ':corrupt';
+  function keepCopy(board, why) { try { localStorage.setItem(BACKUP_KEY, JSON.stringify({ at: Date.now(), why: why, board: board })); return true; } catch (e) { return false; } }
+  function keptBtn(key) { return '<button type="button" class="link-btn" data-act="kept-dl" data-key="' + (key || BACKUP_KEY) + '">Download it</button>'; }
+  function keptList() {
+    var out = [], WHY = { merge: 'from before a merge', replaced: 'replaced by GitHub’s board', github: 'GitHub’s board, replaced by this browser’s' };
+    [[BACKUP_KEY, 'Automatic copy'], [CORRUPT_KEY, 'Damaged copy']].forEach(function (k) {
+      try { var o = JSON.parse(localStorage.getItem(k[0]) || 'null'); if (o && o.at) out.push({ key: k[0], label: k[1] + ', ' + fmtLong(isoOf(o.at)) + ' ' + fmtTime(o.at) + (WHY[o.why] ? ' (' + WHY[o.why] + ')' : '') }); } catch (e) {}
+    });
+    return out;
+  }
+  function downloadKept(key) {
+    var raw = null, o = null; try { raw = localStorage.getItem(key); o = JSON.parse(raw); } catch (e) {}
+    if (!raw) return;
+    var text = o && o.board ? JSON.stringify(o.board, null, 2) : o && typeof o.raw === 'string' ? o.raw : raw;
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+    a.download = (key === CORRUPT_KEY ? 'polaris-damaged-' : 'polaris-copy-') + isoOf(o && o.at) + '.json';
+    document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  }
   function loadGh() {
     try {
       var c = JSON.parse(localStorage.getItem(GH_KEY) || 'null');
@@ -2448,6 +2463,7 @@ td.c-break{display:none}
     var m = (j && j.message) || '';
     var e = new Error(
       status === 401 ? 'GitHub didn’t accept the token. It may be mistyped or expired.' :
+      status === 403 && /rate limit/i.test(m) ? 'GitHub is limiting requests right now. Polaris tries again by itself; give it a few minutes.' :
       status === 403 ? 'The token isn’t allowed to do this. Give it “Contents: Read and write” on this repository.' :
       status === 404 && /branch/i.test(m) ? 'There’s no branch with that name in the repository.' :
       status === 404 ? 'Couldn’t find that repository. Check the name, and that the token has access to it.' :
@@ -2491,13 +2507,14 @@ td.c-break{display:none}
   }
   function ghDeleteFile(c, x) {
     var del = function (sha) { return ghFetch(c, ghPathUrl(c, x.f), { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: 'Polaris: remove ' + (x.n || x.f), sha: sha, branch: c.branch }) }); };
-    var look = function () { return ghFetch(c, ghPathUrl(c, x.f) + '?ref=' + encodeURIComponent(c.branch), { cache: 'no-store' }).then(function (j) { return j.sha; }); };
+    var look = function () { return ghFetch(c, ghPathUrl(c, x.f) + '?ref=' + encodeURIComponent(c.branch), { cache: 'no-store', headers: { 'Accept': 'application/vnd.github.object+json' } }).then(function (j) { return j.sha; }); };
     return (x.sha ? del(x.sha).catch(function (e) { if (e.status === 409 || e.status === 422) return look().then(del); throw e; }) : look().then(del))
       .catch(function (e) { if (e.status === 404) return; throw e; });
   }
   function ghRepoCheck(c) { return ghFetch(c, 'https://api.github.com/repos/' + c.repo, { cache: 'no-store' }); }
   function ghGet(c) {
-    return ghFetch(c, ghUrl(c) + '?ref=' + encodeURIComponent(c.branch), { cache: 'no-store' }).then(function (j) {
+    // the object media type works up to 100 MB (the default one refuses files over 1 MB); over 1 MB the text comes from git/blobs
+    return ghFetch(c, ghUrl(c) + '?ref=' + encodeURIComponent(c.branch), { cache: 'no-store', headers: { 'Accept': 'application/vnd.github.object+json' } }).then(function (j) {
       if (j && !j.content && j.sha && (j.encoding === 'none' || j.size > 0)) {
         return ghFetch(c, 'https://api.github.com/repos/' + c.repo + '/git/blobs/' + j.sha, { cache: 'no-store' }).then(function (b) { return { sha: j.sha, content: b.content || '' }; });
       }
@@ -2524,43 +2541,162 @@ td.c-break{display:none}
       .then(function (j) { return j && j.content ? j.content.sha : null; });
   }
 
-  // Load the board from GitHub. The copy with the higher revision number wins.
+  // ---- keeping this browser and GitHub in step ----
+  // The sync record remembers the GitHub version (its sha) this browser last matched, and the board's revision then.
+  // Only GitHub moved: take GitHub's. Only this browser moved: send it. Both moved: merge the two against the version
+  // they share (read back from GitHub's history by its sha), so neither side's work is lost; a copy is kept either way.
+  var SYNC_KEY = LS_KEY + ':sync', pulling = false;
+  function syncRec() {
+    try { var r = JSON.parse(localStorage.getItem(SYNC_KEY) || 'null'); if (r && gh && r.repo === gh.repo && r.path === gh.path && typeof r.sha === 'string') return r; } catch (e) {}
+    return null;
+  }
+  function syncSave(sha, rev) { if (!gh || !sha) return; try { localStorage.setItem(SYNC_KEY, JSON.stringify({ sha: sha, rev: rev, repo: gh.repo, path: gh.path })); } catch (e) {} }
+  function stableJSON(x) { return JSON.stringify(x, function (k, v) { if (v && typeof v === 'object' && !Array.isArray(v)) { var o = {}; Object.keys(v).sort().forEach(function (kk) { o[kk] = v[kk]; }); return o; } return v; }); }
+  function same(a, b) { return a === b || stableJSON(a) === stableJSON(b); }
+  function sameBoard(a, b) { var x = JSON.parse(JSON.stringify(a)), y = JSON.parse(JSON.stringify(b)); x.rev = y.rev = 0; return same(x, y); }
+  function hasContent(st) { return !!st && (st.projects.some(function (p) { return !p.sample; }) || st.tasks.length > 0 || st.thesis.pages.length > 0 || st.thesis.journal.length > 0); }
+  function isObj(x) { return !!x && typeof x === 'object' && !Array.isArray(x); }
+  function idArr(x) { return Array.isArray(x) && x.every(function (v) { return isObj(v) && typeof v.id === 'string' && v.id; }); }
+  // Three-way merge: b = the shared version, o = this device's, t = GitHub's. Lists of things with ids merge item by item.
+  function merge3(b, o, t, conf) {
+    if (same(o, t)) return o;
+    if (b !== undefined && same(b, o)) return t;
+    if (b !== undefined && same(b, t)) return o;
+    if (isObj(o) && isObj(t)) {
+      var bb = isObj(b) ? b : {}, out = {};
+      Object.keys(t).concat(Object.keys(o).filter(function (k) { return !(k in t); })).forEach(function (k) {
+        var inO = k in o, inT = k in t, inB = k in bb;
+        if (inO && inT) out[k] = merge3(inB ? bb[k] : undefined, o[k], t[k], conf);
+        else if (inO) { if (!inB || !same(bb[k], o[k])) out[k] = o[k]; }   // removed on GitHub: gone, unless changed here
+        else if (!inB || !same(bb[k], t[k])) out[k] = t[k];
+      });
+      return out;
+    }
+    if (idArr(o) && idArr(t) && (b === undefined || idArr(b))) return mergeList(b || [], o, t, conf);
+    conf.n++;
+    return o;   // both changed the same value: this device's version wins (the other is in the kept copy and GitHub's history)
+  }
+  function mergeList(b, o, t, conf) {
+    var B = {}, O = {}, T = {};
+    b.forEach(function (x) { B[x.id] = x; }); o.forEach(function (x) { O[x.id] = x; }); t.forEach(function (x) { T[x.id] = x; });
+    function pick(id) {
+      var inB = id in B, inO = id in O, inT = id in T;
+      if (inO && inT) return merge3(inB ? B[id] : undefined, O[id], T[id], conf);
+      if (inO) return !inB || !same(B[id], O[id]) ? O[id] : null;   // deleted on the other side: gone, unless changed here
+      if (inT) return !inB || !same(B[id], T[id]) ? T[id] : null;
+      return null;
+    }
+    var out = [], placed = {};
+    o.forEach(function (x) { var v = pick(x.id); if (v) { out.push(v); placed[x.id] = true; } });
+    // things only GitHub's version has go in after the item they follow there
+    t.forEach(function (x, i) {
+      if (placed[x.id]) return;
+      var v = pick(x.id); if (!v) return;
+      var at = -1;
+      for (var j = i - 1; j >= 0 && at < 0; j--) for (var k = 0; k < out.length; k++) if (out[k].id === t[j].id) { at = k; break; }
+      out.splice(at + 1, 0, v); placed[x.id] = true;
+    });
+    return out;
+  }
+  function ghBlob(c, sha) {
+    return ghFetch(c, 'https://api.github.com/repos/' + c.repo + '/git/blobs/' + sha, { cache: 'no-store' }).then(function (b) {
+      var d = normalize(JSON.parse(b64decode(b.content || ''))); if (!d) throw new Error('Not a Polaris board.'); return d;
+    });
+  }
+  function ghFail(e) {
+    setStatus(e && e.status === 0 ? 'ghOffline' : 'ghError', (e && e.message) || 'Couldn’t sync with GitHub.');
+    if (dirty && e && (e.status === 0 || e.status >= 500)) { clearTimeout(saveTimer); saveTimer = setTimeout(trySave, 60000); }   // try again by itself
+  }
+  function adoptRemote(res) { state = res.data; dirty = false; ghSha = res.sha; cacheLocal(); syncSave(res.sha, state.rev); render(); setStatus('ghNewer'); }
+
+  // Load the board from GitHub and bring both sides in step.
   function ghPull() {
-    if (!gh) return;
-    var c = gh, startRev = state.rev;
+    if (!gh || pulling) return;
+    var c = gh; pulling = true;
     setStatus('ghLoading');
     ghGet(c).then(function (res) {
-      if (gh !== c) return;
+      pulling = false;
+      if (gh !== c || publishing) return;   // a save in flight sorts itself out when it lands
       if (res.missing) { ghSha = null; dirty = true; return ghPush(); }
-      ghSha = res.sha;
-      if (state.rev !== startRev || res.data.rev < state.rev) { dirty = true; return ghPush(); }
-      if (res.data.rev > state.rev) { state = res.data; cacheLocal(); render(); setStatus(startRev > 0 ? 'ghNewer' : 'gh'); }
-      else if (!dirty) setStatus('gh');
-    }).catch(function (e) { setStatus('ghError', e.message); });
+      return ghReconcile(c, res, 0);
+    }).catch(function (e) { pulling = false; ghFail(e); });
+  }
+  function ghReconcile(c, res, tries) {
+    var rec = syncRec(), localMoved = dirty || !rec || state.rev !== rec.rev, ghMoved = !rec || res.sha !== rec.sha;
+    ghSha = res.sha;
+    if (rec && !ghMoved) { if (localMoved) { dirty = true; return ghPush(tries); } setStatus('gh'); return; }
+    if (sameBoard(state, res.data)) { state.rev = Math.max(state.rev, res.data.rev); dirty = false; syncSave(res.sha, state.rev); cacheLocal(); setStatus('gh'); return; }
+    if (rec && !localMoved) { adoptRemote(res); return; }
+    if (!rec) {   // first sync in this browser: no shared version to merge against
+      if (!hasContent(state) || res.data.rev >= state.rev) {
+        var kept = hasContent(state) && keepCopy(JSON.parse(JSON.stringify(state)), 'replaced');
+        adoptRemote(res);
+        if (kept) noticeSet('sync', 'GitHub had a newer board, so Polaris loaded it. The different copy that was in this browser is kept. ' + keptBtn());
+        return;
+      }
+      if (keepCopy(res.data, 'github')) noticeSet('sync', 'This browser’s board was newer, so it replaced the one on GitHub. GitHub’s copy is kept here and in your repository’s history. ' + keptBtn());
+      dirty = true; return ghPush(tries);
+    }
+    return ghMerge(c, rec, res, tries);
+  }
+  function ghMerge(c, rec, res, tries) {
+    setStatus('saving');
+    return ghBlob(c, rec.sha).then(null, function () { return null; }).then(function (base) {
+      if (gh !== c) return;
+      var mine = JSON.parse(JSON.stringify(state)), conf = { n: 0 }, kept = keepCopy(mine, 'merge'), merged = null;
+      if (base) {   // the revision counter isn't content: line it up before merging, set it after
+        var o = JSON.parse(JSON.stringify(mine)), t = JSON.parse(JSON.stringify(res.data)); o.rev = t.rev = base.rev;
+        merged = normalize(JSON.parse(JSON.stringify(merge3(base, o, t, conf))));
+      }
+      if (!merged) {   // the shared version couldn't be read: GitHub's board wins and this browser's is kept
+        adoptRemote(res);
+        noticeSet('sync', 'Your board changed on another device too, and Polaris couldn’t combine the two, so it loaded the GitHub version.' + (kept ? ' This browser’s copy is kept. ' + keptBtn() : ''));
+        return;
+      }
+      merged.rev = Math.max(mine.rev || 0, res.data.rev || 0) + 1;
+      state = merged; ghSha = res.sha; dirty = true; cacheLocal(); render();
+      noticeSet('sync', 'Changes from another device were merged with this one’s.' + (conf.n ? ' Where both changed the same thing, this device’s version was kept.' : '') + (kept ? ' A copy from before the merge is kept. ' + keptBtn() : ''));
+      return ghPush(tries);
+    });
   }
 
   // Save the board to GitHub as one commit.
-  function ghPush(retried, keepalive) {
+  function ghPush(tries, keepalive) {
     if (!gh || !dirty) return Promise.resolve();
     if (publishing) { clearTimeout(saveTimer); saveTimer = setTimeout(trySave, 800); return Promise.resolve(); }
-    var c = gh, snap = state;
+    var c = gh, snapRev = state.rev;
     publishing = true; dirty = false; setStatus('saving');
-    return ghPut(c, snap, ghSha, keepalive).then(function (sha) {
+    return ghPut(c, state, ghSha, keepalive).then(function (sha) {
       publishing = false;
-      if (sha) ghSha = sha;
+      if (sha) { ghSha = sha; syncSave(sha, snapRev); }
       if (dirty) scheduleSave(); else setStatus('gh');
     }, function (e) {
-      publishing = false;
-      if ((e.status === 409 || e.status === 422) && !retried) {
+      publishing = false; dirty = true;
+      if ((e.status === 409 || e.status === 422) && (tries || 0) < 3) {   // GitHub's file changed since we read it
         return ghGet(c).then(function (res) {
-          ghSha = res.missing ? null : res.sha;
-          if (!res.missing && res.data.rev > snap.rev) { state = res.data; cacheLocal(); render(); setStatus('ghNewer'); return; }
-          dirty = true;
-          return ghPush(true);
-        }).catch(function (e2) { dirty = true; setStatus('ghError', e2.message); });
+          if (gh !== c) return;
+          if (res.missing) { ghSha = null; return ghPush((tries || 0) + 1); }
+          return ghReconcile(c, res, (tries || 0) + 1);
+        }).catch(ghFail);
       }
-      dirty = true;
-      setStatus('ghError', e.message);
+      ghFail(e);
+    });
+  }
+  // Two boards and no shared history (connecting a browser that has its own): you pick, and the other is kept.
+  function pickBoard(res) {
+    var sum = function (st) { return plural(st.projects.length, 'project') + ', ' + plural(st.thesis.pages.length, 'note') + ', ' + plural(st.tasks.length, 'task'); };
+    openModal({
+      draw: function () {
+        $('#modal-body').innerHTML = '<h2 id="modal-title">Which board?</h2>' +
+          '<p>Your GitHub file already has a board (' + sum(res.data) + '), and this browser has a different one (' + sum(state) + ').</p>' +
+          '<p class="muted" style="font-size:13px">The one you don’t pick is kept as a copy under Backup.</p>' +
+          '<div class="modal-actions"><button type="button" class="btn" data-act="pick-local">Keep this browser’s</button><button type="button" class="btn primary" data-act="pick-gh" autofocus>Use GitHub’s</button></div>';
+      },
+      onClick: function (e) {
+        var bt = e.target.closest('[data-act]'); if (!bt) return;
+        if (bt.dataset.act === 'pick-gh') { keepCopy(JSON.parse(JSON.stringify(state)), 'replaced'); closeModal(); adoptRemote(res); }
+        else if (bt.dataset.act === 'pick-local') { keepCopy(res.data, 'github'); closeModal(); dirty = true; render(); ghPush(); }
+      }
     });
   }
 
@@ -2587,7 +2723,7 @@ td.c-break{display:none}
       },
       onClick: function (e) {
         if (e.target.closest('[data-act="disconnect"]')) {
-          try { localStorage.removeItem(GH_KEY); } catch (er) {}
+          try { localStorage.removeItem(GH_KEY); localStorage.removeItem(SYNC_KEY); } catch (er) {}
           gh = null; ghSha = null; mode = 'local'; cacheLocal();
           closeModal(); render(); setStatus('local');
         }
@@ -2610,23 +2746,21 @@ td.c-break{display:none}
           msg.textContent = 'Reading ' + c.path + '…';
           return ghGet(c);
         }).then(function (res) {
-          try { localStorage.setItem(GH_KEY, JSON.stringify(c)); } catch (er) {}
+          var moved = !cur || cur.repo !== c.repo || cur.path !== c.path || cur.branch !== c.branch;
+          try { localStorage.setItem(GH_KEY, JSON.stringify(c)); if (moved) localStorage.removeItem(SYNC_KEY); } catch (er) {}
           gh = c; mode = 'github';
-          if (!res.missing && res.data.rev >= state.rev) {
-            ghSha = res.sha; state = res.data; dirty = false; cacheLocal();
-            closeModal(); render(); setStatus('gh');
-            return;
-          }
-          ghSha = res.missing ? null : res.sha;
-          dirty = true; closeModal(); render();
-          return ghPush();
+          if (res.missing) { ghSha = null; dirty = true; closeModal(); render(); return ghPush(); }
+          ghSha = res.sha;
+          if (!moved && syncRec()) { closeModal(); return ghReconcile(c, res, 0); }   // same file, new token: carry on
+          if (!hasContent(state) || sameBoard(state, res.data)) { closeModal(); adoptRemote(res); return; }
+          pickBoard(res);
         }).catch(function (e) { fail(e.message || 'Couldn’t reach GitHub.'); });
       }
     });
   }
 
   /* ================= rendering ================= */
-  var VIEW_KEY = LS_KEY + ':view';
+  var VIEW_KEY = LS_KEY + ':view', lastView = null;
   // Timeline and To-do are tabs; the Library (all tables) opens from its button. Polaris reopens on the tab you used last.
   function currentView() {
     var h = location.hash;
@@ -2648,7 +2782,7 @@ td.c-break{display:none}
     renderQuickAdd(T);
     var view = currentView();
     document.body.setAttribute('data-view', view);
-    try { if (view !== 'table') localStorage.setItem(VIEW_KEY, view); } catch (e) {}
+    if (view !== lastView) { lastView = view; try { if (view !== 'table') localStorage.setItem(VIEW_KEY, view); } catch (e) {} }
     $$('.view-tab').forEach(function (a) { if (a.dataset.view === view) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     $('#view-timeline').hidden = view !== 'timeline';
     $('#view-todo').hidden = view !== 'todo';
@@ -2773,6 +2907,9 @@ td.c-break{display:none}
       cards.push({ n: -99, html: '<div class="reminder">' + STAR + '<span class="msg">Your <b>Polaris calendar</b> is waiting: Google wants you to sign in again before it can add your latest changes.</span><span class="reminder-acts">' +
         '<button type="button" class="link-btn" data-act="gc-signin">Sign in</button>' + dismissBtn('gcal|' + T) + '</span></div>' });
     }
+    Object.keys(notices).forEach(function (k) {
+      cards.push({ n: -98, html: '<div class="reminder is-recap">' + ORBIT + '<span class="msg">' + notices[k] + '</span><span class="reminder-acts"><button type="button" class="link-btn" data-act="notice-x" data-key="' + esc(k) + '">Dismiss</button></span></div>' });
+    });
     cards.sort(function (a, b) { return a.n - b.n; });
     recentlyForced(T).forEach(function (p) {
       var key = 'forced|' + p.id + '|' + p.ended + '|' + T;
@@ -2793,7 +2930,7 @@ td.c-break{display:none}
     var rc = recapHTML(T);
     if (rc) cards.push({ n: 300, html: rc });
     // reminders live on To-do; other views only show what needs you right now (a project that just ended, a calendar sign-in)
-    if (currentView() !== 'todo') cards = cards.filter(function (c) { return c.n === 100 || c.n === -99; });
+    if (currentView() !== 'todo') cards = cards.filter(function (c) { return c.n === 100 || c.n === -99 || c.n === -98; });
     var cap = isPhone() ? 2 : 3;
     var shown = ui.allReminders ? cards : cards.slice(0, cap);
     box.innerHTML = shown.map(function (c) { return c.html; }).join('') +
@@ -3041,7 +3178,8 @@ td.c-break{display:none}
     }).sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : b.created - a.created; });
 
     $('#updates-count').textContent = plural(list.length, 'update');
-    var ub = $('#updates-body');
+    var ub = $('#updates-body'), more = !q && !ui.allUpdates && list.length > 300 ? list.length : 0;
+    if (more) list = list.slice(0, 300);
     if (!list.length) {
       ub.innerHTML = '<tr><td colspan="4" class="table-empty">' + (state.updates.length ? 'No updates match these filters.' : 'No updates yet. Log one with the box at the top.') + '</td></tr>';
       return;
@@ -3062,14 +3200,13 @@ td.c-break{display:none}
         '<td class="c-proj"><span class="proj-cell"><i class="pdot"></i>' + esc(p.name) + '</span></td>' +
         '<td class="text c-text">' + esc(u.text) + '</td>' +
         '<td class="actions c-acts"><button type="button" class="link-btn edit-only" data-act="edit-upd" data-id="' + esc(u.id) + '">Edit</button><button type="button" class="link-btn danger edit-only" data-act="del-upd" data-id="' + esc(u.id) + '">Delete</button></td></tr>';
-    }).join('');
+    }).join('') + (more ? '<tr><td colspan="4" class="table-empty"><button type="button" class="link-btn" data-act="all-upd">Show all ' + more + ' updates</button></td></tr>' : '');
   }
 
   /* ================= to-do ================= */
   // One daily list fed by two sources: quick tasks you type in, and your projects' to-dos
   // that are due, overdue, or pulled in with the sun button. Unfinished items stay until done.
   var SUN = '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="2.8"/><path d="M8 1.6v1.5M8 12.9v1.5M1.6 8h1.5M12.9 8h1.5M3.5 3.5l1.1 1.1M11.4 11.4l1.1 1.1M3.5 12.5l1.1-1.1M11.4 4.6l1.1-1.1"/></svg>';
-  var LATER = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.6 4.6 12 8l-3.4 3.4"/></svg>';
   var todoShowDone = false, justStarred = null;
   var STAR_HOURS = 48;   // a finished task stays as a faded star this long, then leaves the list
   function recentDone(at) { return !!at && Date.now() - at < STAR_HOURS * 3600000; }
@@ -3300,7 +3437,7 @@ td.c-break{display:none}
       due: isISO(th.due) ? th.due : null, stage: stage, canvas: canvas, pages: [], marks: [], topics: []
     };
     var pids = {};
-    (Array.isArray(th.pages) ? th.pages : []).slice(0, 500).forEach(function (pg) {
+    (Array.isArray(th.pages) ? th.pages : []).slice(0, 3000).forEach(function (pg) {
       if (!pg || typeof pg !== 'object') return;
       var id = typeof pg.id === 'string' && pg.id ? pg.id.slice(0, 40) : uid();
       if (pids[id]) return; pids[id] = true;
@@ -3313,7 +3450,7 @@ td.c-break{display:none}
         ann: (Array.isArray(pg.ann) ? pg.ann : []).filter(function (a) { return a && TH_PENS[a.kind] && typeof a.q === 'string' && a.q.trim(); }).slice(0, 800)
           .map(function (a) { return { id: typeof a.id === 'string' && a.id ? a.id.slice(0, 40) : uid(), kind: a.kind, q: a.q.slice(0, 20000), pre: str(a.pre, 40), suf: str(a.suf, 40) }; }) });
     });
-    (Array.isArray(th.marks) ? th.marks : []).slice(0, 1000).forEach(function (m) {
+    (Array.isArray(th.marks) ? th.marks : []).slice(0, 3000).forEach(function (m) {
       if (!m || typeof m.text !== 'string' || !m.text.trim()) return;
       var mk = { id: typeof m.id === 'string' && m.id ? m.id.slice(0, 40) : uid(), page: pids[m.page] ? m.page : null, text: m.text.trim().slice(0, 3000), created: Number(m.created) || Date.now() };
       if (mk.page && typeof m.q === 'string' && m.q.trim()) { mk.q = m.q.slice(0, 20000); mk.pre = str(m.pre, 40); mk.suf = str(m.suf, 40); }
@@ -3629,8 +3766,8 @@ td.c-break{display:none}
     }
     if (katexState) return;
     katexState = 1;
-    var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = KATEX + 'katex.min.css'; css.crossOrigin = 'anonymous'; document.head.appendChild(css);
-    var js = document.createElement('script'); js.src = KATEX + 'katex.min.js'; js.async = true; js.crossOrigin = 'anonymous';
+    var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = KATEX + 'katex.min.css'; css.integrity = 'sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+'; css.crossOrigin = 'anonymous'; document.head.appendChild(css);
+    var js = document.createElement('script'); js.src = KATEX + 'katex.min.js'; js.integrity = 'sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg'; js.async = true; js.crossOrigin = 'anonymous';
     js.onload = function () { katexState = 2; var p = $('#th-page'); if (p) thTypeset(p); };
     js.onerror = function () { katexState = -1; };
     document.head.appendChild(js);
@@ -3690,7 +3827,6 @@ td.c-break{display:none}
     return (pg.proj || '') + (lp ? lp.name + (lp.ended || '') : '') + '/' + (ar ? ar.id + ar.name : '');
   }
   function thViewStage() { var v = ui.thView; for (var i = 0; i < TH_STAGES.length; i++) if (TH_STAGES[i].id === v) return v; return state.thesis.stage; }
-  function thStageName(id) { for (var i = 0; i < TH_STAGES.length; i++) if (TH_STAGES[i].id === id) return TH_STAGES[i].name; return ''; }
   function thPieceRow(p, m, ro) {
     var T = todayISO(), pid = esc(p.id), mid = esc(m.id), live = !p.ended && !ro;
     var due = m.date && !m.done ? '<span class="th-task-due' + (m.date < T ? ' is-late' : m.date === T ? ' is-today' : '') + '">' + (m.date === T ? 'today' : fmtShort(m.date)) + '</span>' : '';
@@ -3721,7 +3857,7 @@ td.c-break{display:none}
           (P.length ? '<button type="button" class="link-btn" data-act="th-r-hub" data-pid="' + esc(p.id) + '">' + plural(P.length, 'task') + '</button>' : '') +
           (nN ? '<button type="button" class="link-btn" data-act="th-plink-filter" data-pid="' + esc(p.id) + '">' + plural(nN, 'note') + '</button>' : '') +
         '</span></div>' +
-      (adding ? '<form class="th-task-add" data-form="th-r-add" data-pid="' + esc(p.id) + '"><label class="sr-only" for="th-r-new">New task</label><input id="th-r-new" maxlength="140" autocomplete="off" placeholder="+ Task for ' + esc(p.name) + '"></form>' : '') +
+      (adding ? '<form class="th-task-add" data-form="th-r-add" data-pid="' + esc(p.id) + '"><label class="sr-only" for="th-r-new">New task</label><input id="th-r-new" maxlength="300" autocomplete="off" placeholder="+ Task for ' + esc(p.name) + '"></form>' : '') +
       '</div>';
   }
   function thPastRow(p) {
@@ -3817,7 +3953,7 @@ td.c-break{display:none}
       }
     }
     if (!shown) h += '<p class="th-none">' + (q ? 'Nothing matches “' + esc(ui.thQuery.trim()) + '”.' : lf ? 'No notes linked yet.' : 'No pages yet.') + '</p>';
-    var size = 0; try { size = JSON.stringify(state).length; } catch (e) {}
+    var size = lastJsonSize;
     if (size > 3500000) h += '<p class="th-warn">Your notebook is getting big (' + (size / 1048576).toFixed(1) + ' MB). It still syncs, but phones keep less offline. Old chats you no longer need can go.</p>';
     $('#th-list').innerHTML = h;
   }
@@ -4143,6 +4279,21 @@ td.c-break{display:none}
     if (pyCache[key]) return Promise.resolve({ name: thFileName(x), data: pyCache[key] });
     return ghReadFile(gh, x).then(function (b) { return b.arrayBuffer(); }).then(function (buf) { var u = new Uint8Array(buf); pyCache[key] = u; return { name: thFileName(x), data: u }; });
   }
+  // A blob: page belongs to Polaris's own origin, so anything that can run code (HTML, SVG, XML) must never open as one.
+  function thActiveType(t, name) { return /^(text\/html|application\/xhtml\+xml|image\/svg\+xml|text\/xml|application\/xml)/i.test(t || '') || /\.(html?|xhtml|svg|xml|xsl|xslt)$/i.test(name || ''); }
+  var SIM_SANDBOX = 'allow-scripts allow-modals allow-popups allow-forms allow-downloads allow-pointer-lock';
+  // a tiny page with no script of its own; the content sits in a sandboxed frame (no allow-same-origin), so it can't reach Polaris, the token or your data
+  function thSealedPage(title, frame) {
+    return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(title) + '</title>' +
+      '<style>html,body{margin:0;height:100%;background:#fff}iframe{display:block;border:0;width:100%;height:100%}</style></head><body>' + frame + '</body></html>';
+  }
+  function thOpenSealed(w, title, frame) {
+    var url = URL.createObjectURL(new Blob([thSealedPage(title, frame)], { type: 'text/html' }));
+    if (w && !w.closed) { w.location.href = url; setTimeout(function () { try { w.opener = null; } catch (e) {} }, 0); thRevokeWhenClosed(w, url); }
+    else { var a2 = document.createElement('a'); a2.href = url; a2.target = '_blank'; a2.rel = 'noopener'; document.body.appendChild(a2); a2.click(); a2.remove(); setTimeout(function () { URL.revokeObjectURL(url); }, 600000); }
+  }
+  // free a file's memory once its tab is closed (a timer would break Download and Print in a PDF left open)
+  function thRevokeWhenClosed(w, url) { var iv = setInterval(function () { if (!w || w.closed) { clearInterval(iv); URL.revokeObjectURL(url); } }, 15000); }
   // an HTML sim opens in its own tab: a plain page holding one sandboxed frame (no allow-same-origin),
   // so the sim runs in a sealed origin and can't read Polaris, your token or your data
   function thOpenHtmlSim(it, main) {
@@ -4151,12 +4302,7 @@ td.c-break{display:none}
     if (w) { try { w.document.title = it.title; w.document.body.style.cssText = 'margin:0;height:100vh;display:grid;place-items:center;background:#0b1020;color:#9aa3bd;font:14px system-ui'; w.document.body.textContent = 'Opening ' + it.title + '…'; } catch (e) {} }
     thSimFile(hx).then(function (f) {
       var html = new TextDecoder().decode(f.data);
-      var page = '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(it.title) + '</title>' +
-        '<style>html,body{margin:0;height:100%;background:#fff}iframe{display:block;border:0;width:100%;height:100%}</style></head><body>' +
-        '<iframe sandbox="allow-scripts allow-modals allow-popups allow-forms allow-downloads allow-pointer-lock" allow="fullscreen" allowfullscreen title="' + esc(it.title) + '" srcdoc="' + esc(html) + '"></iframe></body></html>';
-      var url = URL.createObjectURL(new Blob([page], { type: 'text/html' }));
-      if (w && !w.closed) { w.location.href = url; setTimeout(function () { try { w.opener = null; } catch (e) {} }, 0); }
-      else { var a2 = document.createElement('a'); a2.href = url; a2.target = '_blank'; a2.rel = 'noopener'; document.body.appendChild(a2); a2.click(); a2.remove(); }
+      thOpenSealed(w, it.title, '<iframe sandbox="' + SIM_SANDBOX + '" allow="fullscreen" allowfullscreen title="' + esc(it.title) + '" srcdoc="' + esc(html) + '"></iframe>');
     }, function (e) {
       if (w) { try { w.close(); } catch (er) {} }
       ui.thFileErr = { id: it.id, msg: 'Couldn’t get ' + main + ' from GitHub. ' + e.message }; renderThPage();
@@ -4757,15 +4903,26 @@ td.c-break{display:none}
       }
       else if (a === 'th-file-open') {
         var fk0 = b.dataset.k, fit = (state.thesis.lists[fk0] || []).filter(function (it) { return it.id === id; })[0], fx = fit && fit.links && fit.links[Number(b.dataset.li)]; if (!fx || !fx.f || !gh) return;
-        var view = /^(application\/pdf|image\/|text\/|video\/|audio\/)/.test(fx.t || '');
+        var fname = fx.n || fx.f.split('/').pop(), active = thActiveType(fx.t, fname);
+        var view = active || /^(application\/pdf|image\/|text\/|video\/|audio\/)/.test(fx.t || '');
         var w = view ? window.open('', '_blank') : null;
         if (w) { try { w.document.title = fx.n || 'File'; w.document.body.style.cssText = 'margin:0;background:#0b1020;color:#9aa3bd;font:14px system-ui;display:grid;place-items:center;height:100vh'; w.document.body.textContent = 'Opening ' + (fx.n || 'the file') + '…'; } catch (e) {} }
         b.classList.add('is-loading');
         ghReadFile(gh, fx).then(function (blob) {
           b.classList.remove('is-loading');
-          var url = URL.createObjectURL(blob); setTimeout(function () { URL.revokeObjectURL(url); }, 120000);
-          if (w && !w.closed) { w.location.href = url; return; }
-          var dl = document.createElement('a'); dl.href = url; dl.download = fx.n || fx.f.split('/').pop(); document.body.appendChild(dl); dl.click(); dl.remove();
+          if (active) {
+            return blob.text().then(function (txt) {
+              var svg = /svg/i.test(fx.t || '') || /\.svg$/i.test(fname), xml = !svg && (/xml$/i.test(fx.t || '') || /\.(xml|xsl|xslt)$/i.test(fname));
+              // HTML may run its scripts, sealed off; SVG shows without scripts; XML shows as text
+              var frame = xml ? '<iframe sandbox title="' + esc(fname) + '" srcdoc="' + esc('<pre style="white-space:pre-wrap;font:13px/1.5 monospace;margin:16px">' + esc(txt) + '</pre>') + '"></iframe>'
+                : '<iframe sandbox="' + (svg ? '' : SIM_SANDBOX) + '" title="' + esc(fname) + '" srcdoc="' + esc(txt) + '"></iframe>';
+              thOpenSealed(w, fname, frame);
+            });
+          }
+          var url = URL.createObjectURL(blob);
+          if (w && !w.closed) { w.location.href = url; thRevokeWhenClosed(w, url); return; }
+          setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+          var dl = document.createElement('a'); dl.href = url; dl.download = fname; document.body.appendChild(dl); dl.click(); dl.remove();
         }, function (e) {
           b.classList.remove('is-loading'); if (w) try { w.close(); } catch (er) {}
           ui.thFileErr = { id: id, msg: e.message }; renderThPage();
@@ -5161,9 +5318,6 @@ td.c-break{display:none}
     function box(attrs, isDone, title) {
       return '<button type="button" class="tbox" data-act="td-toggle" ' + attrs + ' aria-pressed="' + !!isDone + '" aria-label="' + (isDone ? 'Mark not done: ' : 'Mark done: ') + esc(title) + '"' + (ro ? ' disabled' : '') + '>' + CK + '</button>';
     }
-    function later(attrs, title) {
-      return ro ? '' : '<button type="button" class="tact" data-act="td-later" ' + attrs + ' title="Move to tomorrow" aria-label="Move to tomorrow: ' + esc(title) + '">' + LATER + '</button>';
-    }
     function pull(attrs, title) {
       return ro ? '' : '<button type="button" class="tact" data-act="td-pull" ' + attrs + ' title="Do today" aria-label="Do today: ' + esc(title) + '">' + SUN + '</button>';
     }
@@ -5252,7 +5406,7 @@ td.c-break{display:none}
         $('#modal-body').innerHTML = '<h2 id="modal-title">' + esc(t.title) + '</h2>' +
           '<p class="modal-sub">Quick task · added ' + (added === T ? 'today' : fmtShort(added)) + (t.done ? ' · done' : '') + '</p>' +
           '<form id="qt-form" novalidate>' +
-          '<div class="field"><label for="qt-title">Task</label><input id="qt-title" type="text" maxlength="140" value="' + esc(t.title) + '"></div>' +
+          '<div class="field"><label for="qt-title">Task</label><input id="qt-title" type="text" maxlength="300" value="' + esc(t.title) + '"></div>' +
           '<div class="field"><label for="qt-url">Link <span class="muted">(optional)</span></label><input id="qt-url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="Paste a link" value="' + esc(t.url || '') + '"></div>' +
           '<div class="field"><label for="qt-time">Time <span class="muted">(optional, puts it on your Google Calendar)</span></label><input id="qt-time" type="time" value="' + esc(t.time || '') + '"></div>' +
           '<div class="field"><label for="qt-project">Belongs to a project?</label><select id="qt-project"><option value="">No, keep it as a quick task</option>' +
@@ -5274,8 +5428,8 @@ td.c-break{display:none}
         commit(function (s) {
           if (p) {
             s.tasks = s.tasks.filter(function (x) { return x.id !== tid; });
-            p.milestones.push({ id: uid(), title: title.slice(0, 140), date: isTime(tm) ? t.day : null, time: isTime(tm) ? tm : null, done: !!t.done, doneOn: t.done ? t.doneOn : null, doneAt: t.done ? t.doneAt : 0, url: url, created: Date.now(), today: t.done ? null : T });
-          } else { t.title = title.slice(0, 140); t.url = url; t.time = isTime(tm) ? tm : null; if (t.time && !t.done && t.day < T) t.day = T; }
+            p.milestones.push({ id: uid(), title: title.slice(0, TITLE_MAX), date: isTime(tm) ? t.day : null, time: isTime(tm) ? tm : null, done: !!t.done, doneOn: t.done ? t.doneOn : null, doneAt: t.done ? t.doneAt : 0, url: url, created: Date.now(), today: t.done ? null : T });
+          } else { t.title = title.slice(0, TITLE_MAX); t.url = url; t.time = isTime(tm) ? tm : null; if (t.time && !t.done && t.day < T) t.day = T; }
         });
         closeModal();
       }
@@ -5386,8 +5540,8 @@ td.c-break{display:none}
         });
         var r = reorderSubset(s.projects, ids.filter(function (k) { return k !== '__park'; }), function (p) { return p.id; }); if (r) s.projects = r;
       });
-    } else if (list.indexOf('hub:') === 0) {
-      var pid = list.slice(4);
+    } else if (list.indexOf('hub:') === 0 || list.indexOf('steps:') === 0) {
+      var pid = list.slice(list.indexOf(':') + 1);
       commit(function (s) {
         var p = null; s.projects.forEach(function (x) { if (x.id === pid) p = x; }); if (!p) return;
         var r = reorderSubset(p.milestones, ids, function (m) { return m.id; }); if (r) p.milestones = r;
@@ -6027,7 +6181,7 @@ td.c-break{display:none}
     });
   }
   function newPiece(title, i) {
-    return { id: uid(), title: String(title).slice(0, 140), date: null, time: null, at: 0, tz: '', done: false, doneOn: null, doneAt: 0, url: '', created: Date.now() + (i || 0),
+    return { id: uid(), title: String(title).slice(0, TITLE_MAX), date: null, time: null, at: 0, tz: '', done: false, doneOn: null, doneAt: 0, url: '', created: Date.now() + (i || 0),
       today: null, status: 'todo', rule: '', points: null, parent: null, waitSince: null };
   }
 
@@ -6095,7 +6249,7 @@ td.c-break{display:none}
           '<p class="modal-sub">' + esc(p.name) + (parent ? ' › ' + esc(parent.title) : '') + (m.date ? ' · ' + fmtShort(m.date) + (m.time ? ' ' + m.time : '') : '') +
             (m.done ? ' · done' : dl === null ? '' : dl >= 0 ? ' · ' + dueLabel(dl) : ' · ' + plural(-dl, 'day') + ' overdue') + '</p></div></div>' +
           '<form id="ms-form" novalidate>' +
-          '<div class="field"><label for="ms-title">' + (isStep ? 'Step' : 'Name') + '</label><input id="ms-title" type="text" maxlength="140" value="' + esc(m.title) + '"></div>' +
+          '<div class="field"><label for="ms-title">' + (isStep ? 'Step' : 'Name') + '</label><input id="ms-title" type="text" maxlength="300" value="' + esc(m.title) + '"></div>' +
           (isStep ? '<div class="field"><label class="check"><input type="checkbox" id="ms-done"' + (m.done ? ' checked' : '') + '> Done</label></div>'
             : '<div class="field"><label for="ms-status">Status</label><select id="ms-status">' + ST_ORDER.map(function (k) { return '<option value="' + k + '"' + (m.status === k ? ' selected' : '') + '>' + ST_LABEL[k] + '</option>'; }).join('') + '</select></div>' +
               (!showRule ? '' : '<div class="field"><label for="ms-rule">Exact rule <span class="muted">(optional: limits, format, who signs, where it goes)</span></label><textarea id="ms-rule" rows="3" maxlength="1500" placeholder="e.g. Max 400 words, signed and stamped, uploaded on the platform">' + esc(m.rule || '') + '</textarea></div>')) +
@@ -6104,7 +6258,7 @@ td.c-break{display:none}
           '<div class="field"><label for="ms-url">Link <span class="muted">(optional: the doc or file you work on for this)</span></label><input id="ms-url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="Paste a link" value="' + esc(m.url || '') + '"></div>' +
           (m.url ? '<p style="margin:6px 0 0"><a class="btn btn-sm" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer">' + EXT + 'Open link</a></p>' : '') +
           (isStep ? '' : '<div class="field"><span class="field-label">Steps <span class="muted">(optional, small things inside this one)</span></span><ul class="st-list" id="ms-steps"></ul>' +
-            '<div class="st-add"><input id="ms-step" type="text" maxlength="140" placeholder="Add a step"><button type="button" class="btn btn-sm" data-act="st-add">Add</button></div></div>') +
+            '<div class="st-add"><input id="ms-step" type="text" maxlength="300" placeholder="Add a step"><button type="button" class="btn btn-sm" data-act="st-add">Add</button></div></div>') +
           '<p class="form-error" id="ms-error" hidden></p>' +
           '<div class="modal-actions"><button type="button" class="btn btn-quiet" data-act="del-ms" style="margin-right:auto">Delete</button>' +
           '<button type="button" class="btn" data-close>Cancel</button><button type="submit" class="btn primary">Save</button></div></form>';
@@ -6135,7 +6289,7 @@ td.c-break{display:none}
         if (rawU && !url) return fail('That link doesn’t look right. Copy the whole address from the browser bar or the Share button.');
         var stv = isStep ? ($('#ms-done').checked ? 'done' : 'todo') : $('#ms-status').value;
         commit(function (s) {
-          m.title = t.slice(0, 140); m.date = w.date; m.time = w.time; m.at = w.at; m.tz = w.tz; m.url = url;
+          m.title = t.slice(0, TITLE_MAX); m.date = w.date; m.time = w.time; m.at = w.at; m.tz = w.tz; m.url = url;
           if (!isStep) { if ($('#ms-rule')) m.rule = $('#ms-rule').value.trim().slice(0, 1500); if ($('#ms-pts')) m.points = numOrNull($('#ms-pts').value); }
           setStatus2(s, p, m, stv, T);
         });
@@ -6656,6 +6810,7 @@ td.c-break{display:none}
           '<div class="modal-actions" style="justify-content:flex-start"><button type="button" class="btn" data-act="copy">Copy backup</button>' +
           (!inViewer ? '<button type="button" class="btn" data-act="download">Download .json</button>' : '') +
           '<span class="muted" id="bk-msg" style="align-self:center;font-size:13px"></span></div>' +
+          (function () { var K = keptList(); return K.length ? '<h3>Copies kept in this browser</h3>' + K.map(function (k) { return '<p class="muted" style="font-size:13px;margin:4px 0">' + esc(k.label) + ' · <button type="button" class="link-btn" data-act="kept-dl" data-key="' + esc(k.key) + '" style="padding:0">Download</button></p>'; }).join('') : ''; })() +
           (mode !== 'readonly' ? '<h3>Restore</h3><p class="muted" style="font-size:13px">This replaces everything on the board.</p>' +
             '<div class="field"><label for="bk-file">From a .json file</label><input type="file" id="bk-file" accept=".json,application/json"></div>' +
             '<div class="field"><label for="bk-in">Or paste a backup</label><textarea id="bk-in" rows="3" style="font:12px/1.4 var(--font-mono)"></textarea></div>' +
@@ -6666,6 +6821,7 @@ td.c-break{display:none}
       onClick: function (e) {
         var b = e.target.closest('[data-act]'); if (!b) return;
         var msg = $('#bk-msg');
+        if (b.dataset.act === 'kept-dl') { downloadKept(b.dataset.key); return; }
         if (b.dataset.act === 'copy') {
           var txt = $('#bk-out').value;
           try {
@@ -6789,6 +6945,8 @@ td.c-break{display:none}
         try { qt.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (er) {}
       }
       else if (a === 'more-reminders') { ui.allReminders = !ui.allReminders; render(); }
+      else if (a === 'notice-x') noticeClear(b.dataset.key);
+      else if (a === 'kept-dl') downloadKept(b.dataset.key);
       else if (a === 'gc-signin') gcalSignIn('');
       else if (a === 'review') openReview();
       else if (a === 'park-pick') openParking();
@@ -6946,6 +7104,7 @@ td.c-break{display:none}
           break;
         case 'edit-upd': ui.editingUpdate = id; render(); var t = $('#ue-text'); if (t) { t.focus(); t.setSelectionRange(t.value.length, t.value.length); } break;
         case 'cancel-upd': ui.editingUpdate = null; render(); break;
+        case 'all-upd': ui.allUpdates = true; render(); break;
         case 'save-upd': saveTableUpdate(id); break;
         case 'del-upd':
           var u = null; state.updates.forEach(function (x) { if (x.id === id) u = x; });
@@ -7106,10 +7265,11 @@ td.c-break{display:none}
 
     // save if the tab is being hidden with unsaved work
     document.addEventListener('visibilitychange', function () {
-      if (document.visibilityState === 'hidden') { if (dirty) trySave(true); return; }
+      if (document.visibilityState === 'hidden') { flushCache(); if (dirty) trySave(true); return; }
       if (dirty) { trySave(true); return; }   // changes made while offline go up as soon as you're back
       if (mode === 'github' && !publishing && $('#modal').hidden && !ui.editingUpdate && !ui.editingProject) ghPull();
     });
+    window.addEventListener('pagehide', flushCache);
     window.addEventListener('online', function () {
       if (dirty) trySave(true);
       else if (mode === 'github' && !publishing && $('#modal').hidden) ghPull();
